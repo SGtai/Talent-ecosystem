@@ -8,7 +8,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://118.178.91.176:3306/db?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
     username: jx1907
-    password: 2020Jx1907！
+    password: 2020Jx1907!
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       initial-size: 8 #初始化时建立物理连接的个数
