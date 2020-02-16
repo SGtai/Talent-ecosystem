@@ -22,7 +22,7 @@
 <a href="">首页</a>
 <a href="">技术成长</a>
 <a href="">学校路口</a>
-<a href="/jump/company/companylogin">>企业入口</a>
+<a href="/jump/company/companylogin">企业入口</a>
 <a href="">管理员入口</a>
 
 </body>
