@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cykj.net.mapper.tech">
+<mapper namespace="com.cykj.net.mapper.TechDao">
 
+    <select id="getDevelopList" resultType="Develop">
+        select * from develop
+    </select>
 
+    <select id="getCurriculumList" resultType="Curriculum" parameterType="String">
+        select * from curriculum where fzTypeId = #{typeid}
+    </select>
+
+    <select id="getCurriculumListS" resultType="curriculum">
+        select * from curriculum
+    </select>
 
 </mapper>

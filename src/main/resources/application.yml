@@ -36,5 +36,5 @@ spring:
       suffix: .jsp
 
 mybatis:
-  #  config-location: classpath:SqlMapConfig.xml
+  config-location: classpath:SqlMapConfig.xml
   mapper-locations: classpath:/mapper/*.xml
