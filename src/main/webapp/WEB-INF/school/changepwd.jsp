@@ -22,8 +22,10 @@
 	<title></title>
 	<link rel="stylesheet" href=<%=cssPath+"pintuer.css"%>>
 	<link rel="stylesheet" href=<%=cssPath+"admin.css"%>>
-	<script src=<%=jsPath+"jquery.js"%>></script>
-	<script src=<%=jsPath+"pintuer.js"%>></script>
+	<link rel="stylesheet" href="<%=othPath+"layui/css/layui.css"%>" media="all">
+	<script type="text/javascript" src=<%=jsPath+"jquery.js"%>></script>
+	<script type="text/javascript" src=<%=jsPath+"pintuer.js"%>></script>
+	<script src=<%=othPath+"layui/layui.js"%>></script>
 </head>
 <body style="padding-left: 30%;padding-top: 8%">
 <%--<div class="bg"></div>--%>

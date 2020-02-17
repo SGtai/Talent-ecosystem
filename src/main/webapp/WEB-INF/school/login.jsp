@@ -18,8 +18,10 @@
 	<title>菜鸟网后台高校登陆</title>
 	<link rel="stylesheet" href=<%=cssPath+"pintuer.css"%>>
 	<link rel="stylesheet" href=<%=cssPath+"admin.css"%>>
+	<link rel="stylesheet" href="<%=othPath+"layui/css/layui.css"%>" media="all">
 	<script type="text/javascript" src=<%=jsPath+"jquery.js"%>></script>
 	<script type="text/javascript" src=<%=jsPath+"pintuer.js"%>></script>
+	<script src=<%=othPath+"layui/layui.js"%>></script>
 </head>
 <body>
 <%--这个div放的是图片--%>
