@@ -15,7 +15,7 @@
 %>
 <html>
 <head>
-	<title>菜鸟网后台高校登陆</title>
+	<title>菜鸟网后台高校注册</title>
 	<link rel="stylesheet" href=<%=cssPath+"pintuer.css"%>>
 	<link rel="stylesheet" href=<%=cssPath+"admin.css"%>>
 	<script type="text/javascript" src=<%=jsPath+"jquery.js"%>></script>
@@ -32,31 +32,30 @@
 			</div>
 			<form action="" method="post">
 				<div class="panel loginbox">
-					<div class="text-center margin-big padding-big-top"><h1>高校登陆</h1></div>
+					<div class="text-center margin-big padding-big-top"><h1>高校注册</h1></div>
 					<div class="panel-body" style="padding:30px; padding-bottom:10px; padding-top:10px;">
 						<div class="form-group">
 							<div class="field field-icon-right">
-								<input type="text" class="input input-big" name="name" placeholder="登录账号" data-validate="required:请填写账号" />
+								<input type="text" class="input input-big" name="name" placeholder="注册账号" data-validate="required:请填写要注册账号" />
 								<span class="icon icon-user margin-small"></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="field field-icon-right">
-								<input type="password" class="input input-big" name="password" placeholder="登录密码" data-validate="required:请填写密码" />
+								<input type="password" class="input input-big" name="password" placeholder="注册密码" data-validate="required:请填写要注册密码" />
 								<span class="icon icon-key margin-small"></span>
 							</div>
 						</div>
 						<div class="form-group">
-							<div class="field">
-								<input type="text" class="input input-big" name="code" placeholder="填写右侧的验证码" data-validate="required:请填写右侧的验证码" />
-								<img src=<%=othPath+"images/passcode.jpg"%>; alt="" width="100" height="32" class="passcode" style="height:43px;cursor:pointer;" onclick="this.src=this.src+'?'">
-
+							<div class="field field-icon-right">
+								<input type="password" class="input input-big" name="password" placeholder="再次输入密码" data-validate="required:请再次填写要注册密码" />
+								<span class="icon icon-key margin-small"></span>
 							</div>
 						</div>
 					</div>
 					<div style="padding:30px;">
-						<input type="submit" class="button button-block bg-main text-big input-big" value="登录" style="width: 35%;">
-						<input type="button" class="button button-block bg-main text-big input-big" value="返回首页" style="width: 30%;position: absolute;margin-left: 55%;margin-top: -11%">
+						<input type="submit" class="button button-block bg-main text-big input-big" value="下一步" style="width: 35%;">
+						<input type="button" class="button button-block bg-main text-big input-big" value="返回" style="width: 30%;position: absolute;margin-left: 55%;margin-top: -11%">
 					</div>
 				</div>
 			</form>
@@ -71,3 +70,4 @@
 </script>
 </body>
 </html>
+
