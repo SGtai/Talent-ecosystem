@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 蔡鹭鹏
@@ -54,7 +55,7 @@
                     <label>验证码:</label>
                 </div>
                 <div class="cardDiv">
-                    <input class="layui-input cardInput" type="text" name="code"
+                    <input id="code" class="layui-input cardInput" type="text" name="code"
                            lay-verify="required" autocomplete="off" placeholder="输入验证码">
                 </div>
                 <div class="codeDiv">
@@ -79,6 +80,7 @@
 </div>
 <script src=<%=layuiPath+"layui.js"%> type="text/javascript"></script>
 <script type="text/javascript">
+    // 点击图片更换验证码事件
     $('#verifyCodeImage').on('click', function () {
         // $('#verifyCodeImage').removeProp('src');
         $('#verifyCodeImage').attr('src', '/admin/getVerifyCode?' + Math.random());
@@ -87,13 +89,37 @@
         var $ = layui.jquery
             , form = layui.form
             , layer = layui.layer;
-        // 点击图片更换验证码事件
+
+
+        //验证码失去焦点
+        $('#code').blur(function () {
+            //获取input输入的值
+            var inputCode = document.getElementById("code").value;
+            $.ajax({
+                type: "POST",
+                url: "/admin/contrastCode",
+                dataType: "text",
+                data: {code: inputCode},
+                success: function (flag) {
+                    if (flag === 'true') {
+                    } else {
+                        layer.msg('验证码不一致', {icon: 5});
+                        $("#code").val('');
+                        $('#verifyCodeImage').attr('src', '/admin/getVerifyCode?' + Math.random());
+                    }
+                },
+                error: function () {
+                    layer.msg('服务器繁忙');
+                }
+            });
+
+        })
 
 
         // $('#loginBtn').val("正在登录...");
         //注册表单提交
         form.on('submit(login)', function (data) {
-            alert(data.code);
+
             //ajax
             $.ajax({
                 type: "POST",
@@ -103,11 +129,15 @@
                 success: function (flag) {
                     if (flag === 'true') {
                         layer.msg('登录成功', {icon: 6});
-                        window.location.href = '/jump/admin/adminWelcome';
-                    } else if ('haveAccount') {
-                        layer.msg('账号已存在，请登录', {icon: 5});
+                        window.location.href = '/jump/admin/main';
+                    } else if ('noCode') {
+                        layer.msg('验证码不正确，请重新输入', {icon: 5});
+                        $("#code").val('');
+                        $('#verifyCodeImage').attr('src', '/admin/getVerifyCode?' + Math.random());
+                    } else if ('noAccount') {
+                        layer.msg('账号不存在，请重新输入', {icon: 5});
                     } else {
-                        layer.msg('注册失败', {icon: 5});
+                        layer.msg('密码不正确，请重新输入', {icon: 5});
                     }
                 },
                 error: function () {

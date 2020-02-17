@@ -1,8 +1,11 @@
 package com.cykj.net.controller;
 
 import com.cykj.net.javabean.Admin;
+import com.cykj.net.service.admin.AdminService;
 import com.cykj.net.util.GetCode;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,19 +21,48 @@ import java.io.IOException;
 @RequestMapping("/admin")
 public class AdminController {
 
+
+    @Autowired
+    private AdminService adminService;
+
     /**
      * 后台管理员登录
-     * @param admin
+     * @param getAdmin
      * @param session
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public @ResponseBody
-    String login(Admin admin, HttpSession session) {
-
+    String login(Admin getAdmin, HttpSession session) {
+        //获取验证码
         String sessionVerifyCode = (String) session.getAttribute("verifyCodeValue");
-        if (!admin.getCode().equalsIgnoreCase(sessionVerifyCode)) {
+        //验证验证码
+        if (!getAdmin.getCode().equalsIgnoreCase(sessionVerifyCode)) {
+            return "noCode";
+        }
+        //查询管理是否存在
+        Admin findAdmin = adminService.findAdmin(getAdmin.getAccount());
+        if (null == findAdmin){
+            return "noAccount";
+        }
+        //判断密码是否一致
+        if (!getAdmin.getPassword().equals(findAdmin.getPassword())){
+            return "false";
+        }
 
+
+
+        return "true";
+    }
+
+
+
+    @PostMapping(value = "/contrastCode")
+    public @ResponseBody String contrastCode(String code,HttpSession session){
+        //获取验证码
+        String sessionVerifyCode = (String) session.getAttribute("verifyCodeValue");
+        //验证验证码
+        if (!code.equalsIgnoreCase(sessionVerifyCode)) {
             return "false";
         }
         return "true";
@@ -42,7 +74,7 @@ public class AdminController {
      * @param request
      */
     /* 获取校验码 */
-    @RequestMapping("/getVerifyCode")
+    @RequestMapping(value = "/getVerifyCode")
     public void generate(HttpServletResponse response, HttpServletRequest request) {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         String verifyCodeValue = new GetCode().drawImg(output);
