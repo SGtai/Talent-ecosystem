@@ -10,7 +10,7 @@ public class Curriculum {
   private long fzTypeId;
   private String xxInformation;
   private long gmcsPurchase;
-  private long cxcsConsult;
+  private long plcsComment;
   private String ckPicture;
   private String demo1;
   private String demo2;
@@ -80,11 +80,11 @@ public class Curriculum {
 
 
   public long getCxcsConsult() {
-    return cxcsConsult;
+    return plcsComment;
   }
 
   public void setCxcsConsult(long cxcsConsult) {
-    this.cxcsConsult = cxcsConsult;
+    this.plcsComment = cxcsConsult;
   }
 
 

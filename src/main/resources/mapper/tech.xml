@@ -6,12 +6,23 @@
         select * from develop
     </select>
 
-    <select id="getCurriculumList" resultType="Curriculum" parameterType="String">
-        select * from curriculum where fzTypeId = #{typeid}
+    <select id="getCurriculum" resultType="Curriculum" parameterType="String">
+        select * from curriculum where kcId = #{kcid}
     </select>
 
     <select id="getCurriculumListS" resultType="curriculum">
         select * from curriculum
     </select>
 
+    <select id="getChaptersList" resultType="Chapters" parameterType="String">
+        select * from chapters where kjId = #{kjid}
+    </select>
+
+    <select id="getVideoList" resultType="Video" parameterType="String">
+        select * from video where zjId = #{zjid} ORDER BY spid;
+    </select>
+
+    <select id="getChapters" resultType="Chapters" parameterType="String">
+        select * from chapters where zjId = #{zjid}
+    </select>
 </mapper>

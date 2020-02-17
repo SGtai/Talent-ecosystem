@@ -51,14 +51,14 @@
 					</c:forEach>
 
 				</ul>
-				<a href="#" class="slide-more">更多>></a>
+<%--				<a href="#" class="slide-more">更多>></a>--%>
 			</div>
 			<div class="bd floor-side-body">
 				<c:forEach items="${getMap}" var="node">
 					<ul>
 					<c:forEach items="${node.value}" var="cl">
 						<li>
-							<a href="#">
+							<a href="/techb?id=${cl.kcId}&name=${cl.kcName}">
 								<div class="image-ti">
 									<img src="${'/techS/other/'.concat(cl.ckPicture)}" alt="">
 								</div>
@@ -75,7 +75,7 @@
 
                                         </span>
 									<span class="slide-body-price">
-											<c:if test=" ${cl.jgPrice == '免费'}">
+											<c:if test="${cl.jgPrice=='免费'}">
 												免费
 											</c:if>
 											<c:if test="${cl.jgPrice != '免费'}">
