@@ -1,0 +1,303 @@
+/* 公共样式表css */
+html,body {
+    color: #333;
+    margin: 0;
+    height: 100%;
+    font-family: "Myriad Set Pro","Helvetica Neue",Helvetica,Arial,Verdana,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: normal;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+img {
+    border: 0;
+}
+
+body {
+    background: #fff;
+    color: #666;
+}
+
+html, body, div, dl, dt, dd, ol, ul, li, h1, h2, h3, h4, h5, h6, p, blockquote, pre, button, fieldset, form, input, legend, textarea, th, td {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #08acee;
+}
+
+button {
+    outline: 0;
+}
+
+img {
+    border: 0;
+}
+
+button,input,optgroup,select,textarea {
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    outline: none;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    color: #666;
+}
+
+.clearfix::after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.clearfix {
+}
+
+/* 必要布局样式css */
+.floor-course {
+    position: relative;
+    overflow: auto;
+    background-color: #f5f8fa;
+    height: 588px;
+}
+
+.floor-content {
+    position: relative;
+    clear: both;
+    width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.floor-side {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100%;
+}
+
+.floor-side h3 {
+    font-family: 'Microsoft YaHei';
+    font-size: 20px;
+    line-height: 100px;
+    height: 80px;
+    color: #333;
+	font-weight:400;
+}
+
+.floor-side h3 a {
+    color: #333;
+    display: block;
+}
+
+.floor-side-link img {
+    display: block;
+    width: 100%;
+    background-color: green;
+}
+
+.floor-side-right {
+    position: absolute;
+    top: 0;
+    left: 240px;
+    width: 960px;
+    height: 100%;
+}
+
+.floor-side-list {
+    position: relative;
+    height: 80px;
+    padding-top: 25px;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.floor-side-list ul {
+    line-height: 52px;
+    overflow: hidden;
+    height: 55px;
+}
+
+.floor-side-list ul li {
+    position: relative;
+    float: left;
+    height: 55px;
+    margin-right: 10px;
+    padding: 0 10px;
+    border-bottom: 2px solid transparent;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.floor-side-list ul li:after {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -6px;
+    content: '';
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 6px solid transparent;
+}
+
+.floor-side-list ul .on:after {
+    border-bottom-color: #3197e9
+}
+
+.floor-side-list ul .on {
+    border-bottom-color: #3197e9
+}
+
+.floor-side-body {
+    height: 456px;
+    padding-top: 24px;
+}
+
+.floor-side-body ul li {
+    position: relative;
+    float: left;
+    width: 220px;
+    height: 206px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    border: 1px solid #e1e1e1;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -ms-border-radius: 3px;
+}
+
+.floor-side-body ul li:hover {
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+    -webkit-transform: translateY(-6px);
+    -moz-transform: translateY(-6px);
+    transform: translateY(-6px);
+    -webkit-box-shadow: 0 26px 40px -24px rgba(0, 36, 100, .3);
+    -moz-box-shadow: 0 26px 40px -24px rgba(0, 36, 100, .3);
+    box-shadow: 0 26px 40px -24px rgba(0, 36, 100, .3);
+}
+
+.floor-side-body ul li a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.floor-side-body ul li a .image-ti {
+    position: relative;
+    display: block;
+    width: 200px;
+    height: 113px;
+    margin: 8px auto 0;
+    background-color: #2C71AF;
+}
+
+.floor-side-body ul li a .image-ti img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0
+}
+
+.slide-title {
+    line-height: 20px;
+    overflow: hidden;
+    height: 40px;
+    margin: 5px 10px;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    color: #333;
+    font-size: 14px;
+}
+
+.slide-body {
+    line-height: 20px;
+    height: 20px;
+    margin: 0 10px;
+}
+
+.slide-body-nub {
+    margin-right: 10px;
+    color: #999;
+    font-size: 13px;
+}
+
+.slide-body-nub-icon {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-top: -3px;
+    margin-right: 5px;
+    vertical-align: middle;
+    background-image: url(/techS/other/course_ab.png);
+    background-repeat: no-repeat;
+    background-size: 15px;
+    background-position: 0 3px;
+}
+
+.slide-body-nup {
+    margin-right: 10px;
+    color: #999;
+    font-size: 13px;
+}
+
+.slide-body-nup-icon {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-top: -3px;
+    margin-right: 5px;
+    vertical-align: middle;
+    background-image: url(/techS/other/course_ab.png);
+    background-repeat: no-repeat;
+    background-size: 15px;
+    background-position: 0 -23px;
+}
+
+.slide-body-price {
+    line-height: 20px;
+    float: right;
+    height: 20px;
+    vertical-align: top;
+    color: #ef7165;
+}
+
+.slide-admission {
+    color: #46cfa1;
+}
+
+.slide-more {
+    line-height: 52px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    float: right;
+    height: 55px;
+    color: #3197e7;
+}

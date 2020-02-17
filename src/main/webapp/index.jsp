@@ -1,7 +1,7 @@
 <%--
   Created by IntelliJ IDEA.
   User: 86158
-  Date: 2020-2-15
+  Date: 2020-2-15            http://localhost:8080/
   Time: 18:28
   To change this template use File | Settings | File Templates.
 --%>
@@ -20,7 +20,7 @@
 
 <body>
 <a href="">首页</a>
-<a href="">技术成长</a>
+<a href="/techa">技术成长</a>
 <a href="">学校路口</a>
 <a href="/jump/company/companylogin">企业入口</a>
 <a href="">管理员入口</a>

@@ -13,6 +13,4 @@ public class JumpController
 	public String jumpfront(@PathVariable("id") String id, @PathVariable("name") String name) {
 		return "/WEB-INF/"+id+"/"+name;
 	}
-
-
 }
