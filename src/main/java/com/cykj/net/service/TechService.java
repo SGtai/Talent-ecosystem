@@ -13,9 +13,7 @@ public class TechService
 {
     @Resource
     private TechDao techDao;
-    public ArrayList<Develop> getDevelopList(){
-        return techDao.getDevelopList();
-    };
+    public ArrayList<Develop> getDevelopList(){ return techDao.getDevelopList(); };
     public Curriculum getCurriculum(String id){
         return techDao.getCurriculum(id);
     };
