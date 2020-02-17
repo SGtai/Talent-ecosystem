@@ -6,13 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-	String cssPath = application.getContextPath()+"/front/css/";
-	String jsPath = application.getContextPath()+"/front/js/";
-	String path = application.getContextPath();
-	String jspPath =application.getContextPath()+"/company/";
-
-%>
 <html>
 <head>
 	<title>Title</title>
