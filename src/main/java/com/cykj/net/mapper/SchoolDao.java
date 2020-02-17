@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 public interface SchoolDao
 {
 	//查找学校信息
-	public Schoolinfo findSchoolinfo(@Param("scAccount") String scAccount);
+	public Schoolinfo findSchoolinfo(@Param("account") String scAccount);
 	//插入学校信息
 	public int inserSchoolinfo(Schoolinfo schoolinfo);
 	//修改学校信息

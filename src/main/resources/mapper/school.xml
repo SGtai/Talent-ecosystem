@@ -3,7 +3,7 @@
 <mapper namespace="com.cykj.net.mapper.SchoolDao">
     <!--    学校信息-->
     <select id="findSchoolinfo" resultType="Schoolinfo" parameterType="java.lang.String">
-         SELECT * FROM schoolinfo WHERE scAccount=#{scAccount}
+         SELECT * FROM schoolinfo WHERE scAccount=#{account}
     </select>
     <!--    插入学校信息-->
     <insert id="inserSchoolinfo" parameterType="Schoolinfo">
