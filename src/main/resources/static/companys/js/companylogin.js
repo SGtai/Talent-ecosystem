@@ -11,10 +11,11 @@ layui.use(['form', 'layer'], function(){
 		var qy2=$('#qy2').val();
 		var qy3=$('#qy3').val();
 		var qy4=$('#qy4').val();
+		var qy5=$('#qy5').val();
 		var password=document.getElementById("password").value;
 		var password2=document.getElementById("password2").value;
 
-		if(qy1==="success"&&qy2==="success"&&qy3==="success"&&qy4==="success"){
+		if(qy1==="success"&&qy2==="success"&&qy3==="success"&&qy4==="success"&&qy5==="success"){
 			if(password===password2){
 				$.ajax(
 					{
@@ -42,6 +43,8 @@ layui.use(['form', 'layer'], function(){
 				layer.alert("请输入正确的账号", { icon: 1, offset: "auto", time:1000 });
 			} else if(qy4!=="success"){
 				layer.alert("不是有效的统一社会信用编码！", { icon: 1, offset: "auto", time:1000 });
+			}else if(qy5!=="success"){
+				layer.alert("请输入正确的公司名称", { icon: 1, offset: "auto", time:1000 });
 			}
 		}
 		return false;
@@ -70,8 +73,10 @@ function queryaccount(value) {
 	}else if(/^\d+\d+\d$/.test(value)){
 		layer.alert('用户名不能全为数字', { icon: 1, offset: "auto", time:700 });
 		$('#qy1').val("success2");
-	}
-	else{
+	}else if(/[\u4E00-\u9FA5]/g.test(value)){
+		layer.alert('用户名不能存在中文', { icon: 1, offset: "auto", time:700 });
+		$('#qy1').val("success2");
+	} else{
 		$.ajax(
 			{
 				type:"POST",
@@ -110,6 +115,9 @@ function passexist(value) {
 	}else if(/^\d+\d+\d$/.test(value)){
 		layer.alert('密码不能全为数字', { icon: 1, offset: "auto", time:700 });
 		$('#qy2').val("success2");
+	}else if(/[\u4E00-\u9FA5]/g.test(value)){
+		layer.alert('密码不能存在中文', { icon: 1, offset: "auto", time:700 });
+		$('#qy2').val("success2");
 	}else {
 		$('#qy2').val("success");
 	}
@@ -120,7 +128,6 @@ function passexist(value) {
  * @param value
  */
 function passexist2(value) {
-
 	var password=document.getElementById("password").value;
 	var password2=document.getElementById("password2").value;
 	if(value.length ==0){
@@ -132,10 +139,24 @@ function passexist2(value) {
 	}else if(/^\d+\d+\d$/.test(value)){
 		layer.alert('密码不能全为数字', { icon: 1, offset: "auto", time:700 });
 		$('#qy3').val("success2");
-	}else{
+	}else if(/[\u4E00-\u9FA5]/g.test(value)){
+		layer.alert('密码不能存在中文', { icon: 1, offset: "auto", time:700 });
+		$('#qy3').val("success2");
+	}
+	else{
 		$('#qy3').val("success");
 	}
 }
+
+function qyName2(value) {
+	if(/^[\u4e00-\u9fa5\(\)（）\da-zA-Z&]{2,50}$/gi.test(value)){
+		$('#qy5').val("success");
+	}else{
+		layer.alert('请输入正确的公司名称', { icon: 1, offset: "auto", time:700 });
+		$('#qy5').val("success2");
+	}
+}
+
 
 /**
  * 验证统一机构代码证输入符合标准
