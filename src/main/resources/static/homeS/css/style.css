@@ -92,9 +92,16 @@ body{ width:100%; min-width:1200px; margin:0 auto; font-size:12px; font-family:"
 .BodyMain .mainTop .mainTopR .login .loginmain .ContentB{ margin-top:13px; display:none}
 .BodyMain .mainTop .mainTopR .login .loginmain .ContentB .qybox1{width: 224px;height: 37px;margin: 0 auto;background: url(../images/bg_home_img4.png) no-repeat -10px -105px;}
 .BodyMain .mainTop .mainTopR .login .loginmain .ContentB .qybox1 a{float: left;width: 50%;height: 37px;line-height: 37px;font-size: 16px;color: #FFF;cursor: pointer;font-family: "微软雅黑";text-align: center;}
-.BodyMain .mainTop .mainTopR .login .loginmain .ContentB .qybox2{margin:0 auto; margin-top:10px; height:44px; margin-bottom:10px}
-.BodyMain .mainTop .mainTopR .login .loginmain .ContentB .qybox2 p{text-align: center;color: #777777;line-height: 22px;}
-.BodyMain .mainTop .mainTopR .login .loginmain .ContentB .qybox2 p b{font-weight: normal;color: #FA6D01;}
+.BodyMain .mainTop .mainTopR .login .loginmain .ContentA .qybox0 a{margin-bottom: 20px;float: left;width: 50%;height: 37px;line-height: 37px;font-size: 16px;color: #FFF;cursor: pointer;font-family: "微软雅黑";text-align: center;}
+.BodyMain .mainTop .mainTopR .login .loginmain .ContentA .qybox0{width: 224px;height: 37px;margin: 0 auto;background: url(../images/bg_home_img4.png) no-repeat -10px -105px;}
+
+.BodyMain .mainTop .mainTopR .login .loginmain .ContentA .qybox2 {margin:0 auto; margin-top:10px; height:44px; margin-bottom:10px}
+.BodyMain .mainTop .mainTopR .login .loginmain .ContentA .qybox2 p {text-align: center;color: #777777;line-height: 22px;}
+.BodyMain .mainTop .mainTopR .login .loginmain .ContentA .qybox2 p b {font-weight: normal;color: #FA6D01;}
+
+.BodyMain .mainTop .mainTopR .login .loginmain .ContentB .qybox2 {margin:0 auto; margin-top:10px; height:44px; margin-bottom:10px}
+.BodyMain .mainTop .mainTopR .login .loginmain .ContentB .qybox2 p {text-align: center;color: #777777;line-height: 22px;}
+.BodyMain .mainTop .mainTopR .login .loginmain .ContentB .qybox2 p b {font-weight: normal;color: #FA6D01;}
 .BodyMain .mainTop .mainTopR .login .loginmain .ContentB .qybox3{width: 90%;margin-left: 5%; color: #50BA8C;font-family: "微软雅黑";  font-size: 14px;border-top: 1px #DFDFDF dashed;padding-top: 15px;}
 .BodyMain .mainTop .mainTopR .login .loginmain .ContentB .qybox3 .l{ float:left; text-align: center;line-height: 24px;margin-left: 33px;}
 .BodyMain .mainTop .mainTopR .login .loginmain .ContentB .qybox3 .l b{ font-weight:bold}
