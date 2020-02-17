@@ -12,7 +12,6 @@
 	String jsPath = application.getContextPath()+"/schoolS/js/";
 	String path = application.getContextPath();
 	String othPath =application.getContextPath()+"/schoolS/other/";
-
 %>
 <html>
 <head>
