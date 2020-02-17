@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cykj.net.mapper.company">
-
-
+<mapper namespace="com.cykj.net.mapper.CompanyDao">
+    <!--单条数据插入，返回自增ID序号-->
+    <insert id="regQyAccount" parameterType="Qyinfo" keyProperty="qyid" useGeneratedKeys="true">
+		insert into
+		qyinfo(qyAccount,password,qyData,regTime) values(#{qyAccount},#{password},#{qyData},#{regTime})
+	</insert>
+	<select id="findById" parameterType="string" resultType="Qyinfo"
+	>
+		select * from qyinfo where qyAccount=#{_parameter}
+	</select>
 
 </mapper>
