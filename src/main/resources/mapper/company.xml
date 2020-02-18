@@ -8,7 +8,7 @@
 	</insert>
 	<select id="findById" parameterType="string" resultType="Qyinfo"
 	>
-		select * from qyinfo where qyAccount=#{_parameter}
+		select qyid, qyAccount, qyData, qyName, qyAddress, qyfdMan, qyType, jyScope, jyTime, qyKind, regMoney, vipLevel, yingyepicture, xinyongDu, qyPicture, regTime from qyinfo where qyAccount=#{_parameter}
 	</select>
 	<update id="doRegQyinfo" parameterType="Qyinfo" >
 		update qyinfo set qyAddress=#{qyAddress},qyfdMan=#{qyfdMan},regMoney=#{regMoney},qyType=#{qyType},jyScope=#{jyScope},jyTime=#{jyTime} where qyAccount=#{qyAccount};

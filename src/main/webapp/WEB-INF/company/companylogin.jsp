@@ -14,7 +14,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Layui</title>
+	<title>注册界面</title>
 	<link type="text/css" rel="stylesheet" href=<%=path+"css/layui.css"%>  media="all">
 	<script>
 		window.onload=function() {
