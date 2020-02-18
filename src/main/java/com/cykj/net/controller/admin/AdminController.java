@@ -1,10 +1,9 @@
-package com.cykj.net.controller;
+package com.cykj.net.controller.admin;
 
 import com.cykj.net.javabean.Admin;
 import com.cykj.net.javabean.AdminMenu;
 import com.cykj.net.service.admin.AdminService;
 import com.cykj.net.util.GetCode;
-import com.cykj.net.util.LayuiData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,13 +16,11 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.crypto.Data;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/admin")
@@ -185,15 +182,6 @@ public class AdminController {
         }
     }
 
-    @RequestMapping(value = "station")
-    public @ResponseBody LayuiData station(String station,int limit,int page){
-        LayuiData layuiData = new LayuiData();
-        System.out.println(limit);
-        System.out.println(page);
-        System.out.println(station);
-        System.out.println("张家口");
-        return layuiData;
-    }
 
 
 }

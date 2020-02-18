@@ -1,4 +1,4 @@
-package com.cykj.net.mapper;
+package com.cykj.net.mapper.admin;
 
 
 import com.cykj.net.javabean.Admin;
