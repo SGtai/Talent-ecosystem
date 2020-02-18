@@ -24,7 +24,7 @@
 
 		#layout {
 			width: 35%;
-			height: 400px;
+			height: 440px;
 			margin: auto;
 			margin-top: 100px;
 			border: #9F9F9F solid 1px;
@@ -68,6 +68,13 @@
 		</div>
 		<div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>
 		<div id="qy3" style="display: none;"></div>
+	</div>
+	<div class="layui-form-item" >
+		<label class="layui-form-label" >公司名称</label>
+		<div class="layui-input-inline" style="width:400px">
+			<input name="qyName" class="layui-input" type="text" placeholder="请输入公司名称" autocomplete="off" onblur="qyName2(this.value)">
+		</div>
+		<div id="qy5" style="display: none;"></div>
 	</div>
 	<div class="layui-form-item" >
 		<label class="layui-form-label" id="label1">验证统一社会信用代码</label>

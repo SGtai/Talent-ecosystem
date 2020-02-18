@@ -1,7 +1,67 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cykj.net.mapper.school">
-
-
-
+<mapper namespace="com.cykj.net.mapper.SchoolDao">
+    <!--    学校信息-->
+    <select id="findSchoolinfo" resultType="Schoolinfo" parameterType="java.lang.String">
+         SELECT * FROM schoolinfo WHERE scAccount=#{account}
+    </select>
+    <!--    插入学校信息-->
+    <insert id="inserSchoolinfo" parameterType="Schoolinfo">
+        INSERT INTO schoolinfo (scAccount, password,scdata,scName,scAddress,scfdMan,moneyLaiyuan,kaibanMoney,jubanDanwei,xinyongDaima,scAbout,regTime,scpicture,scState,scPhone) VALUES
+        (#{scAccount},#{password},#{scdata},#{scName},#{scAddress},#{scfdMan},#{moneyLaiyuan},#{kaibanMoney},#{jubanDanwei},#{xinyongDaima},#{scAbout},#{regTime},#{scpicture},#{scState},{scPhone})
+    </insert>
+    <!--    修改学校信息-->
+    <update id="updateSchoolinfo" parameterType="Schoolinfo">
+        UPDATE schoolinfo
+        <trim prefix="set" suffixOverrides="," suffix=" where scAccount = #{scAccount} ">
+--             修改密码
+            <if test="password!=null and password.length>0">
+                password=#{password},
+            </if>
+--             修改资料
+            <if test="scdata!=null and scdata.length>0">
+                scdata=#{scdata},
+            </if>
+--             修改名称
+            <if test="scName!=null and scName.length>0">
+                scName=#{scName},
+            </if>
+--             修改地址
+            <if test="scAddress!=null and scAddress.length>0">
+                scAddress=#{scAddress},
+            </if>
+--             修改法定人
+            <if test="scfdMan!=null and scfdMan.length>0">
+                scfdMan=#{scfdMan},
+            </if>
+--             修改金钱来源
+            <if test="moneyLaiyuan!=null and moneyLaiyuan.length>0">
+                moneyLaiyuan=#{moneyLaiyuan},
+            </if>
+--             修改开办资金
+            <if test="kaibanMoney!=null and kaibanMoney.length>0">
+                kaibanMoney=#{kaibanMoney},
+            </if>
+--             修改举办单位
+            <if test="jubanDanwei!=null and jubanDanwei.length>0">
+                jubanDanwei=#{jubanDanwei},
+            </if>
+--             修改信用代码
+            <if test="xinyongDaima!=null and xinyongDaima.length>0">
+                xinyongDaima=#{xinyongDaima},
+            </if>
+--             修改简介
+            <if test="scAbout!=null and scAbout.length>0">
+                scAbout=#{scAbout},
+            </if>
+--             修改联系方式
+            <if test="scPhone!=null and scPhone.length>0">
+                scPhone=#{scPhone},
+            </if>
+--             修改学校状态
+            <if test="scState!=null and scState.length>0">
+                scState=#{scState},
+            </if>
+        </trim>
+    </update>
 </mapper>
