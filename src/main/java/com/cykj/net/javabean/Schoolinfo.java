@@ -14,11 +14,11 @@ public class Schoolinfo {
   private String jubanDanwei;
   private String xinyongDaima;
   private String scAbout;
-  private java.sql.Timestamp regTime;
   private String scpicture;
   private String scState;
-  private String scPhone;
   private long scid;
+  private String scPhone;
+  private java.sql.Timestamp regTime;
 
 
   public String getScAccount() {
@@ -120,15 +120,6 @@ public class Schoolinfo {
   }
 
 
-  public java.sql.Timestamp getRegTime() {
-    return regTime;
-  }
-
-  public void setRegTime(java.sql.Timestamp regTime) {
-    this.regTime = regTime;
-  }
-
-
   public String getScpicture() {
     return scpicture;
   }
@@ -155,13 +146,22 @@ public class Schoolinfo {
     this.scid = scid;
   }
 
-	public String getScPhone()
-	{
-		return scPhone;
-	}
 
-	public void setScPhone(String scPhone)
-	{
-		this.scPhone = scPhone;
-	}
+  public String getScPhone() {
+    return scPhone;
+  }
+
+  public void setScPhone(String scPhone) {
+    this.scPhone = scPhone;
+  }
+
+
+  public java.sql.Timestamp getRegTime() {
+    return regTime;
+  }
+
+  public void setRegTime(java.sql.Timestamp regTime) {
+    this.regTime = regTime;
+  }
+
 }
