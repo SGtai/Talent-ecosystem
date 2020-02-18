@@ -2,6 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.net.mapper.home">
 
-
+    <select id="findById" parameterType="string" resultType="Qyinfo">
+		select A.qyid,A.qyName,A.qyPicture,B.zpxxid,B.salaryLow,B.salaryHigh,C.postion from qyinfo A,jobinfo B,station C
+        where A.qyid = B.qyid and B.zwid = C.stid;
+	</select>
 
 </mapper>

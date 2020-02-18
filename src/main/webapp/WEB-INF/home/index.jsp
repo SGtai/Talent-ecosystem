@@ -11,6 +11,7 @@
 	String jsPath = application.getContextPath()+"/homeS/js/";
 	String path = application.getContextPath()+"/";
 	String imagesPath =application.getContextPath()+"/homeS/images/";
+	String dbimgPath =application.getContextPath()+"/images/";
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -489,8 +490,8 @@
 			<div class="fr1">400-8**-****</div>
 			<div class="fr2">每周一至周日 8:30-17:30</div>
 			<div class="fr3">
-				<span><img src=<%=imagesPath+"1.jpg"%>showqrcode.jpg" /><br />个人安卓客户端</span>
-				<span><img src=<%=imagesPath+"1.jpg"%>showqrcode.jpg" /><br />企业安卓客户端</span>
+				<span><img src=<%=imagesPath+"showqrcode.jpg"%> /><br />个人安卓客户端</span>
+				<span><img src=<%=imagesPath+"showqrcode.jpg"%> /><br />企业安卓客户端</span>
 			</div>
 		</div>
 		<div class="clear"></div>
@@ -498,6 +499,7 @@
 </div>
 
 <script type="text/javascript" src=<%=path+"layui/jquery-3.4.1.js"%>></script>
+<script type="text/javascript" src=<%=jsPath+"index.js"%>></script>
 <script type="text/javascript" src=<%=jsPath+"my.js"%>></script>
 </body>
 </html>
