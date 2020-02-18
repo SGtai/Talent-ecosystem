@@ -30,4 +30,13 @@ public class CompanyService
 		return sum;
 	}
 
+	public int doRegQyKind(Qyinfo qyinfo){
+		int sum=companyDao.doRegQyKind(qyinfo);
+		return sum;
+	}
+
+	public int changePassword(Qyinfo qyinfo){
+		int sum=companyDao.changePassword(qyinfo);
+		return sum;
+	}
 }

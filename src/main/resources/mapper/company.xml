@@ -6,11 +6,21 @@
 		insert into
 		qyinfo(qyAccount,password,qyData,qyName,regTime) values(#{qyAccount},#{password},#{qyData},#{qyName},#{regTime})
 	</insert>
+    <!--    查询企业信息表-->
 	<select id="findById" parameterType="string" resultType="Qyinfo"
 	>
-		select qyid, qyAccount, qyData, qyName, qyAddress, qyfdMan, qyType, jyScope, jyTime, qyKind, regMoney, vipLevel, yingyepicture, xinyongDu, qyPicture, regTime from qyinfo where qyAccount=#{_parameter}
+		select * from qyinfo where qyAccount=#{_parameter}
 	</select>
+    <!--    插入公司信息-->
 	<update id="doRegQyinfo" parameterType="Qyinfo" >
 		update qyinfo set qyAddress=#{qyAddress},qyfdMan=#{qyfdMan},regMoney=#{regMoney},qyType=#{qyType},jyScope=#{jyScope},jyTime=#{jyTime} where qyAccount=#{qyAccount};
+	</update>
+    <!--    插入公司简介-->
+    <update id="doRegQyKind" parameterType="Qyinfo" >
+		update qyinfo set qyKind=#{qyKind} where qyAccount=#{qyAccount};
+	</update>
+	<!--    修改密码-->
+	<update id="changePassword" parameterType="Qyinfo" >
+		update qyinfo set password=#{password} where qyAccount=#{qyAccount};
 	</update>
 </mapper>

@@ -20,7 +20,7 @@
 	<style>
 		body {
 			width: 100%;
-			height: 500px;
+			height: 650px;
 		}
 
 		#layout {

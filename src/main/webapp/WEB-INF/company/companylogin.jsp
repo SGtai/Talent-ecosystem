@@ -16,12 +16,6 @@
 	<meta charset="utf-8">
 	<title>注册界面</title>
 	<link type="text/css" rel="stylesheet" href=<%=path+"css/layui.css"%>  media="all">
-	<script>
-		window.onload=function() {
-			alert("123");
-
-		};
-	</script>
 	<style>
 		body {
 			width: 100%;

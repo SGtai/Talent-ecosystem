@@ -12,4 +12,8 @@ public interface CompanyDao
 	public Qyinfo findById(String account);
 	//完善企业信息
 	public int doRegQyinfo(Qyinfo qyinfo);
+	//填写企业简介
+	public int doRegQyKind(Qyinfo qyinfo);
+	//修改密码
+	public int changePassword(Qyinfo qyinfo);
 }

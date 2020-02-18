@@ -2,6 +2,8 @@ package com.cykj.net.controller;
 
 import com.cykj.net.javabean.Admin;
 import com.cykj.net.javabean.AdminMenu;
+import com.cykj.net.javabean.Qyinfo;
+import com.cykj.net.service.CompanyService;
 import com.cykj.net.service.admin.AdminService;
 import com.cykj.net.util.GetCode;
 import com.cykj.net.util.LayuiData;
@@ -32,6 +34,8 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private CompanyService companyService;
 
     /**
      * 后台管理员登录
@@ -88,9 +92,8 @@ public class AdminController {
             int roid = adminService.findRoid(admin.getAccount());
             //企业
             if (roid == 3){
-
-
-
+                Qyinfo qyinfo=companyService.findById(admin.getAccount());
+                session.setAttribute("Qyinfo", qyinfo);
             //高校
             }else if (roid == 4){
 

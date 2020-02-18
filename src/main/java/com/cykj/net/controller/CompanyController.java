@@ -83,11 +83,7 @@ public class CompanyController
 	public @ResponseBody
 	ModelAndView regCompanyInfo(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		Admin admin = (Admin)session.getAttribute("admin");
-		System.out.println(admin);
-		Qyinfo qyinfo=companyService.findById(admin.getAccount());
 
-		session.setAttribute("Qyinfo", qyinfo);
 		mv.setViewName("/WEB-INF/company/regcompanyinfo");
 
 		return mv;
@@ -99,6 +95,56 @@ public class CompanyController
 		String result = "";
 		int a=companyService.doRegQyinfo(qyinfo);
 		System.out.println(a);
+		if(a>0){
+			result="success";
+		}else{
+			result="nosuccess";
+		}
+		return result;
+	}
+
+	@RequestMapping("/doRegQyKind")
+	public @ResponseBody
+	String doRegQyKind(Qyinfo qyinfo)
+	{
+		String result = "";
+		int a=companyService.doRegQyKind(qyinfo);
+		System.out.println(a);
+		if(a>0){
+			result="success";
+		}else{
+			result="nosuccess";
+		}
+		return result;
+	}
+
+	/**
+	 * 原始密码验证
+	 * @param qyAccount
+	 * @param password
+	 * @return
+	 */
+	@RequestMapping("/verifyPwd")
+	public @ResponseBody
+	String verifyPwd(String qyAccount,String password)
+	{
+		String result = "";
+		Qyinfo qyinfo=companyService.findById(qyAccount);
+
+		if(qyinfo.getPassword().equals(password)){
+			result="success";
+		}else{
+			result="nosuccess";
+		}
+		return result;
+	}
+
+	@RequestMapping("/changePassword")
+	public @ResponseBody
+	String changePassword(Qyinfo qyinfo)
+	{
+		String result = "";
+		int a=companyService.changePassword(qyinfo);
 		if(a>0){
 			result="success";
 		}else{
