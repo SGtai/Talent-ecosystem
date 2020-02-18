@@ -3,20 +3,15 @@ package com.cykj.net.controller;
 import com.cykj.net.javabean.Admin;
 import com.cykj.net.javabean.Adminrole;
 import com.cykj.net.javabean.Qyinfo;
-import com.cykj.net.mapper.AdminDao;
-import com.cykj.net.service.AdminService;
 import com.cykj.net.service.AdminroleService;
 import com.cykj.net.service.CompanyService;
+import com.cykj.net.service.admin.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Controller
 @RequestMapping("/company")
