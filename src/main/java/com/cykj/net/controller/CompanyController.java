@@ -53,7 +53,7 @@ public class CompanyController
 			//插入管理角色表
 			Adminrole adminrole=new Adminrole();
 			adminrole.setAccount(qyinfo.getQyAccount());
-			adminrole.setRoid(0);
+			adminrole.setRoid(3);
 			adminroleService.regAdminRole(adminrole);
 
 

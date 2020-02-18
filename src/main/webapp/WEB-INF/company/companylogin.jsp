@@ -91,7 +91,7 @@
 	</div>
 </form>
 	<h3 align="center">
-		<a href=""  >已有账号，去登录</a>
+		<a href="/jump/company/regcompanyinfo">已有账号，去登录</a>
 	</h3>
 
 </div>
