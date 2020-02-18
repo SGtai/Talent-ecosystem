@@ -4,6 +4,7 @@ import com.cykj.net.javabean.Admin;
 import com.cykj.net.javabean.AdminMenu;
 import com.cykj.net.service.admin.AdminService;
 import com.cykj.net.util.GetCode;
+import com.cykj.net.util.LayuiData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.crypto.Data;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ public class AdminController {
 
     /**
      * 后台管理员登录
+     *
      * @param getAdmin
      * @param session
      * @return
@@ -48,42 +51,52 @@ public class AdminController {
         }
         //查询管理是否存在
         Admin findAdmin = adminService.findAdmin(getAdmin.getAccount());
-        if (null == findAdmin){
+        if (null == findAdmin) {
             return "noAccount";
         }
         //判断密码是否一致
-        if (!getAdmin.getPassword().equals(findAdmin.getPassword())){
+        if (!getAdmin.getPassword().equals(findAdmin.getPassword())) {
             return "false";
         }
         //判断用户的状态是否可登录
-        if(findAdmin.getState() == 1){
+        if (findAdmin.getState() == 1) {
             return "prohibit";
-        }else if (findAdmin.getState() == 2){
+        } else if (findAdmin.getState() == 2) {
             return "delete";
         }
         //添加用户
-        session.setAttribute("admin",findAdmin);
+        session.setAttribute("admin", findAdmin);
         return "true";
     }
 
     /**
      * 管理主页
+     *
      * @param session
      * @return
      */
     @RequestMapping(value = "/main")
-    public ModelAndView main(HttpSession session){
+    public ModelAndView main(HttpSession session) {
         ModelAndView mv = new ModelAndView();
-        //获得管理账号
-        System.out.println("...");
-        System.out.println(session.getAttribute("admin")+"========");
-        if (null == session.getAttribute("admin")){
+        //判断管理账号是否为空
+        if (null == session.getAttribute("admin")) {
             mv.addObject("message", "登录超时/未登录，请重新登录");
             mv.setViewName("/WEB-INF/admin/login");
-        }else {
-            Admin admin = (Admin)session.getAttribute("admin");
+        } else {
+            Admin admin = (Admin) session.getAttribute("admin");
             //查询管理的角色id
             int roid = adminService.findRoid(admin.getAccount());
+            //企业
+            if (roid == 3){
+
+
+            //高校
+            }else if (roid == 4){
+
+
+
+
+            }
             //查询管理所对应的角色的菜单
             List<AdminMenu> list = adminService.findRoleMenus(roid);
             //创建一个hashmap
@@ -102,32 +115,43 @@ public class AdminController {
                     hashMap.put(m.getFirstmenuname(), arrayList);
                 }
             }
-
-            for(Map.Entry<String, List<AdminMenu>> entry: hashMap.entrySet())
-            {
-                System.out.println("Key: "+ entry.getKey()+ " Value: "+entry.getValue());
-            }
-
+//            for(Map.Entry<String, List<AdminMenu>> entry: hashMap.entrySet())
+//            {
+//                System.out.println("Key: "+ entry.getKey()+ " Value: "+entry.getValue());
+//            }
             //添加菜单
             mv.addObject("menus", hashMap);
+            //添加角色
+            mv.addObject("roid", roid);
             mv.setViewName("/WEB-INF/admin/main");
         }
         return mv;
     }
 
-    @RequestMapping(value = "/goOut")
-    public void goOut(HttpSession session){
-
+    /**
+     * 管理退出
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/exit")
+    public ModelAndView exit(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        session.setAttribute("admin", null);
+        mv.setViewName("/WEB-INF/admin/login");
+        return mv;
     }
 
     /**
      * 失去焦点判断验证码
+     *
      * @param code
      * @param session
      * @return
      */
     @PostMapping(value = "/contrastCode")
-    public @ResponseBody String contrastCode(String code,HttpSession session){
+    public @ResponseBody
+    String contrastCode(String code, HttpSession session) {
         //获取验证码
         String sessionVerifyCode = (String) session.getAttribute("verifyCodeValue");
         //验证验证码
@@ -139,6 +163,7 @@ public class AdminController {
 
     /**
      * 获取验证码
+     *
      * @param response
      * @param request
      */
@@ -159,7 +184,15 @@ public class AdminController {
         }
     }
 
-
+    @RequestMapping(value = "station")
+    public @ResponseBody LayuiData station(String station,int limit,int page){
+        LayuiData layuiData = new LayuiData();
+        System.out.println(limit);
+        System.out.println(page);
+        System.out.println(station);
+        System.out.println("张家口");
+        return layuiData;
+    }
 
 
 }
