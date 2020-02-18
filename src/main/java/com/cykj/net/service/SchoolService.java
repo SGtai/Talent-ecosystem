@@ -22,7 +22,7 @@ public class SchoolService
 		return insertsum;
 	}
 
-	public int updateuser(Schoolinfo schoolinfo)
+	public int updateSchoolinfo(Schoolinfo schoolinfo)
 	{
 		int updatesum=schoolDao.updateSchoolinfo(schoolinfo);
 		return updatesum;

@@ -3,12 +3,12 @@
 <mapper namespace="com.cykj.net.mapper.SchoolDao">
     <!--    学校信息-->
     <select id="findSchoolinfo" resultType="Schoolinfo" parameterType="java.lang.String">
-         SELECT * FROM schoolinfo WHERE scAccount=#{scAccount}
+         SELECT * FROM schoolinfo WHERE scAccount=#{account}
     </select>
     <!--    插入学校信息-->
     <insert id="inserSchoolinfo" parameterType="Schoolinfo">
         INSERT INTO schoolinfo (scAccount, password,scdata,scName,scAddress,scfdMan,moneyLaiyuan,kaibanMoney,jubanDanwei,xinyongDaima,scAbout,regTime,scpicture,scState,scPhone) VALUES
-        (#{scAccount},#{password},#{scdata},#{scName},#{scAddress},#{scfdMan},#{moneyLaiyuan},#{kaibanMoney},#{jubanDanwei},#{xinyongDaima},#{scAbout},#{regTime},#{scpicture},#{scState},{scPhone})
+        (#{scAccount},#{password},#{scdata},#{scName},#{scAddress},#{scfdMan},#{moneyLaiyuan},#{kaibanMoney},#{jubanDanwei},#{xinyongDaima},#{scAbout},#{regTime},#{scpicture},#{scState},#{scPhone})
     </insert>
     <!--    修改学校信息-->
     <update id="updateSchoolinfo" parameterType="Schoolinfo">
