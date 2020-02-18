@@ -9,4 +9,5 @@ public interface AdminService {
     Admin findAdmin(String account);
     int findRoid(String account);
     List<AdminMenu> findRoleMenus(int roid);
+    int regAdmin(Admin admin);
 }

@@ -2,6 +2,7 @@ package com.cykj.net.service.admin.impl;
 
 import com.cykj.net.javabean.Admin;
 import com.cykj.net.javabean.AdminMenu;
+import com.cykj.net.mapper.AdminDao;
 import com.cykj.net.mapper.AdminMapper;
 import com.cykj.net.service.admin.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,10 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private AdminMapper adminMapper;
+    @Autowired
+    private AdminDao adminDao;
+
+
 
     @Override
     public Admin findAdmin(String account) {
@@ -28,5 +33,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<AdminMenu> findRoleMenus(int roid) {
         return adminMapper.findRoleMenus(roid);
+    }
+
+    @Override
+    public int regAdmin(Admin admin) {
+        return adminDao.regAdmin(admin);
     }
 }
