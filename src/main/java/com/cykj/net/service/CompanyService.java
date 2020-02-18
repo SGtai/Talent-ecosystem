@@ -25,5 +25,9 @@ public class CompanyService
 		return id;
 	}
 
+	public int doRegQyinfo(Qyinfo qyinfo){
+		int sum=companyDao.doRegQyinfo(qyinfo);
+		return sum;
+	}
 
 }

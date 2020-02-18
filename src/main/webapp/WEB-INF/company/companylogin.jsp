@@ -16,6 +16,12 @@
 	<meta charset="utf-8">
 	<title>Layui</title>
 	<link type="text/css" rel="stylesheet" href=<%=path+"css/layui.css"%>  media="all">
+	<script>
+		window.onload=function() {
+			alert("123");
+
+		};
+	</script>
 	<style>
 		body {
 			width: 100%;
@@ -91,7 +97,7 @@
 	</div>
 </form>
 	<h3 align="center">
-		<a href="/jump/company/regcompanyinfo">已有账号，去登录</a>
+		<a href="/jump/admin/login">已有账号，去登录</a>
 	</h3>
 
 </div>
@@ -99,5 +105,6 @@
 <script src=<%=path + "layui.js"%>></script>
 <script src="<%=path+"json2.js"%>"></script>
 <script src="<%=jsPath+"companylogin.js"%>"></script>
+
 </body>
 </html>

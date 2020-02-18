@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 
 @Controller
@@ -24,7 +26,7 @@ public class CompanyController
 	@Autowired
 	private AdminroleService adminroleService;
 	/**
-	 *
+	 * 注册企业账号
 	 * @param qyinfo
 	 * @return
 	 */
@@ -60,7 +62,7 @@ public class CompanyController
 	}
 
 	/**
-	 *
+	 * 注册账户查重
 	 * @param qyinfo
 	 * @return
 	 */
@@ -77,4 +79,31 @@ public class CompanyController
 		return result;
 	}
 
+	@RequestMapping("/regCompanyInfo")
+	public @ResponseBody
+	ModelAndView regCompanyInfo(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		Admin admin = (Admin)session.getAttribute("admin");
+		System.out.println(admin);
+		Qyinfo qyinfo=companyService.findById(admin.getAccount());
+
+		session.setAttribute("Qyinfo", qyinfo);
+		mv.setViewName("/WEB-INF/company/regcompanyinfo");
+
+		return mv;
+}
+	@RequestMapping("/doRegQyinfo")
+	public @ResponseBody
+	String doRegQyinfo(Qyinfo qyinfo)
+	{
+		String result = "";
+		int a=companyService.doRegQyinfo(qyinfo);
+		System.out.println(a);
+		if(a>0){
+			result="success";
+		}else{
+			result="nosuccess";
+		}
+		return result;
+	}
 }

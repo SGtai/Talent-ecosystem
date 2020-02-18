@@ -10,5 +10,7 @@
 	>
 		select * from qyinfo where qyAccount=#{_parameter}
 	</select>
-
+	<update id="doRegQyinfo" parameterType="Qyinfo" >
+		update qyinfo set qyAddress=#{qyAddress},qyfdMan=#{qyfdMan},regMoney=#{regMoney},qyType=#{qyType},jyScope=#{jyScope},jyTime=#{jyTime} where qyAccount=#{qyAccount};
+	</update>
 </mapper>

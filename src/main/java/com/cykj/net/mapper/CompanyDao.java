@@ -10,5 +10,6 @@ public interface CompanyDao
 	public int regQyAccount(Qyinfo qyinfo);
 	//查询账号
 	public Qyinfo findById(String account);
-
+	//完善企业信息
+	public int doRegQyinfo(Qyinfo qyinfo);
 }
