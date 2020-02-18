@@ -36,7 +36,7 @@
                 </div>
                 <div class="usernameDiv">
                     <i class="layui-icon layui-icon-username adminIcon"></i>
-                    <input class="layui-input adminInput" type="text" name="account"
+                    <input id="account" class="layui-input adminInput" type="text" name="account"
                            lay-verify="required" autocomplete="off" placeholder="输入账号">
                 </div>
             </div>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="passwordDiv">
                     <i class="layui-icon layui-icon-password adminIcon"></i>
-                    <input class="layui-input adminInput" type="password" name="password"
+                    <input id="password" class="layui-input adminInput" type="password" name="password"
                            lay-verify="required" autocomplete="off" placeholder="输入密码">
                 </div>
             </div>
@@ -66,7 +66,7 @@
             </div>
             <div class="usernameWrapDiv">
                 <div class="submitLabel">
-                    <label>没有账号？<a href="#" id="loginRegister">点击注册</a></label>
+                    <label>没有账号？<a href="#" id="register">点击注册</a></label>
                 </div>
                 <div class="submitDiv">
                     <%--                    <input id="loginBtn" type="button" class="submit layui-btn layui-btn-primary" lay-filter="login" value="登录">--%>
@@ -75,11 +75,24 @@
                     </button>
                 </div>
             </div>
+            <input hidden type="text" id="message" value="${message}">
         </form>
     </div>
 </div>
 <script src=<%=layuiPath+"layui.js"%> type="text/javascript"></script>
+
+<%--注册弹出层--%>
+<script type="text/html" id="registerHtml">
+
+
+    <div style="margin-top: 5%;margin-left: 16%"><label>没有企业账号？<a href="/jump/company/companylogin">点击前往企业注册</a></label></div>
+    <div style="margin-top: 10%;margin-left: 16%"><label>没有高校账号？<a href="#">点击前往高校注册</a></label></div>
+</script>
+
+<%--登录登录js--%>
 <script type="text/javascript">
+
+
     // 点击图片更换验证码事件
     $('#verifyCodeImage').on('click', function () {
         // $('#verifyCodeImage').removeProp('src');
@@ -90,7 +103,22 @@
             , form = layui.form
             , layer = layui.layer;
 
+        //是否会话超时
+        if ($('#message').val() === '') {
+        } else {
+            layer.msg($('#message').val());
+        }
 
+        //注册
+        $('#register').click(function () {
+            layer.open({
+                type: 1,//嵌入网页
+                content: $('#registerHtml').html(),
+                area: ['300px', '150px'],
+                title: '企业用户/高校注册入口',
+
+            });
+        });
         //验证码失去焦点
         $('#code').blur(function () {
             //获取input输入的值
@@ -129,16 +157,27 @@
                 success: function (flag) {
                     if (flag === 'true') {
                         layer.msg('登录成功', {icon: 6});
-                        window.location.href = '/jump/admin/main';
-                    } else if ('noCode') {
-                        layer.msg('验证码不正确，请重新输入', {icon: 5});
+                        $("#account").val('');
+                        $("#password").val('');
                         $("#code").val('');
                         $('#verifyCodeImage').attr('src', '/admin/getVerifyCode?' + Math.random());
-                    } else if ('noAccount') {
+                        window.location.href = '/admin/main';
+                    } else if (flag === 'noCode') {
+                        layer.msg('验证码不正确，请重新输入', {icon: 5});
+                    } else if (flag === 'noAccount') {
                         layer.msg('账号不存在，请重新输入', {icon: 5});
+                        $("#account").val('');
+                        $("#password").val('');
+                    } else if (flag === 'prohibit') {
+                        layer.msg('账号被禁用，请联系管理员', {icon: 5});
+                    } else if (flag === 'delete') {
+                        layer.msg('账号被删除，请重新注册/联系管理员', {icon: 5});
                     } else {
                         layer.msg('密码不正确，请重新输入', {icon: 5});
+                        $("#password").val('');
                     }
+                    $("#code").val('');
+                    $('#verifyCodeImage').attr('src', '/admin/getVerifyCode?' + Math.random());
                 },
                 error: function () {
                     layer.msg('服务器繁忙');

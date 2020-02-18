@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String layuiPath = application.getContextPath() + "/layui/";
     String jsPath = application.getContextPath() + "/adminS/js/";
@@ -29,13 +30,13 @@
         <div class="layui-logo" style="width: 350px;font-size: 28px">菜鸟人才网平台-管理端</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
 
-        <ul class="layui-nav layui-layout-right">${sessionScope.admin}
-            <li class="layui-nav-item">欢迎你：${requestScope.admin.wname}，
-                <c:if test="${requestScope.admin.wrole == '1'}">超级管理员</c:if>
-                <c:if test="${requestScope.admin.wrole == '2'}">咨询师</c:if>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">欢迎你：${sessionScope.admin.name}
+<%--                <c:if test="${requestScope.admin.wrole == '1'}">超级管理员</c:if>--%>
+<%--                <c:if test="${requestScope.admin.wrole == '2'}">咨询师</c:if>--%>
             </li>
 
-            <li class="layui-nav-item"><a href="GoJSPServlet?methodName=adminGoOut">注销</a></li>
+            <li class="layui-nav-item"><a href="/admin/goOut">注销</a></li>
         </ul>
     </div>
 
@@ -43,13 +44,13 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <c:if test="${requestScope.menu!=null}">
-                    <c:forEach items="${requestScope.menu}" begin="0" var="i">
+                <c:if test="${menus!=null}">
+                    <c:forEach items="${menus}" begin="0" var="i">
                         <li class="layui-nav-item">
                             <a class="" href="javascript:;">${i.key}</a>
                             <c:forEach items="${i.value}" begin="0" var="j">
                                 <dl class="layui-nav-child">
-                                    <dd><a href="${j.mePath}" target="main_self_frame">${j.secondMenu}</a></dd>
+                                    <dd><a href="${j.menuurl}" target="main_self_frame">${j.sencondmenuname}</a></dd>
                                 </dl>
                             </c:forEach>
                         </li>
@@ -63,7 +64,7 @@
     <div class="layui-body">
         <!-- 内容主体区域 -->
         <!--        <div style="padding: 15px;">内容主体区域</div>-->
-        <iframe src="GoJSPServlet?methodName=goAdminShowMain" name="main_self_frame" frameborder="0" class="layadmin-iframe"
+        <iframe src="" name="main_self_frame" frameborder="0" class="layadmin-iframe"
                 style="width: 100%"
                 height="100%"></iframe>
     </div>
