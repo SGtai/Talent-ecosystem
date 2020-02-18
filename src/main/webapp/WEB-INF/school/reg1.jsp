@@ -56,7 +56,7 @@
 					</div>
 					<div style="padding:30px;">
 						<input type="button" class="button button-block bg-main text-big input-big" value="下一步" style="width: 35%;" onclick="reg1()">
-						<input type="button" class="button button-block bg-main text-big input-big" value="返回" style="width: 30%;position: absolute;margin-left: 55%;margin-top: -11%" onclick="">
+						<input type="button" class="button button-block bg-main text-big input-big" value="返回" style="width: 30%;position: absolute;margin-left: 55%;margin-top: -11%" onclick="back()">
 					</div>
 				</div>
 			</form>
