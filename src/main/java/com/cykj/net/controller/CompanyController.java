@@ -26,8 +26,6 @@ public class CompanyController
 	private AdminService adminService;
 	@Autowired
 	private AdminroleService adminroleService;
-	@Autowired
-	private AdminDao adminDao;
 	/**
 	 * 注册企业账号
 	 * @param qyinfo
@@ -151,7 +149,7 @@ public class CompanyController
 		Admin admin=new Admin();
 		admin.setAccount(qyinfo.getQyAccount());
 		admin.setPassword(qyinfo.getPassword());
-		int b=adminDao.changeAdminPassword(admin);
+		int b=adminService.changeAdminPassword(admin);
 		if(a>0&&b>0){
 			result="success";
 		}else{

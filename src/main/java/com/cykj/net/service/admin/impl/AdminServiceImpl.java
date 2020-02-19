@@ -39,4 +39,9 @@ public class AdminServiceImpl implements AdminService {
     public int regAdmin(Admin admin) {
         return adminDao.regAdmin(admin);
     }
+
+    @Override
+    public int changeAdminPassword(Admin admin) {
+        return adminDao.changeAdminPassword(admin);
+    }
 }

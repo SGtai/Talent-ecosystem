@@ -18,4 +18,14 @@ public class AdminPositionStationServiceImpl implements AdminPositionStationServ
     public List<AdminPositionStation> findPositionList() {
         return adminPositionStationMapper.findPositionList();
     }
+
+    @Override
+    public int countStation(String poid, int page, int limit) {
+        return adminPositionStationMapper.countStation(poid,page,limit);
+    }
+
+    @Override
+    public List<AdminPositionStation> findStation(String poid, int page, int limit) {
+        return adminPositionStationMapper.findStation(poid,page,limit);
+    }
 }

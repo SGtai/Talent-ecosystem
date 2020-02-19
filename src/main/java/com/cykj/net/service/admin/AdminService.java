@@ -10,4 +10,5 @@ public interface AdminService {
     int findRoid(String account);
     List<AdminMenu> findRoleMenus(int roid);
     int regAdmin(Admin admin);
+    int changeAdminPassword(Admin admin);
 }
