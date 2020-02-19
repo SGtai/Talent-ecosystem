@@ -3,6 +3,7 @@ package com.cykj.net.controller;
 import com.cykj.net.javabean.Admin;
 import com.cykj.net.javabean.Adminrole;
 import com.cykj.net.javabean.Qyinfo;
+import com.cykj.net.mapper.AdminDao;
 import com.cykj.net.service.AdminroleService;
 import com.cykj.net.service.CompanyService;
 import com.cykj.net.service.admin.AdminService;
@@ -10,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 
 @Controller
@@ -24,7 +27,7 @@ public class CompanyController
 	@Autowired
 	private AdminroleService adminroleService;
 	/**
-	 *
+	 * 注册企业账号
 	 * @param qyinfo
 	 * @return
 	 */
@@ -48,7 +51,7 @@ public class CompanyController
 			//插入管理角色表
 			Adminrole adminrole=new Adminrole();
 			adminrole.setAccount(qyinfo.getQyAccount());
-			adminrole.setRoid(0);
+			adminrole.setRoid(3);
 			adminroleService.regAdminRole(adminrole);
 
 
@@ -60,7 +63,7 @@ public class CompanyController
 	}
 
 	/**
-	 *
+	 * 注册账户查重
 	 * @param qyinfo
 	 * @return
 	 */
@@ -77,4 +80,81 @@ public class CompanyController
 		return result;
 	}
 
+	@RequestMapping("/regCompanyInfo")
+	public @ResponseBody
+	ModelAndView regCompanyInfo(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+
+		mv.setViewName("/WEB-INF/company/regcompanyinfo");
+
+		return mv;
+}
+	@RequestMapping("/doRegQyinfo")
+	public @ResponseBody
+	String doRegQyinfo(Qyinfo qyinfo)
+	{
+		String result = "";
+		int a=companyService.doRegQyinfo(qyinfo);
+		System.out.println(a);
+		if(a>0){
+			result="success";
+		}else{
+			result="nosuccess";
+		}
+		return result;
+	}
+
+	@RequestMapping("/doRegQyKind")
+	public @ResponseBody
+	String doRegQyKind(Qyinfo qyinfo)
+	{
+		String result = "";
+		int a=companyService.doRegQyKind(qyinfo);
+		System.out.println(a);
+		if(a>0){
+			result="success";
+		}else{
+			result="nosuccess";
+		}
+		return result;
+	}
+
+	/**
+	 * 原始密码验证
+	 * @param qyAccount
+	 * @param password
+	 * @return
+	 */
+	@RequestMapping("/verifyPwd")
+	public @ResponseBody
+	String verifyPwd(String qyAccount,String password)
+	{
+		String result = "";
+		Qyinfo qyinfo=companyService.findById(qyAccount);
+
+		if(qyinfo.getPassword().equals(password)){
+			result="success";
+		}else{
+			result="nosuccess";
+		}
+		return result;
+	}
+
+	@RequestMapping("/changePassword")
+	public @ResponseBody
+	String changePassword(Qyinfo qyinfo)
+	{
+		String result = "";
+		int a=companyService.changePassword(qyinfo);
+		Admin admin=new Admin();
+		admin.setAccount(qyinfo.getQyAccount());
+		admin.setPassword(qyinfo.getPassword());
+		int b=adminService.changeAdminPassword(admin);
+		if(a>0&&b>0){
+			result="success";
+		}else{
+			result="nosuccess";
+		}
+		return result;
+	}
 }

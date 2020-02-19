@@ -36,7 +36,7 @@
 <%--                <c:if test="${requestScope.admin.wrole == '2'}">咨询师</c:if>--%>
             </li>
 
-            <li class="layui-nav-item"><a href="/admin/goOut">注销</a></li>
+            <li class="layui-nav-item"><a href="/admin/exit">注销</a></li>
         </ul>
     </div>
 
@@ -64,9 +64,26 @@
     <div class="layui-body">
         <!-- 内容主体区域 -->
         <!--        <div style="padding: 15px;">内容主体区域</div>-->
-        <iframe src="" name="main_self_frame" frameborder="0" class="layadmin-iframe"
-                style="width: 100%"
-                height="100%"></iframe>
+        <c:if test="${roid!=null}">
+            <c:if test="${roid == 1 || roid == 2}">
+                <iframe src="/jump/admin/station" name="main_self_frame" frameborder="0" class="layadmin-iframe"
+                        style="width: 100%"
+                        height="100%"></iframe>
+            </c:if>
+
+            <c:if test="${roid == 3}">
+                <iframe src="" name="main_self_frame" frameborder="0" class="layadmin-iframe"
+                        style="width: 100%"
+                        height="100%"></iframe>
+            </c:if>
+            <c:if test="${roid == 4}">
+                <iframe src="" name="main_self_frame" frameborder="0" class="layadmin-iframe"
+                        style="width: 100%"
+                        height="100%"></iframe>
+            </c:if>
+
+
+        </c:if>
     </div>
 
     <div class="layui-footer">
@@ -77,6 +94,7 @@
 
 
 <script type="text/javascript" src=<%=layuiPath + "layui.js"%>></script>
+
 
 <script type="text/javascript">
     // e.preventDefault();：设置a的点击事件不跳转到另一个页面

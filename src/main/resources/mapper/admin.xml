@@ -6,5 +6,8 @@
 		insert into
 		admin(account,password,name,registertime) values(#{account},#{password},#{name},#{registertime})
 	</insert>
-
+	<!--    修改密码-->
+	<update id="changeAdminPassword" parameterType="Admin" >
+		update admin set password=#{password} where account=#{account};
+		</update>
 </mapper>

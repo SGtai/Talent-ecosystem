@@ -3,7 +3,7 @@ package com.cykj.net.service.admin.impl;
 import com.cykj.net.javabean.Admin;
 import com.cykj.net.javabean.AdminMenu;
 import com.cykj.net.mapper.AdminDao;
-import com.cykj.net.mapper.AdminMapper;
+import com.cykj.net.mapper.admin.AdminMapper;
 import com.cykj.net.service.admin.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +38,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public int regAdmin(Admin admin) {
         return adminDao.regAdmin(admin);
+    }
+
+    @Override
+    public int changeAdminPassword(Admin admin) {
+        return adminDao.changeAdminPassword(admin);
     }
 }

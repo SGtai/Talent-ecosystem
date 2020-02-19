@@ -59,7 +59,7 @@
 						<div class="information-right" style="height:340px;width:640px;overflow:auto">
 							<c:forEach items="${video}" var="node">
 								<div class="article-list">
-									<a href="#" class="article-link">
+									<a href="/techvideo?id=${node.zjId}&name=${node.spName}&path=${node.spPath}" class="article-link">
 										<div class="article-head">
 											<span class="article-number">${node.spId}</span>
 											<span class="article-title">${node.spName}</span>

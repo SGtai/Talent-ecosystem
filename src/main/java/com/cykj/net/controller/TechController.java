@@ -87,4 +87,29 @@ public class TechController
 		mv.setViewName("/WEB-INF/tech/techC");
 		return mv;
 	}
+
+
+	/**
+	 *
+	 * 施恭泰 jx190719
+	 * @param id  视频播放界面处理
+	 * @return
+	 */
+	@RequestMapping("/techvideo")
+	public ModelAndView techvideo(String id,String name,String path){
+		ModelAndView mv = new ModelAndView();
+		ArrayList<Video> video = techService.getVideoList(id);
+		for (int i = 0; i < video.size(); i++)
+		{
+			video.get(i).setSpId(i+1);
+		}
+		String suffix = path.substring(path.lastIndexOf(".") + 1);
+		System.out.println("后缀="+suffix);
+		mv.addObject("video",video);
+		mv.addObject("path",path);
+		mv.addObject("name",name);
+		mv.addObject("suffix",suffix);
+		mv.setViewName("/WEB-INF/tech/techVideo");
+		return mv;
+	}
 }

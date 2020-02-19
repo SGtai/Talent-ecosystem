@@ -14,4 +14,6 @@ public interface AdminDao
 {
 	//单条插入
 	public int regAdmin(Admin admin);
+	//修改密码
+	public int changeAdminPassword(Admin admin);
 }
