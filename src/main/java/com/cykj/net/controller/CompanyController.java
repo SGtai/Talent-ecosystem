@@ -3,6 +3,7 @@ package com.cykj.net.controller;
 import com.cykj.net.javabean.Admin;
 import com.cykj.net.javabean.Adminrole;
 import com.cykj.net.javabean.Qyinfo;
+import com.cykj.net.mapper.AdminDao;
 import com.cykj.net.service.AdminroleService;
 import com.cykj.net.service.CompanyService;
 import com.cykj.net.service.admin.AdminService;
@@ -25,6 +26,8 @@ public class CompanyController
 	private AdminService adminService;
 	@Autowired
 	private AdminroleService adminroleService;
+	@Autowired
+	private AdminDao adminDao;
 	/**
 	 * 注册企业账号
 	 * @param qyinfo
@@ -145,7 +148,11 @@ public class CompanyController
 	{
 		String result = "";
 		int a=companyService.changePassword(qyinfo);
-		if(a>0){
+		Admin admin=new Admin();
+		admin.setAccount(qyinfo.getQyAccount());
+		admin.setPassword(qyinfo.getPassword());
+		int b=adminDao.changeAdminPassword(admin);
+		if(a>0&&b>0){
 			result="success";
 		}else{
 			result="nosuccess";

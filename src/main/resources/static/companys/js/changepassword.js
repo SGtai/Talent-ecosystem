@@ -21,8 +21,10 @@ layui.use(['form', 'layer'], function(){
 						data:{qyAccount:qyAccount,password:password},
 						success:function (msg) {
 							if (msg==="success"){
-								layer.alert("密码修改成功，请重新登录", { icon: 1, offset: "auto", time:5000 });
-								window.location.href="/jump/admin/login";
+								layer.alert('密码修改成功!', function(index) {
+									layer.close(index);
+									location.reload();
+								})
 							} else{
 								layer.alert("密码修改失败！", { icon: 1, offset: "auto", time:1000 });
 							}
@@ -122,3 +124,13 @@ function passexist2(value) {
 function passexist3(value) {
 	verifyPwd(value);
 }
+
+function sleep(n) {
+	var start = new Date().getTime();
+	 console.log('休眠前：' + start);
+	 while (true) {
+	 if (new Date().getTime() - start > n) {
+	 	break;}
+	 }
+	console.log('休眠后：' + new Date().getTime());
+	}
