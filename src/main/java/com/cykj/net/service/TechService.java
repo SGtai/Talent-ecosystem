@@ -22,7 +22,8 @@ public class TechService
         return techDao.getChaptersList(id);
     };
     public ArrayList<Video> getVideoList(String id){ return techDao.getVideoList(id); }
-    public Chapters getChapters(String id){ return techDao.getChapters(id);
-
-    }
+    public Chapters getChapters(String id){ return techDao.getChapters(id);}
+    public int addCurriculum(Curriculum cc){ return techDao.addCurriculum(cc);}
+    public int addChapters(Chapters ct){return techDao.addChapters(ct);};
+    public int addVideo(Video vd){return techDao.addVideo(vd);};
 }

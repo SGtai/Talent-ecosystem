@@ -2,7 +2,6 @@ server:
   port: 8080
 #  servlet:
 #    context-path: /springboot
-
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -38,3 +37,5 @@ spring:
 mybatis:
   config-location: classpath:SqlMapConfig.xml
   mapper-locations: classpath:/mapper/*.xml
+
+
