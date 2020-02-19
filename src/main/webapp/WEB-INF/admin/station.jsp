@@ -128,11 +128,10 @@
         });
         table.on('tool(getStation)', function (obj) {
 
-            var layEvent = obj.event
-                , data = obj.data
-                , poid = data.poid
-                , station = data.station
-            console.log(obj);
+            var layEvent = obj.event;
+            var data = obj.data;
+            var poid = data.poid;
+            var station = data.station;
             if (layEvent === 'delete') {
 
                 $.ajax({
@@ -141,7 +140,7 @@
                     dataType: "text",
                     data: {poid: poid, station: station},
                     success: function (msg) {
-
+                        alert(msg);
                     },
                     error: function () {
                         layer.msg('服务器繁忙');
