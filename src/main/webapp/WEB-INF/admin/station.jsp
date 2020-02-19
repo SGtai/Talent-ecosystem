@@ -129,9 +129,9 @@
         table.on('tool(getStation)', function (obj) {
 
             var layEvent = obj.event
-                , data = obj.data
-                , poid = data.poid
-                , station = data.station
+                , data = obj.data;
+                var poid = data.poid;
+                var station = data.station;
             console.log(obj);
             if (layEvent === 'delete') {
 
