@@ -1,10 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cykj.net.mapper.home">
+<mapper namespace="com.cykj.net.mapper.HomeDao">
 
-    <select id="findById" parameterType="string" resultType="Qyinfo">
+    <select id="getTenHCom" resultType="JobInfoIndex">
 		select A.qyid,A.qyName,A.qyPicture,B.zpxxid,B.salaryLow,B.salaryHigh,C.postion from qyinfo A,jobinfo B,station C
-        where A.qyid = B.qyid and B.zwid = C.stid;
+		where A.qyid = B.qyid and B.zwid = C.stid order by B.salaryLow desc limit 10;
+	</select>
+
+<!--	推荐职位的复杂查询，一个公司下的多个职位获取-->
+	<!-- 一对多查询，查询用户及订单明细和商品信息 -->
+	<resultMap id="compAndJobMap" type="JobInfoIndex">
+		<!-- 企业信息映射 -->
+		<id column="qyid" property="qyid"/>
+		<result column="qyName" property="qyName"/>
+		<result column="qyPicture" property="qyPicture"/>
+		<!-- 招聘信息映射 --><!-- 下边完成关联信息的映射
+            collection：用于对关联信息映射到集合  property：要将关联信息映射到User的哪个属性中
+            ofType：关联信息映射到User的属性的类型，可以使用别名，不过全称方便确认 -->
+		<collection property="list" ofType="JobInfoIndex">
+			<!-- id：订单关联用户查询的唯一标识  -->
+			<id column="zpxxid" property="zpxxid"/>
+			<result column="postion" property="postion"/>
+		</collection>
+	</resultMap>
+	<select id="compAndJob" resultMap="compAndJobMap">
+		select A.qyid,A.qyName,A.qyPicture,B.zpxxid,B.salaryLow,B.salaryHigh,C.postion from qyinfo A,jobinfo B,station C
+		where A.qyid = B.qyid and B.zwid = C.stid;
+	</select>
+
+<!--	广告-->
+	<select id="advertTen" resultType="Advert">
+		select * from advert where advertType = 0 order by advertMoney desc limit 10;
 	</select>
 
 </mapper>

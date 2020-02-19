@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: 86158
@@ -19,10 +21,21 @@
 	<meta charset="UTF-8">
 	<title>首页</title>
 	<link type="text/css" rel="stylesheet" href=<%=cssPath+"style.css"%>>
-
+	<script type="text/javascript" src=<%=path+"layui/jquery-3.4.1.js"%>></script>
+<%--	<script type="text/javascript" src=<%=jsPath+"index.js"%>></script>--%>
+	<script type="text/javascript" src=<%=jsPath+"my.js"%>></script>
 </head>
 
 <body>
+<script>
+	$.ajax(
+		{type:"POST",
+			async:false,
+			url:"/homeS/getTenHJob",
+			dataType:"text",
+			success:function (msg) {
+			}});
+</script>
 <div class="topDiv">
 	<div class="mainWarp">
 		<div class="topLeft">
@@ -227,34 +240,26 @@
 	</div>
 	<div class="clear"></div>
 	<div class="mainCon1">
-		<div class="imgbox1">
-			<div class="box1"><img src=<%=imagesPath+"1.gif"%> height="71" width="546" /></div>
-			<div class="box1"><img src=<%=imagesPath+"2.gif"%> height="71" width="546" /></div>
-		</div>
-		<div class="clear"></div>
-		<div class="imgbox1">
-			<div class="box2"><img src=<%=imagesPath+"4.gif"%> height="71" width="362" /></div>
-			<div class="box2"><img src=<%=imagesPath+"5.gif"%> height="71" width="362" /></div>
-			<div class="box2"><img src=<%=imagesPath+"6.gif"%> height="71" width="362" /></div>
-		</div>
-		<div class="clear"></div>
-		<div class="imgbox1">
-			<div class="box2"><img src=<%=imagesPath+"7.gif"%> height="71" width="362" /></div>
-			<div class="box3"><img src=<%=imagesPath+"8.gif"%> height="71" width="178" /></div>
-			<div class="box3"><img src=<%=imagesPath+"9.gif"%> height="71" width="178" /></div>
-			<div class="box3"><img src=<%=imagesPath+"10.gif"%> height="71" width="178" /></div>
-			<div class="box3"><img src=<%=imagesPath+"11.gif"%> height="71" width="178" /></div>
-		</div>
-		<div class="clear"></div>
-		<div class="imgbox1">
-			<div class="box3"><img src=<%=imagesPath+"12.gif"%> height="71" width="178" /></div>
-			<div class="box3"><img src=<%=imagesPath+"13.gif"%> height="71" width="178" /></div>
-			<div class="box3"><img src=<%=imagesPath+"14.gif"%> height="71" width="178" /></div>
-			<div class="box3"><img src=<%=imagesPath+"15.gif"%> height="71" width="178" /></div>
-			<div class="box3"><img src=<%=imagesPath+"16.gif"%> height="71" width="178" /></div>
-			<div class="box3"><img src=<%=imagesPath+"17.gif"%> height="71" width="178" /></div>
-		</div>
-		<div class="clear"></div>
+		<c:if test="${sessionScope.advertList != null}">
+			<c:forEach items="${sessionScope.advertList}" begin="0" var="i" varStatus="status">
+				<c:if test="${status.index ==0 or status.index ==2 or status.index ==5}">
+					<div class="imgbox1">
+				</c:if>
+				<c:if test="${status.index < 2}">
+					<div class="box1"><img src=<%=imagesPath%>${i.advertPicture} height="71" width="546" /></div>
+				</c:if>
+				<c:if test="${status.index < 5 and status.index >1}">
+					<div class="box2"><img src=<%=imagesPath%>${i.advertPicture} height="71" width="362" /></div>
+				</c:if>
+				<c:if test="${status.index < 10 and status.index >4}">
+					<div class="box3"><img src=<%=imagesPath%>${i.advertPicture} height="71" width="178" /></div>
+				</c:if>
+				<c:if test="${status.index ==1 or status.index ==4 or status.index ==9}">
+					</div>
+					<div class="clear"></div>
+				</c:if>
+			</c:forEach>
+		</c:if>
 	</div>
 	<div class="mainCon2">
 		<div class="commontitdiv">
@@ -263,75 +268,17 @@
 		</div>
 		<div class="clear"></div>
 		<div class="highMoney">
-			<div class="divBox">
-				<a href=""><img src=<%=imagesPath+"18.gif"%> width="84"/></a>
-				<p class="tit"><a href="">橱柜设计</a></p>
-				<p class="sub"><a href="">深圳维意定制家居用品有限公司</a></p>
-				<p class="num"><span>8K-10K</span></p>
-			</div>
-			<div class="lineBox"></div>
-			<div class="divBox">
-				<a href=""><img src=<%=imagesPath+"18.gif"%> width="84"/></a>
-				<p class="tit"><a href="">橱柜设计</a></p>
-				<p class="sub"><a href="">深圳维意定制家居用品有限公司</a></p>
-				<p class="num"><span>8K-10K</span></p>
-			</div>
-			<div class="lineBox"></div>
-			<div class="divBox">
-				<a href=""><img src=<%=imagesPath+"18.gif"%> width="84"/></a>
-				<p class="tit"><a href="">橱柜设计</a></p>
-				<p class="sub"><a href="">深圳维意定制家居用品有限公司</a></p>
-				<p class="num"><span>8K-10K</span></p>
-			</div>
-			<div class="lineBox"></div>
-			<div class="divBox">
-				<a href=""><img src=<%=imagesPath+"18.gif"%> width="84"/></a>
-				<p class="tit"><a href="">橱柜设计</a></p>
-				<p class="sub"><a href="">深圳维意定制家居用品有限公司</a></p>
-				<p class="num"><span>8K-10K</span></p>
-			</div>
-			<div class="lineBox"></div>
-			<div class="divBox">
-				<a href=""><img src=<%=imagesPath+"18.gif"%> width="84"/></a>
-				<p class="tit"><a href="">橱柜设计</a></p>
-				<p class="sub"><a href="">深圳维意定制家居用品有限公司</a></p>
-				<p class="num"><span>8K-10K</span></p>
-			</div>
-			<div class="lineBox"></div>
-			<div class="divBox">
-				<a href=""><img src=<%=imagesPath+"18.gif"%> width="84"/></a>
-				<p class="tit"><a href="">橱柜设计</a></p>
-				<p class="sub"><a href="">深圳维意定制家居用品有限公司</a></p>
-				<p class="num"><span>8K-10K</span></p>
-			</div>
-			<div class="lineBox"></div>
-			<div class="divBox">
-				<a href=""><img src=<%=imagesPath+"18.gif"%> width="84"/></a>
-				<p class="tit"><a href="">橱柜设计</a></p>
-				<p class="sub"><a href="">深圳维意定制家居用品有限公司</a></p>
-				<p class="num"><span>8K-10K</span></p>
-			</div>
-			<div class="lineBox"></div>
-			<div class="divBox">
-				<a href=""><img src=<%=imagesPath+"18.gif"%> width="84"/></a>
-				<p class="tit"><a href="">橱柜设计</a></p>
-				<p class="sub"><a href="">深圳维意定制家居用品有限公司</a></p>
-				<p class="num"><span>8K-10K</span></p>
-			</div>
-			<div class="lineBox"></div>
-			<div class="divBox">
-				<a href=""><img src=<%=imagesPath+"18.gif"%> width="84"/></a>
-				<p class="tit"><a href="">橱柜设计</a></p>
-				<p class="sub"><a href="">深圳维意定制家居用品有限公司</a></p>
-				<p class="num"><span>8K-10K</span></p>
-			</div>
-			<div class="lineBox"></div>
-			<div class="divBox">
-				<a href=""><img src=<%=imagesPath+"18.gif"%> width="84"/></a>
-				<p class="tit"><a href="">橱柜设计</a></p>
-				<p class="sub"><a href="">深圳维意定制家居用品有限公司</a></p>
-				<p class="num"><span>8K-10K</span></p>
-			</div>
+
+			<c:if test="${sessionScope.jobInfolist != null}">
+				<c:forEach items="${sessionScope.jobInfolist}" begin="0" var="i">
+					<div class="divBox">
+						<a href=""><img src=<%=imagesPath%>${i.qyPicture} width="84"/></a>
+						<p class="tit"><a href="">${i.postion}</a></p>
+						<p class="sub"><a href="">${i.qyName}</a></p>
+						<p class="num"><span>${i.salaryLow}-${i.salaryHigh}</span></p>
+					</div>
+				</c:forEach>
+			</c:if>
 		</div>
 	</div>
 	<div class="mainCon3">
@@ -344,70 +291,23 @@
 	<div class="clear"></div>
 	<div class="mainCon4">
 		<ul>
-			<li>
-				<img src=<%=imagesPath+"19.gif"%> width="62" height="62"/>
-				<p><a href=" ">河北华联建设投资管理股份有限公司</a></p>
-				<span><a href=" ">电子工程师</a></span>
-				<span><a href=" ">电子工程师</a></span><br>
-				<span><a href=" ">电子工程师</a></span>
-				<span><a href=" ">电子工程师</a></span>
-			</li>
-			<li>
-				<img src=<%=imagesPath+"20.gif"%> width="62" height="62"/>
-				<p><a href=" ">广州市富壹贷投资咨询有限公司</a></p>
-			</li>
-			<li>
-				<img src=<%=imagesPath+"21.gif"%> width="62" height="62"/>
-				<p><a href=" ">广州为想互联网科技有限公司</a></p>
-			</li>
-			<li>
-				<img src=<%=imagesPath+"22.gif"%> width="62" height="62"/>
-				<p><a href=" ">广州艾浩尔防霉抗菌科技有限公司</a></p>
-			</li>
-			<li>
-				<img src=<%=imagesPath+"23.gif"%> width="62" height="62"/>
-				<p><a href=" ">河北华联建设投资管理股份有限公司</a></p>
-			</li>
-			<li>
-				<img src=<%=imagesPath+"24.gif"%> width="62" height="62"/>
-				<p><a href=" ">广州为想互联网科技有限公司</a></p>
-			</li>
-			<li>
-				<img src=<%=imagesPath+"25.gif"%> width="62" height="62"/>
-				<p><a href=" ">广州艾浩尔防霉抗菌科技有限公司</a></p>
-			</li>
-			<li>
-				<img src=<%=imagesPath+"26.gif"%> width="62" height="62"/>
-				<p><a href=" ">广州为想互联网科技有限公司</a></p>
-			</li>
-			<li>
-				<img src=<%=imagesPath+"27.gif"%> width="62" height="62"/>
-				<p><a href=" ">河北华联建设投资管理股份有限公司</a></p>
-			</li>
-			<li>
-				<img src=<%=imagesPath+"28.gif"%> width="62" height="62"/>
-				<p><a href=" ">广州为想互联网科技有限公司</a></p>
-			</li>
-			<li>
-				<img src=<%=imagesPath+"19.gif"%> width="62" height="62"/>
-				<p><a href=" ">河北华联建设投资管理股份有限公司</a></p>
-			</li>
-			<li>
-				<img src=<%=imagesPath+"20.gif"%> width="62" height="62"/>
-				<p><a href=" ">广州市富壹贷投资咨询有限公司</a></p>
-			</li>
-			<li>
-				<img src=<%=imagesPath+"21.gif"%> width="62" height="62"/>
-				<p><a href=" ">广州为想互联网科技有限公司</a></p>
-			</li>
-			<li>
-				<img src=<%=imagesPath+"22.gif"%> width="62" height="62"/>
-				<p><a href=" ">广州艾浩尔防霉抗菌科技有限公司</a></p>
-			</li>
-			<li>
-				<img src=<%=imagesPath+"23.gif"%> width="62" height="62"/>
-				<p><a href=" ">河北华联建设投资管理股份有限公司</a></p>
-			</li>
+			<c:if test="${sessionScope.compAndJobList != null}">
+				<c:forEach items="${sessionScope.compAndJobList}" begin="0" var="i">
+					<li>
+						<img src=<%=imagesPath%>${i.qyPicture} width="62" height="62"/>
+						<p><a href=" ">${i.qyName}</a></p>
+					<c:if test="${i.list != null}">
+						<c:forEach items="${i.list}" begin="0" var="j" varStatus="status">
+<%--							第二次结束也就是第三次开始时换行--%>
+							<c:if test="${status.index == 2}">
+								<br>
+							</c:if>
+							<span><a href=" ">${j.postion}</a></span>
+						</c:forEach>
+					</c:if>
+					</li>
+				</c:forEach>
+			</c:if>
 		</ul>
 	</div>
 	<div class="clear"></div>
@@ -497,10 +397,6 @@
 		<div class="clear"></div>
 	</div>
 </div>
-
-<script type="text/javascript" src=<%=path+"layui/jquery-3.4.1.js"%>></script>
-<script type="text/javascript" src=<%=jsPath+"index.js"%>></script>
-<script type="text/javascript" src=<%=jsPath+"my.js"%>></script>
 </body>
 </html>
 
