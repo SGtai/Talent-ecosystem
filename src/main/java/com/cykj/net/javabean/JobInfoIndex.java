@@ -12,8 +12,15 @@ public class JobInfoIndex
 	private String qyName;
 	private String qyPicture;
 	private int zpxxid;
-	private String postion;
+	private String postion;  //招聘职位
 	private int salaryLow;
 	private int salaryHigh;
 	private List<JobInfoIndex> list;
+
+	private String gzAddress;
+	private int replyRate;
+	private String salary;
+	private Data time;
+
+
 }

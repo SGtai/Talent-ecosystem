@@ -31,4 +31,13 @@ public class HomeController
 		request.getSession().setAttribute("advertList",advertList);
 		return "success";
 	}
+
+	@RequestMapping("/getTenHJob")
+	@ResponseBody
+	public List<JobInfoIndex> searchJob(HttpServletRequest request)
+	{
+		List<JobInfoIndex> list = homeService.searchJob();
+		return list;
+	}
+
 }

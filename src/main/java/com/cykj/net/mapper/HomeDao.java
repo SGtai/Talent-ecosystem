@@ -12,4 +12,5 @@ public interface HomeDao
 	public List<JobInfoIndex> getTenHCom();
 	public List<JobInfoIndex> compAndJob();
 	public List<Advert> advertTen();
+	public List<JobInfoIndex> searchJob();
 }

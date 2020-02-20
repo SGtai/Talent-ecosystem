@@ -1,0 +1,495 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0; padding:0}
+ul li{ list-style:none}
+a{ text-decoration:none}
+img{ border:0; max-height:100%; max-width:100%}
+body{ width:100%; min-width:1200px; margin:0 auto; font-size:12px; font-family:"宋体"; color: #434343;}
+.clear{ clear:both}
+input{ border:0; outline:0}
+
+.mainWarp{ width:1100px; margin:0 auto;}
+
+/*topDiv*/
+.topDiv{ width:1100px; margin:0 auto; height:50px; margin-top:10px;}
+.topDiv .topL{ float:left}
+.topDiv .topL .logo{ width:225px; float:left; height:42px}
+.topDiv .topL .logo img{}
+.topDiv .topL img{ float:left}
+.topDiv .topR{ float:right;width: 500px;margin-top: 10px;}
+.topDiv .topR .topR0{ float:right; height: 19px; margin-top: 10px;line-height: 22px; padding-bottom:5px;}
+.topDiv .topR .topR0 a{ color: #434343;}
+.topDiv .topR .topR1{background: url(../images/4.png) no-repeat;width: 50px;padding-left: 25px;cursor: pointer;}
+.topDiv .topR .topR2{width: 50px;padding-left:5px;cursor: pointer;}
+.topDiv .topR .topR3{background: url(../images/5.png) no-repeat;width: 50px;padding-left: 25px;cursor: pointer;}
+.topDiv .topR .topR4{background: url(../images/6.png) no-repeat;width: 68px;padding-left: 25px;cursor: pointer; margin-right:20px}
+
+/*menuDiv*/
+.menuDiv{ width:100%; height:45px; background:#fa6d01}
+.menuDiv ul{width:1100px;height:45px; overflow:hidden}
+.menuDiv ul li{ float:left; width:70px;text-align: center;font-size: 16px;height: 45px;line-height: 45px;font-family: "微软雅黑"; margin:auto 25px}
+.menuDiv ul li a{ color:#fff;}
+.menuDiv ul li.onmenu{border-bottom:3px solid #AF4C01; box-sizing:border-box}
+.menuDiv ul li:hover{ border-bottom:3px solid #AF4C01; box-sizing:border-box}
+
+/*menuLittle*/
+.menuLittle{width: 1100px;margin: 0 auto;height: 25px;line-height: 30px;margin-top: 5px;}
+.menuLittle .menuselect{ float:left; width: 55px;margin-left: 45px;}
+.menuLittle .menuselect:first-child{ margin-left:95px;}
+.menuLittle .menuselect a{color: black;}
+.menuLittle .menuselect a.on{color: rgb(248,90,0);font-weight: bold;}
+
+/*searchDiv*/
+.searchDiv{ width:1100px; margin:0 auto;}
+.searchDiv .search1{ border: 1px solid #D3D3D4;width: 1098px;height: 57px; background: #F2F2F3;border-bottom: none; margin-top:10px}
+.searchDiv .search1 .sea1_1{background: #FFF;border: 1px #C4C4C4 solid;width: 350px;height: 35px;float: left;cursor: pointer;margin-top: 10px;margin-left: 27px;}
+.searchDiv .search1 .sea1_1 input.keyword{color: #898989;padding-left: 35px;background: url(../images/7.png) 8px 8px no-repeat;line-height: 33px;height: 33px;width: 275px;cursor: auto;}
+.searchDiv .search1 span.jiantou{background: url(../images/8.png) 5px 13px no-repeat;width: 29px;height: 35px;float: right;}
+.searchDiv .search1 .sea1_2{background: #FFF;border: 1px #C4C4C4 solid;width: 153px;height: 35px;float: left;cursor: pointer;margin-top: 10px;margin-left: 15px;}
+.searchDiv .search1 .sea1_2 input.addtxt{background: url(../images/8.png) right 13px no-repeat; width:130px;height: 35px; padding-left:15px}
+.searchDiv .search1 .sea1_3{background: #FFF;border: 1px #C4C4C4 solid;width: 228px;height: 35px;float: left;cursor: pointer;margin-top: 10px;margin-left: 15px;}
+.searchDiv .search1 .sea1_3 input.hytxt{background: url(../images/8.png) right 13px no-repeat; width:203px;height: 35px; padding-left:15px}
+.searchDiv .search1 .sea1_4{ float:left;height: 37px;width: 116px; line-height:37px; margin-left: 11px;font-family: "微软雅黑"; font-size: 16px;text-align: center;background: #50BA8C;border-radius: 4px; margin-top: 10px;}
+.searchDiv .search1 .sea1_4 a{ color: #FFF;}
+.searchDiv .search1 .sea1_5{ float:left}
+.searchDiv .search1 .sea1_5 span.span1{ float:left; display:block;cursor: pointer;background: url(../images/9.png) 2px no-repeat;padding-left: 20px;margin-left: 13px;height: 20px;line-height: 20px; margin-top: 19px;}
+.searchDiv .search1 .sea1_5 span.span1 a{color: #7D7D7D;}
+.searchDiv .search1 .sea1_5 span.span2{float: left;margin-left: 20px;margin-top: 21px;}
+.searchDiv .search1 .sea1_5 span.span2 a{color: #FA6D01;}
+.searchDiv .search2{background: #FFF;border: 1px #D3D3D4 solid;padding: 10px;border-top: none;padding-bottom: 15px;margin-bottom: 12px; padding-top:20px}
+.searchDiv .search2 .xzdiv{ }
+.searchDiv .search2 .xzdiv .xzdivL{ float:left;width: 80px;text-align: right;height: 35px;line-height: 35px;font-weight: normal;}
+.searchDiv .search2 .xzdiv .xzdivC{padding-left: 15px; float:left; width:892px; line-height:33px; height:33px; overflow:hidden}
+.searchDiv .search2 .xzdiv .xzdivC span{margin-right: 10px;display: inline-block;}
+.searchDiv .search2 .xzdiv .xzdivC span:hover{color: #FA6D01;}
+.searchDiv .search2 .xzdiv .xzdivB{ float:right;width: 40px;height: 17px; margin-right:20px; cursor: pointer; margin-top: 6px;}
+.searchDiv .search2 .xzdiv .xzdivB .imghidden{ display:none}
+.searchDiv .search2 .xzdiv .xzdivC .dydiv{ float:left; padding-right: 10px;height: 35px;}
+.searchDiv .search2 .xzdiv .xzdivC .dydiv input[type='checkbox']{vertical-align: middle;}
+.searchDiv .search3{width: 139px;height: 20px; margin: 0 auto; background: #FFF; text-align: center; line-height: 18px; margin-top: -22px; border-top: none; cursor:pointer}
+.searchDiv .search3 span.down{padding-right: 20px; background:url(../images/12.png) right no-repeat;}
+.searchDiv .search3 span.up{padding-right: 20px; background:url(../images/13.png) right no-repeat}
+.searchDiv .search2 .xzdiv.hidden{ display:none}
+
+.seachlist{ width:1100px; margin:0 auto; margin-top:20px;}
+.seachlist .listtop{ width:1100px; height:27px;}
+.seachlist .listtop .tj1{ float:left; width:131px; height:27px; background:url(../images/14.png) no-repeat}
+.seachlist .listtop .tj1.on{background:url(../images/15.png) no-repeat}
+.seachlist .listtop .tj1 span{ width: 32px;text-align: left;padding-left: 35px; cursor: pointer;height:27px; line-height:27px}
+.seachlist .listtop .tj1 span.on{color: #3465cb;}
+.seachlist .listtop .tj2{ float:left; margin-left:36px; height:27px; line-height:27px;}
+.seachlist .listtop .tj2 input[type='checkbox']{vertical-align: middle;}
+.seachlist .listtop .tj2 span{}
+.seachlist .listtop .tj3{ float:right}
+.seachlist .listcon{ margin-top:10px}
+table.listtab{}
+table.listtab th{color: #454545;border-bottom: 1px #F7B8A6 solid;text-align: left;padding-left: 7px;height: 30px;}
+table.listtab td{text-align: left;padding: 6px 0 6px 8px;line-height: 27px;height: 33px; overflow:hidden}
+table.listtab td input[type='checkbox']{vertical-align: middle;}
+table.listtab td a.jobname{color: #3364cb;margin-left: 5px;max-width: 175px;vertical-align: middle;font-size: 14px;line-height: 27px;font-weight: bold;}
+table.listtab td a img{vertical-align: middle; padding-right:3px; margin-left:3px}
+table.listtab .company{}
+table.listtab .company a{color: #3364cb;}
+table.listtab .company span{}
+table.listtab .company span img{ width:20px;vertical-align: middle;}
+table.listtab td .yaoqiu{ padding-left:15px;}
+table.listtab td .applydiv{ text-align:center}
+table.listtab td .applydiv a.ljsqbtn{ display:block;width: 90px;height: 30px;background: #50BA8C;color: #FFF;font-family: "微软雅黑";font-size: 14px;border-radius: 3px;}
+table.listtab td .applydiv span{padding-left: 20px; background: url(../images/17.png) 1px 8px no-repeat;display: inline-block;height: 30px;line-height: 30px;color: #1A5AA8;margin-top: 5px;}
+table.listtab td .applydiv span.ygz{background: url(../images/18.png) 1px 8px no-repeat; color:#FF3300}
+table.listtab tr{ width:100%}
+table.listtab tr.xxdetail.none{ display:none}
+.seachlist .listbottom{width: 1084px; height:28px; margin-top: 20px;padding-bottom: 15px;margin-left: 12px;border-bottom:1px #E0E0E0 dotted;}
+.seachlist .listbottom .lb1{ float:left;height: 26px; line-height:26px}
+.seachlist .listbottom .lb1 input[type='checkbox']{vertical-align: middle;}
+.seachlist .listbottom .lb2{ margin-left:10px; float:left;}
+.seachlist .listbottom .lb2 a{ float:left;width: 80px;height: 26px;display: inline-block;margin-left: 5px;text-align: center;vertical-align: middle;border-radius: 3px;line-height: 26px;font-family: "微软雅黑";font-size: 14px;background: #FFF;border: 1px solid #E2E2E2; color:#434343; margin-left:10px;}
+.seachlist .listbottom .lb2 a.sqzw{color: #FFF;background: #FF6236;border: none;}
+.seachlist .listbottom .lb3{ float:right}
+.fenyediv{color: #313131; padding-top:10px; text-align:center}
+.fenyediv a.fy1{width: auto;margin-right: 5px; padding: 3px 7px;margin-bottom: 3px;line-height: 30px;color: #313131;}
+.fenyediv a.fy2{border: 1px #C4C7D1 solid;color: #313131; background-color: #F3F4F6; font-weight: bold;font-size: 14px;margin-right: 5px;padding: 3px 7px;margin-bottom: 3px;line-height: 30px;}
+.fenyediv a.fy2.on{border: 1px #FBCD78 solid;color: #F85A01; background-color: #FFF2EC;font-weight: bold;font-size: 14px;}
+.seachlist .RegionSearch{ margin-bottom:59px;}
+.seachlist .RegionSearch .title{height: 30px;border-bottom: 1px solid #D8D8D8;font-size: 14px;font-weight: 700;line-height: 30px;margin-top: 5px;}
+.seachlist .RegionSearch .title span{ display:block;width: 155px;padding-left: 10px;border-bottom: 2px solid #FF6236;}
+.seachlist .RegionSearch .RegionList{ margin-top:5px}
+.seachlist .RegionSearch .RegionList a{display: inline-block;margin-right: 20px;margin-left: 20px;line-height: 22px;color: #3364cb;}
+
+.footer{padding-top: 20px;padding-bottom: 20px; clear: both; margin: 20px auto 0 auto;border-top: 1px #E2E2E2 solid;text-align: center;}
+.footer a{color: #3364cb; padding-left:5px; padding-right:5px}
+
+
+
+/*招聘会*/
+.meetingDiv{ width:1100px; margin:0 auto; padding-top:10px; color:#000; font-size:14px; font-family:"微软雅黑"}
+.meetingDiv .part1{height: 70px;padding-bottom: 12px;}
+.meetingDiv .part2{background: #FFFCF5;border: 1px #FFD088 solid;font-size: 14px;}
+.meetingDiv .part2 .part2main{padding: 10px 20px;}
+.meetingDiv .part2 .part2main .meetsx{ width:100%; height:40px; border-bottom:1px #E8E6E9 dotted;}
+.meetingDiv .part2 .part2main .meetsx .meettitle{float:left;text-align:right; width:105px;padding-top:10px;line-height:23px;padding-bottom: 5px; font-weight:bold}
+.meetingDiv .part2 .part2main .meetsx .meetcon{ float:left; width:877px; height:20px;padding-top:10px;line-height:23px;padding-bottom: 5px; overflow:hidden}
+.meetingDiv .part2 .part2main .meetsx .meetcon span{margin-right: 25px;cursor: pointer;padding-left: 25px;display:inline-block }
+.meetingDiv .part2 .part2main .meetsx .meetcon span.hot{ background:url(../images/19.png) no-repeat;}
+.meetingDiv .part2 .part2main .meetsx .meetmore{ float:right; width:46px;padding-top: 10px;}
+.meetingDiv .part2 .part2main .meetsx .meetmore .imghidden{ display:none}
+.meetingDiv .part2 .part2main .meetsx .meetcon0 span{ width:160px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden; display:inline-block}
+.meetingDiv .part2 .part2main .meetsx .meetcon a.all{ display:block; float:left;background: #FA6C00;color: #FFF; margin-left:25px;padding-left: 10px; padding-right: 10px;vertical-align: middle;height: 22px;line-height: 21px; margin-top:2px}
+.meetingDiv .part3{ margin-top:20px}
+.meetingDiv .part3 .part3L{ float:left; width:824px;}
+.meetingDiv .part3 .part3L .jianli{ border: 1px solid #FF6565;width: 790px;padding: 10px 5px 10px 15px;text-align: center;cursor: pointer;}
+.meetingDiv .part3 .part3L .jianli span a{ color:red; text-decoration:underline}
+.meetingDiv .part3 .part3L .zph{}
+.meetingDiv .part3 .part3L .zph ul#tabmeet{ padding-bottom:10px;}
+.meetingDiv .part3 .part3L .zph ul#tabmeet li{ float:left;width: 102px; display: inline-block;height: 39px; cursor: pointer;text-align: center;line-height: 39px; color: #000;}
+.meetingDiv .part3 .part3L .zph ul#tabmeet li.current{color: #F95E0E;border-bottom: 2px solid #F95E0E;font-weight: bold;}
+.meetingDiv .part3 .part3L .zph #contentmeet{ width:100%;}
+.meetingDiv .part3 .part3L .zph #contentmeet ul{ display:none}
+.meetingDiv .part3 .part3L .zph #contentmeet .item{width: 790px;padding: 10px 5px 10px 15px; display: inline-block;}
+.meetingDiv .part3 .part3L .zph #contentmeet .item.gray{ background: #FAFAFA;}
+.meetingDiv .part3 .part3L .zph #contentmeet .item .iteml{float: left;width: 166px;padding-top: 5px;text-align: center;border-right: 1px dotted #e1e1e1;}
+.meetingDiv .part3 .part3L .zph #contentmeet .item .iteml span.span1{color: #ff5858;font-size: 24px;font-family: 微软雅黑;width: 48px;}
+.meetingDiv .part3 .part3L .zph #contentmeet .item .iteml span.span2{color: #9f9f9f;font-size: 14px;font-family: 微软雅黑;}
+.meetingDiv .part3 .part3L .zph #contentmeet .item .iteml span.span3{color: #9f9f9f;font-size: 24px;font-family: 微软雅黑;}
+.meetingDiv .part3 .part3L .zph #contentmeet .item .itemr{ float:left;width: 600px;padding-top: 5px;padding-left: 15px;}
+.meetingDiv .part3 .part3L .zph #contentmeet .item .itemr a{ color: #3364cb;}
+.meetingDiv .part3 .part3L .zph #contentmeet .item .itemr span.schoolicon{ background:url(../images/23.png) no-repeat;width: 35px;height: 18px; display: inline-block;vertical-align:middle}
+.meetingDiv .part3 .part3L .zph #contentmeet .item .itemr .sub{ font-size:12px; margin-top:10px; font-family:"宋体";}
+.meetingDiv .part3 .part3L .zph #contentmeet .item .itemr .sub span{ padding-right:8px}
+.meetingDiv .part3 .part3L .zph #contentmeet .item .itemr .sub a{ padding-right:8px}
+.meetingDiv .part3 .part3L .zph #contentmeet .item .itemr .sub img{ vertical-align:middle}
+.meetingDiv .part3 .part3L .zph #contentmeet .item:hover{ background:#F4F4F4}
+.meetingDiv .part3 .part3R{ float:right; width:260px}
+.meetingDiv .part3 .part3R .part3_1{height: 40px;width: 100%;background-color: #358BDB;border-radius: 5px;text-align: center;line-height: 40px;font-size: 18px;}
+.meetingDiv .part3 .part3R .part3_1 a{ display:inline-block;color: #fff;}
+.meetingDiv .part3 .part3R .part3_2{ padding:20px; background: #F8F8F8;margin-top: 10px;}
+.meetingDiv .part3 .part3R .part3_2 h1{border-left: 4px #FA6D01 solid;padding-left: 10px;font-size: 16px;font-weight: normal;color: #F88601;}
+.meetingDiv .part3 .part3R .part3_2 .con{font-family: "宋体";font-size: 12px;margin-top: 12px;}
+.meetingDiv .part3 .part3R .part3_2 .con span{display: block;font-weight: bold;line-height: 25px;}
+.meetingDiv .part3 .part3R .part3_2 .con a{color: #000;line-height: 30px; display: inline-block;}
+.meetingDiv .part3 .part3R .part3_3{ padding:20px; background: #F8F8F8;margin-top: 10px;}
+.meetingDiv .part3 .part3R .part3_3 .title{font-size: 16px;color: #F66C01;border-bottom: 2px #F66C01 solid;width: 78px;margin: 0 auto;text-align: center;padding-bottom:3px;}
+.meetingDiv .part3 .part3R .part3_3 .content{margin-top: 15px;}
+
+
+/*就业资讯*/
+.jobnewsDiv{ width:1100px; margin:0 auto; padding-top:10px;}
+.jobnewsDiv .part1{height: 70px;padding-bottom: 12px;}
+.jobnewsDiv .part2{width: 1070px;border: 1px solid #e3e7ea;line-height: 28px;background: rgb(251,251,251);padding: 15px;}
+.jobnewsDiv .part2 .part2L{ width:600px; float:left}
+.jobnewsDiv .part2 .part2L .newsbox{ border-bottom: 1px dotted #e3e7ea; height:100px; width:600px; overflow:hidden;}
+.jobnewsDiv .part2 .part2L .newsbox.borbottom{ border-bottom:0}
+.jobnewsDiv .part2 .part2L .newsbox .tit{width: 590px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;padding-left: 10px; font-size: 16px;line-height: 40px;font-weight: bold; font-family:"微软雅黑"}
+.jobnewsDiv .part2 .part2L .newsbox .tit a{ color:#000}
+.jobnewsDiv .part2 .part2L .newsbox .con{padding-bottom: 10px;width: 590px; position:relative;padding-left: 10px;line-height: 25px; font-family:"宋体"; font-size:12px; text-indent:2em}
+.jobnewsDiv .part2 .part2L .newsbox .con a{ position:absolute; right:0;color: #3364cb;}
+.jobnewsDiv .part2 .part2R{width: 430px;height: 163px;float: right;background: #f0f0f0;border: 1px solid #434343;}
+.jobnewsDiv .part3{width: 100%;line-height: 28px;border: 1px solid #e3e7ea;background: rgb(251,251,251);height: 40px; margin-top: 12px;}
+.jobnewsDiv .part3 .tit{float: left;border-right: 1px solid;width: 73px;margin-left: 25px;height: 15px;line-height: 15px; margin-top: 13px;}
+.jobnewsDiv .part3 .first{float: left;border-right: 1px solid #e3e7ea;font-size: 14px;line-height: 30px;padding: 5px 15px 0 15px;height: 35px;color: rgb(249,172,92);}
+.jobnewsDiv .part3 .tit a{ color:#000}
+.jobnewsDiv .part3 .tit a:hover{ color:#fa6d01}
+.jobnewsDiv .part3 .tit.last{ border-right:0}
+.jobnewsDiv .part4{margin-top: 15px;}
+.jobnewsDiv .part4 .part4L{width: 800px;float: left; padding-bottom: 10px;}
+.jobnewsDiv .part4 .part4L .part4div{ border: 1px solid #e3e7ea;margin-bottom:15px}
+.jobnewsDiv .part4 .part4L .part4L_1{}
+.jobnewsDiv .part4 .part4L .part4L_1 .tit{border-bottom: 1px solid #e3e7ea; height:32px; font-size:14px}
+.jobnewsDiv .part4 .part4L .part4L_1 .tit span{width: 70px;height: 26px;margin-left: 30px;margin-top: 6px;display: inline;float: left; font-family:"微软雅黑"; color: black;}
+.jobnewsDiv .part4 .part4L .part4L_1 .tit a{width: 55px;height: 26px;margin-right: 20px;font-size: 12px;margin-top: 6px;display: inline;float: right;line-height: 20px; color: #3364cb;}
+.jobnewsDiv .part4 .part4L .part4L_1 .con1{}
+.jobnewsDiv .part4 .part4L .part4L_1 .con1 .img{ float:left;width: 133px;padding-top: 12px;margin-left: 25px;display: inline;}
+.jobnewsDiv .part4 .part4L .part4L_1 .con1 .sub{width: 590px;float: left;margin-left: 25px;line-height: 30px;}
+.jobnewsDiv .part4 .part4L .part4L_1 .con1 .sub .ti{text-align: center;font-weight: bold;padding-top: 10px;font-size: 14px;}
+.jobnewsDiv .part4 .part4L .part4L_1 .con1 .sub .ti a{ color:#000}
+.jobnewsDiv .part4 .part4L .part4L_1 .con1 .sub .ms{color: #434343; text-indent:2em; height:90px; overflow:hidden}
+.jobnewsDiv .part4 .part4L .part4L_1 .con1 .sub .ms a{color: #3364cb;}
+.jobnewsDiv .part4 .part4L .part4L_1 .con2{width: 775px;height: 75px;padding-left: 25px;margin-top: 10px;margin-bottom: 10px;color: #434343;}
+.jobnewsDiv .part4 .part4L .part4L_1 .con2 span{ display:block;width: 380px;margin-top: 12px;float: left;font-size: 12px;}
+.jobnewsDiv .part4 .part4L .part4L_1 .con2 span a{color: #434343; padding-left:10px}
+.jobnewsDiv .part4 .part4L .part4L_2{ float:left;width: 372px;margin-top: 5px;margin-bottom: 5px;border: none;margin-right: 10px;padding-left: 15px;}
+.jobnewsDiv .part4 .part4L .part4L_2 .tit{ width:100%; background: rgb(250,250,250); height:32px; font-size:14px;margin-bottom: 10px;}
+.jobnewsDiv .part4 .part4L .part4L_2 .tit span{width: 70px;height: 26px;margin-left: 30px;margin-top: 6px;display: inline;float: left; font-family:"微软雅黑"; color: black;}
+.jobnewsDiv .part4 .part4L .part4L_2 .tit a{width: 55px;height: 26px;margin-right: 20px;font-size: 12px;margin-top: 6px;display: inline;float: right;line-height: 20px; color: #3364cb;}
+.jobnewsDiv .part4 .part4L .part4L_2 .con{width: 352px; margin-bottom: 10px; color: #434343;}
+.jobnewsDiv .part4 .part4L .part4L_2 .con span{display:block;width: 352px;padding-top: 12px;font-size: 12px;}
+.jobnewsDiv .part4 .part4L .part4L_2 .con span a{color: #434343; padding-left:10px}
+
+.jobnewsDiv .part4 .part4R{width: 282px;float: right;border: 1px solid #e3e7ea;padding-bottom: 20px;}
+/*热点关注*/
+.hotguanzhuss{border-bottom: 1px solid #e3e7ea;padding: 10px;line-height: 24px;}
+.hotguanzhuss .ss{ height:35px}
+.hotguanzhuss .ss input.txtname{width: 154px;border: 1px solid #e3e7ea;height: 32px;padding-left: 15px;float: left;line-height: 32px;}
+.hotguanzhuss .ss input.ssbtn{ background:url(../images/02.gif) no-repeat;float: left;cursor: pointer;width: 79px;height: 34px;border: 1px solid #e3e7ea; border-left: 0;}
+.hotguanzhuss .ss1{margin-bottom: 10px;}
+.hotguanzhuss .ss1 .ssbox{float: left;height: 18px;overflow: hidden;margin-right: 5px;padding-top: 7px;padding-bottom: 9px;color: white;font-weight: bold;text-align: center;cursor: pointer;margin-top: 5px;}
+.hotguanzhuss .ss1 .ssbox a{ color:#fff}
+.hotguanzhuss .ss1 .ssbox1{ background: rgb(77,205,122);width: 100px;}
+.hotguanzhuss .ss1 .ssbox2{ background: rgb(237,179,201);width: 68px;}
+.hotguanzhuss .ss1 .ssbox3{background: rgb(88,187,184);width: 76px;margin-right: 0px;}
+.hotguanzhuss .ss1 .ssbox4{ background: rgb(191,53,4);width: 73px;}
+.hotguanzhuss .ss1 .ssbox5{ background: rgb(121,101,32);width: 85px;}
+.hotguanzhuss .ss1 .ssbox6{ background: rgb(250,109,4);width: 87px;margin-right: 0;}
+.hotguanzhu .tit{margin-top: 8px;margin-left: 14px;margin-bottom: 7px;font-size: 14px;font-weight: bold; font-family:"微软雅黑"}
+.hotguanzhu .con{padding-left: 15px;}
+.hotguanzhu .con .conl{margin-top: 10px; float:left;width: 14px;height: 302px;background:url(../images/03.gif) no-repeat;}
+.hotguanzhu .con .conr{padding-left: 8px;padding-right: 10px; width: 235px; height: 284px; font-size: 12px;   color: #434343;line-height: 32px; float:right; padding-top:1px;}
+.hotguanzhu .con .conr a{ display:block; color:#000;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
+
+
+/*面包屑导航*/
+.brandnav{margin-top: 8px;margin-left: 10px; color:#000}
+.brandnav a{ color:#000}
+.brandnav a:hover{ color: #3364cb;}
+
+/*就业资讯详情*/
+.jobnewsDiv_xq{width: 1100px;margin: 0 auto;margin-top: 14px;margin-bottom: 10px;}
+.XQcontent{border: 1px solid #e3e7ea;margin-top: 15px;}
+.XQcontent .XQleft{font-size: 14px;width: 785px;padding: 10px;padding-bottom: 20px;float: left;margin-top: 2px;border-right: 1px solid #e3e7ea;}
+.XQcontent .XQleft .XQtitle{border-bottom: 1px dashed #e3e7ea;font-size: 20px;}
+.XQcontent .XQleft .XQtitle h1{margin-top: 20px;text-align: center;margin-bottom: 20px; font-family:"微软雅黑"; font-size: 20px;}
+.XQcontent .XQleft .XQtitle h2{text-align: center;font-weight: normal;margin-bottom: 15px;font-size: 12px;}
+.XQcontent .XQleft .XQtitle h2 a{ padding:0 5px; color: #3364cb;}
+.XQcontent .XQleft .XQtitle h2 span.fenxiang{ background:url(../images/24.png) no-repeat;height: 14px;padding-left: 16px;color: rgb(167, 167, 167);font-family: "微软雅黑"; font-size: 12px;line-height: 14px; margin-left:20px}
+.XQcontent .XQleft .XQcon{line-height: 30px;margin-top: 20px; padding: 10px 15px;font-size: 12px; width: 755px;}
+.XQcontent .XQleft .XQcon p{ text-indent:2em}
+.XQcontent .XQleft .XQlaiyuan{ text-align:right;line-height: 30px; font-size:12px}
+.XQcontent .XQleft .likebox{font-size: 12px;padding-bottom: 10px; padding-top: 15px; border-top: 1px solid #e3e7ea;}
+.XQcontent .XQleft .likebox .tit{ margin-bottom: 12px;margin-left: 30px;font-weight: bold;}
+.XQcontent .XQleft .likebox .title{width: 360px;float: left;margin-left: 30px;margin-bottom: 10px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden}
+.XQcontent .XQleft .likebox .title a{color: #365089;}
+.XQcontent .XQright{margin-top: 2px;width: 292px;float: left;font-size: 12px;padding-bottom: 20px;}
+
+/*就业资讯列表*/
+.Listcontent{border: 1px solid #e3e7ea;margin-top: 15px;}
+.Listcontent .Listleft{font-size: 14px;width: 745px;padding: 10px 30px;float: left;margin-top: 2px;border-right: 1px solid #e3e7ea; min-height: 808px;}
+.Listcontent .Listleft .title{ height:16px; margin-top:5px}
+.Listcontent .Listleft .title img{ float:left; display:block;}
+.Listcontent .Listleft .title span{  float:left; display:block; padding-left:5px; font-size:12px;font-weight:bold; color: rgb(98,98,98);}
+.Listcontent .Listright{margin-top: 2px;width: 282px;float: left;font-size: 12px;padding-bottom: 20px; padding-left:10px;} 
+.Listcontent .Listleft .listBox{ border-bottom:1px dotted #e3e7ea; padding-bottom:10px; margin-top:10px}
+.Listcontent .Listleft .listBox table{ font-size:12px; font-family:"宋体";color: #434343;}
+.Listcontent .Listleft .listBox table tr td{ height:28px; line-height:28px}
+.Listcontent .Listleft .listBox table a.listtit{color: #434343; background:url(../images/01.gif) 0 center no-repeat; padding-left:10px} 
+.Listcontent .Listleft .listBox table span.listly{}
+.Listcontent .Listleft .listBox table span.liatdate{}
+
+/*文档下载*/
+.downloadDiv{width: 1100px;margin: 0 auto;margin-top: 14px;margin-bottom: 10px;}
+.downloadDiv .part1{height: 70px;padding-bottom: 12px;}
+.downloadDiv .part2{ margin-top: 10px; width: 100%;background: url(../images/05.gif) repeat-x;border: 1px solid #ffe6a4;}
+.downloadDiv .part2 .part2_1{ width:100%; height:100px; text-align:center}
+.downloadDiv .part2 .part2_1 .tit1{color: #434345;font-size: 30px; margin: 0 auto;margin-top: 33px;width: 450px;display: block;text-align: center;border-bottom: 1px solid #ffeede;padding-bottom: 4px; font-family:"微软雅黑"}
+.downloadDiv .part2 .part2_1 .tit2{color: #fb7802;font-size: 14px;margin: 5px auto;display: block; font-family:"楷体"}
+.downloadDiv .part2 .part2_2{width: 960px;margin: 0px 70px 20px 70px;}
+.downloadDiv .part2 .part2_2 .loadBox{float:left;width:460px; height:85px;cursor: pointer;margin: 35px 0px 35px 20px;color: #365089;display: inline;}
+.downloadDiv .part2 .part2_2 .loadBox .icon{ float:left; width:100px; height:85px}
+.downloadDiv .part2 .part2_2 .loadBox .con{ float:left; width:330px; padding-top:3px}
+.downloadDiv .part2 .part2_2 .loadBox .con span.span1{height: 30px;margin-right: 5px;font-size: 21px;float: left;font-family: "Microsoft YaHei" ! important;color: #000;}
+.downloadDiv .part2 .part2_2 .loadBox .con span.span2{height: 25px; float: left; margin-top: 5px; font-family: Arial, Helvetica, sans-serif;font-weight: bold;font-size: 16px;color: #666;}
+.downloadDiv .part2 .part2_2 .loadBox .sub{ clear:both; width:330px; height:50px; line-height:25px; overflow:hidden;color: #777;}
+
+/*文档下载列表*/
+.downloadDiv .downloadlist{ margin-top:10px}
+.downloadDiv .downloadlist .loadleft{ width: 180px;float: left;border: 1px solid #e5e5e7;background-color: rgb(251,251,251);padding-top: 20px;}
+.downloadDiv .downloadlist .loadleft .loadtype{background: url(../images/07.gif) no-repeat;width: 137px;height: 40px; line-height:40px; margin:0 auto;margin-bottom: 18px; color:rgb(83,83,83);text-align: center;font-size: 12px;font-weight: bold;}
+.downloadDiv .downloadlist .loadleft .loadtype.on{color: #FFFFFF;background: url(../images/06.gif) no-repeat}
+.downloadDiv .downloadlist .loadright{width: 917px;float: left;border: 1px solid #e5e5e7;margin-bottom: 8px;background: #FFFFFF; margin-left:-1px; padding-bottom:10px}
+.downloadDiv .downloadlist .loadright table{ font-size:12px; font-family:"宋体";color: #434343;}
+.downloadDiv .downloadlist .loadright table tr{ height:34px}
+.downloadDiv .downloadlist .loadright table tr th{ background:rgb(251,251,251); border-bottom: 1px solid #e5e5e7;}
+.downloadDiv .downloadlist .loadright table tr td{line-height: 25px;height: 35px;color: #000;}
+.downloadDiv .downloadlist .loadright table tr td.tit{ font-weight: bold;font-size: 12px;width: 630px;}
+.downloadDiv .downloadlist .loadright table tr td.tit a{color: #000;}
+.downloadDiv .downloadlist .loadright table tr td.tit a:hover{ text-decoration:underline;color: #3364cb;}
+.downloadDiv .downloadlist .loadright table tr.borbot td{border-bottom: 1px dotted rgb(234,234,234)}
+.downloadDiv .downloadlist .loadright table .zhaiyao{ margin-bottom:16px;}
+
+/*文档下载详情*/
+.loaddown1{}
+.loadtitle{padding: 10px 0px;padding-left: 20px;border-bottom: 1px solid #E3E7EA;font-weight: bold;}
+.loaddown1 .loadcon1{margin-top: 10px;padding-bottom: 10px;padding-left: 17px;border-bottom: 1px solid #E3E7EA;}
+.loaddown1 .loadcon1 .lis{ float:left;height: 18px;overflow: hidden;margin-right: 5px;padding-top: 7px;padding-bottom: 9px;font-weight: bold;text-align: center;margin-top: 5px;line-height: 20px;}
+.loaddown1 .loadcon1 .lis a{ color:#fff}
+.loaddown1 .loadcon1 .lis.lis1{background: rgb(77,205,122);width: 68px;}
+.loaddown1 .loadcon1 .lis.lis2{background: rgb(237,179,201);width: 68px;}
+.loaddown1 .loadcon1 .lis.lis3{background: rgb(88,187,184);width: 68px;}
+.loaddown1 .loadcon1 .lis.lis4{background: rgb(191,53,4);width: 68px;}
+.loaddown1 .loadcon1 .lis.lis5{background: rgb(121,101,32);width: 68px;}
+.loaddown1 .loadcon1 .lis.lis6{background: rgb(88,187,184);width: 68px;}
+.loaddown1 .loadcon1 .lis.lis7{background: rgb(250,109,4);width: 87px;}
+.loaddown1 .loadcon1 .lis.lis8{background: rgb(237,179,201);width: 68px;}
+.loaddown1 .loadcon1 .lis.lis9{background: rgb(88,187,184);width: 68px;}
+.loaddown1 .loadcon1 .lis.lis10{background: rgb(77,205,122);width: 68px;}
+.loaddown2{}
+.loaddown2 .loadcon2{border-bottom: 1px solid #E3E7EA;padding-bottom: 10px;}
+.loaddown2 .loadcon2 .loadcon2l{margin-top: 11px;margin-left: 15px;width: 20px;height: 310px;float: left;background: url(../images/09.jpg) no-repeat}
+.loaddown2 .loadcon2 .loadcon2r{padding-left: 8px;padding-right: 10px;width: 235px;font-size: 12px;line-height: 32px; float: right; padding-top:4px;margin-top: 1px;}
+.loaddown2 .loadcon2 .loadcon2r a{display:block; color:#000;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
+
+/*求职互助*/
+.helpDiv{width: 1100px;margin: 0 auto;margin-top: 14px;margin-bottom: 10px;}
+.helpDiv .part1{height: 70px;padding-bottom: 12px;}
+.helpDiv .brandnav0 span{ display:block; float:left; padding-top:10px}
+.helpDiv .questionSs{ width:320px; height:34px; float:right;}
+.helpDiv .questionSs input.questiontxt{width: 220px;border: 1px solid #e3e7ea;height: 32px;padding-left: 15px;margin-left: 3px;float: left;line-height: 32px;color: #999999;}
+.helpDiv .questionSs input.questionbtn{cursor: pointer;border: 0;float: left;width: 79px;height: 34px;background: url(../images/02.gif) no-repeat;border: 1px solid #e3e7ea;border-left: 0;}
+.helpDiv .part2{ border: 1px solid #e3e7ea;float: left;margin-top: 15px;width: 1098px;}
+.helpDiv .part2 .helpleft{font-size: 14px;width: 172px;float: left;border-right: 1px solid #e3e7ea;height: 831px;background: rgb(251,251,251);}
+.helpDiv .part2 .helpleft .titBig{ background: url(../images/09.gif) 22px center no-repeat;font-size: 16px;padding: 10px;padding-left: 40px; font-family:"微软雅黑"}
+.helpDiv .part2 .helpleft .con1{border-top: 1px solid #e3e7ea;padding-bottom: 20px;padding-top: 10px;}
+.helpDiv .part2 .helpleft .con1 span{padding-left: 20px;font-weight: bold;display:block;font-size: 12px;margin-bottom: 5px;}
+.helpDiv .part2 .helpleft .con1 a{width: 60px;float: left;font-size: 12px; margin-left: 20px; margin-top: 5px;cursor: pointer;display: inline;color: #434343;}
+.helpDiv .part2 .helpleft .con1 a:hover{ color:#fa6d01}
+.helpDiv .part2 .helpright{float: left;width: 865px;padding: 10px 30px 15px 30px}
+.helpDiv .part2 .helpright .titdiv{height: 40px; line-height:40px;font-size: 14px;border-bottom:1px dashed #e3e7ea; }
+.helpDiv .part2 .helpright .titdiv .sp1{ width:730px; float:left}
+.helpDiv .part2 .helpright .titdiv .sp2{ width:130px; float:left;}
+.helpDiv .part2 .helpright .condiv{ padding-top:10px; line-height:26px; max-height:680px; padding-bottom:10px; overflow:hidden}
+.helpDiv .part2 .helpright .condiv .condiv0:nth-child(5n){ padding-top:10px;}
+.helpDiv .part2 .helpright .condiv .condiv0 span.span1{ float:left; display:block; width:700px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
+.helpDiv .part2 .helpright .condiv .condiv0 span.span1 a.a1{color: rgb(51,100,203);}
+.helpDiv .part2 .helpright .condiv .condiv0 span.span1 a.a2{color:#000;}
+.helpDiv .part2 .helpright .condiv .condiv0 span.span1 a.a2:hover{ color:#a1a1a1}
+.helpDiv .part2 .helpright .condiv .condiv0 span.span3{ display:block; float:left; width:130px; margin-left:30px;color: #a1a1a1;}
+
+
+/*求职互助列表*/
+.helpDiv .part2 .helpcon{float: left;width: 624px;padding: 10px 30px 15px 30px;border-left: 1px solid #e3e7ea; border-right: 1px solid #e3e7ea; background: #FFFFFF;  margin-left:-1px; font-size:12px; font-family:"宋体";  color: #434343;}
+.helpDiv .part2 .helpcon .tit{height: 40px; line-height:40px;font-size: 14px;font-family:"微软雅黑";border-bottom: 1px solid rgb(255,154,66);color: rgb(255,154,66);}
+.helpDiv .part2 .helpcon .tit0{ height: 40px; line-height:40px;font-size: 14px;color: #777; margin-bottom:10px}
+.helpDiv .part2 .helpcon .tit0 .span1{ width:500px; float:left}
+.helpDiv .part2 .helpcon .tit0 .span2{ width:60px; float:left; margin-left:20px}
+.helpDiv .part2 .helpcon .con{max-height:670px; overflow:hidden}
+.helpDiv .part2 .helpcon .con .con0{ line-height:26px}
+.helpDiv .part2 .helpcon .con .con0:nth-child(5n){ padding-bottom:10px}
+.helpDiv .part2 .helpcon .con .con0 a{ display:block; float:left; width:500px; color:#000}
+.helpDiv .part2 .helpcon .con .con0 a:hover{color: #a1a1a1;}
+.helpDiv .part2 .helpcon .con .con0 span{ display:block; width:60px; float:left; margin-left:20px;color: #a1a1a1;}
+.helpDiv .part2 .helpr{float: left;width: 240px;background: #FFFFFF; height: 809px;}
+.helpDiv .part2 .helpr .titdiv{margin-top: 10px; width: 230px;margin-left: 10px;margin-bottom: 7px;font-size: 14px;font-weight: bold;color: #365089;}
+.helpDiv .part2 .helpr .condiv{width: 220px;padding-left: 20px;border-top: 1px solid #e3e7ea;border-bottom: 1px solid #e3e7ea;padding-top: 20px;padding-bottom: 20px;}
+.helpDiv .part2 .helpr .condiv ul li{}
+.helpDiv .part2 .helpr .condiv ul li a{ display:block; float:left; width:96px; height:26px; overflow:hidden; line-height:26px}
+.helpDiv .part2 .helpr .condiv ul li a.a1{color: black;margin-right: 15px;}
+.helpDiv .part2 .helpr .condiv ul li a.a2{color: #3364cb;}
+.helpDiv .part2 .helpr .condiv0{width: 220px;padding-left: 20px;border-top: 1px solid #e3e7ea;padding-top: 10px;padding-bottom: 20px;}
+.helpDiv .part2 .helpr .condiv0 ul li{width: 185px;white-space: nowrap; overflow:hidden; background:url(../images/010.gif) 1px no-repeat;padding-left: 20px; line-height:30px}
+.helpDiv .part2 .helpr .condiv0 ul li a{ color:#000}
+
+
+/*求职互助详情*/
+.helpDiv .part20{ border:0}
+.helpDiv .part20 .helpleftcon{ float:left;font-size: 12px;width: 827px;padding: 10px;min-height: 388px; border:1px solid #e3e7ea; border-right:0}
+.helpDiv .part20 .helpleftcon .XQtitle{border-bottom: 1px dashed #e3e7ea;font-size: 20px;}
+.helpDiv .part20 .helpleftcon .XQtitle h1{margin-top: 20px;text-align: center;margin-bottom: 20px; font-family:"微软雅黑"; font-size: 20px;}
+.helpDiv .part20 .helpleftcon .XQtitle h2{text-align: center;font-weight: normal;margin-bottom: 15px;font-size: 12px;}
+.helpDiv .part20 .helpleftcon .XQtitle h2 span.fenxiang{ background:url(../images/24.png) no-repeat;height: 14px;padding-left: 16px;color: rgb(167, 167, 167);font-family: "微软雅黑"; font-size: 12px;line-height: 14px; margin-left:20px}
+.helpDiv .part20 .helpleftcon .XQcon{line-height: 30px;margin-top: 20px; padding: 10px 15px;font-size: 12px; width: 755px;}
+.helpDiv .part20 .helpleftcon .XQcon p{ text-indent:2em}
+.helpDiv .part20 .helpleftcon .liketit{padding: 10px;line-height: 24px;font-size: 12px;color: #000;  font-weight: bold;}
+.helpDiv .part20 .helpleftcon .liketit span{ padding:10px;border-bottom: 2px solid #fb8322;}
+.helpDiv .part20 .helpleftcon .likecon{width: 650px;margin-left: 20px;margin-top: 5px;}
+.helpDiv .part20 .helpleftcon .likecon0{ line-height:30px; height:30px;}
+.helpDiv .part20 .helpleftcon .likecon a{ width:500px; float:left; white-space: nowrap;text-overflow: ellipsis;overflow: hidden; color:#000}
+.helpDiv .part20 .helpleftcon .likecon a:hover{ color:#3364cb}
+.helpDiv .part20 .helpleftcon .likecon span{ width:130px; float:left; margin-left:20px}
+.helpDiv .part20 .helpr{ border:1px solid #e3e7ea; height:auto}
+
+
+/*职位搜索-热门搜索*/
+.searchhotjob{width: 1100px;margin: 0 auto;margin-top: 10px;}
+.searchhotjob .hottitle{border-bottom: 1px solid #D8D8D8; padding:10px 0}
+.searchhotjob .hottitle span{border-bottom: 2px solid #FF6236; padding:10px 20px;font-family: "微软雅黑";font-weight: normal;font-size: 16px;}
+.searchhotjob .hottitle a{ float:right;font-size: 12px;color: #3364cb; padding:8px}
+.searchhotjob .hotcontent{padding: 13px 43px;display: inline-block;width: 1100px;}
+.searchhotjob .hotcontent ul{width: 1014px;}
+.searchhotjob .hotcontent ul li{ float:left;width: 144px;line-height: 28px;}
+.searchhotjob .hotcontent ul li a{color: #535353;}
+.searchhotjob .hotcontent ul li a:hover{color:rgb(248,90,0); text-decoration:underline}
+.searchhotjob .hotjobcon{ margin-top: 10px; margin-bottom:10px}
+.searchhotjob .hotjobcon ul#tabhot{border-bottom: 1px solid #D8D8D8;height: 35px;line-height: 35px;}
+.searchhotjob .hotjobcon ul#tabhot li{width: 110px;cursor: pointer;text-align: center;font-family: "微软雅黑";  font-size: 16px;float: left;}
+.searchhotjob .hotjobcon ul#tabhot li.currenthot{color: #FF3300;border-bottom: 2px solid #FF6236;}
+.searchhotjob .hotjobcon #contenthot ul{ display:none; padding-top:2px}
+.searchhotjob .hotjobcon #contenthot ul .contA{padding: 8px 0 8px 18px;font-size: 12px;}
+.searchhotjob .hotjobcon #contenthot ul .contA .contAl{font-size: 14px;float: left;width: 170px; margin-top: 6px;}
+.searchhotjob .hotjobcon #contenthot ul .contA .contAl a{color: #404040;}
+.searchhotjob .hotjobcon #contenthot ul .contA .contAl a:hover{color:rgb(248,90,0); text-decoration:underline}
+.searchhotjob .hotjobcon #contenthot ul .contA .contAr{line-height: 28px;float: left;width: 890px;}
+.searchhotjob .hotjobcon #contenthot ul .contA .contAr a{margin-right: 26px;display: inline-block; color: #535353}
+.searchhotjob .hotjobcon #contenthot ul .contA .contAr a:hover{color:rgb(248,90,0); text-decoration:underline}
+.maptypeBox0{border-bottom: 1px solid #D7D7D7;width: 1100px;font-size: 12px;padding-top: 7px;padding-top: 10px;padding-bottom: 20px;}
+.maptypeBox{ line-height: 30px; height:125px; overflow:hidden }
+.maptypeBox .typeone{background: url(../images/011.gif) 0px center no-repeat;float: left;width: 163px;margin-left: 40px;padding-left: 17px;  white-space: nowrap; overflow:hidden}
+.maptypeBox .typeone a{color: #333;}
+/*更多选项*/
+.moretypes{width: 139px;height: 20px; margin: 0 auto; background: #FFF; text-align: center; line-height: 18px; border-top: none; cursor:pointer; margin-top:-12px}
+.moretypes span.down{padding-right: 20px; background:url(../images/12.png) right no-repeat;}
+.moretypes span.up{padding-right: 20px; background:url(../images/13.png) right no-repeat}
+
+.searchhotjob .hotjobcon #contenthot ul .contC{width: 1038px; margin: 0 auto;margin-top: 20px;}
+.abcBox{width: 1036px; height: 36px; border: 1px solid #e3e7ea;text-align: center;  background: #FFF;margin-bottom: 20px;}
+.abcBox .abctit{width: 200px;height: 36px;line-height: 36px;border-right: 1px solid #e3e7ea;margin-right: 40px;float: left;font-size: 15px;}
+.abcBox .abccon{padding-top: 5px;float:left; overflow:hidden}
+.abcBox .abccon div{ float:left;text-align: center; line-height: 26px;width: 22px;height: 26px;background: url(../images/012.gif) no-repeat;display: inline;margin-right: 5px;}
+.abcBox .abccon div:hover{background: url(../images/013.gif) no-repeat;}
+.abcBox .abccon div:hover a{ color:#fff}
+.abcBox .abccon div a{color: #999;font-size: 14px;font-weight: 800;display: block;height: 26px;text-decoration: none;} 
+.Abox{border-bottom: 1px solid #e3e7ea; width: 1018px;padding: 15px 10px 15px 10px;padding-bottom: 18px;}
+.Abox .Aboxl{ float:left;width: 37px;}
+.Abox .Aboxl .AA{ display:block;width: 37px;height: 37px;background: url(../images/014.gif) no-repeat; font-size: 35px;font-weight: bold;color: #ffffff;cursor: pointer; font-family:Arial; text-align:center}
+.Abox .Aboxl .ashow{ display:block;height: 21px;cursor: pointer;width: 44px;margin-top: 10px;color: rgb(248,90,0);}
+.Abox .Aboxr{ width:970px; float:right; max-height:118px; overflow:hidden}
+.Abox .Aboxr a{background: #FFF5e8;line-height: 26px;width: 124px;float: left;margin: 2px;cursor: pointer;overflow: hidden; white-space: nowrap; color:#333; padding-left:10px;}
+.Abox .Aboxr a:hover{ background:#F17420; color:#fff}
+
+
+.searchhotjob .newsjobcon{padding: 13px 20px;}
+.searchhotjob .newsjobcon ul{}
+.searchhotjob .newsjobcon ul li{line-height: 36px;width: 215px;padding: 0 20px; margin-right:10px; display: inline; float: left;font-size: 12px;color: #707070;}
+.searchhotjob .newsjobcon ul li a{ font-size:14px; float:left;color: #333; width:150px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
+.searchhotjob .newsjobcon ul li a:hover{ text-decoration:underline}
+.searchhotjob .newsjobcon ul li span{ float:right; width:60px; text-align:right}
+
+
+
+/*地图搜索*/
+.mainmapbox{width: 1100px; margin: 0 auto;margin-top: 10px;}
+.mainmapbox .mappart1{ width: 1098px;height: 110px;background: #F2F2F3;border: 1px #D8D8D8 solid; border-bottom: none;}
+.mainmapbox .mappart1 .mappart1_con{float: left; background: #FFF;border: 1px solid #CBCBCB;height: 35px;line-height: 35px;margin-left: 15px;margin-top: 10px;}
+.mainmapbox .mappart1 .mappart1_con span{ display:block;float: left;height: 19px;line-height: 19px;padding-left: 15px;padding-right: 10px;border-right: 1px solid #BBBBBB;margin-top: 8px;}
+.mainmapbox .mappart1 .mappart1_con input{padding-left: 12px;border: none;height: 30px;float: left;cursor: pointer;text-align: left;height: 35px;line-height: 34px;outline: none;}
+.mainmapbox .mappart1 .mappart1_1{width: 322px;margin-left: 27px;}
+.mainmapbox .mappart1 .mappart1_1 input{background: url(../images/8.png) right no-repeat; width: 230px;}
+.mainmapbox .mappart1 .mappart1_2{width: 367px;}
+.mainmapbox .mappart1 .mappart1_2 input{background: url(../images/8.png) right no-repeat; width: 275px;}
+.mainmapbox .mappart1 .mappart1_3{width: 226px;}
+.mainmapbox .mappart1 .mappart1_3 input{background: url(../images/8.png) right no-repeat; width: 134px;}
+.mainmapbox .mappart1 .mappart1_4{float: left;margin-left: 28px;margin-top: 20px}
+.mainmapbox .mappart1 .mappart1_4 a{color: #FA6D01;}
+.mainmapbox .mappart1 .mappart1_5{width: 322px;}
+.mainmapbox .mappart1 .mappart1_5 input{background: url(../images/8.png) right no-repeat; width: 230px;}
+.mainmapbox .mappart1 .mappart1_6{background: #50BA8C; font-family: "微软雅黑"; width: 115px; height: 35px; line-height:35px;float: left; margin-left: 17px; margin-top: 10px;  cursor: pointer; border-radius: 3px; text-align: center;padding: 0;}
+.mainmapbox .mappart1 .mappart1_6 a{ color: #FFF;}
+.mainmapbox .mappart2{border: 1px solid #CBCBCB;}
+.mainmapbox .mappart3{margin-top: 30px;width: 1100px;}
+.mainmapbox .mappart3 .mappart3_Title{height: 30px;line-height: 30px;font-weight: bold;width: 1100px;background: #FFF;border-bottom: 1px solid #D6D6D6;}
+.mainmapbox .mappart3 .mappart3_Title span{ display:block;width: 135px; text-align: center;font-family: "微软雅黑";font-size: 14px;border-bottom: 2px solid #FD6232; height: 30px;line-height: 30px}
+.mainmapbox .mappart3 .mappart3_con{padding: 20px 10px;width: 1080px;}
+.mainmapbox .mappart3 .mappart3_con a{display: inline-block;padding-left: 13px; padding-right: 14px;line-height: 25px;color: #3364cb;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

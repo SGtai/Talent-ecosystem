@@ -27,4 +27,9 @@ public class HomeService
 		List<Advert> list = homeDao.advertTen();
 		return list;
 	}
+
+	public List<JobInfoIndex> searchJob(){
+		List<JobInfoIndex> list = homeDao.searchJob();
+		return list;
+	}
 }
