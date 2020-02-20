@@ -2,7 +2,7 @@ package com.cykj.net.controller.admin;
 
 import com.cykj.net.javabean.AdminPositionStation;
 import com.cykj.net.service.admin.AdminPositionStationService;
-import com.cykj.net.util.LayuiData;
+import com.cykj.net.javabean.LayuiData;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

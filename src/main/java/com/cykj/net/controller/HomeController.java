@@ -2,7 +2,9 @@ package com.cykj.net.controller;
 
 import com.cykj.net.javabean.Advert;
 import com.cykj.net.javabean.JobInfoIndex;
+import com.cykj.net.javabean.LayuiData;
 import com.cykj.net.service.HomeService;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,12 +34,16 @@ public class HomeController
 		return "success";
 	}
 
-	@RequestMapping("/getTenHJob")
+	@RequestMapping("/searchJob")
 	@ResponseBody
-	public List<JobInfoIndex> searchJob(HttpServletRequest request)
+	public LayuiData searchJob(int limit, int page)
 	{
-		List<JobInfoIndex> list = homeService.searchJob();
-		return list;
+		LayuiData layuiData = new LayuiData();
+		RowBounds rowBounds = new RowBounds(page - 1, limit);
+		List<JobInfoIndex> list = homeService.searchJob(rowBounds);
+		layuiData.setData(list);
+		layuiData.setCount(list.size());
+		return layuiData;
 	}
 
 }

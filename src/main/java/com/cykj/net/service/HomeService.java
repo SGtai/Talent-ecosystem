@@ -3,6 +3,7 @@ package com.cykj.net.service;
 import com.cykj.net.javabean.Advert;
 import com.cykj.net.javabean.JobInfoIndex;
 import com.cykj.net.mapper.HomeDao;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,8 +29,8 @@ public class HomeService
 		return list;
 	}
 
-	public List<JobInfoIndex> searchJob(){
-		List<JobInfoIndex> list = homeDao.searchJob();
+	public List<JobInfoIndex> searchJob(RowBounds rowBounds){
+		List<JobInfoIndex> list = homeDao.searchJob(rowBounds);
 		return list;
 	}
 }

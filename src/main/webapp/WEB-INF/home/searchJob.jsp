@@ -292,7 +292,7 @@
 	</div>
 	<div class="clear"></div>
 
-	<table class="layui-table" lay-skin="nob" lay-even=""></table>
+	<table class="layui-table" lay-skin="nob" lay-even="searchJob" id="searchJob"></table>
 </div>
 <div class="clear"></div>
 <div class="footer">

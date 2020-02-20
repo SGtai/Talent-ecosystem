@@ -4,20 +4,9 @@ layui.use(['table', 'layer', 'jquery', 'form'], function () {
 		, $ = layui.jquery
 		, form = layui.form;
 
-	$.ajax({
-		type: "POST",
-		url: "/adminStation/choosePosition",
-		dataType: "text",
-		data: {},
-		success: function (msg) {
-		},
-		error: function () {
-			layer.msg('服务器繁忙');
-		}
-	});
 	//第一个实例
 	table.render({
-		elem: '#station'
+		elem: '#searchJob'
 		// , height: 312
 		, url: '/home/searchJob' //数据接口
 		, page: true //开启分页
@@ -32,3 +21,4 @@ layui.use(['table', 'layer', 'jquery', 'form'], function () {
 			, {field: 'time', title: '刷新时间'}
 		]]
 	});
+});
