@@ -1,9 +1,8 @@
 package com.cykj.net.controller;
 
-import com.cykj.net.javabean.Admin;
+import com.cykj.net.javabean.admin.Admin;
 import com.cykj.net.javabean.Adminrole;
 import com.cykj.net.javabean.Qyinfo;
-import com.cykj.net.mapper.AdminDao;
 import com.cykj.net.service.AdminroleService;
 import com.cykj.net.service.CompanyService;
 import com.cykj.net.service.admin.AdminService;
