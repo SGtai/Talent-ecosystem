@@ -1,9 +1,10 @@
 package com.cykj.net.service;
 
-import com.cykj.net.javabean.Qyinfo;
+import com.cykj.net.javabean.*;
 import com.cykj.net.mapper.CompanyDao;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author Lenovo
@@ -39,4 +40,30 @@ public class CompanyService
 		int sum=companyDao.changePassword(qyinfo);
 		return sum;
 	}
+
+	public List<Province> findProvince(){
+		List<Province> list=companyDao.findProvince();
+		return list;
+	}
+
+	public List<City> chooseCity(City city){
+		List<City> list=companyDao.chooseCity(city);
+		return list;
+	}
+
+	public List<Position> findPosition(){
+		List<Position> list=companyDao.findPosition();
+		return list;
+	}
+
+	public List<Station> chooseStation(Station station){
+		List<Station> list=companyDao.chooseStation(station);
+		return list;
+	}
+
+	public int releaseJobinfo(Jobinfo jobinfo) {
+		int sum=companyDao.releaseJobinfo(jobinfo);
+		return sum;
+	}
+
 }

@@ -23,4 +23,30 @@
 	<update id="changePassword" parameterType="Qyinfo" >
 		update qyinfo set password=#{password} where qyAccount=#{qyAccount};
 	</update>
+	<!--    查询城市信息表-->
+	<select id="findProvince"  resultType="com.cykj.net.javabean.Province"
+	>
+		select * from province
+	</select>
+	<!--	查询对应省份得城市数据-->
+	<select id="chooseCity"  resultType="com.cykj.net.javabean.City"
+	>
+		select * from city where prid=#{prid};
+	</select>
+	<!--    查询所有行业-->
+	<select id="findPosition"  resultType="com.cykj.net.javabean.Position"
+	>
+		select * from position
+	</select>
+	<!--    查询对应岗位-->
+	<select id="chooseStation"  resultType="com.cykj.net.javabean.Station"
+	>
+		select * from station where poid=#{poid};
+	</select>
+	<!--单条数据插入，返回自增ID序号-->
+	<insert id="releaseJobinfo" parameterType="com.cykj.net.javabean.Jobinfo" keyProperty="qyid" useGeneratedKeys="true">
+		insert into
+		jobinfo(qyid, zwid, lxMan, lxPhone, zpNum, lxAddress, xueliRequire, jibenRequire, zhiyeType, gzExperience, majorRequire, gzAddress, salaryLow, gztime, welfare, jobDuty,time,continueTime, jobinfoState, salaryHigh, ctid)
+		values(#{qyid},#{zwid},#{lxMan},#{lxPhone},#{zpNum},#{lxAddress},#{xueliRequire},#{jibenRequire},#{zhiyeType},#{gzExperience},#{majorRequire},#{gzAddress},#{salaryLow},#{gztime},#{welfare},#{jobDuty},#{time},#{continueTime},#{jobinfoState},#{salaryHigh},#{ctid})
+	</insert>
 </mapper>

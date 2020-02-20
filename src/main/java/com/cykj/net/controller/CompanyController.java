@@ -1,8 +1,6 @@
 package com.cykj.net.controller;
 
-import com.cykj.net.javabean.Admin;
-import com.cykj.net.javabean.Adminrole;
-import com.cykj.net.javabean.Qyinfo;
+import com.cykj.net.javabean.*;
 import com.cykj.net.mapper.AdminDao;
 import com.cykj.net.service.AdminroleService;
 import com.cykj.net.service.CompanyService;
@@ -15,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Controller
 @RequestMapping("/company")
@@ -88,7 +87,7 @@ public class CompanyController
 		mv.setViewName("/WEB-INF/company/regcompanyinfo");
 
 		return mv;
-}
+	}
 	@RequestMapping("/doRegQyinfo")
 	public @ResponseBody
 	String doRegQyinfo(Qyinfo qyinfo)
@@ -140,6 +139,11 @@ public class CompanyController
 		return result;
 	}
 
+	/**
+	 * 修改密码
+	 * @param qyinfo
+	 * @return
+	 */
 	@RequestMapping("/changePassword")
 	public @ResponseBody
 	String changePassword(Qyinfo qyinfo)
@@ -157,4 +161,65 @@ public class CompanyController
 		}
 		return result;
 	}
+
+	/**
+	 * 打开发布招聘 页面
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value ="/jobinfo")
+	public ModelAndView jobinfo(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		List<Province> list=companyService.findProvince();
+		List<Position> list1=companyService.findPosition();
+		System.out.println("----------"+list+"-----------");
+		mv.addObject("position",list1);
+		mv.addObject("province",list);
+		mv.setViewName("/WEB-INF/company/jobinfo");
+		return mv;
+	}
+
+	/**
+	 * 根据省份选择城市
+	 * @param city
+	 * @return
+	 */
+	@RequestMapping("/chooseCity")
+	public @ResponseBody
+	List<City> chooseCity(City city)
+	{
+		List<City> list=companyService.chooseCity(city);
+		System.out.println(list);
+		return list;
+	}
+
+	/**
+	 * 根据行业选择岗位
+	 * @param station
+	 * @return
+	 */
+	@RequestMapping("/chooseStation")
+	public @ResponseBody
+	List<Station> chooseStation(Station station)
+	{
+		List<Station> list=companyService.chooseStation(station);
+		System.out.println(list);
+		return list;
+	}
+
+	@RequestMapping("/releaseJobinfo")
+	public @ResponseBody
+	String releaseJobinfo(Jobinfo jobinfo)
+	{
+		String result = "";
+		jobinfo.setTime( new Timestamp(System.currentTimeMillis()));
+		int a=companyService.releaseJobinfo(jobinfo);
+		if(a>0){
+			result="success";
+		}else{
+			result="nosuccess";
+		}
+		return result;
+	}
+
 }
