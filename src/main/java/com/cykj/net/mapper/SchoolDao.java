@@ -13,6 +13,20 @@ public interface SchoolDao
 	 * @return
 	 */
 	public Schoolinfo findSchoolinfo(@Param("account") String scAccount);
+
+	/**
+	 * 查相同手机号
+	 * @param scAccount
+	 * @return
+	 */
+	public Schoolinfo finddaima(@Param("daima") String daima);
+
+	/**
+	 * 查相同社会信用代码
+	 * @param scAccount
+	 * @return
+	 */
+	public Schoolinfo findphone(@Param("phone") String phone);
 	/**
 	 * 插入学校信息
 	 * @param schoolinfo

@@ -18,4 +18,7 @@ public interface TechDao
 	public ArrayList<Chapters> getChaptersList(@Param("kjid") String id);
 	public ArrayList<Video> getVideoList(@Param("zjid") String id);
 	public Chapters getChapters(@Param("zjid") String id);
+	public int addCurriculum(Curriculum cc);
+	public int addChapters(Chapters ct);
+	public int addVideo(Video vd);
 }

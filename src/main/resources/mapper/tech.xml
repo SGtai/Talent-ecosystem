@@ -25,4 +25,23 @@
     <select id="getChapters" resultType="Chapters" parameterType="String">
         select * from chapters where zjId = #{zjid}
     </select>
+
+    <insert id="addCurriculum" parameterType="Curriculum" keyProperty="kcId" useGeneratedKeys="true">
+		insert into
+		curriculum(kcName,msDescribe,jgPrice,ckPicture,fzTypeId)
+		values(#{kcName},#{msDescribe},#{jgPrice},#{ckPicture},#{fzTypeId})
+	</insert>
+
+    <insert id="addChapters" parameterType="Chapters" keyProperty="zjId" useGeneratedKeys="true">
+		insert into
+		chapters(zjName,msDescribe,zjPicture,kjId)
+		values(#{zjName},#{msDescribe},#{zjPicture},#{kjId})
+	</insert>
+
+    <insert id="addVideo" parameterType="Video" keyProperty="spId" useGeneratedKeys="true">
+		insert into
+		video(zjId,spDescribe,spName,spPath)
+		values(#{zjId},#{spDescribe},#{spName},#{spPath})
+	</insert>
+
 </mapper>

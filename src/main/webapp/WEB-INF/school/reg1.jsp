@@ -37,19 +37,19 @@
 					<div class="panel-body" style="padding:30px; padding-bottom:10px; padding-top:10px;">
 						<div class="form-group">
 							<div class="field field-icon-right">
-								<input type="text" class="input input-big" name="scAccount" id="scAccount" placeholder="注册账号" data-validate="required:请填写要注册账号" />
+								<input type="text" class="input input-big" name="scAccount" id="scAccount" placeholder="注册账号" data-validate="required:请填写要注册账号" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" maxlength="12" />
 								<span class="icon icon-user margin-small"></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="field field-icon-right">
-								<input type="password" class="input input-big" name="password" id="password" placeholder="注册密码" data-validate="required:请填写要注册密码" />
+								<input type="password" class="input input-big" name="password" id="password1" placeholder="注册密码" data-validate="required:请填写要注册密码" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" maxlength="12"/>
 								<span class="icon icon-key margin-small"></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="field field-icon-right">
-								<input type="password" class="input input-big" name="password" placeholder="再次输入密码" data-validate="required:请再次填写要注册密码" />
+								<input type="password" class="input input-big" name="password" id="password2" placeholder="再次输入密码" data-validate="required:请再次填写要注册密码" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" maxlength="12" />
 								<span class="icon icon-key margin-small"></span>
 							</div>
 						</div>

@@ -5,6 +5,12 @@
     <select id="findSchoolinfo" resultType="Schoolinfo" parameterType="java.lang.String">
          SELECT * FROM schoolinfo WHERE scAccount=#{account}
     </select>
+    <select id="findphone" resultType="Schoolinfo" parameterType="java.lang.String">
+         SELECT * FROM schoolinfo WHERE scAccount=#{phone}
+    </select>
+    <select id="finddaima" resultType="Schoolinfo" parameterType="java.lang.String">
+         SELECT * FROM schoolinfo WHERE scAccount=#{daima}
+    </select>
     <!--    插入学校信息-->
     <insert id="inserSchoolinfo" parameterType="Schoolinfo">
         INSERT INTO schoolinfo (scAccount, password,scdata,scName,scAddress,scfdMan,moneyLaiyuan,kaibanMoney,jubanDanwei,xinyongDaima,scAbout,regTime,scpicture,scState,scPhone) VALUES

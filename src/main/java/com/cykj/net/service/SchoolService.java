@@ -16,6 +16,16 @@ public class SchoolService
 		Schoolinfo schoolinfo=schoolDao.findSchoolinfo(scAccount);
 		return schoolinfo;
 	}
+	public Schoolinfo findphone(String phone)
+	{
+		Schoolinfo schoolinfo=schoolDao.findSchoolinfo(phone);
+		return schoolinfo;
+	}
+	public Schoolinfo finddaima(String daima)
+	{
+		Schoolinfo schoolinfo=schoolDao.findSchoolinfo(daima);
+		return schoolinfo;
+	}
 	public int inserSchoolinfo(Schoolinfo schoolinfo)
 	{
 		int insertsum=schoolDao.inserSchoolinfo(schoolinfo);
