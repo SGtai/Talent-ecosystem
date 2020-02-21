@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
 	String path = application.getContextPath()+"/layui/";
+	String Path =application.getContextPath();
 	String jsPath = application.getContextPath()+"/companys/js/";
 %>
 <html>
@@ -75,19 +76,21 @@
 		table.render({
 			elem: '#demo'
 			,height: 300
-			,url: "/company/searchJobinfoTable" //数据接口
+			,url: '<%=Path+"/company/searchJobinfoTable"%>' //数据接口
 			,page: true //开启分页
 			,limit:5
 			,limits:[5,10,20,50,100]
 			,cols: [[ //表头
-				{field: 'zwid', title: '招聘职位', width:100, fixed: 'left'}
-				,{field: 'zhaopinTime', title: '招聘时间', width:100}
+				{field: 'type', title: '招聘行业', width:150}
+				,{field: 'postion', title: '招聘岗位', width:200}
+				,{field: 'zhaopinTime', title: '招聘时间', width:200}
 				,{field: 'xueliRequire', title: '学历要求', width:100}
-				,{field: 'age', title: '年龄范围', width:100}
-				,{field: 'salary', title: '参考薪资', width: 100}
-				,{field: 'xinzifuli', title: '薪资福利', width: 200}
-				,{field: 'zpNum', title: '招聘人数', width: 300, sort: true}
-				,{field: 'time', title: '发布时间', width: 300,sort: true}
+				,{field: 'age', title: '年龄范围(岁)', width:120}
+				,{field: 'salary', title: '参考薪资(元)', width:150}
+				,{field: 'xinzifuli', title: '薪资福利', width: 250}
+				,{field: 'zpNum', title: '招聘人数', width: 120, sort: true}
+				,{field: 'time', title: '发布时间', width: 200,sort: true}
+				,{field: 'jobinfoState', title: '发布状态', width: 110}
 				,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
 			]]
 			//设置查询刷新的ID

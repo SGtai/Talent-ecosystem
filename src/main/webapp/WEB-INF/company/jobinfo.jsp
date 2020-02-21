@@ -113,11 +113,14 @@
 			<div class="layui-input-inline">
 				<select name="xueliRequire" id="xueliRequire" lay-verify="required">
 					<option value="">请选择学历</option>
-					<option value="研究生以上">研究生以上</option>
-					<option value="本科以上">本科以上</option>
-					<option value="专科以上">专科以上</option>
-					<option value="高中以上">高中以上</option>
-					<option value="初中以上">初中以上</option>
+					<option value="博士">博士及以上</option>
+					<option value="硕士">硕士</option>
+					<option value="研究生">研究生</option>
+					<option value="本科">本科</option>
+					<option value="专科">专科</option>
+					<option value="高中">高中、中技、中专</option>
+					<option value="初中">初中</option>
+					<option value="小学">小学</option>
 					<option value="不限">不限</option>
 				</select>
 			</div>
@@ -131,6 +134,7 @@
 					<option value="">请选择职业性质</option>
 					<option value="全职">全职</option>
 					<option value="兼职">兼职</option>
+					<option value="实习">实习</option>
 				</select>
 			</div>
 		</div>
@@ -140,10 +144,10 @@
 				<select name="gzExperience" id="gzExperience" lay-verify="required">
 					<option value="">请选择工作经验</option>
 					<option value="10年以上">10年以上</option>
-					<option value="5年以上">5年以上</option>
-					<option value="3年以上">3年以上</option>
-					<option value="1年以上">1年以上</option>
-					<option value="应届生">应届生</option>
+					<option value="6~10年">6~10年</option>
+					<option value="3~5年">3~5年</option>
+					<option value="1~2年">1~2年</option>
+					<option value="应届毕业生">应届毕业生</option>
 					<option value="不限">不限</option>
 				</select>
 			</div>

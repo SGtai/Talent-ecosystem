@@ -16,7 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -218,7 +220,7 @@ public class CompanyController
 		String result = "";
 		Qyinfo qyinfo=(Qyinfo)session.getAttribute("Qyinfo");
 		jobinfo.setQyid(qyinfo.getQyid());
-		jobinfo.setTime( new Timestamp(System.currentTimeMillis()));
+		jobinfo.setTime(new Timestamp(System.currentTimeMillis()));
 		int a=companyService.releaseJobinfo(jobinfo);
 		if(a>0){
 			result="success";
@@ -234,12 +236,12 @@ public class CompanyController
 	 * @return
 	 */
 	@RequestMapping(value ="/searchJobinfoTable")
+	@ResponseBody
 	public LayuiData searchJobinfoTable(String page, String limit,HttpSession session) {
 		Qyinfo qyinfo=(Qyinfo)session.getAttribute("Qyinfo");
 		Jobinfo jobinfo= new Jobinfo();
 		jobinfo.setQyid(qyinfo.getQyid());
 		List<Jobinfo> list1=companyService.searchJobinfoTable(jobinfo);
-		System.out.println("----------"+list1.get(1).getBeginTime()+"-----------");
 		LayuiData layuiData=new LayuiData();
 		layuiData.setCode(0);
 		layuiData.setMsg("");
@@ -257,6 +259,7 @@ public class CompanyController
 		}
 
 		layuiData.setCount(list1.size());
+		System.out.println(list1.size());
 		layuiData.setData(data);
 		System.out.println(data);
 //		String json =new Gson().toJson(layuiData);
@@ -264,5 +267,10 @@ public class CompanyController
 		return layuiData;
 	}
 
+	public static SimpleDateFormat getTime(){
+		Date date = new Date();
+		SimpleDateFormat s = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
 
+		return s;
+	}
 }
