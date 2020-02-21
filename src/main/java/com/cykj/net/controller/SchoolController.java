@@ -1,6 +1,6 @@
 package com.cykj.net.controller;
 
-import com.cykj.net.javabean.Admin;
+import com.cykj.net.javabean.admin.Admin;
 import com.cykj.net.javabean.Adminrole;
 import com.cykj.net.javabean.Schoolinfo;
 import com.cykj.net.service.AdminroleService;

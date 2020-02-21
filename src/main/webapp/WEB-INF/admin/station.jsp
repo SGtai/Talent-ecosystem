@@ -39,7 +39,7 @@
         </div>
     </form>
     <div>
-        <button style="margin-left: 60%" class="layui-btn layui-btn-normal" lay-filter="addStation"><i
+        <button style="margin-left: 60%" class="layui-btn layui-btn-normal" id="addStation"><i
                 class="layui-icon">&#xe624;</i>添加岗位
         </button>
     </div>
@@ -51,12 +51,58 @@
 
 
 <script type="text/javascript" src=<%=layuiPath + "layui.js"%>></script>
-<script type="text/html" id="ope">
+<script type="text/html" id="opeHtml">
     <button lay-event="update" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i class="layui-icon">&#xe620;</i>修改
     </button>
     <button lay-event="delete" type="button" class="layui-btn layui-btn-xs layui-btn-radius layui-btn layui-btn-danger">
         <i class="layui-icon">&#xe640;</i>删除
     </button>
+</script>
+<script type="text/html" id="addStationHtml">
+    <form class="layui-form">
+        <div class="layui-form-item" style="margin-top: 3%">
+            <label class="layui-form-label">岗位名称:</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" type="text" id="addStationName" name="station"
+                       lay-verify="required" autocomplete="off">
+            </div>
+        </div>
+        <div class="layui-form-item" style="margin-top: 6%">
+            <label class="layui-form-label">专业名称:</label>
+            <div class="layui-input-inline">
+                <select id="addPosition" name="position" lay-filter="position"></select>
+            </div>
+        </div>
+        <div class="layui-form-item" style="margin-top: 10%">
+            <div class="layui-input-block">
+                <button class="layui-btn" id="reqAddStation">立即添加</button>
+            </div>
+        </div>
+    </form>
+
+</script>
+<script type="text/html" id="updateStationHtml">
+    <form class="layui-form">
+        <div class="layui-form-item" style="margin-top: 3%">
+            <label class="layui-form-label">岗位名称:</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" type="text" id="updateStation" name="station"
+                       lay-verify="required" autocomplete="off">
+            </div>
+        </div>
+        <div class="layui-form-item" style="margin-top: 6%">
+            <label class="layui-form-label">专业名称:</label>
+            <div class="layui-input-inline">
+                <select id="ofPosition" name="position" lay-filter="position"></select>
+            </div>
+        </div>
+        <div class="layui-form-item" style="margin-top: 10%">
+            <div class="layui-input-block">
+                <button class="layui-btn" id="reqUpdateStation">立即修改</button>
+            </div>
+        </div>
+    </form>
+
 </script>
 <script type="text/javascript">
 
@@ -65,6 +111,8 @@
             , layer = layui.layer
             , $ = layui.jquery
             , form = layui.form;
+
+        var poidList;
 
         //ajax
         $.ajax({
@@ -78,8 +126,8 @@
                 $('#position').append('<option value="">请选择行业</option>');
                 // alert(msg);
                 var list = JSON.parse(msg);
+                poidList = list;
                 for (var i = 0; i < list.length; i++) {
-
                     $('#position').append('<option value="' + list[i].id + '">' + list[i].position + '</option>');
                 }
                 layui.form.render("select");
@@ -102,7 +150,7 @@
                 {field: 'id', title: '序列', sort: true, width: 100}
                 , {field: 'station', title: '岗位名称'}
                 , {field: 'position', title: '行业名称', sort: true}
-                , {field: 'ope', title: '操作', toolbar: '#ope'}
+                , {field: 'ope', title: '操作', toolbar: '#opeHtml'}
             ]]
         });
 
@@ -126,28 +174,174 @@
             });
             return false;
         });
+
+        //增加岗位
+        $('#addStation').click(function () {
+            layer.open({
+                type: 1,//嵌入网页
+                content: $('#addStationHtml').html(),
+                area: ['350px', '300px'],
+                title: '添加岗位',
+
+            });
+            // -----------------------这个行业列表感觉需要去数据库查完回来判断/先放着--------------------
+            //设置行业列表
+            $('#addPosition').append('<option value="">请选择行业</option>');
+            for (var i = 0; i < poidList.length; i++) {
+                $('#addPosition').append('<option value="' + poidList[i].id + '">' + poidList[i].position + '</option>');
+            }
+            //重新渲染
+            form.render();
+
+            //添加操作
+            $('#reqAddStation').click(function () {
+                var us = $('#addStationName').val();
+                var op = $('#addPosition').val();
+
+                if (us === '' || op === '') {
+                    layer.msg('岗位名称/专业名称 不可为空')
+                } else if (us.length > 10 || us.length < 2) {
+                    layer.msg('岗位名称不可小于2位,不可超过10位');
+                } else {
+                    layer.confirm('确定要增加岗位:'+us+'吗?', function (index) {
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/adminStation/addStation",
+                            dataType: "text",
+                            data: {poid: op, station: us},
+                            success: function (msg) {
+
+                                if (msg === 'true') {
+                                    layer.msg('添加成功');
+                                    table.reload('station');
+                                    layer.closeAll();
+                                } else if (msg === 'haveStation') {
+                                    layer.msg('该行业已有此岗位名,请重新添加');
+                                } else {
+                                    layer.msg('添加失败');
+                                }
+                            },
+                            error: function () {
+                                layer.msg('服务器繁忙');
+                            }
+                        });
+
+
+                        layer.close(index);
+                    });
+                }
+                return false;
+            });
+
+
+        });
+
+        //修改以及删除
         table.on('tool(getStation)', function (obj) {
 
             var layEvent = obj.event
                 , data = obj.data
                 , poid = data.poid
-                , station = data.station
-            console.log(obj);
-            if (layEvent === 'delete') {
+                , station = data.station;
 
-                $.ajax({
-                    type: "POST",
-                    url: "/adminStation/delete",
-                    dataType: "text",
-                    data: {poid: poid, station: station},
-                    success: function (msg) {
+            if (layEvent === 'update') {
+                //打开网页
+                layer.open({
+                    type: 1,//嵌入网页
+                    content: $('#updateStationHtml').html(),
+                    area: ['350px', '300px'],
+                    title: '修改岗位',
 
-                    },
-                    error: function () {
-                        layer.msg('服务器繁忙');
+                });
+                //设置岗位名称
+                $('#updateStation').prop('value', station);
+                // -----------------------这个行业列表感觉需要去数据库查完回来判断/先放着--------------------
+                //设置行业列表
+                for (var i = 0; i < poidList.length; i++) {
+                    $('#ofPosition').append('<option value="' + poidList[i].id + '">' + poidList[i].position + '</option>');
+                }
+                // 遍历行业select
+                $("#ofPosition").each(function () {
+                    // this代表的是<option></option>，对option再进行遍历
+                    $(this).children("option").each(function () {
+                        // 判断需要对那个选项进行回显
+                        if (this.value == data.poid) {
+                            // 进行回显
+                            $(this).attr("selected", "selected");
+                        }
+                    });
+                })
+                //重新渲染
+                form.render();
+                //提交修改
+                $('#reqUpdateStation').click(function () {
+                    var us = $('#updateStation').val();
+                    var op = $('#ofPosition').val();
+                    console.log(op);
+                    if (op === data.poid && us === data.station) {
+                        layer.msg('请做修改在提交')
+                    } else if (us === '') {
+                        layer.msg('岗位名称不可为空');
+                    } else {
+                        layer.confirm('确定要对岗位进行修改吗?', function (index) {
+
+                            $.ajax({
+                                type: "POST",
+                                url: "/adminStation/updateStation",
+                                dataType: "text",
+                                data: {poid: op, station: us, initStation: data.station},
+                                success: function (msg) {
+
+                                    if (msg === 'true') {
+                                        layer.msg('修改成功');
+                                        table.reload('station');
+                                        layer.closeAll();
+                                    } else if (msg === 'haveStation') {
+                                        layer.msg('该行业已有此岗位名,请重新修改');
+                                    } else {
+                                        layer.msg('修改失败');
+                                    }
+                                },
+                                error: function () {
+                                    layer.msg('服务器繁忙');
+                                }
+                            });
+
+
+                            layer.close(index);
+                        });
                     }
+
+                    return false;
                 });
 
+
+            }
+
+
+            if (layEvent === 'delete') {
+                layer.confirm('确定要删除岗位：' + station + '吗?警告：删除后不可恢复！', function (index) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/adminStation/deleteStation",
+                        dataType: "text",
+                        data: {poid: poid, station: station},
+                        success: function (msg) {
+
+                            if (msg === 'true') {
+                                layer.msg('删除成功');
+                                table.reload('station');
+                            } else {
+                                layer.msg('删除失败');
+                            }
+                        },
+                        error: function () {
+                            layer.msg('服务器繁忙');
+                        }
+                    });
+                    layer.close(index);
+                });
             }
 
         })

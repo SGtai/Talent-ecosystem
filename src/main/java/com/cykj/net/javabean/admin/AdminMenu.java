@@ -1,4 +1,4 @@
-package com.cykj.net.javabean;
+package com.cykj.net.javabean.admin;
 
 import lombok.Data;
 

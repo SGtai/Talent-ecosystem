@@ -1,7 +1,7 @@
 package com.cykj.net.mapper;
 
 
-import com.cykj.net.javabean.Admin;
+import com.cykj.net.javabean.admin.Admin;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

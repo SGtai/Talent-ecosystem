@@ -1,6 +1,6 @@
 package com.cykj.net.controller.admin;
 
-import com.cykj.net.javabean.AdminPositionStation;
+import com.cykj.net.javabean.admin.AdminPositionStation;
 import com.cykj.net.service.admin.AdminPositionStationService;
 import com.cykj.net.javabean.LayuiData;
 import com.google.gson.Gson;
@@ -21,7 +21,7 @@ public class AdminStationController {
     private AdminPositionStationService adminPositionStationService;
 
     /**
-     * 岗位查询
+     * 岗位表格
      *
      * @param poid
      * @param limit
@@ -32,14 +32,15 @@ public class AdminStationController {
     public @ResponseBody
     LayuiData station(String poid, int limit, int page) {
         LayuiData layuiData = new LayuiData();
-        System.out.println(poid+"====");
-        if (null == poid || "".equals(poid)){poid = null;}
+        if (null == poid || "".equals(poid)) {
+            poid = null;
+        }
 
         page = (page - 1) * limit;
-        layuiData.setCount(adminPositionStationService.countStation(poid,page,limit));
-        List<AdminPositionStation> list = adminPositionStationService.findStation(poid,page,limit);
+        layuiData.setCount(adminPositionStationService.countStation(poid, page, limit));
+        List<AdminPositionStation> list = adminPositionStationService.findStation(poid, page, limit);
         for (int i = 0; i < list.size(); i++) {
-            list.get(i).setId(page+1+i);
+            list.get(i).setId(page + 1 + i);
         }
         layuiData.setData(list);
 
@@ -48,6 +49,7 @@ public class AdminStationController {
 
     /**
      * 行业回显
+     *
      * @return
      */
     @PostMapping(value = "/choosePosition")
@@ -56,11 +58,124 @@ public class AdminStationController {
         return new Gson().toJson(adminPositionStationService.findPositionList());
     }
 
-    @PostMapping(value = "/delete")
+    /**
+     * 删除岗位
+     *
+     * @param aps
+     * @return
+     */
+    @PostMapping(value = "/deleteStation")
     public @ResponseBody
-    String delete(AdminPositionStation aps) {
-        System.out.println(aps.getPoid());
-        System.out.println(aps.getStation());
+    String deleteStation(AdminPositionStation aps) {
+        if (adminPositionStationService.deleteStation(aps) > 0) {
+            return "true";
+        }
+        return "false";
+    }
+
+    /**
+     * 更新岗位
+     * @param aps
+     * @return
+     */
+    @PostMapping(value = "/updateStation")
+    public @ResponseBody
+    String updateStation(AdminPositionStation aps) {
+        if (adminPositionStationService.findStationName(aps) > 0) {
+            return "haveStation";
+        }
+        if (adminPositionStationService.updateStation(aps) > 0) {
+            return "true";
+        }
+        return "false";
+    }
+
+    /**
+     * 添加岗位
+     * @param aps
+     * @return
+     */
+    @PostMapping(value = "/addStation")
+    public @ResponseBody
+    String addStation(AdminPositionStation aps) {
+        if (adminPositionStationService.findStationName(aps) > 0) {
+            return "haveStation";
+        }
+        if (adminPositionStationService.addStation(aps) > 0) {
+            return "true";
+        }
+        return "false";
+    }
+
+    /**
+     * 行业表格
+     * @param limit
+     * @param page
+     * @return
+     */
+    @RequestMapping(value = "/table/position")
+    public @ResponseBody
+    LayuiData position(int limit, int page) {
+        LayuiData layuiData = new LayuiData();
+        page = (page - 1) * limit;
+        layuiData.setCount(adminPositionStationService.countPosition());
+        List<AdminPositionStation> list =adminPositionStationService.findAllPosition(page,limit);
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).setId(page + 1 + i);
+        }
+        layuiData.setData(list);
+        return layuiData;
+    }
+
+    /**
+     * 添加行业
+     * @param position
+     * @return
+     */
+    @PostMapping(value = "/addPosition")
+    public @ResponseBody String addPosition(String position){
+        //查询是否存在改行业
+        if (adminPositionStationService.findPosition(position) > 0){
+            return "havePosition";
+        }
+        //添加
+        if (adminPositionStationService.addPosition(position) > 0){
+            return "true";
+        }
+
+        return "false";
+    }
+
+    /**
+     * 删除行业
+     * @param position
+     * @return
+     */
+    @PostMapping(value = "/deletePosition")
+    public @ResponseBody
+    String deletePosition(String position) {
+        if (adminPositionStationService.deletePosition(position) > 0) {
+            return "true";
+        }
+        return "false";
+    }
+
+    /**
+     * 修改行业
+     * @param aps
+     * @return
+     */
+    @PostMapping(value = "/updatePosition")
+    public @ResponseBody
+    String updatePosition(AdminPositionStation aps) {
+        System.out.println(aps.getInitPosition());
+        System.out.println(aps.getPosition());
+        if (adminPositionStationService.findPosition(aps.getPosition()) > 0) {
+            return "havePosition";
+        }
+        if (adminPositionStationService.updatePosition(aps) > 0) {
+            return "true";
+        }
         return "false";
     }
 
