@@ -39,6 +39,12 @@
 		where A.qyid = B.qyid and B.zwid = C.stid and B.ctid = D.ctid and D.prid = E.prid
 	</select>
 
+	<select id="searchJobCount" resultType="int">
+		select count(*)
+		from qyinfo A,jobinfo B,station C,city D,province E
+		where A.qyid = B.qyid and B.zwid = C.stid and B.ctid = D.ctid and D.prid = E.prid
+	</select>
+
 
 
 </mapper>

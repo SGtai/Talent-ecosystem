@@ -19,10 +19,7 @@ input{ border:0; outline:0}
 .topDiv .topR{ float:right;width: 500px;margin-top: 10px;}
 .topDiv .topR .topR0{ float:right; height: 19px; margin-top: 10px;line-height: 22px; padding-bottom:5px;}
 .topDiv .topR .topR0 a{ color: #434343;}
-.topDiv .topR .topR1{background: url(../images/4.png) no-repeat;width: 50px;padding-left: 25px;cursor: pointer;}
 .topDiv .topR .topR2{width: 50px;padding-left:5px;cursor: pointer;}
-.topDiv .topR .topR3{background: url(../images/5.png) no-repeat;width: 50px;padding-left: 25px;cursor: pointer;}
-.topDiv .topR .topR4{background: url(../images/6.png) no-repeat;width: 68px;padding-left: 25px;cursor: pointer; margin-right:20px}
 
 /*menuDiv*/
 .menuDiv{ width:100%; height:45px; background:#fa6d01}
@@ -34,7 +31,7 @@ input{ border:0; outline:0}
 
 /*menuLittle*/
 .menuLittle{width: 1100px;margin: 0 auto;height: 25px;line-height: 30px;margin-top: 5px;}
-.menuLittle .menuselect{ float:left; width: 55px;margin-left: 45px;}
+.menuLittle .menuselect{ float:left; width: 57px;margin-left: 45px;}
 .menuLittle .menuselect:first-child{ margin-left:95px;}
 .menuLittle .menuselect a{color: black;}
 .menuLittle .menuselect a.on{color: rgb(248,90,0);font-weight: bold;}
@@ -43,16 +40,12 @@ input{ border:0; outline:0}
 .searchDiv{ width:1100px; margin:0 auto;}
 .searchDiv .search1{ border: 1px solid #D3D3D4;width: 1098px;height: 57px; background: #F2F2F3;border-bottom: none; margin-top:10px}
 .searchDiv .search1 .sea1_1{background: #FFF;border: 1px #C4C4C4 solid;width: 350px;height: 35px;float: left;cursor: pointer;margin-top: 10px;margin-left: 27px;}
-.searchDiv .search1 .sea1_1 input.keyword{color: #898989;padding-left: 35px;background: url(../images/7.png) 8px 8px no-repeat;line-height: 33px;height: 33px;width: 275px;cursor: auto;}
-.searchDiv .search1 span.jiantou{background: url(../images/8.png) 5px 13px no-repeat;width: 29px;height: 35px;float: right;}
 .searchDiv .search1 .sea1_2{background: #FFF;border: 1px #C4C4C4 solid;width: 153px;height: 35px;float: left;cursor: pointer;margin-top: 10px;margin-left: 15px;}
-.searchDiv .search1 .sea1_2 input.addtxt{background: url(../images/8.png) right 13px no-repeat; width:130px;height: 35px; padding-left:15px}
 .searchDiv .search1 .sea1_3{background: #FFF;border: 1px #C4C4C4 solid;width: 228px;height: 35px;float: left;cursor: pointer;margin-top: 10px;margin-left: 15px;}
-.searchDiv .search1 .sea1_3 input.hytxt{background: url(../images/8.png) right 13px no-repeat; width:203px;height: 35px; padding-left:15px}
 .searchDiv .search1 .sea1_4{ float:left;height: 37px;width: 116px; line-height:37px; margin-left: 11px;font-family: "微软雅黑"; font-size: 16px;text-align: center;background: #50BA8C;border-radius: 4px; margin-top: 10px;}
 .searchDiv .search1 .sea1_4 a{ color: #FFF;}
 .searchDiv .search1 .sea1_5{ float:left}
-.searchDiv .search1 .sea1_5 span.span1{ float:left; display:block;cursor: pointer;background: url(../images/9.png) 2px no-repeat;padding-left: 20px;margin-left: 13px;height: 20px;line-height: 20px; margin-top: 19px;}
+
 .searchDiv .search1 .sea1_5 span.span1 a{color: #7D7D7D;}
 .searchDiv .search1 .sea1_5 span.span2{float: left;margin-left: 20px;margin-top: 21px;}
 .searchDiv .search1 .sea1_5 span.span2 a{color: #FA6D01;}
@@ -67,13 +60,13 @@ input{ border:0; outline:0}
 .searchDiv .search2 .xzdiv .xzdivC .dydiv{ float:left; padding-right: 10px;height: 35px;}
 .searchDiv .search2 .xzdiv .xzdivC .dydiv input[type='checkbox']{vertical-align: middle;}
 .searchDiv .search3{width: 139px;height: 20px; margin: 0 auto; background: #FFF; text-align: center; line-height: 18px; margin-top: -22px; border-top: none; cursor:pointer}
-.searchDiv .search3 span.down{padding-right: 20px; background:url(../images/12.png) right no-repeat;}
+
 .searchDiv .search3 span.up{padding-right: 20px; background:url(../images/13.png) right no-repeat}
 .searchDiv .search2 .xzdiv.hidden{ display:none}
 
 .seachlist{ width:1100px; margin:0 auto; margin-top:20px;}
 .seachlist .listtop{ width:1100px; height:27px;}
-.seachlist .listtop .tj1{ float:left; width:131px; height:27px; background:url(../images/14.png) no-repeat}
+
 .seachlist .listtop .tj1.on{background:url(../images/15.png) no-repeat}
 .seachlist .listtop .tj1 span{ width: 32px;text-align: left;padding-left: 35px; cursor: pointer;height:27px; line-height:27px}
 .seachlist .listtop .tj1 span.on{color: #3465cb;}
@@ -82,7 +75,6 @@ input{ border:0; outline:0}
 .seachlist .listtop .tj2 span{}
 .seachlist .listtop .tj3{ float:right}
 .seachlist .listcon{ margin-top:10px}
-table.listtab{}
 table.listtab th{color: #454545;border-bottom: 1px #F7B8A6 solid;text-align: left;padding-left: 7px;height: 30px;}
 table.listtab td{text-align: left;padding: 6px 0 6px 8px;line-height: 27px;height: 33px; overflow:hidden}
 table.listtab td input[type='checkbox']{vertical-align: middle;}
@@ -95,7 +87,7 @@ table.listtab .company span img{ width:20px;vertical-align: middle;}
 table.listtab td .yaoqiu{ padding-left:15px;}
 table.listtab td .applydiv{ text-align:center}
 table.listtab td .applydiv a.ljsqbtn{ display:block;width: 90px;height: 30px;background: #50BA8C;color: #FFF;font-family: "微软雅黑";font-size: 14px;border-radius: 3px;}
-table.listtab td .applydiv span{padding-left: 20px; background: url(../images/17.png) 1px 8px no-repeat;display: inline-block;height: 30px;line-height: 30px;color: #1A5AA8;margin-top: 5px;}
+table.listtab td .applydiv span{padding-left: 20px; background: 1px 8px no-repeat;display: inline-block;height: 30px;line-height: 30px;color: #1A5AA8;margin-top: 5px;}
 table.listtab td .applydiv span.ygz{background: url(../images/18.png) 1px 8px no-repeat; color:#FF3300}
 table.listtab tr{ width:100%}
 table.listtab tr.xxdetail.none{ display:none}
@@ -425,7 +417,7 @@ table.listtab tr.xxdetail.none{ display:none}
 .maptypeBox .typeone a{color: #333;}
 /*更多选项*/
 .moretypes{width: 139px;height: 20px; margin: 0 auto; background: #FFF; text-align: center; line-height: 18px; border-top: none; cursor:pointer; margin-top:-12px}
-.moretypes span.down{padding-right: 20px; background:url(../images/12.png) right no-repeat;}
+.moretypes span.down{padding-right: 20px; background: right no-repeat;}
 .moretypes span.up{padding-right: 20px; background:url(../images/13.png) right no-repeat}
 
 .searchhotjob .hotjobcon #contenthot ul .contC{width: 1038px; margin: 0 auto;margin-top: 20px;}

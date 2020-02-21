@@ -14,4 +14,5 @@ public interface HomeDao
 	public List<JobInfoIndex> compAndJob();
 	public List<Advert> advertTen();
 	public List<JobInfoIndex> searchJob(RowBounds rowBounds);
+	public int searchJobCount();
 }

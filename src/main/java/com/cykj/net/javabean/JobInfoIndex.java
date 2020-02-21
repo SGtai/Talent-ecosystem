@@ -20,7 +20,7 @@ public class JobInfoIndex
 	private String gzAddress;
 	private int replyRate;
 	private String salary;
-	private Data time;
+	private int time;
 
 
 }

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-@RequestMapping("/homeS")
+@RequestMapping("/home")
 public class HomeController
 {
 
@@ -41,8 +41,9 @@ public class HomeController
 		LayuiData layuiData = new LayuiData();
 		RowBounds rowBounds = new RowBounds(page - 1, limit);
 		List<JobInfoIndex> list = homeService.searchJob(rowBounds);
+		int num = homeService.searchJobCount();
 		layuiData.setData(list);
-		layuiData.setCount(list.size());
+		layuiData.setCount(num);
 		return layuiData;
 	}
 

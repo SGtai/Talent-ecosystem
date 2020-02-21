@@ -33,4 +33,9 @@ public class HomeService
 		List<JobInfoIndex> list = homeDao.searchJob(rowBounds);
 		return list;
 	}
+
+	public int searchJobCount(){
+		int num = homeDao.searchJobCount();
+		return num;
+	}
 }

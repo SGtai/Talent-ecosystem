@@ -32,7 +32,7 @@
 	$.ajax(
 		{type:"POST",
 			async:false,
-			url:"/homeS/getTenHJob",
+			url:"/home/getTenHJob",
 			dataType:"text",
 			success:function (msg) {
 				window.location.href=window.location;
@@ -79,7 +79,8 @@
 </div>
 <div class="menuDiv">
 	<a href="index.html" class="onnav">首页</a>
-	<a href="searchJob.html">人才成长区</a>
+	<a href="">人才成长区</a>
+	<a href="/jump/home/searchJob">职位搜索</a>
 	<a href="meetingJob.html">高校专区</a>
 	<a href=" " class="mobile">微信版</a>
 </div>
