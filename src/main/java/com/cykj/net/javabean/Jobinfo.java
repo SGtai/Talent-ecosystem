@@ -11,20 +11,29 @@ public class Jobinfo {
   private String zpNum;
   private String lxAddress;
   private String xueliRequire;
-  private String jibenRequire;
   private String zhiyeType;
   private String gzExperience;
   private String majorRequire;
   private String gzAddress;
   private long salaryLow;
-  private String gztime;
   private String welfare;
   private String jobDuty;
   private java.sql.Timestamp time;
-  private String continueTime;
   private String jobinfoState;
   private long salaryHigh;
   private long ctid;
+  private String sex;
+  private long ageLow;
+  private long ageHigh;
+  private String beginTime;
+  private String endTime;
+  private String dayTime;
+  private String weekTime;
+  private String workTime;
+  private String baoxian;
+  private String gjijin;
+  private String jiangjin;
+  private String zhusu;
 
 
   public long getZpxxid() {
@@ -99,15 +108,6 @@ public class Jobinfo {
   }
 
 
-  public String getJibenRequire() {
-    return jibenRequire;
-  }
-
-  public void setJibenRequire(String jibenRequire) {
-    this.jibenRequire = jibenRequire;
-  }
-
-
   public String getZhiyeType() {
     return zhiyeType;
   }
@@ -153,15 +153,6 @@ public class Jobinfo {
   }
 
 
-  public String getGztime() {
-    return gztime;
-  }
-
-  public void setGztime(String gztime) {
-    this.gztime = gztime;
-  }
-
-
   public String getWelfare() {
     return welfare;
   }
@@ -189,15 +180,6 @@ public class Jobinfo {
   }
 
 
-  public String getContinueTime() {
-    return continueTime;
-  }
-
-  public void setContinueTime(String continueTime) {
-    this.continueTime = continueTime;
-  }
-
-
   public String getJobinfoState() {
     return jobinfoState;
   }
@@ -222,6 +204,114 @@ public class Jobinfo {
 
   public void setCtid(long ctid) {
     this.ctid = ctid;
+  }
+
+
+  public String getSex() {
+    return sex;
+  }
+
+  public void setSex(String sex) {
+    this.sex = sex;
+  }
+
+
+  public long getAgeLow() {
+    return ageLow;
+  }
+
+  public void setAgeLow(long ageLow) {
+    this.ageLow = ageLow;
+  }
+
+
+  public long getAgeHigh() {
+    return ageHigh;
+  }
+
+  public void setAgeHigh(long ageHigh) {
+    this.ageHigh = ageHigh;
+  }
+
+
+  public String getBeginTime() {
+    return beginTime;
+  }
+
+  public void setBeginTime(String beginTime) {
+    this.beginTime = beginTime;
+  }
+
+
+  public String getEndTime() {
+    return endTime;
+  }
+
+  public void setEndTime(String endTime) {
+    this.endTime = endTime;
+  }
+
+
+  public String getDayTime() {
+    return dayTime;
+  }
+
+  public void setDayTime(String dayTime) {
+    this.dayTime = dayTime;
+  }
+
+
+  public String getWeekTime() {
+    return weekTime;
+  }
+
+  public void setWeekTime(String weekTime) {
+    this.weekTime = weekTime;
+  }
+
+
+  public String getWorkTime() {
+    return workTime;
+  }
+
+  public void setWorkTime(String workTime) {
+    this.workTime = workTime;
+  }
+
+
+  public String getBaoxian() {
+    return baoxian;
+  }
+
+  public void setBaoxian(String baoxian) {
+    this.baoxian = baoxian;
+  }
+
+
+  public String getGjijin() {
+    return gjijin;
+  }
+
+  public void setGjijin(String gjijin) {
+    this.gjijin = gjijin;
+  }
+
+
+  public String getJiangjin() {
+    return jiangjin;
+  }
+
+  public void setJiangjin(String jiangjin) {
+    this.jiangjin = jiangjin;
+  }
+
+
+  public String getZhusu() {
+    return zhusu;
+  }
+
+  public void setZhusu(String zhusu) {
+    this.zhusu = zhusu;
   }
 
 }

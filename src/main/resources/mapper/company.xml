@@ -46,7 +46,14 @@
 	<!--单条数据插入，返回自增ID序号-->
 	<insert id="releaseJobinfo" parameterType="com.cykj.net.javabean.Jobinfo" keyProperty="qyid" useGeneratedKeys="true">
 		insert into
-		jobinfo(qyid, zwid, lxMan, lxPhone, zpNum, lxAddress, xueliRequire, jibenRequire, zhiyeType, gzExperience, majorRequire, gzAddress, salaryLow, gztime, welfare, jobDuty,time,continueTime, jobinfoState, salaryHigh, ctid)
-		values(#{qyid},#{zwid},#{lxMan},#{lxPhone},#{zpNum},#{lxAddress},#{xueliRequire},#{jibenRequire},#{zhiyeType},#{gzExperience},#{majorRequire},#{gzAddress},#{salaryLow},#{gztime},#{welfare},#{jobDuty},#{time},#{continueTime},#{jobinfoState},#{salaryHigh},#{ctid})
+		jobinfo(qyid, zwid, lxMan, lxPhone, zpNum, lxAddress, xueliRequire, zhiyeType, gzExperience, majorRequire, gzAddress, salaryLow, welfare, jobDuty, time, jobinfoState, salaryHigh, ctid, sex, ageLow, ageHigh, beginTime, endTime, dayTime, weekTime, workTime, baoxian, gjijin, jiangjin, zhusu)
+		values(
+		#{qyid},#{zwid},#{lxMan},#{lxPhone},#{zpNum},#{lxAddress},#{xueliRequire},#{zhiyeType},#{gzExperience},#{majorRequire},#{gzAddress},#{salaryLow},#{welfare},#{jobDuty},#{time},#{jobinfoState},#{salaryHigh},#{ctid},#{sex},#{ageLow},#{ageHigh}, #{beginTime}, #{endTime},#{dayTime} , #{weekTime},#{workTime},#{baoxian}, #{gjijin}, #{jiangjin}, #{zhusu})
 	</insert>
+
+	<select id="searchJobinfoTable" resultType="com.cykj.net.javabean.Jobinfo" parameterType="com.cykj.net.javabean.Jobinfo"
+	>
+        select * from jobinfo where qyid=#{qyid};
+	</select>
+
 </mapper>

@@ -26,6 +26,8 @@ public interface CompanyDao
 	public List<Position> findPosition();
 	//查询岗位
 	public List<Station> chooseStation(Station station);
-	//
+	//发布招聘信息
 	public int releaseJobinfo(Jobinfo jobinfo);
+	//招聘表查询
+	public List<Jobinfo> searchJobinfoTable(Jobinfo jobinfo);
 }

@@ -5,6 +5,9 @@ import com.cykj.net.mapper.AdminDao;
 import com.cykj.net.service.AdminroleService;
 import com.cykj.net.service.CompanyService;
 import com.cykj.net.service.admin.AdminService;
+import com.cykj.net.util.LayuiData;
+import com.google.gson.Gson;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -209,9 +213,11 @@ public class CompanyController
 
 	@RequestMapping("/releaseJobinfo")
 	public @ResponseBody
-	String releaseJobinfo(Jobinfo jobinfo)
+	String releaseJobinfo(Jobinfo jobinfo,HttpSession session)
 	{
 		String result = "";
+		Qyinfo qyinfo=(Qyinfo)session.getAttribute("Qyinfo");
+		jobinfo.setQyid(qyinfo.getQyid());
 		jobinfo.setTime( new Timestamp(System.currentTimeMillis()));
 		int a=companyService.releaseJobinfo(jobinfo);
 		if(a>0){
@@ -221,5 +227,42 @@ public class CompanyController
 		}
 		return result;
 	}
+
+	/**
+	 * 打开招聘信息管理页面
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value ="/searchJobinfoTable")
+	public LayuiData searchJobinfoTable(String page, String limit,HttpSession session) {
+		Qyinfo qyinfo=(Qyinfo)session.getAttribute("Qyinfo");
+		Jobinfo jobinfo= new Jobinfo();
+		jobinfo.setQyid(qyinfo.getQyid());
+		List<Jobinfo> list1=companyService.searchJobinfoTable(jobinfo);
+		System.out.println("----------"+list1.get(1).getBeginTime()+"-----------");
+		LayuiData layuiData=new LayuiData();
+		layuiData.setCode(0);
+		layuiData.setMsg("");
+		int nowPage;
+		List<Jobinfo> data=new ArrayList<>();
+		if(list1.size()<Integer.valueOf(page)*Integer.valueOf(limit)){
+			nowPage=list1.size();
+		}else {
+			nowPage=Integer.valueOf(page)*Integer.valueOf(limit);
+		}
+
+		for (int i = (Integer.valueOf(page)-1)*Integer.valueOf(limit); i <nowPage; i++)
+		{
+			data.add(list1.get(i));
+		}
+
+		layuiData.setCount(list1.size());
+		layuiData.setData(data);
+		System.out.println(data);
+//		String json =new Gson().toJson(layuiData);
+//		System.out.println(json);
+		return layuiData;
+	}
+
 
 }

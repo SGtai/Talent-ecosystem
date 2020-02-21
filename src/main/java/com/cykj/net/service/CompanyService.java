@@ -66,4 +66,8 @@ public class CompanyService
 		return sum;
 	}
 
+	public List<Jobinfo> searchJobinfoTable(Jobinfo jobinfo){
+		List<Jobinfo> list=companyDao.searchJobinfoTable(jobinfo);
+		return list;
+	}
 }

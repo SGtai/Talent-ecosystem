@@ -54,7 +54,7 @@
 	<div class="layui-form-item" style="background-color: #95877c;width: 720px">
 		<h3><label class="layui-form-label" style="width: 80px;text-align: left">招聘职位:</label></h3>
 		<div class="layui-input-inline">
-			<select name="position" lay-filter="choosePosition">
+			<select name="position" lay-filter="choosePosition" lay-verify="required" >
 				<option value="">请选择行业</option>
 				<c:if test="${position!=null}">
 					<c:forEach items="${position}" begin="0" var="i">
@@ -64,7 +64,7 @@
 			</select>
 		</div>
 		<div class="layui-input-inline">
-			<select name="zwid" id="zwid">
+			<select name="zwid" id="zwid" lay-verify="required">
 			</select>
 		</div>
 	</div>
@@ -77,31 +77,31 @@
 	<div class="layui-form-item" >
 		<label class="layui-form-label" >招聘日期：</label>
 		<div class="layui-input-inline">
-			<input name="date" class="layui-input" id="date" type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date">
+			<input name="beginTime" class="layui-input" id="date" type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date">
 		</div>
 		<label name="" class="layui-form-label" style="text-align: center">至</label>
 		<div class="layui-input-inline">
-			<input name="date1" class="layui-input" id="date1" type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date">
+			<input name="endTime" class="layui-input" id="date1" type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">联系人：</label>
 		<div class="layui-input-inline" >
-			<input name="lxMan" id="lxMan" class="layui-input" type="text" autocomplete="off" lay-verify="required" >
+			<input name="lxMan" id="lxMan" class="layui-input" type="text" autocomplete="off" lay-verify="lxMan" >
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<div class="layui-inline">
 			<label class="layui-form-label">联系电话：</label>
 			<div class="layui-input-inline">
-				<input name="lxPhone" id="lxPhone" class="layui-input" type="text" autocomplete="off" lay-verify="required" >
+				<input name="lxPhone" id="lxPhone" class="layui-input" type="text" autocomplete="off" lay-verify="number" >
 			</div>
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">通信地址：</label>
 		<div class="layui-input-inline"  >
-			<input name="lxAddress" id="lxAddress" style="width: 600px" class="layui-input" type="text" autocomplete="off"  lay-verify="required" >
+			<input name="lxAddress" id="lxAddress" style="width: 600px" class="layui-input" type="text" autocomplete="off"  lay-verify="lxAddress" >
 		</div>
 	</div>
 	<div class="layui-form-item" style="background-color: #95877c;width:720px">
@@ -111,7 +111,7 @@
 		<div class="layui-inline">
 			<label class="layui-form-label">学历要求：</label>
 			<div class="layui-input-inline">
-				<select name="xueliRequire" id="xueliRequire">
+				<select name="xueliRequire" id="xueliRequire" lay-verify="required">
 					<option value="">请选择学历</option>
 					<option value="研究生以上">研究生以上</option>
 					<option value="本科以上">本科以上</option>
@@ -127,7 +127,7 @@
 		<div class="layui-inline">
 			<label class="layui-form-label">职业性质：</label>
 			<div class="layui-input-inline">
-				<select name="zhiyeType" id="zhiyeType">
+				<select name="zhiyeType" id="zhiyeType" lay-verify="required">
 					<option value="">请选择职业性质</option>
 					<option value="全职">全职</option>
 					<option value="兼职">兼职</option>
@@ -137,7 +137,7 @@
 		<div class="layui-inline">
 			<label class="layui-form-label">工作经验：</label>
 			<div class="layui-input-inline">
-				<select name="gzExperience" id="gzExperience">
+				<select name="gzExperience" id="gzExperience" lay-verify="required">
 					<option value="">请选择工作经验</option>
 					<option value="10年以上">10年以上</option>
 					<option value="5年以上">5年以上</option>
@@ -170,7 +170,7 @@
 	<div class="layui-form-item" >
 		<label class="layui-form-label" >工作地点：</label>
 		<div class="layui-input-inline">
-			<select name="" lay-filter="chooseProvince">
+			<select name="" lay-filter="chooseProvince" lay-verify="required">
 				<option value="">请选择省份</option>
 				<c:if test="${province!=null}">
 					<c:forEach items="${province}" begin="0" var="i">
@@ -180,7 +180,7 @@
 			</select>
 		</div>
 		<div class="layui-input-inline">
-			<select name="ctid" id="ctid">
+			<select name="ctid" id="ctid" lay-verify="required">
 <%--				<option value="">请选择区域</option>--%>
 			</select>
 		</div>
@@ -190,14 +190,17 @@
 	</div>
 	<div class="layui-form-item">
 		<div class="layui-inline">
-			<label class="layui-form-label">参考薪资：</label>
+			<label class="layui-form-label">参考月薪：</label>
 
 			<div class="layui-input-inline" style="width: 100px;">
-				<input name="salaryLow" id="salaryLow" class="layui-input" type="text" placeholder="￥" autocomplete="off"  lay-verify="number">
+				<input name="salaryLow" id="salaryLow" class="layui-input" type="text" placeholder="￥最低月薪" autocomplete="off" lay-verify="number">
 			</div>
 			<div class="layui-form-mid">-</div>
 			<div class="layui-input-inline" style="width: 100px;">
-				<input name="salaryHigh" id="salaryHigh" class="layui-input" type="text" placeholder="￥" autocomplete="off" lay-verify="number">
+				<input name="salaryHigh" id="salaryHigh" class="layui-input" type="text" placeholder="￥最高月薪" autocomplete="off" lay-verify="number">
+			</div>
+			<div class="layui-input-inline" >
+				<label name="" style="width: 200px;text-align: left;color: #4E5465"  class="layui-form-label" >(如需面议该栏均填写"0")</label>
 			</div>
 		</div>
 	</div>
@@ -206,13 +209,28 @@
 			<label class="layui-form-label">上班时间：</label>
 
 			<div class="layui-input-inline" >
-				<input name="gztime1" id="gztime1" class="layui-input" type="text" autocomplete="off" lay-verify="number" placeholder="填写每天工作时间">
+				<select name="dayTime" id="gztime1" lay-verify="required">
+					<option value="">请选择每日上班时长</option>
+					<option value="7小时">7小时</option>
+					<option value="8小时">8小时</option>
+					<option value="9小时">9小时</option>
+					<option value="10小时">10小时</option>
+					<option value="11小时">11小时</option>
+					<option value="12小时">12小时</option>
+					<option value="全天">全天</option>
+				</select>
 			</div>
 			<div class="layui-input-inline" >
-				<input name="gztime2" id="gztime2" class="layui-input" type="text" autocomplete="off" lay-verify="number" placeholder="填写每周休息时间">
+				<select name="weekTime" id="gztime2" lay-verify="required">
+					<option value="">请选择每周休息时间</option>
+					<option value="单休">单休</option>
+					<option value="双休">双休</option>
+					<option value="大小周">大小周</option>
+					<option value="无休">无休</option>
+				</select>
 			</div>
 			<div class="layui-input-inline" >
-				<select name="gztime3" id="gztime3">
+				<select name="workTime" id="gztime3" lay-verify="required">
 					<option value="">请选择上班班次</option>
 					<option value="白班">白班</option>
 					<option value="晚班">晚班</option>
@@ -227,6 +245,16 @@
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">薪资福利：</label>
+		<div class="layui-input-block">
+			<input name="baoxian" title="五险" type="checkbox" value="五险">
+			<input name="gjijin" title="公积金" type="checkbox" value="公积金">
+			<input name="jiangjin" title="奖金提成" type="checkbox" value="奖金提成">
+			<input name="zhusu" title="提供住宿" type="checkbox" value="提供住宿">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">其他福利：</label>
+
 		<div class="layui-input-inline"  >
 			<input name="welfare" id="welfare" style="width: 600px" class="layui-input" type="text" autocomplete="off"  lay-verify="required" placeholder="填写薪资福利">
 		</div>
@@ -245,7 +273,7 @@
 		</h3>
 		<br><br><br>
 		<div class="layui-input-line">
-			<textarea id="jobDuty"  style="width: 600px;margin: 0 auto;float: none;" class="layui-textarea" placeholder="请输入内容"></textarea>
+			<textarea id="jobDuty"  lay-verify="required" style="width: 600px;margin: 0 auto;float: none;" class="layui-textarea" placeholder="请输入内容"></textarea>
 		</div>
 	</div>
 
