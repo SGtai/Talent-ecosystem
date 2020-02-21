@@ -73,7 +73,7 @@
 						<label></label>
 					</div>
 					<div class="field">
-						<button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+						<button class="button bg-main icon-check-square-o" type="button" onclick=""> 提交</button>
 						<button class="button bg-main icon-check-square-o" type="button" style="margin-left: 3%"> 返回</button>
 					</div>
 				</div>

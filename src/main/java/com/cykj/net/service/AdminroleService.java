@@ -1,6 +1,5 @@
 package com.cykj.net.service;
 
-import com.cykj.net.javabean.Admin;
 import com.cykj.net.javabean.Adminrole;
 import com.cykj.net.mapper.AdminRoleDao;
 import org.springframework.stereotype.Service;

@@ -203,6 +203,7 @@ function showChapter(){
         });
     });
 }
+
 //添加视频页面显示
 function showChapter2(){
     layui.use(['layer', 'table', 'form'], function () {

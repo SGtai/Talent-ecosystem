@@ -260,3 +260,164 @@ p.subtitle {
 	-ms-background-size: 16px 16px;
 	background-size: 16px 16px;
 }
+.article-container{
+	background-color: #ffffff;
+	padding-top:20px;
+	width:1024px;
+	margin:20px auto;
+}
+
+.article_r{
+	padding-top:10px;
+	float:right;
+}
+.pulisher,.time,.article_view,.article_comments,.article_del{
+	clear:both;
+	margin-right:25px;
+	font-size: 15px;
+}
+.title{
+	font-weight:bold;
+	font-size: 30px;
+	text-align: center;
+}
+.article_content{
+	background: #ffffff;
+	clear:both;
+	padding:1em 4em;
+	margin-top: 40px;
+}
+p{
+	text-indent: 2em;
+	text-overflow: hidden;
+	font-size:18px;
+}
+
+/*话题内容图片*/
+.ImgContent{
+	width:350px;
+	margin:0px auto;
+	padding: 5px;
+	overflow:hidden;
+
+}
+
+.NavLinks{
+	padding:5px;
+	width:100px;
+	height: 100px;
+	float: left;
+	overflow: hidden;
+}
+
+.NavLinks img{
+	width: 100%;
+	height: 100%;
+}
+.hitShowPic {
+	width:350px;
+	clear:both;
+	margin-left:430px;
+}
+.hitShowPic span {
+	font-size: 15px;
+	text-align: center;
+}
+/*以下评论的css*/
+.show_reply_list {
+	margin-right:1em;
+	color: grey;
+}
+.comment_list {
+	background-color: #ffffff;
+	padding-top:5px;
+	width:900px;
+	margin:0 auto;
+}
+.comment {
+	width:900px;
+	margin-top:10px;
+}
+.comment_details {
+	float:right;
+}
+.comment_content {
+	clear:both;
+	margin:5px 50px;
+	font-size:16px;
+}
+.comment_add_or_last {
+
+	margin:0 auto;
+	clear: both;
+	width:600px;
+	height:50px;
+	background: #F0F0F0;
+	text-align: center;
+	font-size:20px;
+	line-height: 40px;   //行高（与div保持同高，垂直居中写法）
+margin-bottom: 40px;
+}
+.imgdiv{
+	width:80px;
+	height:70px;
+	float:left;
+
+}
+.imgcss {
+	width:60px;
+	height:60px;
+	border-radius: 50%;
+}
+.comment_name {
+	margin-left:10px;
+	color:#3D9EEA;
+	font-size:16px;
+	font-weight: bolder;
+}
+.layui-icon {
+	font-size: 13px;
+	color: grey;
+}
+.del {
+	float:right;
+
+}
+.del_comment {
+	margin-right:50px;
+}
+
+
+
+.reply_list {
+	clear:both;
+	display:none;
+	width:900px;
+
+	padding-right:15px;
+	margin-top:10px;
+	font-size:16px;
+
+}
+.reply {
+	clear:both;
+	width:700px;
+	margin:4px auto;
+
+}
+.reply_name {
+	color:#3D9EEA;
+}
+.del_reply {
+	float:right;
+}
+.show_remain_reply {
+	width:600px;
+	height:40px;
+	text-align:center;font-size:18px;
+	background-color: #F0F0F0;
+	margin:0 auto;
+	line-height: 40px;
+	display:none;
+}
+.a_hover:hover{color: #f00;text-decoration: none;}

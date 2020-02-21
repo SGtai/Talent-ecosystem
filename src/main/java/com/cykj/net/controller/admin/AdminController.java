@@ -1,7 +1,8 @@
 package com.cykj.net.controller.admin;
 
-import com.cykj.net.javabean.Admin;
-import com.cykj.net.javabean.AdminMenu;
+import com.cykj.net.javabean.Position;
+import com.cykj.net.javabean.admin.Admin;
+import com.cykj.net.javabean.admin.AdminMenu;
 import com.cykj.net.javabean.Qyinfo;
 import com.cykj.net.service.CompanyService;
 import com.cykj.net.service.admin.AdminService;
@@ -91,6 +92,8 @@ public class AdminController {
             if (roid == 3){
                 Qyinfo qyinfo=companyService.findById(admin.getAccount());
                 session.setAttribute("Qyinfo", qyinfo);
+                List<Position> list=companyService.findPosition();
+                session.setAttribute("position",list);
             //高校
             }else if (roid == 4){
 
@@ -124,6 +127,7 @@ public class AdminController {
             mv.addObject("menus", hashMap);
             //添加角色
             mv.addObject("roid", roid);
+            //跳转路径
             mv.setViewName("/WEB-INF/admin/main");
         }
         return mv;
