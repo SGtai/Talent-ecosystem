@@ -1,8 +1,8 @@
 package com.cykj.net.mapper.admin;
 
 
-import com.cykj.net.javabean.Admin;
-import com.cykj.net.javabean.AdminMenu;
+import com.cykj.net.javabean.admin.Admin;
+import com.cykj.net.javabean.admin.AdminMenu;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

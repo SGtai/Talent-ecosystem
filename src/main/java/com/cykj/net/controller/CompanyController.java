@@ -1,13 +1,13 @@
 package com.cykj.net.controller;
 
 import com.cykj.net.javabean.*;
-import com.cykj.net.mapper.AdminDao;
+import com.cykj.net.javabean.admin.Admin;
+import com.cykj.net.javabean.Adminrole;
+import com.cykj.net.javabean.Qyinfo;
+import com.cykj.net.javabean.LayuiData;
 import com.cykj.net.service.AdminroleService;
 import com.cykj.net.service.CompanyService;
 import com.cykj.net.service.admin.AdminService;
-import com.cykj.net.util.LayuiData;
-import com.google.gson.Gson;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

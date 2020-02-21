@@ -28,13 +28,16 @@
 
 <body>
 <script>
+	<% if(request.getSession().getAttribute("jobInfolist") == null){%>
 	$.ajax(
 		{type:"POST",
 			async:false,
 			url:"/homeS/getTenHJob",
 			dataType:"text",
 			success:function (msg) {
+				window.location.href=window.location;
 			}});
+	<% }%>
 </script>
 <div class="topDiv">
 	<div class="mainWarp">
