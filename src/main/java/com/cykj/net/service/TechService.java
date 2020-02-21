@@ -1,8 +1,5 @@
 package com.cykj.net.service;
-import com.cykj.net.javabean.Chapters;
-import com.cykj.net.javabean.Curriculum;
-import com.cykj.net.javabean.Develop;
-import com.cykj.net.javabean.Video;
+import com.cykj.net.javabean.*;
 import com.cykj.net.mapper.TechDao;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
@@ -26,4 +23,11 @@ public class TechService
     public int addCurriculum(Curriculum cc){ return techDao.addCurriculum(cc);}
     public int addChapters(Chapters ct){return techDao.addChapters(ct);};
     public int addVideo(Video vd){return techDao.addVideo(vd);};
+	public int addAssess(Assess as){return techDao.addAssess(as);};
+    public int addReply(Reply reply){return techDao.addReply(reply);};
+    public ArrayList<Assess> getAssessList(String id){return techDao.getAssessList(id);};
+    public ArrayList<Reply> getReplyList(String id){return techDao.getReplyList(id);};
+    public Assist getAssist(Assist ast){return techDao.getAssist(ast);};
+    public int addAssist(Assist ast){return techDao.addAssist(ast);};
+    public int upAssess(String cs,Long pjId){return techDao.upAssess(cs,pjId);};
 }

@@ -1,10 +1,9 @@
 package com.cykj.net.controller;
 
-import com.cykj.net.javabean.Chapters;
-import com.cykj.net.javabean.Curriculum;
-import com.cykj.net.javabean.Develop;
-import com.cykj.net.javabean.Video;
+import com.cykj.net.javabean.*;
 import com.cykj.net.service.TechService;
+import com.cykj.net.tool.Comment;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -23,6 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -101,8 +102,6 @@ public class TechController
 		mv.setViewName("/WEB-INF/tech/techC");
 		return mv;
 	}
-
-
 	/**
 	 *
 	 * 施恭泰 jx190719
@@ -110,19 +109,85 @@ public class TechController
 	 * @return
 	 */
 	@RequestMapping("/techvideo")
-	public ModelAndView techvideo(String id,String name,String path){
+	public ModelAndView techvideo(String id,String name,String path,String spId,String nr,String pjId,String cs,String dxName,String dfnr){
+
+		getTime();
+		TimeZone tz = TimeZone.getTimeZone("ETC/GMT-8");
+		TimeZone.setDefault(tz);
 		ModelAndView mv = new ModelAndView();
+		Userlist user = new Userlist();
+		user.setRegTime(getTime());
+		System.out.println(user.getRegTime());
+		user.setYhid(1);
+		user.setPicture("1.jpg");
+		user.setName("小铭");
+		if (nr!=null&&nr.length()>0){
+			Assess assAssess = new Assess();
+			assAssess.setDzcs("0");
+			assAssess.setPjEvaluate(nr);
+			assAssess.setPlTime(getTime());
+			assAssess.setYhPicture(user.getPicture());
+			assAssess.setYhId(user.getYhid());
+			assAssess.setSpId(Long.parseLong(spId));
+			assAssess.setYhName(user.getName());
+			int a = techService.addAssess(assAssess);
+		}
+		if ((pjId!=null&&pjId.length()>0)&&(cs!=null&&cs.length()>0)){
+			Assist as =new Assist();
+			as.setYhId(user.getYhid());
+			as.setPjId(Long.parseLong(pjId));
+			Assist assist = techService.getAssist(as);
+			if (assist!=null){
+				mv.addObject("notify","点赞失败,你已经点赞过该评论！！！");
+			}else{
+				techService.addAssist(as);
+				int dz = Integer.valueOf(cs)+1;
+				techService.upAssess(String.valueOf(dz),Long.parseLong(pjId));
+				mv.addObject("notify","点赞成功");
+			}
+		}
+		if ((pjId!=null&&pjId.length()>0)&&(dfnr!=null&&!dfnr.equals(""))){
+			Reply reply = new Reply();
+			reply.setDfName(user.getName());
+			reply.setDxName(dxName);
+			reply.setDfId(user.getYhid());
+			reply.setDfTime(getTime());
+			reply.setDfPicture(user.getPicture());
+			reply.setNrContent(dfnr);
+			reply.setPjId(Long.parseLong(pjId));
+			int pl = techService.addReply(reply);
+			mv.addObject("notify","评论成功！！！");
+		}
 		ArrayList<Video> video = techService.getVideoList(id);
 		for (int i = 0; i < video.size(); i++)
 		{
 			video.get(i).setSpId(i+1);
 		}
+		ArrayList<Assess> assess = techService.getAssessList(spId);
+		ArrayList<Comment> com = new ArrayList<>();
+		for (int i = 0; i < assess.size(); i++)
+		{
+			Comment comment = new Comment();
+			comment.setAssess(assess.get(i));
+			ArrayList<Reply> rep = techService.getReplyList(assess.get(i).getPjId()+"");
+			comment.setAryR(rep);
+			com.add(comment);
+		}
 		String suffix = path.substring(path.lastIndexOf(".") + 1);
 		System.out.println("后缀="+suffix);
+
 		mv.addObject("video",video);
+		mv.addObject("suffix",suffix);
 		mv.addObject("path",path);
 		mv.addObject("name",name);
-		mv.addObject("suffix",suffix);
+		mv.addObject("spId",spId);
+		mv.addObject("id",id);
+		if (assess.size()!=0){
+			mv.addObject("com",com);
+		}else{
+			mv.addObject("tips","暂无评论");
+		}
+		mv.addObject("user",user);
 		mv.setViewName("/WEB-INF/tech/techVideo");
 		return mv;
 	}
@@ -291,6 +356,9 @@ public class TechController
 		//为防止文件覆盖的现象发生，要为上传文件产生一个唯一的文件名
 		return UUID.randomUUID().toString() + "_" + filename;
 	}
-
+	private java.sql.Timestamp getTime() {  //2.jpg
+		java.sql.Timestamp d = new java.sql.Timestamp(System.currentTimeMillis());
+		return d;
+	}
 
 }
