@@ -48,6 +48,7 @@ public class Jobinfo
   private String type;
   private String postion;
 
+
   public long getZpxxid()
   {
     return zpxxid;

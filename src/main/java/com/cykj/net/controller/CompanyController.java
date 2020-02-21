@@ -177,9 +177,6 @@ public class CompanyController
 	public ModelAndView jobinfo(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		List<Province> list=companyService.findProvince();
-		List<Position> list1=companyService.findPosition();
-		System.out.println("----------"+list+"-----------");
-		mv.addObject("position",list1);
 		mv.addObject("province",list);
 		mv.setViewName("/WEB-INF/company/jobinfo");
 		return mv;
@@ -237,11 +234,15 @@ public class CompanyController
 	 */
 	@RequestMapping(value ="/searchJobinfoTable")
 	@ResponseBody
-	public LayuiData searchJobinfoTable(String page, String limit,HttpSession session) {
+	public LayuiData searchJobinfoTable(String page, String limit,String jobinfoState,String zwid,String type,HttpSession session) {
 		Qyinfo qyinfo=(Qyinfo)session.getAttribute("Qyinfo");
 		Jobinfo jobinfo= new Jobinfo();
+		jobinfo.setJobinfoState(jobinfoState);
+		jobinfo.setZwid(zwid);
+		jobinfo.setType(type);
 		jobinfo.setQyid(qyinfo.getQyid());
 		List<Jobinfo> list1=companyService.searchJobinfoTable(jobinfo);
+		System.out.println(list1);
 		LayuiData layuiData=new LayuiData();
 		layuiData.setCode(0);
 		layuiData.setMsg("");
@@ -262,6 +263,7 @@ public class CompanyController
 		System.out.println(list1.size());
 		layuiData.setData(data);
 		System.out.println(data);
+
 //		String json =new Gson().toJson(layuiData);
 //		System.out.println(json);
 		return layuiData;

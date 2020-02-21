@@ -56,7 +56,21 @@
 	select C.type,B.postion,A.* from
 	(select zwid ,concat(beginTime,"至",endTime) zhaopinTime,xueliRequire,concat(ageLow,"-",ageHigh) age,concat(salaryLow,"-",salaryHigh) salary,concat(baoxian,"、",gjijin,"、",jiangjin,"、",zhusu,"、",welfare) xinzifuli,zpNum,jobinfoState,time
 	from jobinfo where qyid=#{qyid}) A,station B,position C
-	WHERE A.zwid=B.stid AND B.poid=C.poid
+
+		<where>
+			<if test="qyid!=null and qyid!=''">
+				A.zwid=B.stid and B.poid=C.poid
+			</if>
+			<if test="jobinfoState!=null and jobinfoState!=''">
+				and jobinfoState=#{jobinfoState}
+			</if>
+			<if test="zwid!=null and zwid!=''">
+				and zwid=#{zwid}
+			</if>
+			<if test="type!=null and type!=''">
+				and C.type=#{type}
+			</if>
+		</where>
 	</select>
 
 </mapper>
