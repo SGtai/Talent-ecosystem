@@ -1,4 +1,4 @@
-package com.cykj.net.javabean;
+package com.cykj.net.javabean.admin;
 
 import lombok.Data;
 
@@ -8,5 +8,8 @@ public class AdminPositionStation {
     private String station;
     private String position;
     private String poid;
+    private String initStation;
+    private String initPosition;
+    private int state;
 
 }

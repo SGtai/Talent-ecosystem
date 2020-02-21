@@ -1,7 +1,7 @@
 package com.cykj.net.service.admin;
 
-import com.cykj.net.javabean.Admin;
-import com.cykj.net.javabean.AdminMenu;
+import com.cykj.net.javabean.admin.Admin;
+import com.cykj.net.javabean.admin.AdminMenu;
 
 import java.util.List;
 

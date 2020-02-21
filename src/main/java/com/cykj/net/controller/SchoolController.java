@@ -1,6 +1,6 @@
 package com.cykj.net.controller;
 
-import com.cykj.net.javabean.Admin;
+import com.cykj.net.javabean.admin.Admin;
 import com.cykj.net.javabean.Adminrole;
 import com.cykj.net.javabean.Schoolinfo;
 import com.cykj.net.service.AdminroleService;
@@ -10,7 +10,9 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -63,23 +65,34 @@ public class SchoolController
 	 */
 	@RequestMapping("/reg2")
 	@ResponseBody
-	public String screg2(Schoolinfo schoolinfo, HttpServletRequest request){
+	public String screg2(Schoolinfo schoolinfo, HttpServletRequest request,@RequestParam("file") MultipartFile file){
 		System.out.println("学校注册２启动。。。");
+		String filename = file.getOriginalFilename();
+		System.out.println("filename="+filename);
 		//session里面取值
 		Schoolinfo sess= (Schoolinfo) request.getSession().getAttribute("reg1need");
 		//注入账户密码
 		schoolinfo.setScAccount(sess.getScAccount());
 		schoolinfo.setPassword(sess.getPassword());
 		//查找这个账户存在不，是否被其他管理员在这个期间注册了
-		Schoolinfo sc=schoolService.findSchoolinfo(schoolinfo.getScAccount());
-		if(sc!=null){
+		Schoolinfo scnamecheck=schoolService.findSchoolinfo(schoolinfo.getScAccount());
+		//查找手机号是否唯一
+		Schoolinfo scphonecheck=schoolService.findphone(schoolinfo.getScAccount());
+		//查找信用代码是否唯一
+		Schoolinfo scdaimachenk=schoolService.finddaima(schoolinfo.getScAccount());
+		if(scnamecheck!=null){
 			//被其他管理员注册了，注册失败
 			return "0";
-		}else{
+		}else if(scphonecheck!=null){
+			//手机不唯一
+			return "-1";
+		}else if(scdaimachenk!=null){
+			//社会信用代码不唯一
+			return "-2";
+		} else{
 			//可以注册
 			//插入注册时间
 			schoolinfo.setRegTime(new Timestamp(System.currentTimeMillis()));
-			schoolinfo.setMoneyLaiyuan("无");
 			//插入图片路径
 			schoolinfo.setScpicture("路径我也不知道多少??");
 			schoolinfo.setScState("启用");
@@ -113,11 +126,33 @@ public class SchoolController
 		return "1";
 	}
 
-//	//登陆业务
-//	public void sclogin(){
-//		System.out.println("学校登陆启动。。。");
-//
-//	}
+	/**
+	 *
+	 * @param account
+	 * @param password
+	 * @param newpassword
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping("/pwd")
+	public void changepwd(String account,String password,String newpassword,HttpServletRequest request, HttpServletResponse response){
+		utf8(request,response);
+		Schoolinfo sc=new Schoolinfo();
+		if(schoolService.findSchoolinfo(getParameter("account",request))!=null){
+			if(schoolService.findSchoolinfo(getParameter("account",request)).getPassword().equals(getParameter("password",request))){
+				sc.setScAccount(getParameter("account",request));
+				sc.setPassword(getParameter("newpassword",request));
+				int i=schoolService.updateSchoolinfo(sc);
+				if(i>0){
+					gsonString("1",response);
+				}
+			}else{
+				gsonString("0",response);
+			}
+		}else{
+			gsonString("0",response);
+		}
+	}
 
 
 
