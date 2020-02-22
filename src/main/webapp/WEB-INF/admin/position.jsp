@@ -125,17 +125,17 @@
             $('#reqAddPosition').click(function () {
                 var ap = $('#addPositionName').val();
 
-                if (ap === '' ) {
+                if (ap === '') {
                     layer.msg('专业名称不可为空')
                 } else if (ap.length > 10 || ap.length < 2) {
                     layer.msg('行业名称不可小于2位,不可超过10位');
                 } else {
-                    layer.confirm('确定要增加行业:'+ap+'吗?', function (index) {
+                    layer.confirm('确定要增加行业:' + ap + '吗?', function (index) {
                         $.ajax({
                             type: "POST",
                             url: "/adminStation/addPosition",
                             dataType: "text",
-                            data: {position:ap},
+                            data: {position: ap},
                             success: function (msg) {
 
                                 if (msg === 'true') {
@@ -198,7 +198,7 @@
                                 type: "POST",
                                 url: "/adminStation/updatePosition",
                                 dataType: "text",
-                                data: {position:up,initPosition:data.position},
+                                data: {position: up, initPosition: data.position},
                                 success: function (msg) {
 
                                     if (msg === 'true') {
@@ -234,12 +234,14 @@
                         type: "POST",
                         url: "/adminStation/deletePosition",
                         dataType: "text",
-                        data: {position: position},
+                        data: {position: position, poid: data.poid},
                         success: function (msg) {
 
                             if (msg === 'true') {
                                 layer.msg('删除成功');
                                 table.reload('position');
+                            } else if (msg === 'haveStation') {
+                                layer.msg('改行业下面有岗位，不可删除');
                             } else {
                                 layer.msg('删除失败');
                             }
