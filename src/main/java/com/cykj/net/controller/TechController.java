@@ -19,9 +19,13 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -41,11 +45,23 @@ public class TechController
 	 * @return
 	 */
 	@RequestMapping("/techa")
-	public ModelAndView techa(){
+	public ModelAndView techa(String lows,String highs,String kcname){
+		ArrayList<Curriculum> al =new ArrayList<>();
+		if (lows!=null||highs!=null||kcname!=null){
+			Curriculum cu = new Curriculum();
+			String nameS = "%"+kcname.trim()+"%";
+			cu.setKcName(nameS);
+			cu.setDemo1(lows);
+			cu.setDemo2(highs);
+			al = techService.geCurriculumsel(cu);
+		}else{
+			al = techService.getCurriculumListS();
+		}
 		ModelAndView mv = new ModelAndView();
 		ArrayList<Develop> dl = techService.getDevelopList();
-		ArrayList<Curriculum> al = techService.getCurriculumListS();
+
 		HashMap<String,ArrayList<Curriculum>> getMap = new HashMap<>();
+		getMap.put("1",al);
 		for (int i = 0; i <dl.size() ; i++)
 		{
 			ArrayList<Curriculum>  alA = new ArrayList<>();
@@ -55,7 +71,7 @@ public class TechController
 					alA.add(al.get(j));
 				}
 			}
-			getMap.put(String.valueOf(i+1),alA);
+			getMap.put(String.valueOf(i+2),alA);
 		}
 		mv.addObject("getMap",getMap);
 		mv.addObject("dl",dl);
@@ -109,7 +125,8 @@ public class TechController
 	 * @return
 	 */
 	@RequestMapping("/techvideo")
-	public ModelAndView techvideo(String id,String name,String path,String spId,String nr,String pjId,String cs,String dxName,String dfnr){
+	public ModelAndView techvideo(HttpServletRequest request, HttpServletResponse response,String id,String name,String path,String spId,String nr,String pjId,String cs,String dxName,String dfnr,String fName) throws IOException
+	{
 
 		getTime();
 		TimeZone tz = TimeZone.getTimeZone("ETC/GMT-8");
@@ -121,6 +138,10 @@ public class TechController
 		user.setYhid(1);
 		user.setPicture("1.jpg");
 		user.setName("小铭");
+		if (fName!=null&&fName.length()>0){
+			String as = myDownload(request,response,fName);
+			mv.addObject("warning",as);
+		}
 		if (nr!=null&&nr.length()>0){
 			Assess assAssess = new Assess();
 			assAssess.setDzcs("0");
@@ -192,6 +213,12 @@ public class TechController
 		return mv;
 	}
 
+	/**
+	 *
+	 * 施恭泰 jx190719 上传课程
+	 * @param
+	 * @return
+	 */
 	@RequestMapping("/techUpload.data")
 	@ResponseBody
 	public HashMap<String, Object> myUpload(HttpServletRequest request, ServletResponse response)
@@ -211,7 +238,6 @@ public class TechController
 				MultipartFile file = req.getFile(iterator.next());
 				String fileNames = file.getOriginalFilename();
 				int split = fileNames.lastIndexOf(".");
-				System.out.println("111"+file+"222"+fileNames+"333"+split);
 				//存储文件
 				//文件名  fileNames.substring(0,split)
 				//文件格式   fileNames.substring(split+1,fileNames.length())
@@ -230,9 +256,9 @@ public class TechController
 				file.transferTo(new File(savePath + "/" + makeFileName));
 				int a = Integer.valueOf(request.getParameter("jg"));
 				if (a>0){
-					cc.setJgPrice(request.getParameter("jg"));
+					cc.setJgPrice(Integer.valueOf(request.getParameter("jg")));
 				}else{
-					cc.setJgPrice("免费");
+					cc.setJgPrice(0);
 				}
 				cc.setKcName(request.getParameter("name"));
 				cc.setFzTypeId(Integer.valueOf(request.getParameter("type")));
@@ -258,7 +284,12 @@ public class TechController
 		}
 		return null;
 	}
-
+	/**
+	 *
+	 * 施恭泰 jx190719 上传章节
+	 * @param
+	 * @return
+	 */
 	@RequestMapping("/techUploadCt.data")
 	@ResponseBody
 	public HashMap<String, Object> myUploadS(HttpServletRequest request, ServletResponse response)
@@ -301,6 +332,12 @@ public class TechController
 		return null;
 	}
 
+	/**
+	 *
+	 * 施恭泰 jx190719 上传视频
+	 * @param
+	 * @return
+	 */
 	@RequestMapping("/techUploadV.data")
 	@ResponseBody
 	public HashMap<String, Object> myUploadS2(HttpServletRequest request, ServletResponse response)
@@ -343,6 +380,9 @@ public class TechController
 		return null;
 	}
 
+
+
+
 	@RequestMapping("/techUpload")
 	public ModelAndView jumpfront() {
 		ModelAndView mv = new ModelAndView();
@@ -352,13 +392,63 @@ public class TechController
 		return mv;
 	}
 
-	private String makeFileName(String filename) {  //2.jpg
-		//为防止文件覆盖的现象发生，要为上传文件产生一个唯一的文件名
+	/**
+	 *
+	 * 施恭泰 jx190719 为防止文件覆盖的现象发生，要为上传文件产生一个唯一的文件名
+	 * @param
+	 * @return
+	 */
+	private String makeFileName(String filename) {
 		return UUID.randomUUID().toString() + "_" + filename;
 	}
+
+	/**
+	 *
+	 * 施恭泰 jx190719 Timestamp类型当前时间
+	 * @param
+	 * @return
+	 */
 	private java.sql.Timestamp getTime() {  //2.jpg
 		java.sql.Timestamp d = new java.sql.Timestamp(System.currentTimeMillis());
 		return d;
 	}
 
+	public String myDownload(HttpServletRequest request, HttpServletResponse response,
+	                               String fName) throws IOException {
+		System.out.println("12345");
+		//得到要下载的文件名
+		String fileName = fName;
+		//上传的文件都是保存在/WEB-INF/upload目录下的子目录当中
+		String fileSaveRootPath = ResourceUtils.getURL("classpath:").getPath()+"static/techS/other/video";
+		//得到要下载的文件
+		File file = new File(fileSaveRootPath + "/" + fName);
+		//		System.out.println("fileName = " + fileName);
+		//如果文件不存在
+		if (!file.exists()) {
+			return "您要下载的资源已被删除！！";
+		}
+		//处理文件名
+		String realname = fName;
+		//下载显示的文件名，解决中文名称乱码问题
+		String downloadFileName = new String(realname.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
+		//设置响应头，控制浏览器下载该文件
+		response.setHeader("content-disposition", "attachment;filename=" + downloadFileName);
+		//读取要下载的文件，保存到文件输入流
+		FileInputStream in = new FileInputStream(fileSaveRootPath + "/"+realname);
+		//创建输出流
+		OutputStream out = response.getOutputStream();
+		//创建缓冲区
+		byte buffer[] = new byte[1024];
+		int len = 0;
+		//循环将输入流中的内容读取到缓冲区当中
+		while ((len = in.read(buffer)) > 0) {
+			//输出缓冲区的内容到浏览器，实现文件下载
+			out.write(buffer, 0, len);
+		}
+		//关闭文件输入流
+		in.close();
+		//关闭输出流
+		out.close();
+		return null;
+	}
 }

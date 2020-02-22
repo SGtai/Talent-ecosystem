@@ -11,6 +11,7 @@ public interface TechDao
 {
 	public ArrayList<Develop> getDevelopList();
 	public ArrayList<Curriculum> getCurriculumListS();
+	public ArrayList<Curriculum> geCurriculumsel(Curriculum cu);
 	public Curriculum getCurriculum(@Param("kcid") String id);
 	public ArrayList<Chapters> getChaptersList(@Param("kjid") String id);
 	public ArrayList<Video> getVideoList(@Param("zjid") String id);

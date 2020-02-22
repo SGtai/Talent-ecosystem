@@ -8,6 +8,7 @@ public class AdminPositionStation {
     private String station;
     private String position;
     private String poid;
+    private String stid;
     private String initStation;
     private String initPosition;
     private int state;

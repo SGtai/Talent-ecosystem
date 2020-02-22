@@ -14,6 +14,7 @@ public class TechService
     public Curriculum getCurriculum(String id){
         return techDao.getCurriculum(id);
     };
+	public ArrayList<Curriculum> geCurriculumsel(Curriculum cu){return techDao.geCurriculumsel(cu);};
     public ArrayList<Curriculum> getCurriculumListS(){ return techDao.getCurriculumListS(); };
     public ArrayList<Chapters> getChaptersList(String id){
         return techDao.getChaptersList(id);

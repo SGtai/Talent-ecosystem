@@ -78,4 +78,18 @@
 		update assess set dzcs = #{dzcs} where pjId = #{pjId}
 	</update>
 
+
+    <select id="geCurriculumsel" resultType="Curriculum"
+            parameterType="Curriculum">
+        select * from curriculum where 1=1
+        <if test="kcName !=null and kcName !='' ">
+            and kcName like  #{kcName}
+        </if>
+        <if test="demo1 !=null and demo1 !='' ">
+            and jgPrice &gt;= #{demo1}
+        </if>
+        <if test="demo2 !=null and demo2 !='' ">
+            and jgPrice &lt;= #{demo2}
+        </if>
+    </select>
 </mapper>

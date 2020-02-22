@@ -12,6 +12,7 @@
 	String jsPath = application.getContextPath()+"/techS/js/";
 	String path = application.getContextPath();
 	String othPath =application.getContextPath()+"/techS/other/";
+	String layuiPath =application.getContextPath()+"/layui/";
 //	String pathS = ResourceUtils.getURL("classpath:").getPath();
 
 %>
@@ -20,13 +21,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title>tab切换</title>
+	<link rel="stylesheet" href=<%=layuiPath+"css/layui.css" %>>
 	<link href=<%=cssPath+"style.css"%> rel="stylesheet" type="text/css"/>
 	<script type="text/javascript" src=<%=jsPath+"jquery.min.js"%>></script>
 	<script type="text/javascript" src=<%=jsPath+"jquery.SuperSlide.2.1.1.js"%>></script>
 </head>
 <body>
 <a href="/techUpload">添加课程</a>
-<div class="floor-course">
+<div class="floor-course" style="height: 100%;">
 	<div class="floor-content">
 		<div class="floor-side">
 			<h3>
@@ -37,23 +39,32 @@
 			</a>
 		</div>
 		<div class="floor-side-right">
-			<div class="hd floor-side-list">
+			<div class="hd floor-side-list" >
 				<ul>
+					<li class="on">全部课程</li>
 					<!-- 输出发展方向 -->
 					<c:forEach items="${dl}" var="node">
-
-						<c:if test="${node.deid == 1}">
-							<li class="on">${node.type}</li>
-						</c:if>
-						<c:if test="${node.deid != 1}">
 							<li>${node.type}</li>
-						</c:if>
 					</c:forEach>
 
 				</ul>
 <%--				<a href="#" class="slide-more">更多>></a>--%>
 			</div>
-			<div class="bd floor-side-body">
+			<form action="/techa" method="post"   accept-charset="UTF-8">
+			<label class="layui-form-label" style="position: absolute;margin-left: 25%;width: 10%;">价格区间</label>
+			<div class="layui-input-block" style="">
+				<input type="text" name="lows" id="lows" oninput="value=value.replace(/[^\d]/g,'')"  placeholder="最低价" autocomplete="off" class="layui-input" style="position: absolute;width: 10%;margin-left: 30%;">
+			</div>
+			<div class="layui-input-block" style="">
+				<label class="layui-form-label" style="position: absolute;margin-left: 38%;margin-top: -4.2%;">到</label>
+				<input type="text" name="highs" id="highs" oninput="value=value.replace(/[^\d]/g,'')"  placeholder="最高价" autocomplete="off" class="layui-input" style="position: absolute;width: 10%;margin-left: 50%;margin-top: -4.2%;">
+			</div>
+			<div class="layui-input-block" style="">
+				<input type="text" name="kcname" id="kcname"  placeholder="请输入课程名" autocomplete="off" class="layui-input" style="position: absolute;width: 20%;margin-left: 70%;margin-top: -8.5%;">
+			</div>
+			<button type="submit" class="layui-btn" style="position: absolute;margin-left: 98%;margin-top: -11.5%;" >查询</button>
+			</form>
+				<div class="bd floor-side-body" style="margin-top: -8%;">
 				<c:forEach items="${getMap}" var="node">
 					<ul>
 					<c:forEach items="${node.value}" var="cl">
@@ -71,14 +82,14 @@
                                         </span>
 									<span class="slide-body-nup">
                                             <i class="slide-body-nup-icon"></i>
-                                           ${cl.cxcsConsult}
+                                           ${cl.plcsComment}
 
                                         </span>
 									<span class="slide-body-price">
-											<c:if test="${cl.jgPrice=='免费'}">
+											<c:if test="${cl.jgPrice==0}">
 												免费
 											</c:if>
-											<c:if test="${cl.jgPrice != '免费'}">
+											<c:if test="${cl.jgPrice != 0}">
 												¥${cl.jgPrice}
 											</c:if>
 										</span>
