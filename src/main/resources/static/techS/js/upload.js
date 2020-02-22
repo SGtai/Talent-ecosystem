@@ -61,11 +61,15 @@ $(function () {
             var   index =mySelect.selectedIndex;// 选中索引(选取select中option选中的第几个)
 
             var   text =mySelect.options[index].text; // 选中文本
-            if (text!='请选择一个类型') {
-	            $("#sc1").show();
-            $('#test9').click();
-            }else{
-            alert("类型未选择");
+            var   money=$("#jg").val();
+            if (text=='请选择一个类型') {
+	              alert("类型未选择");
+
+            }else if (money.length>7) {
+               alert("输入金额过大请重新输入!!!")
+            }else {
+                $("#sc1").show();
+                $('#test9').click();
             }
         })
     })
