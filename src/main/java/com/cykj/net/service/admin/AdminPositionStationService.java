@@ -12,10 +12,12 @@ public interface AdminPositionStationService {
     int updateStation(AdminPositionStation aps);
     int findStationName(AdminPositionStation aps);
     int addStation(AdminPositionStation aps);
+    int findJobStid(String stid);
     int countPosition();
     List<AdminPositionStation> findAllPosition(int page,int limit);
     int findPosition(String position);
     int addPosition(String position);
     int deletePosition(String position);
     int updatePosition(AdminPositionStation aps);
+    int findPositionHaveStationCount(int poid);
 }
