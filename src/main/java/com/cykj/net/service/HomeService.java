@@ -29,13 +29,29 @@ public class HomeService
 		return list;
 	}
 
-	public List<JobInfoIndex> searchJob(RowBounds rowBounds){
-		List<JobInfoIndex> list = homeDao.searchJob(rowBounds);
+	public List<JobInfoIndex> searchJob(RowBounds rowBounds,JobInfoIndex tijiao){
+		List<JobInfoIndex> list = homeDao.searchJob(rowBounds,tijiao);
 		return list;
 	}
 
-	public int searchJobCount(){
-		int num = homeDao.searchJobCount();
+	public int searchJobCount(JobInfoIndex tijiao){
+		int num = homeDao.searchJobCount(tijiao);
+		return num;
+	}
+	public int gangweiNew(){
+		int num = homeDao.gangweiNew();
+		return num;
+	}
+	public int gangweicount(){
+		int num = homeDao.gangweicount();
+		return num;
+	}
+	public int usercount(){
+		int num = homeDao.usercount();
+		return num;
+	}
+	public int qiuzhiSuccess(){
+		int num = homeDao.qiuzhiSuccess();
 		return num;
 	}
 }

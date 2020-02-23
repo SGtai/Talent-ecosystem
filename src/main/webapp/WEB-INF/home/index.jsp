@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: 86158
@@ -21,8 +20,9 @@
 	<meta charset="UTF-8">
 	<title>首页</title>
 	<link type="text/css" rel="stylesheet" href=<%=cssPath+"style.css"%>>
+	<link rel="stylesheet" href="<%=path+"layui/css/layui.css"%>" media="all">
 	<script type="text/javascript" src=<%=path+"layui/jquery-3.4.1.js"%>></script>
-<%--	<script type="text/javascript" src=<%=jsPath+"index.js"%>></script>--%>
+	<script src=<%=path + "layui/layui.js"%>></script>
 	<script type="text/javascript" src=<%=jsPath+"my.js"%>></script>
 </head>
 
@@ -32,7 +32,7 @@
 	$.ajax(
 		{type:"POST",
 			async:false,
-			url:"/home/getTenHJob",
+			url:"/homeS/getTenHJob",
 			dataType:"text",
 			success:function (msg) {
 				window.location.href=window.location;
@@ -70,9 +70,12 @@
 			<span class="span2"></span>
 		</div>
 	</div>
+	<form method="post" action="/homeS/jumpsearch">
 	<div class="loginC">
-		<input name="" type="text" placeholder="请填写关键词或选择职位..." />
+		<input name="searchText" type="text" placeholder="请填写关键词或选择职位..."/>
+		<a href=""><button type="submit" style="margin-left: 39px;width: 118px;height: 46px; background-color:transparent;border-style:none;" id="searchIndx" ></button></a>>
 	</div>
+	</form>
 	<div class="loginR">
 		<img src=<%=imagesPath+"spirit_40.png"%>/>
 	</div>
@@ -83,6 +86,12 @@
 	<a href="/jump/home/searchJob">职位搜索</a>
 	<a href="meetingJob.html">高校专区</a>
 	<a href=" " class="mobile">微信版</a>
+
+	<div>
+		<span style="margin-left: 45px;">岗位总数/本月新增:${sessionScope.gangweicount}/${sessionScope.gangweiNew}</span>
+		<span style="margin-left: 60px;">求职人数:${sessionScope.usercount}</span>
+		<span style="margin-left: 60px;">就业人数:${sessionScope.qiuzhiSuccess}</span>
+	</div>
 </div>
 <div class="BodyMain">
 	<div class="mainTop">

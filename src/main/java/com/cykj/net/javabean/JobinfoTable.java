@@ -3,6 +3,7 @@ package com.cykj.net.javabean;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class JobinfoTable
 	private String salary;
 	private String xinzifuli;
 	private long zpNum;
-	private java.sql.Timestamp time;
+	private Date time;
 	private List<JobinfoTable> list;
 
 }
