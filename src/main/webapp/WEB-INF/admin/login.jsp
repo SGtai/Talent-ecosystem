@@ -37,7 +37,7 @@
                 <div class="usernameDiv">
                     <i class="layui-icon layui-icon-username adminIcon"></i>
                     <input id="account" class="layui-input adminInput" type="text" name="account"
-                           lay-verify="required" autocomplete="off" placeholder="输入账号">
+                           lay-verify="required" autocomplete="off" value="admin" placeholder="输入账号">
                 </div>
             </div>
             <div class="usernameWrapDiv">
@@ -47,7 +47,7 @@
                 <div class="passwordDiv">
                     <i class="layui-icon layui-icon-password adminIcon"></i>
                     <input id="password" class="layui-input adminInput" type="password" name="password"
-                           lay-verify="required" autocomplete="off" placeholder="输入密码">
+                           lay-verify="required" autocomplete="off" value="admin" placeholder="输入密码">
                 </div>
             </div>
             <div class="usernameWrapDiv">
@@ -56,7 +56,7 @@
                 </div>
                 <div class="cardDiv">
                     <input id="code" class="layui-input cardInput" type="text" name="code"
-                           lay-verify="required" autocomplete="off" placeholder="输入验证码">
+                           lay-verify="required" autocomplete="off" value="1234" placeholder="输入验证码">
                 </div>
                 <div class="codeDiv">
                     <%--                    <input id="loginCode" class="layui-input codeInput" type="button">--%>
@@ -86,7 +86,7 @@
 
 
     <div style="margin-top: 5%;margin-left: 16%"><label>没有企业账号？<a href="/jump/company/companylogin">点击前往企业注册</a></label></div>
-    <div style="margin-top: 10%;margin-left: 16%"><label>没有高校账号？<a href="#">点击前往高校注册</a></label></div>
+    <div style="margin-top: 10%;margin-left: 16%"><label>没有高校账号？<a href="/jump/school/reg1">点击前往高校注册</a></label></div>
 </script>
 
 <%--登录登录js--%>

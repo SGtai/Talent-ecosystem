@@ -10,6 +10,14 @@
         select * from curriculum where kcId = #{kcid}
     </select>
 
+    <select id="getAssessList" resultType="Assess" parameterType="String">
+        select * from assess where spId = #{spId} order by dzcs desc
+    </select>
+
+    <select id="getReplyList" resultType="Reply" parameterType="String">
+        select * from reply where pjId = #{pjId}
+    </select>
+
     <select id="getCurriculumListS" resultType="curriculum">
         select * from curriculum
     </select>
@@ -24,6 +32,10 @@
 
     <select id="getChapters" resultType="Chapters" parameterType="String">
         select * from chapters where zjId = #{zjid}
+    </select>
+
+    <select id="getAssist" resultType="Assist" parameterType="Assist">
+        select * from assist where yhId = #{yhId} and pjId = #{pjId}
     </select>
 
     <insert id="addCurriculum" parameterType="Curriculum" keyProperty="kcId" useGeneratedKeys="true">
@@ -44,4 +56,40 @@
 		values(#{zjId},#{spDescribe},#{spName},#{spPath})
 	</insert>
 
+    <insert id="addReply" parameterType="Reply" keyProperty="hfId" useGeneratedKeys="true">
+		insert into
+		reply(pjId,dfId,dxName,nrContent,dfName,dfPicture,dfTime)
+		values(#{pjId},#{dfId},#{dxName},#{nrContent},#{dfName},#{dfPicture},#{dfTime})
+	</insert>
+
+    <insert id="addAssess" parameterType="Assess" keyProperty="pjId" useGeneratedKeys="true">
+		insert into
+		assess(spId,pjEvaluate,yhId,dzcs,plTime,yhPicture,yhName)
+		values(#{spId},#{pjEvaluate},#{yhId},#{dzcs},#{plTime},#{yhPicture},#{yhName})
+	</insert>
+
+    <insert id="addAssist" parameterType="Assist" keyProperty="dzId" useGeneratedKeys="true">
+		insert into
+		assist(yhId,pjId)
+		values(#{yhId},#{pjId})
+	</insert>
+
+    <update id="upAssess" parameterType="Assess"  useGeneratedKeys="true">
+		update assess set dzcs = #{dzcs} where pjId = #{pjId}
+	</update>
+
+
+    <select id="geCurriculumsel" resultType="Curriculum"
+            parameterType="Curriculum">
+        select * from curriculum where 1=1
+        <if test="kcName !=null and kcName !='' ">
+            and kcName like  #{kcName}
+        </if>
+        <if test="demo1 !=null and demo1 !='' ">
+            and jgPrice &gt;= #{demo1}
+        </if>
+        <if test="demo2 !=null and demo2 !='' ">
+            and jgPrice &lt;= #{demo2}
+        </if>
+    </select>
 </mapper>

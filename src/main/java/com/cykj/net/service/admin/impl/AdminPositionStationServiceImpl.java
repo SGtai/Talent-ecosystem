@@ -50,6 +50,11 @@ public class AdminPositionStationServiceImpl implements AdminPositionStationServ
     }
 
     @Override
+    public int findJobStid(String stid) {
+        return adminPositionStationMapper.findJobStid(stid);
+    }
+
+    @Override
     public int countPosition() {
         return adminPositionStationMapper.countPosition();
     }
@@ -77,5 +82,10 @@ public class AdminPositionStationServiceImpl implements AdminPositionStationServ
     @Override
     public int updatePosition(AdminPositionStation aps) {
         return adminPositionStationMapper.updatePosition(aps);
+    }
+
+    @Override
+    public int findPositionHaveStationCount(int poid) {
+        return adminPositionStationMapper.findPositionHaveStationCount(poid);
     }
 }

@@ -67,14 +67,19 @@ public class AdminStationController {
     @PostMapping(value = "/deleteStation")
     public @ResponseBody
     String deleteStation(AdminPositionStation aps) {
-        if (adminPositionStationService.deleteStation(aps) > 0) {
-            return "true";
+        if (adminPositionStationService.findJobStid(aps.getStid()) > 0) {
+            return "haveJob";
+        } else {
+            if (adminPositionStationService.deleteStation(aps) > 0) {
+                return "true";
+            }
         }
         return "false";
     }
 
     /**
      * 更新岗位
+     *
      * @param aps
      * @return
      */
@@ -92,6 +97,7 @@ public class AdminStationController {
 
     /**
      * 添加岗位
+     *
      * @param aps
      * @return
      */
@@ -109,6 +115,7 @@ public class AdminStationController {
 
     /**
      * 行业表格
+     *
      * @param limit
      * @param page
      * @return
@@ -119,7 +126,7 @@ public class AdminStationController {
         LayuiData layuiData = new LayuiData();
         page = (page - 1) * limit;
         layuiData.setCount(adminPositionStationService.countPosition());
-        List<AdminPositionStation> list =adminPositionStationService.findAllPosition(page,limit);
+        List<AdminPositionStation> list = adminPositionStationService.findAllPosition(page, limit);
         for (int i = 0; i < list.size(); i++) {
             list.get(i).setId(page + 1 + i);
         }
@@ -129,17 +136,19 @@ public class AdminStationController {
 
     /**
      * 添加行业
+     *
      * @param position
      * @return
      */
     @PostMapping(value = "/addPosition")
-    public @ResponseBody String addPosition(String position){
+    public @ResponseBody
+    String addPosition(String position) {
         //查询是否存在改行业
-        if (adminPositionStationService.findPosition(position) > 0){
+        if (adminPositionStationService.findPosition(position) > 0) {
             return "havePosition";
         }
         //添加
-        if (adminPositionStationService.addPosition(position) > 0){
+        if (adminPositionStationService.addPosition(position) > 0) {
             return "true";
         }
 
@@ -148,20 +157,28 @@ public class AdminStationController {
 
     /**
      * 删除行业
+     *
      * @param position
      * @return
      */
     @PostMapping(value = "/deletePosition")
     public @ResponseBody
-    String deletePosition(String position) {
-        if (adminPositionStationService.deletePosition(position) > 0) {
-            return "true";
+    String deletePosition(String position, int poid) {
+
+        if (adminPositionStationService.findPositionHaveStationCount(poid) > 0) {
+            return "haveStation";
+        } else {
+            if (adminPositionStationService.deletePosition(position) > 0) {
+                return "true";
+            }
         }
+
         return "false";
     }
 
     /**
      * 修改行业
+     *
      * @param aps
      * @return
      */

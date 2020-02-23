@@ -7,11 +7,15 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page import="java.util.*"%>
+<%@ page import="java.text.*"%>
 <%
 	String cssPath = application.getContextPath()+"/techS/css/";
 	String jsPath = application.getContextPath()+"/techS/js/";
 	String othPath =application.getContextPath()+"/techS/other/";
 	String videoPath =application.getContextPath()+"/techS/other/video";
+	String layuiPath =application.getContextPath()+"/layui/";
 %>
 <!DOCTYPE html>
 <html>
@@ -19,8 +23,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title>视频播放</title>
+	<title>Title</title>
 	<link rel="stylesheet" type="text/css" href=<%=cssPath+"video.css"%> />
+	<link rel="stylesheet" href=<%=layuiPath+"css/layui.css" %>>
 	<script src=<%=jsPath+"jquery.min.js"%> type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src=<%=jsPath + "jquery-3.4.1.js"%>></script>
+	<script type="text/javascript" src=<%=jsPath + "json2.js"%>></script>
+	<script type="text/javascript" src=<%=layuiPath + "layui.js"%>></script>
+	<script type="text/javascript" src=<%=jsPath + "util.js"%>></script>
 </head>
 
 <body>
@@ -46,8 +56,9 @@
 					<div class="information-right" style="height:440px;width:640px;overflow:auto">
 
 						<c:forEach items="${video}" var="node">
+							<a class="layui-btn layui-btn-xs mydown" href = "javascript:void(0);" onclick ="down('${node.spPath}')">下载视频${node.spName}</a>
 							<div class="article-list">
-								<a href="/techvideo?id=${node.zjId}&name=${node.spName}&path=${node.spPath}" class="article-link">
+								<a href="/techvideo?id=${node.zjId}&name=${node.spName}&path=${node.spPath}&spId=${node.spId}" class="article-link">
 									<div class="article-head">
 										<span class="article-number">${node.spId}</span>
 										<span class="article-title">${node.spName}</span>
@@ -63,7 +74,90 @@
 			</div>
 		</div>
 	</div>
+
 </div>
+<div class="layui-form-item layui-form-text" style="position: absolute;margin-top: 45%;margin-left: 25%;width: 1000px;">
+	<div class="layui-input-inline" style="width: 70%;">
+		<input type="text"  name="pl"  placeholder="请输入评论"
+		       id="pl"     class="layui-input" >
+	</div>
+</div>
+<div class="layui-form-item" style="position: absolute;margin-top: 45%;margin-left: 77%;">
+	<button class="layui-btn" lay-submit="" lay-filter="upload" id="myUpload" onclick="release()">发布评论</button>
+</div>
+<div class="article-container" style="position: absolute;margin-top: 50%;margin-left: 20%;">
+<h1>评论区</h1>
+	<hr>
+	<h2>${tips}</h2>
+	<div class="comment" id="content">
+		<c:forEach items="${com}" var="node">
+			<div class="imgdiv">
+				<img class="imgcss"  src="${'/images/'.concat(node.assess.yhPicture)}"/>
+			</div>
+			<div class="conmment_details">
+				<div style="float:left;">
+<%--					<%String datetime1=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format("${node.assess.plTime}"); %>--%>
+<%--					<%=datetime1%>--%>
+					<span class="comment_name">${node.assess.yhName} </span>     <span>
+	<fmt:formatDate value="${node.assess.plTime}" pattern="yyyy年MM月dd日 HH:mm:ss"/>
+
+</span>
+
+				</div>
+				<div class="del">
+					<a  class="a_hover" href = "javascript:void(0);" onclick ="look(${node.assess.pjId})">查看回复</a>
+					<a class="a_hover" href = "javascript:void(0);" onclick ="help(${node.assess.pjId},${node.assess.dzcs})">&nbsp;&nbsp;&nbsp;👍赞(${node.assess.dzcs})</a>
+					<a class="a_hover" href = "javascript:void(0);" onclick ="eva(${node.assess.pjId},'${node.assess.yhName}')"> &nbsp;&nbsp;&nbsp;评价</a>
+				</div>
+				<div class="comment_content" >  ${node.assess.pjEvaluate}
+				</div>
+			</div>
+			<div class="reply_listS" id="${node.assess.pjId}">   <!--style="display:none;"-->
+
+				<c:forEach items="${node.aryR}" var="nodes">
+					<c:if test="${nodes.dfId == user.yhid}">
+						<div class="reply" >
+							<img class="imgcss"  src="${'/images/'.concat(nodes.dfPicture)}" style="width: 5%;height: 5%;"/>
+							<span class="comment_name">${nodes.dfName}</span>回复<span class="comment_name">${nodes.dxName}</span> <span><fmt:formatDate value="${nodes.dfTime}" pattern="yyyy年MM月dd日 HH:mm:ss" /></span>：<span class="reply_content">${nodes.nrContent} </span>
+						</div>
+					</c:if>
+					<c:if test="${nodes.dfId != user.yhid}">
+						<div class="reply" >
+							<img class="imgcss"  src="${'/images/'.concat(nodes.dfPicture)}" style="width: 5%;height: 5%;"/>
+							<span class="comment_name">${nodes.dfName}</span>回复<span class="comment_name">${nodes.dxName}</span> <span><fmt:formatDate value="${nodes.dfTime}" pattern="yyyy年MM月dd日 HH:mm:ss" /></span>：<span class="reply_content">${nodes.nrContent} </span>
+								<a  data-id="1" class="del_reply">
+									<i class="icon layui-icon" >    <a class="a_hover" href = "javascript:void(0);" onclick ="eva(${node.assess.pjId},'${nodes.dfName}')">            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回复</a></i>
+								</a>
+						</div>
+					</c:if>
+				</c:forEach>
+			</div>
+			<hr>
+		</c:forEach>
+
+
+			</div>
+
+			<hr>
+<%--			<div class="comment_add_or_last" >--%>
+<%--				点击加载更多评论--%>
+<%--			</div>--%>
+<%--			<hr>--%>
+		</div>
+	</div>
+	</div>
+<form action="/techvideo" method="get" id="myForm">
+	<input type="hidden" value="" name="nr" id="nr">
+	<input type="hidden" value="${name}" name="name" id="name">
+	<input type="hidden" value="${path}" name="path" id="path">
+	<input type="hidden" value="${spId}" name="spId" id="spId">
+	<input type="hidden" value="${id}" name="id" id="id">
+	<input type="hidden" value="" name="pjId" id="pjId">
+	<input type="hidden" value="" name="cs" id="cs">
+	<input type="hidden" value="" name="dxName" id="dxName">
+	<input type="hidden" value="" name="dfnr" id="dfnr">
+	<input type="hidden" value="" name="fName" id="fName">
+</form>
 <script type="text/javascript">
 	//tab切换
 	$('.tab-button').click(function() {
@@ -77,6 +171,62 @@
 	}, function() {
 		$(this).parent('.information-right').find('.article-list:first-of-type').addClass('current').siblings('.article-list').removeClass('current');
 	});
+	var ny  ='${notify}';
+	if (ny.length>0){
+		alert(ny);
+	}
+	<c:forEach items="${com}" var="node">
+	$("#${node.assess.pjId}").hide();
+	</c:forEach>
+	//查看回复
+	function look(name){
+		if($("#"+name).is(':hidden')){
+			$("#"+name).show();
+			//如果隐藏时。。。
+		}else{
+			$("#"+name).hide();
+			//如果显示时。。。
+		}
+	}
+	function help(pjId,cs){
+		$("#pjId").val(pjId);
+		$("#cs").val(cs);
+		$("#myForm").submit();
+	}
+	function release(){
+		if ($("#pl").val().length==0){
+			alert("你未输入评论");
+		} else{
+			alert($("#pl").val()+"评论成功！！！");
+			$("#nr").val($("#pl").val());
+			$("#myForm").submit();
+		}
+	}
+	function eva(pjId,dxName){
+		var pass = prompt("请输入评价内容","");
+		if (pass!=null && pass!="")
+		{
+			$("#dfnr").val(pass);
+			$("#pjId").val(pjId);
+			$("#dxName").val(dxName);
+			$("#cs").val("");
+			$("#myForm").submit();
+		}else if(pass==null) {
+
+		}else{
+			alert("你输入为空，请重新输入！");
+		}
+	}
+	function down(fName){
+		if (confirm('确认下载吗？？')) {
+			$("#fName").val(fName);
+			$("#myForm").submit();
+		}
+	}
+	var warning = '${warning}';
+	if (warning.length>0){
+		alert(warning);
+	}
 </script>
 
 </body>

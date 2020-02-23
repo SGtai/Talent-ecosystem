@@ -1,8 +1,19 @@
+#文件大小 MB必须大写
+#  maxFileSize 是单个文件大小
+#  maxRequestSize是设置总上传的数据大小
 server:
   port: 8080
 #  servlet:
 #    context-path: /springboot
 spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: -1
+      max-request-size: -1
+  devtools:
+    restart:
+      additional-paths: resources/**,static/**,WEB-INF/**
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://118.178.91.176:3306/db?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&useSSL=false

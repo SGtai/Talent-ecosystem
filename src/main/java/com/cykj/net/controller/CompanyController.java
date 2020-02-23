@@ -16,7 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -175,9 +177,6 @@ public class CompanyController
 	public ModelAndView jobinfo(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		List<Province> list=companyService.findProvince();
-		List<Position> list1=companyService.findPosition();
-		System.out.println("----------"+list+"-----------");
-		mv.addObject("position",list1);
 		mv.addObject("province",list);
 		mv.setViewName("/WEB-INF/company/jobinfo");
 		return mv;
@@ -218,7 +217,7 @@ public class CompanyController
 		String result = "";
 		Qyinfo qyinfo=(Qyinfo)session.getAttribute("Qyinfo");
 		jobinfo.setQyid(qyinfo.getQyid());
-		jobinfo.setTime( new Timestamp(System.currentTimeMillis()));
+		jobinfo.setTime(new Timestamp(System.currentTimeMillis()));
 		int a=companyService.releaseJobinfo(jobinfo);
 		if(a>0){
 			result="success";
@@ -234,12 +233,16 @@ public class CompanyController
 	 * @return
 	 */
 	@RequestMapping(value ="/searchJobinfoTable")
-	public LayuiData searchJobinfoTable(String page, String limit,HttpSession session) {
+	@ResponseBody
+	public LayuiData searchJobinfoTable(String page, String limit,String jobinfoState,String zwid,String type,HttpSession session) {
 		Qyinfo qyinfo=(Qyinfo)session.getAttribute("Qyinfo");
 		Jobinfo jobinfo= new Jobinfo();
+		jobinfo.setJobinfoState(jobinfoState);
+		jobinfo.setZwid(zwid);
+		jobinfo.setType(type);
 		jobinfo.setQyid(qyinfo.getQyid());
 		List<Jobinfo> list1=companyService.searchJobinfoTable(jobinfo);
-		System.out.println("----------"+list1.get(1).getBeginTime()+"-----------");
+		System.out.println(list1);
 		LayuiData layuiData=new LayuiData();
 		layuiData.setCode(0);
 		layuiData.setMsg("");
@@ -257,12 +260,19 @@ public class CompanyController
 		}
 
 		layuiData.setCount(list1.size());
+		System.out.println(list1.size());
 		layuiData.setData(data);
 		System.out.println(data);
+
 //		String json =new Gson().toJson(layuiData);
 //		System.out.println(json);
 		return layuiData;
 	}
 
+	public static SimpleDateFormat getTime(){
+		Date date = new Date();
+		SimpleDateFormat s = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
 
+		return s;
+	}
 }

@@ -23,7 +23,7 @@
 			height: 700px;
 		}
 
-		#layout {
+		#layoutjobinfo {
 			width: 720px;
 			margin: auto;
 			margin-top: 15px;
@@ -46,9 +46,7 @@
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
 	<legend style="margin: 0 auto;float: none;">招聘信息填写</legend>
 </fieldset>
-<div id="layout">
-
-
+<div id="layoutjobinfo">
 <form class="layui-form" action="">
 	<input id="qyid" type="hidden" value="${sessionScope.Qyinfo.qyid}" />
 	<div class="layui-form-item" style="background-color: #95877c;width: 720px">
@@ -113,11 +111,14 @@
 			<div class="layui-input-inline">
 				<select name="xueliRequire" id="xueliRequire" lay-verify="required">
 					<option value="">请选择学历</option>
-					<option value="研究生以上">研究生以上</option>
-					<option value="本科以上">本科以上</option>
-					<option value="专科以上">专科以上</option>
-					<option value="高中以上">高中以上</option>
-					<option value="初中以上">初中以上</option>
+					<option value="博士">博士及以上</option>
+					<option value="硕士">硕士</option>
+					<option value="研究生">研究生</option>
+					<option value="本科">本科</option>
+					<option value="专科">专科</option>
+					<option value="高中">高中、中技、中专</option>
+					<option value="初中">初中</option>
+					<option value="小学">小学</option>
 					<option value="不限">不限</option>
 				</select>
 			</div>
@@ -131,6 +132,8 @@
 					<option value="">请选择职业性质</option>
 					<option value="全职">全职</option>
 					<option value="兼职">兼职</option>
+					<option value="实习">实习</option>
+					<option value="不限">不限</option>
 				</select>
 			</div>
 		</div>
@@ -140,10 +143,10 @@
 				<select name="gzExperience" id="gzExperience" lay-verify="required">
 					<option value="">请选择工作经验</option>
 					<option value="10年以上">10年以上</option>
-					<option value="5年以上">5年以上</option>
-					<option value="3年以上">3年以上</option>
-					<option value="1年以上">1年以上</option>
-					<option value="应届生">应届生</option>
+					<option value="6~10年">6~10年</option>
+					<option value="3~5年">3~5年</option>
+					<option value="1~2年">1~2年</option>
+					<option value="应届毕业生">应届毕业生</option>
 					<option value="不限">不限</option>
 				</select>
 			</div>
@@ -211,12 +214,12 @@
 			<div class="layui-input-inline" >
 				<select name="dayTime" id="gztime1" lay-verify="required">
 					<option value="">请选择每日上班时长</option>
-					<option value="7小时">7小时</option>
-					<option value="8小时">8小时</option>
-					<option value="9小时">9小时</option>
-					<option value="10小时">10小时</option>
-					<option value="11小时">11小时</option>
-					<option value="12小时">12小时</option>
+					<option value="7">7小时</option>
+					<option value="8">8小时</option>
+					<option value="9">9小时</option>
+					<option value="10">10小时</option>
+					<option value="11">11小时</option>
+					<option value="12">12小时</option>
 					<option value="全天">全天</option>
 				</select>
 			</div>

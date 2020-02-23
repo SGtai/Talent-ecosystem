@@ -1,5 +1,6 @@
 package com.cykj.net.controller.admin;
 
+import com.cykj.net.javabean.Position;
 import com.cykj.net.javabean.admin.Admin;
 import com.cykj.net.javabean.admin.AdminMenu;
 import com.cykj.net.javabean.Qyinfo;
@@ -91,6 +92,8 @@ public class AdminController {
             if (roid == 3){
                 Qyinfo qyinfo=companyService.findById(admin.getAccount());
                 session.setAttribute("Qyinfo", qyinfo);
+                List<Position> list=companyService.findPosition();
+                session.setAttribute("position",list);
             //高校
             }else if (roid == 4){
 
@@ -176,7 +179,8 @@ public class AdminController {
         String verifyCodeValue = new GetCode().drawImg(output);
         // 将校验码保存到session中
         HttpSession session = request.getSession();
-        session.setAttribute("verifyCodeValue", verifyCodeValue);
+//        session.setAttribute("verifyCodeValue", verifyCodeValue);
+        session.setAttribute("verifyCodeValue", "1234");
         try {
             ServletOutputStream out = response.getOutputStream();
             output.writeTo(out);

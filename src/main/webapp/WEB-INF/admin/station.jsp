@@ -284,6 +284,7 @@
                     } else if (us === '') {
                         layer.msg('岗位名称不可为空');
                     } else {
+
                         layer.confirm('确定要对岗位进行修改吗?', function (index) {
 
                             $.ajax({
@@ -326,12 +327,14 @@
                         type: "POST",
                         url: "/adminStation/deleteStation",
                         dataType: "text",
-                        data: {poid: poid, station: station},
+                        data: {poid: poid, station: station,stid:data.stid},
                         success: function (msg) {
 
                             if (msg === 'true') {
                                 layer.msg('删除成功');
                                 table.reload('station');
+                            } else if (msg === 'haveJob'){
+                                layer.msg('该岗位下面有企业发布的招聘信息，暂不可删除');
                             } else {
                                 layer.msg('删除失败');
                             }
