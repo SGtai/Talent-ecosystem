@@ -6,7 +6,7 @@ public class Curriculum {
   private long kcId;
   private String kcName;
   private String msDescribe;
-  private String jgPrice;
+  private long jgPrice;
   private long fzTypeId;
   private String xxInformation;
   private long gmcsPurchase;
@@ -43,11 +43,11 @@ public class Curriculum {
   }
 
 
-  public String getJgPrice() {
+  public long getJgPrice() {
     return jgPrice;
   }
 
-  public void setJgPrice(String jgPrice) {
+  public void setJgPrice(long jgPrice) {
     this.jgPrice = jgPrice;
   }
 
@@ -79,12 +79,12 @@ public class Curriculum {
   }
 
 
-  public long getCxcsConsult() {
+  public long getPlcsComment() {
     return plcsComment;
   }
 
-  public void setCxcsConsult(long cxcsConsult) {
-    this.plcsComment = cxcsConsult;
+  public void setPlcsComment(long plcsComment) {
+    this.plcsComment = plcsComment;
   }
 
 

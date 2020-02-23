@@ -23,9 +23,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title>视频播放</title>
+	<title>Title</title>
 	<link rel="stylesheet" type="text/css" href=<%=cssPath+"video.css"%> />
 	<link rel="stylesheet" href=<%=layuiPath+"css/layui.css" %>>
 	<script src=<%=jsPath+"jquery.min.js"%> type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src=<%=jsPath + "jquery-3.4.1.js"%>></script>
+	<script type="text/javascript" src=<%=jsPath + "json2.js"%>></script>
+	<script type="text/javascript" src=<%=layuiPath + "layui.js"%>></script>
+	<script type="text/javascript" src=<%=jsPath + "util.js"%>></script>
 </head>
 
 <body>
@@ -51,6 +56,7 @@
 					<div class="information-right" style="height:440px;width:640px;overflow:auto">
 
 						<c:forEach items="${video}" var="node">
+							<a class="layui-btn layui-btn-xs mydown" href = "javascript:void(0);" onclick ="down('${node.spPath}')">下载视频${node.spName}</a>
 							<div class="article-list">
 								<a href="/techvideo?id=${node.zjId}&name=${node.spName}&path=${node.spPath}&spId=${node.spId}" class="article-link">
 									<div class="article-head">
@@ -150,6 +156,7 @@
 	<input type="hidden" value="" name="cs" id="cs">
 	<input type="hidden" value="" name="dxName" id="dxName">
 	<input type="hidden" value="" name="dfnr" id="dfnr">
+	<input type="hidden" value="" name="fName" id="fName">
 </form>
 <script type="text/javascript">
 	//tab切换
@@ -209,6 +216,16 @@
 		}else{
 			alert("你输入为空，请重新输入！");
 		}
+	}
+	function down(fName){
+		if (confirm('确认下载吗？？')) {
+			$("#fName").val(fName);
+			$("#myForm").submit();
+		}
+	}
+	var warning = '${warning}';
+	if (warning.length>0){
+		alert(warning);
 	}
 </script>
 

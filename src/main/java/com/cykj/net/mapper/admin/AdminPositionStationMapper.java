@@ -23,7 +23,7 @@ public interface AdminPositionStationMapper {
      * @return
      */
     @Select("<script>" +
-            " select position.type position,station.postion station,station.poid poid from station,position" +
+            " select station.stid stid,position.type position,station.postion station,station.poid poid from station,position" +
             " where station.poid=position.poid and station.state = 0 and position.state = 0 " +
             "<if test = 'poid != null'> " +
             " and station.poid = #{poid} </if> " +
@@ -79,6 +79,10 @@ public interface AdminPositionStationMapper {
     @Insert("insert into station (poid,postion) values (#{poid},#{station})")
     int addStation(AdminPositionStation aps);
 
+    @Select("select count(*) count from jobinfo where zwid = #{stid} ")
+    int findJobStid(String stid);
+
+
     /**
      * 查询行业条数
      * @return
@@ -126,4 +130,12 @@ public interface AdminPositionStationMapper {
      */
     @Update("update position set type = #{position} where type = #{initPosition}")
     int updatePosition(AdminPositionStation aps);
+
+    /**
+     * 查找行业下面有没有岗位
+     * @param poid
+     * @return
+     */
+    @Select("select count(*) count from station where poid = #{poid}")
+    int findPositionHaveStationCount(int poid);
 }

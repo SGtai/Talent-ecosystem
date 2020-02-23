@@ -11,6 +11,9 @@ spring:
       enabled: true
       max-file-size: -1
       max-request-size: -1
+  devtools:
+    restart:
+      additional-paths: resources/**,static/**,WEB-INF/**
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://118.178.91.176:3306/db?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&useSSL=false

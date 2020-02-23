@@ -1,6 +1,8 @@
 package com.cykj.net.javabean.admin;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Admin {
 
   private long adid;
@@ -46,7 +48,7 @@ public class Admin {
     this.password = password;
   }
 
-
+  @JsonFormat(timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
   public java.sql.Timestamp getRegistertime() {
     return registertime;
   }

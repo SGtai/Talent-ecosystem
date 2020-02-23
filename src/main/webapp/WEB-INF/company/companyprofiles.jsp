@@ -23,7 +23,7 @@
 			height:650px;
 		}
 
-		#layout {
+		#layout3 {
 			width: 50%;
 			height: 500px;
 			margin: auto;
@@ -43,7 +43,7 @@
 	</style>
 </head>
 <body>
-<div id="layout">
+<div id="layout3">
 	<form class="layui-form" action="" >
 		<input id="qyAccount" type="hidden" value="${sessionScope.Qyinfo.qyAccount}" />
 		<br>
