@@ -12,7 +12,8 @@ layui.use(['form', 'layer', 'jquery','table'], function(){
 		,limit:5
 		,limits:[5,10,20,50,100]
 		,cols: [[ //表头
-			{field: 'type', title: '招聘行业', width:150}
+			{field: 'zpxxid', title: 'ID', width: 80,hide:true}
+			,{field: 'type', title: '招聘行业', width:150}
 			,{field: 'postion', title: '招聘岗位', width:200}
 			,{field: 'zhaopinTime', title: '招聘时间', width:200}
 			,{field: 'xueliRequire', title: '学历要求', width:100}
@@ -107,6 +108,24 @@ layui.use(['form', 'layer', 'jquery','table'], function(){
 		var data = obj.data //获得当前行数据
 			,layEvent = obj.event; //获得 lay-event 对应的值
 		if(layEvent === 'detail'){
+			var zpxxid=data.zpxxid;
+			$.ajax(
+				{
+					type:"POST",
+					url:"/company/searchJobinfo",
+					dataType:"json",
+					data:{zpxxid:zpxxid},
+
+					success:function (msg) {
+						//数据回显方法
+						searchJob(msg);
+
+					},
+					error:function () {
+						alert("服务器正忙.....");
+					}
+				}
+			);
 			//打开查看页面
 			layer.open({
 				type: 1,
@@ -114,8 +133,12 @@ layui.use(['form', 'layer', 'jquery','table'], function(){
 				area: ['740px','550px'],
 				title: '招聘信息',
 				btn:['取消'],
+				anim: 1,//0-6的动画形式，-1不开启
+				offset: '40px',
 				success:function () {
 					form.render();
+
+
 				}
 			});
 		} else if(layEvent === 'del'){
@@ -189,3 +212,92 @@ layui.use(['form', 'layer', 'jquery','table'], function(){
 
 	});
 });
+
+function searchJob(param) {
+	alert(param);
+
+	var position2=$('#position2');
+	var zwid=$('#zwid');
+	var beginTime=$('#beginTime');
+	var endTime=$('#endTime');
+	var lxMan=$('#lxMan');
+	var lxPhone=$('#lxPhone');
+	var lxAddress=$('#lxAddress');
+	var xueliRequire=$('#xueliRequire');
+	var zhiyeType=$('#zhiyeType');
+	var gzExperience=$('#gzExperience');
+	var ageLow=$('#ageLow');
+	var ageHigh=$('#ageHigh');
+	var sex;
+	var province=$('#province');
+	var ctid=$('#ctid');
+	var gzAddress=$('#gzAddress');
+	var salaryLow=$('#salaryLow');
+	var salaryHigh=$('#salaryHigh');
+	var dayTime=$('#dayTime');
+	var weekTime=$('#weekTime');
+	var workTime=$('#workTime');
+
+
+
+	var zpNum=$('#zpNum');
+	var jobDuty=$('#jobDuty');
+
+
+	position2.empty();
+	zwid.empty();
+	beginTime.empty();
+	endTime.empty();
+	lxMan.empty();
+	lxPhone.empty();
+	lxAddress.empty();
+	xueliRequire.empty();
+	zhiyeType.empty();
+	gzExperience.empty();
+	ageLow.empty();
+	ageHigh.empty();
+	sex;
+	province.empty();
+	ctid.empty();
+	gzAddress.empty();
+	salaryLow.empty();
+	salaryHigh.empty();
+	dayTime.empty();
+	weekTime.empty();
+	workTime.empty();
+
+
+
+	zpNum.empty();
+	jobDuty.empty();
+
+
+
+
+	position2.val(param.position);
+	zwid.val(param.zwid);
+	beginTime.val();
+	endTime.val();
+	lxMan.val(param.lxMan);
+	lxPhone.val(param.lxPhone);
+	lxAddress.val(param.lxAddress);
+	xueliRequire.val(param.xueliRequire);
+	zhiyeType.val(param.zhiyeType);
+	gzExperience.val(param.gzExperience);
+	ageLow.val(param.ageLow);
+	ageHigh.val(param.ageHigh);
+	sex;
+	province.val(param.poid);
+	ctid.val(param.ctid);
+	gzAddress.val(param.gzAddress);
+	salaryLow.val(param.salaryLow);
+	salaryHigh.val(param.salaryHigh);
+	dayTime.val(param.dayTime);
+	weekTime.val(param.weekTime);
+	workTime.val(param.workTime);
+
+
+
+	zpNum.val(param.zpNum);
+	jobDuty.text(param.jobDuty);
+}

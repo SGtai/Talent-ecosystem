@@ -8,6 +8,7 @@ import com.cykj.net.javabean.LayuiData;
 import com.cykj.net.service.AdminroleService;
 import com.cykj.net.service.CompanyService;
 import com.cykj.net.service.admin.AdminService;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -264,15 +265,22 @@ public class CompanyController
 		layuiData.setData(data);
 		System.out.println(data);
 
-//		String json =new Gson().toJson(layuiData);
-//		System.out.println(json);
 		return layuiData;
 	}
 
-	public static SimpleDateFormat getTime(){
-		Date date = new Date();
-		SimpleDateFormat s = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
-
-		return s;
+	/**
+	 * 根据zpxxi的查询对应数据
+	 * @param jobinfo
+	 * @return
+	 */
+	@RequestMapping(value ="/searchJobinfo")
+	public @ResponseBody
+	Jobinfo searchJobinfo(Jobinfo jobinfo,HttpSession session) {
+		Jobinfo jobinfo1=companyService.searchJobinfo(jobinfo);
+		System.out.println(jobinfo1.getZpxxid());
+//		String json = new Gson().toJson(jobinfo1);
+//		return json;
+		return jobinfo1;
 	}
+
 }

@@ -28,7 +28,7 @@ layui.use(['form', 'layedit', 'laydate'], function(){
 			layer.alert("薪资范围填写错误！", { icon: 1, offset: "auto", time:1500 });
 			return false;
 		}else{
-			//发布招聘信息
+			// 发布招聘信息
 			$.ajax(
 				{
 					type:"POST",

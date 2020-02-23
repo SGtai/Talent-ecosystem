@@ -276,10 +276,10 @@
 		</h3>
 		<br><br><br>
 		<div class="layui-input-line">
-			<textarea id="jobDuty"  lay-verify="required" style="width: 600px;margin: 0 auto;float: none;" class="layui-textarea" placeholder="请输入内容"></textarea>
+			<textarea name="jobDuty" id="jobDuty"  lay-verify="required" style="width: 600px;margin: 0 auto;float: none;" class="layui-textarea" placeholder="请输入内容"></textarea>
 		</div>
 	</div>
-
+	<input name="jobinfoState" type="hidden" value="发布中" />
 	<div class="layui-form-item">
 		<div class="layui-input-block">
 			<button class="layui-btn" type="submit" lay-filter="jobinfo" lay-submit="">立即提交</button>

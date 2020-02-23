@@ -77,7 +77,7 @@
 		<div class="layui-form-item" style="background-color: #95877c;width: 720px">
 			<h3><label class="layui-form-label" style="width: 80px;text-align: left">招聘职位:</label></h3>
 			<div class="layui-input-inline">
-				<select name="position" lay-filter="choosePosition" lay-verify="required" >
+				<select name="position"  id="position2" lay-filter="choosePosition" lay-verify="required" >
 					<option value="">请选择行业</option>
 					<c:if test="${position!=null}">
 						<c:forEach items="${position}" begin="0" var="i">
@@ -100,17 +100,17 @@
 		<div class="layui-form-item" >
 			<label class="layui-form-label" >招聘日期：</label>
 			<div class="layui-input-inline">
-				<input name="beginTime" class="layui-input" id="date" type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date">
+				<input name="beginTime" id="beginTime"  class="layui-input" id="date" type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date">
 			</div>
 			<label name="" class="layui-form-label" style="text-align: center">至</label>
 			<div class="layui-input-inline">
-				<input name="endTime" class="layui-input" id="date1" type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date">
+				<input name="endTime" id="endTime" class="layui-input" id="date1" type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date">
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">联系人：</label>
 			<div class="layui-input-inline" >
-				<input name="lxMan" id="lxMan" class="layui-input" type="text" autocomplete="off" lay-verify="lxMan" >
+				<input name="lxMan"  id="lxMan" class="layui-input" type="text" autocomplete="off" lay-verify="lxMan" >
 			</div>
 		</div>
 		<div class="layui-form-item">
@@ -198,7 +198,7 @@
 		<div class="layui-form-item" >
 			<label class="layui-form-label" >工作地点：</label>
 			<div class="layui-input-inline">
-				<select name="" lay-filter="chooseProvince" lay-verify="required">
+				<select name="province" id="province" lay-filter="chooseProvince" lay-verify="required">
 					<option value="">请选择省份</option>
 					<c:if test="${province!=null}">
 						<c:forEach items="${province}" begin="0" var="i">
@@ -237,7 +237,7 @@
 				<label class="layui-form-label">上班时间：</label>
 
 				<div class="layui-input-inline" >
-					<select name="dayTime" id="gztime1" lay-verify="required">
+					<select name="dayTime" id="dayTime" lay-verify="required">
 						<option value="">请选择每日上班时长</option>
 						<option value="7">7小时</option>
 						<option value="8">8小时</option>
@@ -249,7 +249,7 @@
 					</select>
 				</div>
 				<div class="layui-input-inline" >
-					<select name="weekTime" id="gztime2" lay-verify="required">
+					<select name="weekTime" id="weekTime" lay-verify="required">
 						<option value="">请选择每周休息时间</option>
 						<option value="单休">单休</option>
 						<option value="双休">双休</option>
@@ -258,7 +258,7 @@
 					</select>
 				</div>
 				<div class="layui-input-inline" >
-					<select name="workTime" id="gztime3" lay-verify="required">
+					<select name="workTime" id="workTime" lay-verify="required">
 						<option value="">请选择上班班次</option>
 						<option value="白班">白班</option>
 						<option value="晚班">晚班</option>
@@ -319,7 +319,7 @@
 <script src="<%=path+"json2.js"%>"></script>
 <script src="<%=jsPath+"companytable.js"%>"></script>
 <script type="text/html" id="barDemo">
-	<a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
+	<a class="layui-btn layui-btn-xs" lay-event="detail" >查看</a>
 	<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
