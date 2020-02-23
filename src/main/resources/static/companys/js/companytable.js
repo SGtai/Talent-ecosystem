@@ -115,11 +115,23 @@ layui.use(['form', 'layer', 'jquery','table'], function(){
 					url:"/company/searchJobinfo",
 					dataType:"json",
 					data:{zpxxid:zpxxid},
-
 					success:function (msg) {
 						//数据回显方法
-						searchJob(msg);
+						// searchJob(msg);
+						// window.location.href=window.location;
 
+						layer.open({
+							type: 1,
+							content: $('#jobinfo').html(),
+							area: ['740px','550px'],
+							title: '招聘信息',
+							btn:['取消'],
+							anim: 1,//0-6的动画形式，-1不开启
+							offset: '40px',
+							success:function () {
+								form.render();
+							}
+						});
 					},
 					error:function () {
 						alert("服务器正忙.....");
@@ -127,20 +139,7 @@ layui.use(['form', 'layer', 'jquery','table'], function(){
 				}
 			);
 			//打开查看页面
-			layer.open({
-				type: 1,
-				content: $('#jobinfo').html(),
-				area: ['740px','550px'],
-				title: '招聘信息',
-				btn:['取消'],
-				anim: 1,//0-6的动画形式，-1不开启
-				offset: '40px',
-				success:function () {
-					form.render();
 
-
-				}
-			});
 		} else if(layEvent === 'del'){
 			layer.confirm('真的删除行么', function(index){
 
@@ -214,8 +213,6 @@ layui.use(['form', 'layer', 'jquery','table'], function(){
 });
 
 function searchJob(param) {
-	alert(param);
-
 	var position2=$('#position2');
 	var zwid=$('#zwid');
 	var beginTime=$('#beginTime');
@@ -237,6 +234,7 @@ function searchJob(param) {
 	var dayTime=$('#dayTime');
 	var weekTime=$('#weekTime');
 	var workTime=$('#workTime');
+	var welfare=$('#welfare');
 
 
 
@@ -265,7 +263,7 @@ function searchJob(param) {
 	dayTime.empty();
 	weekTime.empty();
 	workTime.empty();
-
+	welfare.empty();
 
 
 	zpNum.empty();
@@ -295,7 +293,7 @@ function searchJob(param) {
 	dayTime.val(param.dayTime);
 	weekTime.val(param.weekTime);
 	workTime.val(param.workTime);
-
+	welfare.val(param.welfare);
 
 
 	zpNum.val(param.zpNum);

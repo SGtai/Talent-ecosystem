@@ -46,7 +46,7 @@
 			</div>
 		</div>
 		<div class="layui-inline">
-			<label class="layui-form-label">招聘岗位：</label>
+			<label class="layui-form-label">招聘岗位：${sessionScope.ojbk}</label>
 			<div class="layui-input-block">
 				<select name="zwid" id="zwid2">
 				</select>
@@ -110,14 +110,15 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">联系人：</label>
 			<div class="layui-input-inline" >
-				<input name="lxMan"  id="lxMan" class="layui-input" type="text" autocomplete="off" lay-verify="lxMan" >
+				<input name="lxMan"  id="lxMan" class="layui-input" type="text" autocomplete="off" lay-verify="lxMan" value="${request.getSession()}">
+
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<div class="layui-inline">
 				<label class="layui-form-label">联系电话：</label>
 				<div class="layui-input-inline">
-					<input name="lxPhone" id="lxPhone" class="layui-input" type="text" autocomplete="off" lay-verify="number" >
+					<input name="lxPhone" id="lxPhone" class="layui-input" type="text" autocomplete="off" lay-verify="number" value="${sessionScope.ojbk}">
 				</div>
 			</div>
 		</div>
