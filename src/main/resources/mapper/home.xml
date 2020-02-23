@@ -36,9 +36,138 @@
 	<select id="searchJob" resultType="JobInfoIndex">
 		select A.qyid,A.qyName,A.replyRate,B.zpxxid,C.postion,concat(B.salaryLow,'-',B.salaryHigh) salary,concat(E.name,D.name,ifnull(B.gzAddress,'')) gzAddress,(now()-B.time) AS time
 		from qyinfo A,jobinfo B,station C,city D,province E
-		where A.qyid = B.qyid and B.zwid = C.stid and B.ctid = D.ctid and D.prid = E.prid
+		<where>
+			A.qyid = B.qyid and B.zwid = C.stid and B.ctid = D.ctid and D.prid = E.prid
+			<if test="baoxian != null and baoxian !=''">
+				and B.baoxian is not null
+			</if>
+			<if test="gjijin != null and gjijin !=''">
+				and B.gjijin is not null
+			</if>
+			<if test="jiangjin != null and jiangjin !=''">
+				and B.jiangjin is not null
+			</if>
+			<if test="zhusu != null and zhusu !=''">
+				and B.zhusu is not null
+			</if>
+			<if test="shuangxiu != null and shuangxiu !=''">
+				and B.weekTime like '双休'
+			</if>
+			-- 			八小时工作制
+			<if test="baxiaoshi != null and baxiaoshi !=''">
+				and B.dayTime &lt; 9
+			</if>
+			<if test="gzAddress != null and gzAddress !='' and gzAddress !='0'.toString()">
+				and B.ctid =  #{gzAddress}
+			</if>
+			-- 			大于最低工资的情况
+			<if test="salaryLow != null and salaryLow !='' and salaryLow !='21' and salaryLow !='0'">
+				and B.salaryLow &gt;= #{salaryLow}
+			</if>
+			-- 			面议的情况
+			<if test="salaryLow != null and salaryLow !='' and salaryLow =='21'">
+				and B.salaryLow == 0 and B.salaryHigh == 0
+			</if>
+			-- 			小于最高工资的情况，为空则不添加
+			<if test="salaryHigh != null and salaryHigh !='' and salaryHigh !='0'">
+				and B.salaryHigh &lt;= #{salaryLow}
+			</if>
+			-- 			学历
+			<if test="eduction != null and eduction !='' and eduction !='0'.toString()">
+				and B.xueliRequire like "%"#{eduction}"%"
+			</if>
+			-- 			工作年限
+			<if test="workTime != null and workTime !='' and workTime !='0'.toString()">
+				and B.gzExperience like "%"#{workTime}"%"
+			</if>
+			<if test="workState != null and workState !='' and workState !='0'.toString()">
+				and B.zhiyeType like #{workState}
+			</if>
+			<if test="qyPeople != null and qyPeople !='' and qyPeople !='0'.toString()">
+				and A.qyPeople like "%"#{qyPeople}
+			</if>
+			<if test="replyRate != null and replyRate !='' and replyRate !='0'">
+				and A.replyRate &gt;= #{replyRate}
+			</if>
+			<if test="postion != null and postion !=''">
+				and C.postion like '%${postion}%'
+			</if>
+		</where>
 	</select>
 
+	<select id="searchJobCount" resultType="int">
+		select count(*)
+		from qyinfo A,jobinfo B,station C,city D,province E
+		<where>
+			A.qyid = B.qyid and B.zwid = C.stid and B.ctid = D.ctid and D.prid = E.prid
+			<if test="baoxian != null and baoxian !=''">
+				and B.baoxian is not null
+			</if>
+			<if test="gjijin != null and gjijin !=''">
+				and B.gjijin is not null
+			</if>
+			<if test="jiangjin != null and jiangjin !=''">
+				and B.jiangjin is not null
+			</if>
+			<if test="zhusu != null and zhusu !=''">
+				and B.zhusu is not null
+			</if>
+			<if test="shuangxiu != null and shuangxiu !=''">
+				and B.weekTime like '双休'
+			</if>
+			-- 			八小时工作制
+			<if test="baxiaoshi != null and baxiaoshi !=''">
+				and B.dayTime &lt; 9
+			</if>
+			<if test="gzAddress != null and gzAddress !='' and gzAddress !='0'.toString()">
+				and B.ctid =  #{gzAddress}
+			</if>
+			-- 			大于最低工资的情况
+			<if test="salaryLow != null and salaryLow !='' and salaryLow !='21' and salaryLow !='0'">
+				and B.salaryLow &gt;= #{salaryLow}
+			</if>
+			-- 			面议的情况
+			<if test="salaryLow != null and salaryLow !='' and salaryLow =='21'">
+				and B.salaryLow == 0 and B.salaryHigh == 0
+			</if>
+			-- 			小于最高工资的情况，为空则不添加
+			<if test="salaryHigh != null and salaryHigh !='' and salaryHigh !='0'">
+				and B.salaryHigh &lt;= #{salaryLow}
+			</if>
+			-- 			学历
+			<if test="eduction != null and eduction !='' and eduction !='0'.toString()">
+				and B.xueliRequire like #{eduction}
+			</if>
+			-- 			工作年限
+			<if test="workTime != null and workTime !='' and workTime !='0'.toString()">
+				and B.gzExperience like #{workTime}
+			</if>
+			<if test="workState != null and workState !='' and workState !='0'.toString()">
+				and B.zhiyeType like #{workState}
+			</if>
+			<if test="qyPeople != null and qyPeople !='' and qyPeople !='0'.toString()">
+				and A.qyPeople like #{qyPeople}
+			</if>
+			<if test="replyRate != null and replyRate !='' and replyRate !='0'">
+				and A.replyRate &gt;= #{replyRate}
+			</if>
+			<if test="postion != null and postion !=''">
+				and C.postion like '%${postion}%'
+			</if>
+		</where>
+	</select>
 
+	<select id="gangweiNew" resultType="int">
+		SELECT count(*) FROM jobinfo WHERE DATE_FORMAT( time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' );
+	</select>
+	<select id="gangweicount" resultType="int">
+		SELECT count(*) FROM jobinfo;
+	</select>
+	<select id="usercount" resultType="int">
+		SELECT count(*) FROM userlist;
+	</select>
+	<select id="qiuzhiSuccess" resultType="int">
+		SELECT count(*) FROM applicationjob where feedbackType = 0;
+	</select>
 
 </mapper>

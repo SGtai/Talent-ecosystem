@@ -1,0 +1,37 @@
+.layui-table-box{
+    width: 1100px;
+    margin: 0 auto;
+    margin-top: 0px;
+}
+.layui-table td{
+    text-align: left;
+    padding: 6px 0 6px 8px;
+    line-height: 27px;
+    height: 33px;
+    overflow: hidden;
+}
+.laytable-cell-1-0-0{
+    color: #3364cb;
+    margin-left: 5px;
+    max-width: 175px;
+    vertical-align: middle;
+    font-size: 14px;
+    line-height: 27px;
+    font-weight: bold;
+}
+.laytable-cell-1-0-1{
+    color: #3364cb;
+}
+.laytable-cell-1-0-2{
+    color: red;
+}
+.laytable-cell-1-0-4{
+    text-align: left;
+    padding: 6px 0 6px 8px;
+    line-height: 27px;
+    height: 33px;
+    overflow: hidden;
+}
+.layui-table-view{
+
+}
