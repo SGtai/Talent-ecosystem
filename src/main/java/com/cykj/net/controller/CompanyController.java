@@ -32,6 +32,19 @@ public class CompanyController
 	private AdminService adminService;
 	@Autowired
 	private AdminroleService adminroleService;
+
+
+	@RequestMapping("/companyLogin")
+	public @ResponseBody
+	ModelAndView companyLogin()
+	{
+		ModelAndView mv =new ModelAndView();
+		List<Province> list=companyService.findProvince();
+		mv.addObject("province2",list);
+		mv.setViewName("/WEB-INF/company/companylogin");
+		return mv;
+	}
+
 	/**
 	 * 注册企业账号
 	 * @param qyinfo

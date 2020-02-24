@@ -85,7 +85,7 @@
 <script type="text/html" id="registerHtml">
 
 
-    <div style="margin-top: 5%;margin-left: 16%"><label>没有企业账号？<a href="/jump/company/companylogin">点击前往企业注册</a></label></div>
+    <div style="margin-top: 5%;margin-left: 16%"><label>没有企业账号？<a href="/company/companyLogin">点击前往企业注册</a></label></div>
     <div style="margin-top: 10%;margin-left: 16%"><label>没有高校账号？<a href="/jump/school/reg1">点击前往高校注册</a></label></div>
 </script>
 

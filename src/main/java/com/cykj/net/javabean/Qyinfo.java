@@ -20,6 +20,10 @@ public class Qyinfo {
   private String xinyongDu;
   private String qyPicture;
   private java.sql.Timestamp regTime;
+  private long replyRate;
+  private long ctid;
+  private String qyPeople;
+  private long prid;
 
 
   public long getQyid() {
@@ -174,4 +178,40 @@ public class Qyinfo {
     this.regTime = regTime;
   }
 
+
+  public long getReplyRate() {
+    return replyRate;
+  }
+
+  public void setReplyRate(long replyRate) {
+    this.replyRate = replyRate;
+  }
+
+
+  public long getCtid() {
+    return ctid;
+  }
+
+  public void setCtid(long ctid) {
+    this.ctid = ctid;
+  }
+
+
+  public String getQyPeople() {
+    return qyPeople;
+  }
+
+  public void setQyPeople(String qyPeople) {
+    this.qyPeople = qyPeople;
+  }
+
+  public long getPrid()
+  {
+    return prid;
+  }
+
+  public void setPrid(long prid)
+  {
+    this.prid = prid;
+  }
 }

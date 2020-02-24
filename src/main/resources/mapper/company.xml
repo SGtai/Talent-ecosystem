@@ -4,7 +4,7 @@
     <!--单条数据插入，返回自增ID序号-->
     <insert id="regQyAccount" parameterType="Qyinfo" keyProperty="qyid" useGeneratedKeys="true">
 		insert into
-		qyinfo(qyAccount,password,qyData,qyName,regTime) values(#{qyAccount},#{password},#{qyData},#{qyName},#{regTime})
+		qyinfo(qyAccount,password,qyData,qyName,regTime,ctid,prid) values(#{qyAccount},#{password},#{qyData},#{qyName},#{regTime},#{ctid},#{prid})
 	</insert>
     <!--    查询企业信息表-->
 	<select id="findById" parameterType="string" resultType="Qyinfo"

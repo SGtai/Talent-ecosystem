@@ -30,6 +30,9 @@
 			margin-top: 15px;
 			border: #9F9F9F solid 1px;
 		}
+		#qytype2{
+			width: 150px;
+		}
 		.layui-form-label{
 			width: 120px;
 
@@ -83,11 +86,20 @@
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">公司类型</label>
-			<div class="layui-input-line">
-				<input name="qyType"  title="有限责任公司" type="radio"  value="有限责任公司">
-				<input name="qyType"  title="股份有限责任公司" type="radio" value="股份有限责任公司">
-				<input name="qyType"  title="个人独资企业" type="radio" value="个人独资企业">
-				<input name="qyType"  title="合伙企业" type="radio" value="合伙企业">
+			<div class="layui-inline" >
+				<select name="qyType" id="qytype2"  lay-verify="required" >
+					<option value="">请选择公司类型</option>
+					<option value="国有企业">国有企业</option>
+					<option value="集体所有制">集体所有制</option>
+					<option value="个人独资企业">个人独资企业</option>
+					<option value="股份制企业">股份制企业</option>
+					<option value="有限合伙企业">有限合伙企业</option>
+					<option value="股份合作企业">股份合作企业</option>
+					<option value="合伙企业">合伙企业</option>
+					<option value="联营企业">联营企业</option>
+					<option value="港、澳、台">港、澳、台</option>
+					<option value="外商投资企业">外商投资企业</option>
+				</select>
 			</div>
 			<input id="qytype" type="hidden" value="${sessionScope.Qyinfo.qyType}" />
 		</div>
@@ -118,15 +130,7 @@
 <script src="<%=jsPath+"regcompanyinfo.js"%>"></script>
 <script type="text/javascript">
 	var data=document.getElementById("qytype").value;
-	if (data==="有限责任公司") {
-		$("input[name='qyType'][value=有限责任公司]").attr("checked",true)
-	}else if (data==="股份有限责任公司") {
-		$("input[name='qyType'][value=股份有限责任公司]").attr("checked",true)
-	}else if (data==="个人独资企业") {
-		$("input[name='qyType'][value=个人独资企业]").attr("checked",true)
-	}else if (data==="合伙企业") {
-		$("input[name='qyType'][value=合伙企业]").attr("checked",true)
-	}
+	$("#qytype2").find("option[value='${sessionScope.Qyinfo.qyType}']").attr("selected",'selected');
 </script>
 </body>
 </html>

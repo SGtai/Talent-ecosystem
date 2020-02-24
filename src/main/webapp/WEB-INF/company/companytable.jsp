@@ -37,8 +37,8 @@
 			<div class="layui-input-inline">
 				<select name="position" id="position" lay-filter="choosePosition"  >
 					<option value="0" >请选择行业</option>
-					<c:if test="${position!=null}">
-						<c:forEach items="${position}" begin="0" var="i">
+					<c:if test="${position2!=null}">
+						<c:forEach items="${position2}" begin="0" var="i">
 							<option  value="${i.poid}">${i.type}</option>
 						</c:forEach>
 					</c:if>
