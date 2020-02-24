@@ -5,6 +5,35 @@ layui.use(['form', 'layer'], function(){
 	var form = layui.form
 		,layer = layui.layer;
 
+	//城市信息回显
+	form.on('select(chooseProvince2)', function(data){
+		var name = $('#ctid');
+
+		name.empty();
+
+		name.append('<option value="">请选择区域</option>');
+		$.ajax(
+			{
+				type:"POST",
+				url:"/company/chooseCity",
+				dataType:"text",
+				data:{prid:data.value},
+				success:function (msg) {
+					var city = $('#ctid');
+					city.empty();
+					var arr = JSON.parse(msg);
+					city.append("<option value=''>请选择城市</option>");
+					for (var i = 0; i < arr.length; i++) {
+						city.append("<option value='"+arr[i].ctid+"'>"+arr[i].name+"</option>");
+					}
+					layui.form.render('select')
+				},
+				error:function (msg) {
+
+				}
+			}
+		);
+	});
 	//监听提交
 	form.on('submit(demo1)', function(data){
 		var qy1=$('#qy1').val();

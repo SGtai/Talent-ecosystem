@@ -30,4 +30,7 @@ public interface CompanyDao
 	public int releaseJobinfo(Jobinfo jobinfo);
 	//招聘表查询
 	public List<Jobinfo> searchJobinfoTable(Jobinfo jobinfo);
+	//根据ZPXXID查询招聘表
+	public Jobinfo searchJobinfo(Jobinfo jobinfo);
+
 }

@@ -4,7 +4,7 @@
     <!--单条数据插入，返回自增ID序号-->
     <insert id="regQyAccount" parameterType="Qyinfo" keyProperty="qyid" useGeneratedKeys="true">
 		insert into
-		qyinfo(qyAccount,password,qyData,qyName,regTime) values(#{qyAccount},#{password},#{qyData},#{qyName},#{regTime})
+		qyinfo(qyAccount,password,qyData,qyName,regTime,ctid,prid) values(#{qyAccount},#{password},#{qyData},#{qyName},#{regTime},#{ctid},#{prid})
 	</insert>
     <!--    查询企业信息表-->
 	<select id="findById" parameterType="string" resultType="Qyinfo"
@@ -42,11 +42,12 @@
 	<select id="chooseStation"  resultType="com.cykj.net.javabean.Station"
 	>
 		select * from station where poid=#{poid};
+
 	</select>
 	<!--单条数据插入，返回自增ID序号-->
 	<insert id="releaseJobinfo" parameterType="com.cykj.net.javabean.Jobinfo" keyProperty="qyid" useGeneratedKeys="true">
 		insert into
-		jobinfo(qyid, zwid, lxMan, lxPhone, zpNum, lxAddress, xueliRequire, zhiyeType, gzExperience, majorRequire, gzAddress, salaryLow, welfare, jobDuty, "time", jobinfoState, salaryHigh, ctid, sex, ageLow, ageHigh, beginTime, endTime, dayTime, weekTime, workTime, baoxian, gjijin, jiangjin, zhusu)
+		jobinfo(qyid, zwid, lxMan, lxPhone, zpNum, lxAddress, xueliRequire, zhiyeType, gzExperience, majorRequire, gzAddress, salaryLow, welfare, jobDuty,time, jobinfoState, salaryHigh, ctid, sex, ageLow, ageHigh, beginTime, endTime, dayTime, weekTime, workTime, baoxian, gjijin, jiangjin, zhusu)
 		values(
 		#{qyid},#{zwid},#{lxMan},#{lxPhone},#{zpNum},#{lxAddress},#{xueliRequire},#{zhiyeType},#{gzExperience},#{majorRequire},#{gzAddress},#{salaryLow},#{welfare},#{jobDuty},#{time},#{jobinfoState},#{salaryHigh},#{ctid},#{sex},#{ageLow},#{ageHigh}, #{beginTime}, #{endTime},#{dayTime} , #{weekTime},#{workTime},#{baoxian}, #{gjijin}, #{jiangjin}, #{zhusu})
 	</insert>
@@ -54,7 +55,7 @@
 	<select id="searchJobinfoTable" resultType="com.cykj.net.javabean.Jobinfo" parameterType="com.cykj.net.javabean.Jobinfo"
 	>
 	select C.type,B.postion,A.* from
-	(select zwid ,concat(beginTime,"至",endTime) zhaopinTime,xueliRequire,concat(ageLow,"-",ageHigh) age,concat(salaryLow,"-",salaryHigh) salary,concat(baoxian,"、",gjijin,"、",jiangjin,"、",zhusu,"、",welfare) xinzifuli,zpNum,jobinfoState,time
+	(select zpxxid,zwid ,concat(beginTime,"至",endTime) zhaopinTime,xueliRequire,concat(ageLow,"-",ageHigh) age,concat(salaryLow,"-",salaryHigh) salary,concat(baoxian,"、",gjijin,"、",jiangjin,"、",zhusu,"、",welfare) xinzifuli,zpNum,jobinfoState,time
 	from jobinfo where qyid=#{qyid}) A,station B,position C
 
 		<where>
@@ -67,10 +68,16 @@
 			<if test="zwid!=null and zwid!=''">
 				and zwid=#{zwid}
 			</if>
-			<if test="type!=null and type!=''">
+			<if test="type!=null and type!='' and type!='请选择行业'">
 				and C.type=#{type}
 			</if>
 		</where>
+	</select>
+
+    <!--    查询发布招聘信息表-->
+    <select id="searchJobinfo"  resultType="com.cykj.net.javabean.Jobinfo"
+    >
+		select * from jobinfo where zpxxid=#{zpxxid};
 	</select>
 
 </mapper>

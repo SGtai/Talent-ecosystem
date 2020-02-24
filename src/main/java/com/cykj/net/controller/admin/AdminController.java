@@ -1,9 +1,9 @@
 package com.cykj.net.controller.admin;
 
 import com.cykj.net.javabean.Position;
+import com.cykj.net.javabean.Qyinfo;
 import com.cykj.net.javabean.admin.Admin;
 import com.cykj.net.javabean.admin.AdminMenu;
-import com.cykj.net.javabean.Qyinfo;
 import com.cykj.net.service.CompanyService;
 import com.cykj.net.service.admin.AdminService;
 import com.cykj.net.util.GetCode;
