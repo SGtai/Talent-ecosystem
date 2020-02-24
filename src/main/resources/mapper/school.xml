@@ -75,7 +75,7 @@
         </where>
     </select>
     <select id="fenyeshuju1"  resultType="Alluserinfo" parameterType="java.util.Map">
-         SELECT b.*,c.*,d.zyMajor,e.jzstate FROM schoolinfo a,userlist b,resume c,experience d,undergo e
+         SELECT b.*,c.*,d.*,e.* FROM schoolinfo a,userlist b,resume c,experience d,undergo e
         <where>
             a.scAccount=#{account} and a.scAccount=b.tuijianren and b.yhid=c.yhId and c.jlId=d.jlId and c.jlId=e.jlId
             <if test="username != null and username !=''">
