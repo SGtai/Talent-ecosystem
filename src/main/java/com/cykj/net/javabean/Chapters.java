@@ -6,8 +6,8 @@ public class Chapters {
   private long zjId;
   private long kjId;
   private String zjName;
-  private String demo1;
-  private String demo2;
+  private long demo1;
+  private long demo2;
   private String msDescribe;
   private String zjPicture;
 
@@ -39,20 +39,20 @@ public class Chapters {
   }
 
 
-  public String getDemo1() {
+  public long getDemo1() {
     return demo1;
   }
 
-  public void setDemo1(String demo1) {
+  public void setDemo1(long demo1) {
     this.demo1 = demo1;
   }
 
 
-  public String getDemo2() {
+  public long getDemo2() {
     return demo2;
   }
 
-  public void setDemo2(String demo2) {
+  public void setDemo2(long demo2) {
     this.demo2 = demo2;
   }
 

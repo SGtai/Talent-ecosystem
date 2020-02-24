@@ -27,7 +27,6 @@
 	<script type="text/javascript" src=<%=jsPath+"jquery.SuperSlide.2.1.1.js"%>></script>
 </head>
 <body>
-<a href="/techUpload">添加课程</a>
 <div class="floor-course" style="height: 100%;">
 	<div class="floor-content">
 		<div class="floor-side">
