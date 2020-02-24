@@ -49,10 +49,8 @@ layui.use(['form', 'layer', 'jquery','table'], function(){
 	});
 
 	form.on('select(choosePosition)', function(data){
-		var name = $('#zwid');
-
+		var name = $('#zwid2');
 		name.empty();
-
 		$.ajax(
 			{
 				type:"POST",
@@ -60,7 +58,7 @@ layui.use(['form', 'layer', 'jquery','table'], function(){
 				dataType:"text",
 				data:{poid:data.value},
 				success:function (msg) {
-					var gangwei = $('#zwid');
+					var gangwei = $('#zwid2');
 					gangwei.empty();
 					var arr = JSON.parse(msg);
 					gangwei.append("<option value=''>请选择岗位</option>");
@@ -69,8 +67,7 @@ layui.use(['form', 'layer', 'jquery','table'], function(){
 					}
 					layui.form.render('select')
 				},
-				error:function (msg) {
-					alert(msg);
+				error:function () {
 				}
 			}
 		);
@@ -117,21 +114,10 @@ layui.use(['form', 'layer', 'jquery','table'], function(){
 					data:{zpxxid:zpxxid},
 					success:function (msg) {
 						//数据回显方法
-						// searchJob(msg);
+						searchJob(msg);
 						// window.location.href=window.location;
 
-						layer.open({
-							type: 1,
-							content: $('#jobinfo').html(),
-							area: ['740px','550px'],
-							title: '招聘信息',
-							btn:['取消'],
-							anim: 1,//0-6的动画形式，-1不开启
-							offset: '40px',
-							success:function () {
-								form.render();
-							}
-						});
+
 					},
 					error:function () {
 						alert("服务器正忙.....");
@@ -139,7 +125,18 @@ layui.use(['form', 'layer', 'jquery','table'], function(){
 				}
 			);
 			//打开查看页面
-
+			layer.open({
+				type: 1,
+				content: $('#jobinfo').html(),
+				area: ['740px','550px'],
+				title: '招聘信息',
+				btn:['取消'],
+				anim: 1,//0-6的动画形式，-1不开启
+				offset: '40px',
+				success:function () {
+					form.render();
+				}
+			});
 		} else if(layEvent === 'del'){
 			layer.confirm('真的删除行么', function(index){
 

@@ -42,6 +42,7 @@
 	<select id="chooseStation"  resultType="com.cykj.net.javabean.Station"
 	>
 		select * from station where poid=#{poid};
+
 	</select>
 	<!--单条数据插入，返回自增ID序号-->
 	<insert id="releaseJobinfo" parameterType="com.cykj.net.javabean.Jobinfo" keyProperty="qyid" useGeneratedKeys="true">
@@ -67,7 +68,7 @@
 			<if test="zwid!=null and zwid!=''">
 				and zwid=#{zwid}
 			</if>
-			<if test="type!=null and type!=''">
+			<if test="type!=null and type!='' and type!='请选择行业'">
 				and C.type=#{type}
 			</if>
 		</where>

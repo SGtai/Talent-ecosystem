@@ -36,7 +36,7 @@
 			<label class="layui-form-label">招聘行业：</label>
 			<div class="layui-input-inline">
 				<select name="position" id="position" lay-filter="choosePosition"  >
-					<option value="">请选择行业</option>
+					<option value="0" >请选择行业</option>
 					<c:if test="${position!=null}">
 						<c:forEach items="${position}" begin="0" var="i">
 							<option  value="${i.poid}">${i.type}</option>

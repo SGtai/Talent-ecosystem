@@ -278,7 +278,6 @@ public class CompanyController
 	Jobinfo searchJobinfo(Jobinfo jobinfo,HttpSession session) {
 		Jobinfo jobinfo1=companyService.searchJobinfo(jobinfo);
 		System.out.println(jobinfo1.getZpxxid());
-		session.setAttribute("ojbk","123");
 		return jobinfo1;
 	}
 
