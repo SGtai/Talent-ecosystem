@@ -1,12 +1,15 @@
 package com.cykj.net.controller;
 
 import com.cykj.net.javabean.Adminrole;
+import com.cykj.net.javabean.Alluserinfo;
 import com.cykj.net.javabean.Schoolinfo;
+import com.cykj.net.javabean.Table;
 import com.cykj.net.javabean.admin.Admin;
 import com.cykj.net.service.AdminroleService;
 import com.cykj.net.service.SchoolService;
 import com.cykj.net.service.admin.AdminService;
 import com.google.gson.Gson;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +26,7 @@ import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 @Controller
@@ -278,15 +282,46 @@ public class SchoolController
 	 * @param request
 	 * @return
 	 */
+	@RequestMapping("/rencaiinfo")
 	public ModelAndView rencaiinfo(HttpServletRequest request){
 		Admin admin= (Admin) request.getSession().getAttribute("admin");
 		Schoolinfo scinfo=schoolService.findSchoolinfo(admin.getAccount());
 		ModelAndView mv=new ModelAndView();
-		mv.setViewName("/WEB-INF/school/changepwd");
+		mv.setViewName("/WEB-INF/school/rencaiinfo");
 		mv.addObject("scinfo",scinfo);
 		return mv;
 	}
 
+	/**
+	 * 分页查询人才信息
+	 *
+	 */
+	@RequestMapping("/rencaiinfoquery")
+	public void rencaiquery(HttpServletRequest request,HttpServletResponse response,String time,String name,String zy,String page,String limit)throws Exception{
+		utf8(request,response);
+		Admin admin= (Admin) request.getSession().getAttribute("admin");
+		String lasttime="";
+		String nowtime="";
+		if(time!=null&&time!=""){
+			String arr[]=time.split("to");
+			lasttime=arr[0].trim();
+			nowtime=arr[1].trim();
+			System.out.println(lasttime);
+			System.out.println(nowtime);
+		}
+		int page1 = Integer.valueOf(page);
+		int limit1=Integer.valueOf(limit);
+		RowBounds rowBounds = new RowBounds(page1-1, limit1);
+		int count=schoolService.fenyecount1(admin.getAccount(),name,zy,lasttime,nowtime);
+		System.out.println(count);
+		List<Alluserinfo> list=schoolService.fenyeshuju1(admin.getAccount(),name,zy,lasttime,nowtime,rowBounds);
+		Table t=new Table();
+		t.setCode(0);
+		t.setCount(count);
+		t.setMsg("");
+		t.setData(list);
+		gsonbean(t,response);
+	}
 
 
 
@@ -367,4 +402,29 @@ public class SchoolController
 		}
 		return "无类型";
 	}
+
+	//传值为bean类型
+	public void gsonbean(Object object,HttpServletResponse response){
+		Gson g=new Gson();
+		try
+		{
+			response.getWriter().write(g.toJson(object));
+			response.setContentType("text/html; charset =utf-8");
+			response.getWriter().flush();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	public void utf8(HttpServletRequest request, HttpServletResponse response){
+		try
+		{
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e)
+		{
+			e.printStackTrace();
+		}
+		response.setCharacterEncoding("UTF-8");
+	}
 }
+

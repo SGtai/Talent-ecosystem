@@ -6,10 +6,10 @@
          SELECT * FROM schoolinfo WHERE scAccount=#{account}
     </select>
     <select id="findphone" resultType="Schoolinfo" parameterType="java.lang.String">
-         SELECT * FROM schoolinfo WHERE scAccount=#{phone}
+         SELECT * FROM schoolinfo WHERE scPhone=#{phone}
     </select>
     <select id="finddaima" resultType="Schoolinfo" parameterType="java.lang.String">
-         SELECT * FROM schoolinfo WHERE scAccount=#{daima}
+         SELECT * FROM schoolinfo WHERE xinyongDaima=#{daima}
     </select>
     <!--    插入学校信息-->
     <insert id="inserSchoolinfo" parameterType="Schoolinfo">
@@ -58,4 +58,35 @@
             </if>
         </trim>
     </update>
+<!--    查看人才信息-->
+    <select id="fenyecount1" resultType="int" parameterType="java.util.Map">
+        select count(*) from schoolinfo a,userlist b,resume c,experience d,undergo e
+        <where>
+            a.scAccount=#{account} and a.scAccount=b.tuijianren and b.yhid=c.yhId and c.jlId=d.jlId and c.jlId=e.jlId
+            <if test="username != null and username !=''">
+                and b.name like '%${username}%'
+            </if>
+            <if test="lasttime != null and lasttime !=''">
+                and b.regTime between #{lasttime} and #{nowtime}
+            </if>
+            <if test="zy != null and zy !=''">
+                and d.zyMajor like '%${zy}%'
+            </if>
+        </where>
+    </select>
+    <select id="fenyeshuju1"  resultType="Alluserinfo" parameterType="java.util.Map">
+         SELECT b.*,c.*,d.zyMajor,e.jzstate FROM schoolinfo a,userlist b,resume c,experience d,undergo e
+        <where>
+            a.scAccount=#{account} and a.scAccount=b.tuijianren and b.yhid=c.yhId and c.jlId=d.jlId and c.jlId=e.jlId
+            <if test="username != null and username !=''">
+                and b.name like '%${username}%'
+            </if>
+            <if test="lasttime != null and lasttime !=''">
+                and b.regTime between #{lasttime} and #{nowtime}
+            </if>
+            <if test="zy != null and zy !=''">
+                and d.zyMajor like '%${zy}%'
+            </if>
+        </where>
+    </select>
 </mapper>
