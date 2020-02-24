@@ -58,7 +58,6 @@ public class AdminBackUserController {
         }
         layuiData.setCount(adminBackUserService.countAllAdmin(account, name, 2));
         layuiData.setData(list);
-
         return layuiData;
     }
 
