@@ -3,6 +3,7 @@ package com.cykj.net.javabean;
 
 public class Qyinfo {
 
+  private int id;
   private long qyid;
   private String qyAccount;
   private String password;
@@ -20,7 +21,19 @@ public class Qyinfo {
   private String xinyongDu;
   private String qyPicture;
   private java.sql.Timestamp regTime;
+  private long replyRate;
+  private String ctid;
+  private String qyPeople;
+  private long qyState;
+  private String prid;
 
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
 
   public long getQyid() {
     return qyid;
@@ -172,6 +185,51 @@ public class Qyinfo {
 
   public void setRegTime(java.sql.Timestamp regTime) {
     this.regTime = regTime;
+  }
+
+
+  public long getReplyRate() {
+    return replyRate;
+  }
+
+  public void setReplyRate(long replyRate) {
+    this.replyRate = replyRate;
+  }
+
+
+  public String getCtid() {
+    return ctid;
+  }
+
+  public void setCtid(String ctid) {
+    this.ctid = ctid;
+  }
+
+
+  public String getQyPeople() {
+    return qyPeople;
+  }
+
+  public void setQyPeople(String qyPeople) {
+    this.qyPeople = qyPeople;
+  }
+
+
+  public long getQyState() {
+    return qyState;
+  }
+
+  public void setQyState(long qyState) {
+    this.qyState = qyState;
+  }
+
+
+  public String getPrid() {
+    return prid;
+  }
+
+  public void setPrid(String prid) {
+    this.prid = prid;
   }
 
 }
