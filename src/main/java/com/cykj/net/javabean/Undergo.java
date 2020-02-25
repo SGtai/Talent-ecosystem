@@ -12,7 +12,6 @@ public class Undergo {
   private String gzContent;
   private String demo1;
   private String demo2;
-  private String jzstate;
 
 
   public long getGzjlId() {
@@ -93,15 +92,6 @@ public class Undergo {
 
   public void setDemo2(String demo2) {
     this.demo2 = demo2;
-  }
-
-
-  public String getJzstate() {
-    return jzstate;
-  }
-
-  public void setJzstate(String jzstate) {
-    this.jzstate = jzstate;
   }
 
 }

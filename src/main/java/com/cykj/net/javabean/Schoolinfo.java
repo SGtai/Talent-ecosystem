@@ -3,6 +3,7 @@ package com.cykj.net.javabean;
 
 public class Schoolinfo {
 
+  private long scid;
   private String scAccount;
   private String password;
   private String scdata;
@@ -15,10 +16,20 @@ public class Schoolinfo {
   private String xinyongDaima;
   private String scAbout;
   private String scpicture;
-  private String scState;
-  private long scid;
+  private long scState;
   private String scPhone;
   private java.sql.Timestamp regTime;
+  private long ctid;
+  private long prid;
+
+
+  public long getScid() {
+    return scid;
+  }
+
+  public void setScid(long scid) {
+    this.scid = scid;
+  }
 
 
   public String getScAccount() {
@@ -129,21 +140,12 @@ public class Schoolinfo {
   }
 
 
-  public String getScState() {
+  public long getScState() {
     return scState;
   }
 
-  public void setScState(String scState) {
+  public void setScState(long scState) {
     this.scState = scState;
-  }
-
-
-  public long getScid() {
-    return scid;
-  }
-
-  public void setScid(long scid) {
-    this.scid = scid;
   }
 
 
@@ -162,6 +164,24 @@ public class Schoolinfo {
 
   public void setRegTime(java.sql.Timestamp regTime) {
     this.regTime = regTime;
+  }
+
+
+  public long getCtid() {
+    return ctid;
+  }
+
+  public void setCtid(long ctid) {
+    this.ctid = ctid;
+  }
+
+
+  public long getPrid() {
+    return prid;
+  }
+
+  public void setPrid(long prid) {
+    this.prid = prid;
   }
 
 }

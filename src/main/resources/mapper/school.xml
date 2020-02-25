@@ -60,9 +60,9 @@
     </update>
 <!--    查看人才信息-->
     <select id="fenyecount1" resultType="int" parameterType="java.util.Map">
-        select count(*) from schoolinfo a,userlist b,resume c,experience d,undergo e
+        select count(*) from schoolinfo a,userlist b,resume c
         <where>
-            a.scAccount=#{account} and a.scAccount=b.tuijianren and b.yhid=c.yhId and c.jlId=d.jlId and c.jlId=e.jlId
+            a.scAccount=#{account} and a.scAccount=b.tuijianren and b.yhid=c.yhId
             <if test="username != null and username !=''">
                 and b.name like '%${username}%'
             </if>
@@ -75,9 +75,9 @@
         </where>
     </select>
     <select id="fenyeshuju1"  resultType="Alluserinfo" parameterType="java.util.Map">
-         SELECT b.*,c.*,d.*,e.* FROM schoolinfo a,userlist b,resume c,experience d,undergo e
+         SELECT * FROM schoolinfo a,userlist b,resume c
         <where>
-            a.scAccount=#{account} and a.scAccount=b.tuijianren and b.yhid=c.yhId and c.jlId=d.jlId and c.jlId=e.jlId
+            a.scAccount=#{account} and a.scAccount=b.tuijianren and b.yhid=c.yhId
             <if test="username != null and username !=''">
                 and b.name like '%${username}%'
             </if>

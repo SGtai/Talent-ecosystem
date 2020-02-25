@@ -21,6 +21,9 @@ public class Resume {
   private String demo1;
   private String demo2;
   private java.sql.Timestamp csTime;
+  private String jzstate;
+  private String byschool;
+  private String zy;
 
 
   public long getJlId() {
@@ -182,6 +185,33 @@ public class Resume {
 
   public void setCsTime(java.sql.Timestamp csTime) {
     this.csTime = csTime;
+  }
+
+
+  public String getJzstate() {
+    return jzstate;
+  }
+
+  public void setJzstate(String jzstate) {
+    this.jzstate = jzstate;
+  }
+
+
+  public String getByschool() {
+    return byschool;
+  }
+
+  public void setByschool(String byschool) {
+    this.byschool = byschool;
+  }
+
+
+  public String getZy() {
+    return zy;
+  }
+
+  public void setZy(String zy) {
+    this.zy = zy;
   }
 
 }

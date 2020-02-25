@@ -8,7 +8,7 @@ public class Experience {
   private java.sql.Timestamp sxSchooltime;
   private String xlEducation;
   private String zyMajor;
-  private String bySchool;
+  private String school;
   private java.sql.Timestamp gxtime;
   private String xxOptions;
   private String demo1;
@@ -60,12 +60,12 @@ public class Experience {
   }
 
 
-  public String getBySchool() {
-    return bySchool;
+  public String getSchool() {
+    return school;
   }
 
-  public void setBySchool(String bySchool) {
-    this.bySchool = bySchool;
+  public void setSchool(String school) {
+    this.school = school;
   }
 
 

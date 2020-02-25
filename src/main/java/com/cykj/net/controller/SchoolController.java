@@ -121,7 +121,7 @@ public class SchoolController
 			String filename = file.getOriginalFilename();
 			file.transferTo(new File(path+"\\"+"logo"+"\\"+schoolinfo.getScAccount()+"\\"+ filename));
 			schoolinfo.setScpicture("\\"+"logo"+"\\"+schoolinfo.getScAccount()+"\\"+ filename);
-			schoolinfo.setScState("启用");
+			schoolinfo.setScState(0);
 			Admin a=new Admin();
 			a=adminService.findAdmin(schoolinfo.getScAccount());
 			if(a!=null){
