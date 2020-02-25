@@ -288,9 +288,9 @@ public class CompanyController
 	 */
 	@RequestMapping(value ="/searchJobinfo")
 	public @ResponseBody
-	Jobinfo searchJobinfo(Jobinfo jobinfo,HttpSession session) {
-		Jobinfo jobinfo1=companyService.searchJobinfo(jobinfo);
-		System.out.println(jobinfo1.getZpxxid());
+	List<Jobinfo> searchJobinfo(Jobinfo jobinfo,HttpSession session) {
+		List<Jobinfo> jobinfo1=companyService.searchJobinfoTable(jobinfo);
+		System.out.println(jobinfo.getZpxxid());
 		return jobinfo1;
 	}
 

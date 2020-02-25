@@ -47,7 +47,17 @@ public class Jobinfo
   private String xinzifuli;
   private String type;
   private String postion;
+  private long poid;
 
+  public long getPoid()
+  {
+    return poid;
+  }
+
+  public void setPoid(long poid)
+  {
+    this.poid = poid;
+  }
 
   public long getZpxxid()
   {

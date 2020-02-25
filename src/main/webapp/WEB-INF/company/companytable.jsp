@@ -29,7 +29,8 @@
 	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
-
+<input id="qyid" type="hidden" value="${sessionScope.Qyinfo.qyid}" />
+<input id="positionlist" type="hidden" value="${position}" />
 <form class="layui-form" lay-filter="component-form-group" id="search_submits" onsubmit="return false">
 	<div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="layadmin-useradmin-formlist">
 		<div class="layui-inline">
@@ -37,8 +38,8 @@
 			<div class="layui-input-inline">
 				<select name="position" id="position" lay-filter="choosePosition"  >
 					<option value="0" >请选择行业</option>
-					<c:if test="${position2!=null}">
-						<c:forEach items="${position2}" begin="0" var="i">
+					<c:if test="${position!=null}">
+						<c:forEach items="${position}" begin="0" var="i">
 							<option  value="${i.poid}">${i.type}</option>
 						</c:forEach>
 					</c:if>
@@ -46,7 +47,7 @@
 			</div>
 		</div>
 		<div class="layui-inline">
-			<label class="layui-form-label">招聘岗位：${sessionScope.ojbk}</label>
+			<label class="layui-form-label">招聘岗位：</label>
 			<div class="layui-input-block">
 				<select name="zwid" id="zwid2">
 				</select>
@@ -73,11 +74,10 @@
 <%--查看招聘信息表--%>
 <script type="text/html" id="jobinfo">
 	<form class="layui-form" action="">
-		<input id="qyid" type="hidden" value="${sessionScope.Qyinfo.qyid}" />
 		<div class="layui-form-item" style="background-color: #95877c;width: 720px">
 			<h3><label class="layui-form-label" style="width: 80px;text-align: left">招聘职位:</label></h3>
 			<div class="layui-input-inline">
-				<select name="position"  id="position2" lay-filter="choosePosition" lay-verify="required" >
+				<select name="position2"  id="position2" lay-filter="choosePosition2" lay-verify="required" >
 					<option value="">请选择行业</option>
 					<c:if test="${position!=null}">
 						<c:forEach items="${position}" begin="0" var="i">
@@ -88,6 +88,7 @@
 			</div>
 			<div class="layui-input-inline">
 				<select name="zwid" id="zwid" lay-verify="required">
+
 				</select>
 			</div>
 		</div>
@@ -100,11 +101,11 @@
 		<div class="layui-form-item" >
 			<label class="layui-form-label" >招聘日期：</label>
 			<div class="layui-input-inline">
-				<input name="beginTime" id="beginTime"  class="layui-input" id="date" type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date">
+				<input name="beginTime" id="beginTime"  class="layui-input"  type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date">
 			</div>
 			<label name="" class="layui-form-label" style="text-align: center">至</label>
 			<div class="layui-input-inline">
-				<input name="endTime" id="endTime" class="layui-input" id="date1" type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date">
+				<input name="endTime" id="endTime" class="layui-input"  type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date">
 			</div>
 		</div>
 		<div class="layui-form-item">
@@ -298,7 +299,7 @@
 		</div>
 		<div class="layui-form-item layui-form-text">
 			<h3>
-				<label class="layui-form-label"  style="background-color: #95877c;width:690px;text-align: left">岗位职责：</label>
+				<label class="layui-form-label"  style="background-color:#95877c;width:690px;text-align: left">岗位职责：</label>
 			</h3>
 			<br><br><br>
 			<div class="layui-input-line">
@@ -318,14 +319,428 @@
 <script src=<%=path + "jquery-3.4.1.js"%> ></script>
 <script src=<%=path + "layui.js"%>></script>
 <script src="<%=path+"json2.js"%>"></script>
-<script src="<%=jsPath+"companytable.js"%>"></script>
+<%--<script src="<%=jsPath+"companytable.js"%>"></script>--%>
 <script type="text/html" id="barDemo">
 	<a class="layui-btn layui-btn-xs" lay-event="detail" >查看</a>
 	<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
-<script>
+<script type="text/javascript">
+	layui.use(['form', 'layer', 'jquery','table','layedit', 'laydate'], function(){
+		var table = layui.table;
+		var layer = layui.layer;
+		var form = layui.form;
+		var $ = layui.jquery;
+	    var layedit = layui.layedit;
+		var laydate = layui.laydate;
 
+
+
+
+		//第一个实例
+		table.render({
+			elem: '#demo'
+			,height: 300
+			,url: "/company/searchJobinfoTable" //数据接口
+			,page: true //开启分页
+			,limit:5
+			,limits:[5,10,20,50,100]
+			,cols: [[ //表头
+				{field: 'zpxxid', title: 'ID', width: 80,hide:true}
+				,{field: 'type', title: '招聘行业', width:150}
+				,{field: 'postion', title: '招聘岗位', width:200}
+				,{field: 'zhaopinTime', title: '招聘时间', width:200}
+				,{field: 'xueliRequire', title: '学历要求', width:100}
+				,{field: 'age', title: '年龄范围(岁)', width:120}
+				,{field: 'salary', title: '参考薪资(元)', width:150}
+				,{field: 'xinzifuli', title: '薪资福利', width: 250}
+				,{field: 'zpNum', title: '招聘人数', width: 120, sort: true}
+				,{field: 'time', title: '发布时间', width: 200,sort: true}
+				,{field: 'jobinfoState', title: '发布状态', width: 110}
+				,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
+			]]
+			//设置查询刷新的ID
+			,id:'table1'
+		});
+
+		form.on('submit(search)', function (data) {
+			var myselect=document.getElementById("position");
+			var index=myselect.selectedIndex;
+			var type = myselect.options[index].text;
+			var zwid = $('#zwid2').val();
+			var jobinfoState = $('#jobinfoState').val();
+			table.reload('table1',{
+				url:"/company/searchJobinfoTable"
+				,where: { //设定异步数据接口的额外参数，任意设
+					type:type,
+					zwid:zwid,
+					jobinfoState:jobinfoState
+				}
+				,page: {
+					curr: 1 //重新从第 1 页开始
+				}
+			});
+		});
+		//查询岗位
+		form.on('select(choosePosition)', function(data){
+			var name = $('#zwid2');
+			name.empty();
+			$.ajax(
+				{
+					type:"POST",
+					url:"/company/chooseStation",
+					dataType:"text",
+					data:{poid:data.value},
+					success:function (msg) {
+						var gangwei = $('#zwid2');
+						gangwei.empty();
+						var arr = JSON.parse(msg);
+						gangwei.append("<option value=''>请选择岗位</option>");
+						for (var i = 0; i < arr.length; i++) {
+							gangwei.append("<option value='"+arr[i].stid+"'>"+arr[i].postion+"</option>");
+						}
+						layui.form.render('select')
+					},
+					error:function () {
+					}
+				}
+			);
+		});
+		//弹窗内的岗位选择
+		form.on('select(choosePosition2)', function(data){
+			var name = $('#zwid');
+			name.empty();
+			$.ajax(
+				{
+					type:"POST",
+					url:"/company/chooseStation",
+					dataType:"text",
+					data:{poid:data.value},
+					success:function (msg) {
+						var gangwei = $('#zwid');
+						gangwei.empty();
+						var arr = JSON.parse(msg);
+						gangwei.append("<option value=''>请选择岗位</option>");
+						for (var i = 0; i < arr.length; i++) {
+							gangwei.append("<option value='"+arr[i].stid+"'>"+arr[i].postion+"</option>");
+						}
+						layui.form.render('select')
+					},
+					error:function () {
+					}
+				}
+			);
+		});
+
+		//监听头工具栏事件
+		table.on('toolbar(test)', function(obj){
+			var checkStatus = table.checkStatus(obj.config.id)
+				,data = checkStatus.data; //获取选中的数据
+			switch(obj.event){
+				case 'add':
+					layer.msg('添加');
+					break;
+				case 'update':
+					if(data.length === 0){
+						layer.msg('请选择一行');
+					} else if(data.length > 1){
+						layer.msg('只能同时编辑一个');
+					} else {
+						layer.alert('编辑 [id]：'+ checkStatus.data[0].id);
+					}
+					break;
+				case 'delete':
+					if(data.length === 0){
+						layer.msg('请选择一行');
+					} else {
+						layer.msg('删除');
+					}
+					break;
+			};
+		});
+
+		//监听行工具事件
+		table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+			var data = obj.data //获得当前行数据
+				,layEvent = obj.event; //获得 lay-event 对应的值
+			if(layEvent === 'detail'){
+				var zpxxid=data.zpxxid;
+				var qyid=$('#qyid').val();
+				$.ajax(
+					{
+						type:"POST",
+						url:"/company/searchJobinfo",
+						dataType:"json",
+						data:{zpxxid:zpxxid,qyid:qyid},
+						success:function (msg) {
+							// alert(msg[0].dayTime);
+							// alert($('#positionlist').val());
+                            //打开查看页面
+                            layer.open({
+                                type: 1,
+                                content: $('#jobinfo').html(),
+                                area: ['740px','550px'],
+                                title: '招聘信息',
+                                btn:['取消'],
+                                anim: 1,//0-6的动画形式，-1不开启
+                                offset: '40px',
+                                success:function () {
+	                                //日期
+	                                laydate.render({
+		                                elem: '#beginTime'
+		                                ,value:msg[0].beginTime//回显日期
+                                     });
+	                                laydate.render({
+		                                elem: '#endTime'
+		                                ,value:msg[0].endTime//回显日期
+	                                });
+
+	                                var poid=msg[0].poid;
+									//行业及岗位二级联动回显
+	                                //行业回显
+	                                $("#position2").each(function () {
+		                                // this代表的是<option></option>，对option再进行遍历
+		                                $(this).children("option").each(function () {
+			                                // 判断需要对那个选项进行回显
+			                                if (this.value ==poid) {
+				                                // 进行回显
+				                                $(this).attr("selected", "selected");
+				                                //二级岗位回显
+				                                $.ajax(
+					                                {
+						                                type:"POST",
+						                                url:"/company/chooseStation",
+						                                dataType:"text",
+						                                data:{poid:poid},
+						                                success:function (msg2) {
+							                                var gangwei = $('#zwid');
+							                                gangwei.empty();
+							                                var arr = JSON.parse(msg2);
+							                                gangwei.append("<option value=''>请选择岗位</option>");
+							                                for (var i = 0; i < arr.length; i++) {
+								                                gangwei.append("<option value='"+arr[i].stid+"'>"+arr[i].postion+"</option>");
+							                                }
+							                                $("#zwid").each(function () {
+								                                // this代表的是<option></option>，对option再进行遍历
+								                                $(this).children("option").each(function () {
+									                                // 判断需要对那个选项进行回显
+									                                if (this.value ==msg[0].zwid) {
+										                                // 进行回显
+										                                $(this).attr("selected", "selected");
+									                                }
+								                                });
+							                                });
+							                                layui.form.render('select');
+
+						                                },
+						                                error:function () {
+						                                }
+					                                }
+				                                );
+
+			                                }
+		                                });
+	                                });
+
+									//还差性别及城市省份ID回显
+
+
+	                                //数据回显方法
+                                    searchJob(msg[0]);
+                                    form.render();
+
+                                }
+                            });
+
+						},
+						error:function () {
+							alert("服务器正忙.....");
+						}
+					}
+				);
+
+
+
+			} else if(layEvent === 'del'){
+				layer.confirm('真的删除行么', function(index){
+
+					var account =data.account;//data.XXX 后缀直接写需要取值的名称与表头给的field一致
+					alert(account);
+					$.ajax({
+						type:"post",
+						url:"",
+						//预期服务器返回的数据类型;
+						datatype:"text",
+						//从该js会发出到服务器的数据
+						data:{account:account},
+						//从servlet接收的数据
+						success:function (msg) {
+							if (msg === 'success') {
+								alert("删除成功！");
+								window.location.reload();
+							} else {
+								layer.msg("删除失败！")
+							}
+						}
+						,error:function () {
+							alert("服务器正忙.....");
+						}
+					});
+					layer.close(index);
+				});
+			} else if(layEvent === 'edit'){
+				layer.msg('编辑操作');
+			}
+		});
+		$('#register').click(function () {
+			layer.open({
+				type: 1,
+				content: $('#registerface').html(),
+				area: ['500px'],
+				title: '前台注册页面',
+				btn:['取消'],
+				success:function () {
+					form.render();
+				}
+			});
+			//监听提交
+			form.on('submit(reg)',function (data) {
+				console.log(data.field);//获取提交的全部数据
+				$.ajax(
+					{
+						type:"POST",
+						url:basepath + "/user/doReg",
+						dataType:"text",
+						data:data.field,
+						success:function (msg) {
+							if (msg==="success"){
+								alert("注册成功");
+								console.log("success");
+								window.location.href=basepath+"/jump/front/welcome";
+							} else{
+								alert("账号已存在");
+								// console.log("登入失败，账号或者密码不正确");
+							}
+						},
+						error:function (msg) {
+							alert(msg);
+						}
+					}
+				);
+				return false;
+			})
+
+		});
+	});
+	//回显数据插入
+	function searchJob(param) {
+		// alert($('#positionlist').val());
+
+		// var position2=$('#position2');
+		// position2.empty();
+		// var position=$('#positionlist').val();
+		// // var arr = JSON.parse(position);
+		// position2.append("<option value=''>请选择岗位</option>");
+		// for (var i = 0; i < position.length; i++) {
+		// 	position2.append("<option value='"+position[i].poid+"'>"+position[i].type+"</option>");
+		// }
+		// layui.form.render('select')
+
+
+		// var zwid=$('#zwid');
+		var beginTime=$('#beginTime');
+		var endTime=$('#endTime');
+		var lxMan=$('#lxMan');
+		var lxPhone=$('#lxPhone');
+		var lxAddress=$('#lxAddress');
+		var xueliRequire=$('#xueliRequire');
+		var zhiyeType=$('#zhiyeType');
+		var gzExperience=$('#gzExperience');
+		var ageLow=$('#ageLow');
+		var ageHigh=$('#ageHigh');
+		var sex;
+		var province=$('#province');
+		var ctid=$('#ctid');
+		var gzAddress=$('#gzAddress');
+		var salaryLow=$('#salaryLow');
+		var salaryHigh=$('#salaryHigh');
+		var dayTime=$('#dayTime');
+		var weekTime=$('#weekTime');
+		var workTime=$('#workTime');
+		var welfare=$('#welfare');
+		var zpNum=$('#zpNum');
+		var jobDuty=$('#jobDuty');
+
+
+		//position2.empty();
+		//zwid.empty();
+		// beginTime.empty();
+		// endTime.empty();
+		lxMan.empty();
+		lxPhone.empty();
+		lxAddress.empty();
+		//xueliRequire.empty();
+		//zhiyeType.empty();
+		//gzExperience.empty();
+		ageLow.empty();
+		ageHigh.empty();
+		//sex;
+		//province.empty();
+		//ctid.empty();
+		//gzAddress.empty();
+		salaryLow.empty();
+		salaryHigh.empty();
+		//dayTime.empty();
+		//weekTime.empty();
+		//workTime.empty();
+		welfare.empty();
+
+
+		zpNum.empty();
+		jobDuty.empty();
+
+
+
+        // position2.val('1');
+		//position2.val(param.position);
+		// position2.attr("value",param.position);
+
+		// zwid.val(param.zwid);
+		// beginTime.val();
+		// endTime.val();
+		lxMan.val(param.lxMan);
+		lxPhone.val(param.lxPhone);
+		lxAddress.val(param.lxAddress);
+
+		xueliRequire.find("option[value='"+param.xueliRequire+"']").attr("selected",'selected');
+		zhiyeType.find("option[value='"+param.zhiyeType+"']").attr("selected",'selected');
+		gzExperience.find("option[value='"+param.gzExperience+"']").attr("selected",'selected');
+
+		ageLow.val(param.ageLow);
+		ageHigh.val(param.ageHigh);
+		sex;
+		//上班地点回显
+		province.val(param.poid);
+		ctid.val(param.ctid);
+		gzAddress.val(param.gzAddress);
+		salaryLow.val(param.salaryLow);
+		salaryHigh.val(param.salaryHigh);
+
+		//上班时间回显
+		dayTime.find("option[value='"+param.dayTime+"']").attr("selected",'selected');
+		weekTime.find("option[value='"+param.weekTime+"']").attr("selected",'selected');
+		workTime.find("option[value='"+param.workTime+"']").attr("selected",'selected');
+		//福利回显
+		$("input[name=baoxian][value="+param.baoxian+"]").attr("checked","checked");
+		$("input[name=gjijin][value="+param.gjijin+"]").attr("checked","checked");
+		$("input[name=jiangjin][value="+param.jiangjin+"]").attr("checked","checked");
+		$("input[name=zhusu][value="+param.zhusu+"]").attr("checked","checked");
+		welfare.val(param.welfare);
+		//招聘人数
+		zpNum.val(param.zpNum);
+		//岗位职责
+		jobDuty.text(param.jobDuty);
+	}
 </script>
 </body>
 </html>

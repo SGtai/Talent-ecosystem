@@ -54,10 +54,9 @@
 
 	<select id="searchJobinfoTable" resultType="com.cykj.net.javabean.Jobinfo" parameterType="com.cykj.net.javabean.Jobinfo"
 	>
-	select C.type,B.postion,A.* from
-	(select zpxxid,zwid ,concat(beginTime,"至",endTime) zhaopinTime,xueliRequire,concat(ageLow,"-",ageHigh) age,concat(salaryLow,"-",salaryHigh) salary,concat(baoxian,"、",gjijin,"、",jiangjin,"、",zhusu,"、",welfare) xinzifuli,zpNum,jobinfoState,time
+	select C.type,B.*,A.* from
+	(select *,concat(beginTime,"至",endTime) zhaopinTime,concat(ageLow,"-",ageHigh) age,concat(salaryLow,"-",salaryHigh) salary,concat(baoxian,"、",gjijin,"、",jiangjin,"、",zhusu,"、",welfare) xinzifuli
 	from jobinfo where qyid=#{qyid}) A,station B,position C
-
 		<where>
 			<if test="qyid!=null and qyid!=''">
 				A.zwid=B.stid and B.poid=C.poid
@@ -70,6 +69,9 @@
 			</if>
 			<if test="type!=null and type!='' and type!='请选择行业'">
 				and C.type=#{type}
+			</if>
+			<if test="zpxxid!=null and zpxxid!=''">
+				and A.zpxxid=#{zpxxid}
 			</if>
 		</where>
 	</select>
