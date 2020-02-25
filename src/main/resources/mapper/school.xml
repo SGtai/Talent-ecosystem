@@ -13,7 +13,7 @@
     </select>
     <!--    插入学校信息-->
     <insert id="inserSchoolinfo" parameterType="Schoolinfo">
-        INSERT INTO schoolinfo (scAccount, password,scdata,scName,scAddress,scfdMan,moneyLaiyuan,kaibanMoney,jubanDanwei,xinyongDaima,scAbout,regTime,scpicture,scState,scPhone) VALUES
+        INSERT INTO schoolinfo (scAccount, password,scdata,scName,scAddress,scfdMan,moneyLaiyuan,kaibanMoney,jubanDanwei,xinyongDaima,scAbout,regTime,scpicture,scState,scPhone,ctid,prid,type) VALUES
         (#{scAccount},#{password},#{scdata},#{scName},#{scAddress},#{scfdMan},#{moneyLaiyuan},#{kaibanMoney},#{jubanDanwei},#{xinyongDaima},#{scAbout},#{regTime},#{scpicture},#{scState},#{scPhone})
     </insert>
     <!--    修改学校信息-->
