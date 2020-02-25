@@ -21,6 +21,7 @@ public class Schoolinfo {
   private java.sql.Timestamp regTime;
   private long ctid;
   private long prid;
+  private String type;
 
 
   public long getScid() {
@@ -182,6 +183,15 @@ public class Schoolinfo {
 
   public void setPrid(long prid) {
     this.prid = prid;
+  }
+
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
   }
 
 }
