@@ -78,12 +78,31 @@
 		update assess set dzcs = #{dzcs} where pjId = #{pjId}
 	</update>
 
+    <update id="upCurriculum" parameterType="Curriculum"  useGeneratedKeys="true">
+		update curriculum set jgPrice = #{jgPrice} where kcId = #{kcId}
+	</update>
+
+    <update id="upCurriculumD" parameterType="Curriculum"  useGeneratedKeys="true">
+		update curriculum set kcName = #{kcName},msDescribe = #{msDescribe},ckPicture = #{ckPicture} where kcId = #{kcId}
+	</update>
+
+    <update id="upChaptersD" parameterType="Chapters"  useGeneratedKeys="true">
+		update chapters set zjName = #{zjName},msDescribe = #{msDescribe},zjPicture = #{zjPicture} where zjId = #{zjId}
+	</update>
+
+    <update id="upVideoD" parameterType="Video"  useGeneratedKeys="true">
+		update video set spName = #{spName},spDescribe = #{spDescribe},spPath = #{spPath} where spId = #{spId}
+	</update>
+
 
     <select id="geCurriculumsel" resultType="Curriculum"
             parameterType="Curriculum">
         select * from curriculum where 1=1
         <if test="kcName !=null and kcName !='' ">
             and kcName like  #{kcName}
+        </if>
+        <if test="fzTypeId !=null and fzTypeId !='' ">
+            and fzTypeId=#{fzTypeId}
         </if>
         <if test="demo1 !=null and demo1 !='' ">
             and jgPrice &gt;= #{demo1}
@@ -92,4 +111,87 @@
             and jgPrice &lt;= #{demo2}
         </if>
     </select>
+
+    <select id="geCurriculumData" resultType="Curriculum"
+            parameterType="Curriculum">
+        select * from curriculum where 1=1
+        <if test="kcName !=null and kcName !='' ">
+            and kcName like  #{kcName}
+        </if>
+        <if test="fzTypeId !=null and fzTypeId !='' ">
+            and fzTypeId=#{fzTypeId}
+        </if>
+        <if test="demo1 !=null and demo1 !='' ">
+            and jgPrice &gt;= #{demo1}
+        </if>
+        <if test="demo2 !=null and demo2 !='' ">
+            and jgPrice &lt;= #{demo2}
+        </if>
+        <if test="kcId !=null and kcId !='' ">
+            limit  #{jgPrice},#{kcId}
+        </if>
+    </select>
+
+    <select id="geChapterssel" resultType="Chapters"
+            parameterType="Chapters">
+        select * from chapters where 1=1
+        <if test="zjName !=null and zjName !='' ">
+            and zjName like  #{zjName}
+        </if>
+        <if test="kjId !=null and kjId !='' ">
+            and kjId=#{kjId}
+        </if>
+    </select>
+
+    <select id="geChaptersData" resultType="Chapters"
+            parameterType="Chapters">
+        select * from chapters where 1=1
+        <if test="zjName !=null and zjName !='' ">
+            and zjName like  #{zjName}
+        </if>
+        <if test="kjId !=null and kjId !='' ">
+            and kjId=#{kjId}
+        </if>
+        <if test="demo1 !=null and demo1 !='' ">
+            limit  #{demo2},#{demo1}
+        </if>
+    </select>
+
+    <select id="geVideossel" resultType="Video"
+            parameterType="Chapters">
+        select * from video where 1=1
+        <if test="spName !=null and spName !='' ">
+            and spName like  #{spName}
+        </if>
+        <if test="zjId !=null and zjId !='' ">
+            and zjId=#{zjId}
+        </if>
+    </select>
+
+    <select id="geVideoData" resultType="Video"
+            parameterType="Chapters">
+        select * from video where 1=1
+        <if test="spName !=null and spName !='' ">
+            and spName like  #{spName}
+        </if>
+        <if test="zjId !=null and zjId !='' ">
+            and zjId=#{zjId}
+        </if>
+        <if test="spId !=null and spId !='' ">
+            limit  #{bfcsRoadcast},#{spId}
+        </if>
+    </select>
+
+
+    <delete id="deleteKc" parameterType="String" >
+		DELETE a,b,c FROM curriculum a,chapters b,video c WHERE a.kcId=#{kcId} AND a.kcId=b.kjId AND b.zjId=c.zjId
+	</delete>
+
+    <delete id="deleteZj" parameterType="String" >
+		DELETE b,c FROM chapters b,video c WHERE b.zjId=#{zjId} AND c.zjId=#{zjId}
+	</delete>
+
+    <delete id="deleteSp" parameterType="String" >
+		DELETE  FROM video  WHERE spId=#{spId}
+	</delete>
 </mapper>

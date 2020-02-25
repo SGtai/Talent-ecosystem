@@ -28,7 +28,7 @@ layui.use(['form', 'layedit', 'laydate'], function(){
 			layer.alert("薪资范围填写错误！", { icon: 1, offset: "auto", time:1500 });
 			return false;
 		}else{
-			//发布招聘信息
+			// 发布招聘信息
 			$.ajax(
 				{
 					type:"POST",
@@ -58,9 +58,6 @@ layui.use(['form', 'layedit', 'laydate'], function(){
 	form.on('select(chooseProvince)', function(data){
 		var name = $('#ctid');
 
-		if($('#salaryLow').val()>$('#salaryHigh').val()){
-			layer.alert("薪资范围填写错误！", { icon: 1, offset: "auto", time:1500 });
-		}
 		name.empty();
 
 		name.append('<option value="">请选择区域</option>');

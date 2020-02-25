@@ -70,4 +70,9 @@ public class CompanyService
 		List<Jobinfo> list=companyDao.searchJobinfoTable(jobinfo);
 		return list;
 	}
+
+	public Jobinfo searchJobinfo(Jobinfo jobinfo){
+		Jobinfo jobinfo1=companyDao.searchJobinfo(jobinfo);
+		return jobinfo1;
+	}
 }

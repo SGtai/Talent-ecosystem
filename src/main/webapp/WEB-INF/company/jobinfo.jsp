@@ -46,7 +46,9 @@
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
 	<legend style="margin: 0 auto;float: none;">招聘信息填写</legend>
 </fieldset>
-<div id="layoutjobinfo">
+<div id="layout">
+
+
 <form class="layui-form" action="">
 	<input id="qyid" type="hidden" value="${sessionScope.Qyinfo.qyid}" />
 	<div class="layui-form-item" style="background-color: #95877c;width: 720px">
@@ -133,7 +135,6 @@
 					<option value="全职">全职</option>
 					<option value="兼职">兼职</option>
 					<option value="实习">实习</option>
-					<option value="不限">不限</option>
 				</select>
 			</div>
 		</div>
@@ -214,12 +215,12 @@
 			<div class="layui-input-inline" >
 				<select name="dayTime" id="gztime1" lay-verify="required">
 					<option value="">请选择每日上班时长</option>
-					<option value="7">7小时</option>
-					<option value="8">8小时</option>
-					<option value="9">9小时</option>
-					<option value="10">10小时</option>
-					<option value="11">11小时</option>
-					<option value="12">12小时</option>
+					<option value="7小时">7小时</option>
+					<option value="8小时">8小时</option>
+					<option value="9小时">9小时</option>
+					<option value="10小时">10小时</option>
+					<option value="11小时">11小时</option>
+					<option value="12小时">12小时</option>
 					<option value="全天">全天</option>
 				</select>
 			</div>
@@ -276,10 +277,10 @@
 		</h3>
 		<br><br><br>
 		<div class="layui-input-line">
-			<textarea id="jobDuty"  lay-verify="required" style="width: 600px;margin: 0 auto;float: none;" class="layui-textarea" placeholder="请输入内容"></textarea>
+			<textarea name="jobDuty" id="jobDuty"  lay-verify="required" style="width: 600px;margin: 0 auto;float: none;" class="layui-textarea" placeholder="请输入内容"></textarea>
 		</div>
 	</div>
-
+	<input name="jobinfoState" type="hidden" value="发布中" />
 	<div class="layui-form-item">
 		<div class="layui-input-block">
 			<button class="layui-btn" type="submit" lay-filter="jobinfo" lay-submit="">立即提交</button>

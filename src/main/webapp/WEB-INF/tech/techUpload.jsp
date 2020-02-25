@@ -47,7 +47,7 @@
 
 		</div>
 		<div class="layui-form-item" style="position: absolute;margin-left: 30%;margin-top: -2.5%;">
-			<button class="layui-btn" lay-submit="" lay-filter="upload" id="myUpload">上传并保存</button>
+			<button class="layui-btn" lay-submit="" lay-filter="upload" id="myUpload" style="margin-left: 50%;margin-top: -6%;">上传并保存</button>
 		</div>
 	</div>
 
@@ -97,7 +97,7 @@
 <script type="text/html" id="chapter">
 	<form class="layui-form" action="" onsubmit="return false" id="uploadFormS" method="post">
 		<div class="layui-form-item">
-			<label class="layui-form-label">课程图片</label>
+			<label class="layui-form-label">章节图片</label>
 			<div class="layui-input-inline">
 				<input type="text" name="title" required  lay-verify="required" placeholder="图片名称" readonly
 				       id="tpS"    autocomplete="off" class="layui-input">
@@ -112,14 +112,14 @@
 		</div>
 
 		<div class="layui-form-item layui-form-text">
-			<label class="layui-form-label">课程标题</label>
+			<label class="layui-form-label">章节标题</label>
 			<div class="layui-input-inline">
             <textarea placeholder="请输入课程标题" required  lay-verify="required" name="domTittle"
                       id="domTittleS" class="layui-textarea" style="resize: none"></textarea>
 			</div>
 		</div>
 		<div class="layui-form-item layui-form-text">
-			<label class="layui-form-label">课程简介</label>
+			<label class="layui-form-label">章节简介</label>
 			<div class="layui-input-inline">
             <textarea placeholder="请输入课程简介" required  lay-verify="required" name="fileInfo"
                       id="fileInfoS" class="layui-textarea" style="resize: none"></textarea>

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String path = application.getContextPath()+"/layui/";
 	String jsPath = application.getContextPath()+"/companys/js/";
@@ -24,7 +25,7 @@
 
 		#layout {
 			width: 35%;
-			height: 440px;
+			height: 480px;
 			margin: auto;
 			margin-top: 100px;
 			border: #9F9F9F solid 1px;
@@ -75,6 +76,23 @@
 			<input name="qyName" class="layui-input" type="text" placeholder="请输入公司名称" autocomplete="off" onblur="qyName2(this.value)">
 		</div>
 		<div id="qy5" style="display: none;"></div>
+	</div>
+	<div class="layui-form-item" >
+		<label class="layui-form-label" >所在城市：</label>
+		<div class="layui-input-inline">
+			<select name="prid" lay-filter="chooseProvince2" lay-verify="required">
+				<option value="">请选择省份</option>
+				<c:if test="${province2!=null}">
+					<c:forEach items="${province2}" begin="0" var="i">
+						<option  value="${i.prid}">${i.name}</option>
+					</c:forEach>
+				</c:if>
+			</select>
+		</div>
+		<div class="layui-input-inline">
+			<select name="ctid" id="ctid" lay-verify="required">
+			</select>
+		</div>
 	</div>
 	<div class="layui-form-item" >
 		<label class="layui-form-label" id="label1">验证统一社会信用代码</label>
