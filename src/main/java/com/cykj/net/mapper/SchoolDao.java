@@ -1,6 +1,8 @@
 package com.cykj.net.mapper;
 
 import com.cykj.net.javabean.Alluserinfo;
+import com.cykj.net.javabean.C1;
+import com.cykj.net.javabean.P1;
 import com.cykj.net.javabean.Schoolinfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -69,4 +71,16 @@ public interface SchoolDao
 	 */
 	public List<Alluserinfo> fenyeshuju1(@Param("account") String account,@Param("username") String username,@Param("zy") String zy, @Param("lasttime") String lasttime, @Param("nowtime") String nowtime, RowBounds rowBounds);
 
+	/**
+	 * 查找省
+	 * @return
+	 */
+	public List<P1> findpro();
+
+	/**
+	 * 查找城市
+	 * @param prid
+	 * @return
+	 */
+	public List<C1> findcity(@Param("prid") String prid);
 }
