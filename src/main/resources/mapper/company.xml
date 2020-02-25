@@ -44,13 +44,19 @@
 		select * from station where poid=#{poid};
 
 	</select>
-	<!--单条数据插入，返回自增ID序号-->
+	<!--发布招聘信息-->
 	<insert id="releaseJobinfo" parameterType="com.cykj.net.javabean.Jobinfo" keyProperty="qyid" useGeneratedKeys="true">
 		insert into
 		jobinfo(qyid, zwid, lxMan, lxPhone, zpNum, lxAddress, xueliRequire, zhiyeType, gzExperience, majorRequire, gzAddress, salaryLow, welfare, jobDuty,time, jobinfoState, salaryHigh, ctid, sex, ageLow, ageHigh, beginTime, endTime, dayTime, weekTime, workTime, baoxian, gjijin, jiangjin, zhusu)
 		values(
 		#{qyid},#{zwid},#{lxMan},#{lxPhone},#{zpNum},#{lxAddress},#{xueliRequire},#{zhiyeType},#{gzExperience},#{majorRequire},#{gzAddress},#{salaryLow},#{welfare},#{jobDuty},#{time},#{jobinfoState},#{salaryHigh},#{ctid},#{sex},#{ageLow},#{ageHigh}, #{beginTime}, #{endTime},#{dayTime} , #{weekTime},#{workTime},#{baoxian}, #{gjijin}, #{jiangjin}, #{zhusu})
 	</insert>
+	<update id="updateJobinfo" parameterType="com.cykj.net.javabean.Jobinfo" keyProperty="qyid" useGeneratedKeys="true">
+	    update jobinfo
+	    set zwid=#{zwid},lxMan=#{lxMan},lxPhone=#{lxPhone},zpNum=#{zpNum},lxAddress=#{lxAddress},xueliRequire=#{xueliRequire},zhiyeType=#{zhiyeType},gzExperience=#{gzExperience},majorRequire=#{majorRequire},gzAddress=#{gzAddress},salaryLow=#{salaryLow},welfare=#{welfare},jobDuty=#{jobDuty},time=#{time},
+	    salaryHigh=#{salaryHigh},ctid=#{ctid},sex=#{sex},ageLow=#{ageLow},ageHigh=#{ageHigh}, beginTime=#{beginTime}, endTime=#{endTime},dayTime=#{dayTime} , weekTime=#{weekTime},workTime=#{workTime},baoxian=#{baoxian}, gjijin=#{gjijin},jiangjin=#{jiangjin}, zhusu=#{zhusu}
+	    where zpxxid=#{zpxxid};
+	</update>
 
 	<select id="searchJobinfoTable" resultType="com.cykj.net.javabean.Jobinfo" parameterType="com.cykj.net.javabean.Jobinfo"
 	>

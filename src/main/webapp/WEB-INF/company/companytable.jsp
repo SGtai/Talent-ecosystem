@@ -30,7 +30,7 @@
 </script>
 
 <input id="qyid" type="hidden" value="${sessionScope.Qyinfo.qyid}" />
-<input id="positionlist" type="hidden" value="${position}" />
+
 <form class="layui-form" lay-filter="component-form-group" id="search_submits" onsubmit="return false">
 	<div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="layadmin-useradmin-formlist">
 		<div class="layui-inline">
@@ -74,6 +74,7 @@
 <%--查看招聘信息表--%>
 <script type="text/html" id="jobinfo">
 	<form class="layui-form" action="">
+		<input id="zpxxid" name="zpxxid" type="hidden" >
 		<div class="layui-form-item" style="background-color: #95877c;width: 720px">
 			<h3><label class="layui-form-label" style="width: 80px;text-align: left">招聘职位:</label></h3>
 			<div class="layui-input-inline">
@@ -192,7 +193,7 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">性别要求：</label>
 			<div class="layui-input-block">
-				<input name="sex" title="男" type="radio" checked="" value="男">
+				<input name="sex" title="男" type="radio" value="男">
 				<input name="sex" title="女" type="radio" value="女">
 				<input name="sex" title="不限" type="radio" value="不限">
 			</div>
@@ -303,13 +304,13 @@
 			</h3>
 			<br><br><br>
 			<div class="layui-input-line">
-				<textarea id="jobDuty"  lay-verify="required" style="width: 600px;margin: 0 auto;float: none;" class="layui-textarea" placeholder="请输入内容"></textarea>
+				<textarea name="jobDuty" id="jobDuty"  lay-verify="required" style="width: 600px;margin: 0 auto;float: none;" class="layui-textarea" placeholder="请输入内容"></textarea>
 			</div>
 		</div>
 
 		<div class="layui-form-item">
 			<div class="layui-input-block">
-				<button class="layui-btn" type="submit" lay-filter="jobinfo" lay-submit="">立即提交</button>
+				<button class="layui-btn" type="submit" lay-filter="jobinfo" lay-submit="">修改</button>
 				<button class="layui-btn layui-btn-primary" type="reset">重置</button>
 			</div>
 		</div>
@@ -463,18 +464,24 @@
 		table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
 			var data = obj.data //获得当前行数据
 				,layEvent = obj.event; //获得 lay-event 对应的值
+
 			if(layEvent === 'detail'){
-				var zpxxid=data.zpxxid;
+				// console.log("data"+data);
+				// var zpxxid=$("#zpxxid").text(123);
+				// console.log("长度"+zpxxid.text());
 				var qyid=$('#qyid').val();
 				$.ajax(
 					{
 						type:"POST",
 						url:"/company/searchJobinfo",
 						dataType:"json",
-						data:{zpxxid:zpxxid,qyid:qyid},
+						data:{zpxxid:data.zpxxid,qyid:qyid},
 						success:function (msg) {
+
 							// alert(msg[0].dayTime);
-							// alert($('#positionlist').val());
+							alert(msg[0].zpxxid);
+							var zpxxid=$("#zpxxid").val(msg[0].zpxxid);
+							alert(zpxxid);
                             //打开查看页面
                             layer.open({
                                 type: 1,
@@ -585,8 +592,6 @@
 			                                }
 		                                });
 	                                });
-
-
 	                                //数据回显方法
                                     searchJob(msg[0]);
                                     form.render();
@@ -600,9 +605,6 @@
 						}
 					}
 				);
-
-
-
 			} else if(layEvent === 'del'){
 				layer.confirm('真的删除行么', function(index){
 
@@ -635,7 +637,51 @@
 			}
 		});
 
+		//修改招聘表提交
+		form.on('submit(jobinfo)', function(data){
+
+			if($('#beginTime').val()>$('#endTime').val()){
+				layer.alert("招聘日期终止日期小于起止日期！", { icon: 1, offset: "auto", time:1500 });
+				return false;
+			}else if ($('#ageLow').val()>$('#ageHigh').val()){
+				layer.alert("年龄范围填写错误！", { icon: 1, offset: "auto", time:1500 });
+				return false;
+			}else if ($('#ageLow').val()<16||$('#ageHigh').val()>60){
+				layer.alert("超过法定劳动适龄年龄！", { icon: 1, offset: "auto", time:1500 });
+				return false;
+			}else if($('#salaryLow').val()>$('#salaryHigh').val()){
+				layer.alert("薪资范围填写错误！", { icon: 1, offset: "auto", time:1500 });
+				return false;
+			}else{
+				// 发布招聘信息
+				$.ajax(
+					{
+						type:"POST",
+						url:"/company/updateJobinfo",
+						dataType:"text",
+						data:data.field,
+						success:function (msg) {
+							if (msg==="success"){
+								layer.alert('招聘信息修改成功!', function(index) {
+									layer.close(index);
+								})
+							} else{
+								layer.alert("招聘信息修改失败", { icon: 1, offset: "auto", time:1500 });
+							}
+						},
+						error:function (msg) {
+							alert(msg);
+						}
+					}
+				);
+				return false;
+			}
+
+		});
+
 	});
+
+
 	//回显数据插入
 	function searchJob(param) {
 
@@ -647,7 +693,6 @@
 		var gzExperience=$('#gzExperience');
 		var ageLow=$('#ageLow');
 		var ageHigh=$('#ageHigh');
-		var sex;
 		var gzAddress=$('#gzAddress');
 		var salaryLow=$('#salaryLow');
 		var salaryHigh=$('#salaryHigh');
@@ -657,7 +702,6 @@
 		var welfare=$('#welfare');
 		var zpNum=$('#zpNum');
 		var jobDuty=$('#jobDuty');
-
 
 		lxMan.empty();
 		lxPhone.empty();
@@ -675,7 +719,7 @@
 		ageLow.val(param.ageLow);
 		ageHigh.val(param.ageHigh);
 
-		sex;
+		$("input[type=radio][name='sex'][value='"+param.sex+"']").attr("checked",'checked');
 		//上班地点回显
 		gzAddress.empty();
 		gzAddress.val(param.gzAddress);
