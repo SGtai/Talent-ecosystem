@@ -14,7 +14,7 @@
     <!--    插入学校信息-->
     <insert id="inserSchoolinfo" parameterType="Schoolinfo">
         INSERT INTO schoolinfo (scAccount, password,scdata,scName,scAddress,scfdMan,moneyLaiyuan,kaibanMoney,jubanDanwei,xinyongDaima,scAbout,regTime,scpicture,scState,scPhone,ctid,prid,type) VALUES
-        (#{scAccount},#{password},#{scdata},#{scName},#{scAddress},#{scfdMan},#{moneyLaiyuan},#{kaibanMoney},#{jubanDanwei},#{xinyongDaima},#{scAbout},#{regTime},#{scpicture},#{scState},#{scPhone})
+        (#{scAccount},#{password},#{scdata},#{scName},#{scAddress},#{scfdMan},#{moneyLaiyuan},#{kaibanMoney},#{jubanDanwei},#{xinyongDaima},#{scAbout},#{regTime},#{scpicture},#{scState},#{scPhone},#{ctid},#{prid},#{type})
     </insert>
     <!--    修改学校信息-->
     <update id="updateSchoolinfo" parameterType="Schoolinfo">
@@ -55,6 +55,15 @@
             </if>
             <if test="scState!=null and scState.length>0">
                 scState=#{scState},
+            </if>
+            <if test="ctid!=null and ctid.length>0">
+                ctid=#{ctid},
+            </if>
+            <if test="prid!=null and prid.length>0">
+                prid=#{prid},
+            </if>
+            <if test="type!=null and type.length>0">
+                type=#{type},
             </if>
         </trim>
     </update>
