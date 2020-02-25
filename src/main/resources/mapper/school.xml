@@ -98,8 +98,12 @@
             </if>
         </where>
     </select>
-<!--    查找城市信息-->
-    <select id="findprocity" resultType="Weizhi">
-        select * from province a,city b where a.prid=b.prid
+<!--    查找省信息-->
+    <select id="findpro" resultType="P1">
+        select * from province
+    </select>
+    <!--    查找市信息-->
+    <select id="findcity" resultType="C1" parameterType="java.lang.String">
+        select b.* from province a,city b where a.prid=b.prid and a.prid=#{prid}
     </select>
 </mapper>

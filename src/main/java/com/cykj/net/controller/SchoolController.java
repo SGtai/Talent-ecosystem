@@ -1,9 +1,6 @@
 package com.cykj.net.controller;
 
-import com.cykj.net.javabean.Adminrole;
-import com.cykj.net.javabean.Alluserinfo;
-import com.cykj.net.javabean.Schoolinfo;
-import com.cykj.net.javabean.Table;
+import com.cykj.net.javabean.*;
 import com.cykj.net.javabean.admin.Admin;
 import com.cykj.net.service.AdminroleService;
 import com.cykj.net.service.SchoolService;
@@ -70,9 +67,11 @@ public class SchoolController
 	@RequestMapping("/returnreg2")
 	@ResponseBody
 	public ModelAndView returnreg2(){
+		System.out.println("获取省份");
 		ModelAndView mv=new ModelAndView();
+		List<P1> p=schoolService.findpro();
 		mv.setViewName("/WEB-INF/school/reg2");
-		mv.addObject("weizhi",1);
+		mv.addObject("province",p);
 		return mv;
 	}
 	/**

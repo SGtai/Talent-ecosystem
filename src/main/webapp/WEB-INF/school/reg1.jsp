@@ -92,7 +92,7 @@
 								$("#password1").val("");
 								$("#password2").val("");
 								var a=document.createElement("a");
-								a.href="/jump/school/reg2";
+								a.href="/school/returnreg2";
 								a.click();
 							}
 						},
@@ -111,7 +111,7 @@
 	}
 	function back() {
 		var returnlogin = document.createElement("a");
-		returnlogin.href="/school/returnreg2";
+		returnlogin.href="/jump/admin/login";
 		returnlogin.click();
 	}
 

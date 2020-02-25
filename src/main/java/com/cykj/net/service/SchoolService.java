@@ -1,6 +1,8 @@
 package com.cykj.net.service;
 
 import com.cykj.net.javabean.Alluserinfo;
+import com.cykj.net.javabean.C1;
+import com.cykj.net.javabean.P1;
 import com.cykj.net.javabean.Schoolinfo;
 import com.cykj.net.mapper.SchoolDao;
 import org.apache.ibatis.annotations.Param;
@@ -50,6 +52,16 @@ public class SchoolService
 	public List<Alluserinfo> fenyeshuju1(String account,String username,String zy,String lasttime,String nowtime, RowBounds rowBounds){
 		List<Alluserinfo> fenyeshuju1=schoolDao.fenyeshuju1(account, username, zy, lasttime, nowtime, rowBounds);
 		return fenyeshuju1;
+	}
+
+	public List<P1> findpro(){
+		List<P1> p=schoolDao.findpro();
+		return p;
+	}
+
+	public List<C1> findcity(String prid){
+		List<C1> c=schoolDao.findcity(prid);
+		return c;
 	}
 
 }
