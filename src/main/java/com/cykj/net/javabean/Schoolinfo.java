@@ -1,197 +1,214 @@
 package com.cykj.net.javabean;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Schoolinfo {
 
-  private long scid;
-  private String scAccount;
-  private String password;
-  private String scdata;
-  private String scName;
-  private String scAddress;
-  private String scfdMan;
-  private String moneyLaiyuan;
-  private String kaibanMoney;
-  private String jubanDanwei;
-  private String xinyongDaima;
-  private String scAbout;
-  private String scpicture;
-  private long scState;
-  private String scPhone;
-  private java.sql.Timestamp regTime;
-  private long ctid;
-  private long prid;
-  private String type;
+    private long scid;
+    private String scAccount;
+    private String password;
+    private String scdata;
+    private String scName;
+    private String scAddress;
+    private String scfdMan;
+    private String moneyLaiyuan;
+    private String kaibanMoney;
+    private String jubanDanwei;
+    private String xinyongDaima;
+    private String scAbout;
+    private String scpicture;
+    private long scState;
+    private String scPhone;
+    private java.sql.Timestamp regTime;
+    private String ctid;
+    private String prid;
+    private String type;
+    private int id;
+    private int state;
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public String getCtid() {
+        return ctid;
+    }
+
+    public String getPrid() {
+        return prid;
+    }
+
+    public void setCtid(String ctid) {
+        this.ctid = ctid;
+    }
+
+    public void setPrid(String prid) {
+        this.prid = prid;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public long getScid() {
+        return scid;
+    }
+
+    public void setScid(long scid) {
+        this.scid = scid;
+    }
 
 
-  public long getScid() {
-    return scid;
-  }
+    public String getScAccount() {
+        return scAccount;
+    }
 
-  public void setScid(long scid) {
-    this.scid = scid;
-  }
-
-
-  public String getScAccount() {
-    return scAccount;
-  }
-
-  public void setScAccount(String scAccount) {
-    this.scAccount = scAccount;
-  }
+    public void setScAccount(String scAccount) {
+        this.scAccount = scAccount;
+    }
 
 
-  public String getPassword() {
-    return password;
-  }
+    public String getPassword() {
+        return password;
+    }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-
-  public String getScdata() {
-    return scdata;
-  }
-
-  public void setScdata(String scdata) {
-    this.scdata = scdata;
-  }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 
-  public String getScName() {
-    return scName;
-  }
+    public String getScdata() {
+        return scdata;
+    }
 
-  public void setScName(String scName) {
-    this.scName = scName;
-  }
-
-
-  public String getScAddress() {
-    return scAddress;
-  }
-
-  public void setScAddress(String scAddress) {
-    this.scAddress = scAddress;
-  }
+    public void setScdata(String scdata) {
+        this.scdata = scdata;
+    }
 
 
-  public String getScfdMan() {
-    return scfdMan;
-  }
+    public String getScName() {
+        return scName;
+    }
 
-  public void setScfdMan(String scfdMan) {
-    this.scfdMan = scfdMan;
-  }
-
-
-  public String getMoneyLaiyuan() {
-    return moneyLaiyuan;
-  }
-
-  public void setMoneyLaiyuan(String moneyLaiyuan) {
-    this.moneyLaiyuan = moneyLaiyuan;
-  }
+    public void setScName(String scName) {
+        this.scName = scName;
+    }
 
 
-  public String getKaibanMoney() {
-    return kaibanMoney;
-  }
+    public String getScAddress() {
+        return scAddress;
+    }
 
-  public void setKaibanMoney(String kaibanMoney) {
-    this.kaibanMoney = kaibanMoney;
-  }
-
-
-  public String getJubanDanwei() {
-    return jubanDanwei;
-  }
-
-  public void setJubanDanwei(String jubanDanwei) {
-    this.jubanDanwei = jubanDanwei;
-  }
+    public void setScAddress(String scAddress) {
+        this.scAddress = scAddress;
+    }
 
 
-  public String getXinyongDaima() {
-    return xinyongDaima;
-  }
+    public String getScfdMan() {
+        return scfdMan;
+    }
 
-  public void setXinyongDaima(String xinyongDaima) {
-    this.xinyongDaima = xinyongDaima;
-  }
-
-
-  public String getScAbout() {
-    return scAbout;
-  }
-
-  public void setScAbout(String scAbout) {
-    this.scAbout = scAbout;
-  }
+    public void setScfdMan(String scfdMan) {
+        this.scfdMan = scfdMan;
+    }
 
 
-  public String getScpicture() {
-    return scpicture;
-  }
+    public String getMoneyLaiyuan() {
+        return moneyLaiyuan;
+    }
 
-  public void setScpicture(String scpicture) {
-    this.scpicture = scpicture;
-  }
-
-
-  public long getScState() {
-    return scState;
-  }
-
-  public void setScState(long scState) {
-    this.scState = scState;
-  }
+    public void setMoneyLaiyuan(String moneyLaiyuan) {
+        this.moneyLaiyuan = moneyLaiyuan;
+    }
 
 
-  public String getScPhone() {
-    return scPhone;
-  }
+    public String getKaibanMoney() {
+        return kaibanMoney;
+    }
 
-  public void setScPhone(String scPhone) {
-    this.scPhone = scPhone;
-  }
-
-
-  public java.sql.Timestamp getRegTime() {
-    return regTime;
-  }
-
-  public void setRegTime(java.sql.Timestamp regTime) {
-    this.regTime = regTime;
-  }
+    public void setKaibanMoney(String kaibanMoney) {
+        this.kaibanMoney = kaibanMoney;
+    }
 
 
-  public long getCtid() {
-    return ctid;
-  }
+    public String getJubanDanwei() {
+        return jubanDanwei;
+    }
 
-  public void setCtid(long ctid) {
-    this.ctid = ctid;
-  }
-
-
-  public long getPrid() {
-    return prid;
-  }
-
-  public void setPrid(long prid) {
-    this.prid = prid;
-  }
+    public void setJubanDanwei(String jubanDanwei) {
+        this.jubanDanwei = jubanDanwei;
+    }
 
 
-  public String getType() {
-    return type;
-  }
+    public String getXinyongDaima() {
+        return xinyongDaima;
+    }
 
-  public void setType(String type) {
-    this.type = type;
-  }
+    public void setXinyongDaima(String xinyongDaima) {
+        this.xinyongDaima = xinyongDaima;
+    }
+
+
+    public String getScAbout() {
+        return scAbout;
+    }
+
+    public void setScAbout(String scAbout) {
+        this.scAbout = scAbout;
+    }
+
+
+    public String getScpicture() {
+        return scpicture;
+    }
+
+    public void setScpicture(String scpicture) {
+        this.scpicture = scpicture;
+    }
+
+
+    public long getScState() {
+        return scState;
+    }
+
+    public void setScState(long scState) {
+        this.scState = scState;
+    }
+
+
+    public String getScPhone() {
+        return scPhone;
+    }
+
+    public void setScPhone(String scPhone) {
+        this.scPhone = scPhone;
+    }
+
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    public java.sql.Timestamp getRegTime() {
+        return regTime;
+    }
+
+    public void setRegTime(java.sql.Timestamp regTime) {
+        this.regTime = regTime;
+    }
+
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
 }
