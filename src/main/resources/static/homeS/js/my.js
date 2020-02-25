@@ -33,16 +33,20 @@ $(document).ready(function () {
   $('.loginA').click(function(){
      $('.smlogin').css('display','block');
 	 $('.loginB').removeClass('select');
+
 	 $(this).addClass('select');
 	 $('.ContentA').css('display','block');
-	 $('.ContentB').css('display','none')
+	 $('.ContentB').css('display','none');
+
   })
   $('.loginB').click(function(){
 	 $('.smlogin').css('display','none');
      $('.loginA').removeClass('select');
+
 	 $(this).addClass('select');
 	 $('.ContentB').css('display','block');
-	 $('.ContentA').css('display','none')
+	 $('.ContentA').css('display','none');
+
   })
   //首页右侧登录方式接受用户协议
   $('.chebox').click(function(){

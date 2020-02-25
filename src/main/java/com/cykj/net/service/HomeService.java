@@ -1,7 +1,9 @@
 package com.cykj.net.service;
 
 import com.cykj.net.javabean.Advert;
+import com.cykj.net.javabean.City;
 import com.cykj.net.javabean.JobInfoIndex;
+import com.cykj.net.javabean.Position;
 import com.cykj.net.mapper.HomeDao;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
@@ -53,5 +55,23 @@ public class HomeService
 	public int qiuzhiSuccess(){
 		int num = homeDao.qiuzhiSuccess();
 		return num;
+	}
+	public int gaoxiaocount(){
+		int num = homeDao.gaoxiaocount();
+		return num;
+	}
+	//找所有的职位
+	public List<Position> position(){
+		List<Position> position = homeDao.position();
+		return position;
+	}
+	//找所有的省/市
+	public List<City> province(){
+		List<City> position = homeDao.province();
+		return position;
+	}
+	public List<City> city(int prid){
+		List<City> city = homeDao.city(prid);
+		return city;
 	}
 }
