@@ -67,7 +67,14 @@ public class SchoolController
 		}
 			return "1";
 	}
-
+	@RequestMapping("/returnreg2")
+	@ResponseBody
+	public ModelAndView returnreg2(){
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("/WEB-INF/school/reg2");
+		mv.addObject("weizhi",1);
+		return mv;
+	}
 	/**
 	 * 该功能真正实现注册，并插入管理员的表以及高校的表
 	 * @param schoolinfo

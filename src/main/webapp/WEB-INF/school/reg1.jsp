@@ -111,7 +111,7 @@
 	}
 	function back() {
 		var returnlogin = document.createElement("a");
-		returnlogin.href="/jump/school/reg1";
+		returnlogin.href="/school/returnreg2";
 		returnlogin.click();
 	}
 

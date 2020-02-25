@@ -79,7 +79,7 @@
                 and b.regTime between #{lasttime} and #{nowtime}
             </if>
             <if test="zy != null and zy !=''">
-                and d.zyMajor like '%${zy}%'
+                and c.zy like '%${zy}%'
             </if>
         </where>
     </select>
@@ -97,5 +97,9 @@
                 and d.zyMajor like '%${zy}%'
             </if>
         </where>
+    </select>
+<!--    查找城市信息-->
+    <select id="findprocity" resultType="Weizhi">
+        select * from province a,city b where a.prid=b.prid
     </select>
 </mapper>
