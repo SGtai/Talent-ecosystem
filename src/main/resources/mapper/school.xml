@@ -6,68 +6,100 @@
          SELECT * FROM schoolinfo WHERE scAccount=#{account}
     </select>
     <select id="findphone" resultType="Schoolinfo" parameterType="java.lang.String">
-         SELECT * FROM schoolinfo WHERE scAccount=#{phone}
+         SELECT * FROM schoolinfo WHERE scPhone=#{phone}
     </select>
     <select id="finddaima" resultType="Schoolinfo" parameterType="java.lang.String">
-         SELECT * FROM schoolinfo WHERE scAccount=#{daima}
+         SELECT * FROM schoolinfo WHERE xinyongDaima=#{daima}
     </select>
     <!--    插入学校信息-->
     <insert id="inserSchoolinfo" parameterType="Schoolinfo">
-        INSERT INTO schoolinfo (scAccount, password,scdata,scName,scAddress,scfdMan,moneyLaiyuan,kaibanMoney,jubanDanwei,xinyongDaima,scAbout,regTime,scpicture,scState,scPhone) VALUES
-        (#{scAccount},#{password},#{scdata},#{scName},#{scAddress},#{scfdMan},#{moneyLaiyuan},#{kaibanMoney},#{jubanDanwei},#{xinyongDaima},#{scAbout},#{regTime},#{scpicture},#{scState},#{scPhone})
+        INSERT INTO schoolinfo (scAccount, password,scdata,scName,scAddress,scfdMan,moneyLaiyuan,kaibanMoney,jubanDanwei,xinyongDaima,scAbout,regTime,scpicture,scState,scPhone,ctid,prid,type) VALUES
+        (#{scAccount},#{password},#{scdata},#{scName},#{scAddress},#{scfdMan},#{moneyLaiyuan},#{kaibanMoney},#{jubanDanwei},#{xinyongDaima},#{scAbout},#{regTime},#{scpicture},#{scState},#{scPhone},#{ctid},#{prid},#{type})
     </insert>
     <!--    修改学校信息-->
     <update id="updateSchoolinfo" parameterType="Schoolinfo">
         UPDATE schoolinfo
         <trim prefix="set" suffixOverrides="," suffix=" where scAccount = #{scAccount} ">
---             修改密码
             <if test="password!=null and password.length>0">
                 password=#{password},
             </if>
---             修改资料
             <if test="scdata!=null and scdata.length>0">
                 scdata=#{scdata},
             </if>
---             修改名称
             <if test="scName!=null and scName.length>0">
                 scName=#{scName},
             </if>
---             修改地址
             <if test="scAddress!=null and scAddress.length>0">
                 scAddress=#{scAddress},
             </if>
---             修改法定人
             <if test="scfdMan!=null and scfdMan.length>0">
                 scfdMan=#{scfdMan},
             </if>
---             修改金钱来源
             <if test="moneyLaiyuan!=null and moneyLaiyuan.length>0">
                 moneyLaiyuan=#{moneyLaiyuan},
             </if>
---             修改开办资金
             <if test="kaibanMoney!=null and kaibanMoney.length>0">
                 kaibanMoney=#{kaibanMoney},
             </if>
---             修改举办单位
             <if test="jubanDanwei!=null and jubanDanwei.length>0">
                 jubanDanwei=#{jubanDanwei},
             </if>
---             修改信用代码
             <if test="xinyongDaima!=null and xinyongDaima.length>0">
                 xinyongDaima=#{xinyongDaima},
             </if>
---             修改简介
             <if test="scAbout!=null and scAbout.length>0">
                 scAbout=#{scAbout},
             </if>
---             修改联系方式
             <if test="scPhone!=null and scPhone.length>0">
                 scPhone=#{scPhone},
             </if>
---             修改学校状态
             <if test="scState!=null and scState.length>0">
                 scState=#{scState},
             </if>
+            <if test="ctid!=null and ctid.length>0">
+                ctid=#{ctid},
+            </if>
+            <if test="prid!=null and prid.length>0">
+                prid=#{prid},
+            </if>
+            <if test="type!=null and type.length>0">
+                type=#{type},
+            </if>
         </trim>
     </update>
+<!--    查看人才信息-->
+    <select id="fenyecount1" resultType="int" parameterType="java.util.Map">
+        select count(*) from schoolinfo a,userlist b,resume c
+        <where>
+            a.scAccount=#{account} and a.scAccount=b.tuijianren and b.yhid=c.yhId
+            <if test="username != null and username !=''">
+                and b.name like '%${username}%'
+            </if>
+            <if test="lasttime != null and lasttime !=''">
+                and b.regTime between #{lasttime} and #{nowtime}
+            </if>
+            <if test="zy != null and zy !=''">
+                and c.zy like '%${zy}%'
+            </if>
+        </where>
+    </select>
+    <select id="fenyeshuju1"  resultType="Alluserinfo" parameterType="java.util.Map">
+         SELECT * FROM schoolinfo a,userlist b,resume c
+        <where>
+            a.scAccount=#{account} and a.scAccount=b.tuijianren and b.yhid=c.yhId
+            <if test="username != null and username !=''">
+                and b.name like '%${username}%'
+            </if>
+            <if test="lasttime != null and lasttime !=''">
+                and b.regTime between #{lasttime} and #{nowtime}
+            </if>
+            <if test="zy != null and zy !=''">
+                and d.zyMajor like '%${zy}%'
+            </if>
+        </where>
+    </select>
+<!--    查找城市信息-->
+    <select id="findprocity" resultType="Weizhi">
+        select * from province a,city b where a.prid=b.prid
+    </select>
 </mapper>

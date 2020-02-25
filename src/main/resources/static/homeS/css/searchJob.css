@@ -39,7 +39,7 @@ input{ border:0; outline:0}
 /*searchDiv*/
 .searchDiv{ width:1100px; margin:0 auto;}
 .searchDiv .search1{ border: 1px solid #D3D3D4;width: 1098px;height: 57px; background: #F2F2F3;border-bottom: none; margin-top:10px}
-.searchDiv .search1 .sea1_1{background: #FFF;border: 1px #C4C4C4 solid;width: 350px;height: 35px;float: left;cursor: pointer;margin-top: 10px;margin-left: 27px;}
+.searchDiv .search1 .sea1_1{background: #FFF;border: 1px #C4C4C4 solid;width: 350px;height: 35px;float: left;cursor: pointer;margin-top: 10px;margin-left: 8px;}
 .searchDiv .search1 .sea1_2{background: #FFF;border: 1px #C4C4C4 solid;width: 153px;height: 35px;float: left;cursor: pointer;margin-top: 10px;margin-left: 15px;}
 .searchDiv .search1 .sea1_3{background: #FFF;border: 1px #C4C4C4 solid;width: 228px;height: 35px;float: left;cursor: pointer;margin-top: 10px;margin-left: 15px;}
 .searchDiv .search1 .sea1_4{ float:left;height: 37px;width: 116px; line-height:37px; margin-left: 11px;font-family: "微软雅黑"; font-size: 16px;text-align: center;background: #50BA8C;border-radius: 4px; margin-top: 10px;}
@@ -472,7 +472,11 @@ table.listtab tr.xxdetail.none{ display:none}
 .mainmapbox .mappart3 .mappart3_con a{display: inline-block;padding-left: 13px; padding-right: 14px;line-height: 25px;color: #3364cb;}
 
 
+.search1 input{
+    margin-top: 10px;
 
+    margin-left: 10px;
+}
 
 
 

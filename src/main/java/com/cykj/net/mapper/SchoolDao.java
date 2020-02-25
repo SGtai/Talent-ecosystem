@@ -1,8 +1,12 @@
 package com.cykj.net.mapper;
 
+import com.cykj.net.javabean.Alluserinfo;
 import com.cykj.net.javabean.Schoolinfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
+
+import java.util.List;
 
 @Mapper
 public interface SchoolDao
@@ -16,14 +20,14 @@ public interface SchoolDao
 
 	/**
 	 * 查相同手机号
-	 * @param scAccount
+	 * @param daima
 	 * @return
 	 */
 	public Schoolinfo finddaima(@Param("daima") String daima);
 
 	/**
 	 * 查相同社会信用代码
-	 * @param scAccount
+	 * @param phone
 	 * @return
 	 */
 	public Schoolinfo findphone(@Param("phone") String phone);
@@ -40,4 +44,29 @@ public interface SchoolDao
 	 * @return
 	 */
 	public int updateSchoolinfo(Schoolinfo schoolinfo);
+
+	/**
+	 * 分页信息页数
+	 * @param account
+	 * @param username
+	 * @param zy
+	 * @param lasttime
+	 * @param nowtime
+	 * @return
+	 */
+	public int fenyecount1(@Param("account") String account,@Param("username") String username,@Param("zy") String zy, @Param("lasttime") String lasttime, @Param("nowtime") String nowtime);
+
+
+	/**
+	 * 分页查询
+	 * @param account
+	 * @param username
+	 * @param zy
+	 * @param lasttime
+	 * @param nowtime
+	 * @param rowBounds
+	 * @return
+	 */
+	public List<Alluserinfo> fenyeshuju1(@Param("account") String account,@Param("username") String username,@Param("zy") String zy, @Param("lasttime") String lasttime, @Param("nowtime") String nowtime, RowBounds rowBounds);
+
 }

@@ -8,19 +8,22 @@ import java.util.List;
 @Data
 public class JobInfoIndex
 {
-	private int qyid;
+	private Integer qyid;
 	private String qyName;
 	private String qyPicture;
-	private int zpxxid;
+	private Integer zpxxid;
 	private String postion;  //招聘职位
-	private int salaryLow;
-	private int salaryHigh;
+	private Integer postiontype;  //招聘类型
+	private Integer salaryLow;
+	private Integer salaryHigh;
 	private List<JobInfoIndex> list;
 
 	private String gzAddress;
-	private int replyRate;
+	private Integer prid;
+	private Integer ctid;
+	private Integer replyRate;
 	private String salary;
-	private int time;
+	private Integer time;
 	//学历
 	private String eduction;
 	//已工作时间

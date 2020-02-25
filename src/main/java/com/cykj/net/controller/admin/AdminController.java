@@ -1,6 +1,7 @@
 package com.cykj.net.controller.admin;
 
 import com.cykj.net.javabean.Position;
+import com.cykj.net.javabean.Province;
 import com.cykj.net.javabean.Qyinfo;
 import com.cykj.net.javabean.admin.Admin;
 import com.cykj.net.javabean.admin.AdminMenu;
@@ -94,6 +95,8 @@ public class AdminController {
                 session.setAttribute("Qyinfo", qyinfo);
                 List<Position> list=companyService.findPosition();
                 session.setAttribute("position",list);
+                List<Province> list2=companyService.findProvince();
+                session.setAttribute("province",list2);
             //高校
             }else if (roid == 4){
 

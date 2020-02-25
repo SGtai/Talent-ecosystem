@@ -48,6 +48,11 @@ public class Jobinfo
   private String type;
   private String postion;
   private long poid;
+  private long prid;
+
+  public long getPrid() { return prid; }
+
+  public void setPrid(long prid) { this.prid = prid; }
 
   public long getPoid()
   {

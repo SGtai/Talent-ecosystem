@@ -5,6 +5,7 @@ public class Position {
 
   private long poid;
   private String type;
+  private long state;
 
 
   public long getPoid() {
@@ -22,6 +23,15 @@ public class Position {
 
   public void setType(String type) {
     this.type = type;
+  }
+
+
+  public long getState() {
+    return state;
+  }
+
+  public void setState(long state) {
+    this.state = state;
   }
 
 }

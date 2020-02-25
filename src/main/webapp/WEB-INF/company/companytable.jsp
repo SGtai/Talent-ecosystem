@@ -36,7 +36,7 @@
 		<div class="layui-inline">
 			<label class="layui-form-label">招聘行业：</label>
 			<div class="layui-input-inline">
-				<select name="position" id="position" lay-filter="choosePosition"  >
+				<select name="position2" id="position" lay-filter="choosePosition"  >
 					<option value="0" >请选择行业</option>
 					<c:if test="${position!=null}">
 						<c:forEach items="${position}" begin="0" var="i">
@@ -77,7 +77,7 @@
 		<div class="layui-form-item" style="background-color: #95877c;width: 720px">
 			<h3><label class="layui-form-label" style="width: 80px;text-align: left">招聘职位:</label></h3>
 			<div class="layui-input-inline">
-				<select name="position2"  id="position2" lay-filter="choosePosition2" lay-verify="required" >
+				<select name="position"  id="position2" lay-filter="choosePosition2" lay-verify="required" >
 					<option value="">请选择行业</option>
 					<c:if test="${position!=null}">
 						<c:forEach items="${position}" begin="0" var="i">
@@ -496,6 +496,8 @@
 	                                });
 
 	                                var poid=msg[0].poid;
+	                                var prid=msg[0].prid;
+
 									//行业及岗位二级联动回显
 	                                //行业回显
 	                                $("#position2").each(function () {
@@ -541,8 +543,48 @@
 			                                }
 		                                });
 	                                });
-
 									//还差性别及城市省份ID回显
+	                                $("#province").each(function () {
+		                                // this代表的是<option></option>，对option再进行遍历
+		                                $(this).children("option").each(function () {
+			                                // 判断需要对那个选项进行回显
+			                                if (this.value ==prid) {
+				                                // 进行回显
+				                                $(this).attr("selected", "selected");
+				                                $.ajax(
+					                                {
+						                                type:"POST",
+						                                url:"/company/chooseCity",
+						                                dataType:"text",
+						                                data:{prid:prid},
+						                                success:function (msg3) {
+							                                var city = $('#ctid');
+							                                city.empty();
+							                                var arr = JSON.parse(msg3);
+							                                city.append("<option value=''>请选择城市</option>");
+							                                for (var i = 0; i < arr.length; i++) {
+								                                city.append("<option value='"+arr[i].ctid+"'>"+arr[i].name+"</option>");
+							                                }
+							                                $("#ctid").each(function () {
+							                                    // this代表的是<option></option>，对option再进行遍历
+							                                    $(this).children("option").each(function () {
+							                                        // 判断需要对那个选项进行回显
+							                                        if (this.value ==msg[0].ctid) {
+							                                            // 进行回显
+							                                            $(this).attr("selected", "selected");
+							                                        }
+							                                    });
+							                                });
+							                                layui.form.render('select')
+						                                },
+						                                error:function (msg) {
+							                                alert(msg);
+						                                }
+					                                }
+				                                );
+			                                }
+		                                });
+	                                });
 
 
 	                                //数据回显方法
@@ -592,64 +634,11 @@
 				layer.msg('编辑操作');
 			}
 		});
-		$('#register').click(function () {
-			layer.open({
-				type: 1,
-				content: $('#registerface').html(),
-				area: ['500px'],
-				title: '前台注册页面',
-				btn:['取消'],
-				success:function () {
-					form.render();
-				}
-			});
-			//监听提交
-			form.on('submit(reg)',function (data) {
-				console.log(data.field);//获取提交的全部数据
-				$.ajax(
-					{
-						type:"POST",
-						url:basepath + "/user/doReg",
-						dataType:"text",
-						data:data.field,
-						success:function (msg) {
-							if (msg==="success"){
-								alert("注册成功");
-								console.log("success");
-								window.location.href=basepath+"/jump/front/welcome";
-							} else{
-								alert("账号已存在");
-								// console.log("登入失败，账号或者密码不正确");
-							}
-						},
-						error:function (msg) {
-							alert(msg);
-						}
-					}
-				);
-				return false;
-			})
 
-		});
 	});
 	//回显数据插入
 	function searchJob(param) {
-		// alert($('#positionlist').val());
 
-		// var position2=$('#position2');
-		// position2.empty();
-		// var position=$('#positionlist').val();
-		// // var arr = JSON.parse(position);
-		// position2.append("<option value=''>请选择岗位</option>");
-		// for (var i = 0; i < position.length; i++) {
-		// 	position2.append("<option value='"+position[i].poid+"'>"+position[i].type+"</option>");
-		// }
-		// layui.form.render('select')
-
-
-		// var zwid=$('#zwid');
-		var beginTime=$('#beginTime');
-		var endTime=$('#endTime');
 		var lxMan=$('#lxMan');
 		var lxPhone=$('#lxPhone');
 		var lxAddress=$('#lxAddress');
@@ -659,8 +648,6 @@
 		var ageLow=$('#ageLow');
 		var ageHigh=$('#ageHigh');
 		var sex;
-		var province=$('#province');
-		var ctid=$('#ctid');
 		var gzAddress=$('#gzAddress');
 		var salaryLow=$('#salaryLow');
 		var salaryHigh=$('#salaryHigh');
@@ -672,42 +659,9 @@
 		var jobDuty=$('#jobDuty');
 
 
-		//position2.empty();
-		//zwid.empty();
-		// beginTime.empty();
-		// endTime.empty();
 		lxMan.empty();
 		lxPhone.empty();
 		lxAddress.empty();
-		//xueliRequire.empty();
-		//zhiyeType.empty();
-		//gzExperience.empty();
-		ageLow.empty();
-		ageHigh.empty();
-		//sex;
-		//province.empty();
-		//ctid.empty();
-		//gzAddress.empty();
-		salaryLow.empty();
-		salaryHigh.empty();
-		//dayTime.empty();
-		//weekTime.empty();
-		//workTime.empty();
-		welfare.empty();
-
-
-		zpNum.empty();
-		jobDuty.empty();
-
-
-
-        // position2.val('1');
-		//position2.val(param.position);
-		// position2.attr("value",param.position);
-
-		// zwid.val(param.zwid);
-		// beginTime.val();
-		// endTime.val();
 		lxMan.val(param.lxMan);
 		lxPhone.val(param.lxPhone);
 		lxAddress.val(param.lxAddress);
@@ -716,13 +670,18 @@
 		zhiyeType.find("option[value='"+param.zhiyeType+"']").attr("selected",'selected');
 		gzExperience.find("option[value='"+param.gzExperience+"']").attr("selected",'selected');
 
+		ageLow.empty();
+		ageHigh.empty();
 		ageLow.val(param.ageLow);
 		ageHigh.val(param.ageHigh);
+
 		sex;
 		//上班地点回显
-		province.val(param.poid);
-		ctid.val(param.ctid);
+		gzAddress.empty();
 		gzAddress.val(param.gzAddress);
+
+		salaryLow.empty();
+		salaryHigh.empty();
 		salaryLow.val(param.salaryLow);
 		salaryHigh.val(param.salaryHigh);
 
@@ -735,10 +694,14 @@
 		$("input[name=gjijin][value="+param.gjijin+"]").attr("checked","checked");
 		$("input[name=jiangjin][value="+param.jiangjin+"]").attr("checked","checked");
 		$("input[name=zhusu][value="+param.zhusu+"]").attr("checked","checked");
+
+		welfare.empty();
 		welfare.val(param.welfare);
 		//招聘人数
+		zpNum.empty();
 		zpNum.val(param.zpNum);
 		//岗位职责
+		jobDuty.empty();
 		jobDuty.text(param.jobDuty);
 	}
 </script>

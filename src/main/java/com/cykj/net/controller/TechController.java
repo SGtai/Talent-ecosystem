@@ -3,6 +3,7 @@ package com.cykj.net.controller;
 import com.cykj.net.javabean.*;
 import com.cykj.net.service.TechService;
 import com.cykj.net.tool.Comment;
+import com.cykj.net.tool.DateDemo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -450,5 +451,267 @@ public class TechController
 		//关闭输出流
 		out.close();
 		return null;
+	}
+
+
+	@RequestMapping("/document.data")
+	@ResponseBody
+	private DateDemo documentData(String title,String price1,String price2,String city,String page,String limit){
+		if (page==null||page.equals("")){
+			page="1";
+			limit="5";
+		}
+		int limitInt = Integer.valueOf(limit);
+		int pageNum = (Integer.valueOf(page)-1)*limitInt;
+		if (title!=null&&!title.equals("")){
+			title="%"+title.trim()+"%";
+		}
+		Curriculum cc = new Curriculum();
+		cc.setKcName(title);
+		cc.setDemo1(price1);
+		cc.setDemo2(price2);
+		if (city!=null&&!city.equals("")){
+		cc.setFzTypeId(Long.parseLong(city));}
+		ArrayList<Curriculum> cu = techService.geCurriculumsel(cc);
+		int num = cu.size();
+		cc.setKcId(pageNum);
+		cc.setJgPrice(limitInt);
+		cu=techService.geCurriculumData(cc);
+		DateDemo dateS1 = new DateDemo();
+		dateS1.setCount(num);
+		dateS1.setMsg("");
+		dateS1.setData(cu);
+		return dateS1;
+	}
+
+	@RequestMapping("/chapter.data")
+	@ResponseBody
+	private DateDemo chapterData(String title,String kcId,String page,String limit){
+		if (page==null||page.equals("")){
+			page="1";
+			limit="5";
+		}
+		int limitInt = Integer.valueOf(limit);
+		int pageNum = (Integer.valueOf(page)-1)*limitInt;
+		if (title!=null&&!title.equals("")){
+			title="%"+title.trim()+"%";
+		}
+		Chapters cc = new Chapters();
+		cc.setZjName(title);
+		if (kcId!=null&&!kcId.equals("")){
+			cc.setKjId(Long.parseLong(kcId));
+		}
+		ArrayList<Chapters> cu = techService.geChapterssel(cc);
+		int num = cu.size();
+		cc.setDemo1(pageNum);
+		cc.setDemo2(limitInt);
+		cu=techService.geChaptersData(cc);
+		DateDemo dateS1 = new DateDemo();
+		dateS1.setCount(num);
+		dateS1.setMsg("");
+		dateS1.setData(cu);
+		return dateS1;
+	}
+
+	@RequestMapping("/video.data")
+	@ResponseBody
+	private DateDemo videoData(String title,String kcId,String page,String limit){
+		if (page==null||page.equals("")){
+			page="1";
+			limit="5";
+		}
+		int limitInt = Integer.valueOf(limit);
+		int pageNum = (Integer.valueOf(page)-1)*limitInt;
+		if (title!=null&&!title.equals("")){
+			title="%"+title.trim()+"%";
+		}
+		Video vo = new Video();
+		vo.setSpName(title);
+		if (kcId!=null&&!kcId.equals("")){
+			vo.setZjId(Long.parseLong(kcId));
+		}
+		ArrayList<Video> cu = techService.geVideossel(vo);
+		int num = cu.size();
+		vo.setSpId(pageNum);
+		vo.setBfcsRoadcast(limitInt);
+		cu=techService.geVideoData(vo);
+		DateDemo dateS1 = new DateDemo();
+		dateS1.setCount(num);
+		dateS1.setMsg("");
+		dateS1.setData(cu);
+		return dateS1;
+	}
+
+	@RequestMapping("/delete")
+	public @ResponseBody String delete(String kcId) {
+		int num = techService.deleteKc(kcId);
+		String result="服务器异常";
+		if(num!=0){
+			result="success";
+		}else{
+			result="fail";
+		}
+		return result;
+	}
+
+	@RequestMapping("/deleteZj")
+	public @ResponseBody String deleteZj(String zjId) {
+		int num = techService.deleteZj(zjId);
+		System.out.println(num+"sadafsa"+zjId);
+		String result="服务器异常";
+		if(num!=0){
+			result="success";
+		}else{
+			result="fail";
+		}
+		return result;
+	}
+
+	@RequestMapping("/deleteSp")
+	public @ResponseBody String deleteSp(String spId) {
+		int num = techService.deleteSp(spId);
+		System.out.println(num+"sadafsa"+spId);
+		String result="服务器异常";
+		if(num!=0){
+			result="success";
+		}else{
+			result="fail";
+		}
+		return result;
+	}
+
+	@RequestMapping("/upData")
+	@ResponseBody
+	public HashMap<String, Object> upData(HttpServletRequest request, ServletResponse response)
+			throws Exception {
+		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+		if (isMultipart) {
+			DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
+			ServletFileUpload upload = new ServletFileUpload(diskFileItemFactory);
+			upload.setHeaderEncoding("utf-8");
+			String makeFileName = null;
+			Curriculum ct= new Curriculum();
+			StandardMultipartHttpServletRequest req = (StandardMultipartHttpServletRequest) request;
+			Iterator<String> iterator = req.getFileNames();
+			while (iterator.hasNext()) {
+				MultipartFile file = req.getFile(iterator.next());
+				String fileNames = file.getOriginalFilename();
+				makeFileName = makeFileName(fileNames);
+				String savePath = ResourceUtils.getURL("classpath:").getPath()+"static/techS/other";
+				File file2 = new File(savePath);
+				//                        判断上传文件的保存目录是否存在
+				if (!file2.exists() && !file2.isDirectory()) {
+					System.out.println(savePath + "目录不存在，需要创建");
+					//创建目录
+					file2.mkdir();
+				}
+				file.transferTo(new File(savePath + "/" + makeFileName));
+				ct.setKcName(request.getParameter("name"));
+				ct.setMsDescribe(request.getParameter("xx"));
+				ct.setCkPicture(makeFileName);
+				ct.setKcId(Integer.valueOf(request.getParameter("id")));
+				techService.upCurriculumD(ct);
+			}
+			response.setContentType("application/json; charset=utf-8");
+			HashMap<String, Object> myMap = new HashMap<>();
+			myMap.put("code", 0);
+			myMap.put("msg", "");
+			return myMap;
+		}
+		return null;
+	}
+
+	@RequestMapping("/upZjData")
+	@ResponseBody
+	public HashMap<String, Object> upZjData(HttpServletRequest request, ServletResponse response)
+			throws Exception {
+		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+		if (isMultipart) {
+			DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
+			ServletFileUpload upload = new ServletFileUpload(diskFileItemFactory);
+			upload.setHeaderEncoding("utf-8");
+			String makeFileName = null;
+			Chapters ct= new Chapters();
+			StandardMultipartHttpServletRequest req = (StandardMultipartHttpServletRequest) request;
+			Iterator<String> iterator = req.getFileNames();
+			while (iterator.hasNext()) {
+				MultipartFile file = req.getFile(iterator.next());
+				String fileNames = file.getOriginalFilename();
+				makeFileName = makeFileName(fileNames);
+				String savePath = ResourceUtils.getURL("classpath:").getPath()+"static/techS/other";
+				File file2 = new File(savePath);
+				//                        判断上传文件的保存目录是否存在
+				if (!file2.exists() && !file2.isDirectory()) {
+					System.out.println(savePath + "目录不存在，需要创建");
+					//创建目录
+					file2.mkdir();
+				}
+				file.transferTo(new File(savePath + "/" + makeFileName));
+				ct.setZjName(request.getParameter("name"));
+				ct.setMsDescribe(request.getParameter("xx"));
+				ct.setZjPicture(makeFileName);
+				ct.setZjId(Integer.valueOf(request.getParameter("id")));
+				techService.upChaptersD(ct);
+			}
+			response.setContentType("application/json; charset=utf-8");
+			HashMap<String, Object> myMap = new HashMap<>();
+			myMap.put("code", 0);
+			myMap.put("msg", "");
+			return myMap;
+		}
+		return null;
+	}
+
+	@RequestMapping("/upSpData")
+	@ResponseBody
+	public HashMap<String, Object> upSpData(HttpServletRequest request, ServletResponse response)
+			throws Exception {
+		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+		if (isMultipart) {
+			DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
+			ServletFileUpload upload = new ServletFileUpload(diskFileItemFactory);
+			upload.setHeaderEncoding("utf-8");
+			String makeFileName = null;
+			Video ct= new Video();
+			StandardMultipartHttpServletRequest req = (StandardMultipartHttpServletRequest) request;
+			Iterator<String> iterator = req.getFileNames();
+			while (iterator.hasNext()) {
+				MultipartFile file = req.getFile(iterator.next());
+				String fileNames = file.getOriginalFilename();
+				makeFileName = makeFileName(fileNames);
+				String savePath = ResourceUtils.getURL("classpath:").getPath()+"static/techS/other";
+				File file2 = new File(savePath);
+				//                        判断上传文件的保存目录是否存在
+				if (!file2.exists() && !file2.isDirectory()) {
+					System.out.println(savePath + "目录不存在，需要创建");
+					//创建目录
+					file2.mkdir();
+				}
+				file.transferTo(new File(savePath + "/" + makeFileName));
+				ct.setSpName(request.getParameter("name"));
+				ct.setSpDescribe(request.getParameter("xx"));
+				ct.setSpPath(makeFileName);
+				ct.setSpId(Integer.valueOf(request.getParameter("id")));
+				techService.upVideoD(ct);
+			}
+			response.setContentType("application/json; charset=utf-8");
+			HashMap<String, Object> myMap = new HashMap<>();
+			myMap.put("code", 0);
+			myMap.put("msg", "");
+			return myMap;
+		}
+		return null;
+	}
+
+	@RequestMapping("/upPrice")
+	public @ResponseBody String upPrice(String kcId,String jgPrice) {
+		int num = techService.upCurriculum(Long.parseLong(jgPrice),Long.parseLong(kcId));
+		String result="";
+		if(num!=0){
+			result="success";
+		}else{
+			result="fail";
+		}
+		return result;
 	}
 }
