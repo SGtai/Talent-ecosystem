@@ -9,5 +9,6 @@ public class City {
   private long prid;
   private String ctname;
   private String prname;
+  private String name;
 
 }
