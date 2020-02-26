@@ -1,17 +1,17 @@
 <%--
   Created by IntelliJ IDEA.
   User: 蔡鹭鹏
-  Date: 2020/2/24
-  Time: 23:45
+  Date: 2020/2/26
+  Time: 12:15
   To change this template use File | Settings | File Templates.
 --%>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String layuiPath = application.getContextPath() + "/layui/";
     String jsPath = application.getContextPath() + "/adminS/js/";
     String cssPath = application.getContextPath() + "/adminS/css/";
+    String path = application.getContextPath() + "/";
 
 %>
 <!DOCTYPE html>
@@ -46,11 +46,12 @@
             </div>
             <label class="layui-form-label">状态：</label>
             <div class="layui-input-inline">
-                <select id="state" name="state" lay-filter="state">
-                    <option value="">请选择学校状态</option>
-                    <option value="0">在业</option>
-                    <option value="1">冻结</option>
-                    <option value="2">黑名单</option>
+                <select id="scState" name="scState" lay-filter="scState">
+                    <option value="">请选择审批状态</option>
+                    <option value="0">待审批</option>
+                    <option value="1">审批通过</option>
+                    <option value="2">审批拒绝</option>
+
                 </select>
             </div>
         </div>
@@ -79,38 +80,31 @@
 
 <script type="text/javascript" src=<%=layuiPath + "layui.js"%>></script>
 <script type="text/html" id="opeHtml">
-    {{# if(d.state == 0 ){ }}
+    {{# if(d.scState == 0 ){ }}
     <button lay-event="see" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i
             class="layui-icon">&#xe63c;</i>
         查看
     </button>
-    <button lay-event="prohibit" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i class="layui-icon">&#xe620;</i>
-        冻结
+    <button lay-event="agree" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i class="layui-icon">&#xe620;</i>
+        通过审批
     </button>
-    <button lay-event="update" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i class="layui-icon">&#xe620;</i>
-        修改密码
+    <button lay-event="refuse" type="button" class="layui-btn layui-btn-xs layui-btn-radius  layui-btn-danger"><i
+            class="layui-icon">&#xe620;</i>
+        拒绝审批
     </button>
-    <button lay-event="delete" type="button" class="layui-btn layui-btn-xs layui-btn-radius layui-btn layui-btn-danger">
-        <i class="layui-icon">&#xe640;</i>黑名单
-    </button>
-    {{# } }}
-    {{# if(d.state == 1 ){ }}
-    <button lay-event="see" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i
-            class="layui-icon">&#xe63c;</i>
-        查看
-    </button>
-    <button lay-event="enable" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i class="layui-icon">&#xe620;</i>
-        启用
-    </button>
-    <button lay-event="update" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i class="layui-icon">&#xe620;</i>
-        修改密码
-    </button>
-    <button lay-event="delete" type="button" class="layui-btn layui-btn-xs layui-btn-radius layui-btn layui-btn-danger">
-        <i class="layui-icon">&#xe640;</i>黑名单
-    </button>
-    {{# } }}
-    {{# if(d.state == 2 ){ }}
 
+    {{# } }}
+    {{# if(d.scState == 1 ){ }}
+    <button lay-event="see" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i
+            class="layui-icon">&#xe63c;</i>
+        查看
+    </button>
+    {{# } }}
+    {{# if(d.scState == 2 ){ }}
+    <button lay-event="see" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i
+            class="layui-icon">&#xe63c;</i>
+        查看
+    </button>
     {{# } }}
 </script>
 <script type="text/html" id="seeSchool">
@@ -234,7 +228,6 @@
             , page: true //开启分页
             , limit: 5
             , limits: [5]
-            ,where: {scState:"1"}
             //返回整个数据
             // , parseData: function (res) { //res 即为原始返回的数据
             //     return {
@@ -254,31 +247,31 @@
                 , {field: 'ctid', title: '所在城市', width: 90}
                 , {field: 'regTime', title: '注册时间', width: 160}
                 , {
-                    field: 'state', title: '状态', width: 75, templet: function (d) {
-                        if (d.state == 0) {
-                            return '在业';
-                        } else if (d.state == 1) {
-                            return '冻结';
+                    field: 'scState', title: '状态', width: 90, templet: function (d) {
+                        if (d.scState == 0) {
+                            return '待审核';
+                        } else if (d.scState == 1) {
+                            return '通过审核';
                         } else {
-                            return '黑名单';
+                            return '拒绝审核';
                         }
                     }
                 }
-                , {field: 'ope', title: '操作', toolbar: '#opeHtml', width: 330}
+                , {field: 'ope', title: '操作', toolbar: '#opeHtml', width: 318}
             ]]
         });
 
         //获取下拉框的值
         var city = "",
-            state = "",
+            scState = "",
             prid = "",
             type = "";
         // 获取下拉框数据
         form.on('select(city)', function (data) {
             city = data.value;
         });
-        form.on('select(state)', function (data) {
-            state = data.value;
+        form.on('select(scState)', function (data) {
+            scState = data.value;
         });
         form.on('select(type)', function (data) {
             type = data.value;
@@ -300,29 +293,26 @@
             });
             return false;
         });
-        //在营，冻结，修改密码，拉黑 学校
+        //审批 学校
         table.on('tool(getSchool)', function (obj) {
 
             var layEvent = obj.event
                 , data = obj.data
-            //禁用
-            if (layEvent === 'prohibit' || layEvent === 'enable' || layEvent === 'delete') {
-                var state = 0;
-                var t = '取消冻结';
-                if (layEvent === 'prohibit') {
-                    state = 1;
-                    t = '冻结';
-                }
-                if (layEvent === 'delete') {
+
+            if (layEvent === 'agree' || layEvent === 'refuse') {
+                var state = 1;
+                var t = '通过审批';
+                if (layEvent === 'refuse') {
                     state = 2;
-                    t = '拉入黑名单';
+                    t = '拒绝审批';
                 }
+
                 layer.confirm('确定要将：' + data.scName + '' + t + '吗?', function (index) {
                     $.ajax({
                         type: "POST",
-                        url: "/adminSchool/updateState",
+                        url: "/adminSchool/updateScState",
                         dataType: "text",
-                        data: {account: data.scAccount, state: state},
+                        data: {scAccount: data.scAccount, scState: state},
                         success: function (msg) {
                             var i = 0;
                             if (msg === 'true') {
@@ -333,28 +323,6 @@
                             }
                             if (i === 0) {
                                 table.reload('school');
-                            }
-                        },
-                        error: function () {
-                            layer.msg('服务器繁忙');
-                        }
-                    });
-                    layer.close(index);
-                });
-            }
-            //修改密码
-            if (layEvent === 'update') {
-                layer.confirm('确定要重置:' + data.scName + '的密码吗?', function (index) {
-                    $.ajax({
-                        type: "POST",
-                        url: "/adminSchool/updatePassword",
-                        dataType: "text",
-                        data: {account: data.scAccount},
-                        success: function (msg) {
-                            if (msg != '') {
-                                layer.msg('密码重置成功，重置密码为：' + msg);
-                            } else {
-                                layer.msg('密码重置失败');
                             }
                         },
                         error: function () {
@@ -384,15 +352,6 @@
                 $('#getCredit').html(data.xinyongDaima);
                 $('#getType').html(data.type);
                 $('#getScpicture').attr("src",data.scpicture);
-                //
-                // $('#getQyName').html(data.qyName);
-                // $('#getQyData').html(data.qyData);
-                // $('#getQyAddress').html(data.qyAddress);
-                // $('#getQyfdMan').html(data.qyfdMan);
-                // $('#getRegMoney').html(data.regMoney);
-                // $('#getQyType').html(data.qyType);
-                // $('#getJyScope').html(data.jyScope);
-                // $('#getJyTime').html(data.jyTime);
             }
         })
     });

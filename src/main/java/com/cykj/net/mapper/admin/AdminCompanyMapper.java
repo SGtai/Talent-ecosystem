@@ -25,11 +25,13 @@ public interface AdminCompanyMapper {
             "and a.ctid = #{ctid} </if> " +
             "<if test = 'state != null'> " +
             "and b.state = #{state} </if> " +
+            "<if test = 'qyState != null'> " +
+            "and a.qyState = #{qyState} </if> " +
             "</script> ")
-    int countCompany(@Param("qyName")String qyName, @Param("qyType")String qyType, @Param("prid")String prid, @Param("ctid")String ctid,@Param("state")String state);
+    int countCompany(@Param("qyName")String qyName, @Param("qyType")String qyType, @Param("prid")String prid, @Param("ctid")String ctid,@Param("state")String state,@Param("qyState")String qyState);
 
     @Select("<script> " +
-            "select a.qyData,a.qyid,a.qyAccount,a.qyName,a.qyAddress,a.qyfdMan,a.qyType,a.jyScope,a.jyTime," +
+            "select a.qyState,a.qyData,a.qyid,a.qyAccount,a.qyName,a.qyAddress,a.qyfdMan,a.qyType,a.jyScope,a.jyTime," +
             "a.qyKind,a.regMoney,a.vipLevel,a.xinyongDu,a.qyPicture,a.regTime,a.replyRate,a.ctid," +
             "a.qyPeople,a.prid,b.state " +
             "from qyinfo a,admin b where a.qyAccount = b.account " +
@@ -43,9 +45,12 @@ public interface AdminCompanyMapper {
             "and a.ctid = #{ctid} </if> " +
             "<if test = 'state != null'> " +
             "and b.state = #{state} </if> " +
+            "<if test = 'qyState != null'> " +
+            "and a.qyState = #{qyState} </if> " +
+            "order by a.regTime desc " +
             "limit #{page},#{limit}" +
             "</script> ")
-    List<Qyinfo> allCompany(@Param("qyName")String qyName, @Param("qyType")String qyType, @Param("prid")String prid, @Param("ctid")String ctid, @Param("state")String state, @Param("page")int page, @Param("limit")int limit);
+    List<Qyinfo> allCompany(@Param("qyName")String qyName, @Param("qyType")String qyType, @Param("prid")String prid, @Param("ctid")String ctid, @Param("state")String state,@Param("qyState")String qyState, @Param("page")int page, @Param("limit")int limit);
 
     @Select("select name from city where ctid = #{ctid}")
     String findCityName(String ctid);
@@ -59,10 +64,15 @@ public interface AdminCompanyMapper {
     @Select("select name ctname,ctid ctid from city where prid = #{prid}")
     List<City> getCitys(String prid);
 
-    @Update("update admin set state = #{state} where account = #{qyAccount}")
-    int updateState(@Param("qyAccount")String qyAccount, @Param("state")String state);
+    @Update("update admin set state = #{state} where account = #{account}")
+    int updateState(@Param("account")String account, @Param("state")String state);
 
-    @Update("update admin set password = #{password} where account = #{qyAccount}")
-    int updatePassword(String qyAccount,String password);
+    @Update("update admin set password = #{password} where account = #{account}")
+    int updatePassword(@Param("account")String account,@Param("password")String password);
 
+    @Update("update qyinfo set qyState = #{qyState} where qyAccount = #{qyAccount}")
+    int updateQyState(@Param("qyAccount")String qyAccount, @Param("qyState")String qyState);
+
+    @Update("update schoolinfo set scState = #{scState} where scAccount = #{scAccount}")
+    int updateScState(String scAccount, String scState);
 }

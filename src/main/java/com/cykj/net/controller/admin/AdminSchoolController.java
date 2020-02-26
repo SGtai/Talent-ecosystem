@@ -17,23 +17,28 @@ public class AdminSchoolController {
 
     @RequestMapping(value = "/table/school")
     @ResponseBody
-    public LayuiData school(String scName, String type, String prid, String ctid, String state, int page, int limit){
-        return adminSchoolService.school(scName,type,prid,ctid,state,page,limit);
+    public LayuiData school(String scName, String type, String prid, String ctid, String state,String scState, int page, int limit){
+        return adminSchoolService.school(scName,type,prid,ctid,state,scState,page,limit);
     }
 
     @RequestMapping(value = "/updateState")
     @ResponseBody
-    public String updateState(String scAccount ,String state){
-        return adminSchoolService.updateState(scAccount,state);
+    public String updateState(String account ,String state){
+        return adminSchoolService.updateState(account,state);
     }
 
     @RequestMapping(value = "/updatePassword")
     @ResponseBody
-    public String updatePassword(String scAccount){
-        return adminSchoolService.updatePassword(scAccount);
+    public String updatePassword(String account){
+        return adminSchoolService.updatePassword(account);
     }
 
 
+    @RequestMapping(value = "/updateScState")
+    @ResponseBody
+    public String updateScState(String scAccount ,String scState){
+        return adminSchoolService.updateScState(scAccount,scState);
+    }
 
 
 }
