@@ -24,6 +24,7 @@ public class Resume {
   private String jzstate;
   private String byschool;
   private String zy;
+  private String xl;
 
 
   public long getJlId() {
@@ -212,6 +213,15 @@ public class Resume {
 
   public void setZy(String zy) {
     this.zy = zy;
+  }
+
+
+  public String getXl() {
+    return xl;
+  }
+
+  public void setXl(String xl) {
+    this.xl = xl;
   }
 
 }

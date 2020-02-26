@@ -5,8 +5,7 @@ public class Experience {
 
   private long jyId;
   private long jlId;
-  private java.sql.Timestamp sxSchooltime;
-  private String xlEducation;
+  private String sxSchooltime;
   private String zyMajor;
   private String school;
   private java.sql.Timestamp gxtime;
@@ -33,21 +32,12 @@ public class Experience {
   }
 
 
-  public java.sql.Timestamp getSxSchooltime() {
+  public String getSxSchooltime() {
     return sxSchooltime;
   }
 
-  public void setSxSchooltime(java.sql.Timestamp sxSchooltime) {
+  public void setSxSchooltime(String sxSchooltime) {
     this.sxSchooltime = sxSchooltime;
-  }
-
-
-  public String getXlEducation() {
-    return xlEducation;
-  }
-
-  public void setXlEducation(String xlEducation) {
-    this.xlEducation = xlEducation;
   }
 
 

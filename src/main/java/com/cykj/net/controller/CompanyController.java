@@ -72,7 +72,7 @@ public class CompanyController
 			//插入管理角色表
 			Adminrole adminrole = new Adminrole();
 			adminrole.setAccount(qyinfo.getQyAccount());
-			adminrole.setRoid(3);
+			adminrole.setRoid(6);
 			adminroleService.regAdminRole(adminrole);
 
 
@@ -345,8 +345,54 @@ public class CompanyController
 	{
 		List<Jobinfo> jobinfo1 = companyService.searchJobinfoTable(jobinfo);
 		System.out.println(jobinfo.getZpxxid());
+		session.setAttribute("zpxxid",jobinfo.getZpxxid());
 		return jobinfo1;
 	}
+
+	/**
+	 * 修改招聘信息状态
+	 * @param jobinfo
+	 * @return
+	 */
+	@RequestMapping("/updateJobinfoState")
+	public @ResponseBody
+	String updateJobinfoState(Jobinfo jobinfo)
+	{
+		String result = "";
+		int a = companyService.updateJobinfoState(jobinfo);
+		if (a > 0)
+		{
+			result = "success";
+		} else
+		{
+			result = "nosuccess";
+		}
+		System.out.println("返回值"+result);
+		return result;
+	}
+
+	/**
+	 * 删除招聘信息
+	 * @param jobinfo
+	 * @return
+	 */
+	@RequestMapping("/deleteJobinfo")
+	public @ResponseBody
+	String deleteJobinfo(Jobinfo jobinfo)
+	{
+		String result = "";
+		int a = companyService.deleteJobinfo(jobinfo);
+		if (a > 0)
+		{
+			result = "success";
+		} else
+		{
+			result = "nosuccess";
+		}
+		return result;
+	}
+
+
 }
 
 

@@ -38,8 +38,24 @@ public class Alluserinfo {
 	private String picture;
 	private String by1;
 	private String by2;
+	private String zy;
+	private String xl;
 
+	public String getXl() {
+		return xl;
+	}
 
+	public void setXl(String xl) {
+		this.xl = xl;
+	}
+
+	public String getZy() {
+		return zy;
+	}
+
+	public void setZy(String zy) {
+		this.zy = zy;
+	}
 	public long getYhid() {
 		return yhid;
 	}
