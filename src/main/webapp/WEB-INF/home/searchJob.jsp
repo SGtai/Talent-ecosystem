@@ -25,6 +25,7 @@
 </head>
 
 <body>
+
 <div class="topDiv">
 	<div class="topL">
 		<div class="logo">
@@ -76,14 +77,42 @@
 				<c:if test="${text == null or text == ''}">
 					""
 				</c:if>
-			  type="text" placeholder="请填写关键词或选择职位" class="keyword" style="color: #898989;padding-left: 35px;background: url(<%=imagesPath+"7.png"%>) 8px 8px no-repeat;line-height: 33px;height: 33px;width: 275px;cursor: auto" id="searchJobText"/>
+			  type="text" placeholder="请填写关键词或选择职位" class="keyword" style="color: #898989;padding-left: 35px;background: url(<%=imagesPath+"7.png"%>) 8px 8px no-repeat;line-height: 33px;height: 33px;width: 275px;cursor: auto;margin-top: -1px;" id="searchJobText"/>
 			<span class="jiantou" style="background: url(<%=imagesPath+"8.png"%>) 5px 13px no-repeat;width: 29px;height: 35px;float: right;"></span>
 		</div>
-<%--		<div class="sea1_3">--%>
-<%--			<input name="" type="text" placeholder="请选择行业" class="hytxt" style="background:url(<%=imagesPath+"8.png"%>)  right 13px no-repeat; width:203px;height: 35px; padding-left:15px"/>--%>
-<%--		</div>--%>
-		<div class="sea1_4">
-			<a href="" style="width: 112px;"><button class="layui-btn" lay-submit lay-filter="searchBtn" id="searchBtn" style="width: 116px;">搜工作</button></a>
+		<div class="layui-input-inline">
+			<select name="postiontype" id="postiontype">
+				<option value="">请选择职业类型</option>
+				<c:if test="${pList != null}">
+					<c:forEach items="${pList}" begin="0" var="i">
+						<c:if test="${i.poid == type}">
+							<option selected="" value="${i.poid}">${i.type}</option>
+						</c:if>
+						<c:if test="${i.poid != type}">
+							<option value="${i.poid}">${i.type}</option>
+						</c:if>
+
+					</c:forEach>
+				</c:if>
+			</select>
+		</div>
+		<div class="layui-input-inline">
+			<select name="prid" lay-filter="prid">
+				<option value="">请选择省</option>
+				<c:if test="${province != null}">
+					<c:forEach items="${province}" begin="0" var="i">
+						<option value="${i.prid}">${i.prname}</option>
+					</c:forEach>
+				</c:if>
+
+			</select>
+		</div>
+		<div class="layui-input-inline">
+			<select name="ctid" lay-filter="ctid" id="ctid">
+			</select>
+		</div>
+		<div class="sea1_4" style="position: absolute;margin-left: 971px;margin-top: -38px;">
+			<a style="width:112px"><button class="layui-btn" lay-submit lay-filter="searchBtn" id="searchBtn" style="width: 116px;">搜工作</button></a>
 		</div>
 	</div>
 
@@ -228,14 +257,14 @@
 <div class="seachlist">
 	<div class="listtop">
 
-		<div class="tj2">
-			<input name="" type="checkbox" value="" />
-			<span>只显示在线 </span>
-		</div>
-		<div class="tj2">
-			<input name="" type="checkbox" value="" />
-			<span>只显示有环境照片 </span>
-		</div>
+<%--		<div class="tj2">--%>
+<%--			<input name="" type="checkbox" value="" />--%>
+<%--			<span>只显示在线 </span>--%>
+<%--		</div>--%>
+<%--		<div class="tj2">--%>
+<%--			<input name="" type="checkbox" value="" />--%>
+<%--			<span>只显示有环境照片 </span>--%>
+<%--		</div>--%>
 
 	</div>
 	<div class="clear"></div>

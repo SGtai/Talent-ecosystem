@@ -68,6 +68,86 @@
 	</form>
 	<div style="margin-left: 20%;margin-top: -2%"><table id="demo" lay-filter="table_pa"></table></div>
 
+	<%--人才简历--%>
+	<div id="mydiv" style="display: none ; padding: 10px;margin-left: 10%">
+		<div class="layui-form-item" style="margin-left: -15%">
+			<label class="layui-form-label">姓名</label>
+			<div class="layui-input-inline">
+				<input type="text" id="hide1"  autocomplete="off" class="layui-input" disabled>
+			</div>
+			<label class="layui-form-label">学校名称</label>
+			<div class="layui-input-inline">
+				<input type="text" id="hide2"  autocomplete="off" class="layui-input" disabled>
+			</div>
+		</div>
+		<div class="layui-form-item" style="margin-left: -15%">
+			<label class="layui-form-label">出生年月</label>
+			<div class="layui-input-inline">
+				<input type="text" id="hide3"  autocomplete="off" class="layui-input" disabled>
+			</div>
+			<label class="layui-form-label">专业</label>
+			<div class="layui-input-inline">
+				<input type="text" id="hide4"  autocomplete="off" class="layui-input" disabled>
+			</div>
+		</div>
+		<div class="layui-form-item" style="margin-left: -15%">
+			<label class="layui-form-label">政治面貌</label>
+			<div class="layui-input-inline">
+				<input type="text" id="hide5"  autocomplete="off" class="layui-input" disabled>
+			</div>
+			<label class="layui-form-label">学历</label>
+			<div class="layui-input-inline">
+				<input type="text" id="hide6"  autocomplete="off" class="layui-input" disabled>
+			</div>
+		</div>
+		<div class="layui-form-item" style="margin-left: -15%">
+			<label class="layui-form-label">电话</label>
+			<div class="layui-input-inline">
+				<input type="text" id="hide7"  autocomplete="off" class="layui-input" disabled>
+			</div>
+			<label class="layui-form-label">住址</label>
+			<div class="layui-input-inline">
+				<input type="text" id="hide8"  autocomplete="off" class="layui-input" disabled>
+			</div>
+		</div>
+		<img  src=/schoolS/cunchu/mypic/图片1.png" alt="" style="width: 20%;height: 20%;margin-left: 70%;margin-top: -30%">
+		<div class="layui-form-item" style="margin-left: -15%">
+			<label class="layui-form-label">技能证书</label>
+			<div class="layui-input-inline" style="width: 79%;">
+				<textarea name="scdata" id="hide9" class="layui-textarea" placeholder="请输入内容" maxlength="240" disabled></textarea>
+			</div>
+		</div>
+		<div class="layui-form-item" style="margin-left: -15%">
+			<label class="layui-form-label">自我评价</label>
+			<div class="layui-input-inline" style="width: 79%;">
+				<textarea name="scdata" id="hide10" class="layui-textarea" placeholder="请输入内容" maxlength="240" disabled></textarea>
+			</div>
+		</div>
+	</div>
+<%--	人才批量导入面板--%>
+	<div id="daorumb" style="display: none ; padding: 10px;margin-left: 10%">
+
+		<div class="layui-form-item">
+			<label class="layui-form-label" style="margin-left: 15%">模板下载</label>
+			<div class="layui-inline">
+				<button style="margin-left: 5%" class="layui-btn layui-btn-normal layui-btn-radius" id="xiazaimb" type="button">下载模板</button>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label" style="margin-left: 15%">批量上传</label>
+			<div class="layui-inline">
+				<button style="margin-left: 5%" class="layui-btn layui-btn-normal layui-btn-radius" id="xzwj" type="button">选择文件</button>
+			</div>
+		</div>
+		<div>
+			<div class="layui-inline" style="margin-left: 19%">
+				<button type="button" class="layui-btn"  id="baocun">提交</button>
+			</div>
+			<div class="layui-inline" style="margin-left: 15%">
+				<button type="button" class="layui-btn"  id="fanhui">返回</button>
+			</div>
+		</div>
+	</div>
 	<script>
 		layui.use(['form','layer','jquery','table','laydate'], function() {
 			var table = layui.table;
@@ -76,6 +156,7 @@
 			var layer = layui.layer;
 			var laydate = layui.laydate;
 			var times = "";
+			//日期显示
 			laydate.render({
 				elem: '#test16'
 				, type: 'datetime'
@@ -85,7 +166,7 @@
 					times = value;
 				}
 			});
-			// $('#date').val()+"to"+$('#date1').val();
+			//表格
 			table.render({
 				elem: '#demo'
 				,height: 300
@@ -98,21 +179,21 @@
 				,cols: [[ //表头
 					{field: 'account', title: '账号名', width:150,height:100}
 					,{field: 'name', title: '姓名', width:150,height:100}
-					,{field: 'zyMajor', title: '专业', width:150,height:100}
-					,{field: 'jzstate', title: '就业情况', width: 150,height:100,templet:function (d) {
-							if(d.jzstate==="0"){
-								return "未就业"
-							}
-							if(d.jzstate==="1"){
-								return "已就业"
-							}
-
-						}
-					}
+					,{field: 'zy', title: '专业', width:150,height:100}
+					,{field: 'jzstate', title: '就业情况', width: 150,height:100}
 					,{field:'opera', width:150, title: '操作',align:'center', toolbar: '#toolbar'}
+					,{field: 'mmFace', title: '政治面貌', width: 50,style:'display:none;'}
+					,{field: 'birthday', title: '出生日期', width: 50,style:'display:none;'}
+					,{field: 'phone', title: '电话', width: 50,style:'display:none;'}
+					,{field: 'byschool', title: '学校', width: 50,style:'display:none;'}
+					,{field: 'xl', title: '学历', width: 50,style:'display:none;'}
+					,{field: 'jzdResidence', title: '住址', width: 50,style:'display:none;'}
+					,{field: 'zsCertificate', title: '技能证书', width: 50,style:'display:none;'}
+					,{field: 'pjEvaluation', title: '自我评价', width: 50,style:'display:none;'}
 				]]
 				,id:'UserTable'
 			});
+			//搜索
 			$("#query_pa").click(function () {
 				table.reload('UserTable',{
 					url:'/school/rencaiinfoquery'
@@ -126,97 +207,109 @@
 					}
 				});
 			});
-
+			//查看简历
 			table.on('tool(table_pa)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
 				var data = obj.data //获得当前行数据
 					,layEvent = obj.event; //获得 lay-event 对应的值
+				$("#hide1").val(data.name);
+				$("#hide2").val(data.byschool);
+				$("#hide3").val(data.birthday);
+				$("#hide4").val(data.zy);
+				$("#hide5").val(data.mmFace);
+				$("#hide6").val(data.xl);
+				$("#hide7").val(data.phone);
+				$("#hide8").val(data.jzdResidence);
+				$("#hide9").val(data.zsCertificate);
+				$("#hide10").val(data.pjEvaluation);
+				$.ajax(
+					{
+						type:"POST",
+						url:"/school/reg1",
+						dataType:"text",
+						data:{
+							jlid:data.account
+						},
+						success:function (msg) {
 
-				var account = data.account;
-				var state = data.state;
-				// 修改状态
+						},
+						error:function (msg) {
+							alert("系统忙，请稍等");
+						}
+					}
+				);
+				// 查看简历
 				if(layEvent === 'able'){
-					layer.confirm('确定要修改该用户状态吗',function (index)
-					{
-						$.ajax({
-							type: 'post'
-							, url: ''
-							, dataType: 'text'
-							, data: {account: account, state:state}
-							, success: function (res) {
-								// var result = res.toString();
-								// if (result == 'true') {
-								layer.msg('修改成功');
-								// 	window.location.reload();
-								// } else {
-								// 	layer.msg('修改错误');
-								// }
-							}
-							, error: function (msg) {
-								alert("服务器正忙。。。。" + msg);
-							}
-						});
+					layer.open({
 
-						layer.close(index);
-					});
-				}
-				// 删除
-				if(layEvent === 'delete'){
-					layer.confirm('确定要删除该用户吗',function (index)
-					{
-						$.ajax({
-							type: 'post'
-							, url: ''
-							, dataType: 'text'
-							, data: {account: account, state:2}
-							, success: function (res) {
-								// var result = res.toString();
-								// if (result == 'true') {
-								layer.msg('修改成功');
-								// 	window.location.reload();
-								// } else {
-								// 	layer.msg('修改错误');
-								// }
-							}
-							, error: function (msg) {
-								alert("服务器正忙。。。。" + msg);
-							}
-						});
-						layer.close(index);
+						type:1 , //设置类型 默认为0， 1：页面层  2：iframe层 type - 基本层类型
+
+						title:"个人简历(简略)",// title - 标题
+
+						content:$("#mydiv"),// content - 内容
+
+						skin:'layui-layer-molv',// skin - 样式类名
+
+						area:['1000px','400px'],// area - 宽高
+
+						offset:'auto',// offset - 坐标
+
+						icon:1,//只对type=0的有效 icon - 图标。信息框和加载层的私有参数
+
+
+						btnAlign: 'c',//按钮居中对齐
+
+						shadeClose:true,
+						// time:5000,//time - 自动关闭所需毫秒
+
+						anim:5,//anim - 弹出动画 渐显
+
+						resize:false,//resize - 是否允许拉伸
+
+						maxmin:false, //是否显示最大化和最小化的按钮 对type=1 type=2有效
+
+						success:function () {
+
+						}
+
 					})
 				}
-
-				// 重置密码,直接访问修改状态的方法，传入状态为8
-				if(layEvent === 'repwd') {
-					layer.confirm('确定要对此用户重置密码？',function (index)
-					{
-						$.ajax({
-							type: 'post'
-							, url: ''
-							, dataType: 'text'
-							, data: {account: account, state:8}
-							, success: function (res) {
-								// var result = res.toString();
-								// if (result == 'true') {
-								layer.msg('修改成功');
-								// 	window.location.reload();
-								// } else {
-								// 	layer.msg('修改错误');
-								// }
-							}
-							, error: function (msg) {
-								alert("服务器正忙。。。。" + msg);
-							}
-						});
-						layer.close(index);
-					})
-
-
-
-				}
-
-
 			});
+			//导入人才面板
+			$("#daoru").click(function () {
+				layer.open({
 
+					type:1 , //设置类型 默认为0， 1：页面层  2：iframe层 type - 基本层类型
+
+					title:"人才批量导入",// title - 标题
+
+					content:$("#daorumb"),// content - 内容
+
+					skin:'layui-layer-molv',// skin - 样式类名
+
+					area:['450px','250px'],// area - 宽高
+
+					offset:'auto',// offset - 坐标
+
+					icon:1,//只对type=0的有效 icon - 图标。信息框和加载层的私有参数
+
+
+					btnAlign: 'c',//按钮居中对齐
+
+					shadeClose:true,
+					// time:10000,//time - 自动关闭所需毫秒
+
+					anim:5,//anim - 弹出动画 渐显
+
+					resize:false,//resize - 是否允许拉伸
+
+					maxmin:false, //是否显示最大化和最小化的按钮 对type=1 type=2有效
+
+					success:function () {
+
+					}
+
+				})
+			});
 
 
 

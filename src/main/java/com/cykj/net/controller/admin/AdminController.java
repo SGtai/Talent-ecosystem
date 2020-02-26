@@ -1,6 +1,7 @@
 package com.cykj.net.controller.admin;
 
 import com.cykj.net.javabean.Position;
+import com.cykj.net.javabean.Province;
 import com.cykj.net.javabean.Qyinfo;
 import com.cykj.net.javabean.admin.Admin;
 import com.cykj.net.javabean.admin.AdminMenu;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpSession;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 
@@ -94,6 +96,8 @@ public class AdminController {
                 session.setAttribute("Qyinfo", qyinfo);
                 List<Position> list=companyService.findPosition();
                 session.setAttribute("position",list);
+                List<Province> list2=companyService.findProvince();
+                session.setAttribute("province",list2);
             //高校
             }else if (roid == 4){
 
@@ -141,11 +145,16 @@ public class AdminController {
      */
     @RequestMapping(value = "/exit")
     public ModelAndView exit(HttpSession session) {
+        Enumeration em = session.getAttributeNames();
+        while(em.hasMoreElements()){
+            session.removeAttribute(em.nextElement().toString());
+        }
         ModelAndView mv = new ModelAndView();
-        session.setAttribute("admin", null);
+//        session.setAttribute("admin", null);
         mv.setViewName("/WEB-INF/admin/login");
         return mv;
     }
+
 
     /**
      * 失去焦点判断验证码
@@ -179,7 +188,6 @@ public class AdminController {
         String verifyCodeValue = new GetCode().drawImg(output);
         // 将校验码保存到session中
         HttpSession session = request.getSession();
-//        session.setAttribute("verifyCodeValue", verifyCodeValue);
         session.setAttribute("verifyCodeValue", "1234");
         try {
             ServletOutputStream out = response.getOutputStream();

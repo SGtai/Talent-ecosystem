@@ -129,7 +129,6 @@
 <script src="<%=path+"json2.js"%>"></script>
 <script src="<%=jsPath+"regcompanyinfo.js"%>"></script>
 <script type="text/javascript">
-	var data=document.getElementById("qytype").value;
 	$("#qytype2").find("option[value='${sessionScope.Qyinfo.qyType}']").attr("selected",'selected');
 </script>
 </body>

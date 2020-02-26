@@ -36,8 +36,16 @@
 			width: 250px;
 			text-align: center;
 		}
+		.layui-form-select .layui-input{
+			width: 100px;
+			text-align: center;
+		}
 		#button1{
 			margin-left: 38%;
+		}
+		.layui-form-item .layui-input-inline {
+			float: left;
+			width: 100px;
 		}
 	</style>
 </head>
@@ -61,7 +69,23 @@
 			</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">学校地址：</label>
+			<label class="layui-form-label">学校省市位置：</label>
+			<div class="layui-input-inline">
+				<select name="pro" lay-filter="pro" id="pro" lay-verify="required">
+					<option value="">请选择省</option>
+					<c:if test="${province!=null}">
+						<c:forEach items="${province}" begin="0" var="i">
+							<option value="${i.prid}">${i.name}</option>
+						</c:forEach>
+					</c:if>
+				</select>
+			</div>
+			<div class="layui-input-inline " style="margin-left: 4%">
+				<select name="city" id="city" lay-verify="required">
+					<option value="">请选择市</option>
+				</select>
+			</div>
+			<label class="layui-form-label" style="margin-left: 9%">学校具体地址：</label>
 			<div class="layui-input-inline" style="width: 190px">
 				<input name="scAddress" id="scAddress" class="layui-input" type="text" placeholder="请输入" autocomplete="off"  lay-verify="required" maxlength="30" >
 			</div>
@@ -95,6 +119,19 @@
 				<input id="s4" title="智力、技术有偿服务" type="checkbox" value="智力、技术有偿服务">
 			</div>
 			<input type="text" style="display: none" id="jinqianly">
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">学校类型：</label>
+			<div class="layui-input-inline" >
+				<select name="sctype" lay-filter="sctype" id="sctype" lay-verify="required">
+					<option value="">请选择学校类型</option>
+					<option value="普通高等教育">普通高等教育</option>
+					<option value="成人高等教育">成人高等教育</option>
+					<option value="高教自学考试">高教自学考试</option>
+					<option value="电大开放教育">电大开放教育</option>
+					<option value="远程网络教育">远程网络教育</option>
+				</select>
+			</div>
 		</div>
 		<div class="layui-form-item layui-form-text">
 			<label class="layui-form-label">学校简介：</label>
@@ -132,7 +169,7 @@
 				var form = layui.form;
 				var $ = layui.jquery;
 				var layer = layui.layer;
-				//执行实例
+				//执行实例上传
 				upload.render({
 					elem: '#test2' //绑定元素
 					, url: '/school/reg2' //上传接口
@@ -151,7 +188,10 @@
 							jubanDanwei:document.getElementById("jubanDanwei").value,
 							xinyongDaima:document.getElementById("xinyongDaima").value,
 							scAbout:document.getElementById("scAbout").value,
-							scPhone:document.getElementById("scPhone").value
+							scPhone:document.getElementById("scPhone").value,
+							prid:$("#pro").val(),
+							ctid:$("#city").val(),
+							type:$("#sctype").val()
 						}
 					}
 					, choose: function (obj) {
@@ -188,15 +228,40 @@
 						//请求异常回调
 					}
 				});
+					form.on('select(pro)', function(data) {
+						if(data.value!=""&&data.value!=null){
+							$.ajax(
+								{
+									type:"POST",
+									url:"/school/findcity",
+									dataType:"text",
+									data:{
+										province:data.value
+									},
+									success:function (msg) {
+										var city = $('#city');
+										city.empty();
+										var arr = JSON.parse(msg);
+										city.append("<option value=''>请选择市</option>");
+										for (var i = 0; i < arr.length; i++) {
+											city.append("<option value='"+arr[i].ctid+"'>"+arr[i].name+"</option>");
+										}
+										layui.form.render('select');
+									},
+									error:function (msg) {
+										alert("系统忙，请稍等");
+									}
+								}
+							);
+						}else{
+							var city = $('#city');
+							city.empty();
+							city.append("<option value=''>请选择市</option>");
+							layui.form.render('select')
+						}
+					});
 			});
-			// 点击返回按钮操作
-			$('#return').click(
-				function () {
-					<%--var returnpmain = document.createElement("a");--%>
-					<%--returnpmain.href = '<%=appPath+"admin/returnpmain.do"%>';--%>
-					<%--returnpmain.click();--%>
-				}
-			);
+			//点击提交
 			$('#bb').click(
 				function () {
 					var click="success";
@@ -209,7 +274,9 @@
 					var xinyongDaima1=document.getElementById("xinyongDaima").value;
 					var scAbout1=document.getElementById("scAbout").value;
 					var scPhone1=document.getElementById("scPhone").value;
-
+					var p=$("#pro").val();
+					var c=$("#city").val();
+					var type=$("#sctype").val();
 					//金钱来源
 					var jinqianly="";
 					var s1=$("#s1");
@@ -240,8 +307,12 @@
 						xinyongDaima1.length===0||
 						scAbout1.length===0||
 						scPhone1===0||
-						jinqianly==""
+						jinqianly==""||
+							p==""||
+							c==""||
+							type==""
 					){
+						alert(c);
 						layer.alert("尊敬的用户，请填写完整内容", {icon: 2, offset: "right", time: 30000});
 						return;
 					}
@@ -296,6 +367,7 @@
 						layer.alert("您还未选择上传图片", {icon: 2, offset: "right", time: 30000});
 					}
 					if(click=="success"){
+						//触发上传的btn按钮
 						var a = document.getElementById("btn");
 						a.click();
 					}

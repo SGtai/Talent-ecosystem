@@ -89,8 +89,17 @@
 			<if test="replyRate != null and replyRate !='' and replyRate !='0'">
 				and A.replyRate &gt;= #{replyRate}
 			</if>
+-- 			岗位模糊搜索
 			<if test="postion != null and postion !=''">
 				and C.postion like '%${postion}%'
+			</if>
+-- 			岗位类型
+			<if test="postiontype != null and postiontype !=''">
+				and C.poid = #{postiontype}
+			</if>
+			-- 			城市
+			<if test="ctid != null and ctid !=''">
+				and D.ctid = #{ctid}
 			</if>
 		</where>
 	</select>
@@ -142,21 +151,34 @@
 			<if test="workTime != null and workTime !='' and workTime !='0'.toString()">
 				and B.gzExperience like #{workTime}
 			</if>
+-- 			工作类型/全职兼职
 			<if test="workState != null and workState !='' and workState !='0'.toString()">
 				and B.zhiyeType like #{workState}
 			</if>
+-- 			公司人数
 			<if test="qyPeople != null and qyPeople !='' and qyPeople !='0'.toString()">
 				and A.qyPeople like #{qyPeople}
 			</if>
+-- 			回复率
 			<if test="replyRate != null and replyRate !='' and replyRate !='0'">
 				and A.replyRate &gt;= #{replyRate}
 			</if>
+-- 			岗位模糊搜索
 			<if test="postion != null and postion !=''">
 				and C.postion like '%${postion}%'
 			</if>
+			-- 			岗位类型
+			<if test="postiontype != null and postiontype !=''">
+				and C.poid = #{postiontype}
+			</if>
+			-- 			城市
+			<if test="ctid != null and ctid !=''">
+				and D.ctid = #{ctid}
+			</if>
+--
 		</where>
 	</select>
-
+<!--	//本月新增岗位/岗位总数/用户总数/求职成功人数/高校人数-->
 	<select id="gangweiNew" resultType="int">
 		SELECT count(*) FROM jobinfo WHERE DATE_FORMAT( time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' );
 	</select>
@@ -168,6 +190,22 @@
 	</select>
 	<select id="qiuzhiSuccess" resultType="int">
 		SELECT count(*) FROM applicationjob where feedbackType = 0;
+	</select>
+	<select id="gaoxiaocount" resultType="int">
+		select count(*) from userlist where tuijianren != 0 and tuijianren is not null;
+	</select>
+
+<!--	//岗位类型/省/市-->
+	<select id="position" resultType="Position">
+		select * from position;
+	</select>
+
+	<select id="province" resultType="City">
+		select prid,name prname from province;
+	</select>
+
+	<select id="city" parameterType="int" resultType="City">
+		select ctid,name ctname from city where prid = #{prid};
 	</select>
 
 </mapper>

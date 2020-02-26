@@ -1,9 +1,6 @@
 package com.cykj.net.controller;
 
-import com.cykj.net.javabean.Adminrole;
-import com.cykj.net.javabean.Alluserinfo;
-import com.cykj.net.javabean.Schoolinfo;
-import com.cykj.net.javabean.Table;
+import com.cykj.net.javabean.*;
 import com.cykj.net.javabean.admin.Admin;
 import com.cykj.net.service.AdminroleService;
 import com.cykj.net.service.SchoolService;
@@ -12,6 +9,7 @@ import com.google.gson.Gson;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,6 +26,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+
+import static com.cykj.net.javabean.S1.*;
 
 @Controller
 @RequestMapping("/school")
@@ -52,9 +52,9 @@ public class SchoolController
 	 */
 	@RequestMapping("/reg1")
 	@ResponseBody
-	public String screg1(Schoolinfo schoolinfo, HttpServletRequest request){
+	public String screg1(S1 schoolinfo, HttpServletRequest request){
 		System.out.println("学校注册１启动。。。");
-		Schoolinfo sc=schoolService.findSchoolinfo(schoolinfo.getScAccount());
+		S1 sc=schoolService.findSchoolinfo(schoolinfo.getScAccount());
 		if(sc!=null){
 			//该账户存在的情况下，不给注册
 			System.out.println("不给注册");
@@ -69,6 +69,28 @@ public class SchoolController
 	}
 
 	/**
+	 * 获取省份跳转页面
+	 * @return
+	 */
+	@RequestMapping("/returnreg2")
+	@ResponseBody
+	public ModelAndView returnreg2(){
+		System.out.println("获取省份");
+		ModelAndView mv=new ModelAndView();
+		List<P1> p=schoolService.findpro();
+		mv.setViewName("/WEB-INF/school/reg2");
+		mv.addObject("province",p);
+		return mv;
+	}
+	@RequestMapping("/findcity")
+	@ResponseBody
+	public List<C1> getcity(String province){
+		System.out.println("获取城市");
+		ModelAndView mv=new ModelAndView();
+		List<C1> c=schoolService.findcity(province);
+		return c;
+	}
+	/**
 	 * 该功能真正实现注册，并插入管理员的表以及高校的表
 	 * @param schoolinfo
 	 * @param request
@@ -76,20 +98,20 @@ public class SchoolController
 	 */
 	@RequestMapping("/reg2")
 	@ResponseBody
-	public String screg2(Schoolinfo schoolinfo, HttpServletRequest request,@RequestParam("file") MultipartFile file) throws IOException
+	public String screg2(S1 schoolinfo, HttpServletRequest request,@RequestParam("file") MultipartFile file) throws IOException
 	{
 		System.out.println("学校注册２启动。。。");
 		//session里面取值
-		Schoolinfo sess= (Schoolinfo) request.getSession().getAttribute("reg1need");
+		S1 sess= (S1) request.getSession().getAttribute("reg1need");
 		//注入账户密码
 		schoolinfo.setScAccount(sess.getScAccount());
 		schoolinfo.setPassword(sess.getPassword());
 		//查找这个账户存在不，是否被其他管理员在这个期间注册了
-		Schoolinfo scnamecheck=schoolService.findSchoolinfo(schoolinfo.getScAccount());
+		S1 scnamecheck=schoolService.findSchoolinfo(schoolinfo.getScAccount());
 		//查找手机号是否唯一
-		Schoolinfo scphonecheck=schoolService.findphone(schoolinfo.getScPhone());
+		S1 scphonecheck=schoolService.findphone(schoolinfo.getScPhone());
 		//查找信用代码是否唯一
-		Schoolinfo scdaimachenk=schoolService.finddaima(schoolinfo.getXinyongDaima());
+		S1 scdaimachenk=schoolService.finddaima(schoolinfo.getXinyongDaima());
 		if(scnamecheck!=null){
 			//被其他管理员注册了，注册失败
 			return "0";
@@ -106,7 +128,7 @@ public class SchoolController
 			//插入注册时间
 			schoolinfo.setRegTime(new Timestamp(System.currentTimeMillis()));
 			//插入图片路径
-			String path=request.getServletContext().getRealPath("/WEB-INF/school/cunchu");
+			String path= ResourceUtils.getURL("classpath:").getPath()+"static/schoolS/cunchu";
 			//判断logo目录的是否存在
 			File pathlogo=new File(path+"\\"+"logo");
 			if(!pathlogo.exists()){
@@ -120,8 +142,8 @@ public class SchoolController
 			System.out.println(path+"\\"+"logo"+"\\"+schoolinfo.getScAccount());
 			String filename = file.getOriginalFilename();
 			file.transferTo(new File(path+"\\"+"logo"+"\\"+schoolinfo.getScAccount()+"\\"+ filename));
-			schoolinfo.setScpicture("\\"+"logo"+"\\"+schoolinfo.getScAccount()+"\\"+ filename);
-			schoolinfo.setScState("启用");
+			schoolinfo.setScpicture("\\schoolS\\cunchu\\"+"logo"+"\\"+schoolinfo.getScAccount()+"\\"+ filename);
+			schoolinfo.setScState("0");
 			Admin a=new Admin();
 			a=adminService.findAdmin(schoolinfo.getScAccount());
 			if(a!=null){
@@ -137,16 +159,13 @@ public class SchoolController
 				//插入管理角色表
 				Adminrole adminrole=new Adminrole();
 				adminrole.setAccount(schoolinfo.getScAccount());
-				adminrole.setRoid(4);
+				adminrole.setRoid(7);
 				adminroleService.regAdminRole(adminrole);
 				int i=schoolService.inserSchoolinfo(schoolinfo);
 				if(i>0){
 					System.out.println("学校表插入成功");
 				}
-
 			}
-
-
 		}
 		return "1";
 	}
@@ -159,10 +178,15 @@ public class SchoolController
 	@RequestMapping("/changeinfo")
 	public ModelAndView changeinfo(HttpServletRequest request){
 		Admin admin= (Admin) request.getSession().getAttribute("admin");
-		Schoolinfo scinfo=schoolService.findSchoolinfo(admin.getAccount());
+		System.out.println(admin.getAccount());
+		S1 scinfo=schoolService.findSchoolinfo(admin.getAccount());
 		ModelAndView mv=new ModelAndView();
+		List<P1> p=schoolService.findpro();
+		List<C1> c=schoolService.findcity(String.valueOf(scinfo.getPrid()));
 		mv.setViewName("/WEB-INF/school/changeinfo");
 		mv.addObject("scinfo",scinfo);
+		mv.addObject("province",p);
+		mv.addObject("city",c);
 		return mv;
 	}
 	/**
@@ -175,11 +199,11 @@ public class SchoolController
 	 */
 	@RequestMapping("/changeInfo1")
 	@ResponseBody
-	public String changeInfo1(Schoolinfo sc,HttpServletRequest request,@RequestParam("file") MultipartFile file) throws IOException
+	public String changeInfo1(S1 sc,HttpServletRequest request,@RequestParam("file") MultipartFile file) throws IOException
 	{
 		Admin admin= (Admin) request.getSession().getAttribute("admin");
-		sc.setScAccount(admin.getAccount());
-			Schoolinfo ssc=schoolService.findSchoolinfo(admin.getAccount());
+			sc.setScAccount(admin.getAccount());
+			S1 ssc=schoolService.findSchoolinfo(admin.getAccount());
 			//判断电话号码是否唯一
 			int a=panduanphone(admin.getAccount(),sc.getScPhone());
 			if(a==1){}else{return "-1";}
@@ -187,7 +211,7 @@ public class SchoolController
 			int b=panduandaima(admin.getAccount(),sc.getXinyongDaima());
 			if(b==1){}else{return "-2";}
 			//插入图片路径
-			String path=request.getServletContext().getRealPath("/WEB-INF/school/cunchu");
+			String path= ResourceUtils.getURL("classpath:").getPath()+"static/schoolS/cunchu";
 			File logoacc=new File(path+"\\"+"logo"+"\\"+admin.getAccount());
 			//删除这个用户文件夹下的所有文件
 			File[] files = logoacc.listFiles();
@@ -215,7 +239,7 @@ public class SchoolController
 	 */
 	@RequestMapping("/changeInfo2")
 	@ResponseBody
-	public String changeInfo2(Schoolinfo sc,HttpServletRequest request)
+	public String changeInfo2(S1 sc,HttpServletRequest request)
 	{
 		Admin admin= (Admin) request.getSession().getAttribute("admin");
 		sc.setScAccount(admin.getAccount());
@@ -243,7 +267,7 @@ public class SchoolController
 	@RequestMapping("/changepassword")
 	public ModelAndView changepassword(HttpServletRequest request){
 		Admin admin= (Admin) request.getSession().getAttribute("admin");
-		Schoolinfo scinfo=schoolService.findSchoolinfo(admin.getAccount());
+		S1 scinfo=schoolService.findSchoolinfo(admin.getAccount());
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("/WEB-INF/school/changepwd");
 		mv.addObject("scinfo",scinfo);
@@ -255,7 +279,7 @@ public class SchoolController
 	 */
 	@RequestMapping("/pwd")
 	@ResponseBody
-	public String changepwd(Schoolinfo sc,String newpass,HttpServletRequest request){
+	public String changepwd(S1 sc,String newpass,HttpServletRequest request){
 		Admin admin= (Admin) request.getSession().getAttribute("admin");
 		if(admin!=null){
 			if(schoolService.findSchoolinfo(admin.getAccount()).getPassword().equals(sc.getPassword())){
@@ -285,7 +309,7 @@ public class SchoolController
 	@RequestMapping("/rencaiinfo")
 	public ModelAndView rencaiinfo(HttpServletRequest request){
 		Admin admin= (Admin) request.getSession().getAttribute("admin");
-		Schoolinfo scinfo=schoolService.findSchoolinfo(admin.getAccount());
+		S1 scinfo=schoolService.findSchoolinfo(admin.getAccount());
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("/WEB-INF/school/rencaiinfo");
 		mv.addObject("scinfo",scinfo);
@@ -323,6 +347,17 @@ public class SchoolController
 		gsonbean(t,response);
 	}
 
+	@RequestMapping("/exgz")
+	@ResponseBody
+	public ModelAndView exgz(String jlid){
+		List<Experience> experiences=schoolService.findexperience(jlid);
+		List<Undergo> undergos=schoolService.findegzjl(jlid);
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("/WEB-INF/school/rencaiinfo");
+		mv.addObject("ex",experiences);
+		mv.addObject("un",undergos);
+		return mv;
+	}
 
 
 
@@ -367,21 +402,21 @@ public class SchoolController
 
 
 	public int panduanphone(String account,String phone){
-		Schoolinfo ssc=schoolService.findSchoolinfo(account);
+		S1 ssc=schoolService.findSchoolinfo(account);
 		if(ssc.getScPhone().equals(phone)){}else{
 			//查找手机号是否唯一
 			System.out.println("yyy"+ssc.getScPhone());
 			System.out.println("xxx"+phone);
-			Schoolinfo scphonecheck=schoolService.findphone(phone);
+			S1 scphonecheck=schoolService.findphone(phone);
 			if(scphonecheck!=null){return 0;}
 		}
 		return 1;
 	}
 	public int panduandaima(String account,String daima){
-		Schoolinfo ssc=schoolService.findSchoolinfo(account);
+		S1 ssc=schoolService.findSchoolinfo(account);
 		if(ssc.getXinyongDaima().equals(daima)){}else{
 			//查找手机号是否唯一
-			Schoolinfo scdaimacheck=schoolService.finddaima(daima);
+			S1 scdaimacheck=schoolService.finddaima(daima);
 			if(scdaimacheck!=null){return 0;}
 		}
 		return 1;

@@ -42,22 +42,23 @@
 <div class="topDiv">
 	<div class="mainWarp">
 		<div class="topLeft">
-			<span>地区频道：</span>
-			<a href=" ">广州</a>
-			<a href=" ">深圳</a>
-			<a href=" ">珠海</a>
-			<a href=" ">汕头</a>
-			<a href=" ">韶关</a>
-			<a href=" ">河源</a>
-			<a href=" ">广州</a>
-			<a href=" ">深圳</a>
-			<a href=" ">珠海</a>
+<%--			<span>地区频道：</span>--%>
+<%--			<a href=" ">广州</a>--%>
+<%--			<a href=" ">深圳</a>--%>
+<%--			<a href=" ">珠海</a>--%>
+<%--			<a href=" ">汕头</a>--%>
+<%--			<a href=" ">韶关</a>--%>
+<%--			<a href=" ">河源</a>--%>
+<%--			<a href=" ">广州</a>--%>
+<%--			<a href=" ">深圳</a>--%>
+<%--			<a href=" ">珠海</a>--%>
 		</div>
 		<div class="topRight">
 			<span>好消息：</span>
 			<a href=" ">好消息好消息好消息</a>
 		</div>
 	</div>
+	<a href="/jump/admin/login">管理员入口</a>
 </div>
 <div class="loginDiv">
 	<div class="loginL">
@@ -73,7 +74,7 @@
 	<form method="post" action="/homeS/jumpsearch">
 	<div class="loginC">
 		<input name="searchText" type="text" placeholder="请填写关键词或选择职位..."/>
-		<a href=""><button type="submit" style="margin-left: 39px;width: 118px;height: 46px; background-color:transparent;border-style:none;" id="searchIndx" ></button></a>>
+		<a href=""><button type="submit" style="margin-left: 39px;width: 118px;height: 46px; background-color:transparent;border-style:none;" id="searchIndx" ></button></a>
 	</div>
 	</form>
 	<div class="loginR">
@@ -82,16 +83,10 @@
 </div>
 <div class="menuDiv">
 	<a href="index.html" class="onnav">首页</a>
-	<a href="">人才成长区</a>
-	<a href="/jump/home/searchJob">职位搜索</a>
-	<a href="meetingJob.html">高校专区</a>
+	<a href="/techa">人才成长区</a>
+	<a href="/homeS/jumpsearch">职位搜索</a>
+	<a href="/jump/school/login">高校专区</a>
 	<a href=" " class="mobile">微信版</a>
-
-	<div>
-		<span style="margin-left: 45px;">岗位总数/本月新增:${sessionScope.gangweicount}/${sessionScope.gangweiNew}</span>
-		<span style="margin-left: 60px;">求职人数:${sessionScope.usercount}</span>
-		<span style="margin-left: 60px;">就业人数:${sessionScope.qiuzhiSuccess}</span>
-	</div>
 </div>
 <div class="BodyMain">
 	<div class="mainTop">
@@ -99,62 +94,62 @@
 			<ul>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme7"><b></b><a href=""> IT|互联网|通信</a></span>
+						<span class="itme7"><b></b><a href="/homeS/jumpsearch?type=1"> 技术</a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme1"><b></b><a href=""> 销售|市场|客服|贸易</a></span>
+						<span class="itme1"><b></b><a href="/homeS/jumpsearch?type=2"> 市场</a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme2"><b></b><a href=""> 经营管理|人事|行政|财务</a></span>
+						<span class="itme2"><b></b><a href="/homeS/jumpsearch?type=3"> 人事</a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme6"><b></b><a href=""> 广告|媒体|艺术|出版</a></span>
+						<span class="itme6"><b></b><a href="/homeS/jumpsearch?type=4"> 媒体</a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme8"><b></b><a href=""> 金融|保险</a></span>
+						<span class="itme8"><b></b><a href="/homeS/jumpsearch?type=5"> 金融</a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme9"><b></b><a href=""> 医疗|制药|环保|化工</a></span>
+						<span class="itme9"><b></b><a href="/homeS/jumpsearch?type=6"> 医疗健康</a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme3"><b></b><a href=""> 生产|质管|技工|物流</a></span>
+						<span class="itme3"><b></b><a href="/homeS/jumpsearch?type=7"> 供应链/物流</a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme10"><b></b><a href=""> 建筑|房地产|物业管理</a></span>
+						<span class="itme10"><b></b><a href="/homeS/jumpsearch?type=8"> 房地产/建筑</a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme4"><b></b><a href=""> 教育|法律|咨询|翻译</a></span>
+						<span class="itme4"><b></b><a href="/homeS/jumpsearch?type=9"> 咨询/翻译/法律/教育</a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme5"><b></b><a href=""> 零售|家政|餐饮|旅游></a></span>
+						<span class="itme5"><b></b><a href="/homeS/jumpsearch?type=10"> 旅游></a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme12"><b></b><a href=""> 服务业</a></span>
+						<span class="itme12"><b></b><a href="/homeS/jumpsearch?type=11"> 服务业</a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme11"><b></b><a href=""> 电子|能源|机械|纺织</a></span>
+						<span class="itme11"><b></b><a href="/homeS/jumpsearch?type=12"> 生产制造</a></span>
 					</div>
 				</div>
 			</ul>
@@ -205,7 +200,7 @@
 					</div>
 					<div class="ContentB">
 						<div class="qybox1">
-							<a href=" ">企业登录</a>
+							<a href="/jump/admin/login">企业入口</a>
 							<a href=" ">企业注册</a>
 						</div>
 						<div class="qybox2">
@@ -214,6 +209,11 @@
 						<div class="qybox3">
 							<div class="l">企业服务热线<br><b>400-800-8*8*</b></div>
 							<div class="r"></div>
+						</div>
+					</div>
+					<div class="ContentC">
+						<div class="qybox0">
+							<a href="/jump/admin/login">管理员登录</a>
 						</div>
 					</div>
 				</div>
@@ -230,13 +230,11 @@
 						<div class="zph">
 							<div class="zph_1"><a href=" "><img src=<%=imagesPath+"haoxiaoxi.gif"%> /></a></div>
 							<div class="zph_2">
-								<p class="TopTitle">
-									<a href=" ">12月20日周三龙观人才大市场综合类招聘会</a>
-								</p>
 								<div class="ContentMain">
-									<p><span>举办时间：</span> <span>&nbsp;08:00-13:00 周三 </span></p>
-									<p><span>举办场馆：</span> <span>深圳市龙观人才大市场</span></p>
-									<p><span>具体地点：</span> <span>深圳市龙华新区龙华汽车站三楼</span></p>
+									<p><span>岗位总数/本月新增:${sessionScope.gangweicount}/${sessionScope.gangweiNew}</span></p>
+									<p><span>高校人数:${sessionScope.gaoxiaocount}</span></p>
+									<p><span>求职人数:${sessionScope.usercount}</span></p>
+									<p><span>就业人数:${sessionScope.qiuzhiSuccess}</span></p>
 								</div>
 							</div>
 							<div class="zph_3">

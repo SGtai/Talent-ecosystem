@@ -1,9 +1,9 @@
 package com.cykj.net.controller;
 
-import com.cykj.net.javabean.Advert;
-import com.cykj.net.javabean.JobInfoIndex;
-import com.cykj.net.javabean.LayuiData;
+import com.cykj.net.javabean.*;
 import com.cykj.net.service.HomeService;
+import com.google.gson.Gson;
+import com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ public class HomeController
 
 	@Autowired
 	private HomeService homeService;
-	//打开首页的时候，获取薪资最高的10个招聘信息
+	//打开首页的时候，页面初始化
 	@RequestMapping("/getTenHJob")
 	@ResponseBody
 	public String getTenHighCompany(HttpServletRequest request)
@@ -38,6 +38,7 @@ public class HomeController
 		int gangweicount =homeService.gangweicount();
 		int usercount =homeService.usercount();
 		int qiuzhiSuccess = homeService.qiuzhiSuccess();
+		int gaoxiaocount = homeService.gaoxiaocount();
 		request.getSession().setAttribute("jobInfolist",jobInfolist);
 		request.getSession().setAttribute("compAndJobList",compAndJobList);
 		request.getSession().setAttribute("advertList",advertList);
@@ -45,9 +46,11 @@ public class HomeController
 		request.getSession().setAttribute("gangweicount",gangweicount);
 		request.getSession().setAttribute("usercount",usercount);
 		request.getSession().setAttribute("qiuzhiSuccess",qiuzhiSuccess);
+		request.getSession().setAttribute("gaoxiaocount",gaoxiaocount);
 		return "success";
 	}
 
+//	多条件搜索职位
 	@RequestMapping("/searchJob")
 	@ResponseBody
 	public LayuiData searchJob(JobInfoIndex tijiao)
@@ -61,12 +64,30 @@ public class HomeController
 		return layuiData;
 	}
 
+//前端页跳职位搜索页面
 	@RequestMapping("/jumpsearch")
-	public ModelAndView jumpsearch(String searchText){
+	public ModelAndView jumpsearch(String searchText,int type,HttpServletRequest request){
 		ModelAndView mv = new ModelAndView();
+
+		List<Position> p = homeService.position();
+		List<City> province = homeService.province();
+		mv.addObject("type",type);
+		mv.addObject("pList",p);
+		mv.addObject("province",province);
 		mv.addObject("text",searchText);
 		mv.setViewName("/WEB-INF/home/searchJob");
 		return mv;
 	}
+
+//	点击省出现市
+	@RequestMapping("/getcity")
+	@ResponseBody
+	public String getcity(int prid){
+		List<City> cityList = homeService.city(prid);
+		String s = new Gson().toJson(cityList);
+		return s;
+	}
+
+
 
 }

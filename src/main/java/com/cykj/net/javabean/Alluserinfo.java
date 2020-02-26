@@ -2,23 +2,7 @@ package com.cykj.net.javabean;
 
 
 public class Alluserinfo {
-	//用户表完全版
 
-	private long yhid;
-	private String account;
-	private String password;
-	private String name;
-	private String phone;
-	private String sex;
-	private String degree;
-	private String idCard;
-	private String idCardType;
-	private String birthday;
-	private java.sql.Timestamp regTime;
-	private String picture;
-	private String by1;
-	private String by2;
-	//简历表完全
 
 	private long jlId;
 	private long yhId;
@@ -38,142 +22,40 @@ public class Alluserinfo {
 	private String demo1;
 	private String demo2;
 	private java.sql.Timestamp csTime;
-
-	//工作经历表部分
-
-	private String ksTime;
-	private String jzUnit;
-	private String zwPosition;
-	private String gzContent;
 	private String jzstate;
+	private String byschool;
+	private long yhid;
+	private String account;
+	private String password;
+	private String name;
+	private String phone;
+	private String sex;
+	private String degree;
+	private String idCard;
+	private String idCardType;
+	private String birthday;
+	private java.sql.Timestamp regTime;
+	private String picture;
+	private String by1;
+	private String by2;
+	private String zy;
+	private String xl;
 
-
-	//学习经验表部分
-
-	private java.sql.Timestamp sxSchooltime;
-	private String xlEducation;
-	private String zyMajor;
-	private String bySchool;
-	private String xxOptions;
-
-
-
-
-
-	public java.sql.Timestamp getSxSchooltime() {
-		return sxSchooltime;
+	public String getXl() {
+		return xl;
 	}
 
-	public void setSxSchooltime(java.sql.Timestamp sxSchooltime) {
-		this.sxSchooltime = sxSchooltime;
+	public void setXl(String xl) {
+		this.xl = xl;
 	}
 
-
-	public String getXlEducation() {
-		return xlEducation;
+	public String getZy() {
+		return zy;
 	}
 
-	public void setXlEducation(String xlEducation) {
-		this.xlEducation = xlEducation;
+	public void setZy(String zy) {
+		this.zy = zy;
 	}
-
-
-	public String getZyMajor() {
-		return zyMajor;
-	}
-
-	public void setZyMajor(String zyMajor) {
-		this.zyMajor = zyMajor;
-	}
-
-
-	public String getBySchool() {
-		return bySchool;
-	}
-
-	public void setBySchool(String bySchool) {
-		this.bySchool = bySchool;
-	}
-
-
-	public String getXxOptions() {
-		return xxOptions;
-	}
-
-	public void setXxOptions(String xxOptions) {
-		this.xxOptions = xxOptions;
-	}
-
-
-
-
-	public String getKsTime() {
-		return ksTime;
-	}
-
-	public void setKsTime(String ksTime) {
-		this.ksTime = ksTime;
-	}
-
-
-	public String getJzUnit() {
-		return jzUnit;
-	}
-
-	public void setJzUnit(String jzUnit) {
-		this.jzUnit = jzUnit;
-	}
-
-
-	public String getZwPosition() {
-		return zwPosition;
-	}
-
-	public void setZwPosition(String zwPosition) {
-		this.zwPosition = zwPosition;
-	}
-
-
-
-
-
-	public long getJlId() {
-		return jlId;
-	}
-
-	public void setJlId(long jlId) {
-		this.jlId = jlId;
-	}
-
-
-	public long getYhId() {
-		return yhId;
-	}
-
-	public void setYhId(long yhId) {
-		this.yhId = yhId;
-	}
-
-	public String getGzContent() {
-		return gzContent;
-	}
-
-	public void setGzContent(String gzContent) {
-		this.gzContent = gzContent;
-	}
-
-
-
-
-	public String getJzstate() {
-		return jzstate;
-	}
-
-	public void setJzstate(String jzstate) {
-		this.jzstate = jzstate;
-	}
-
-
 	public long getYhid() {
 		return yhid;
 	}
@@ -300,9 +182,22 @@ public class Alluserinfo {
 	}
 
 
+	public long getJlId() {
+		return jlId;
+	}
+
+	public void setJlId(long jlId) {
+		this.jlId = jlId;
+	}
 
 
+	public long getYhId() {
+		return yhId;
+	}
 
+	public void setYhId(long yhId) {
+		this.yhId = yhId;
+	}
 
 
 	public String getZsCertificate() {
@@ -420,6 +315,26 @@ public class Alluserinfo {
 	public void setZtStatus(String ztStatus) {
 		this.ztStatus = ztStatus;
 	}
+
+
+	public String getDemo1() {
+		return demo1;
+	}
+
+	public void setDemo1(String demo1) {
+		this.demo1 = demo1;
+	}
+
+
+	public String getDemo2() {
+		return demo2;
+	}
+
+	public void setDemo2(String demo2) {
+		this.demo2 = demo2;
+	}
+
+
 	public java.sql.Timestamp getCsTime() {
 		return csTime;
 	}
@@ -427,6 +342,26 @@ public class Alluserinfo {
 	public void setCsTime(java.sql.Timestamp csTime) {
 		this.csTime = csTime;
 	}
+
+
+	public String getJzstate() {
+		return jzstate;
+	}
+
+	public void setJzstate(String jzstate) {
+		this.jzstate = jzstate;
+	}
+
+
+	public String getByschool() {
+		return byschool;
+	}
+
+	public void setByschool(String byschool) {
+		this.byschool = byschool;
+	}
+
+
 }
 
 
