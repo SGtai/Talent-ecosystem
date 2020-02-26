@@ -34,5 +34,8 @@ public interface CompanyDao
 	public List<Jobinfo> searchJobinfoTable(Jobinfo jobinfo);
 	//根据ZPXXID查询招聘表
 	public Jobinfo searchJobinfo(Jobinfo jobinfo);
-
+	//修改招聘信息发布状态
+	public int updateJobinfoState(Jobinfo jobinfo);
+	//删除招聘信息
+	public int deleteJobinfo(Jobinfo jobinfo);
 }

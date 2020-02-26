@@ -80,4 +80,14 @@ public class CompanyService
 		Jobinfo jobinfo1=companyDao.searchJobinfo(jobinfo);
 		return jobinfo1;
 	}
+
+	public int updateJobinfoState(Jobinfo jobinfo){
+		int sum=companyDao.updateJobinfoState(jobinfo);
+		return sum;
+	}
+
+	public int deleteJobinfo(Jobinfo jobinfo){
+		int sum=companyDao.deleteJobinfo(jobinfo);
+		return sum;
+	}
 }
