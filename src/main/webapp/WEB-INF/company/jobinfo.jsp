@@ -23,7 +23,7 @@
 			height: 700px;
 		}
 
-		#layoutjobinfo {
+		#layout{
 			width: 720px;
 			margin: auto;
 			margin-top: 15px;

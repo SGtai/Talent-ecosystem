@@ -61,6 +61,11 @@ public class CompanyService
 		return list;
 	}
 
+	public int updateJobinfo(Jobinfo jobinfo) {
+		int sum=companyDao.updateJobinfo(jobinfo);
+		return sum;
+	}
+
 	public int releaseJobinfo(Jobinfo jobinfo) {
 		int sum=companyDao.releaseJobinfo(jobinfo);
 		return sum;
