@@ -24,7 +24,9 @@ public interface TechDao
 	public Chapters getChapters(@Param("zjid") String id);
 	public ArrayList<Reply> getReplyList(@Param("pjId") String id);
 	public Assist getAssist(Assist ast);
+	public  ArrayList<Finance> getFinance(Finance fe);
 	public int addCurriculum(Curriculum cc);
+	public int addFinance(Finance fe);
 	public int addChapters(Chapters ct);
 	public int addVideo(Video vd);
 	public int addAssess(Assess as);

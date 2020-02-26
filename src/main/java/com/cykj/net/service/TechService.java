@@ -29,7 +29,9 @@ public class TechService
     public ArrayList<Video> geVideossel(Video vo){return techDao.geVideossel(vo);};
     public ArrayList<Video>	geVideoData(Video vo){return techDao.geVideoData(vo);};
 	public int addAssess(Assess as){return techDao.addAssess(as);};
+    public int addFinance(Finance fe){return techDao.addFinance(fe);};
     public int upVideoD(Video vo){return techDao.upVideoD(vo);};
+    public ArrayList<Finance> getFinance(Finance fe){return techDao.getFinance(fe);};
     public int deleteSp(@Param("spId") String spId){return techDao.deleteSp(spId);};
     public int addReply(Reply reply){return techDao.addReply(reply);};
     public int deleteKc(String kcId){return techDao.deleteKc(kcId);};

@@ -38,10 +38,28 @@
         select * from assist where yhId = #{yhId} and pjId = #{pjId}
     </select>
 
+    <select id="getFinance" resultType="Finance"
+            parameterType="Finance">
+        select * from finance where 1=1
+        <if test="kcId !=null and kcId !='' ">
+            and kcId=#{kcId}
+        </if>
+        <if test="yhId !=null and yhId !='' ">
+            and yhId=#{yhId}
+        </if>
+    </select>
+
+
     <insert id="addCurriculum" parameterType="Curriculum" keyProperty="kcId" useGeneratedKeys="true">
 		insert into
 		curriculum(kcName,msDescribe,jgPrice,ckPicture,fzTypeId)
 		values(#{kcName},#{msDescribe},#{jgPrice},#{ckPicture},#{fzTypeId})
+	</insert>
+
+    <insert id="addFinance" parameterType="Finance" keyProperty="cwId" useGeneratedKeys="true">
+		insert into
+		finance(kcId,yhId,jgPrice,kcName,yhName,time,msDescribe,ddNumber)
+		values(#{kcId},#{yhId},#{jgPrice},#{kcName},#{yhName},#{time},#{msDescribe},#{ddNumber})
 	</insert>
 
     <insert id="addChapters" parameterType="Chapters" keyProperty="zjId" useGeneratedKeys="true">
