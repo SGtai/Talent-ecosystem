@@ -179,23 +179,14 @@
 				,cols: [[ //表头
 					{field: 'account', title: '账号名', width:150,height:100}
 					,{field: 'name', title: '姓名', width:150,height:100}
-					,{field: 'zyMajor', title: '专业', width:150,height:100}
-					,{field: 'jzstate', title: '就业情况', width: 150,height:100,templet:function (d) {
-							if(d.jzstate==="0"){
-								return "未就业"
-							}
-							if(d.jzstate==="1"){
-								return "已就业"
-							}
-
-						}
-					}
+					,{field: 'zy', title: '专业', width:150,height:100}
+					,{field: 'jzstate', title: '就业情况', width: 150,height:100}
 					,{field:'opera', width:150, title: '操作',align:'center', toolbar: '#toolbar'}
 					,{field: 'mmFace', title: '政治面貌', width: 50,style:'display:none;'}
 					,{field: 'birthday', title: '出生日期', width: 50,style:'display:none;'}
 					,{field: 'phone', title: '电话', width: 50,style:'display:none;'}
-					,{field: 'bySchool', title: '学校', width: 50,style:'display:none;'}
-					,{field: 'xlEducation', title: '学历', width: 50,style:'display:none;'}
+					,{field: 'byschool', title: '学校', width: 50,style:'display:none;'}
+					,{field: 'xl', title: '学历', width: 50,style:'display:none;'}
 					,{field: 'jzdResidence', title: '住址', width: 50,style:'display:none;'}
 					,{field: 'zsCertificate', title: '技能证书', width: 50,style:'display:none;'}
 					,{field: 'pjEvaluation', title: '自我评价', width: 50,style:'display:none;'}
@@ -221,15 +212,16 @@
 				var data = obj.data //获得当前行数据
 					,layEvent = obj.event; //获得 lay-event 对应的值
 				$("#hide1").val(data.name);
-				$("#hide2").val(data.bySchool);
+				$("#hide2").val(data.byschool);
 				$("#hide3").val(data.birthday);
-				$("#hide4").val(data.zyMajor);
+				$("#hide4").val(data.zy);
 				$("#hide5").val(data.mmFace);
-				$("#hide6").val(data.xlEducation);
+				$("#hide6").val(data.xl);
 				$("#hide7").val(data.phone);
 				$("#hide8").val(data.jzdResidence);
 				$("#hide9").val(data.zsCertificate);
 				$("#hide10").val(data.pjEvaluation);
+				
 				// 查看简历
 				if(layEvent === 'able'){
 					layer.open({

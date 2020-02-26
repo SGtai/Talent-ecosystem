@@ -17,11 +17,11 @@ public class S1
   private String xinyongDaima;
   private String scAbout;
   private String scpicture;
-  private long scState;
+  private String scState;
   private String scPhone;
   private java.sql.Timestamp regTime;
-  private long ctid;
-  private long prid;
+  private String ctid;
+  private String prid;
   private String type;
 
 
@@ -142,11 +142,11 @@ public class S1
   }
 
 
-  public long getScState() {
+  public String getScState() {
     return scState;
   }
 
-  public void setScState(long scState) {
+  public void setScState(String scState) {
     this.scState = scState;
   }
 
@@ -169,20 +169,20 @@ public class S1
   }
 
 
-  public long getCtid() {
+  public String getCtid() {
     return ctid;
   }
 
-  public void setCtid(long ctid) {
+  public void setCtid(String ctid) {
     this.ctid = ctid;
   }
 
 
-  public long getPrid() {
+  public String getPrid() {
     return prid;
   }
 
-  public void setPrid(long prid) {
+  public void setPrid(String prid) {
     this.prid = prid;
   }
 

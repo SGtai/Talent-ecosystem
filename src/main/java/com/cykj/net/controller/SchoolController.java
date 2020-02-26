@@ -143,7 +143,7 @@ public class SchoolController
 			String filename = file.getOriginalFilename();
 			file.transferTo(new File(path+"\\"+"logo"+"\\"+schoolinfo.getScAccount()+"\\"+ filename));
 			schoolinfo.setScpicture("\\schoolS\\cunchu\\"+"logo"+"\\"+schoolinfo.getScAccount()+"\\"+ filename);
-			schoolinfo.setScState(0);
+			schoolinfo.setScState("0");
 			Admin a=new Admin();
 			a=adminService.findAdmin(schoolinfo.getScAccount());
 			if(a!=null){
@@ -165,10 +165,7 @@ public class SchoolController
 				if(i>0){
 					System.out.println("学校表插入成功");
 				}
-
 			}
-
-
 		}
 		return "1";
 	}
@@ -184,8 +181,12 @@ public class SchoolController
 		System.out.println(admin.getAccount());
 		S1 scinfo=schoolService.findSchoolinfo(admin.getAccount());
 		ModelAndView mv=new ModelAndView();
+		List<P1> p=schoolService.findpro();
+		List<C1> c=schoolService.findcity(String.valueOf(scinfo.getPrid()));
 		mv.setViewName("/WEB-INF/school/changeinfo");
 		mv.addObject("scinfo",scinfo);
+		mv.addObject("province",p);
+		mv.addObject("city",c);
 		return mv;
 	}
 	/**

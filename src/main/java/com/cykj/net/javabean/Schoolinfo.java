@@ -18,7 +18,7 @@ public class Schoolinfo {
     private String xinyongDaima;
     private String scAbout;
     private String scpicture;
-    private long scState;
+    private String scState;
     private String scPhone;
     private java.sql.Timestamp regTime;
     private String ctid;
@@ -176,11 +176,11 @@ public class Schoolinfo {
     }
 
 
-    public long getScState() {
+    public String getScState() {
         return scState;
     }
 
-    public void setScState(long scState) {
+    public void setScState(String scState) {
         this.scState = scState;
     }
 

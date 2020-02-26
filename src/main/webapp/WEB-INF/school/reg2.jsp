@@ -190,7 +190,7 @@
 							scAbout:document.getElementById("scAbout").value,
 							scPhone:document.getElementById("scPhone").value,
 							prid:$("#pro").val(),
-							ciid:$("#city").val(),
+							ctid:$("#city").val(),
 							type:$("#sctype").val()
 						}
 					}
