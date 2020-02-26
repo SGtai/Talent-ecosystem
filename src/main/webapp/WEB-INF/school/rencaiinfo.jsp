@@ -168,19 +168,20 @@
 			</div>
 		</div>
 	</div>
+	<input id="upfile" type="file" name="upfile" onchange="fileUpload()"/>
 <%--	人才批量导入面板--%>
 	<div id="daorumb" style="display: none ; padding: 10px;margin-left: 10%">
 
 		<div class="layui-form-item">
 			<label class="layui-form-label" style="margin-left: 15%">模板下载</label>
 			<div class="layui-inline">
-				<button style="margin-left: 5%" class="layui-btn layui-btn-normal layui-btn-radius" id="xiazaimb" type="button">下载模板</button>
+				<button style="margin-left: 5%" class="layui-btn layui-btn-normal layui-btn-radius" onclick="downloadTemp()">下载模板</button>
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label" style="margin-left: 15%">批量上传</label>
 			<div class="layui-inline">
-				<button style="margin-left: 5%" class="layui-btn layui-btn-normal layui-btn-radius" id="xzwj" type="button">选择文件</button>
+				<button style="margin-left: 5%" class="layui-btn layui-btn-normal layui-btn-radius"  id="btn" name="btn">选择文件</button>
 			</div>
 		</div>
 		<div>
@@ -378,7 +379,50 @@
 		});
 
 	</script>
+	<script>
+		function downloadTemp(){
+			// window.location.href="/4sinfo/downloadTmpl.do";
+		}
 
+		function fileUpload(){
+			var fileName = $("#upfile").val();
+			if(fileName == null || fileName==""){
+				alert("请选择文件");
+			}else{
+				var fileType = fileName.substr(fileName.length-4,fileName.length);
+				if(fileType == ".xls" || fileType == "xlsx"){
+					var formData = new FormData();
+					formData.append("file",$("#upfile").prop("files")[0]);
+					$.ajax({
+						type:"post",
+						url:"/4sinfo/ajaxUpload.do",
+						data:formData,
+						cache:false,
+						processData:false,
+						contentType:false,
+						dataType:"json",
+						success:function(data){
+							if(null != data){
+								if(data.dataStatus == "1"){
+									if(confirm("上传成功！")){
+										window.location.reload();
+									}
+								}else{
+									alert("上传失败！");
+								}
+							}
+						},
+						error:function(){
+							alert("上传失败！");
+						}
+					});
+				}else{
+					alert("上传文件类型错误！");
+				}
+			}
+		}
+
+	</script>
 
 
 
