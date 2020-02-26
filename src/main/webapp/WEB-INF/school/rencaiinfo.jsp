@@ -221,7 +221,22 @@
 				$("#hide8").val(data.jzdResidence);
 				$("#hide9").val(data.zsCertificate);
 				$("#hide10").val(data.pjEvaluation);
-				
+				$.ajax(
+					{
+						type:"POST",
+						url:"/school/reg1",
+						dataType:"text",
+						data:{
+							jlid:data.account
+						},
+						success:function (msg) {
+
+						},
+						error:function (msg) {
+							alert("系统忙，请稍等");
+						}
+					}
+				);
 				// 查看简历
 				if(layEvent === 'able'){
 					layer.open({

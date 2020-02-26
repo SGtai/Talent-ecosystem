@@ -347,6 +347,17 @@ public class SchoolController
 		gsonbean(t,response);
 	}
 
+	@RequestMapping("/exgz")
+	@ResponseBody
+	public ModelAndView exgz(String jlid){
+		List<Experience> experiences=schoolService.findexperience(jlid);
+		List<Undergo> undergos=schoolService.findegzjl(jlid);
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("/WEB-INF/school/rencaiinfo");
+		mv.addObject("ex",experiences);
+		mv.addObject("un",undergos);
+		return mv;
+	}
 
 
 

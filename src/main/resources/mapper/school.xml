@@ -98,6 +98,14 @@
             </if>
         </where>
     </select>
+<!--    查找简历的教育经历信息-->
+    <select id="findexperience" resultType="Experience" parameterType="java.lang.String">
+        SELECT * FROM experience where jlId = #{jlid}
+    </select>
+<!--    查找简历的工作经历信息-->
+    <select id="findegzjl" resultType="Undergo" parameterType="java.lang.String">
+        SELECT * FROM undergo where jlId = #{jlid}
+    </select>
 <!--    查找省信息-->
     <select id="findpro" resultType="P1">
         select * from province

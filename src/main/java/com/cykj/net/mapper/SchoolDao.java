@@ -69,6 +69,18 @@ public interface SchoolDao
 	public List<Alluserinfo> fenyeshuju1(@Param("account") String account,@Param("username") String username,@Param("zy") String zy, @Param("lasttime") String lasttime, @Param("nowtime") String nowtime, RowBounds rowBounds);
 
 	/**
+	 * 查找教育经历
+	 * @param jlid
+	 * @return
+	 */
+	public List<Experience> findexperience(@Param("jlid") String jlid);
+	/**
+	 * 查找工作经历
+	 * @param jlid
+	 * @return
+	 */
+	public List<Undergo> findegzjl(@Param("jlid") String jlid);
+	/**
 	 * 查找省
 	 * @return
 	 */
