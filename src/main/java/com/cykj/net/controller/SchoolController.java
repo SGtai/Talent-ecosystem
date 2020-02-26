@@ -348,15 +348,15 @@ public class SchoolController
 	}
 
 	@RequestMapping("/exgz")
-	@ResponseBody
-	public ModelAndView exgz(String jlid){
-		List<Experience> experiences=schoolService.findexperience(jlid);
-		List<Undergo> undergos=schoolService.findegzjl(jlid);
-		ModelAndView mv=new ModelAndView();
-		mv.setViewName("/WEB-INF/school/rencaiinfo");
-		mv.addObject("ex",experiences);
-		mv.addObject("un",undergos);
-		return mv;
+	public void exgz(String account,HttpServletRequest request,HttpServletResponse response){
+		utf8(request,response);
+		System.out.println("account="+account);
+		List<Experience> experiences=schoolService.findexperience(account);
+		List<Undergo> undergos=schoolService.findegzjl(account);
+		Table t=new Table();
+		t.setExperiences(experiences);
+		t.setUndergos(undergos);
+		gsonbean(t,response);
 	}
 
 

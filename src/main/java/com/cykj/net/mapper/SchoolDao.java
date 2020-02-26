@@ -73,13 +73,13 @@ public interface SchoolDao
 	 * @param jlid
 	 * @return
 	 */
-	public List<Experience> findexperience(@Param("jlid") String jlid);
+	public List<Experience> findexperience(@Param("account") String account);
 	/**
 	 * 查找工作经历
 	 * @param jlid
 	 * @return
 	 */
-	public List<Undergo> findegzjl(@Param("jlid") String jlid);
+	public List<Undergo> findegzjl(@Param("account") String account);
 	/**
 	 * 查找省
 	 * @return
