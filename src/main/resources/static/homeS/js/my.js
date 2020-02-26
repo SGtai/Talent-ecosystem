@@ -56,14 +56,13 @@ $(document).ready(function () {
 	  {
 		  $(this).addClass('yes');
 	  }
-  })
+  });
   //二维码登录
   $('.smlogin').click(function(){
      $('.erweima').css('display','block');
-  })
+  });
   $('.erweima .close').click(function(){
      $('.erweima').css('display','none');
   })
 
-})
-
+});

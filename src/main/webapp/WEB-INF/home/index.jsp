@@ -191,8 +191,8 @@
 				<div class="loginmain">
 					<div class="ContentA">
 						<div class="qybox0">
-							<a href=" ">个人登录</a>
-							<a href=" ">个人注册</a>
+							<a href="/jump/user/login">个人登录</a>
+							<a href="/jump/user/reg">个人注册</a>
 						</div>
 						<div class="qybox2">
 							<p>&nbsp;注册后可<b>直接</b>成为<b>普通会员</b><br>即刻可开始寻求您的中意职位</p>
