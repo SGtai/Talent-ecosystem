@@ -64,6 +64,11 @@ public class SchoolController
 		}
 			return "1";
 	}
+
+	/**
+	 * 获取省份跳转页面
+	 * @return
+	 */
 	@RequestMapping("/returnreg2")
 	@ResponseBody
 	public ModelAndView returnreg2(){
@@ -73,6 +78,14 @@ public class SchoolController
 		mv.setViewName("/WEB-INF/school/reg2");
 		mv.addObject("province",p);
 		return mv;
+	}
+	@RequestMapping("/findcity")
+	@ResponseBody
+	public List<C1> getcity(String province){
+		System.out.println("获取城市");
+		ModelAndView mv=new ModelAndView();
+		List<C1> c=schoolService.findcity(province);
+		return c;
 	}
 	/**
 	 * 该功能真正实现注册，并插入管理员的表以及高校的表
@@ -112,7 +125,7 @@ public class SchoolController
 			//插入注册时间
 			schoolinfo.setRegTime(new Timestamp(System.currentTimeMillis()));
 			//插入图片路径
-			String path=request.getServletContext().getRealPath("/WEB-INF/school/cunchu");
+			String path=request.getServletContext().getRealPath("/schoolS/cunchu");
 			//判断logo目录的是否存在
 			File pathlogo=new File(path+"\\"+"logo");
 			if(!pathlogo.exists()){
@@ -165,6 +178,7 @@ public class SchoolController
 	@RequestMapping("/changeinfo")
 	public ModelAndView changeinfo(HttpServletRequest request){
 		Admin admin= (Admin) request.getSession().getAttribute("admin");
+		System.out.println(admin.getAccount());
 		Schoolinfo scinfo=schoolService.findSchoolinfo(admin.getAccount());
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("/WEB-INF/school/changeinfo");

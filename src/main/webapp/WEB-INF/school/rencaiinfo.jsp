@@ -110,7 +110,7 @@
 				<input type="text" id="hide8"  autocomplete="off" class="layui-input" disabled>
 			</div>
 		</div>
-		<img  src="WEB-INF/school/cunchu/mypic/图片1.png" alt="" style="width: 20%;height: 20%;margin-left: 70%;margin-top: -30%">
+		<img  src=/schoolS/cunchu/mypic/图片1.png" alt="" style="width: 20%;height: 20%;margin-left: 70%;margin-top: -30%">
 		<div class="layui-form-item" style="margin-left: -15%">
 			<label class="layui-form-label">技能证书</label>
 			<div class="layui-input-inline" style="width: 79%;">

@@ -71,7 +71,7 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">学校省市位置：</label>
 			<div class="layui-input-inline">
-				<select name="pro" id="pro" lay-verify="required">
+				<select name="pro" lay-filter="pro" id="pro" lay-verify="required">
 					<option value="">请选择省</option>
 					<c:if test="${province!=null}">
 						<c:forEach items="${province}" begin="0" var="i">
@@ -123,7 +123,7 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">学校类型：</label>
 			<div class="layui-input-inline" >
-				<select name="sctype" id="sctype" lay-verify="required">
+				<select name="sctype" lay-filter="sctype" id="sctype" lay-verify="required">
 					<option value="">请选择学校类型</option>
 					<option value="普通高等教育">普通高等教育</option>
 					<option value="成人高等教育">成人高等教育</option>
@@ -169,7 +169,7 @@
 				var form = layui.form;
 				var $ = layui.jquery;
 				var layer = layui.layer;
-				//执行实例
+				//执行实例上传
 				upload.render({
 					elem: '#test2' //绑定元素
 					, url: '/school/reg2' //上传接口
@@ -188,7 +188,10 @@
 							jubanDanwei:document.getElementById("jubanDanwei").value,
 							xinyongDaima:document.getElementById("xinyongDaima").value,
 							scAbout:document.getElementById("scAbout").value,
-							scPhone:document.getElementById("scPhone").value
+							scPhone:document.getElementById("scPhone").value,
+							prid:$("#pro").val(),
+							ciid:$("#city").val(),
+							type:$("#sctype").val()
 						}
 					}
 					, choose: function (obj) {
@@ -225,15 +228,40 @@
 						//请求异常回调
 					}
 				});
+					form.on('select(pro)', function(data) {
+						if(data.value!=""&&data.value!=null){
+							$.ajax(
+								{
+									type:"POST",
+									url:"/school/findcity",
+									dataType:"text",
+									data:{
+										province:data.value
+									},
+									success:function (msg) {
+										var city = $('#city');
+										city.empty();
+										var arr = JSON.parse(msg);
+										city.append("<option value=''>请选择市</option>");
+										for (var i = 0; i < arr.length; i++) {
+											city.append("<option value='"+arr[i].ctid+"'>"+arr[i].name+"</option>");
+										}
+										layui.form.render('select');
+									},
+									error:function (msg) {
+										alert("系统忙，请稍等");
+									}
+								}
+							);
+						}else{
+							var city = $('#city');
+							city.empty();
+							city.append("<option value=''>请选择市</option>");
+							layui.form.render('select')
+						}
+					});
 			});
-			// 点击返回按钮操作
-			$('#return').click(
-				function () {
-					<%--var returnpmain = document.createElement("a");--%>
-					<%--returnpmain.href = '<%=appPath+"admin/returnpmain.do"%>';--%>
-					<%--returnpmain.click();--%>
-				}
-			);
+			//点击提交
 			$('#bb').click(
 				function () {
 					var click="success";
@@ -246,7 +274,9 @@
 					var xinyongDaima1=document.getElementById("xinyongDaima").value;
 					var scAbout1=document.getElementById("scAbout").value;
 					var scPhone1=document.getElementById("scPhone").value;
-
+					var p=$("#pro").val();
+					var c=$("#city").val();
+					var type=$("#sctype").val();
 					//金钱来源
 					var jinqianly="";
 					var s1=$("#s1");
@@ -277,7 +307,10 @@
 						xinyongDaima1.length===0||
 						scAbout1.length===0||
 						scPhone1===0||
-						jinqianly==""
+						jinqianly==""||
+							p==""||
+							c==""||
+							type==""
 					){
 						layer.alert("尊敬的用户，请填写完整内容", {icon: 2, offset: "right", time: 30000});
 						return;
@@ -333,6 +366,7 @@
 						layer.alert("您还未选择上传图片", {icon: 2, offset: "right", time: 30000});
 					}
 					if(click=="success"){
+						//触发上传的btn按钮
 						var a = document.getElementById("btn");
 						a.click();
 					}
