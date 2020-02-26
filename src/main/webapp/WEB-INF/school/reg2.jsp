@@ -312,6 +312,7 @@
 							c==""||
 							type==""
 					){
+						alert(c);
 						layer.alert("尊敬的用户，请填写完整内容", {icon: 2, offset: "right", time: 30000});
 						return;
 					}

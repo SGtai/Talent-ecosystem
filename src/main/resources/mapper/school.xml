@@ -2,22 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cykj.net.mapper.SchoolDao">
     <!--    学校信息-->
-    <select id="findSchoolinfo" resultType="Schoolinfo" parameterType="java.lang.String">
+    <select id="findSchoolinfo" resultType="S1" parameterType="java.lang.String">
          SELECT * FROM schoolinfo WHERE scAccount=#{account}
     </select>
-    <select id="findphone" resultType="Schoolinfo" parameterType="java.lang.String">
+    <select id="findphone" resultType="S1" parameterType="java.lang.String">
          SELECT * FROM schoolinfo WHERE scPhone=#{phone}
     </select>
-    <select id="finddaima" resultType="Schoolinfo" parameterType="java.lang.String">
+    <select id="finddaima" resultType="S1" parameterType="java.lang.String">
          SELECT * FROM schoolinfo WHERE xinyongDaima=#{daima}
     </select>
     <!--    插入学校信息-->
-    <insert id="inserSchoolinfo" parameterType="Schoolinfo">
+    <insert id="inserSchoolinfo" parameterType="S1">
         INSERT INTO schoolinfo (scAccount, password,scdata,scName,scAddress,scfdMan,moneyLaiyuan,kaibanMoney,jubanDanwei,xinyongDaima,scAbout,regTime,scpicture,scState,scPhone,ctid,prid,type) VALUES
         (#{scAccount},#{password},#{scdata},#{scName},#{scAddress},#{scfdMan},#{moneyLaiyuan},#{kaibanMoney},#{jubanDanwei},#{xinyongDaima},#{scAbout},#{regTime},#{scpicture},#{scState},#{scPhone},#{ctid},#{prid},#{type})
     </insert>
     <!--    修改学校信息-->
-    <update id="updateSchoolinfo" parameterType="Schoolinfo">
+    <update id="updateSchoolinfo" parameterType="S1">
         UPDATE schoolinfo
         <trim prefix="set" suffixOverrides="," suffix=" where scAccount = #{scAccount} ">
             <if test="password!=null and password.length>0">

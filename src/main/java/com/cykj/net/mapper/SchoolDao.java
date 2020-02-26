@@ -1,9 +1,6 @@
 package com.cykj.net.mapper;
 
-import com.cykj.net.javabean.Alluserinfo;
-import com.cykj.net.javabean.C1;
-import com.cykj.net.javabean.P1;
-import com.cykj.net.javabean.Schoolinfo;
+import com.cykj.net.javabean.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
@@ -18,34 +15,34 @@ public interface SchoolDao
 	 * @param scAccount
 	 * @return
 	 */
-	public Schoolinfo findSchoolinfo(@Param("account") String scAccount);
+	public S1 findSchoolinfo(@Param("account") String scAccount);
 
 	/**
 	 * 查相同手机号
 	 * @param daima
 	 * @return
 	 */
-	public Schoolinfo finddaima(@Param("daima") String daima);
+	public S1 finddaima(@Param("daima") String daima);
 
 	/**
 	 * 查相同社会信用代码
 	 * @param phone
 	 * @return
 	 */
-	public Schoolinfo findphone(@Param("phone") String phone);
+	public S1 findphone(@Param("phone") String phone);
 	/**
 	 * 插入学校信息
 	 * @param schoolinfo
 	 * @return
 	 */
-	public int inserSchoolinfo(Schoolinfo schoolinfo);
+	public int inserSchoolinfo(S1 schoolinfo);
 
 	/**
 	 * 修改学校信息
 	 * @param schoolinfo
 	 * @return
 	 */
-	public int updateSchoolinfo(Schoolinfo schoolinfo);
+	public int updateSchoolinfo(S1 schoolinfo);
 
 	/**
 	 * 分页信息页数
