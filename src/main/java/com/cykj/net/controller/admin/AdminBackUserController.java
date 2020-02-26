@@ -28,6 +28,8 @@ public class AdminBackUserController {
     private AdminDao adminDao;
     @Autowired
     private AdminRoleDao adminRoleDao;
+//    @Autowired
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     /**
@@ -41,7 +43,7 @@ public class AdminBackUserController {
      */
     @RequestMapping(value = "/table/backUser")
     public @ResponseBody
-    LayuiData position(String account, String name, int limit, int page) {
+    LayuiData backUser(String account, String name, int limit, int page) {
         LayuiData layuiData = new LayuiData();
         if (null == account || "".equals(account)) {
             account = null;

@@ -6,11 +6,18 @@ layui.use(['form', 'layedit', 'laydate'], function(){
 
 	//日期
 	laydate.render({
-		elem: '#date'
+		elem: '#date',
+		min:minDate()
 	});
 	laydate.render({
-		elem: '#date1'
+		elem: '#date1',
+		min:minDate()
 	});
+	// 设置最小可选的日期
+	function minDate(){
+		var now = new Date();
+		return now.getFullYear()+"-" + (now.getMonth()+1) + "-" + now.getDate();
+	};
 
 	//监听提交
 	form.on('submit(jobinfo)', function(data){

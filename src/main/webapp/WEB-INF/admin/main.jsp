@@ -31,11 +31,7 @@
         <!-- 头部区域（可配合layui已有的水平导航） -->
 
         <ul class="layui-nav layui-layout-right">
-            <li class="layui-nav-item">欢迎你：${sessionScope.admin.name}
-<%--                <c:if test="${requestScope.admin.wrole == '1'}">超级管理员</c:if>--%>
-<%--                <c:if test="${requestScope.admin.wrole == '2'}">咨询师</c:if>--%>
-            </li>
-
+            <li class="layui-nav-item">欢迎你：${sessionScope.admin.name}</li>
             <li class="layui-nav-item"><a href="/admin/exit">注销</a></li>
         </ul>
     </div>
@@ -66,7 +62,7 @@
         <!--        <div style="padding: 15px;">内容主体区域</div>-->
         <c:if test="${roid!=null}">
             <c:if test="${roid == 1 || roid == 2}">
-                <iframe src="/jump/admin/school" name="main_self_frame" frameborder="0" class="layadmin-iframe"
+                <iframe src="/jump/admin/frontuser" name="main_self_frame" frameborder="0" class="layadmin-iframe"
                         style="width: 100%"
                         height="100%"></iframe>
             </c:if>

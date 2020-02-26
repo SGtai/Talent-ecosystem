@@ -174,7 +174,7 @@
 	<div class="layui-form-item" >
 		<label class="layui-form-label" >工作地点：</label>
 		<div class="layui-input-inline">
-			<select name="" lay-filter="chooseProvince" lay-verify="required">
+			<select name="prid" lay-filter="chooseProvince" lay-verify="required">
 				<option value="">请选择省份</option>
 				<c:if test="${province!=null}">
 					<c:forEach items="${province}" begin="0" var="i">

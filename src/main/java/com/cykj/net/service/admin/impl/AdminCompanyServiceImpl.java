@@ -19,7 +19,7 @@ public class AdminCompanyServiceImpl implements AdminComanyService {
     private AdminCompanyMapper adminCompanyMapper;
 
     @Override
-    public LayuiData company(String qyName, String qyType, String prid, String ctid, String state, int page, int limit) {
+    public LayuiData company(String qyName, String qyType, String prid, String ctid, String state, String qyState, int page, int limit) {
 
         LayuiData layuiData = new LayuiData();
         if (null == qyName || "".equals(qyName)) {
@@ -28,19 +28,23 @@ public class AdminCompanyServiceImpl implements AdminComanyService {
         if (null == qyType || "".equals(qyType)) {
             qyType = null;
         }
-        if (null == state || "".equals(state)) {
-            state = null;
+        if (null == qyState || "".equals(qyState)) {
+            qyState = null;
         }
         if (null == prid || "".equals(prid)) {
             prid = null;
         }
+
         if (null == ctid || "".equals(ctid)) {
             ctid = null;
         }
 
+        if (null == state || "".equals(state)) {
+            state = null;
+        }
         page = (page - 1) * limit;
-        layuiData.setCount(adminCompanyMapper.countCompany(qyName, qyType, prid, ctid, state));
-        List<Qyinfo> list = adminCompanyMapper.allCompany(qyName, qyType, prid, ctid, state, page, limit);
+        layuiData.setCount(adminCompanyMapper.countCompany(qyName, qyType, prid, ctid, state, qyState));
+        List<Qyinfo> list = adminCompanyMapper.allCompany(qyName, qyType, prid, ctid, state, qyState, page, limit);
 
         layuiData.setData(list);
         for (int i = 0; i < list.size(); i++) {
@@ -84,6 +88,15 @@ public class AdminCompanyServiceImpl implements AdminComanyService {
         if (adminCompanyMapper.updatePassword(qyAccount, updatePassword) > 0) {
             //参数表查询
             result = updatePassword;
+        }
+        return result;
+    }
+
+    @Override
+    public String updateQyState(String qyAccount, String qyState) {
+        String result = "false";
+        if (adminCompanyMapper.updateQyState(qyAccount,qyState) > 0){
+            result = "true";
         }
         return result;
     }

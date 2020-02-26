@@ -24,13 +24,19 @@
 
 
 <script type="text/html" id="barDemo">
-	<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-	<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+	<button lay-event="detail" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i
+			class="layui-icon">&#xe63c;</i>
+		查看/修改
+	</button>
+	<button lay-event="update" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i class="layui-icon">&#xe620;</i>
+		发布/下架
+	</button>
+	<button lay-event="delete" type="button" class="layui-btn layui-btn-xs layui-btn-radius layui-btn layui-btn-danger">
+		<i class="layui-icon">&#xe640;</i>删除
+	</button>
 </script>
 
 <input id="qyid" type="hidden" value="${sessionScope.Qyinfo.qyid}" />
-
 <form class="layui-form" lay-filter="component-form-group" id="search_submits" onsubmit="return false">
 	<div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="layadmin-useradmin-formlist">
 		<div class="layui-inline">
@@ -60,7 +66,7 @@
 					<option value="">选择</option>
 					<option value="发布中">发布中</option>
 					<option value="待发布">待发布</option>
-					<option value="已下架">已下架</option>
+					<option value="已到期">已到期</option>
 				</select>
 			</div>
 		</div>
@@ -74,7 +80,7 @@
 <%--查看招聘信息表--%>
 <script type="text/html" id="jobinfo">
 	<form class="layui-form" action="">
-		<input id="zpxxid" name="zpxxid" type="hidden" >
+		<input id="zpxxid" name="zpxxid" class="layui-input"  type="hidden" >
 		<div class="layui-form-item" style="background-color: #95877c;width: 720px">
 			<h3><label class="layui-form-label" style="width: 80px;text-align: left">招聘职位:</label></h3>
 			<div class="layui-input-inline">
@@ -201,7 +207,7 @@
 		<div class="layui-form-item" >
 			<label class="layui-form-label" >工作地点：</label>
 			<div class="layui-input-inline">
-				<select name="province" id="province" lay-filter="chooseProvince" lay-verify="required">
+				<select name="prid" id="province" lay-filter="chooseProvince" lay-verify="required">
 					<option value="">请选择省份</option>
 					<c:if test="${province!=null}">
 						<c:forEach items="${province}" begin="0" var="i">
@@ -335,13 +341,15 @@
 	    var layedit = layui.layedit;
 		var laydate = layui.laydate;
 
-
-
-
+		// 设置最小可选的日期
+		function minDate(){
+			var now = new Date();
+			return now.getFullYear()+"-" + (now.getMonth()+1) + "-" + now.getDate();
+		};
 		//第一个实例
 		table.render({
 			elem: '#demo'
-			,height: 300
+			,height: 280
 			,url: "/company/searchJobinfoTable" //数据接口
 			,page: true //开启分页
 			,limit:5
@@ -351,14 +359,14 @@
 				,{field: 'type', title: '招聘行业', width:150}
 				,{field: 'postion', title: '招聘岗位', width:200}
 				,{field: 'zhaopinTime', title: '招聘时间', width:200}
-				,{field: 'xueliRequire', title: '学历要求', width:100}
-				,{field: 'age', title: '年龄范围(岁)', width:120}
-				,{field: 'salary', title: '参考薪资(元)', width:150}
-				,{field: 'xinzifuli', title: '薪资福利', width: 250}
+				// ,{field: 'xueliRequire', title: '学历要求', width:100}
+				// ,{field: 'age', title: '年龄范围(岁)', width:120}
+				// ,{field: 'salary', title: '参考薪资(元)', width:150}
+				// ,{field: 'xinzifuli', title: '薪资福利', width: 250}
 				,{field: 'zpNum', title: '招聘人数', width: 120, sort: true}
 				,{field: 'time', title: '发布时间', width: 200,sort: true}
 				,{field: 'jobinfoState', title: '发布状态', width: 110}
-				,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
+				,{fixed: 'right', width: 320, align:'center', toolbar: '#barDemo'}
 			]]
 			//设置查询刷新的ID
 			,id:'table1'
@@ -432,43 +440,43 @@
 				}
 			);
 		});
+		//二级联动城市信息
+		form.on('select(chooseProvince)', function(data){
+			var name = $('#ctid');
 
-		//监听头工具栏事件
-		table.on('toolbar(test)', function(obj){
-			var checkStatus = table.checkStatus(obj.config.id)
-				,data = checkStatus.data; //获取选中的数据
-			switch(obj.event){
-				case 'add':
-					layer.msg('添加');
-					break;
-				case 'update':
-					if(data.length === 0){
-						layer.msg('请选择一行');
-					} else if(data.length > 1){
-						layer.msg('只能同时编辑一个');
-					} else {
-						layer.alert('编辑 [id]：'+ checkStatus.data[0].id);
+			name.empty();
+
+			name.append('<option value="">请选择区域</option>');
+			$.ajax(
+				{
+					type:"POST",
+					url:"/company/chooseCity",
+					dataType:"text",
+					data:{prid:data.value},
+					success:function (msg) {
+						var city = $('#ctid');
+						city.empty();
+						var arr = JSON.parse(msg);
+						city.append("<option value=''>请选择城市</option>");
+						for (var i = 0; i < arr.length; i++) {
+							city.append("<option value='"+arr[i].ctid+"'>"+arr[i].name+"</option>");
+						}
+						layui.form.render('select')
+					},
+					error:function () {
+
 					}
-					break;
-				case 'delete':
-					if(data.length === 0){
-						layer.msg('请选择一行');
-					} else {
-						layer.msg('删除');
-					}
-					break;
-			};
+				}
+			);
 		});
 
-		//监听行工具事件
+		//监听3个按钮，查看/修改，发布/下架，删除
 		table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
 			var data = obj.data //获得当前行数据
 				,layEvent = obj.event; //获得 lay-event 对应的值
-
+			//查看及修改
 			if(layEvent === 'detail'){
-				// console.log("data"+data);
-				// var zpxxid=$("#zpxxid").text(123);
-				// console.log("长度"+zpxxid.text());
+
 				var qyid=$('#qyid').val();
 				$.ajax(
 					{
@@ -478,12 +486,8 @@
 						data:{zpxxid:data.zpxxid,qyid:qyid},
 						success:function (msg) {
 
-							// alert(msg[0].dayTime);
-							alert(msg[0].zpxxid);
-							var zpxxid=$("#zpxxid").val(msg[0].zpxxid);
-							alert(zpxxid);
                             //打开查看页面
-                            layer.open({
+							var index=layer.open({
                                 type: 1,
                                 content: $('#jobinfo').html(),
                                 area: ['740px','550px'],
@@ -492,13 +496,17 @@
                                 anim: 1,//0-6的动画形式，-1不开启
                                 offset: '40px',
                                 success:function () {
+	                                var zpxxid=$("#zpxxid").val(msg[0].zpxxid);
 	                                //日期
 	                                laydate.render({
 		                                elem: '#beginTime'
+		                                ,min:minDate()
 		                                ,value:msg[0].beginTime//回显日期
+
                                      });
 	                                laydate.render({
 		                                elem: '#endTime'
+		                                ,min:minDate()
 		                                ,value:msg[0].endTime//回显日期
 	                                });
 
@@ -564,10 +572,10 @@
 						                                url:"/company/chooseCity",
 						                                dataType:"text",
 						                                data:{prid:prid},
-						                                success:function (msg3) {
+						                                success:function (msg2) {
 							                                var city = $('#ctid');
 							                                city.empty();
-							                                var arr = JSON.parse(msg3);
+							                                var arr = JSON.parse(msg2);
 							                                city.append("<option value=''>请选择城市</option>");
 							                                for (var i = 0; i < arr.length; i++) {
 								                                city.append("<option value='"+arr[i].ctid+"'>"+arr[i].name+"</option>");
@@ -597,86 +605,115 @@
                                     form.render();
 
                                 }
-                            });
 
+                            });
+							//修改招聘表提交
+							form.on('submit(jobinfo)', function(data){
+
+								if($('#beginTime').val()>$('#endTime').val()){
+									layer.alert("招聘日期终止日期小于起止日期！", { icon: 1, offset: "auto", time:1500 });
+									return false;
+								}else if ($('#ageLow').val()>$('#ageHigh').val()){
+									layer.alert("年龄范围填写错误！", { icon: 1, offset: "auto", time:1500 });
+									return false;
+								}else if ($('#ageLow').val()<16||$('#ageHigh').val()>60){
+									layer.alert("超过法定劳动适龄年龄！", { icon: 1, offset: "auto", time:1500 });
+									return false;
+								}else if($('#salaryLow').val()>$('#salaryHigh').val()){
+									layer.alert("薪资范围填写错误！", { icon: 1, offset: "auto", time:1500 });
+									return false;
+								}else{
+									// 发布招聘信息
+									$.ajax(
+										{
+											type:"POST",
+											url:"/company/updateJobinfo",
+											dataType:"text",
+											data:data.field,
+											success:function (msg) {
+												if (msg==="success"){
+													layer.alert('招聘信息修改成功!', function(index) {
+														layer.closeAll();
+														$(".layui-laypage-btn")[0].click();
+													})
+												} else{
+													layer.alert("招聘信息修改失败", { icon: 1, offset: "auto", time:1500 });
+												}
+											},
+											error:function (msg) {
+												alert(msg);
+											}
+										}
+									);
+									return false;
+								}
+
+							});
 						},
 						error:function () {
 							alert("服务器正忙.....");
 						}
 					}
 				);
-			} else if(layEvent === 'del'){
-				layer.confirm('真的删除行么', function(index){
+			}
+			//删除
+			else if(layEvent === 'update'){
+					var jobinfoState;
+					if(data.jobinfoState==='发布中'){
+						jobinfoState='待发布'
+					}else if(data.jobinfoState==='待发布'){
+						jobinfoState='发布中'
+					}else {
+						jobinfoState='已到期';
+						layer.msg('已到期无法更改状态');
+					}
 
-					var account =data.account;//data.XXX 后缀直接写需要取值的名称与表头给的field一致
-					alert(account);
 					$.ajax({
-						type:"post",
-						url:"",
-						//预期服务器返回的数据类型;
-						datatype:"text",
-						//从该js会发出到服务器的数据
-						data:{account:account},
+						type:"POST",
+						url:"/company/updateJobinfoState",
+						dataType:"text",
+						data:{zpxxid:data.zpxxid,jobinfoState:jobinfoState},
 						//从servlet接收的数据
 						success:function (msg) {
-							if (msg === 'success') {
-								alert("删除成功！");
-								window.location.reload();
+							if (msg ==='success') {
+								// alert("状态修改成功！");
+								$(".layui-laypage-btn")[0].click();
 							} else {
-								layer.msg("删除失败！")
+								layer.msg("修改失败！")
 							}
 						}
 						,error:function () {
 							alert("服务器正忙.....");
 						}
 					});
-					layer.close(index);
-				});
-			} else if(layEvent === 'edit'){
-				layer.msg('编辑操作');
-			}
-		});
-
-		//修改招聘表提交
-		form.on('submit(jobinfo)', function(data){
-
-			if($('#beginTime').val()>$('#endTime').val()){
-				layer.alert("招聘日期终止日期小于起止日期！", { icon: 1, offset: "auto", time:1500 });
-				return false;
-			}else if ($('#ageLow').val()>$('#ageHigh').val()){
-				layer.alert("年龄范围填写错误！", { icon: 1, offset: "auto", time:1500 });
-				return false;
-			}else if ($('#ageLow').val()<16||$('#ageHigh').val()>60){
-				layer.alert("超过法定劳动适龄年龄！", { icon: 1, offset: "auto", time:1500 });
-				return false;
-			}else if($('#salaryLow').val()>$('#salaryHigh').val()){
-				layer.alert("薪资范围填写错误！", { icon: 1, offset: "auto", time:1500 });
-				return false;
-			}else{
-				// 发布招聘信息
-				$.ajax(
-					{
+			} else if(layEvent === 'delete'){
+				if(data.jobinfoState==='发布中'){
+					layer.msg('发布中无法删除状态');
+					return false;
+				}else {
+					$.ajax({
 						type:"POST",
-						url:"/company/updateJobinfo",
+						url:"/company/deleteJobinfo",
 						dataType:"text",
-						data:data.field,
+						data:{zpxxid:data.zpxxid},
+						//从servlet接收的数据
 						success:function (msg) {
-							if (msg==="success"){
-								layer.alert('招聘信息修改成功!', function(index) {
-									layer.close(index);
-								})
-							} else{
-								layer.alert("招聘信息修改失败", { icon: 1, offset: "auto", time:1500 });
+							if (msg ==='success') {
+								layer.msg('删除成功');
+								$(".layui-laypage-btn")[0].click();
+							} else {
+								layer.msg("修改失败！")
 							}
-						},
-						error:function (msg) {
-							alert(msg);
 						}
-					}
-				);
-				return false;
-			}
+						,error:function () {
+							alert("服务器正忙.....");
+						}
+					});
 
+				}
+
+
+			}
 		});
 
 	});
@@ -748,6 +785,7 @@
 		jobDuty.empty();
 		jobDuty.text(param.jobDuty);
 	}
+
 </script>
 </body>
 </html>

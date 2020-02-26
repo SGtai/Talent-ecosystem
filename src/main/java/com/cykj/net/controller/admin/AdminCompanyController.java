@@ -29,8 +29,9 @@ public class AdminCompanyController {
      */
     @RequestMapping(value = "/table/company")
     @ResponseBody
-    public LayuiData company(String qyName,String qyType,String prid,String ctid,String state,int page,int limit){
-        return adminComanyService.company(qyName,qyType,prid,ctid,state,page,limit);
+    public LayuiData company(String qyName,String qyType,String prid,String ctid,String state,String qyState,int page,int limit){
+
+        return adminComanyService.company(qyName,qyType,prid,ctid,state,qyState,page,limit);
     }
 
     @RequestMapping(value = "/getProvince")
@@ -59,5 +60,11 @@ public class AdminCompanyController {
     }
 
 
+
+    @RequestMapping(value = "/updateScState")
+    @ResponseBody
+    public String updateScState(String qyAccount ,String qyState){
+        return adminComanyService.updateQyState(qyAccount,qyState);
+    }
 
 }

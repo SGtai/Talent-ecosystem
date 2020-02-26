@@ -20,7 +20,7 @@ public class AdminSchoolServiceImpl implements AdminSchoolService {
     private AdminCompanyMapper adminCompanyMapper;
 
     @Override
-    public LayuiData school(String scName, String type, String prid, String ctid, String state, int page, int limit) {
+    public LayuiData school(String scName, String type, String prid, String ctid, String state,String scState, int page, int limit) {
         LayuiData layuiData = new LayuiData();
         if (null == scName || "".equals(scName)) { scName = null; }
         if (null == ctid || "".equals(ctid)) { ctid = null; }
@@ -28,9 +28,10 @@ public class AdminSchoolServiceImpl implements AdminSchoolService {
         page = (page - 1) * limit;
         if (null == prid || "".equals(prid)) { prid = null; }
         if (null == type || "".equals(type)) { type = null; }
+        if (null == scState || "".equals(scState)) { scState = null; }
 
-        layuiData.setCount(adminSchoolMapper.countSchool(scName, type, prid, ctid, state));
-        List<Schoolinfo> list = adminSchoolMapper.allSchool(scName, type, prid, ctid, state, page, limit);
+        layuiData.setCount(adminSchoolMapper.countSchool(scName, type, prid, ctid, state,scState));
+        List<Schoolinfo> list = adminSchoolMapper.allSchool(scName, type, prid, ctid, state,scState, page, limit);
         layuiData.setData(list);
         for (int i = 0; i < list.size(); i++) {
             list.get(i).setPrid(adminCompanyMapper.findProvinceName(list.get(i).getPrid()));
@@ -42,12 +43,31 @@ public class AdminSchoolServiceImpl implements AdminSchoolService {
     }
 
     @Override
-    public String updateState(String qyAccount, String state) {
-        return null;
+    public String updateState(String scAccount, String state) {
+        String result = "false";
+        if (adminCompanyMapper.updateState(scAccount,state) > 0) {
+            result = "true";
+        }
+        return result;
     }
 
     @Override
-    public String updatePassword(String qyAccount) {
-        return null;
+    public String updatePassword(String scAccount) {
+        String result = "";
+        String updatePassword = "123456";
+        if (adminCompanyMapper.updatePassword(scAccount, updatePassword) > 0) {
+            //参数表查询
+            result = updatePassword;
+        }
+        return result;
+    }
+
+    @Override
+    public String updateScState(String scAccount, String scState) {
+        String result = "false";
+        if (adminCompanyMapper.updateScState(scAccount,scState) > 0){
+            result = "true";
+        }
+        return result;
     }
 }
