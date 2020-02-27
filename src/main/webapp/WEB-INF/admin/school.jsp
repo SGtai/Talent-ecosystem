@@ -1,17 +1,17 @@
 <%--
   Created by IntelliJ IDEA.
   User: 蔡鹭鹏
-  Date: 2020/2/22
-  Time: 17:42
+  Date: 2020/2/24
+  Time: 23:45
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String layuiPath = application.getContextPath() + "/layui/";
     String jsPath = application.getContextPath() + "/adminS/js/";
     String cssPath = application.getContextPath() + "/adminS/css/";
-    String path = application.getContextPath() + "/";
 
 %>
 <!DOCTYPE html>
@@ -28,31 +28,26 @@
 <div style="width: 96%;margin-top: 5%;margin-left: 2%">
     <form class="layui-form" style="margin-left:10%">
         <div class="layui-form-item">
-            <label class="layui-form-label">企业名称：</label>
+            <label class="layui-form-label">学校名称：</label>
             <div class="layui-input-inline">
-                <input id="qyName" class="layui-input" type="text" name="qyName"
-                       autocomplete="off" placeholder="输入企业名称">
+                <input id="scName" class="layui-input" type="text" name="scName"
+                       autocomplete="off" placeholder="输入学校名称">
             </div>
-            <label class="layui-form-label">企业类型：</label>
+            <label class="layui-form-label">类型：</label>
             <div class="layui-input-inline">
-                <select id="qyType" name="qyType" lay-filter="qyType">
-                    <option value="">请选择公司类型</option>
-                    <option value="国有企业">国有企业</option>
-                    <option value="集体所有制">集体所有制</option>
-                    <option value="个人独资企业">个人独资企业</option>
-                    <option value="股份制企业">股份制企业</option>
-                    <option value="有限合伙企业">有限合伙企业</option>
-                    <option value="股份合作企业">股份合作企业</option>
-                    <option value="合伙企业">合伙企业</option>
-                    <option value="联营企业">联营企业</option>
-                    <option value="港、澳、台">港、澳、台</option>
-                    <option value="外商投资企业">外商投资企业</option>
+                <select id="type" name="type" lay-filter="state">
+                    <option value="">请选择学校类型</option>
+                    <option value="普通高等教育">普通高等教育</option>
+                    <option value="成人高等教育">成人高等教育</option>
+                    <option value="高教自学考试">高教自学考试</option>
+                    <option value="电大开放教育">电大开放教育</option>
+                    <option value="远程网络教育">远程网络教育</option>
                 </select>
             </div>
             <label class="layui-form-label">状态：</label>
             <div class="layui-input-inline">
                 <select id="state" name="state" lay-filter="state">
-                    <option value="">请选择公司状态</option>
+                    <option value="">请选择学校状态</option>
                     <option value="0">在业</option>
                     <option value="1">冻结</option>
                     <option value="2">黑名单</option>
@@ -70,14 +65,14 @@
                 <select id="ctid" name="ctid" lay-filter="ctid"></select>
             </div>
 
-            <button style="margin-left: 5%" class="layui-btn" lay-submit lay-filter="searchCompany"><i
+            <button style="margin-left: 5%" class="layui-btn" lay-submit lay-filter="searchSchool"><i
                     class="layui-icon">&#xe615;</i>搜索
             </button>
         </div>
     </form>
 
     <div>
-        <table id="company" lay-filter="getCompany"></table>
+        <table id="school" lay-filter="getSchool"></table>
     </div>
 </div>
 
@@ -118,57 +113,60 @@
 
     {{# } }}
 </script>
-<script type="text/html" id="seeCompany">
+<script type="text/html" id="seeSchool">
+
     <div>
-        <h1 align="center">企业信息</h1>
+        <h1 align="center">学校信息</h1>
     </div>
     <br>
     <div class="layui-form-item">
-        <label class="layui-form-label" >公司名称：</label>
-        <div class="layui-input-inline" >
-            <label id="getQyName" class="layui-form-label" style="width: 180px;text-align: left;" ></label>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label" >统一社会信用代码：</label>
-        <div class="layui-input-inline" >
-            <label id="getQyData" class="layui-form-label" style="width: 180px;text-align: left;"></label>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">注册地址：</label>
+        <label class="layui-form-label">学校名称：</label>
         <div class="layui-input-inline">
-            <label id="getQyAddress" class="layui-form-label" style="width: 180px;text-align: left;"></label>
+            <label id="getScName" class="layui-form-label"
+                   style="width: 180px;text-align: left;"></label>
+        </div>
+
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">学校头像：</label>
+        <div class="layui-input-inline">
+            <img style="width: 50px;height: 50px" class="layui-nav-img" id="getScpicture" src="" alt="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">信用代码：</label>
+        <div class="layui-input-inline">
+            <label id="getCredit" class="layui-form-label" style="width: 180px;text-align: left;"></label>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">学校地址：</label>
+        <div class="layui-input-inline">
+            <label id="getScAddress" class="layui-form-label" style="width: 240px;text-align: left;"></label>
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label" style="width: 85px">法定代表人:</label>
-        <div class="layui-input-inline" >
-            <label id="getQyfdMan" class="layui-form-label" style="width: 180px;text-align: left;"></label>
+        <div class="layui-input-inline">
+            <label id="getScfdMan" class="layui-form-label" style="width: 180px;text-align: left;"></label>
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">注册资本：</label>
-        <div class="layui-input-inline" >
-            <label id="getRegMoney" class="layui-form-label" style="width: 180px;text-align: left;"></label>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">公司类型：</label>
-        <div class="layui-inline" >
-            <label id="getQyType" class="layui-form-label" style="width: 180px;text-align: left;"></label>
+        <label class="layui-form-label">学校类型：</label>
+        <div class="layui-inline">
+            <label id="getType" class="layui-form-label" style="width: 180px;text-align: left;"></label>
         </div>
     </div>
     <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">经营范围：</label>
+        <label class="layui-form-label">学校简介：</label>
         <div class="layui-input-inline" style="width: 250px">
-            <textarea readonly  id="getJyScope" class="layui-textarea" ></textarea>
+            <textarea readonly id="getScAbout" class="layui-textarea"></textarea>
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">营业期限：</label>
-        <div class="layui-input-inline" style="width: 200px">
-            <label id="getJyTime" class="layui-form-label" style="width: 200px;text-align: left;"></label>
+        <label class="layui-form-label">学校资料：</label>
+        <div class="layui-input-inline" style="width: 250px">
+            <textarea readonly id="getScData" class="layui-textarea"></textarea>
         </div>
     </div>
 
@@ -227,15 +225,16 @@
         });
 
 
+        var p = "1223";
         //第一个实例
         table.render({
-            elem: '#company'
+            elem: '#school'
             // , height: 312
-            , url: '/adminCompany/table/company' //数据接口
+            , url: '/adminSchool/table/school' //数据接口
             , page: true //开启分页
             , limit: 5
             , limits: [5]
-            ,where: {qyState:"1"}
+            ,where: {scState:"1"}
             //返回整个数据
             // , parseData: function (res) { //res 即为原始返回的数据
             //     return {
@@ -246,13 +245,14 @@
             //     };
             // }
             , cols: [[ //表头
-                {field: 'id', title: '序列', width: 75}
-                , {field: 'qyName', title: '企业名称', width: 200}
-                , {field: 'qyfdMan', title: '企业法人', width: 90}
-                , {field: 'qyType', title: '公司类型'}
+                {field: 'id', title: '序列', width: 70}
+                , {field: 'scpicture', title: '学校头像', width: 90,templet:'<div><img  src="{{ d.scpicture }}"></div>'}
+                , {field: 'scName', title: '学校名称', width: 170}
+                , {field: 'scfdMan', title: '学校法人', width: 90}
+                , {field: 'type', title: '学校类型', width: 90}
                 , {field: 'prid', title: '所在省份', width: 90}
                 , {field: 'ctid', title: '所在城市', width: 90}
-                , {field: 'regTime', title: '注册时间', width: 170}
+                , {field: 'regTime', title: '注册时间', width: 160}
                 , {
                     field: 'state', title: '状态', width: 75, templet: function (d) {
                         if (d.state == 0) {
@@ -264,24 +264,24 @@
                         }
                     }
                 }
-                , {field: 'ope', title: '操作', toolbar: '#opeHtml', width: 320}
+                , {field: 'ope', title: '操作', toolbar: '#opeHtml', width: 330}
             ]]
         });
 
         //获取下拉框的值
         var city = "",
-            qyType = "",
             state = "",
-            prid = "";
+            prid = "",
+            type = "";
         // 获取下拉框数据
         form.on('select(city)', function (data) {
             city = data.value;
         });
-        form.on('select(qyType)', function (data) {
-            qyType = data.value;
-        });
         form.on('select(state)', function (data) {
             state = data.value;
+        });
+        form.on('select(type)', function (data) {
+            type = data.value;
         });
         form.on('select(prid)', function (data) {
             prid = data.value;
@@ -289,9 +289,9 @@
 
 
         //搜索
-        form.on('submit(searchCompany)', function (data) {
-            table.reload('company', {
-                url: '/adminCompany/table/company'
+        form.on('submit(searchSchool)', function (data) {
+            table.reload('school', {
+                url: '/adminSchool/table/school'
                 , where: //设定异步数据接口的额外参数，任意设
                 data.field
                 , page: {
@@ -300,8 +300,8 @@
             });
             return false;
         });
-        //在营，冻结，修改密码，拉黑 公司
-        table.on('tool(getCompany)', function (obj) {
+        //在营，冻结，修改密码，拉黑 学校
+        table.on('tool(getSchool)', function (obj) {
 
             var layEvent = obj.event
                 , data = obj.data
@@ -317,12 +317,12 @@
                     state = 2;
                     t = '拉入黑名单';
                 }
-                layer.confirm('确定要将：' + data.qyName + '' + t + '吗?', function (index) {
+                layer.confirm('确定要将：' + data.scName + '' + t + '吗?', function (index) {
                     $.ajax({
                         type: "POST",
-                        url: "/adminCompany/updateState",
+                        url: "/adminSchool/updateState",
                         dataType: "text",
-                        data: {qyAccount: data.qyAccount, state: state},
+                        data: {account: data.scAccount, state: state},
                         success: function (msg) {
                             var i = 0;
                             if (msg === 'true') {
@@ -332,7 +332,7 @@
                                 i = 1;
                             }
                             if (i === 0) {
-                                table.reload('company');
+                                table.reload('school');
                             }
                         },
                         error: function () {
@@ -344,12 +344,12 @@
             }
             //修改密码
             if (layEvent === 'update') {
-                layer.confirm('确定要重置:' + data.qyName + '的密码吗?', function (index) {
+                layer.confirm('确定要重置:' + data.scName + '的密码吗?', function (index) {
                     $.ajax({
                         type: "POST",
-                        url: "/adminCompany/updatePassword",
+                        url: "/adminSchool/updatePassword",
                         dataType: "text",
-                        data: {qyAccount: data.qyAccount},
+                        data: {account: data.scAccount},
                         success: function (msg) {
                             if (msg != '') {
                                 layer.msg('密码重置成功，重置密码为：' + msg);
@@ -365,26 +365,34 @@
                 });
             }
 
-            //查看公司信息
+            //查看学校信息
             if (layEvent === 'see') {
 
                 layer.open({
                     type: 1,//嵌入网页
-                    content: $('#seeCompany').html(),
-                    area: ['500px', '610px'],
-                    title: '企业信息',
+                    content: $('#seeSchool').html(),
+                    area: ['400px', '620px'],
+                    title: '学校信息',
 
                 });
                 form.render();
-
-                $('#getQyName').html(data.qyName);
-                $('#getQyData').html(data.qyData);
-                $('#getQyAddress').html(data.qyAddress);
-                $('#getQyfdMan').html(data.qyfdMan);
-                $('#getRegMoney').html(data.regMoney);
-                $('#getQyType').html(data.qyType);
-                $('#getJyScope').html(data.jyScope);
-                $('#getJyTime').html(data.jyTime);
+                $('#getScName').html(data.scName);
+                $('#getScAbout').html(data.scAbout);
+                $('#getScAddress').html(data.scAddress);
+                $('#getScData').html(data.scdata);
+                $('#getScfdMan').html(data.scfdMan);
+                $('#getCredit').html(data.xinyongDaima);
+                $('#getType').html(data.type);
+                $('#getScpicture').attr("src",data.scpicture);
+                //
+                // $('#getQyName').html(data.qyName);
+                // $('#getQyData').html(data.qyData);
+                // $('#getQyAddress').html(data.qyAddress);
+                // $('#getQyfdMan').html(data.qyfdMan);
+                // $('#getRegMoney').html(data.regMoney);
+                // $('#getQyType').html(data.qyType);
+                // $('#getJyScope').html(data.jyScope);
+                // $('#getJyTime').html(data.jyTime);
             }
         })
     });
@@ -393,3 +401,4 @@
 
 </body>
 </html>
+

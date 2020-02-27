@@ -20,5 +20,6 @@ public class Userlist {
   private String by1;
   private String by2;
   private int state;
+  private String tuijianren;
 
 }

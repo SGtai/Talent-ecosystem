@@ -110,7 +110,51 @@
 				<input type="text" id="hide8"  autocomplete="off" class="layui-input" disabled>
 			</div>
 		</div>
-		<img  src="WEB-INF/school/cunchu/mypic/图片1.png" alt="" style="width: 20%;height: 20%;margin-left: 70%;margin-top: -30%">
+		<img  src=/schoolS/cunchu/mypic/图片1.png" alt="" style="width: 20%;height: 20%;margin-left: 70%;margin-top: -30%">
+		<div  class="layui-form-item">
+			<label class="layui-form-label" style="margin-left: -5%">学习经历</label>
+			<table class="layui-table" style="margin-left: -5%">
+				<col width="200">
+				<col width="200">
+				<col width="200">
+				<thead>
+				<tr>
+					<th>时间</th>
+					<th>学校</th>
+					<th>专业</th>
+				</tr>
+				</thead>
+				<tbody id="ex">
+					<tr>
+						<td>无</td>
+						<td>无</td>
+						<td>无</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div  class="layui-form-item">
+			<label class="layui-form-label" style="margin-left: -5%">工作经历</label>
+			<table class="layui-table" style="margin-left: -5%">
+				<col width="200">
+				<col width="200">
+				<col width="200">
+				<thead>
+				<tr>
+					<th>时间</th>
+					<th>公司</th>
+					<th>工作内容</th>
+				</tr>
+				</thead>
+				<tbody id="gz">
+				<tr>
+					<td>无</td>
+					<td>无</td>
+					<td>无</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
 		<div class="layui-form-item" style="margin-left: -15%">
 			<label class="layui-form-label">技能证书</label>
 			<div class="layui-input-inline" style="width: 79%;">
@@ -124,19 +168,20 @@
 			</div>
 		</div>
 	</div>
+	<input id="upfile" type="file" name="upfile" onchange="fileUpload()"/>
 <%--	人才批量导入面板--%>
 	<div id="daorumb" style="display: none ; padding: 10px;margin-left: 10%">
 
 		<div class="layui-form-item">
 			<label class="layui-form-label" style="margin-left: 15%">模板下载</label>
 			<div class="layui-inline">
-				<button style="margin-left: 5%" class="layui-btn layui-btn-normal layui-btn-radius" id="xiazaimb" type="button">下载模板</button>
+				<button style="margin-left: 5%" class="layui-btn layui-btn-normal layui-btn-radius" onclick="downloadTemp()">下载模板</button>
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label" style="margin-left: 15%">批量上传</label>
 			<div class="layui-inline">
-				<button style="margin-left: 5%" class="layui-btn layui-btn-normal layui-btn-radius" id="xzwj" type="button">选择文件</button>
+				<button style="margin-left: 5%" class="layui-btn layui-btn-normal layui-btn-radius"  id="btn" name="btn">选择文件</button>
 			</div>
 		</div>
 		<div>
@@ -179,23 +224,14 @@
 				,cols: [[ //表头
 					{field: 'account', title: '账号名', width:150,height:100}
 					,{field: 'name', title: '姓名', width:150,height:100}
-					,{field: 'zyMajor', title: '专业', width:150,height:100}
-					,{field: 'jzstate', title: '就业情况', width: 150,height:100,templet:function (d) {
-							if(d.jzstate==="0"){
-								return "未就业"
-							}
-							if(d.jzstate==="1"){
-								return "已就业"
-							}
-
-						}
-					}
+					,{field: 'zy', title: '专业', width:150,height:100}
+					,{field: 'jzstate', title: '就业情况', width: 150,height:100}
 					,{field:'opera', width:150, title: '操作',align:'center', toolbar: '#toolbar'}
 					,{field: 'mmFace', title: '政治面貌', width: 50,style:'display:none;'}
 					,{field: 'birthday', title: '出生日期', width: 50,style:'display:none;'}
 					,{field: 'phone', title: '电话', width: 50,style:'display:none;'}
-					,{field: 'bySchool', title: '学校', width: 50,style:'display:none;'}
-					,{field: 'xlEducation', title: '学历', width: 50,style:'display:none;'}
+					,{field: 'byschool', title: '学校', width: 50,style:'display:none;'}
+					,{field: 'xl', title: '学历', width: 50,style:'display:none;'}
 					,{field: 'jzdResidence', title: '住址', width: 50,style:'display:none;'}
 					,{field: 'zsCertificate', title: '技能证书', width: 50,style:'display:none;'}
 					,{field: 'pjEvaluation', title: '自我评价', width: 50,style:'display:none;'}
@@ -221,15 +257,49 @@
 				var data = obj.data //获得当前行数据
 					,layEvent = obj.event; //获得 lay-event 对应的值
 				$("#hide1").val(data.name);
-				$("#hide2").val(data.bySchool);
+				$("#hide2").val(data.byschool);
 				$("#hide3").val(data.birthday);
-				$("#hide4").val(data.zyMajor);
+				$("#hide4").val(data.zy);
 				$("#hide5").val(data.mmFace);
-				$("#hide6").val(data.xlEducation);
+				$("#hide6").val(data.xl);
 				$("#hide7").val(data.phone);
 				$("#hide8").val(data.jzdResidence);
 				$("#hide9").val(data.zsCertificate);
 				$("#hide10").val(data.pjEvaluation);
+				$.ajax(
+					{
+						type:"POST",
+						url:"/school/exgz",
+						dataType:"text",
+						data:{
+							account:data.account
+						},
+						success:function (msg) {
+							var arr = JSON.parse(msg);
+							// alert(arr.experiences[0].zyMajor);
+							$("#ex").children().empty();
+							$("#gz").children().empty();
+							if(arr.experiences.length!=0){
+								for (var i = 0; i < arr.experiences.length; i++) {
+									$("#ex").append("<tr><td>"+arr.experiences[i].sxSchooltime+"</td><td>"+arr.experiences[i].school+"</td><td>"+arr.experiences[i].zyMajor+"</td></tr>");
+								}
+							}else{
+								$("#ex").append("<tr><td>无</td><td>无</td><td>无</td></tr>");
+							}
+							if(arr.undergos.length!=0){
+									for (var i = 0; i < arr.undergos.length; i++) {
+										$("#gz").append("<tr><td>"+arr.undergos[i].ksTime+"</td><td>"+arr.undergos[i].jzUnit+"</td><td>"+arr.undergos[i].zwPosition+"</td></tr>");
+									}
+							}else{
+								$("#gz").append("<tr><td>无</td><td>无</td><td>无</td></tr>");
+							}
+							layui.form.render('table');
+						},
+						error:function (msg) {
+							alert("系统忙，请稍等");
+						}
+					}
+				);
 				// 查看简历
 				if(layEvent === 'able'){
 					layer.open({
@@ -309,7 +379,50 @@
 		});
 
 	</script>
+	<script>
+		function downloadTemp(){
+			// window.location.href="/4sinfo/downloadTmpl.do";
+		}
 
+		function fileUpload(){
+			var fileName = $("#upfile").val();
+			if(fileName == null || fileName==""){
+				alert("请选择文件");
+			}else{
+				var fileType = fileName.substr(fileName.length-4,fileName.length);
+				if(fileType == ".xls" || fileType == "xlsx"){
+					var formData = new FormData();
+					formData.append("file",$("#upfile").prop("files")[0]);
+					$.ajax({
+						type:"post",
+						url:"/4sinfo/ajaxUpload.do",
+						data:formData,
+						cache:false,
+						processData:false,
+						contentType:false,
+						dataType:"json",
+						success:function(data){
+							if(null != data){
+								if(data.dataStatus == "1"){
+									if(confirm("上传成功！")){
+										window.location.reload();
+									}
+								}else{
+									alert("上传失败！");
+								}
+							}
+						},
+						error:function(){
+							alert("上传失败！");
+						}
+					});
+				}else{
+					alert("上传文件类型错误！");
+				}
+			}
+		}
+
+	</script>
 
 
 

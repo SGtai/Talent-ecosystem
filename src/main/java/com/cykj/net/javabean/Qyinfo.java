@@ -1,6 +1,8 @@
 package com.cykj.net.javabean;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Qyinfo {
 
   private int id;
@@ -26,6 +28,15 @@ public class Qyinfo {
   private String qyPeople;
   private long qyState;
   private String prid;
+  private long state;
+
+  public long getState() {
+    return state;
+  }
+
+  public void setState(long state) {
+    this.state = state;
+  }
 
   public int getId() {
     return id;
@@ -178,7 +189,7 @@ public class Qyinfo {
     this.qyPicture = qyPicture;
   }
 
-
+  @JsonFormat(timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
   public java.sql.Timestamp getRegTime() {
     return regTime;
   }

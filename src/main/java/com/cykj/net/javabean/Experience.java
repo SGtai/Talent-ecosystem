@@ -5,10 +5,9 @@ public class Experience {
 
   private long jyId;
   private long jlId;
-  private java.sql.Timestamp sxSchooltime;
-  private String xlEducation;
+  private String sxSchooltime;
   private String zyMajor;
-  private String bySchool;
+  private String school;
   private java.sql.Timestamp gxtime;
   private String xxOptions;
   private String demo1;
@@ -33,21 +32,12 @@ public class Experience {
   }
 
 
-  public java.sql.Timestamp getSxSchooltime() {
+  public String getSxSchooltime() {
     return sxSchooltime;
   }
 
-  public void setSxSchooltime(java.sql.Timestamp sxSchooltime) {
+  public void setSxSchooltime(String sxSchooltime) {
     this.sxSchooltime = sxSchooltime;
-  }
-
-
-  public String getXlEducation() {
-    return xlEducation;
-  }
-
-  public void setXlEducation(String xlEducation) {
-    this.xlEducation = xlEducation;
   }
 
 
@@ -60,12 +50,12 @@ public class Experience {
   }
 
 
-  public String getBySchool() {
-    return bySchool;
+  public String getSchool() {
+    return school;
   }
 
-  public void setBySchool(String bySchool) {
-    this.bySchool = bySchool;
+  public void setSchool(String school) {
+    this.school = school;
   }
 
 
