@@ -1,5 +1,6 @@
 package com.cykj.net.controller.admin;
 
+import com.cykj.net.aop.Log;
 import com.cykj.net.javabean.Adminrole;
 import com.cykj.net.javabean.LayuiData;
 import com.cykj.net.javabean.admin.Admin;
@@ -70,8 +71,9 @@ public class AdminBackUserController {
      * @return
      */
     @RequestMapping(value = "/updateState")
+    @Log(type = "修改操作",event = "修改后台管理员状态")
     public @ResponseBody
-    String updateState(Admin admin) {
+    String updateStateLog(Admin admin) {
         String msg = "";
         if (adminBackUserService.updateAdmin(admin) > 0) {
             msg = "true";
@@ -80,8 +82,9 @@ public class AdminBackUserController {
     }
 
     @RequestMapping(value = "/updatePassword")
+    @Log(type = "修改操作",event = "修改后台管理员密码")
     public @ResponseBody
-    String updatePassword(Admin admin) {
+    String updatePasswordLog(Admin admin) {
         String msg = "";
         //参数表获得
         admin.setPassword("123456");
@@ -98,8 +101,9 @@ public class AdminBackUserController {
      * @return
      */
     @RequestMapping(value = "/addBackUser")
+    @Log(type = "添加操作",event = "添加后台管理员")
     public @ResponseBody
-    String addBackUser(Admin admin) {
+    String addBackUserLog(Admin admin) {
         String msg = "false";
         admin.setRegistertime(new Timestamp(System.currentTimeMillis()));
         if (adminService.findAdmin(admin.getAccount()) != null) {

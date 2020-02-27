@@ -9,5 +9,5 @@ public interface AdminSchoolService {
 
     String updatePassword(String scAccount);
 
-    String updateScState(String scAccount, String scState);
+    String updateScState(String scAccount, String scState,String name);
 }

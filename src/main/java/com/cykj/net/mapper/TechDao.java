@@ -13,6 +13,8 @@ public interface TechDao
 	public ArrayList<Curriculum> getCurriculumListS();
 	public ArrayList<Curriculum> geCurriculumsel(Curriculum cu);
 	public ArrayList<Curriculum> geCurriculumData(Curriculum cu);
+	public ArrayList<Finance> geFinanceSel(Finance fe);
+	public ArrayList<Finance> geFinanceData(Finance fe);
 	public ArrayList<Chapters> geChapterssel(Chapters cp);
 	public ArrayList<Chapters> geChaptersData(Chapters cp);
 	public ArrayList<Video> geVideossel(Video vo);
@@ -24,7 +26,10 @@ public interface TechDao
 	public Chapters getChapters(@Param("zjid") String id);
 	public ArrayList<Reply> getReplyList(@Param("pjId") String id);
 	public Assist getAssist(Assist ast);
+	public ArrayList<Chapters> getChaptersKcId(@Param("zjId") String id);
+	public  ArrayList<Finance> getFinance(Finance fe);
 	public int addCurriculum(Curriculum cc);
+	public int addFinance(Finance fe);
 	public int addChapters(Chapters ct);
 	public int addVideo(Video vd);
 	public int addAssess(Assess as);
@@ -33,9 +38,13 @@ public interface TechDao
 	public int deleteKc(@Param("kcId") String kcId);
 	public int deleteZj(@Param("zjId") String zjId);
 	public int deleteSp(@Param("spId") String spId);
+	public int deleteFi(@Param("cwId") String cwId);
 	public int upCurriculumD(Curriculum curriculum);
 	public int upChaptersD(Chapters cp);
 	public int upVideoD(Video vo);
 	public int upAssess(@Param("dzcs") String dzcs,@Param("pjId") Long pjId);
 	public int upCurriculum(@Param("jgPrice") Long jgPrice,@Param("kcId") Long kcId);
+	public int upCurriculumPj(@Param("kcId") Long kcId);
+	public int upCurriculumGm(@Param("kcId") Long kcId);
+
 }

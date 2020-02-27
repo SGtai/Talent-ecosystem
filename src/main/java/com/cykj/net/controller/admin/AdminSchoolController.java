@@ -1,6 +1,7 @@
 package com.cykj.net.controller.admin;
 
 
+import com.cykj.net.aop.Log;
 import com.cykj.net.javabean.LayuiData;
 import com.cykj.net.service.admin.AdminSchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,23 +22,25 @@ public class AdminSchoolController {
         return adminSchoolService.school(scName,type,prid,ctid,state,scState,page,limit);
     }
 
+    @Log(type = "修改操作",event = "修改高校状态")
     @RequestMapping(value = "/updateState")
     @ResponseBody
-    public String updateState(String account ,String state){
+    public String updateStateLog(String account ,String state){
         return adminSchoolService.updateState(account,state);
     }
 
+    @Log(type = "修改操作",event = "修改高校密码")
     @RequestMapping(value = "/updatePassword")
     @ResponseBody
-    public String updatePassword(String account){
+    public String updatePasswordLog(String account){
         return adminSchoolService.updatePassword(account);
     }
 
-
+    @Log(type = "审核操作",event = "审核高校")
     @RequestMapping(value = "/updateScState")
     @ResponseBody
-    public String updateScState(String scAccount ,String scState){
-        return adminSchoolService.updateScState(scAccount,scState);
+    public String updateScStateLog(String scAccount ,String scState,String name){
+        return adminSchoolService.updateScState(scAccount,scState,name);
     }
 
 
