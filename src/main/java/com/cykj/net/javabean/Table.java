@@ -8,17 +8,21 @@ public class Table
 	private int count;
 	private String msg="";
 	private List<?> data;
+	private List<Experience> experiences;
+	private List<Undergo> undergos;
 
-	public Table(int code, int count, String msg, List<?> data)
+	public Table()
+	{
+	}
+
+	public Table(int code, int count, String msg, List<?> data, List<Experience> experiences, List<Undergo> undergos)
 	{
 		this.code = code;
 		this.count = count;
 		this.msg = msg;
 		this.data = data;
-	}
-
-	public Table()
-	{
+		this.experiences = experiences;
+		this.undergos = undergos;
 	}
 
 	public int getCode()
@@ -59,5 +63,25 @@ public class Table
 	public void setData(List<?> data)
 	{
 		this.data = data;
+	}
+
+	public List<Experience> getExperiences()
+	{
+		return experiences;
+	}
+
+	public void setExperiences(List<Experience> experiences)
+	{
+		this.experiences = experiences;
+	}
+
+	public List<Undergo> getUndergos()
+	{
+		return undergos;
+	}
+
+	public void setUndergos(List<Undergo> undergos)
+	{
+		this.undergos = undergos;
 	}
 }

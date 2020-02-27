@@ -1,5 +1,6 @@
 package com.cykj.net.controller.admin;
 
+import com.cykj.net.aop.Log;
 import com.cykj.net.javabean.Position;
 import com.cykj.net.javabean.Province;
 import com.cykj.net.javabean.Qyinfo;
@@ -150,7 +151,6 @@ public class AdminController {
             session.removeAttribute(em.nextElement().toString());
         }
         ModelAndView mv = new ModelAndView();
-//        session.setAttribute("admin", null);
         mv.setViewName("/WEB-INF/admin/login");
         return mv;
     }

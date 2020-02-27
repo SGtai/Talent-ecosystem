@@ -16,7 +16,7 @@ spring:
       additional-paths: resources/**,static/**,WEB-INF/**
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://118.178.91.176:3306/db?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://118.178.91.176:3306/db?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true
     username: jx1907
     password: 2020Jx1907!
     type: com.alibaba.druid.pool.DruidDataSource

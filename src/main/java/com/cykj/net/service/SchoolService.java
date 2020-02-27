@@ -61,13 +61,13 @@ public class SchoolService
 		return c;
 	}
 
-	public List<Experience> findexperience(String jlid){
-		List<Experience> experiences=schoolDao.findexperience(jlid);
+	public List<Experience> findexperience(String account){
+		List<Experience> experiences=schoolDao.findexperience(account);
 		return experiences;
 	}
 
-	public List<Undergo> findegzjl(String jlid){
-		List<Undergo> undergos=schoolDao.findegzjl(jlid);
+	public List<Undergo> findegzjl(String account){
+		List<Undergo> undergos=schoolDao.findegzjl(account);
 		return undergos;
 	}
 

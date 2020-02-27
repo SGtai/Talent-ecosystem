@@ -111,6 +111,50 @@
 			</div>
 		</div>
 		<img  src=/schoolS/cunchu/mypic/图片1.png" alt="" style="width: 20%;height: 20%;margin-left: 70%;margin-top: -30%">
+		<div  class="layui-form-item">
+			<label class="layui-form-label" style="margin-left: -5%">学习经历</label>
+			<table class="layui-table" style="margin-left: -5%">
+				<col width="200">
+				<col width="200">
+				<col width="200">
+				<thead>
+				<tr>
+					<th>时间</th>
+					<th>学校</th>
+					<th>专业</th>
+				</tr>
+				</thead>
+				<tbody id="ex">
+					<tr>
+						<td>无</td>
+						<td>无</td>
+						<td>无</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div  class="layui-form-item">
+			<label class="layui-form-label" style="margin-left: -5%">工作经历</label>
+			<table class="layui-table" style="margin-left: -5%">
+				<col width="200">
+				<col width="200">
+				<col width="200">
+				<thead>
+				<tr>
+					<th>时间</th>
+					<th>公司</th>
+					<th>工作内容</th>
+				</tr>
+				</thead>
+				<tbody id="gz">
+				<tr>
+					<td>无</td>
+					<td>无</td>
+					<td>无</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
 		<div class="layui-form-item" style="margin-left: -15%">
 			<label class="layui-form-label">技能证书</label>
 			<div class="layui-input-inline" style="width: 79%;">
@@ -124,19 +168,20 @@
 			</div>
 		</div>
 	</div>
+	<input id="upfile" type="file" name="upfile" onchange="fileUpload()"/>
 <%--	人才批量导入面板--%>
 	<div id="daorumb" style="display: none ; padding: 10px;margin-left: 10%">
 
 		<div class="layui-form-item">
 			<label class="layui-form-label" style="margin-left: 15%">模板下载</label>
 			<div class="layui-inline">
-				<button style="margin-left: 5%" class="layui-btn layui-btn-normal layui-btn-radius" id="xiazaimb" type="button">下载模板</button>
+				<button style="margin-left: 5%" class="layui-btn layui-btn-normal layui-btn-radius" onclick="downloadTemp()">下载模板</button>
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label" style="margin-left: 15%">批量上传</label>
 			<div class="layui-inline">
-				<button style="margin-left: 5%" class="layui-btn layui-btn-normal layui-btn-radius" id="xzwj" type="button">选择文件</button>
+				<button style="margin-left: 5%" class="layui-btn layui-btn-normal layui-btn-radius"  id="btn" name="btn">选择文件</button>
 			</div>
 		</div>
 		<div>
@@ -224,13 +269,31 @@
 				$.ajax(
 					{
 						type:"POST",
-						url:"/school/reg1",
+						url:"/school/exgz",
 						dataType:"text",
 						data:{
-							jlid:data.account
+							account:data.account
 						},
 						success:function (msg) {
-
+							var arr = JSON.parse(msg);
+							// alert(arr.experiences[0].zyMajor);
+							$("#ex").children().empty();
+							$("#gz").children().empty();
+							if(arr.experiences.length!=0){
+								for (var i = 0; i < arr.experiences.length; i++) {
+									$("#ex").append("<tr><td>"+arr.experiences[i].sxSchooltime+"</td><td>"+arr.experiences[i].school+"</td><td>"+arr.experiences[i].zyMajor+"</td></tr>");
+								}
+							}else{
+								$("#ex").append("<tr><td>无</td><td>无</td><td>无</td></tr>");
+							}
+							if(arr.undergos.length!=0){
+									for (var i = 0; i < arr.undergos.length; i++) {
+										$("#gz").append("<tr><td>"+arr.undergos[i].ksTime+"</td><td>"+arr.undergos[i].jzUnit+"</td><td>"+arr.undergos[i].zwPosition+"</td></tr>");
+									}
+							}else{
+								$("#gz").append("<tr><td>无</td><td>无</td><td>无</td></tr>");
+							}
+							layui.form.render('table');
 						},
 						error:function (msg) {
 							alert("系统忙，请稍等");
@@ -316,7 +379,50 @@
 		});
 
 	</script>
+	<script>
+		function downloadTemp(){
+			// window.location.href="/4sinfo/downloadTmpl.do";
+		}
 
+		function fileUpload(){
+			var fileName = $("#upfile").val();
+			if(fileName == null || fileName==""){
+				alert("请选择文件");
+			}else{
+				var fileType = fileName.substr(fileName.length-4,fileName.length);
+				if(fileType == ".xls" || fileType == "xlsx"){
+					var formData = new FormData();
+					formData.append("file",$("#upfile").prop("files")[0]);
+					$.ajax({
+						type:"post",
+						url:"/4sinfo/ajaxUpload.do",
+						data:formData,
+						cache:false,
+						processData:false,
+						contentType:false,
+						dataType:"json",
+						success:function(data){
+							if(null != data){
+								if(data.dataStatus == "1"){
+									if(confirm("上传成功！")){
+										window.location.reload();
+									}
+								}else{
+									alert("上传失败！");
+								}
+							}
+						},
+						error:function(){
+							alert("上传失败！");
+						}
+					});
+				}else{
+					alert("上传文件类型错误！");
+				}
+			}
+		}
+
+	</script>
 
 
 
