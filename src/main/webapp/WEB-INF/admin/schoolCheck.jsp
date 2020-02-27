@@ -312,7 +312,7 @@
                         type: "POST",
                         url: "/adminSchool/updateScState",
                         dataType: "text",
-                        data: {scAccount: data.scAccount, scState: state},
+                        data: {scAccount: data.scAccount, scState: state,name:data.scName},
                         success: function (msg) {
                             var i = 0;
                             if (msg === 'true') {
