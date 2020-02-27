@@ -17,7 +17,6 @@
 <a href="/jump/school/login">学校路口</a>
 <a href="/jump/admin/login">企业入口</a>
 <a href="/jump/admin/login">管理员入口</a>
-<a href="/jump/payment/index">支付入口</a>
 
 </body>
 </html>

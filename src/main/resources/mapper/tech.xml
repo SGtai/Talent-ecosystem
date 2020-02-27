@@ -18,6 +18,10 @@
         select * from reply where pjId = #{pjId}
     </select>
 
+    <select id="getChaptersKcId" resultType="Chapters" parameterType="String">
+        select * from chapters where zjId = #{zjId}
+    </select>
+
     <select id="getCurriculumListS" resultType="curriculum">
         select * from curriculum
     </select>
@@ -58,8 +62,8 @@
 
     <insert id="addFinance" parameterType="Finance" keyProperty="cwId" useGeneratedKeys="true">
 		insert into
-		finance(kcId,yhId,jgPrice,kcName,yhName,time,msDescribe,ddNumber)
-		values(#{kcId},#{yhId},#{jgPrice},#{kcName},#{yhName},#{time},#{msDescribe},#{ddNumber})
+		finance(kcId,yhId,jgPrice,kcName,yhName,ddTime,msDescribe,ddNumber)
+		values(#{kcId},#{yhId},#{jgPrice},#{kcName},#{yhName},#{ddTime},#{msDescribe},#{ddNumber})
 	</insert>
 
     <insert id="addChapters" parameterType="Chapters" keyProperty="zjId" useGeneratedKeys="true">
@@ -98,6 +102,14 @@
 
     <update id="upCurriculum" parameterType="Curriculum"  useGeneratedKeys="true">
 		update curriculum set jgPrice = #{jgPrice} where kcId = #{kcId}
+	</update>
+
+    <update id="upCurriculumPj" parameterType="Curriculum"  useGeneratedKeys="true">
+		update curriculum set plcsComment = plcsComment + 1 where kcId = #{kcId}
+	</update>
+
+    <update id="upCurriculumGm" parameterType="Curriculum"  useGeneratedKeys="true">
+		update curriculum set gmcsPurchase = gmcsPurchase + 1 where kcId = #{kcId}
 	</update>
 
     <update id="upCurriculumD" parameterType="Curriculum"  useGeneratedKeys="true">
@@ -147,6 +159,61 @@
         </if>
         <if test="kcId !=null and kcId !='' ">
             limit  #{jgPrice},#{kcId}
+        </if>
+    </select>
+
+    <select id="geFinanceSel" resultType="Finance"
+            parameterType="Finance">
+        select * from finance where 1=1
+        <if test="kcName !=null and kcName !='' ">
+            and kcName like  #{kcName}
+        </if>
+        <if test="yhName !=null and yhName !='' ">
+            and yhName like #{yhName}
+        </if>
+        <if test="ddNumber !=null and ddNumber !='' ">
+            and ddNumber like #{ddNumber}
+        </if>
+        <if test="demo1 !=null and demo1 !='' ">
+            and ddTime &gt;= #{demo1}
+        </if>
+        <if test="demo2 !=null and demo2 !='' ">
+            and ddTime &lt;= #{demo2}
+        </if>
+        <if test="demo3 !=null and demo3 !='' ">
+            and jgPrice &gt;= #{demo3}
+        </if>
+        <if test="demo4 !=null and demo4 !='' ">
+            and jgPrice &lt;= #{demo4}
+        </if>
+    </select>
+
+    <select id="geFinanceData" resultType="Finance"
+            parameterType="Finance">
+        select * from finance where 1=1
+        <if test="kcName !=null and kcName !='' ">
+            and kcName like  #{kcName}
+        </if>
+        <if test="yhName !=null and yhName !='' ">
+            and yhName like #{yhName}
+        </if>
+        <if test="ddNumber !=null and ddNumber !='' ">
+            and ddNumber like #{ddNumber}
+        </if>
+        <if test="demo1 !=null and demo1 !='' ">
+            and ddTime &gt;= #{demo1}
+        </if>
+        <if test="demo2 !=null and demo2 !='' ">
+            and ddTime &lt;= #{demo2}
+        </if>
+        <if test="demo3 !=null and demo3 !='' ">
+            and jgPrice &gt;= #{demo3}
+        </if>
+        <if test="demo4 !=null and demo4 !='' ">
+            and jgPrice &lt;= #{demo4}
+        </if>
+        <if test="kcId !=null and kcId !='' ">
+            limit  #{yhId},#{kcId}
         </if>
     </select>
 
@@ -211,5 +278,9 @@
 
     <delete id="deleteSp" parameterType="String" >
 		DELETE  FROM video  WHERE spId=#{spId}
+	</delete>
+
+    <delete id="deleteFi" parameterType="String" >
+		DELETE  FROM finance  WHERE cwId=#{cwId}
 	</delete>
 </mapper>

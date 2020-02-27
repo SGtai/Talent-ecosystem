@@ -34,7 +34,7 @@
 				<a href="#">技术·专区</a>
 			</h3>
 			<a href="#" class="floor-side-link">
-				<img src=<%=othPath+"head-fl.jpg"%> alt="">
+				<img src=<%=othPath+"head-f.jpg"%> alt="">
 			</a>
 		</div>
 		<div class="floor-side-right">
