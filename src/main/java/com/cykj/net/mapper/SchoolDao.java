@@ -92,4 +92,11 @@ public interface SchoolDao
 	 * @return
 	 */
 	public List<C1> findcity(@Param("prid") String prid);
+
+	/**
+	 * 插入用户信息
+	 * @param userlist
+	 * @return
+	 */
+	public int inseruserinfo(Userlist userlist);
 }

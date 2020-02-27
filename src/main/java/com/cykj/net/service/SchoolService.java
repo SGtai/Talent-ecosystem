@@ -71,4 +71,8 @@ public class SchoolService
 		return undergos;
 	}
 
+	public int inseruserinfo(Userlist userlist){
+		int Userlistnum=schoolDao.inseruserinfo(userlist);
+		return Userlistnum;
+	}
 }
