@@ -66,3 +66,15 @@ $(document).ready(function () {
   })
 
 });
+
+function tuichu() {
+	$.ajax({
+		type: "POST",
+		url: "/user/tuichu",
+		async:false,
+		dataType: "text",
+		success: function (flag) {
+			window.location.href=window.location;
+		}
+	});
+}

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("/user")
 public class UserController
@@ -16,7 +18,7 @@ public class UserController
 
 	@RequestMapping("/login")
 	@ResponseBody
-	public String login(String phone,String password){
+	public String login(String phone, String password, HttpServletRequest request){
 
 		Userlist userlist = userService.findPhone(phone);
 		if (userlist == null){
@@ -26,6 +28,7 @@ public class UserController
 				return "prohibit";
 			}else {
 				if (userlist.getPassword().equals(password)){
+					request.getSession().setAttribute("user",userlist);
 					return "true";
 				}else {
 					return "false"; } } }
@@ -41,8 +44,13 @@ public class UserController
 		}else {
 			return "false";
 		}
+	}
 
-
+	@RequestMapping("/tuichu")
+	@ResponseBody
+	public String tuichu(HttpServletRequest request){
+		request.getSession().removeAttribute("user");
+		return "success";
 	}
 
 }

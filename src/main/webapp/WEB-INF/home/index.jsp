@@ -174,6 +174,56 @@
 				<div class="clear"> </div>
 			</div>
 			<div class="login">
+<%--				当session域里面有user值，显示个人中心和退出--%>
+
+					<div class="loginmain" id="userDiv"
+							<c:if test="${sessionScope.user != null}">
+                                style="display: block"
+							</c:if>
+							<c:if test="${sessionScope.user == null}">
+								style="display: none"
+							</c:if>
+					>
+						<div class="ContentA">
+							<div class="qybox2">
+								<P style="margin-top: 46px;font-size: 20px;">欢迎您，用户${sessionScope.user.phone}</P>
+							</div>
+							<div class="qybox0">
+								<a href="javascript:void(0)">个人中心</a>
+								<a href="javascript:tuichu()">退出</a>
+							</div>
+						</div>
+						<div class="ContentB">
+							<div class="qybox1">
+								<a href="/jump/admin/login">企业入口</a>
+								<a href=" ">企业注册</a>
+							</div>
+							<div class="qybox2">
+								<p>注册后可<b>免费</b>升级为<b>普通会员</b><br>不花钱也能完成中低职位的招聘</p>
+							</div>
+							<div class="qybox3">
+								<div class="l">企业服务热线<br><b>400-800-8*8*</b></div>
+								<div class="r"></div>
+							</div>
+						</div>
+						<div class="ContentC">
+							<div class="qybox0">
+								<a href="/jump/admin/login">管理员登录</a>
+							</div>
+						</div>
+					</div>
+
+	<%--				当session域里面没有，显登录--%>
+
+			<div id="nouserDiv"
+				<c:if test="${sessionScope.user == null}">
+				    style="display: block"
+				</c:if>
+				<c:if test="${sessionScope.user != null}">
+					style="display: none"
+				</c:if>
+			>
+
 				<div class="erweima">
 					<div class="close"></div>
 					<div class="ewmimg"><img src=<%=imagesPath+"showqrcode.jpg"%> /></div>
@@ -198,6 +248,7 @@
 							<p>&nbsp;注册后可<b>直接</b>成为<b>普通会员</b><br>即刻可开始寻求您的中意职位</p>
 						</div>
 					</div>
+
 					<div class="ContentB">
 						<div class="qybox1">
 							<a href="/jump/admin/login">企业入口</a>
@@ -217,6 +268,8 @@
 						</div>
 					</div>
 				</div>
+					</div>
+
 			</div>
 			<div class="clear"></div>
 			<div class="tabs">
