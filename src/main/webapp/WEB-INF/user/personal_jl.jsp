@@ -254,7 +254,7 @@
 		</div>
 		<div class="clear"></div>
 		<div class="addJl">
-			<a href="/jump/user/personal_jlsee">
+			<a href="/user/gojl">
 				<span>继续创建简历</span>
 				<label>（还可创建2份简历）</label>
 			</a>

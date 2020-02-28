@@ -14,6 +14,20 @@ function personal_jlupdate(){
 	});
 }
 
+function userinfojl() {
+	var s = $('#userinfojl').serialize();
+	$.ajax({
+		type: "POST",
+		url: "/user/userInfojl",
+		dataType: "text",
+		data: s,
+		success: function (msg) {
+			if (msg == "true") {
+				window.alert("保存成功");
+			}
+		}
+	});
+}
 function yixiang() {
 	
 }

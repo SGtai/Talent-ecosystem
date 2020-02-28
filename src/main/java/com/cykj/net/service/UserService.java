@@ -1,6 +1,6 @@
 package com.cykj.net.service;
 
-import com.cykj.net.javabean.Userlist;
+import com.cykj.net.javabean.*;
 import com.cykj.net.mapper.UserDao;
 import org.springframework.stereotype.Service;
 
@@ -24,5 +24,21 @@ public class UserService
 	public int gerenInfo(Userlist userlist){
 		int gerenInfo = userDao.gerenInfo(userlist);
 		return gerenInfo;
+	}
+	public void addbasejl(Resume resume){
+		userDao.addbasejl(resume);
+	}
+	public void addJobIntension(Jobintension jobintension){
+		userDao.addJobIntension(jobintension);
+	}
+	public void addexperience(Experience experience){
+		userDao.addexperience(experience);
+	}
+	public void addundergo(Undergo undergo){
+		userDao.addundergo(undergo);
+	}
+	public int userInfojl(Resume resume){
+		int num = userDao.userInfojl(resume);
+		return num;
 	}
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 86158
@@ -140,15 +141,21 @@
 				<a href="">英文简历</a>
 			</div>
 		</div>
-		<div class="JlBoxCon">
+		<form class="layui-form" id="userinfojl">
+		<div class="JlBoxCon layui-form">
+			<div class="layui-form-item">
+				<div class="nametxt"><span>*</span>是否隐藏简历（off为不隐藏）：</div>
+				<div class="layui-input-block">
+					<input name="ycHide" type="checkbox" lay-skin="switch" lay-text="ON|OFF">
+				</div>
+			</div>
+			<input hidden value="${jlId}" name="jlId">
 			<h1><span>基本信息</span></h1>
-			<div class="JlBoxLeft">
+			<div class="JlBoxLeft layui-form">
 				<div class="jldiv">
 					<div class="nametxt"><span>*</span>姓    名：</div>
 					<div class="inputtxt">
-						<input name="name" type="text" class="txt1"/>
-						<span class="check1"></span>
-						<span class="ycname">隐藏姓名</span>
+						<input name="yhname" type="text" class="txt1" value="${userinfo.name}"/>
 					</div>
 					<div class="clear"></div>
 				</div>
@@ -156,10 +163,16 @@
 				<div class="layui-form-item jldiv">
 					<div class="nametxt"><span>*</span>性    别：</div>
 					<div class="layui-input-inline">
-						<select name="sex" lay-filter="sex">
+						<select name="xbSex" lay-filter="sex">
 							<option value=""></option>
-							<option value="男">男</option>
-							<option value="女">女</option>
+							<c:if test="${userinfo.sex == '男'}">
+								<option value="男" checked="">男</option>
+								<option value="女">女</option>
+							</c:if>
+							<c:if test="${userinfo.sex == '女'}">
+								<option value="男">男</option>
+								<option value="女" checked="">女</option>
+							</c:if>
 						</select>
 					</div>
 				</div>
@@ -168,7 +181,7 @@
 				<div class="layui-form-item jldiv">
 					<div class="nametxt"><span>*</span>出生年月：</div>
 					<div class="layui-input-inline">
-						<input id="birthday" name="birthday" class="layui-input" id="date" type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date">
+						<input id="csTime" name="csTime" class="layui-input" id="date" type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date" value="${userinfo.birthday}">
 					</div>
 				</div>
 				<div class="clear"></div>
@@ -206,7 +219,7 @@
 				<div class="jldiv">
 					<div class="nametxt"><span>*</span>民  族：</div>
 					<div class="inputtxt">
-						<input name="mmFace" type="text" class="txt" placeholder="群众/团员/党员"/>
+						<input name="minzu" type="text" class="txt" placeholder="群众/团员/党员"/>
 					</div>
 				</div>
 				<div class="clear"></div>
@@ -218,13 +231,16 @@
 				</div>
 				<div class="clear"></div>
 			</div>
-
-			<div class="clear"></div>
+			<div class="jldiv">
+				<a href="javascript:void(0)" class="save" onclick="userinfojl()">保存</a>
+			</div>
 		</div>
+		</form>
 		<div class="clear"></div>
 		<div class="lineddiv"></div>
-		<form id="yixiang">
+		<form id="yixiang" class="layui-form">
 		<div class="JlBoxCon">
+			<input hidden value="${jzyxid}" name="jzyxid">
 			<h1><span>求职意向</span><a href="" class="update">修改</a></h1>
 			<div class="JlBoxLeft">
 					<div class="layui-form-item jldiv">
@@ -277,8 +293,9 @@
 		</form>
 		<div class="clear"></div>
 		<div class="lineddiv"></div>
-		<form id="jiaoyu">
+		<form id="jiaoyu" class="layui-form">
 		<div class="JlBoxCon">
+			<input hidden value="${jyid}" name="jyId">
 			<h1><span>教育背景</span></h1>
 			<div class="JlBoxLeft">
 				<div class="jldiv">
@@ -326,8 +343,9 @@
 		</form>
 		<div class="clear"></div>
 		<div class="lineddiv"></div>
-		<form id="gongzuo">
+		<form id="gongzuo" class="layui-form">
 		<div class="JlBoxCon">
+			<input hidden value="${gzjlId}" name="gzjlId">
 			<h1><span>工作经历</span></h1>
 			<div class="jobjingli">
 				<input name="" type="radio" value="" />
@@ -383,7 +401,7 @@
 		</form>
 		<div class="clear"></div>
 		<div class="lineddiv"></div>
-		<form id="zhengshu">
+		<form id="zhengshu" class="layui-form">
 		<div class="JlBoxCon">
 			<h1><span>证书</span></h1>
 			<div class="JlBoxLeft">

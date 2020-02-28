@@ -27,6 +27,7 @@ public class Resume {
   private String byschool;
   private String zy;
   private String xl;
+  private String yhname;
 
 
 }
