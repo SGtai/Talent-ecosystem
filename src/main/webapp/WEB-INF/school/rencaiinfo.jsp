@@ -422,19 +422,20 @@
 	<script>
 
 		function downloadTemp(){
-			$.ajax(
-				{
-					type:"POST",
-					url:"/school/xiazaimoban",
-					dataType:"text",
-					success:function (msg) {
-						alert("模板已经下载到C盘")
-					},
-					error:function (msg) {
-						alert("系统忙，请稍等");
-					}
-				}
-			);
+			window.open("/schoolS/cunchu/简历模板.xls");
+			// $.ajax(
+			// 	{
+			// 		type:"POST",
+			// 		url:"/school/xiazaimoban",
+			// 		dataType:"text",
+			// 		success:function (msg) {
+			// 			alert("模板已经下载到C盘")
+			// 		},
+			// 		error:function (msg) {
+			// 			alert("系统忙，请稍等");
+			// 		}
+			// 	}
+			// );
 		}
 		$('#bb').click(
 			function () {
