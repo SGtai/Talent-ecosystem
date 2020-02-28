@@ -1,5 +1,10 @@
 package com.cykj.net.controller;
 
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.request.AlipayTradePagePayRequest;
+import com.alipay.config.AlipayConfig;
 import com.cykj.net.javabean.*;
 import com.cykj.net.service.TechService;
 import com.cykj.net.tool.Comment;
@@ -11,6 +16,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,14 +24,13 @@ import org.springframework.web.multipart.support.StandardMultipartHttpServletReq
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.awt.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -38,6 +43,9 @@ public class TechController
 {
 	@Autowired
 	private TechService techService;
+	private String kcIdS;
+	private String kcNameS;
+	private String ddMs;
 
 
 	/**
@@ -47,7 +55,10 @@ public class TechController
 	 */
 	@RequestMapping("/techa")
 	public ModelAndView techa(String lows,String highs,String kcname){
-		ArrayList<Curriculum> al =new ArrayList<>();
+		ArrayList<Curriculum> al = new ArrayList<>();
+		Finance finance = new Finance();
+		finance.setYhId(1);
+		ArrayList<Finance> finances = techService.getFinance(finance);
 		if (lows!=null||highs!=null||kcname!=null){
 			Curriculum cu = new Curriculum();
 			String nameS = "%"+kcname.trim()+"%";
@@ -58,11 +69,12 @@ public class TechController
 		}else{
 			al = techService.getCurriculumListS();
 		}
+
 		ModelAndView mv = new ModelAndView();
 		ArrayList<Develop> dl = techService.getDevelopList();
-
 		HashMap<String,ArrayList<Curriculum>> getMap = new HashMap<>();
-		getMap.put("1",al);
+		System.out.println(al.size()+"123124124124124241241244124");
+		getMap.put("0",al);
 		for (int i = 0; i <dl.size() ; i++)
 		{
 			ArrayList<Curriculum>  alA = new ArrayList<>();
@@ -72,8 +84,19 @@ public class TechController
 					alA.add(al.get(j));
 				}
 			}
-			getMap.put(String.valueOf(i+2),alA);
+			getMap.put(String.valueOf(i+1),alA);
 		}
+		ArrayList<Curriculum>  cuA= new ArrayList<>();
+		for (int i = 0; i < finances.size(); i++)
+		{
+			for (int j = 0; j <al.size() ; j++)
+			{
+				if (finances.get(i).getKcId()==al.get(j).getKcId()){
+					cuA.add(al.get(j));
+				}
+			}
+		}
+		getMap.put(String.valueOf(dl.size()+1),cuA);
 		mv.addObject("getMap",getMap);
 		mv.addObject("dl",dl);
 		mv.setViewName("/WEB-INF/tech/techA");
@@ -87,14 +110,81 @@ public class TechController
 	 * @return
 	 */
 	@RequestMapping("/techb")
-	public ModelAndView techb(String name , String id){
+	@ResponseBody
+	public Object techb(HttpServletRequest request,HttpServletResponse response,String name , String id,String jg,String ms) throws ServletException, IOException, AlipayApiException
+	{
 		ModelAndView mv = new ModelAndView();
 		ArrayList<Chapters> ct = techService.getChaptersList(id);
+//		String idS = id;
 		System.out.println(name);
-		mv.addObject("ct",ct);
-		mv.addObject("name",name);
-		mv.setViewName("/WEB-INF/tech/techB");
-		return mv;
+		mv.addObject("ct", ct);
+		mv.addObject("name", name);
+		Userlist user = new Userlist();
+		user.setYhid(1);
+		Finance fea = new Finance();
+		fea.setYhId(1);
+		fea.setKcId(Long.parseLong(id));
+		ArrayList<Finance> fes = techService.getFinance(fea);
+		if (Integer.valueOf(jg)!=0){
+			if (fes.size()>0){
+				mv.setViewName("/WEB-INF/tech/techB");
+				return mv;
+			}else{
+				kcIdS=id;
+				kcNameS=name;
+				ddMs=ms;
+				//获得初始化的AlipayClient
+				AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
+				//设置请求参数
+				AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
+				alipayRequest.setReturnUrl(AlipayConfig.return_url);
+				alipayRequest.setNotifyUrl(AlipayConfig.notify_url);
+				//商户订单号，商户网站订单系统中唯一订单号，必填WIDout_trade_norequest.getParameter("12").getBytes("ISO-8859-1"),"UTF-8"
+				String out_trade_no = new String(UUID.randomUUID().toString());
+				//付款金额，必填WIDtotal_amount
+				String total_amount = new String(String.valueOf(jg));
+				//订单名称，必填WIDsubject
+				String subject = new String(name);
+				//商品描述，可空WIDbody
+				String body = new String(ms);
+				alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\","
+						+ "\"total_amount\":\""+ total_amount +"\","
+						+ "\"subject\":\""+ subject +"\","
+						+ "\"body\":\""+ body +"\","
+						+ "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
+
+				//若想给BizContent增加其他可选请求参数，以增加自定义超时时间参数timeout_express来举例说明
+				//alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\","
+				//		+ "\"total_amount\":\""+ total_amount +"\","
+				//		+ "\"subject\":\""+ subject +"\","
+				//		+ "\"body\":\""+ body +"\","
+				//		+ "\"timeout_express\":\"10m\","
+				//		+ "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
+				//请求参数可查阅【电脑网站支付的API文档-alipay.trade.page.pay-请求参数】章节
+
+				//请求
+				String result = alipayClient.pageExecute(alipayRequest).getBody();
+				return  result;
+			}
+		}else
+		{
+			if (fes.size()==0){
+			Finance fe = new Finance();
+			fe.setKcId(Integer.valueOf(id));
+			fe.setMsDescribe(ms);
+			fe.setKcName(name);
+			fe.setJgPrice(Long.parseLong(jg));
+			fe.setDdNumber(UUID.randomUUID().toString());
+			fe.setDdTime(getTime());
+			fe.setYhName("小铭");
+			fe.setYhId(user.getYhid());
+			//		fe.setMsDescribe();
+			int a = techService.addFinance(fe);
+			techService.upCurriculumGm(Long.parseLong(id));
+			}
+			mv.setViewName("/WEB-INF/tech/techB");
+			return mv;
+		}
 	}
 
 	/**
@@ -130,15 +220,15 @@ public class TechController
 	{
 
 		getTime();
-		TimeZone tz = TimeZone.getTimeZone("ETC/GMT-8");
-		TimeZone.setDefault(tz);
-		ModelAndView mv = new ModelAndView();
 		Userlist user = new Userlist();
 		user.setRegTime(getTime());
 		System.out.println(user.getRegTime());
 		user.setYhid(1);
-		user.setPicture("1.jpg");
+		user.setPicture("head-fl.jpg");
 		user.setName("小铭");
+		TimeZone tz = TimeZone.getTimeZone("ETC/GMT-8");
+		TimeZone.setDefault(tz);
+		ModelAndView mv = new ModelAndView();
 		if (fName!=null&&fName.length()>0){
 			String as = myDownload(request,response,fName);
 			mv.addObject("warning",as);
@@ -153,6 +243,10 @@ public class TechController
 			assAssess.setSpId(Long.parseLong(spId));
 			assAssess.setYhName(user.getName());
 			int a = techService.addAssess(assAssess);
+			ArrayList<Chapters> chapters = techService.getChaptersKcId(id);
+			if (chapters.size()>0){
+				techService.upCurriculumPj(chapters.get(0).getKjId());
+			}
 		}
 		if ((pjId!=null&&pjId.length()>0)&&(cs!=null&&cs.length()>0)){
 			Assist as =new Assist();
@@ -413,7 +507,12 @@ public class TechController
 		java.sql.Timestamp d = new java.sql.Timestamp(System.currentTimeMillis());
 		return d;
 	}
-
+	/**
+	 *
+	 * 施恭泰 jx190719 下载视频方法
+	 * @param
+	 * @return
+	 */
 	public String myDownload(HttpServletRequest request, HttpServletResponse response,
 	                               String fName) throws IOException {
 		System.out.println("12345");
@@ -453,7 +552,12 @@ public class TechController
 		return null;
 	}
 
-
+	/**
+	 *
+	 * 施恭泰 jx190719 课程管理页面数据
+	 * @param
+	 * @return
+	 */
 	@RequestMapping("/document.data")
 	@ResponseBody
 	private DateDemo documentData(String title,String price1,String price2,String city,String page,String limit){
@@ -484,6 +588,12 @@ public class TechController
 		return dateS1;
 	}
 
+	/**
+	 *
+	 * 施恭泰 jx190719 章节管理页面数据
+	 * @param
+	 * @return
+	 */
 	@RequestMapping("/chapter.data")
 	@ResponseBody
 	private DateDemo chapterData(String title,String kcId,String page,String limit){
@@ -513,6 +623,12 @@ public class TechController
 		return dateS1;
 	}
 
+	/**
+	 *
+	 * 施恭泰 jx190719 视频管理页面数据
+	 * @param
+	 * @return
+	 */
 	@RequestMapping("/video.data")
 	@ResponseBody
 	private DateDemo videoData(String title,String kcId,String page,String limit){
@@ -542,6 +658,56 @@ public class TechController
 		return dateS1;
 	}
 
+	/**
+	 *
+	 * 施恭泰 jx190719 资金管理页面数据
+	 * @param
+	 * @return
+	 */
+	@RequestMapping("/finance.data")
+	@ResponseBody
+	private DateDemo financeData(String title,String price1,String price2,String ddTime1,String ddTime2,String ddNumber,String yhName,String page,String limit){
+		if (page==null||page.equals("")){
+			page="1";
+			limit="5";
+		}
+		int limitInt = Integer.valueOf(limit);
+		int pageNum = (Integer.valueOf(page)-1)*limitInt;
+		if (title!=null&&!title.equals("")){
+			title="%"+title.trim()+"%";
+		}
+		if (yhName!=null&&!yhName.equals("")){
+			yhName="%"+yhName.trim()+"%";
+		}
+		if (ddNumber!=null&&!ddNumber.equals("")){
+			ddNumber="%"+ddNumber.trim()+"%";
+		}
+		Finance fe = new Finance();
+		fe.setDemo1(ddTime1);
+		fe.setDemo2(ddTime2);
+		fe.setKcName(title);
+		fe.setDemo3(price1);
+		fe.setDemo4(price2);
+		fe.setYhName(yhName);
+		fe.setDdNumber(ddNumber);
+		ArrayList<Finance> fu = techService.geFinanceSel(fe);
+		int num = fu.size();
+		fe.setKcId(pageNum);
+		fe.setYhId(limitInt);
+		fu=techService.geFinanceData(fe);
+		DateDemo dateS1 = new DateDemo();
+		dateS1.setCount(num);
+		dateS1.setMsg("");
+		dateS1.setData(fu);
+		return dateS1;
+	}
+
+	/**
+	 *
+	 * 施恭泰 jx190719 删除课程
+	 * @param
+	 * @return
+	 */
 	@RequestMapping("/delete")
 	public @ResponseBody String delete(String kcId) {
 		int num = techService.deleteKc(kcId);
@@ -554,6 +720,30 @@ public class TechController
 		return result;
 	}
 
+	/**
+	 *
+	 * 施恭泰 jx190719 删除订单
+	 * @param
+	 * @return
+	 */
+	@RequestMapping("/deleteFinance")
+	public @ResponseBody String deleteFinance(String cwId) {
+		int num = techService.deleteFi(cwId);
+		String result="服务器异常";
+		if(num!=0){
+			result="success";
+		}else{
+			result="fail";
+		}
+		return result;
+	}
+
+	/**
+	 *
+	 * 施恭泰 jx190719 删除章节
+	 * @param
+	 * @return
+	 */
 	@RequestMapping("/deleteZj")
 	public @ResponseBody String deleteZj(String zjId) {
 		int num = techService.deleteZj(zjId);
@@ -567,6 +757,12 @@ public class TechController
 		return result;
 	}
 
+	/**
+	 *
+	 * 施恭泰 jx190719 删除视频
+	 * @param
+	 * @return
+	 */
 	@RequestMapping("/deleteSp")
 	public @ResponseBody String deleteSp(String spId) {
 		int num = techService.deleteSp(spId);
@@ -580,6 +776,12 @@ public class TechController
 		return result;
 	}
 
+	/**
+	 *
+	 * 施恭泰 jx190719 修改课程信息
+	 * @param
+	 * @return
+	 */
 	@RequestMapping("/upData")
 	@ResponseBody
 	public HashMap<String, Object> upData(HttpServletRequest request, ServletResponse response)
@@ -621,6 +823,12 @@ public class TechController
 		return null;
 	}
 
+	/**
+	 *
+	 * 施恭泰 jx190719 修改章节信息
+	 * @param
+	 * @return
+	 */
 	@RequestMapping("/upZjData")
 	@ResponseBody
 	public HashMap<String, Object> upZjData(HttpServletRequest request, ServletResponse response)
@@ -662,6 +870,12 @@ public class TechController
 		return null;
 	}
 
+	/**
+	 *
+	 * 施恭泰 jx190719 修改视频信息
+	 * @param
+	 * @return
+	 */
 	@RequestMapping("/upSpData")
 	@ResponseBody
 	public HashMap<String, Object> upSpData(HttpServletRequest request, ServletResponse response)
@@ -703,6 +917,12 @@ public class TechController
 		return null;
 	}
 
+	/**
+	 *
+	 * 施恭泰 jx190719 修改课程价格
+	 * @param
+	 * @return
+	 */
 	@RequestMapping("/upPrice")
 	public @ResponseBody String upPrice(String kcId,String jgPrice) {
 		int num = techService.upCurriculum(Long.parseLong(jgPrice),Long.parseLong(kcId));
@@ -714,4 +934,94 @@ public class TechController
 		}
 		return result;
 	}
+	/**
+	 *
+	 * 施恭泰 jx190719 同步支付信息
+	 * @param
+	 * @return
+	 */
+	@RequestMapping("/paymentUrl")
+	public ModelAndView returnUrl(String out_trade_no,String total_amount,String subject,String body,String lows,String highs,String kcname){
+
+		System.out.println("同步通知支付成功");
+		Finance fe = new Finance();
+		fe.setKcId(Integer.valueOf(kcIdS));
+		fe.setMsDescribe(ddMs);
+		fe.setKcName(kcNameS);
+		String[] total = total_amount.split("\\.");
+		fe.setJgPrice(Long.parseLong(total[0]));
+		fe.setDdNumber(out_trade_no);
+		fe.setDdTime(getTime());
+
+		Userlist user = new Userlist();
+		user.setYhid(1);
+		fe.setYhName("小铭");
+		fe.setYhId(user.getYhid());
+//		fe.setMsDescribe();
+		if (kcNameS!=""){
+		int a = techService.addFinance(fe);}
+		techService.upCurriculumGm(Long.parseLong(kcIdS));
+		kcNameS="";
+		ArrayList<Curriculum> al = new ArrayList<>();
+		Finance finance = new Finance();
+		finance.setYhId(1);
+		ArrayList<Finance> finances = techService.getFinance(finance);
+		if (lows!=null||highs!=null||kcname!=null){
+			Curriculum cu = new Curriculum();
+			String nameS = "%"+kcname.trim()+"%";
+			cu.setKcName(nameS);
+			cu.setDemo1(lows);
+			cu.setDemo2(highs);
+			al = techService.geCurriculumsel(cu);
+		}else{
+			al = techService.getCurriculumListS();
+		}
+		ModelAndView mv = new ModelAndView();
+		ArrayList<Develop> dl = techService.getDevelopList();
+		HashMap<String,ArrayList<Curriculum>> getMap = new HashMap<>();
+		System.out.println(al.size()+"123124124124124241241244124");
+		getMap.put("0",al);
+		for (int i = 0; i <dl.size() ; i++)
+		{
+			ArrayList<Curriculum>  alA = new ArrayList<>();
+			for (int j = 0; j <al.size(); j++)
+			{
+				if (al.get(j).getFzTypeId()==dl.get(i).getDeid()){
+					alA.add(al.get(j));
+				}
+			}
+			getMap.put(String.valueOf(i+1),alA);
+		}
+		ArrayList<Curriculum>  cuA= new ArrayList<>();
+		for (int i = 0; i < finances.size(); i++)
+		{
+			for (int j = 0; j <al.size() ; j++)
+			{
+				if (finances.get(i).getKcId()==al.get(j).getKcId()){
+					cuA.add(al.get(j));
+				}
+			}
+		}
+		System.out.println("购买成功");
+		mv.addObject("xx","购买成功");
+		getMap.put(String.valueOf(dl.size()+1),cuA);
+		mv.addObject("getMap",getMap);
+		mv.addObject("dl",dl);
+		mv.setViewName("/WEB-INF/tech/techA");
+		return mv;
+	}
+	/**
+	 *
+	 * 施恭泰 jx190719 异步支付信息
+	 * @param
+	 * @return
+	 */
+	@RequestMapping("/paymentUrlS")
+	public ModelAndView paymentUrlS(String out_trade_no,String total_amount){
+		ModelAndView mv = new ModelAndView();
+		System.out.println("异步通知支付成功");
+		mv.setViewName("/WEB-INF/tech/techA");
+		return mv;
+	}
+
 }

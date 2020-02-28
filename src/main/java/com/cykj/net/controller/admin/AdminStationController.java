@@ -1,5 +1,6 @@
 package com.cykj.net.controller.admin;
 
+import com.cykj.net.aop.Log;
 import com.cykj.net.javabean.admin.AdminPositionStation;
 import com.cykj.net.service.admin.AdminPositionStationService;
 import com.cykj.net.javabean.LayuiData;
@@ -65,8 +66,9 @@ public class AdminStationController {
      * @return
      */
     @PostMapping(value = "/deleteStation")
+    @Log(type = "删除操作", event = "删除岗位")
     public @ResponseBody
-    String deleteStation(AdminPositionStation aps) {
+    String deleteStationLog(AdminPositionStation aps) {
         if (adminPositionStationService.findJobStid(aps.getStid()) > 0) {
             return "haveJob";
         } else {
@@ -84,8 +86,9 @@ public class AdminStationController {
      * @return
      */
     @PostMapping(value = "/updateStation")
+    @Log(type = "修改操作",event = "修改岗位名称")
     public @ResponseBody
-    String updateStation(AdminPositionStation aps) {
+    String updateStationLog(AdminPositionStation aps) {
         if (adminPositionStationService.findStationName(aps) > 0) {
             return "haveStation";
         }
@@ -102,8 +105,9 @@ public class AdminStationController {
      * @return
      */
     @PostMapping(value = "/addStation")
+    @Log(type = "增加操作",event = "增加岗位")
     public @ResponseBody
-    String addStation(AdminPositionStation aps) {
+    String addStationLog(AdminPositionStation aps) {
         if (adminPositionStationService.findStationName(aps) > 0) {
             return "haveStation";
         }
@@ -122,7 +126,7 @@ public class AdminStationController {
      */
     @RequestMapping(value = "/table/position")
     public @ResponseBody
-    LayuiData position(int limit, int page) {
+    LayuiData positionLog(int limit, int page) {
         LayuiData layuiData = new LayuiData();
         page = (page - 1) * limit;
         layuiData.setCount(adminPositionStationService.countPosition());
@@ -141,8 +145,9 @@ public class AdminStationController {
      * @return
      */
     @PostMapping(value = "/addPosition")
+    @Log(type = "增加操作",event = "增加行业")
     public @ResponseBody
-    String addPosition(String position) {
+    String addPositionLog(String position) {
         //查询是否存在改行业
         if (adminPositionStationService.findPosition(position) > 0) {
             return "havePosition";
@@ -162,8 +167,9 @@ public class AdminStationController {
      * @return
      */
     @PostMapping(value = "/deletePosition")
+    @Log(type = "删除操作",event = "删除行业")
     public @ResponseBody
-    String deletePosition(String position, int poid) {
+    String deletePositionLog(String position, int poid) {
 
         if (adminPositionStationService.findPositionHaveStationCount(poid) > 0) {
             return "haveStation";
@@ -183,8 +189,9 @@ public class AdminStationController {
      * @return
      */
     @PostMapping(value = "/updatePosition")
+    @Log(type = "修改操作",event = "修改行业名称")
     public @ResponseBody
-    String updatePosition(AdminPositionStation aps) {
+    String updatePositionLog(AdminPositionStation aps) {
         System.out.println(aps.getInitPosition());
         System.out.println(aps.getPosition());
         if (adminPositionStationService.findPosition(aps.getPosition()) > 0) {

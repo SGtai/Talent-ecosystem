@@ -34,7 +34,7 @@
 				<a href="#">技术·专区</a>
 			</h3>
 			<a href="#" class="floor-side-link">
-				<img src=<%=othPath+"head-fl.jpg"%> alt="">
+				<img src=<%=othPath+"head-f.jpg"%> alt="">
 			</a>
 		</div>
 		<div class="floor-side-right">
@@ -45,7 +45,7 @@
 					<c:forEach items="${dl}" var="node">
 							<li>${node.type}</li>
 					</c:forEach>
-
+					<li>我的课程</li>
 				</ul>
 <%--				<a href="#" class="slide-more">更多>></a>--%>
 			</div>
@@ -68,7 +68,7 @@
 					<ul>
 					<c:forEach items="${node.value}" var="cl">
 						<li>
-							<a href="/techb?id=${cl.kcId}&name=${cl.kcName}">
+							<a href="/techb?id=${cl.kcId}&name=${cl.kcName}&jg=${cl.jgPrice}&ms=${cl.msDescribe}">
 								<div class="image-ti">
 									<img src="${'/techS/other/'.concat(cl.ckPicture)}" alt="">
 								</div>
@@ -110,6 +110,10 @@
 		trigger: "mouseover",
 		delayTime: 700
 	});
+	<%--var xx  ='${xx}' ;--%>
+	<%--if (xx.length>0){--%>
+	<%--	alert(xx);--%>
+	<%--}--%>
 </script>
 
 </body>

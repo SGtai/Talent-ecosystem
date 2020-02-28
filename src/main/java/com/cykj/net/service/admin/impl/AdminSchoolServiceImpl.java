@@ -1,8 +1,10 @@
 package com.cykj.net.service.admin.impl;
 
 import com.cykj.net.javabean.LayuiData;
+import com.cykj.net.javabean.Msg;
 import com.cykj.net.javabean.Schoolinfo;
 import com.cykj.net.mapper.admin.AdminCompanyMapper;
+import com.cykj.net.mapper.admin.AdminMsgMapper;
 import com.cykj.net.mapper.admin.AdminSchoolMapper;
 import com.cykj.net.service.admin.AdminSchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ public class AdminSchoolServiceImpl implements AdminSchoolService {
 
     @Autowired
     private AdminCompanyMapper adminCompanyMapper;
+    @Autowired
+    private AdminMsgMapper adminMsgMapper;
 
     @Override
     public LayuiData school(String scName, String type, String prid, String ctid, String state,String scState, int page, int limit) {
@@ -63,9 +67,12 @@ public class AdminSchoolServiceImpl implements AdminSchoolService {
     }
 
     @Override
-    public String updateScState(String scAccount, String scState) {
+    public String updateScState(String scAccount, String scState,String name) {
         String result = "false";
         if (adminCompanyMapper.updateScState(scAccount,scState) > 0){
+            Msg msg = new Msg();
+            msg.setEvent("欢迎"+name+"入驻本站");
+            adminMsgMapper.addMsg(msg);
             result = "true";
         }
         return result;

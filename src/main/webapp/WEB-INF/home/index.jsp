@@ -160,7 +160,7 @@
 				<div class="adBox0">
 					<ul style="margin-left: 0px; overflow: hidden">
 						<li>
-							<a href=" "><div style="background:url(<%=imagesPath+"1.jpg"%>);background-size: cover;background-repeat: no-repeat;background-position: center"></div></a>
+							<a href=" "><div style="background:url(<%=imagesPath+"head-fl.jpg"%>);background-size: cover;background-repeat: no-repeat;background-position: center"></div></a>
 						</li>
 						<li>
 							<a href=" "><div style="background:url(<%=imagesPath+"2.jpg"%>);background-size: cover;background-repeat: no-repeat;background-position: center"></div></a>

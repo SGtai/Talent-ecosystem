@@ -1,5 +1,6 @@
 package com.cykj.net.controller.admin;
 
+import com.cykj.net.aop.Log;
 import com.cykj.net.javabean.LayuiData;
 import com.cykj.net.service.admin.AdminFrontUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +23,17 @@ public class AdminFrontUserController {
         return adminFrontUserService.frontUser(phone,name,limit,page);
     }
 
+    @Log(type = "修改操作",event = "修改前台用户状态")
     @RequestMapping(value = "/updateState")
     @ResponseBody
-    public String updateState(String phone ,String state){
+    public String updateStateLog(String phone ,String state){
         return adminFrontUserService.updateState(phone,state);
     }
 
+    @Log(type = "修改操作",event = "修改前台用户密码")
     @RequestMapping(value = "/updatePassword")
     @ResponseBody
-    public String updatePassword(String phone){
+    public String updatePasswordLog(String phone){
         return adminFrontUserService.updatePassword(phone);
     }
 

@@ -311,7 +311,7 @@
                         type: "POST",
                         url: "/adminCompany/updateQyState",
                         dataType: "text",
-                        data: {qyAccount: data.qyAccount, qyState: state},
+                        data: {qyAccount: data.qyAccount, qyState: state,name:data.qyName},
                         success: function (msg) {
                             var i = 0;
                             if (msg === 'true') {

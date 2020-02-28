@@ -25,13 +25,13 @@
 </head>
 <body>
 <div class="layui-form-item">
-	<label class="layui-form-label" style="margin-top: -4%;margin-left: 21%;font-size: 17px;">章节标题</label>
+	<label class="layui-form-label" style="margin-top: -4%;margin-left: 21%;font-size: 17px;">视频标题</label>
 	<div class="layui-input-block" style="margin-left: 30%;margin-top: -4%;position: absolute;width: 12%;">
 		<input type="text" id="title" name="title" required  lay-verify="required" placeholder="请输入章节标题" autocomplete="off" class="layui-input" >
 	</div>
 </div>
 <div class="layui-form-item">
-	<label class="layui-form-label" style="margin-top: -4%;margin-left: 41%;font-size: 17px;">所属课程</label>
+	<label class="layui-form-label" style="margin-top: -4%;margin-left: 41%;font-size: 17px;">所属章节</label>
 	<div class="layui-input-block" style="margin-left: 49%;margin-top: -4%;position: absolute;width: 12%;">
 		<input type="text" id="kcId" name="kcId" required  lay-verify="required" placeholder="请输入课程ID" autocomplete="off" class="layui-input" >
 	</div>

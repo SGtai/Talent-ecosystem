@@ -12,5 +12,5 @@ public interface AdminComanyService {
 
     String updatePassword(String qyAccount);
 
-    String updateQyState(String qyAccount, String qyState);
+    String updateQyState(String qyAccount, String qyState,String name);
 }
