@@ -21,4 +21,8 @@ public class UserService
 		int num = userDao.reg(phone,password);
 		return num;
 	}
+	public int gerenInfo(Userlist userlist){
+		int gerenInfo = userDao.gerenInfo(userlist);
+		return gerenInfo;
+	}
 }

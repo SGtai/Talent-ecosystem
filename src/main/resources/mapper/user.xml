@@ -10,4 +10,10 @@
 		insert into userlist (phone,password,regTime,state) value ( #{phone},#{password},now(),0);
 	</insert>
 
+	<update id="gerenInfo" parameterType="Userlist">
+		update userlist set name=#{name} ,sex=#{sex} , birthday=#{birthday}
+			, idCardType=#{idCardType} , idCard=#{idCard} , degree=#{degree} ,regTime=now()
+		where phone = #{phone}
+	</update>
+
 </mapper>

@@ -10,4 +10,5 @@ public interface UserDao
 
 	public Userlist findPhone(String phone);
 	public int reg(@Param("phone")String phone,@Param("password") String password);
+	public int gerenInfo(Userlist userlist);
 }
