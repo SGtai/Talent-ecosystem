@@ -218,9 +218,7 @@
 				</div>
 				<div class="clear"></div>
 			</div>
-			<div class="JlBoxRight">
-				<img src="<%=imagesPath+"per1.jpg"%>" width="80" height="100" />
-			</div>
+
 			<div class="clear"></div>
 		</div>
 		<div class="clear"></div>
@@ -367,30 +365,6 @@
 					<div class="inputtxt">
 						<textarea name="gzContent" cols="" rows="" placeholder="主要填写自己从事工作的岗位职责，在工作中能力的体现，以及自己取得过哪些成绩。"></textarea>
 						<br /><span>最多可输入200汉字。</span>
-					</div>
-				</div>
-				<div class="clear"></div>
-				<div class="jobmore">
-					<div class="jobmoreicon">填写更详细的工作经历</div>
-					<div class="qitaBox" style=" display:none">
-						<div class="divbox">
-							<div class="nametxt">企业性质：</div>
-							<div class="inputdiv">
-								<input name="" type="text" class="txt01"/>
-							</div>
-						</div>
-						<div class="divbox">
-							<div class="nametxt">所在部门：</div>
-							<div class="inputdiv">
-								<input name="" type="text" class="txt02"/>
-							</div>
-						</div>
-						<div class="divbox">
-							<div class="nametxt">上级职务：</div>
-							<div class="inputdiv">
-								<input name="" type="text" class="txt02"/>
-							</div>
-						</div>
 					</div>
 				</div>
 				<div class="clear"></div>
