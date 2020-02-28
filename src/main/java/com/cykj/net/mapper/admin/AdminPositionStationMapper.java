@@ -60,7 +60,7 @@ public interface AdminPositionStationMapper {
      * @return
      */
     @Update("update station set poid = #{poid},postion = #{station} " +
-            "where postion = #{initStation}")
+            "where postion = #{initStation} and poid = #{id}")
     int updateStation(AdminPositionStation aps);
 
     /**

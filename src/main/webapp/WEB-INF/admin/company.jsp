@@ -254,7 +254,8 @@
                 , {field: 'ctid', title: '所在城市', width: 90}
                 , {field: 'regTime', title: '注册时间', width: 170}
                 , {
-                    field: 'state', title: '状态', width: 75, templet: function (d) {
+                    field: 'state', title: '状态', width: 75
+                    , templet: function (d) {
                         if (d.state == 0) {
                             return '在业';
                         } else if (d.state == 1) {

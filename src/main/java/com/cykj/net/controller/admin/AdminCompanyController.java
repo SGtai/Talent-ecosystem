@@ -29,8 +29,9 @@ public class AdminCompanyController {
      * @return
      */
     @RequestMapping(value = "/table/company")
+    @Log(type = "查询操作",event = "查询企业")
     @ResponseBody
-    public LayuiData company(String qyName,String qyType,String prid,String ctid,String state,String qyState,int page,int limit){
+    public LayuiData companyLog(String qyName,String qyType,String prid,String ctid,String state,String qyState,int page,int limit){
 
         return adminComanyService.company(qyName,qyType,prid,ctid,state,qyState,page,limit);
     }

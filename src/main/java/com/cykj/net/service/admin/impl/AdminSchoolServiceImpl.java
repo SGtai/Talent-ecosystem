@@ -5,6 +5,7 @@ import com.cykj.net.javabean.Msg;
 import com.cykj.net.javabean.Schoolinfo;
 import com.cykj.net.mapper.admin.AdminCompanyMapper;
 import com.cykj.net.mapper.admin.AdminMsgMapper;
+import com.cykj.net.mapper.admin.AdminParameterMapper;
 import com.cykj.net.mapper.admin.AdminSchoolMapper;
 import com.cykj.net.service.admin.AdminSchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class AdminSchoolServiceImpl implements AdminSchoolService {
     private AdminCompanyMapper adminCompanyMapper;
     @Autowired
     private AdminMsgMapper adminMsgMapper;
+    @Autowired
+    private AdminParameterMapper adminParameterMapper;
 
     @Override
     public LayuiData school(String scName, String type, String prid, String ctid, String state,String scState, int page, int limit) {
@@ -58,7 +61,7 @@ public class AdminSchoolServiceImpl implements AdminSchoolService {
     @Override
     public String updatePassword(String scAccount) {
         String result = "";
-        String updatePassword = "123456";
+        String updatePassword = adminParameterMapper.findPassword(1);
         if (adminCompanyMapper.updatePassword(scAccount, updatePassword) > 0) {
             //参数表查询
             result = updatePassword;
