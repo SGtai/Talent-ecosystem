@@ -168,10 +168,9 @@
 			</div>
 		</div>
 	</div>
-	<input id="upfile" type="file" name="upfile" onchange="fileUpload()"/>
 <%--	人才批量导入面板--%>
+	<form action="">
 	<div id="daorumb" style="display: none ; padding: 10px;margin-left: 10%">
-
 		<div class="layui-form-item">
 			<label class="layui-form-label" style="margin-left: 15%">模板下载</label>
 			<div class="layui-inline">
@@ -179,9 +178,20 @@
 			</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label" style="margin-left: 15%">批量上传</label>
+			<label class="layui-form-label" style="margin-left: 0%">批量上传</label>
 			<div class="layui-inline">
-				<button style="margin-left: 5%" class="layui-btn layui-btn-normal layui-btn-radius"  id="btn" name="btn">选择文件</button>
+				<input class="layui-upload-file" type="file" accept="" name="file" readonly>
+				<button type="button" class="layui-btn" id="test2" style="margin-left: 0%; margin-top: -0%">
+					<i class="layui-icon">&#xe67c;</i>选择文件
+				</button>
+			</div>
+			<div class="layui-inline">
+				<input type="text" name="file" required="" lay-verify="required" placeholder="文档名称" readonly=""
+				       id="filename" autocomplete="off" class="layui-input">
+			</div>
+			<div class="layui-inline">
+				<button type="button" class="layui-btn"  id="bb">提交</button>
+				<button type="button" class="layui-btn" style="position: absolute;visibility: hidden" id="btn">修改</button>
 			</div>
 		</div>
 		<div>
@@ -193,14 +203,44 @@
 			</div>
 		</div>
 	</div>
+		</form>
 	<script>
-		layui.use(['form','layer','jquery','table','laydate'], function() {
+		layui.use(['form','layer','jquery','table','laydate','upload'], function() {
 			var table = layui.table;
 			var form = layui.form;
 			var $ = layui.jquery;
 			var layer = layui.layer;
 			var laydate = layui.laydate;
+			var upload = layui.upload;
 			var times = "";
+			//上传文件
+			upload.render({
+				elem: '#test2' //绑定元素
+				, url: '/school/daoru' //上传接口
+				, multiple: false //设置是否多文件上传
+				, auto: false  //取消自动上传，并指定提交按钮进行上传
+				, bindAction: '#btn' //这个绑定id为btn的按钮触发这个提交
+				, accept: 'file' //允许上传的文件类型
+				, before: function (obj) { //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+					this.data = {
+
+					}
+				}
+				, choose: function (obj) {
+					var files = this.files = obj.pushFile();//需要上传的这个文档对象
+					obj.preview(function (index, file, result) {
+						$("#filename").val(file.name);
+					})
+				}
+				, done: function (msg) {
+					if(msg=="ok"){
+						alert("上传成功");
+					}
+				}
+				, error: function () {
+					//请求异常回调
+				}
+			});
 			//日期显示
 			laydate.render({
 				elem: '#test16'
@@ -380,48 +420,28 @@
 
 	</script>
 	<script>
+
 		function downloadTemp(){
-			// window.location.href="/4sinfo/downloadTmpl.do";
+			window.open("/schoolS/cunchu/简历模板.xls");
+			// $.ajax(
+			// 	{
+			// 		type:"POST",
+			// 		url:"/school/xiazaimoban",
+			// 		dataType:"text",
+			// 		success:function (msg) {
+			// 			alert("模板已经下载到C盘")
+			// 		},
+			// 		error:function (msg) {
+			// 			alert("系统忙，请稍等");
+			// 		}
+			// 	}
+			// );
 		}
-
-		function fileUpload(){
-			var fileName = $("#upfile").val();
-			if(fileName == null || fileName==""){
-				alert("请选择文件");
-			}else{
-				var fileType = fileName.substr(fileName.length-4,fileName.length);
-				if(fileType == ".xls" || fileType == "xlsx"){
-					var formData = new FormData();
-					formData.append("file",$("#upfile").prop("files")[0]);
-					$.ajax({
-						type:"post",
-						url:"/4sinfo/ajaxUpload.do",
-						data:formData,
-						cache:false,
-						processData:false,
-						contentType:false,
-						dataType:"json",
-						success:function(data){
-							if(null != data){
-								if(data.dataStatus == "1"){
-									if(confirm("上传成功！")){
-										window.location.reload();
-									}
-								}else{
-									alert("上传失败！");
-								}
-							}
-						},
-						error:function(){
-							alert("上传失败！");
-						}
-					});
-				}else{
-					alert("上传文件类型错误！");
-				}
-			}
-		}
-
+		$('#bb').click(
+			function () {
+				var a = document.getElementById("btn");
+				a.click();
+			});
 	</script>
 
 

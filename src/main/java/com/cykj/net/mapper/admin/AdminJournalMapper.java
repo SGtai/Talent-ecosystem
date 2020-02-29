@@ -26,8 +26,13 @@ public interface AdminJournalMapper {
             "a.account = b.account " +
             "<if test = 'account != null'> " +
             "and a.account like CONCAT('%',#{account},'%') </if> " +
+            "<if test = 'type != null'> " +
+            "and a.type = #{type} </if> " +
             "order by a.date desc " +
             "limit #{page},#{limit} " +
             "</script> ")
-    List<Adjournal> allJournal(String account, int page, int limit);
+    List<Adjournal> allJournal(String account,String type, int page, int limit);
+
+    @Select("select distinct type from adjournal")
+    List<Adjournal> getJournal();
 }

@@ -114,4 +114,9 @@
     <select id="findcity" resultType="C1" parameterType="java.lang.String">
         select b.* from province a,city b where a.prid=b.prid and a.prid=#{prid}
     </select>
+<!--    插入用户表-->
+    <insert id="inseruserinfo" parameterType="Userlist">
+        INSERT INTO userlist (account, password,name,phone,sex,degree,idCard,idCardType,birthday,regTime,picture,state,tuijianren) VALUES
+        (#{account},#{password},#{name},#{phone},#{sex},#{degree},#{idCard},#{idCardType},#{birthday},#{regTime},#{picture},#{state},#{tuijianren})
+    </insert>
 </mapper>

@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: 蔡鹭鹏
-  Date: 2020/2/18
-  Time: 17:28
+  Date: 2020/2/28
+  Time: 22:03
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -30,22 +30,22 @@
 <div style="width: 80%;margin-top: 5%;margin-left: 10%">
     <form class="layui-form">
         <div class="layui-form-item" style="margin-left: 5%">
-            <label class="layui-form-label">行业：</label>
+            <label class="layui-form-label">省份：</label>
             <div class="layui-input-inline">
-                <select id="position" name="position" lay-filter="position"></select>
+                <select id="province" name="province" lay-filter="province"></select>
             </div>
-            <button class="layui-btn" lay-submit lay-filter="searchStation"><i class="layui-icon">&#xe615;</i>搜索
+            <button class="layui-btn" lay-submit lay-filter="searchCity"><i class="layui-icon">&#xe615;</i>搜索
             </button>
         </div>
     </form>
     <div>
-        <button style="margin-left: 60%" class="layui-btn layui-btn-normal" id="addStation"><i
-                class="layui-icon">&#xe624;</i>添加岗位
+        <button style="margin-left: 60%" class="layui-btn layui-btn-normal" id="addCity"><i
+                class="layui-icon">&#xe624;</i>添加城市
         </button>
     </div>
 
     <div>
-        <table id="station" lay-filter="getStation"></table>
+        <table id="city" lay-filter="getCity"></table>
     </div>
 </div>
 
@@ -58,47 +58,47 @@
         <i class="layui-icon">&#xe640;</i>删除
     </button>
 </script>
-<script type="text/html" id="addStationHtml">
+<script type="text/html" id="addCityHtml">
     <form class="layui-form">
         <div class="layui-form-item" style="margin-top: 3%">
-            <label class="layui-form-label">岗位名称:</label>
+            <label class="layui-form-label">城市名称:</label>
             <div class="layui-input-inline">
-                <input class="layui-input" type="text" id="addStationName" name="station"
+                <input class="layui-input" type="text" id="addCityName" name="city"
                        lay-verify="required" autocomplete="off">
             </div>
         </div>
         <div class="layui-form-item" style="margin-top: 6%">
-            <label class="layui-form-label">专业名称:</label>
+            <label class="layui-form-label">省份名称:</label>
             <div class="layui-input-inline">
-                <select id="addPosition" name="position" lay-filter="position"></select>
+                <select id="addProvince" name="province" lay-filter="province"></select>
             </div>
         </div>
         <div class="layui-form-item" style="margin-top: 10%">
             <div class="layui-input-block">
-                <button class="layui-btn" id="reqAddStation">立即添加</button>
+                <button class="layui-btn" id="reqAddCity">立即添加</button>
             </div>
         </div>
     </form>
 
 </script>
-<script type="text/html" id="updateStationHtml">
+<script type="text/html" id="updateCityHtml">
     <form class="layui-form">
         <div class="layui-form-item" style="margin-top: 3%">
-            <label class="layui-form-label">岗位名称:</label>
+            <label class="layui-form-label">城市名称:</label>
             <div class="layui-input-inline">
-                <input class="layui-input" type="text" id="updateStation" name="station"
+                <input class="layui-input" type="text" id="updateCity" name="city"
                        lay-verify="required" autocomplete="off">
             </div>
         </div>
         <div class="layui-form-item" style="margin-top: 6%">
-            <label class="layui-form-label">专业名称:</label>
+            <label class="layui-form-label">省份名称:</label>
             <div class="layui-input-inline">
-                <select id="ofPosition" name="position" lay-filter="position"></select>
+                <select id="ofProvince" name="province" lay-filter="province"></select>
             </div>
         </div>
         <div class="layui-form-item" style="margin-top: 10%">
             <div class="layui-input-block">
-                <button class="layui-btn" id="reqUpdateStation">立即修改</button>
+                <button class="layui-btn" id="reqUpdateCity">立即修改</button>
             </div>
         </div>
     </form>
@@ -117,18 +117,18 @@
         //ajax
         $.ajax({
             type: "POST",
-            url: "/adminStation/choosePosition",
+            url: "/adminCity/chooseProvince",
             dataType: "text",
             data: {},
             success: function (msg) {
 
                 // $('#position').empty();
-                $('#position').append('<option value="">请选择行业</option>');
+                $('#province').append('<option value="">请选择省份</option>');
                 // alert(msg);
                 var list = JSON.parse(msg);
                 poidList = list;
                 for (var i = 0; i < list.length; i++) {
-                    $('#position').append('<option value="' + list[i].id + '">' + list[i].position + '</option>');
+                    $('#province').append('<option value="' + list[i].prid + '">' + list[i].prname + '</option>');
                 }
                 layui.form.render("select");
             },
@@ -140,33 +140,33 @@
 
         //第一个实例
         table.render({
-            elem: '#station'
+            elem: '#city'
             // , height: 312
-            , url: '/adminStation/table/station' //数据接口
+            , url: '/adminCity/table/city' //数据接口
             , page: true //开启分页
             , limit: 5
             , limits: [5]
             , cols: [[ //表头
                 {field: 'id', title: '序列', sort: true, width: 100}
-                , {field: 'station', title: '岗位名称'}
-                , {field: 'position', title: '行业名称', sort: true}
+                , {field: 'ctname', title: '城市名称'}
+                , {field: 'prname', title: '省份名称', sort: true}
                 , {field: 'ope', title: '操作', toolbar: '#opeHtml'}
             ]]
         });
 
 
         //获取下拉框的值
-        var position = "";
+        var prid = "";
         // 获取下拉框数据
-        form.on('select(position)', function (data) {
-            position = data.value;
+        form.on('select(province)', function (data) {
+            prid = data.value;
         });
         //搜索
-        form.on('submit(searchStation)', function () {
-            table.reload('station', {
-                url: '/adminStation/table/station'
+        form.on('submit(searchCity)', function () {
+            table.reload('city', {
+                url: '/adminCity/table/city'
                 , where: { //设定异步数据接口的额外参数，任意设
-                    poid: position
+                    prid: prid
                 }
                 , page: {
                     curr: 1 //重新从第 1 页开始
@@ -175,49 +175,49 @@
             return false;
         });
 
-        //增加岗位
-        $('#addStation').click(function () {
+        //增加城市
+        $('#addCity').click(function () {
             layer.open({
                 type: 1,//嵌入网页
-                content: $('#addStationHtml').html(),
+                content: $('#addCityHtml').html(),
                 area: ['350px', '300px'],
-                title: '添加岗位',
+                title: '添加城市',
 
             });
-            // -----------------------这个行业列表感觉需要去数据库查完回来判断/先放着--------------------
-            //设置行业列表
-            $('#addPosition').append('<option value="">请选择行业</option>');
+            // -----------------------这个省份列表感觉需要去数据库查完回来判断/先放着--------------------
+            //设置省份列表
+            $('#addProvince').append('<option value="">请选择省份</option>');
             for (var i = 0; i < poidList.length; i++) {
-                $('#addPosition').append('<option value="' + poidList[i].id + '">' + poidList[i].position + '</option>');
+                $('#addProvince').append('<option value="' + poidList[i].prid + '">' + poidList[i].prname + '</option>');
             }
             //重新渲染
             form.render();
 
             //添加操作
-            $('#reqAddStation').click(function () {
-                var us = $('#addStationName').val();
-                var op = $('#addPosition').val();
+            $('#reqAddCity').click(function () {
+                var us = $('#addCityName').val();
+                var op = $('#addProvince').val();
 
                 if (us === '' || op === '') {
-                    layer.msg('岗位名称/专业名称 不可为空')
+                    layer.msg('城市名称/省份名称 不可为空')
                 } else if (us.length > 10 || us.length < 2) {
-                    layer.msg('岗位名称不可小于2位,不可超过10位');
+                    layer.msg('城市名称不可小于2位,不可超过10位');
                 } else {
-                    layer.confirm('确定要增加岗位:'+us+'吗?', function (index) {
+                    layer.confirm('确定要增加城市:'+us+'吗?', function (index) {
 
                         $.ajax({
                             type: "POST",
-                            url: "/adminStation/addStation",
+                            url: "/adminCity/addCity",
                             dataType: "text",
-                            data: {poid: op, station: us},
+                            data: {prid: op, ctname: us},
                             success: function (msg) {
 
                                 if (msg === 'true') {
                                     layer.msg('添加成功');
-                                    table.reload('station');
+                                    table.reload('city');
                                     layer.closeAll();
-                                } else if (msg === 'haveStation') {
-                                    layer.msg('该行业已有此岗位名,请重新添加');
+                                } else if (msg === 'haveCity') {
+                                    layer.msg('该省份已有此城市名,请重新添加');
                                 } else {
                                     layer.msg('添加失败');
                                 }
@@ -238,35 +238,35 @@
         });
 
         //修改以及删除
-        table.on('tool(getStation)', function (obj) {
+        table.on('tool(getCity)', function (obj) {
 
             var layEvent = obj.event
                 , data = obj.data
-                , poid = data.poid
-                , station = data.station;
+                , prid = data.prid
+                , ctname = data.ctname;
 
             if (layEvent === 'update') {
                 //打开网页
                 layer.open({
                     type: 1,//嵌入网页
-                    content: $('#updateStationHtml').html(),
+                    content: $('#updateCityHtml').html(),
                     area: ['350px', '300px'],
-                    title: '修改岗位',
+                    title: '修改城市',
 
                 });
-                //设置岗位名称
-                $('#updateStation').prop('value', station);
-                // -----------------------这个行业列表感觉需要去数据库查完回来判断/先放着--------------------
-                //设置行业列表
+                //设置城市名称
+                $('#updateCity').prop('value', ctname);
+                // -----------------------这个城市列表感觉需要去数据库查完回来判断/先放着--------------------
+                //设置城市列表
                 for (var i = 0; i < poidList.length; i++) {
-                    $('#ofPosition').append('<option value="' + poidList[i].id + '">' + poidList[i].position + '</option>');
+                    $('#ofProvince').append('<option value="' + poidList[i].prid + '">' + poidList[i].prname + '</option>');
                 }
                 // 遍历行业select
-                $("#ofPosition").each(function () {
+                $("#ofProvince").each(function () {
                     // this代表的是<option></option>，对option再进行遍历
                     $(this).children("option").each(function () {
                         // 判断需要对那个选项进行回显
-                        if (this.value == data.poid) {
+                        if (this.value == data.prid) {
                             // 进行回显
                             $(this).attr("selected", "selected");
                         }
@@ -275,31 +275,31 @@
                 //重新渲染
                 form.render();
                 //提交修改
-                $('#reqUpdateStation').click(function () {
-                    var us = $('#updateStation').val();
-                    var op = $('#ofPosition').val();
+                $('#reqUpdateCity').click(function () {
+                    var us = $('#updateCity').val();
+                    var op = $('#ofProvince').val();
                     console.log(op);
-                    if (op === data.poid && us === data.station) {
+                    if (op === data.prid && us === data.ctname) {
                         layer.msg('请做修改在提交')
                     } else if (us === '') {
-                        layer.msg('岗位名称不可为空');
+                        layer.msg('城市名称不可为空');
                     } else {
 
-                        layer.confirm('确定要对岗位进行修改吗?', function (index) {
+                        layer.confirm('确定要对城市进行修改吗?', function (index) {
 
                             $.ajax({
                                 type: "POST",
-                                url: "/adminStation/updateStation",
+                                url: "/adminCity/updateCity",
                                 dataType: "text",
-                                data: {id:data.poid,poid: op, station: us, initStation: data.station},
+                                data: {ctid:data.prid,prid: op, ctname: us, name: data.ctname},
                                 success: function (msg) {
 
                                     if (msg === 'true') {
                                         layer.msg('修改成功');
-                                        table.reload('station');
+                                        table.reload('city');
                                         layer.closeAll();
-                                    } else if (msg === 'haveStation') {
-                                        layer.msg('该行业已有此岗位名,请重新修改');
+                                    } else if (msg === 'haveCity') {
+                                        layer.msg('该省份已有此城市名,请重新修改');
                                     } else {
                                         layer.msg('修改失败');
                                     }
@@ -322,20 +322,18 @@
 
 
             if (layEvent === 'delete') {
-                layer.confirm('确定要删除岗位：' + station + '吗?警告：删除后不可恢复！', function (index) {
+                layer.confirm('确定要删除城市：' + ctname + '吗?警告：删除后不可恢复！', function (index) {
                     $.ajax({
                         type: "POST",
-                        url: "/adminStation/deleteStation",
+                        url: "/adminCity/deleteCity",
                         dataType: "text",
-                        data: {poid: poid, station: station,stid:data.stid},
+                        data: {prid: prid, ctname: ctname,ctid:data.ctid},
                         success: function (msg) {
 
                             if (msg === 'true') {
                                 layer.msg('删除成功');
-                                table.reload('station');
-                            } else if (msg === 'haveJob'){
-                                layer.msg('该岗位下面有企业发布的招聘信息，暂不可删除');
-                            } else {
+                                table.reload('city');
+                            }else {
                                 layer.msg('删除失败');
                             }
                         },

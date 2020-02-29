@@ -3,6 +3,7 @@ package com.cykj.net.service.admin.impl;
 import com.cykj.net.javabean.LayuiData;
 import com.cykj.net.javabean.Userlist;
 import com.cykj.net.mapper.admin.AdminFrontUserMapper;
+import com.cykj.net.mapper.admin.AdminParameterMapper;
 import com.cykj.net.service.admin.AdminFrontUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,8 @@ public class AdminFrontUserServiceImpl implements AdminFrontUserService {
 
     @Autowired
     private AdminFrontUserMapper adminFrontUserMapper;
+    @Autowired
+    private AdminParameterMapper adminParameterMapper;
 
     @Override
     public LayuiData frontUser(String phone, String name, int limit, int page) {
@@ -43,7 +46,7 @@ public class AdminFrontUserServiceImpl implements AdminFrontUserService {
     @Override
     public String updatePassword(String phone) {
         String result = "";
-        String updatePassword = "123456";
+        String updatePassword = adminParameterMapper.findPassword(1);
         if (adminFrontUserMapper.updatePassword(phone, updatePassword) > 0) {
             //参数表查询
             result = updatePassword;

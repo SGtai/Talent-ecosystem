@@ -1,5 +1,4 @@
 package com.cykj.net.controller;
-
 import com.cykj.net.javabean.*;
 import com.cykj.net.javabean.admin.Admin;
 import com.cykj.net.service.AdminroleService;
@@ -7,6 +6,16 @@ import com.cykj.net.service.SchoolService;
 import com.cykj.net.service.admin.AdminService;
 import com.google.gson.Gson;
 import org.apache.ibatis.session.RowBounds;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
@@ -18,9 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -227,7 +234,6 @@ public class SchoolController
 			{
 				return "1";
 			}
-
 		return "0";
 	}
 
@@ -347,6 +353,12 @@ public class SchoolController
 		gsonbean(t,response);
 	}
 
+	/**
+	 * 查询工作经历和学习经历
+	 * @param account
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping("/exgz")
 	public void exgz(String account,HttpServletRequest request,HttpServletResponse response){
 		utf8(request,response);
@@ -359,9 +371,166 @@ public class SchoolController
 		gsonbean(t,response);
 	}
 
+	/**
+	 * 下载模板
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping("/xiazaimoban")
+	@ResponseBody
+	public String xiazaimoban() throws IOException
+	{
+		//new一个工作本
+		Workbook wb=new HSSFWorkbook();
+		//创建sheet页
+		Sheet sheet1=wb.createSheet("第一个sheet页");
+		//创建一个行
+		Row row=sheet1.createRow(0);
+		//给单元格赋值，列
+		row.createCell(0).setCellValue("账号");
+		row.createCell(1).setCellValue("密码");
+		row.createCell(2).setCellValue("姓名");
+		row.createCell(3).setCellValue("电话");
+		row.createCell(4).setCellValue("性别");
+		row.createCell(5).setCellValue("最高学历");
+		row.createCell(6).setCellValue("证件号");
+		row.createCell(7).setCellValue("证件类型");
+		row.createCell(8).setCellValue("出生日期");
+		FileOutputStream fileOut=new FileOutputStream("C:\\简历模板.xls");
+		//打印流
+		wb.write(fileOut);
+		//关闭流
+		fileOut.close();
+		return "ok";
+	}
+
+	@RequestMapping("/daoru")
+	@ResponseBody
+	public String daoru(HttpServletRequest request,@RequestParam("file") MultipartFile file) throws IOException
+	{
+		System.out.println("开始导入数据");
+		String fileName = file.getOriginalFilename();
+
+		Admin admin= (Admin) request.getSession().getAttribute("admin");
+
+		//获取excel文件的io流
+		InputStream is = file.getInputStream();
+
+		HSSFWorkbook wb=new HSSFWorkbook(is);
+
+		HSSFSheet hssfSheet=wb.getSheetAt(0);
+
+		if (hssfSheet!=null){
+			for (int rowNum = 1; rowNum < hssfSheet.getLastRowNum()+1; rowNum++)
+			{
+				System.out.println("一次循环");
+				HSSFRow hssfRow=hssfSheet.getRow(rowNum);
+				if (hssfRow==null){
+					continue;
+				}
+				Userlist userlist=new Userlist();
+				userlist.setAccount(formatCell(hssfRow.getCell(0)));
+				userlist.setPassword(formatCell(hssfRow.getCell(1)));
+				userlist.setName(formatCell(hssfRow.getCell(2)));
+				userlist.setPhone(formatCell(hssfRow.getCell(3)));
+				userlist.setPhone(formatCell(hssfRow.getCell(4)));
+				userlist.setSex(formatCell(hssfRow.getCell(5)));
+				userlist.setDegree(formatCell(hssfRow.getCell(6)));
+				userlist.setIdCard(formatCell(hssfRow.getCell(7)));
+				userlist.setIdCardType(formatCell(hssfRow.getCell(8)));
+				userlist.setBirthday(formatCell(hssfRow.getCell(9)));
+				userlist.setRegTime(new Timestamp(System.currentTimeMillis()));
+				userlist.setState(0);
+				userlist.setPicture("图片路径未定义");
+				userlist.setTuijianren(admin.getAccount());
+				//插入管理员表
+				Admin a=new Admin();
+				admin.setAccount(userlist.getAccount());
+				admin.setPassword(userlist.getPassword());
+				admin.setRegistertime(userlist.getRegTime());
+				admin.setName(userlist.getName());
+				adminService.regAdmin(admin);
+
+				//插入管理角色表
+				Adminrole adminrole=new Adminrole();
+				adminrole.setAccount(userlist.getAccount());
+				adminrole.setRoid(5);
+				adminroleService.regAdminRole(adminrole);
+
+				int i=schoolService.inseruserinfo(userlist);
+				if(i>0){
+					System.out.println("用户插入一条成功");
+				}
+			}
+
+		}
+		return "ok";
+	}
 
 
+	/**
+	 * 判断文件是否存在以及是否是excel文件
+	 * @param file
+	 * @throws IOException
+	 */
+	public static void checkFile(MultipartFile file) throws IOException {
+		//判断文件是否存在
+		if (null == file) {
+			System.err.println("文件不存在！");
+		}
+		//获得文件名
+		String fileName = file.getOriginalFilename();
+		//判断文件是否是excel文件
+		if (!fileName.endsWith("xls") && !fileName.endsWith("xlsx")) {
+			System.err.println("不是excel文件");
+		}
+	}
 
+
+	/**
+	 * 判断文件类型是xls还是xlsx
+	 * @param file
+	 * @return
+	 */
+	public static Workbook getWorkBook(MultipartFile file) {
+		//获得文件名
+		String fileName = file.getOriginalFilename();
+		//创建Workbook工作薄对象，表示整个excel
+		Workbook workbook = null;
+		try {
+			//获取excel文件的io流
+			InputStream is = file.getInputStream();
+			//根据文件后缀名不同(xls和xlsx)获得不同的Workbook实现类对象
+			if (fileName.endsWith("xls")) {
+				//2003
+				workbook = new HSSFWorkbook(is);
+			} else if (fileName.endsWith("xlsx")) {
+				//2007 及2007以上
+				workbook = new XSSFWorkbook(is);
+			}
+		} catch (IOException e) {
+			e.getMessage();
+		}
+		return workbook;
+	}
+
+	/**
+	 * 返回类型
+	 * @param hssfCell
+	 * @return
+	 */
+	public static String formatCell(HSSFCell hssfCell){
+		if(hssfCell==null){
+			return "";
+		}
+		if(hssfCell.getCellType()==HSSFCell.CELL_TYPE_BOOLEAN){
+			return String.valueOf(hssfCell.getStringCellValue());
+		}else if(hssfCell.getCellType()==HSSFCell.CELL_TYPE_NUMERIC){
+			return String.valueOf(hssfCell.getStringCellValue());
+		}else{
+			return String.valueOf(hssfCell.getStringCellValue());
+		}
+	}
 
 
 

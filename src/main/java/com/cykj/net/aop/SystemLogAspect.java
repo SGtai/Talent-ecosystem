@@ -23,8 +23,15 @@ public class SystemLogAspect {
     private HttpSession session;
     @Autowired
     private AdminJournalService adminJournalService;
+    /*
+     *  @Pointcut(" execution(* com.cykj.net.controller..*.*Log*(..))")
+     *  所以有注解的方法结尾都要加Log
+     *
+     *  @Pointcut("@annotation(com.cykj.net.aop.Log)")
+     *  有加注解的方法都是切面
+     */
 
-    @Pointcut(" execution(* com.cykj.net.controller..*.*Log*(..))")
+    @Pointcut("@annotation(com.cykj.net.aop.Log)")
     public void logPointcut() {
     }
 
@@ -38,6 +45,8 @@ public class SystemLogAspect {
         String methodName = joinPoint.getSignature().getName();
         //获取参数值
         Object[] args = joinPoint.getArgs();
+        System.out.println("args："+args.toString());
+//        System.out.println("args："+args[0].getClass());
 
         //日志对象
         Adjournal adjournal = new Adjournal();
@@ -51,32 +60,30 @@ public class SystemLogAspect {
         for (Method method : methods) {
             if (method.getName().equals(methodName)) {
                 Class[] argCls = method.getParameterTypes();
+
                 if (argCls.length == args.length) {
-                    for (int i = 0; i < args.length; i++) {
-                        if (args[i] instanceof HttpServletRequest && argCls[i] == HttpServletRequest.class) {
-                            continue;
-                        }
-                        if (args[i] instanceof HttpServletResponse && argCls[i] == HttpServletResponse.class) {
-                            continue;
-                        }
-                        if (argCls[i] == args[i].getClass()) {
-                            continue;
-                        }
+//                    for (int i = 0; i < args.length; i++) {
+//                        if (args[i] instanceof HttpServletRequest && argCls[i] == HttpServletRequest.class) {
+//                            continue;
+//                        }
+//                        if (args[i] instanceof HttpServletResponse && argCls[i] == HttpServletResponse.class) {
+//                            continue;
+//                        }
+//                        if (null == args[i]){
+//                            continue;
+//                        }
+//                        if (argCls[i] == args[i].getClass()) {
+//                            continue;
+//                        }
+//
+//                        isMatch = false;
+//                        break;
+//                    }
 
-                        isMatch = false;
-                        break;
-                    }
-
-//					System.out.println(method.getAnnotation(Log.class).operationType());
-
-//					if (!isMatch)
-//					{
-//						continue;
-//					}
                     type = method.getAnnotation(Log.class).type();
                     event = method.getAnnotation(Log.class).event();
 
-                    adjournal.setAccount(((Admin)session.getAttribute("admin")).getAccount());
+                    adjournal.setAccount(((Admin) session.getAttribute("admin")).getAccount());
                     adjournal.setEvent(event);
                     adjournal.setType(type);
                     adjournal.setDate(new Timestamp(System.currentTimeMillis()));
@@ -86,67 +93,4 @@ public class SystemLogAspect {
             }
         }
     }
-//	//自定义注解的处理
-//	@AfterReturning(value = "logPointcut()")
-//	public void getOperation(JoinPoint joinPoint) throws Exception
-//	{
-//		//获取目标对象的类名
-//		String targetClassName = joinPoint.getTarget().getClass().getName();
-//		//获取方法名称
-//		String methodName = joinPoint.getSignature().getName();
-//		//获取参数值
-//		Object[] args = joinPoint.getArgs();
-//		//日志对象
-//		LogInfo logInfo = new LogInfo();
-//		int j = 0;
-//
-//		Class targetClass = Class.forName(targetClassName);
-//		Method[] methods = targetClass.getMethods();
-//		boolean isMatch = true;
-//		String operationType = null;
-//		String operationName = null;
-//		for (Method method : methods)
-//		{
-//			if (method.getName().equals(methodName))
-//			{
-//				Class[] argCls = method.getParameterTypes();
-//				if (argCls.length == args.length)
-//				{
-//					for (int i = 0; i < args.length; i++)
-//					{
-//						if (args[i] instanceof HttpServletRequest && argCls[i] == HttpServletRequest.class)
-//						{
-//							continue;
-//						}
-//						if (args[i] instanceof HttpServletResponse && argCls[i] == HttpServletResponse.class)
-//						{
-//							continue;
-//						}
-//						if (argCls[i] == args[i].getClass())
-//						{
-//							continue;
-//						}
-//
-//						isMatch = false;
-//						break;
-//					}
-//					if (!isMatch)
-//					{
-//						continue;
-//					}
-//					operationType = method.getAnnotation(Log.class).operationType();
-//					operationName = method.getAnnotation(Log.class).operationName();
-//
-//					int userId = (int) args[0];
-//					logInfo.setUser_Id(userId);
-//					logInfo.setLog_Type(operationName);
-//					logInfo.setLog_Time(new Date().toLocaleString());
-//
-//					j = logMapper.insertNewLog(logInfo);
-//
-//					System.out.println("插入成功：" + j);
-//				}
-//			}
-//		}
-//	}
 }

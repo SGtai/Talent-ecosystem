@@ -30,8 +30,9 @@ public class AdminStationController {
      * @return
      */
     @RequestMapping(value = "/table/station")
+    @Log(type = "查询操作",event = "查询岗位")
     public @ResponseBody
-    LayuiData station(String poid, int limit, int page) {
+    LayuiData stationLog(String poid, int limit, int page) {
         LayuiData layuiData = new LayuiData();
         if (null == poid || "".equals(poid)) {
             poid = null;
@@ -105,7 +106,7 @@ public class AdminStationController {
      * @return
      */
     @PostMapping(value = "/addStation")
-    @Log(type = "增加操作",event = "增加岗位")
+    @Log(type = "添加操作",event = "增加岗位")
     public @ResponseBody
     String addStationLog(AdminPositionStation aps) {
         if (adminPositionStationService.findStationName(aps) > 0) {
@@ -125,6 +126,7 @@ public class AdminStationController {
      * @return
      */
     @RequestMapping(value = "/table/position")
+    @Log(type = "查询操作",event = "查询行业")
     public @ResponseBody
     LayuiData positionLog(int limit, int page) {
         LayuiData layuiData = new LayuiData();
@@ -145,7 +147,7 @@ public class AdminStationController {
      * @return
      */
     @PostMapping(value = "/addPosition")
-    @Log(type = "增加操作",event = "增加行业")
+    @Log(type = "添加操作",event = "添加行业")
     public @ResponseBody
     String addPositionLog(String position) {
         //查询是否存在改行业

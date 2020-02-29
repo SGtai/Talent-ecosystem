@@ -10,4 +10,53 @@
 		insert into userlist (phone,password,regTime,state) value ( #{phone},#{password},now(),0);
 	</insert>
 
+	<update id="gerenInfo" parameterType="Userlist">
+		update userlist set name=#{name} ,sex=#{sex} , birthday=#{birthday}
+			, idCardType=#{idCardType} , idCard=#{idCard} , degree=#{degree} ,regTime=now()
+		where phone = #{phone}
+	</update>
+
+<!--    创建简历是，创建一个简历表空表-->
+    <insert id="addbasejl" parameterType="Resume" useGeneratedKeys="true" keyProperty="jlId">
+	    insert into resume(yhId,sjPhone) values(#{yhId},#{sjPhone})
+    </insert>
+<!--创建空的求职意向表-->
+    <insert id="addJobIntension" parameterType="Resume" useGeneratedKeys="true" keyProperty="jzyxid">
+	    insert into jobintension (jlid,yhid)value (#{jlid},#{yhid})
+    </insert>
+<!--创建空的学习经验表-->
+    <insert id="addexperience" parameterType="Resume" useGeneratedKeys="true" keyProperty="jyId">
+	    insert into experience (jlId) values(#{jlId})
+    </insert>
+<!--    创建新的工作经验-->
+    <insert id="addundergo" parameterType="Resume" useGeneratedKeys="true" keyProperty="gzjlId">
+	    insert into undergo (jlId) values(#{jlId})
+    </insert>
+
+<!--    更新简历的信息-->
+    <update id="userInfojl" parameterType="Resume">
+		update resume
+		<set>
+            <if test="name != null and name.length()>0">
+                yhname = #{yhname},
+            </if>
+            <if test="xbSex != null and xbSex.length()>0">
+                xbSex = #{xbSex},
+            </if>
+            <if test="csTime != null and csTime.length()>0">
+                csTime = #{csTime},
+            </if>
+            <if test="gjNationality != null and gjNationality.length()>0">
+                gjNationality = #{gjNationality},
+            </if>
+            <if test="mmFace != null and mmFace.length()>0">
+                mmFace = #{mmFace},
+            </if>
+            scTime=now()
+        </set>
+        where jlid=#{jlid}
+	</update>
+
+
+
 </mapper>
