@@ -34,6 +34,10 @@
                 <input id="account" class="layui-input" type="text" name="account"
                        autocomplete="off" placeholder="输入账号">
             </div>
+            <label class="layui-form-label">操作类型：</label>
+            <div class="layui-input-inline">
+                <select id="type" name="type" lay-filter="type"></select>
+            </div>
             <button class="layui-btn" lay-submit lay-filter="searchJournal"><i class="layui-icon">&#xe615;</i>搜索
             </button>
         </div>
@@ -55,6 +59,23 @@
             , $ = layui.jquery
             , form = layui.form;
 
+        $('#type').empty();
+        $.ajax({
+            type: "POST",
+            url: "/adminJournal/getJournal",
+            dataType: "text",
+            success: function (msg) {
+                $('#type').append('<option value="">请选择参数类型</option>');
+                var list = JSON.parse(msg);
+                for (var i = 0; i < list.length; i++) {
+                    $('#type').append('<option value="' + list[i].type + '">' + list[i].type + '</option>');
+                }
+                layui.form.render("select");
+            },
+            error: function () {
+                layer.msg('服务器繁忙');
+            }
+        });
 
         //第一个实例
         table.render({
@@ -82,6 +103,12 @@
                 , {field: 'date', title: '操作时间', width: 230}
             ]]
         });
+        //获取下拉框的值
+        var type = "";
+        // 获取下拉框数据
+        form.on('select(type)', function (data) {
+            type = data.value;
+        });
 
         //搜索
         form.on('submit(searchJournal)', function (data) {
@@ -89,6 +116,7 @@
                 url: '/adminJournal/table/journal'
                 , where: { //设定异步数据接口的额外参数，任意设
                     account: data.field.account,
+                    type:type
                 }
                 , page: {
                     curr: 1 //重新从第 1 页开始

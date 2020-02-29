@@ -10,5 +10,6 @@ public class City {
   private String ctname;
   private String prname;
   private String name;
+  private int id;
 
 }

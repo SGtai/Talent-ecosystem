@@ -16,5 +16,4 @@ public class Jobintension {
   private String other;
   private String by1;
   private String by2;
-
 }

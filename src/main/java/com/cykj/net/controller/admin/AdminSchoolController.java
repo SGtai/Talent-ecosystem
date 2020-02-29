@@ -16,9 +16,10 @@ public class AdminSchoolController {
     @Autowired
     private AdminSchoolService adminSchoolService;
 
+    @Log(type = "查询操作",event = "查询高校")
     @RequestMapping(value = "/table/school")
     @ResponseBody
-    public LayuiData school(String scName, String type, String prid, String ctid, String state,String scState, int page, int limit){
+    public LayuiData schoolLog(String scName, String type, String prid, String ctid, String state,String scState, int page, int limit){
         return adminSchoolService.school(scName,type,prid,ctid,state,scState,page,limit);
     }
 
