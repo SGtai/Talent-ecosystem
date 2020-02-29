@@ -177,6 +177,7 @@
         <result column="csTime" property="csTime"/>
         <result column="yhname" property="yhname"/>
         <result column="jlname" property="jlname"/>
+        <result column="xl" property="xl"/>
         <collection property="jobintension" ofType="Jobintension">
             <id column="jzyxid" property="jzyxid"/>
             <result column="workPlace" property="workPlace"/>
