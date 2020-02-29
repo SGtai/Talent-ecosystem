@@ -49,6 +49,30 @@ public class Jobinfo
   private String postion;
   private long poid;
   private long prid;
+  private String zpNumEnd;
+  //进度
+  private String schedule;
+
+
+  public String getSchedule()
+  {
+    return schedule;
+  }
+
+  public void setSchedule(String schedule)
+  {
+    this.schedule = schedule;
+  }
+
+  public String getZpNumEnd()
+  {
+    return zpNumEnd;
+  }
+
+  public void setZpNumEnd(String zpNumEnd)
+  {
+    this.zpNumEnd = zpNumEnd;
+  }
 
   public long getPrid() { return prid; }
 

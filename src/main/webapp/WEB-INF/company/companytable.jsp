@@ -7,7 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%
 	String path = application.getContextPath()+"/layui/";
 	String Path =application.getContextPath();
@@ -327,11 +326,7 @@
 <script src=<%=path + "layui.js"%>></script>
 <script src="<%=path+"json2.js"%>"></script>
 <%--<script src="<%=jsPath+"companytable.js"%>"></script>--%>
-<script type="text/html" id="barDemo">
-	<a class="layui-btn layui-btn-xs" lay-event="detail" >查看</a>
-	<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-</script>
+
 <script type="text/javascript">
 	layui.use(['form', 'layer', 'jquery','table','layedit', 'laydate'], function(){
 		var table = layui.table;

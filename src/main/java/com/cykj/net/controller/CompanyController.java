@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -322,6 +323,12 @@ public class CompanyController
 
 		for (int i = (Integer.valueOf(page) - 1) * Integer.valueOf(limit); i < nowPage; i++)
 		{
+			//计算完成进度
+			int a=Integer.valueOf(list1.get(i).getZpNumEnd());
+			int b=Integer.valueOf(list1.get(i).getZpNum());
+			DecimalFormat df = new DecimalFormat("0.00");//格式化小数
+			String num = df.format((float)a/b*100);//返回的是String类型
+			list1.get(i).setSchedule(num+"%");
 			data.add(list1.get(i));
 		}
 
