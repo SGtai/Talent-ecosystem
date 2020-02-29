@@ -62,8 +62,12 @@ public class UserService
 		int num = userDao.pingjia(resume);
 		return num;
 	}
-	public List<Jianli> yulanxml(){
-		List<Jianli> jianli = userDao.yulanxml();
+	public List<Jianli> yulanxml(int jlid){
+		List<Jianli> jianli = userDao.yulanxml(jlid);
 		return jianli;
+	}
+	public List<Resume> jliList(int yhId){
+		List<Resume> list = userDao.jliList(yhId);
+		return list;
 	}
 }

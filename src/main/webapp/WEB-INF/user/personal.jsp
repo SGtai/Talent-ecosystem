@@ -88,7 +88,7 @@
 				<a href="/jump/user/personal" class="a1">会员首页</a>
 			</div>
 			<div class="NavLeftBox">
-				<a href="/jump/user/personal_jl" class="a2">我的简历</a>
+				<a href="/user/gopersonaljl" class="a2">我的简历</a>
 			</div>
 			<div class="NavLeftBox">
 				<a href="/jump/user/personal_zwss" class="a3">职位搜索</a>

@@ -37,6 +37,9 @@
     <update id="userInfojl" parameterType="Resume">
 		update resume
 		<set>
+            <if test="jlname != null and jlname.length()>0">
+                jlname = #{jlname},
+            </if>
             <if test="yhname != null and yhname.length()>0">
                 yhname = #{yhname},
             </if>
@@ -151,6 +154,10 @@
         where jlId =  #{jlId}
     </update>
 
+    <select id="jliList" resultType="Resume" parameterType="int">
+        select * from resume where yhId = ${yhId};
+	</select>
+
 
 <!--    简历表一对多的sql-->
     <resultMap id="jianliAll" type="Jianli">
@@ -169,6 +176,7 @@
         <result column="minzu" property="minzu"/>
         <result column="csTime" property="csTime"/>
         <result column="yhname" property="yhname"/>
+        <result column="jlname" property="jlname"/>
         <collection property="jobintension" ofType="Jobintension">
             <id column="jzyxid" property="jzyxid"/>
             <result column="workPlace" property="workPlace"/>
@@ -192,10 +200,10 @@
             <result column="gzContent" property="gzContent"/>
         </collection>
     </resultMap>
-    <select id="yulanxml" resultMap="jianliAll">
+    <select id="yulanxml" resultMap="jianliAll" parameterType="int">
 		select *
         from resume A,jobintension B, experience C,undergo D
-        where A.jlId = 29 and B.jlid = 29 and C.jlId = 29 and D.jlId = 29;
+        where A.jlId = ${jlid} and B.jlid = ${jlid} and C.jlId = ${jlid} and D.jlId = ${jlid};
 	</select>
 
 </mapper>

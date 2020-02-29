@@ -133,10 +133,6 @@
 	</div>
 	<div class="perRightcon ">
 		<div class="seeTitle">
-			<div class="seeTitle1">
-				<input name="" type="text" class="txt" value="" placeholder="请输入此份简历的名字"/>
-				<input name="" type="button" class="btn" value="修改"/>
-			</div>
 			<div class="seeTitle2">
 				<a href="/jump/user/personal_jlyulan">预览</a>
 				<a href="/jump/user/personal_jl">返回简历列表</a>
@@ -147,14 +143,17 @@
 		</div>
 		<form class="" id="userinfojl">
 			<div class="JlBoxCon ">
-				<div class="">
-					<div class="layui-input-block">
-						<input name="ycHide" type="checkbox" lay-skin="switch" lay-text="ON|OFF">
-					</div>
-				</div>
-				<input hidden value="${jlId}" name="jlId" id="jlId">
 				<h1><span>基本信息</span></h1>
 				<div class="JlBoxLeft ">
+					<div class="jldiv">
+						<div class="nametxt1">简历名称：
+							<c:if test="${yulan[0].jlname != null}">
+								${yulan[0].jlname}
+							</c:if>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="clear"></div>
 					<div class="jldiv">
 						<div class="nametxt1">姓    名：
 							<c:if test="${yulan[0].yhname != null}">

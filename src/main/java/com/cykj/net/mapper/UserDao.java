@@ -23,6 +23,7 @@ public interface UserDao
 	public int gongzuo(Undergo undergo);
 	public int zhengshu(Resume resume);
 	public int pingjia(Resume resume);
-	public List<Jianli> yulanxml();
+	public List<Jianli> yulanxml(@Param("jlid") int jlid);
+	public List<Resume> jliList(@Param("yhId") int yhId);
 
 }

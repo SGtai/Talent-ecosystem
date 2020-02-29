@@ -25,6 +25,7 @@ public class Jianli
 	private String minzu;
 	private String csTime;
 	private String yhname;
+	private String jlname;
 	private List<Jobintension> jobintension;
 	private List<Experience> experienceList;
 	private List<Undergo> undergoList;

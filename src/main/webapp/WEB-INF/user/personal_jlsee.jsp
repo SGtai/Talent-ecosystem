@@ -154,6 +154,13 @@
 			<h1><span>基本信息</span></h1>
 			<div class="JlBoxLeft layui-form">
 				<div class="jldiv">
+					<div class="nametxt"><span>*</span>简历 名称：</div>
+					<div class="inputtxt">
+						<input name="jlname" type="text" class="txt2"/>
+					</div>
+				</div>
+				<div class="clear"></div>
+				<div class="jldiv">
 					<div class="nametxt"><span>*</span>姓    名：</div>
 					<div class="inputtxt">
 						<input name="yhname" type="text" class="txt1" value=

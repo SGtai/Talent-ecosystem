@@ -154,7 +154,7 @@
 						<div class="jlpart2">
 							<div class="Orange" style="width:40px;"></div>
 						</div>
-						<div class="jlpart3">中文完整度 20 分 [ <a href="/jump/user/personal_jlsee">修改</a>   <a href="/user/yulan">预览</a>   <a href="">下载</a> ]</div>
+						<div class="jlpart3">中文完整度 20 分 [ <a href="/jump/user/personal_jlsee">修改</a>   <a href="/user/yulan?jlid=29">预览</a>   <a href="">下载</a> ]</div>
 					</td>
 					<td rowspan="2">
 						<div class="jlpart4">
@@ -181,14 +181,7 @@
 						</div>
 					</td>
 				</tr>
-				<tr>
-					<td width="61%">
-						<div class="jlpart2">
-							<div class="Orange" style="width:0"></div>
-						</div>
-						<div class="jlpart3">英文完整度 0 分 [ <a href="/jump/user/personal_jlsee">修改</a>   <a href="/user/yulan">预览</a>   <a href="">下载</a> ]</div>
-					</td>
-				</tr>
+
 				<tr>
 					<td colspan="5">
 						<div class="divline"></div>
@@ -209,7 +202,7 @@
 						<div class="jlpart2">
 							<div class="Green" style="width:140px"></div>
 						</div>
-						<div class="jlpart3">中文完整度 20 分 [ <a href="/jump/user/personal_jlsee">修改</a>   <a href="/user/yulan">预览</a>   <a href="">下载</a> ]</div>
+						<div class="jlpart3">中文完整度 20 分 [ <a href="/jump/user/personal_jlsee">修改</a>   <a href="/user/yulan/?jlid=29">预览</a>   <a href="">下载</a> ]</div>
 					</td>
 					<td rowspan="2">
 						<div class="jlpart4">
@@ -236,14 +229,7 @@
 						</div>
 					</td>
 				</tr>
-				<tr>
-					<td width="61%">
-						<div class="jlpart2">
-							<div class="Orange" style="width:60px"></div>
-						</div>
-						<div class="jlpart3">英文完整度 0 分 [ <a href="/jump/user/personal_jlsee">修改</a>   <a href="/user/yulan">预览</a>   <a href="">下载</a> ]</div>
-					</td>
-				</tr>
+
 				<tr>
 					<td colspan="5">
 						<div class="divline"></div>

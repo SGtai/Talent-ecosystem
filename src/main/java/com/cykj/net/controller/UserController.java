@@ -56,6 +56,17 @@ public class UserController
 		return "success";
 	}
 
+//	跳转简历列表界面
+	@RequestMapping("/gopersonaljl")
+	public ModelAndView gopersonaljl(HttpServletRequest request){
+		ModelAndView mv = new ModelAndView();
+		Userlist userlist = (Userlist) request.getSession().getAttribute("user");
+		List<Resume> list = userService.jliList((int) userlist.getYhid());
+		mv.addObject("list",list);
+		mv.setViewName("/WEB-INF/user/personal_jl");
+		return mv;
+	}
+
 	//简历页面点击新建简历，重新获取用户的基础信息，并往数据库写上一行简历表，拿到该序号，然后返回到页面上
 	@RequestMapping("/gojl")
 	public ModelAndView gojl(HttpServletRequest request){
@@ -205,9 +216,9 @@ public class UserController
 //	跳转预览界面
 //	新增工作经验
 	@RequestMapping("/yulan")
-	public ModelAndView yulan(){
+	public ModelAndView yulan(int jlid){
 		ModelAndView mv = new ModelAndView();
-		List<Jianli> yulan = userService.yulanxml();
+		List<Jianli> yulan = userService.yulanxml(jlid);
 		mv.addObject("yulan",yulan);
 		mv.setViewName("/WEB-INF/user/personal_jlyulan");
 		return mv;
