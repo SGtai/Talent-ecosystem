@@ -277,7 +277,6 @@
 					<div class="nametxt"><span>*</span>期望月薪：</div>
 					<div class="inputtxt">
 						<input name="monthlyPay" type="text" class="txt3"/>
-						<span class="check1"></span>
 <%--						<span class="ycname">可面议</span>--%>
 					</div>
 				</div>
@@ -440,6 +439,8 @@
 			</div>
 		</div>
 		</form>
+		<div class="clear"></div>
+		<div class="lineddiv"></div>
 		<form id="pingjia">
 			<div class="JlBoxCon">
 				<input hidden value="${jlId}" name="jlId">

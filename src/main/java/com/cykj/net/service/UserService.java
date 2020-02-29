@@ -5,6 +5,7 @@ import com.cykj.net.mapper.UserDao;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class UserService
@@ -60,5 +61,9 @@ public class UserService
 	public int pingjia(Resume resume){
 		int num = userDao.pingjia(resume);
 		return num;
+	}
+	public List<Jianli> yulanxml(){
+		List<Jianli> jianli = userDao.yulanxml();
+		return jianli;
 	}
 }

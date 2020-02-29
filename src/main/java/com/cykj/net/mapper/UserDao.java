@@ -4,6 +4,8 @@ import com.cykj.net.javabean.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface UserDao
 {
@@ -21,5 +23,6 @@ public interface UserDao
 	public int gongzuo(Undergo undergo);
 	public int zhengshu(Resume resume);
 	public int pingjia(Resume resume);
+	public List<Jianli> yulanxml();
 
 }

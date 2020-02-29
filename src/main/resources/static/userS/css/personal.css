@@ -277,6 +277,9 @@ h1.fl{ float:left; margin-right:10px}
 .JlBoxCon .JlBoxLeft .jldiv{ height:50px; width:100%;}
 .JlBoxCon .JlBoxLeft .jldiv .nametxt{ float:left;height:50px; line-height:50px; display:block;text-align: right; width:19%;padding-right:5px;font-weight: normal;}
 .JlBoxCon .JlBoxLeft .jldiv .nametxt span{color: #f25b16;margin-right: 10px;}
+.JlBoxCon .JlBoxLeft .jldiv .nametxt1{ margin-left: 40px;float:left;height:50px; line-height:50px; display:block;text-align: right;padding-right:5px;font-weight: normal;}
+.JlBoxCon .JlBoxLeft .jldiv .nametxt1 span{color: #f25b16;margin-right: 10px;}
+
 .JlBoxCon .JlBoxLeft .jldiv .inputtxt{padding: 7px 10px; width:75%; float:left}
 .JlBoxCon .JlBoxLeft .jldiv .inputtxt label{vertical-align: middle;word-break: break-all;height: 35px;line-height: 35px;}
 .JlBoxCon .JlBoxLeft .jldiv .inputtxt input{width: 243px;height: 35px;line-height: 35px;border: 1px #DBDBDB solid;border-radius: 4px;padding-left: 10px;vertical-align: middle;}

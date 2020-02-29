@@ -151,4 +151,51 @@
         where jlId =  #{jlId}
     </update>
 
+
+<!--    简历表一对多的sql-->
+    <resultMap id="jianliAll" type="Jianli">
+        <id column="jlId" property="jlId"/>
+        <result column="yhId" property="yhId"/>
+        <result column="zsCertificate" property="zsCertificate"/>
+        <result column="zpPhoto" property="zpPhoto"/>
+        <result column="scTime" property="scTime"/>
+        <result column="gjNationality" property="gjNationality"/>
+        <result column="yxMailbox" property="yxMailbox"/>
+        <result column="sjPhone" property="sjPhone"/>
+        <result column="pjEvaluation" property="pjEvaluation"/>
+        <result column="xbSex" property="xbSex"/>
+        <result column="jzdResidence" property="jzdResidence"/>
+        <result column="scPath" property="scPath"/>
+        <result column="minzu" property="minzu"/>
+        <result column="csTime" property="csTime"/>
+        <result column="yhname" property="yhname"/>
+        <collection property="jobintension" ofType="Jobintension">
+            <id column="jzyxid" property="jzyxid"/>
+            <result column="workPlace" property="workPlace"/>
+            <result column="intentionWork" property="intentionWork"/>
+            <result column="monthlyPay" property="monthlyPay"/>
+            <result column="workstate" property="workstate"/>
+            <result column="other" property="other"/>
+        </collection>
+        <collection property="experienceList" ofType="Experience">
+            <id column="jyId" property="jyId"/>
+            <result column="sxSchooltime" property="sxSchooltime"/>
+            <result column="zyMajor" property="zyMajor"/>
+            <result column="school" property="school"/>
+            <result column="rongyu" property="rongyu"/>
+        </collection>
+        <collection property="undergoList" ofType="Undergo">
+            <id column="gzjlId" property="gzjlId"/>
+            <result column="ksTime" property="ksTime"/>
+            <result column="jzUnit" property="jzUnit"/>
+            <result column="zwPosition" property="zwPosition"/>
+            <result column="gzContent" property="gzContent"/>
+        </collection>
+    </resultMap>
+    <select id="yulanxml" resultMap="jianliAll">
+		select *
+        from resume A,jobintension B, experience C,undergo D
+        where A.jlId = 29 and B.jlid = 29 and C.jlId = 29 and D.jlId = 29;
+	</select>
+
 </mapper>

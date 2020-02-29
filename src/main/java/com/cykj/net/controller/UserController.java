@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -73,7 +74,7 @@ public class UserController
 		experience.setJlId(jlid);
 		Jobintension jobintension =new Jobintension();
 		jobintension.setJlid(jlid);
-		jobintension.setYhid(user.getYhid());
+		jobintension.setYhid((int) user.getYhid());
 		Undergo undergo = new Undergo();
 		undergo.setJlId(jlid);
 		//将值都放入实体类后，通过mybatis获取到插入后的自增长的主键id
@@ -199,5 +200,16 @@ public class UserController
 		//将值都放入实体类后，通过mybatis获取到插入后的自增长的主键id
 		userService.addundergo(undergo);
 		return String.valueOf(undergo.getGzjlId());
+	}
+
+//	跳转预览界面
+//	新增工作经验
+	@RequestMapping("/yulan")
+	public ModelAndView yulan(){
+		ModelAndView mv = new ModelAndView();
+		List<Jianli> yulan = userService.yulanxml();
+		mv.addObject("yulan",yulan);
+		mv.setViewName("/WEB-INF/user/personal_jlyulan");
+		return mv;
 	}
 }
