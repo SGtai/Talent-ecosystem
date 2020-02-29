@@ -17,6 +17,7 @@
 <!DOCTYPE html>
 <head>
 	<link rel="stylesheet" href=<%=cssPath+"personal.css"%>>
+	<link rel="stylesheet" href="<%=path+"layui/css/layui.css"%>" media="all">
 	<title>个人中心-我的简历</title>
 </head>
 <body>
@@ -127,7 +128,7 @@
 			<span class="Notice">蝶飞人才网<br>找工作更靠谱</span>
 		</div>
 	</div>
-	<div class="perRightcon">
+	<div class="perRightcon layui-form">
 		<div class="seeTitle">
 			<div class="seeTitle1">
 				<input name="" type="text" class="txt" value="" placeholder="请输入此份简历的名字"/>
@@ -149,13 +150,17 @@
 					<input name="ycHide" type="checkbox" lay-skin="switch" lay-text="ON|OFF">
 				</div>
 			</div>
-			<input hidden value="${jlId}" name="jlId">
+			<input hidden value="${jlId}" name="jlId" id="jlId">
 			<h1><span>基本信息</span></h1>
 			<div class="JlBoxLeft layui-form">
 				<div class="jldiv">
 					<div class="nametxt"><span>*</span>姓    名：</div>
 					<div class="inputtxt">
-						<input name="yhname" type="text" class="txt1" value="${userinfo.name}"/>
+						<input name="yhname" type="text" class="txt1" value=
+						<c:if test="${userinfo.name != null}">
+							"${userinfo.name}"
+						</c:if>
+						/>
 					</div>
 					<div class="clear"></div>
 				</div>
@@ -165,13 +170,17 @@
 					<div class="layui-input-inline">
 						<select name="xbSex" lay-filter="sex">
 							<option value=""></option>
+							<c:if test="${userinfo.sex == null}">
+								<option value="男">男</option>
+								<option value="女">女</option>
+							</c:if>
 							<c:if test="${userinfo.sex == '男'}">
-								<option value="男" checked="">男</option>
+								<option value="男" selected="">男</option>
 								<option value="女">女</option>
 							</c:if>
 							<c:if test="${userinfo.sex == '女'}">
 								<option value="男">男</option>
-								<option value="女" checked="">女</option>
+								<option value="女" selected="">女</option>
 							</c:if>
 						</select>
 					</div>
@@ -181,14 +190,19 @@
 				<div class="layui-form-item jldiv">
 					<div class="nametxt"><span>*</span>出生年月：</div>
 					<div class="layui-input-inline">
-						<input id="csTime" name="csTime" class="layui-input" id="date" type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date" value="${userinfo.birthday}">
+						<input id="csTime" name="csTime" class="layui-input" id="date" type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date"
+						       value=
+						       <c:if test="${userinfo.birthday != null}">
+								       "${userinfo.birthday}"
+							   </c:if>
+									>
 					</div>
 				</div>
 				<div class="clear"></div>
 				<div class="jldiv">
 					<div class="nametxt"><span>*</span>国籍：</div>
 					<div class="inputtxt">
-						<input name="gjNationality" type="text" class="txt" placeholder="群众/团员/党员"/>
+						<input name="gjNationality" type="text" class="txt" placeholder="请输入您的国籍"/>
 					</div>
 				</div>
 				<div class="clear"></div>
@@ -202,7 +216,11 @@
 				<div class="jldiv">
 					<div class="nametxt"><span>*</span>手机号码：</div>
 					<div class="inputtxt">
-						<span class="phone">${sessionScope.user.phone}</span>
+						<span class="phone">
+							 <c:if test="${sessionScope.user.phone != null}">
+								 ${sessionScope.user.phone}
+							 </c:if>
+							</span>
 						<a href="/jump/user/personal_updatenum" class="updateph">修改手机号</a>
 						<span class="check1"></span>
 						<span class="ycname">接收短信面试通知</span>
@@ -212,21 +230,21 @@
 				<div class="jldiv">
 					<div class="nametxt"><span>*</span>邮  箱：</div>
 					<div class="inputtxt">
-						<input name="yxMailbox" type="text" class="txt2" placeholder="群众/团员/党员"/>
+						<input name="yxMailbox" type="text" class="txt2" placeholder="请输入完整的邮箱地址"/>
 					</div>
 				</div>
 				<div class="clear"></div>
 				<div class="jldiv">
 					<div class="nametxt"><span>*</span>民  族：</div>
 					<div class="inputtxt">
-						<input name="minzu" type="text" class="txt" placeholder="群众/团员/党员"/>
+						<input name="minzu" type="text" class="txt" placeholder="请输入您的民族"/>
 					</div>
 				</div>
 				<div class="clear"></div>
 				<div class="jldiv">
 					<div class="nametxt"><span>*</span>居住地：</div>
 					<div class="inputtxt">
-						<input name="jzdResidence" type="text" class="txt4" placeholder="请填写您的现居住地"/>
+						<input name="jzdResidence" type="text" class="txt3" placeholder="请填写您的现居住地"/>
 					</div>
 				</div>
 				<div class="clear"></div>
@@ -239,9 +257,9 @@
 		<div class="clear"></div>
 		<div class="lineddiv"></div>
 		<form id="yixiang" class="layui-form">
-		<div class="JlBoxCon">
-			<input hidden value="${jzyxid}" name="jzyxid">
-			<h1><span>求职意向</span><a href="" class="update">修改</a></h1>
+		<div class="JlBoxCon layui-form">
+			<input hidden value="${jzyxid}" name="jzyxid" >
+			<h1><span>求职意向</span></h1>
 			<div class="JlBoxLeft">
 					<div class="layui-form-item jldiv">
 						<div class="nametxt"><span>*</span>期望工作性质：</div>
@@ -258,7 +276,7 @@
 				<div class="jldiv">
 					<div class="nametxt"><span>*</span>期望月薪：</div>
 					<div class="inputtxt">
-						<input name="monthlyPay" type="text" class="txt2"/>
+						<input name="monthlyPay" type="text" class="txt3"/>
 						<span class="check1"></span>
 <%--						<span class="ycname">可面议</span>--%>
 					</div>
@@ -267,14 +285,14 @@
 				<div class="jldiv">
 					<div class="nametxt"><span>*</span>期望工作地点：</div>
 					<div class="inputtxt">
-						<input name="workPlace" type="text" class="txt4"/>
+						<input name="workPlace" type="text" class="txt3"/>
 					</div>
 				</div>
 				<div class="clear"></div>
 				<div class="jldiv">
 					<div class="nametxt"><span>*</span>期望职位类别：</div>
 					<div class="inputtxt">
-						<input name="intentionWork" type="text" class="txt4"/>
+						<input name="intentionWork" type="text" class="txt3"/>
 					</div>
 				</div>
 				<div class="clear"></div>
@@ -293,8 +311,8 @@
 		</form>
 		<div class="clear"></div>
 		<div class="lineddiv"></div>
-		<form id="jiaoyu" class="layui-form">
-		<div class="JlBoxCon">
+		<div class="JlBoxCon" id="jiaoyudiv">
+			<form id="jiaoyu" class="layui-form">
 			<input hidden value="${jyid}" name="jyId">
 			<h1><span>教育背景</span></h1>
 			<div class="JlBoxLeft">
@@ -329,7 +347,7 @@
 				</div>
 				<div class="clear"></div>
 				<div class="jldiv">
-					<a href="" class="save">保存</a>
+					<a href="javascript:void(0)" class="save" onclick="jiaoyu(this)">保存</a>
 				</div>
 			</div>
 			<div class="JlBoxRight">
@@ -337,22 +355,19 @@
 			</div>
 			<div class="clear"></div>
 			<div class="addcomeon">
-				<a href="">继续添加教育背景</a>
+				<a href="javascript:void(0)" onclick="morejiaoyu()">继续添加教育背景</a>
 			</div>
+			</form>
 		</div>
-		</form>
+
 		<div class="clear"></div>
 		<div class="lineddiv"></div>
-		<form id="gongzuo" class="layui-form">
-		<div class="JlBoxCon">
+
+		<div class="JlBoxCon" id="gongzuodiv">
+			<form id="gongzuo" class="layui-form">
 			<input hidden value="${gzjlId}" name="gzjlId">
 			<h1><span>工作经历</span></h1>
-			<div class="jobjingli">
-				<input name="" type="radio" value="" />
-				<span>我有工作经验</span>
-				<input name="" type="radio" value="" />
-				<span>我没有工作经验</span>
-			</div>
+
 			<div class="clear"></div>
 			<div class="JlBoxLeft" style="width:710px">
 				<div class="jldiv">
@@ -374,7 +389,7 @@
 				<div class="jldiv">
 					<div class="nametxt"><span>*</span>工作时间：</div>
 					<div class="inputtxt">
-						<input name="ksTime" type="text" class="txt6"/><span class="zhi">至</span><input name="" type="text" class="txt6"/>
+						<input name="ksTime" type="text" class="txt3" placeholder="年/月——年/月"/>
 					</div>
 				</div>
 				<div class="clear"></div>
@@ -387,7 +402,7 @@
 				</div>
 				<div class="clear"></div>
 				<div class="jldiv">
-					<a href="" class="save">保存</a>
+					<a href="javascript:void(0)" class="save" onclick="gongzuo(this)">保存</a>
 				</div>
 			</div>
 			<div class="JlBoxRight" style="width:100px">
@@ -395,13 +410,15 @@
 			</div>
 			<div class="clear"></div>
 			<div class="addcomeon">
-				<a href="">继续添加工作经历</a>
+				<a href="javascript:void(0)" onclick="moregongzuo()">继续添加工作经历</a>
 			</div>
+			</form>
 		</div>
-		</form>
+
 		<div class="clear"></div>
 		<div class="lineddiv"></div>
 		<form id="zhengshu" class="layui-form">
+			<input hidden value="${jlId}" name="jlId">
 		<div class="JlBoxCon">
 			<h1><span>证书</span></h1>
 			<div class="JlBoxLeft">
@@ -415,14 +432,17 @@
 				</div>
 				<div class="clear"></div>
 				<div class="jldiv">
-					<a href="" class="save">保存</a>
+					<a href="javascript:void(0)" class="save" onclick="zhengshu()">保存</a>
 				</div>
 			</div>
 			<div class="JlBoxRight">
 				<a href="" class="del">删除</a>
 			</div>
 		</div>
+		</form>
+		<form id="pingjia">
 			<div class="JlBoxCon">
+				<input hidden value="${jlId}" name="jlId">
 				<h1><span>自我评价</span></h1>
 				<div class="JlBoxLeft">
 					<div class="clear"></div>
@@ -435,13 +455,13 @@
 					</div>
 					<div class="clear"></div>
 					<div class="jldiv">
-						<a href="" class="save">保存</a>
+						<a href="javascript:void(0)" class="save" onclick="pingjia()">保存</a>
 					</div>
 				</div>
 				<div class="JlBoxRight">
 					<a href="" class="del">删除</a>
 				</div>
-			</div>
+				</div>
 		</form>
 		<div class="clear"></div>
 		<div class="lineddiv"></div>
@@ -466,7 +486,15 @@
 </div>
 
 <script type="text/javascript" src=<%=path+"layui/jquery-3.4.1.js"%>></script>
+<script src=<%=path + "layui/layui.js"%>></script>
 <script type="text/javascript" src=<%=jsPath+"personal.js"%>></script>
 <script type="text/javascript" src=<%=jsPath+"personal_jl.js"%>></script>
+<script>
+	layui.use('form', function () {
+		var form = layui.form;
+		form.render();
+	});
+</script>
+
 </body>
 </html>

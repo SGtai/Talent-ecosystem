@@ -22,7 +22,7 @@ public class Resume {
   private String ztStatus;
   private String minzu;
   private String demo2;
-  private java.sql.Timestamp csTime;
+  private String csTime;
   private String jzstate;
   private String byschool;
   private String zy;

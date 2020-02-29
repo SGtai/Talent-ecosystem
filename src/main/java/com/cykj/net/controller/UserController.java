@@ -107,11 +107,8 @@ public class UserController
 //	简历——个人基础信息
 	@RequestMapping("/userInfojl")
 	@ResponseBody
-	public String gerenInfo(Resume resume,HttpServletRequest request){
-		//先获取当前页面的简历id
-		int jlid = (int) request.getSession().getAttribute("nowjlid");
-//		根据id插入数据
-		resume.setJlId(jlid);
+	public String gerenInfo(Resume resume){
+
 		int num = userService.userInfojl(resume);
 		if (num > 0){
 			return "true";
@@ -120,5 +117,87 @@ public class UserController
 		}
 	}
 
+//	求职意向表的更新
+	@RequestMapping("/yixiang")
+	@ResponseBody
+	public String yixiang(Jobintension jobintension){
 
+		int num = userService.yixiang(jobintension);
+		if (num > 0){
+			return "true";
+		}else{
+			return "false";
+		}
+	}
+
+	//	求职教育表的更新
+	@RequestMapping("/jiaoyu")
+	@ResponseBody
+	public String jiaoyu(Experience experience){
+
+		int num = userService.jiaoyu(experience);
+		if (num > 0){
+			return "true";
+		}else{
+			return "false";
+		}
+	}
+//求职工作经历
+	@RequestMapping("/gongzuo")
+	@ResponseBody
+	public String gongzuo(Undergo undergo){
+
+		int num = userService.gongzuo(undergo);
+		if (num > 0){
+			return "true";
+		}else{
+			return "false";
+		}
+	}
+//证书
+	@RequestMapping("/zhengshu")
+	@ResponseBody
+	public String zhengshu(Resume resume){
+
+		int num = userService.zhengshu(resume);
+		if (num > 0){
+			return "true";
+		}else{
+			return "false";
+		}
+	}
+
+//	个人介绍
+	@RequestMapping("/pingjia")
+	@ResponseBody
+	public String pingjia(Resume resume){
+
+		int num = userService.pingjia(resume);
+		if (num > 0){
+			return "true";
+		}else{
+			return "false";
+		}
+	}
+
+//	新增教育经历
+	@RequestMapping("/morejiaoyu")
+	@ResponseBody
+	public String morejiaoyu(int jlid){
+		Experience experience = new Experience();
+		experience.setJlId(jlid);
+		//将值都放入实体类后，通过mybatis获取到插入后的自增长的主键id
+		userService.addexperience(experience);
+		return String.valueOf(experience.getJyId());
+	}
+//	新增工作经验
+	@RequestMapping("/moregongzuo")
+	@ResponseBody
+	public String moregongzuo(int jlid){
+		Undergo undergo = new Undergo();
+		undergo.setJlId(jlid);
+		//将值都放入实体类后，通过mybatis获取到插入后的自增长的主键id
+		userService.addundergo(undergo);
+		return String.valueOf(undergo.getGzjlId());
+	}
 }

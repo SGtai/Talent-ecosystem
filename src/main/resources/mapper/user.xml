@@ -37,7 +37,7 @@
     <update id="userInfojl" parameterType="Resume">
 		update resume
 		<set>
-            <if test="name != null and name.length()>0">
+            <if test="yhname != null and yhname.length()>0">
                 yhname = #{yhname},
             </if>
             <if test="xbSex != null and xbSex.length()>0">
@@ -52,11 +52,103 @@
             <if test="mmFace != null and mmFace.length()>0">
                 mmFace = #{mmFace},
             </if>
+            <if test="yxMailbox != null and yxMailbox.length()>0">
+                yxMailbox = #{yxMailbox},
+            </if>
+            <if test="minzu != null and minzu.length()>0">
+                minzu = #{minzu},
+            </if>
+            <if test="jzdResidence != null and jzdResidence.length()>0">
+                jzdResidence = #{jzdResidence},
+            </if>
             scTime=now()
         </set>
-        where jlid=#{jlid}
+        where jlId=#{jlId}
 	</update>
 
+    <update id="yixiang" parameterType="Jobintension">
+        update jobintension
+        <set>
+            <if test="workstate != null and workstate.length()>0">
+                workstate = #{workstate},
+            </if>
+            <if test="monthlyPay != null and monthlyPay.length()>0">
+                monthlyPay = #{monthlyPay},
+            </if>
+            <if test="workPlace != null and workPlace.length()>0">
+                workPlace = #{workPlace},
+            </if>
+            <if test="intentionWork != null and intentionWork.length()>0">
+                intentionWork = #{intentionWork},
+            </if>
+            <if test="other != null and other.length()>0">
+                other = #{other},
+            </if>
+        </set>
+        where jzyxid = #{jzyxid}
+    </update>
 
+
+    <update id="jiaoyu" parameterType="Resume">
+        update experience
+        <set>
+            <if test="school != null and school.length()>0">
+                school = #{school},
+            </if>
+            <if test="sxSchooltime != null and sxSchooltime.length()>0">
+                sxSchooltime = #{sxSchooltime},
+            </if>
+            <if test="zyMajor != null and zyMajor.length()>0">
+                zyMajor = #{zyMajor},
+            </if>
+            <if test="rongyu != null and rongyu.length()>0">
+                rongyu = #{rongyu},
+            </if>
+            gxtime = now()
+        </set>
+        where jyId = #{jyId}
+    </update>
+
+    <update id="gongzuo" parameterType="Resume">
+        update undergo
+        <set>
+            <if test="jzUnit != null and jzUnit.length()>0">
+                jzUnit = #{jzUnit},
+            </if>
+            <if test="zwPosition != null and zwPosition.length()>0">
+                zwPosition = #{zwPosition},
+            </if>
+            <if test="ksTime != null and ksTime.length()>0">
+                ksTime = #{ksTime},
+            </if>
+            <if test="gzContent != null and gzContent.length()>0">
+                gzContent = #{gzContent},
+            </if>
+            gxTime = now()
+        </set>
+        where gzjlId = #{gzjlId}
+    </update>
+
+    <update id="zhengshu" parameterType="Resume">
+        update resume
+        <set>
+            <if test="zsCertificate != null and zsCertificate.length()>0">
+                zsCertificate = #{zsCertificate},
+            </if>
+            scTime = now()
+        </set>
+        where jlId = #{jlId}
+    </update>
+
+    <update id="pingjia" parameterType="Resume">
+        update resume
+        <set>
+            <if test="pjEvaluation != null and pjEvaluation.length()>0">
+                pjEvaluation = #{pjEvaluation},
+            </if>
+            scTime = now()
+        </set>
+        where jlId =  #{jlId}
+    </update>
 
 </mapper>

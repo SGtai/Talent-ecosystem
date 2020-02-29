@@ -16,5 +16,10 @@ public interface UserDao
 	public void addexperience(Experience experience);
 	public void addundergo(Undergo undergo);
 	public int userInfojl(Resume resume);
+	public int yixiang(Jobintension jobintension);
+	public int jiaoyu(Experience experience);
+	public int gongzuo(Undergo undergo);
+	public int zhengshu(Resume resume);
+	public int pingjia(Resume resume);
 
 }
