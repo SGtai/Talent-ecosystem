@@ -19,7 +19,7 @@ public class UserController
 	@RequestMapping("/login")
 	@ResponseBody
 	public String login(String phone, String password, HttpServletRequest request){
-
+		System.out.println("phone="+phone+"password="+password);
 		Userlist userlist = userService.findPhone(phone);
 		if (userlist == null){
 			return "noAccount";
