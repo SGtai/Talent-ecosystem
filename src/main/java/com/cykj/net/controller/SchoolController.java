@@ -17,6 +17,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -562,6 +563,16 @@ public class SchoolController
 		return value.trim();
 	}
 
+	@RequestMapping("/tjrencai")
+	@ResponseBody
+	public ModelAndView turntjrc(HttpServletRequest request){
+		Admin admin= (Admin) request.getSession().getAttribute("admin");
+		S1 scinfo=schoolService.findSchoolinfo(admin.getAccount());
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("/WEB-INF/school/tuijianrencai");
+		mv.addObject("scinfo",scinfo);
+		return mv;
+	}
 
 
 
