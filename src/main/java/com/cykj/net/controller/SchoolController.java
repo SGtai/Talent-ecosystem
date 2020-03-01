@@ -333,7 +333,7 @@ public class SchoolController
 		Admin admin= (Admin) request.getSession().getAttribute("admin");
 		String lasttime="";
 		String nowtime="";
-		if(time!=null&&time!=""){
+		if(time!=null&&time!=""&&!time.equals("to")){
 			String arr[]=time.split("to");
 			lasttime=arr[0].trim();
 			nowtime=arr[1].trim();
@@ -458,31 +458,31 @@ public class SchoolController
 					continue;
 				}
 				Userlist userlist=new Userlist();
-				userlist.setAccount(formatCell(hssfRow.getCell(0)));
-				userlist.setPassword(formatCell(hssfRow.getCell(1)));
-				userlist.setName(formatCell(hssfRow.getCell(2)));
-				userlist.setPhone(formatCell(hssfRow.getCell(3)));
-				userlist.setPhone(formatCell(hssfRow.getCell(4)));
-				userlist.setSex(formatCell(hssfRow.getCell(5)));
-				userlist.setDegree(formatCell(hssfRow.getCell(6)));
-				userlist.setIdCard(formatCell(hssfRow.getCell(7)));
-				userlist.setIdCardType(formatCell(hssfRow.getCell(8)));
-				userlist.setBirthday(formatCell(hssfRow.getCell(9)));
+				userlist.setPassword(formatCell(hssfRow.getCell(0)));
+				userlist.setName(formatCell(hssfRow.getCell(1)));
+				userlist.setPhone(formatCell(hssfRow.getCell(2)));
+				userlist.setSex(formatCell(hssfRow.getCell(3)));
+				userlist.setSex(formatCell(hssfRow.getCell(4)));
+				userlist.setDegree(formatCell(hssfRow.getCell(5)));
+				userlist.setIdCard(formatCell(hssfRow.getCell(6)));
+				userlist.setIdCardType(formatCell(hssfRow.getCell(7)));
+				userlist.setBirthday(formatCell(hssfRow.getCell(8)));
 				userlist.setRegTime(new Timestamp(System.currentTimeMillis()));
 				userlist.setState(0);
 				userlist.setPicture("图片路径未定义");
 				userlist.setTuijianren(admin.getAccount());
 				//插入管理员表
 				Admin a=new Admin();
-				a.setAccount(userlist.getAccount());
+				a.setAccount(userlist.getPhone());
 				a.setPassword(userlist.getPassword());
 				a.setRegistertime(userlist.getRegTime());
 				a.setName(userlist.getName());
+				a.setState(0);
 				adminService.regAdmin(a);
 
 				//插入管理角色表
 				Adminrole adminrole=new Adminrole();
-				adminrole.setAccount(userlist.getAccount());
+				adminrole.setAccount(userlist.getPhone());
 				adminrole.setRoid(5);
 				adminroleService.regAdminRole(adminrole);
 

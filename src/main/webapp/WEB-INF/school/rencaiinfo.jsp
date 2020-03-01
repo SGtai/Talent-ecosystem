@@ -115,7 +115,7 @@
 				<input type="text" id="hide8"  autocomplete="off" class="layui-input" disabled>
 			</div>
 		</div>
-		<img  src=/schoolS/cunchu/mypic/图片1.png" alt="" style="width: 20%;height: 20%;margin-left: 70%;margin-top: -30%">
+		<img  src="\schoolS\cunchu\logo\555555\jmgz.jpg" alt="" style="width: 20%;height: 20%;margin-left: 70%;margin-top: -30%">
 		<div  class="layui-form-item">
 			<label class="layui-form-label" style="margin-left: -5%">学习经历</label>
 			<table class="layui-table" style="margin-left: -5%">
@@ -270,7 +270,7 @@
 				}
 			});
 			//表格
-			table.render({
+			var ins1=table.render({
 				elem: '#demo'
 				,height: 300
 				,width:760
@@ -294,11 +294,25 @@
 					,{field: 'zsCertificate', title: '技能证书', width: 50,style:'display:none;'}
 					,{field: 'pjEvaluation', title: '自我评价', width: 50,style:'display:none;'}
 				]]
+				,done: function (res, curr, count) {
+					exportData=res.data;
+				}
 				,id:'UserTable'
+			});
+			$("#daochu").click(function(){
+				table.exportFile(ins1.config.id,exportData, 'xls');
 			});
 			//搜索
 			$("#query_pa").click(function () {
+				var a=$("#start_time").val();
+				var b=$("#end_time").val();
 				var times=$("#start_time").val()+"to"+$("#end_time").val();
+				if(a!=""&&a!=null||b!=""&&b!=null){
+					if(a==""||a==null||b==""||b==null){
+						alert("日期格式未填写完整");
+						return;
+					}
+				}
 				table.reload('UserTable',{
 					url:'/school/rencaiinfoquery'
 					,where: { //设定异步数据接口的额外参数，任意设
