@@ -32,7 +32,7 @@
 		<div class="layui-inline">
 			<label class="layui-form-label">招聘行业：</label>
 			<div class="layui-input-inline">
-				<select name="position2" id="position" lay-filter="choosePosition"  >
+				<select name="position" id="position" lay-filter="choosePosition"  >
 					<option value="0" >请选择行业</option>
 					<c:if test="${position!=null}">
 						<c:forEach items="${position}" begin="0" var="i">
@@ -45,7 +45,7 @@
 		<div class="layui-inline">
 			<label class="layui-form-label">招聘岗位：</label>
 			<div class="layui-input-block">
-				<select name="zwid" id="zwid2">
+				<select name="zwid" id="zwid">
 				</select>
 			</div>
 		</div>
@@ -72,7 +72,7 @@
 	<div class="layui-inline">
 		<label class="layui-form-label">招聘行业：</label>
 		<div class="layui-input-inline">
-			<select name="position2" id="position" lay-filter="choosePosition"  >
+			<select name="position" id="position1" lay-filter="choosePosition"  >
 				<option value="0" >请选择行业</option>
 				<c:if test="${position!=null}">
 					<c:forEach items="${position}" begin="0" var="i">
@@ -85,23 +85,9 @@
 	<div class="layui-inline">
 		<label class="layui-form-label">招聘岗位：</label>
 		<div class="layui-input-block">
-			<select name="zwid" id="zwid2">
+			<select name="zwid" id="zwid1">
 			</select>
 		</div>
-	</div>
-	<div class="layui-inline">
-		<label class="layui-form-label">发布状态:</label>
-		<div class="layui-input-block">
-			<select name="jobinfoState" id="jobinfoState" lay-filter="" lay-search>
-				<option value="">选择</option>
-				<option value="发布中">发布中</option>
-				<option value="待发布">待发布</option>
-				<option value="已到期">已到期</option>
-			</select>
-		</div>
-	</div>
-	<div class="layui-inline">
-		<button class="layui-btn" lay-submit="search_submits" lay-filter="search">查询</button>
 	</div>
 </div>
 </form>
@@ -143,7 +129,7 @@
 		table.render({
 			elem: '#demo'
 			, height: 280
-			, url: "/company/searchJobinfoTable" //数据接口
+			, url: "/user/yulan" //数据接口
 			, page: true //开启分页
 			, limit: 5
 			, limits: [5, 10, 20, 50, 100]
@@ -151,15 +137,15 @@
 				//简历发布时间 姓名 年龄 性别 应聘行业 岗位 学历
 				{field: 'zpxxid', title: 'ID', width: 80, hide: true}
 				, {field: 'type', title: '招聘行业', width: 150}
-				, {field: 'postion', title: '招聘岗位', width: 200}
-				, {field: 'zhaopinTime', title: '招聘时间', width: 200}
+				, {field: 'postion', title: '意向岗位', width: 200}
+				, {field: 'zhaopinTime', title: '名字', width: 200}
 				// ,{field: 'xueliRequire', title: '学历要求', width:100}
 				// ,{field: 'age', title: '年龄范围(岁)', width:120}
 				// ,{field: 'salary', title: '参考薪资(元)', width:150}
 				// ,{field: 'xinzifuli', title: '薪资福利', width: 250}
-				, {field: 'zpNum', title: '招聘人数', width: 120, sort: true}
+				, {field: 'zpNum', title: '学历', width: 120, sort: true}
 				, {field: 'time', title: '发布时间', width: 200, sort: true}
-				, {field: 'jobinfoState', title: '发布状态', width: 110}
+				// , {field: 'jobinfoState', title: '发布状态', width: 110}
 				, {fixed: 'right', width: 320, align: 'center', toolbar: '#barDemo'}
 			]]
 			//设置查询刷新的ID
