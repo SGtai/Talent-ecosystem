@@ -62,7 +62,7 @@ public class UserController
 		ModelAndView mv = new ModelAndView();
 		Userlist userlist = (Userlist) request.getSession().getAttribute("user");
 		List<Resume> list = userService.jliList((int) userlist.getYhid());
-		mv.addObject("list",list);
+		mv.addObject("jllist",list);
 		mv.setViewName("/WEB-INF/user/personal_jl");
 		return mv;
 	}

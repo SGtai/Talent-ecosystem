@@ -160,6 +160,12 @@
 							${yulan[0].yhname}
 							</c:if>
 						</div>
+						<div class="nametxt1"></div>
+						<div class="nametxt1">最高 学历：
+							<c:if test="${yulan[0].yhname != null}">
+								${yulan[0].xl}
+							</c:if>
+						</div>
 						<div class="clear"></div>
 					</div>
 					<div class="clear"></div>
