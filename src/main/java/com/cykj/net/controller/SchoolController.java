@@ -29,10 +29,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
+import java.util.*;
 
 import static com.cykj.net.javabean.S1.*;
 
@@ -136,8 +135,10 @@ public class SchoolController
 			schoolinfo.setRegTime(new Timestamp(System.currentTimeMillis()));
 			//插入图片路径
 			String path= ResourceUtils.getURL("classpath:").getPath()+"static/schoolS/cunchu";
+			System.out.println("path="+path);
 			//判断logo目录的是否存在
 			File pathlogo=new File(path+"\\"+"logo");
+			System.out.println("pathlogo="+pathlogo);
 			if(!pathlogo.exists()){
 				pathlogo.mkdir();
 			}
@@ -406,12 +407,40 @@ public class SchoolController
 
 	@RequestMapping("/daoru")
 	@ResponseBody
-	public String daoru(HttpServletRequest request,@RequestParam("file") MultipartFile file) throws IOException
+	public Map<String,Object> daoru(HttpServletRequest request,@RequestParam("file") MultipartFile file) throws IOException
 	{
 		System.out.println("开始导入数据");
-		String fileName = file.getOriginalFilename();
 
 		Admin admin= (Admin) request.getSession().getAttribute("admin");
+
+		System.out.println("文件大小为"+file .getSize());
+
+		String filename = file.getOriginalFilename();
+		Map map=new HashMap<String,Object>();
+
+		if(checkFile(file)==false){
+			//文件不存在或者格式错误
+			System.out.println("文件不存在或者格式错误");
+			map.put("msg","fail1");
+			return map;
+		}
+
+
+		if(file .getSize()>10*1024*1024){
+			//上传文件超过10M
+			System.out.println("上传文件超过10M");
+			map.put("msg","fail2");
+			return map;
+		}
+
+		if(checkFileexcel(file)==false){
+			//上传文件不是xsl文件
+			System.out.println("上传文件不是xsl文件");
+			map.put("msg","fail3");
+			return map;
+		}
+
+
 
 		//获取excel文件的io流
 		InputStream is = file.getInputStream();
@@ -445,11 +474,11 @@ public class SchoolController
 				userlist.setTuijianren(admin.getAccount());
 				//插入管理员表
 				Admin a=new Admin();
-				admin.setAccount(userlist.getAccount());
-				admin.setPassword(userlist.getPassword());
-				admin.setRegistertime(userlist.getRegTime());
-				admin.setName(userlist.getName());
-				adminService.regAdmin(admin);
+				a.setAccount(userlist.getAccount());
+				a.setPassword(userlist.getPassword());
+				a.setRegistertime(userlist.getRegTime());
+				a.setName(userlist.getName());
+				adminService.regAdmin(a);
 
 				//插入管理角色表
 				Adminrole adminrole=new Adminrole();
@@ -457,14 +486,15 @@ public class SchoolController
 				adminrole.setRoid(5);
 				adminroleService.regAdminRole(adminrole);
 
-				int i=schoolService.inseruserinfo(userlist);
-				if(i>0){
+				int k=schoolService.inseruserinfo(userlist);
+				if(k>0){
 					System.out.println("用户插入一条成功");
 				}
 			}
 
 		}
-		return "ok";
+		map.put("msg","ok");
+		return map;
 	}
 
 
@@ -473,17 +503,20 @@ public class SchoolController
 	 * @param file
 	 * @throws IOException
 	 */
-	public static void checkFile(MultipartFile file) throws IOException {
+	public static boolean checkFile(MultipartFile file) throws IOException {
 		//判断文件是否存在
 		if (null == file) {
 			System.err.println("文件不存在！");
+			return false;
 		}
 		//获得文件名
 		String fileName = file.getOriginalFilename();
 		//判断文件是否是excel文件
 		if (!fileName.endsWith("xls") && !fileName.endsWith("xlsx")) {
 			System.err.println("不是excel文件");
+			return false;
 		}
+		return  true;
 	}
 
 
@@ -492,26 +525,15 @@ public class SchoolController
 	 * @param file
 	 * @return
 	 */
-	public static Workbook getWorkBook(MultipartFile file) {
+	public static boolean checkFileexcel(MultipartFile file) {
 		//获得文件名
 		String fileName = file.getOriginalFilename();
-		//创建Workbook工作薄对象，表示整个excel
-		Workbook workbook = null;
-		try {
-			//获取excel文件的io流
-			InputStream is = file.getInputStream();
-			//根据文件后缀名不同(xls和xlsx)获得不同的Workbook实现类对象
+			//根据文件后缀名不同(xls)
 			if (fileName.endsWith("xls")) {
-				//2003
-				workbook = new HSSFWorkbook(is);
-			} else if (fileName.endsWith("xlsx")) {
-				//2007 及2007以上
-				workbook = new XSSFWorkbook(is);
+			return true;
 			}
-		} catch (IOException e) {
-			e.getMessage();
-		}
-		return workbook;
+
+		return false;
 	}
 
 	/**
@@ -520,16 +542,24 @@ public class SchoolController
 	 * @return
 	 */
 	public static String formatCell(HSSFCell hssfCell){
-		if(hssfCell==null){
-			return "";
+		String value = "";
+		if (hssfCell != null) {
+			switch (hssfCell.getCellType()) {
+				case HSSFCell.CELL_TYPE_FORMULA:
+					break;
+				case HSSFCell.CELL_TYPE_NUMERIC:
+					DecimalFormat df = new DecimalFormat("0");
+					value = df.format(hssfCell.getNumericCellValue());
+					break;
+				case HSSFCell.CELL_TYPE_STRING:
+					value = hssfCell.getStringCellValue().trim();
+					break;
+				default:
+					value = "";
+					break;
+			}
 		}
-		if(hssfCell.getCellType()==HSSFCell.CELL_TYPE_BOOLEAN){
-			return String.valueOf(hssfCell.getStringCellValue());
-		}else if(hssfCell.getCellType()==HSSFCell.CELL_TYPE_NUMERIC){
-			return String.valueOf(hssfCell.getStringCellValue());
-		}else{
-			return String.valueOf(hssfCell.getStringCellValue());
-		}
+		return value.trim();
 	}
 
 

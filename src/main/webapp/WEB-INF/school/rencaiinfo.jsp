@@ -52,9 +52,14 @@
 			<div class="layui-form-item">
 				<div class="layui-inline" style="margin-left: 3%">
 					<label class="layui-form-label">请选择范围</label>
-					<div class="layui-input-inline">
-						<input class="layui-input" id="test16" type="text" placeholder="开始 到 结束">
-					</div>
+						<div class="layui-input-inline">
+							<input type="text" name="start_time" class="layui-input" id="start_time"
+							       placeholder="开始时间">
+						</div>
+						<div class="layui-input-inline">
+							<input type="text" name="end_time" class="layui-input" id="end_time"
+							       placeholder="结束时间">
+						</div>
 				</div>
 				<div class="layui-inline">
 					<button style="margin-left: 5%" class="layui-btn layui-btn-normal layui-btn-radius" id="query_pa" type="button">搜索</button>
@@ -125,11 +130,11 @@
 				</tr>
 				</thead>
 				<tbody id="ex">
-					<tr>
-						<td>无</td>
-						<td>无</td>
-						<td>无</td>
-					</tr>
+				<tr>
+					<td>无</td>
+					<td>无</td>
+					<td>无</td>
+				</tr>
 				</tbody>
 			</table>
 		</div>
@@ -168,11 +173,10 @@
 			</div>
 		</div>
 	</div>
-<%--	人才批量导入面板--%>
-	<form action="">
+	<%--	人才批量导入面板--%>
 	<div id="daorumb" style="display: none ; padding: 10px;margin-left: 10%">
 		<div class="layui-form-item">
-			<label class="layui-form-label" style="margin-left: 15%">模板下载</label>
+			<label class="layui-form-label">模板下载</label>
 			<div class="layui-inline">
 				<button style="margin-left: 5%" class="layui-btn layui-btn-normal layui-btn-radius" onclick="downloadTemp()">下载模板</button>
 			</div>
@@ -181,7 +185,7 @@
 			<label class="layui-form-label" style="margin-left: 0%">批量上传</label>
 			<div class="layui-inline">
 				<input class="layui-upload-file" type="file" accept="" name="file" readonly>
-				<button type="button" class="layui-btn" id="test2" style="margin-left: 0%; margin-top: -0%">
+				<button type="button" class="layui-btn layui-btn-normal layui-btn-radius" id="test2" style="margin-left: 0%; margin-top: -0%">
 					<i class="layui-icon">&#xe67c;</i>选择文件
 				</button>
 			</div>
@@ -194,16 +198,7 @@
 				<button type="button" class="layui-btn" style="position: absolute;visibility: hidden" id="btn">修改</button>
 			</div>
 		</div>
-		<div>
-			<div class="layui-inline" style="margin-left: 19%">
-				<button type="button" class="layui-btn"  id="baocun">提交</button>
-			</div>
-			<div class="layui-inline" style="margin-left: 15%">
-				<button type="button" class="layui-btn"  id="fanhui">返回</button>
-			</div>
-		</div>
 	</div>
-		</form>
 	<script>
 		layui.use(['form','layer','jquery','table','laydate','upload'], function() {
 			var table = layui.table;
@@ -212,7 +207,8 @@
 			var layer = layui.layer;
 			var laydate = layui.laydate;
 			var upload = layui.upload;
-			var times = "";
+			var nowTime = new Date().valueOf();
+			var max = null;
 			//上传文件
 			upload.render({
 				elem: '#test2' //绑定元素
@@ -221,6 +217,7 @@
 				, auto: false  //取消自动上传，并指定提交按钮进行上传
 				, bindAction: '#btn' //这个绑定id为btn的按钮触发这个提交
 				, accept: 'file' //允许上传的文件类型
+				,exts:'xls|xlsx'
 				, before: function (obj) { //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
 					this.data = {
 
@@ -232,8 +229,14 @@
 						$("#filename").val(file.name);
 					})
 				}
-				, done: function (msg) {
-					if(msg=="ok"){
+				, done: function (json) {
+					if(json.msg=="fail1"){
+						alert("文件不存在或者格式错误");
+					}else if(json.msg=="fail2"){
+						alert("上传文件超过10M")
+					}else if(json.msg=="fail3"){
+						alert("上传文件不是xsl文件");
+					}else {
 						alert("上传成功");
 					}
 				}
@@ -242,13 +245,28 @@
 				}
 			});
 			//日期显示
-			laydate.render({
-				elem: '#test16'
-				, type: 'datetime'
-				, range: 'to'
-				, format: 'yyyy-MM-dd'
-				, done: function (value, date) {
-					times = value;
+			var start = laydate.render({
+				elem: '#start_time',
+				type: 'datetime',
+				max: nowTime,
+				btns: ['clear', 'confirm'],
+				done: function(value, date){
+					endMax = end.config.max;
+					end.config.min = date;
+					end.config.min.month = date.month -1;
+				}
+			});
+			var end = laydate.render({
+				elem: '#end_time',
+				type: 'datetime',
+				max: nowTime,
+				done: function(value, date){
+					if($.trim(value) == ''){
+						var curDate = new Date();
+						date = {'date': curDate.getDate(), 'month': curDate.getMonth()+1, 'year': curDate.getFullYear()};
+					}
+					start.config.max = date;
+					start.config.max.month = date.month -1;
 				}
 			});
 			//表格
@@ -280,6 +298,7 @@
 			});
 			//搜索
 			$("#query_pa").click(function () {
+				var times=$("#start_time").val()+"to"+$("#end_time").val();
 				table.reload('UserTable',{
 					url:'/school/rencaiinfoquery'
 					,where: { //设定异步数据接口的额外参数，任意设
@@ -327,9 +346,9 @@
 								$("#ex").append("<tr><td>无</td><td>无</td><td>无</td></tr>");
 							}
 							if(arr.undergos.length!=0){
-									for (var i = 0; i < arr.undergos.length; i++) {
-										$("#gz").append("<tr><td>"+arr.undergos[i].ksTime+"</td><td>"+arr.undergos[i].jzUnit+"</td><td>"+arr.undergos[i].zwPosition+"</td></tr>");
-									}
+								for (var i = 0; i < arr.undergos.length; i++) {
+									$("#gz").append("<tr><td>"+arr.undergos[i].ksTime+"</td><td>"+arr.undergos[i].jzUnit+"</td><td>"+arr.undergos[i].zwPosition+"</td></tr>");
+								}
 							}else{
 								$("#gz").append("<tr><td>无</td><td>无</td><td>无</td></tr>");
 							}
@@ -389,7 +408,7 @@
 
 					skin:'layui-layer-molv',// skin - 样式类名
 
-					area:['450px','250px'],// area - 宽高
+					area:['700px','200px'],// area - 宽高
 
 					offset:'auto',// offset - 坐标
 
@@ -422,7 +441,8 @@
 	<script>
 
 		function downloadTemp(){
-			window.open("/schoolS/cunchu/简历模板.xls");
+			window.location="/schoolS/cunchu/简历模板.xls";
+			// window.open("/schoolS/cunchu/简历模板.xls");
 			// $.ajax(
 			// 	{
 			// 		type:"POST",
@@ -439,9 +459,17 @@
 		}
 		$('#bb').click(
 			function () {
-				var a = document.getElementById("btn");
-				a.click();
+				var f=$("#filename").val();
+				if (f!=null&&f!="") {
+					var a = document.getElementById("btn");
+					a.click();
+				}else{
+					alert("您还未选择要提交的excel文件");
+				}
 			});
+		$('#query_shuaxin').click(function () {
+			$(".layui-laypage-btn")[0].click();
+		});
 	</script>
 
 
