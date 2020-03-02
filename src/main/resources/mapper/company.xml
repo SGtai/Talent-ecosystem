@@ -96,4 +96,77 @@
         delete from jobinfo where zpxxid=#{zpxxid}
     </delete>
 
+	<select id="searchResume"  resultType="com.cykj.net.javabean.Resume"
+	>
+select	* from (select E.*,F.postion from
+(select C.*,D.type from
+    (select A.byschool,A.scTime,A.yhname,A.xl,A.ycHide,B.*
+     from resume A,jobintension B where A.jlId=B.jlid ) C
+        left join position D on C.poid=D.poid) E
+left join  station F on E.gwid=F.stid) H
+	<where>
+		   ycHide=0
+		<if test="type!=null and type!='' and type!='请选择行业'">
+			and type=#{type}
+		</if>
+		<if test="postion!=null and postion!='' and postion!='请选择岗位'">
+			and postion='${postion}'
+		</if>
+
+	</where>
+
+	</select>
+
+    <select id="searchResumeCompany"  resultType="com.cykj.net.javabean.Resume"
+    >
+        SELECT * from position A,
+        (SELECT * FROM station A,
+        (select A.*,B.cxrzId,B.ckTime,B.zpxxid,B.paid,C.zwid from resume A,(select * from query where qyId=#{qyId} and paid =#{paid}) B,jobinfo C
+        WHERE A.jlId=B.jlId and B.zpxxid=C.zpxxid) B
+        WHERE A.stid=B.zwid) B
+        <where>
+            <if test="qyId!=null and qyId!=''">
+                A.poid=B.poid
+            </if>
+            <if test="type!=null and type!='' and type!='请选择行业'">
+                and type=#{type}
+            </if>
+            <if test="postion!=null and postion!='' and postion!='请选择岗位'">
+                and postion='${postion}'
+            </if>
+        </where>
+
+    </select>
+
+	<!--    投递公司后的邀请面试-->
+	<update id="updateQuery" parameterType="com.cykj.net.javabean.Query">
+        update query set ckTime=#{ckTime},paid=#{paid} where cxrzId=#{cxrzId}
+    </update>
+	<!--    查询简历日志表-->
+	<select id="selectQuery" parameterType="com.cykj.net.javabean.Query" resultType="com.cykj.net.javabean.Query">
+        select * from query where jlId=#{jlId} and qyId=#{qyId}
+    </select>
+
+	<!--插入日志表-->
+	<insert id="insertQuery" parameterType="com.cykj.net.javabean.Query" keyProperty="cxrzId" useGeneratedKeys="true">
+		insert into query (jlId, qyId, ckTime, paid)
+		values (#{jlId},#{qyId},#{ckTime},#{paid})
+	</insert>
+
+	<select id="feedbackQuery" parameterType="com.cykj.net.javabean.Resume" resultType="com.cykj.net.javabean.Resume">
+	SELECT * FROM resume A,
+    (SELECT * FROM query WHERE qyId=#{qyId} AND paid>11) B
+		<where>
+			A.jlId=B.jlId
+			<if test="paid!=0">
+				and paid=#{paid}
+			</if>
+		</where>
+	</select>
+
+	<!--    应聘修改状态-->
+	<update id="yingpin" parameterType="com.cykj.net.javabean.Query">
+        update query set paid=14 where cxrzId=#{cxrzId}
+    </update>
+
 </mapper>

@@ -480,7 +480,6 @@
 						dataType:"json",
 						data:{zpxxid:data.zpxxid,qyid:qyid},
 						success:function (msg) {
-
                             //打开查看页面
 							var index=layer.open({
                                 type: 1,
