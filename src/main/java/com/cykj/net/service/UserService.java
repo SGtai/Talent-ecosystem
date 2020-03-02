@@ -1,10 +1,11 @@
 package com.cykj.net.service;
 
-import com.cykj.net.javabean.Userlist;
+import com.cykj.net.javabean.*;
 import com.cykj.net.mapper.UserDao;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class UserService
@@ -20,5 +21,53 @@ public class UserService
 	public int reg(String phone,String password){
 		int num = userDao.reg(phone,password);
 		return num;
+	}
+	public int gerenInfo(Userlist userlist){
+		int gerenInfo = userDao.gerenInfo(userlist);
+		return gerenInfo;
+	}
+	public void addbasejl(Resume resume){
+		userDao.addbasejl(resume);
+	}
+	public void addJobIntension(Jobintension jobintension){
+		userDao.addJobIntension(jobintension);
+	}
+	public void addexperience(Experience experience){
+		userDao.addexperience(experience);
+	}
+	public void addundergo(Undergo undergo){
+		userDao.addundergo(undergo);
+	}
+	public int userInfojl(Resume resume){
+		int num = userDao.userInfojl(resume);
+		return num;
+	}
+	public int yixiang(Jobintension jobintension){
+		int num = userDao.yixiang(jobintension);
+		return num;
+	}
+	public int jiaoyu(Experience experience){
+		int num = userDao.jiaoyu(experience);
+		return num;
+	}
+	public int gongzuo(Undergo undergo){
+		int num = userDao.gongzuo(undergo);
+		return num;
+	}
+	public int zhengshu(Resume resume){
+		int num = userDao.zhengshu(resume);
+		return num;
+	}
+	public int pingjia(Resume resume){
+		int num = userDao.pingjia(resume);
+		return num;
+	}
+	public List<Jianli> yulanxml(int jlid){
+		List<Jianli> jianli = userDao.yulanxml(jlid);
+		return jianli;
+	}
+	public List<Resume> jliList(int yhId){
+		List<Resume> list = userDao.jliList(yhId);
+		return list;
 	}
 }

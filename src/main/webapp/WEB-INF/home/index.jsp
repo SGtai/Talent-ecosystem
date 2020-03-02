@@ -189,7 +189,7 @@
 								<P style="margin-top: 46px;font-size: 20px;">欢迎您，用户${sessionScope.user.phone}</P>
 							</div>
 							<div class="qybox0">
-								<a href="javascript:void(0)">个人中心</a>
+								<a href="/jump/user/personal">个人中心</a>
 								<a href="javascript:tuichu()">退出</a>
 							</div>
 						</div>

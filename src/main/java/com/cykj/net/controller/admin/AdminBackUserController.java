@@ -29,8 +29,6 @@ public class AdminBackUserController {
     private AdminDao adminDao;
     @Autowired
     private AdminRoleDao adminRoleDao;
-//    @Autowired
-//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     /**
@@ -43,8 +41,9 @@ public class AdminBackUserController {
      * @return
      */
     @RequestMapping(value = "/table/backUser")
+    @Log(type = "查询操作",event = "查询后台用户")
     public @ResponseBody
-    LayuiData backUser(String account, String name, int limit, int page) {
+    LayuiData backUserLog(String account, String name, int limit, int page) {
         LayuiData layuiData = new LayuiData();
         if (null == account || "".equals(account)) {
             account = null;

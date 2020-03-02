@@ -15,10 +15,10 @@ public class AdminFrontUserController {
 
     @Autowired
     private AdminFrontUserService adminFrontUserService;
-
+    @Log(type = "查询操作",event = "查询前台用户")
     @RequestMapping(value = "/table/frontUser")
     public @ResponseBody
-    LayuiData frontUser(String phone, String name, int limit, int page) {
+    LayuiData frontUserLog(String phone, String name, int limit, int page) {
 
         return adminFrontUserService.frontUser(phone,name,limit,page);
     }

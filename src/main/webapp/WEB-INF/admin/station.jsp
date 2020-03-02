@@ -291,7 +291,7 @@
                                 type: "POST",
                                 url: "/adminStation/updateStation",
                                 dataType: "text",
-                                data: {poid: op, station: us, initStation: data.station},
+                                data: {id:data.poid,poid: op, station: us, initStation: data.station},
                                 success: function (msg) {
 
                                     if (msg === 'true') {
