@@ -373,38 +373,38 @@ public class SchoolController
 		gsonbean(t,response);
 	}
 
-	/**
-	 * 下载模板
-	 * @return
-	 * @throws IOException
-	 */
-	@RequestMapping("/xiazaimoban")
-	@ResponseBody
-	public String xiazaimoban() throws IOException
-	{
-		//new一个工作本
-		Workbook wb=new HSSFWorkbook();
-		//创建sheet页
-		Sheet sheet1=wb.createSheet("第一个sheet页");
-		//创建一个行
-		Row row=sheet1.createRow(0);
-		//给单元格赋值，列
-		row.createCell(0).setCellValue("账号");
-		row.createCell(1).setCellValue("密码");
-		row.createCell(2).setCellValue("姓名");
-		row.createCell(3).setCellValue("电话");
-		row.createCell(4).setCellValue("性别");
-		row.createCell(5).setCellValue("最高学历");
-		row.createCell(6).setCellValue("证件号");
-		row.createCell(7).setCellValue("证件类型");
-		row.createCell(8).setCellValue("出生日期");
-		FileOutputStream fileOut=new FileOutputStream("C:\\简历模板.xls");
-		//打印流
-		wb.write(fileOut);
-		//关闭流
-		fileOut.close();
-		return "ok";
-	}
+//	/**
+//	 * 下载模板
+//	 * @return
+//	 * @throws IOException
+//	 */
+//	@RequestMapping("/xiazaimoban")
+//	@ResponseBody
+//	public String xiazaimoban() throws IOException
+//	{
+//		//new一个工作本
+//		Workbook wb=new HSSFWorkbook();
+//		//创建sheet页
+//		Sheet sheet1=wb.createSheet("第一个sheet页");
+//		//创建一个行
+//		Row row=sheet1.createRow(0);
+//		//给单元格赋值，列
+//		row.createCell(0).setCellValue("账号");
+//		row.createCell(1).setCellValue("密码");
+//		row.createCell(2).setCellValue("姓名");
+//		row.createCell(3).setCellValue("电话");
+//		row.createCell(4).setCellValue("性别");
+//		row.createCell(5).setCellValue("最高学历");
+//		row.createCell(6).setCellValue("证件号");
+//		row.createCell(7).setCellValue("证件类型");
+//		row.createCell(8).setCellValue("出生日期");
+//		FileOutputStream fileOut=new FileOutputStream("C:\\简历模板.xls");
+//		//打印流
+//		wb.write(fileOut);
+//		//关闭流
+//		fileOut.close();
+//		return "ok";
+//	}
 
 	@RequestMapping("/daoru")
 	@ResponseBody
@@ -563,6 +563,11 @@ public class SchoolController
 		return value.trim();
 	}
 
+	/**
+	 * 跳转到推荐人才页面
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/tjrencai")
 	@ResponseBody
 	public ModelAndView turntjrc(HttpServletRequest request){
@@ -574,6 +579,26 @@ public class SchoolController
 		return mv;
 	}
 
+	/**
+	 * 分页查询人才信息
+	 *
+	 */
+	@RequestMapping("/tjrcquery")
+	public void tjrcquery(HttpServletRequest request,HttpServletResponse response,String position,String type,String page,String limit)throws Exception{
+		utf8(request,response);
+		int page1 = Integer.valueOf(page);
+		int limit1=Integer.valueOf(limit);
+		RowBounds rowBounds = new RowBounds(page1-1, limit1);
+		int count=schoolService.fenyecount2(position,type);
+		System.out.println(count);
+		List<J1> list=schoolService.fenyeshuju2(position,type,rowBounds);
+		Table t=new Table();
+		t.setCode(0);
+		t.setCount(count);
+		t.setMsg("");
+		t.setData(list);
+		gsonbean(t,response);
+	}
 
 
 

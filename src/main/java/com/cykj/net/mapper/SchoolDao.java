@@ -45,6 +45,7 @@ public interface SchoolDao
 	public int updateSchoolinfo(S1 schoolinfo);
 
 	/**
+	 * 查看人才信息
 	 * 分页信息页数
 	 * @param account
 	 * @param username
@@ -57,6 +58,7 @@ public interface SchoolDao
 
 
 	/**
+	 * 查看人才信息
 	 * 分页查询
 	 * @param account
 	 * @param username
@@ -70,13 +72,13 @@ public interface SchoolDao
 
 	/**
 	 * 查找教育经历
-	 * @param jlid
+	 * @param account
 	 * @return
 	 */
 	public List<Experience> findexperience(@Param("account") String account);
 	/**
 	 * 查找工作经历
-	 * @param jlid
+	 * @param account
 	 * @return
 	 */
 	public List<Undergo> findegzjl(@Param("account") String account);
@@ -99,4 +101,21 @@ public interface SchoolDao
 	 * @return
 	 */
 	public int inseruserinfo(Userlist userlist);
+
+	/**
+	 * 分页查询发布信息
+	 * @param position
+	 * @param type
+	 * @return
+	 */
+	public int fenyecount2(@Param("position") String position,@Param("type") String type);
+
+	/**
+	 * 查询发布信息
+	 * @param position
+	 * @param type
+	 * @param rowBounds
+	 * @return
+	 */
+	public List<J1> fenyeshuju2(@Param("position") String position, @Param("type") String type, RowBounds rowBounds);
 }
