@@ -177,56 +177,89 @@
 
 <%--	个人简历修改--%>
 	<div id="mydiv1" style="display: none ; padding: 10px;margin-left: 10%">
+		<form class="layui-form">
+			<div>
+				<h1 align="center" style="margin-left: -15%">修改简历信息</h1>
+				<h3 style="color: red;margin-left: -10%" >提示:方框打勾默认可编辑可提交修改，不打勾默认不修改</h3>
+			</div>
 		<div class="layui-form-item" style="margin-left: -15%">
 			<label class="layui-form-label">姓名</label>
 			<div class="layui-input-inline">
 				<input type="text" id="usename"  autocomplete="off" class="layui-input" >
+				<input type="hidden" id="usename1"  autocomplete="off" class="layui-input" hidden >
 			</div>
-			<label class="layui-form-label">学校名称</label>
-			<div class="layui-input-inline">
-				<input type="text" id="school"  autocomplete="off" class="layui-input" >
+			<div class="layui-form-mid layui-word-aux" style="margin-top: -1%">
+				<input type="checkbox" id="a1" lay-filter="a1" checked class="layui-icon-radio">
 			</div>
-		</div>
-		<div class="layui-form-item" style="margin-left: -15%">
 			<label class="layui-form-label">出生年月</label>
 			<div class="layui-input-inline">
 				<input type="text" id="birth"  autocomplete="off" class="layui-input" >
+				<input type="hidden" id="birth1"  autocomplete="off" class="layui-input" hidden >
+			</div>
+			<div class="layui-form-mid layui-word-aux" style="margin-top: -1%">
+				<input type="checkbox" id="a2" lay-filter="a2" checked class="layui-icon-radio">
+			</div>
+
+		</div>
+		<div class="layui-form-item" style="margin-left: -15%">
+			<label class="layui-form-label">住址</label>
+			<div class="layui-input-inline">
+				<input type="text" id="address"  autocomplete="off" class="layui-input">
+				<input type="hidden" id="address1"  autocomplete="off" class="layui-input" hidden >
+			</div>
+			<div class="layui-form-mid layui-word-aux" style="margin-top: -1%">
+				<input type="checkbox" id="a3" lay-filter="a3" checked class="layui-icon-radio">
 			</div>
 			<label class="layui-form-label">专业</label>
 			<div class="layui-input-inline">
 				<input type="text" id="zhuanye"  autocomplete="off" class="layui-input" >
+				<input type="hidden" id="zhuanye1"  autocomplete="off" class="layui-input" hidden >
+			</div>
+			<div class="layui-form-mid layui-word-aux" style="margin-top: -1%">
+				<input type="checkbox" id="a4" lay-filter="a4" checked class="layui-icon-radio">
 			</div>
 		</div>
 		<div class="layui-form-item" style="margin-left: -15%">
 			<label class="layui-form-label">政治面貌</label>
 			<div class="layui-input-inline">
 				<input type="text" id="mm"  autocomplete="off" class="layui-input" >
+				<input type="hidden" id="mm1"  autocomplete="off" class="layui-input" hidden >
+			</div>
+			<div class="layui-form-mid layui-word-aux" style="margin-top: -1%;">
+				<input type="checkbox" id="a5" lay-filter="a5" checked class="layui-icon-radio">
 			</div>
 			<label class="layui-form-label">学历</label>
 			<div class="layui-input-inline">
 				<input type="text" id="xl"  autocomplete="off" class="layui-input" >
+				<input type="hidden" id="xl1"  autocomplete="off" class="layui-input" hidden >
+			</div>
+			<div class="layui-form-mid layui-word-aux" style="margin-top: -1%">
+				<input type="checkbox" id="a6" lay-filter="a6" checked class="layui-icon-radio">
 			</div>
 		</div>
-		<div class="layui-form-item" style="margin-left: -15%">
-			<label class="layui-form-label">住址</label>
-			<div class="layui-input-inline">
-				<input type="text" id="address"  autocomplete="off" class="layui-input">
-			</div>
-		</div>
+
 		<img  src="\schoolS\cunchu\logo\555555\jmgz.jpg" alt="" style="width: 20%;height: 20%;margin-left: 70%;margin-top: -30%">
 		<div class="layui-form-item" style="margin-left: -15%">
 			<label class="layui-form-label">技能证书</label>
 			<div class="layui-input-inline" style="width: 79%;">
-				<textarea name="scdata" id="jn" class="layui-textarea" placeholder="请输入内容" maxlength="240" disabled></textarea>
+				<textarea name="scdata" id="jn" class="layui-textarea" placeholder="请输入内容" maxlength="240"></textarea>
+				<input type="hidden" id="jn1"  autocomplete="off" class="layui-input" hidden >
+			</div>
+			<div class="layui-form-mid layui-word-aux" style="margin-top: 2%;margin-left: 0%">
+				<input type="checkbox" id="a7" lay-filter="a7" checked class="layui-icon-radio">
 			</div>
 		</div>
 		<div class="layui-form-item" style="margin-left: -15%">
 			<label class="layui-form-label">自我评价</label>
 			<div class="layui-input-inline" style="width: 79%;">
-				<textarea name="scdata" id="pp" class="layui-textarea" placeholder="请输入内容" maxlength="240" disabled></textarea>
+				<textarea name="scdata" id="pp" class="layui-textarea" placeholder="请输入内容" maxlength="240"></textarea>
+				<input type="hidden" id="pp1"  autocomplete="off" class="layui-input" >
+			</div>
+			<div class="layui-form-mid layui-word-aux" style="margin-top: 2%;margin-left: 0%">
+				<input type="checkbox" id="a8" lay-filter="a8" checked class="layui-icon-radio">
 			</div>
 		</div>
-
+		</form>
 	</div>
 	<%--	人才批量导入面板--%>
 	<div id="daorumb" style="display: none ; padding: 10px;margin-left: 10%">
@@ -395,7 +428,6 @@
 				$("#hide10").val(data.pjEvaluation);
 
 				$("#usename").val(data.name);
-				$("#school").val(data.byschool);
 				$("#birth").val(data.birthday);
 				$("#zhuanye").val(data.zy);
 				$("#mm").val(data.mmFace);
@@ -403,6 +435,15 @@
 				$("#address").val(data.jzdResidence);
 				$("#jn").val(data.zsCertificate);
 				$("#pp").val(data.pjEvaluation);
+
+				$("#usename1").val(data.name);
+				$("#birth1").val(data.birthday);
+				$("#zhuanye1").val(data.zy);
+				$("#mm1").val(data.mmFace);
+				$("#xl1").val(data.xl);
+				$("#address1").val(data.jzdResidence);
+				$("#jn1").val(data.zsCertificate);
+				$("#pp1").val(data.pjEvaluation);
 				$.ajax(
 					{
 						type:"POST",
@@ -496,7 +537,6 @@
 
 						btnAlign: 'c',//按钮居中对齐
 
-						shadeClose:true,
 						// time:5000,//time - 自动关闭所需毫秒
 
 						anim:5,//anim - 弹出动画 渐显
@@ -505,7 +545,7 @@
 
 						maxmin:false, //是否显示最大化和最小化的按钮 对type=1 type=2有效
 
-						btn: ['修改'],
+						btn: ['修改','关闭'],
 						btn1: function(){
 							layer.confirm('确认修改该生信息吗?', {
 									btn: ['是', '否'], btn1: function (index) {
@@ -620,7 +660,79 @@
 			$(".layui-laypage-btn")[0].click();
 		});
 	</script>
+	<script>
+		layui.use(['form'], function () {
+			var $ = layui.$; //Jquery,
+			var form = layui.form;//表单
+			form.on('checkbox(a1)', function(data){
+				if (data.elem.checked) {
+					$("#usename").attr("disabled", false )
+				}else {
+					$("#usename").val($("#usename1").val());
+					$("#usename").attr("disabled", "disabled" )
+				}
+			});
+			form.on('checkbox(a2)', function(data){
+				if (data.elem.checked) {
+					$("#birth").attr("disabled", false )
+				}else {
+					$("#birth").val($("#birth1").val());
+					$("#birth").attr("disabled", "disabled" )
+				}
 
+			});
+			form.on('checkbox(a3)', function(data){
+				if (data.elem.checked) {
+					$("#address").attr("disabled", false )
+				}else {
+					$("#address").val($("#address1").val());
+					$("#address").attr("disabled", "disabled" )
+				}
+			});
+			form.on('checkbox(a4)', function(data){
+				if (data.elem.checked) {
+					$("#zhuanye").attr("disabled", false )
+				}else {
+					$("#zhuanye").val($("#zhuanye1").val());
+					$("#zhuanye").attr("disabled", "disabled" )
+				}
+			});
+			form.on('checkbox(a5)', function(data){
+				if (data.elem.checked) {
+					$("#mm").attr("disabled", false )
+				}else {
+					$("#mm").val($("#mm1").val());
+					$("#mm").attr("disabled", "disabled" )
+				}
+			});
+			form.on('checkbox(a6)', function(data){
+				if (data.elem.checked) {
+					$("#xl").attr("disabled", false )
+				}else {
+					$("#xl").val($("#xl1").val());
+					$("#xl").attr("disabled", "disabled" )
+				}
+			});
+			form.on('checkbox(a7)', function(data){
+				if (data.elem.checked) {
+					$("#jn").attr("disabled", false )
+				}else {
+					$("#jn").val($("#jn1").val());
+					$("#jn").attr("disabled", "disabled" )
+				}
+			});
+			form.on('checkbox(a8)', function(data){
+				if (data.elem.checked) {
+					$("#pp").attr("disabled", false )
+				}else {
+					$("#pp").val($("#pp1").val());
+					$("#pp").attr("disabled", "disabled" )
+				}
+			});
+		});
+
+
+	</script>
 
 
 

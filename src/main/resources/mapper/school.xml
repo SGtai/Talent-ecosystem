@@ -120,14 +120,14 @@
         (#{account},#{password},#{name},#{phone},#{sex},#{degree},#{idCard},#{idCardType},#{birthday},#{regTime},#{picture},#{state},#{tuijianren})
     </insert>
 <!--    修改用户表-->
-    <update  id="updateuserinfo" parameterType="Userlist">
+    <update  id="updateuser" parameterType="J1">
         UPDATE userlist
         <trim prefix="set" suffixOverrides="," suffix=" where scAccount = #{scAccount} ">
-            <if test="phone!=null and phone.length>0">
-                phone=#{phone},
+            <if test="name!=null and name.length>0">
+                name=#{name},
             </if>
-            <if test="password!=null and password.length>0">
-                password=#{password},
+            <if test="birthday!=null and birthday.length>0">
+                birthday=#{birthday},
             </if>
             <if test="name!=null and name.length>0">
                 name=#{name},
