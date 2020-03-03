@@ -36,7 +36,7 @@
 						<ul>
 							<li><a href="/jump/user/personal_updatepsd">修改密码</a></li>
 							<li><a href="/jump/user/personal_updatenum">修改手机</a></li>
-							<li><a href="/jump/user/index">退出</a></li>
+							<li><a href="javascript:void(0)" onclick="tuichu2()">退出</a></li>
 						</ul>
 					</div>
 				</div>
@@ -46,25 +46,12 @@
 </div>
 <div class="navTop">
 	<div class="navTopmain">
-		<div class="logo"><a href="index.html"><img src="<%=imagesPath+"logo_1.png"%>"/><img src="<%=imagesPath+"logo_2.png"%>"/></a></div>
+		<div class="logo"><a href="/user/index"><img src="<%=imagesPath+"logo_1.png"%>"/><img src="<%=imagesPath+"logo_2.png"%>"/></a></div>
 		<div class="nav">
-			<div class="navItem"><a href="/jump/user/index">首页</a></div>
-			<div class="navItem"><a href="/jump/user/searchJob">职位搜索</a></div>
-			<div class="navItem"><a href=/jump/user/"meetingJob">招聘会</a></div>
-			<div class="navItem"><a href="">政府招考</a></div>
-			<div class="navItem"><a href="">校园招聘</a></div>
-			<div class="navItem other">
-				<div style="position:relative;">
-					<span>更多</span>
-					<div id="TopNavMorePopup">
-						<ul>
-							<li><a href="jobnews.html">就业资讯</a></li>
-							<li><a href="download.html">文档下载</a></li>
-							<li><a href="helpJob.html">求职互助</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
+			<div class="navItem"><a href="/user/index">首页</a></div>
+			<div class="navItem"><a href="/jump/home/searchJob">职位搜索</a></div>
+			<a href="/techa">人才成长区</a>
+
 		</div>
 	</div>
 </div>
@@ -76,13 +63,7 @@
 				<a href="/jump/user/personal" class="a1">会员首页</a>
 			</div>
 			<div class="NavLeftBox active">
-				<a href="/jump/user/personal_jl" class="a2">我的简历</a>
-			</div>
-			<div class="NavLeftBox">
-				<a href="/jump/user/personal_zwss" class="a3">职位搜索</a>
-			</div>
-			<div class="NavLeftBox">
-				<a href="/jump/user/personal_cai" class="a4">你的菜儿</a>
+				<a href="/user/gopersonaljl" class="a2">我的简历</a>
 			</div>
 			<div class="NavLeftBox twoNav">
 				<a class="a5">职位申请</a>
@@ -99,20 +80,14 @@
 			<ul>
 				<li><a href="/jump/user/personal_mainshi">面试通知</a></li>
 				<li><a href="/jump/user/personal_yaoqing">应聘邀请</a></li>
-				<li><a href="/jump/user/personal_whogz">谁在关注我</a></li>
-				<li><a href="/jump/user/personal_goutong">在线沟通记录</a></li>
 			</ul>
-			<div class="NavLeftBox">
-				<a href="/jump/user/personal_zhanghu" class="a7">账户管理</a>
-			</div>
 			<div class="NavLeftBox">
 				<a href="/jump/user/personal_help" class="a8">帮助中心</a>
 			</div>
 		</div>
 		<div class="navLeftBottom">
-			<span class="sys">扫一扫绑定微信</span><br />
 			<img src="<%=imagesPath+"showqrcode.jpg"%>" />
-			<span class="Notice">蝶飞人才网<br>找工作更靠谱</span>
+			<span class="Notice">菜鸟人才网<br>找工作更靠谱</span>
 		</div>
 	</div>
 	<div class="perRightcon layui-form">
@@ -745,7 +720,7 @@
 
 <div class="clear"></div>
 <div class="footer">
-	<p><a href="">**人才</a>旗下<img src="<%=imagesPath+"logo_foot.gif"%>" />蝶飞人才网版权所有 <a href="">京ICP证0******9号</a><a href=""></a>本网站所有招聘信息，未经书面授权不得转载 投诉电话：400-8**-****</p>
+	<p><a href="">菜鸟人才</a>旗下<img src="<%=imagesPath+"logo_foot.gif"%>" />菜鸟人才网版权所有 <a href="">闽ICP证0******9号</a><a href="#"></a>本网站所有招聘信息，未经书面授权不得转载 投诉电话：200-8**-****</p>
 </div>
 
 <script type="text/javascript" src=<%=path+"layui/jquery-3.4.1.js"%>></script>

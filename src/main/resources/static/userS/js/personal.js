@@ -201,7 +201,7 @@ function tuichu2() {
 	layui.use(['layer', 'jquery', 'form'], function () {
 		var layer = layui.layer;
 
-		layer.confirm('确定用户登录吗？', function (index) {
+		layer.confirm('确定退出用户登录吗？', function (index) {
 			window.location.href = "/user/tuichu2";
 			layer.close(index);
 		});
