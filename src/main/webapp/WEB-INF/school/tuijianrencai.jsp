@@ -122,7 +122,7 @@
 				,width:760
 				,limit:5
 				,limits:[5,10,15,20]
-				,url: '/school/tjrcquery' //数据接口
+				,url: '/school/rgxg' //数据接口
 				,page: true //开启分页
 				,even:true
 				,cols: [[ //表头
@@ -131,7 +131,7 @@
 					,{field: 'postion', title: '岗位', width:150,height:100}
 					,{field: 'time', title: '发布时间', width: 150,height:100}
 					,{field:'opera', width:150, title: '推荐',align:'center', toolbar: '#toolbar'}
-					,{field: 'zpxxid', title: '企业招聘的id', width: 150,height:100,style:'display:none;'}
+					,{field: 'zpxxid', title: '企业招聘的id', width: 150,height:100,hide:true}
 				]]
 				,id:'UserTable'
 			});
@@ -172,26 +172,25 @@
 				,page: true //开启分页
 				,even:true
 				,cols: [[ //表头
-					{field: 'account', title: '账号名', width:150,height:100}
+					{field: 'phone', title: '手机号', width:150,height:100}
 					,{field: 'name', title: '姓名', width:150,height:100}
 					,{field: 'zy', title: '专业', width:150,height:100}
 					,{field: 'jzstate', title: '就业情况', width: 150,height:100}
 					,{field:'opera', width:150, title: '是否推荐',align:'center', toolbar: '#toolbar1'}
-					,{field: 'mmFace', title: '政治面貌', width: 50,style:'display:none;'}
-					,{field: 'birthday', title: '出生日期', width: 50,style:'display:none;'}
-					,{field: 'phone', title: '电话', width: 50,style:'display:none;'}
-					,{field: 'byschool', title: '学校', width: 50,style:'display:none;'}
-					,{field: 'xl', title: '学历', width: 50,style:'display:none;'}
-					,{field: 'jzdResidence', title: '住址', width: 50,style:'display:none;'}
-					,{field: 'zsCertificate', title: '技能证书', width: 50,style:'display:none;'}
-					,{field: 'pjEvaluation', title: '自我评价', width: 50,style:'display:none;'}
+					,{field: 'mmFace', title: '政治面貌', width: 50,hide:true}
+					,{field: 'birthday', title: '出生日期', width: 50,hide:true}
+					,{field: 'byschool', title: '学校', width: 50,hide:true}
+					,{field: 'xl', title: '学历', width: 50,hide:true}
+					,{field: 'jzdResidence', title: '住址', width: 50,hide:true}
+					,{field: 'zsCertificate', title: '技能证书', width: 50,hide:true}
+					,{field: 'pjEvaluation', title: '自我评价', width: 50,hide:true}
 				]]
 				,id:'UserTable1'
 			});
 			//搜索1
 			$("#query_pa").click(function () {
 				table.reload('UserTable',{
-					url:'/school/tjrcquery'
+					url:'/school/rgxg'
 					,where: { //设定异步数据接口的额外参数，任意设
 						position: $("#gw").val(),
 						type:$("#hy").val()

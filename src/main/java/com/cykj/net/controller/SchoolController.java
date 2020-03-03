@@ -134,23 +134,23 @@ public class SchoolController
 		else{
 			//插入注册时间
 			schoolinfo.setRegTime(new Timestamp(System.currentTimeMillis()));
-			//插入图片路径
+			//插入图片路径  图片
 			String path= ResourceUtils.getURL("classpath:").getPath()+"static/schoolS/cunchu";
 			System.out.println("path="+path);
 			//判断logo目录的是否存在
-			File pathlogo=new File(path+"\\"+"logo");
+			File pathlogo=new File(path+"\\"+"logo"); //图片
 			System.out.println("pathlogo="+pathlogo);
 			if(!pathlogo.exists()){
 				pathlogo.mkdir();
 			}
 			//判断以这个账号为命名目录的是否存在
-			File logoacc=new File(path+"\\"+"logo"+"\\"+schoolinfo.getScAccount());
+			File logoacc=new File(path+"\\"+"logo"+"\\"+schoolinfo.getScAccount()); //图片
 			if(!logoacc.exists()){
 				logoacc.mkdir();
 			}
-			System.out.println(path+"\\"+"logo"+"\\"+schoolinfo.getScAccount());
+			System.out.println(path+"\\"+"logo"+"\\"+schoolinfo.getScAccount()); //图片
 			String filename = file.getOriginalFilename();
-			file.transferTo(new File(path+"\\"+"logo"+"\\"+schoolinfo.getScAccount()+"\\"+ filename));
+			file.transferTo(new File(path+"\\"+"logo"+"\\"+schoolinfo.getScAccount()+"\\"+ filename)); //插入成功
 			schoolinfo.setScpicture("\\schoolS\\cunchu\\"+"logo"+"\\"+schoolinfo.getScAccount()+"\\"+ filename);
 			schoolinfo.setScState("0");
 			Admin a=new Admin();
@@ -583,7 +583,7 @@ public class SchoolController
 	 * 分页查询人才信息
 	 *
 	 */
-	@RequestMapping("/tjrcquery")
+	@RequestMapping("/rgxg")
 	public void tjrcquery(HttpServletRequest request,HttpServletResponse response,String position,String type,String page,String limit)throws Exception{
 		utf8(request,response);
 		int page1 = Integer.valueOf(page);

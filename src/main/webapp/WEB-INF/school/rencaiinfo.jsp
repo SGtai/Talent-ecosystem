@@ -23,6 +23,7 @@
 <table class="layui-hide" id="test" lay-filter="table_pa"></table>
 <script type="text/html" id="toolbar">
 	<a class="layui-btn layui-btn-sm background-style" lay-event="able">查看</a>
+	<a class="layui-btn layui-btn-sm background-style" lay-event="able1">修改</a>
 </script>
 <div id="di">
 	<form class="layui-form">
@@ -173,6 +174,60 @@
 			</div>
 		</div>
 	</div>
+
+<%--	个人简历修改--%>
+	<div id="mydiv1" style="display: none ; padding: 10px;margin-left: 10%">
+		<div class="layui-form-item" style="margin-left: -15%">
+			<label class="layui-form-label">姓名</label>
+			<div class="layui-input-inline">
+				<input type="text" id="usename"  autocomplete="off" class="layui-input" >
+			</div>
+			<label class="layui-form-label">学校名称</label>
+			<div class="layui-input-inline">
+				<input type="text" id="school"  autocomplete="off" class="layui-input" >
+			</div>
+		</div>
+		<div class="layui-form-item" style="margin-left: -15%">
+			<label class="layui-form-label">出生年月</label>
+			<div class="layui-input-inline">
+				<input type="text" id="birth"  autocomplete="off" class="layui-input" >
+			</div>
+			<label class="layui-form-label">专业</label>
+			<div class="layui-input-inline">
+				<input type="text" id="zhuanye"  autocomplete="off" class="layui-input" >
+			</div>
+		</div>
+		<div class="layui-form-item" style="margin-left: -15%">
+			<label class="layui-form-label">政治面貌</label>
+			<div class="layui-input-inline">
+				<input type="text" id="mm"  autocomplete="off" class="layui-input" >
+			</div>
+			<label class="layui-form-label">学历</label>
+			<div class="layui-input-inline">
+				<input type="text" id="xl"  autocomplete="off" class="layui-input" >
+			</div>
+		</div>
+		<div class="layui-form-item" style="margin-left: -15%">
+			<label class="layui-form-label">住址</label>
+			<div class="layui-input-inline">
+				<input type="text" id="address"  autocomplete="off" class="layui-input">
+			</div>
+		</div>
+		<img  src="\schoolS\cunchu\logo\555555\jmgz.jpg" alt="" style="width: 20%;height: 20%;margin-left: 70%;margin-top: -30%">
+		<div class="layui-form-item" style="margin-left: -15%">
+			<label class="layui-form-label">技能证书</label>
+			<div class="layui-input-inline" style="width: 79%;">
+				<textarea name="scdata" id="jn" class="layui-textarea" placeholder="请输入内容" maxlength="240" disabled></textarea>
+			</div>
+		</div>
+		<div class="layui-form-item" style="margin-left: -15%">
+			<label class="layui-form-label">自我评价</label>
+			<div class="layui-input-inline" style="width: 79%;">
+				<textarea name="scdata" id="pp" class="layui-textarea" placeholder="请输入内容" maxlength="240" disabled></textarea>
+			</div>
+		</div>
+
+	</div>
 	<%--	人才批量导入面板--%>
 	<div id="daorumb" style="display: none ; padding: 10px;margin-left: 10%">
 		<div class="layui-form-item">
@@ -280,26 +335,25 @@
 				,page: true //开启分页
 				,even:true
 				,cols: [[ //表头
-					{field: 'account', title: '账号名', width:150,height:100}
+					{field: 'phone', title: '电话/账号', width: 150,height:100}
 					,{field: 'name', title: '姓名', width:150,height:100}
 					,{field: 'zy', title: '专业', width:150,height:100}
 					,{field: 'jzstate', title: '就业情况', width: 150,height:100}
 					,{field:'opera', width:150, title: '操作',align:'center', toolbar: '#toolbar'}
-					,{field: 'mmFace', title: '政治面貌', width: 50,style:'display:none;'}
-					,{field: 'birthday', title: '出生日期', width: 50,style:'display:none;'}
-					,{field: 'phone', title: '电话', width: 50,style:'display:none;'}
-					,{field: 'byschool', title: '学校', width: 50,style:'display:none;'}
-					,{field: 'xl', title: '学历', width: 50,style:'display:none;'}
-					,{field: 'jzdResidence', title: '住址', width: 50,style:'display:none;'}
-					,{field: 'zsCertificate', title: '技能证书', width: 50,style:'display:none;'}
-					,{field: 'pjEvaluation', title: '自我评价', width: 50,style:'display:none;'}
+					,{field: 'mmFace', title: '政治面貌', width: 50,hide:true}
+					,{field: 'birthday', title: '出生日期', width: 50,hide:true}
+					,{field: 'byschool', title: '学校', width: 50,hide:true}
+					,{field: 'xl', title: '学历', width: 50,hide:true}
+					,{field: 'jzdResidence', title: '住址', width: 50,hide:true}
+					,{field: 'zsCertificate', title: '技能证书', width: 50,hide:true}
+					,{field: 'pjEvaluation', title: '自我评价', width: 50,hide:true}
 				]]
 				,done: function (res, curr, count) {
 					exportData=res.data;
 				}
 				,id:'UserTable'
 			});
-			$("#daochu").click(function(){
+			$("#daochu").click(function(res,curr,count){
 				table.exportFile(ins1.config.id,exportData, 'xls');
 			});
 			//搜索
@@ -339,6 +393,16 @@
 				$("#hide8").val(data.jzdResidence);
 				$("#hide9").val(data.zsCertificate);
 				$("#hide10").val(data.pjEvaluation);
+
+				$("#usename").val(data.name);
+				$("#school").val(data.byschool);
+				$("#birth").val(data.birthday);
+				$("#zhuanye").val(data.zy);
+				$("#mm").val(data.mmFace);
+				$("#xl").val(data.xl);
+				$("#address").val(data.jzdResidence);
+				$("#jn").val(data.zsCertificate);
+				$("#pp").val(data.pjEvaluation);
 				$.ajax(
 					{
 						type:"POST",
@@ -375,6 +439,7 @@
 				);
 				// 查看简历
 				if(layEvent === 'able'){
+
 					layer.open({
 
 						type:1 , //设置类型 默认为0， 1：页面层  2：iframe层 type - 基本层类型
@@ -403,6 +468,76 @@
 
 						maxmin:false, //是否显示最大化和最小化的按钮 对type=1 type=2有效
 
+						success:function () {
+
+						}
+
+					})
+				}
+
+				if(layEvent === 'able1'){
+
+					layer.open({
+
+						type:1 , //设置类型 默认为0， 1：页面层  2：iframe层 type - 基本层类型
+
+						title:"个人简历修改",// title - 标题
+
+						content:$("#mydiv1"),// content - 内容
+
+						skin:'layui-layer-molv',// skin - 样式类名
+
+						area:['1000px','400px'],// area - 宽高
+
+						offset:'auto',// offset - 坐标
+
+						icon:1,//只对type=0的有效 icon - 图标。信息框和加载层的私有参数
+
+
+						btnAlign: 'c',//按钮居中对齐
+
+						shadeClose:true,
+						// time:5000,//time - 自动关闭所需毫秒
+
+						anim:5,//anim - 弹出动画 渐显
+
+						resize:false,//resize - 是否允许拉伸
+
+						maxmin:false, //是否显示最大化和最小化的按钮 对type=1 type=2有效
+
+						btn: ['修改'],
+						btn1: function(){
+							layer.confirm('确认修改该生信息吗?', {
+									btn: ['是', '否'], btn1: function (index) {
+											layer.close(index);
+									$.ajax(
+										{
+											type:"POST",
+											url:"/school/cguserinfo",
+											dataType:"text",
+											data:{
+												username:$("#usename").val(),
+												school:$("#school").val(),
+												birth:$("#birth").val(),
+												zhuanye:$("#zhuanye").val(),
+												mm:$("#mm").val(),
+												xl:$("#xl").val(),
+												address:$("#address").val(),
+												jn:$("#jn").val(),
+												pp:$("#pp").val()
+											},
+											success:function (msg) {
+
+											},
+											error:function (msg) {
+												alert("系统忙，请稍等");
+											}
+										}
+									);
+									}
+								}
+							)
+						},
 						success:function () {
 
 						}

@@ -94,7 +94,7 @@
                 and b.regTime between #{lasttime} and #{nowtime}
             </if>
             <if test="zy != null and zy !=''">
-                and d.zyMajor like '%${zy}%'
+                and c.zy like '%${zy}%'
             </if>
         </where>
     </select>
@@ -119,6 +119,57 @@
         INSERT INTO userlist (account, password,name,phone,sex,degree,idCard,idCardType,birthday,regTime,picture,state,tuijianren) VALUES
         (#{account},#{password},#{name},#{phone},#{sex},#{degree},#{idCard},#{idCardType},#{birthday},#{regTime},#{picture},#{state},#{tuijianren})
     </insert>
+<!--    修改用户表-->
+    <update  id="updateuserinfo" parameterType="Userlist">
+        UPDATE userlist
+        <trim prefix="set" suffixOverrides="," suffix=" where scAccount = #{scAccount} ">
+            <if test="phone!=null and phone.length>0">
+                phone=#{phone},
+            </if>
+            <if test="password!=null and password.length>0">
+                password=#{password},
+            </if>
+            <if test="name!=null and name.length>0">
+                name=#{name},
+            </if>
+            <if test="sex!=null and sex.length>0">
+                sex=#{sex},
+            </if>
+            <if test="degree!=null and degree.length>0">
+                degree=#{degree},
+            </if>
+            <if test="idCard!=null and idCard.length>0">
+                idCard=#{idCard},
+            </if>
+            <if test="kaibanMoney!=null and kaibanMoney.length>0">
+                kaibanMoney=#{kaibanMoney},
+            </if>
+            <if test="jubanDanwei!=null and jubanDanwei.length>0">
+                jubanDanwei=#{jubanDanwei},
+            </if>
+            <if test="xinyongDaima!=null and xinyongDaima.length>0">
+                xinyongDaima=#{xinyongDaima},
+            </if>
+            <if test="scAbout!=null and scAbout.length>0">
+                scAbout=#{scAbout},
+            </if>
+            <if test="scPhone!=null and scPhone.length>0">
+                scPhone=#{scPhone},
+            </if>
+            <if test="scState!=null and scState.length>0">
+                scState=#{scState},
+            </if>
+            <if test="ctid!=null and ctid.length>0">
+                ctid=#{ctid},
+            </if>
+            <if test="prid!=null and prid.length>0">
+                prid=#{prid},
+            </if>
+            <if test="type!=null and type.length>0">
+                type=#{type},
+            </if>
+        </trim>
+    </update>
 <!--    插入简历信息-->
     <insert id="inserjl" parameterType="Resume">
         INSERT INTO resume (yhId, zsCertificate,scTime,phone,sex,degree,idCard,idCardType,birthday,regTime,picture,state,tuijianren) VALUES
@@ -149,4 +200,5 @@
             </if>
         </where>
     </select>
+
 </mapper>
