@@ -32,6 +32,7 @@
 	<link type="text/css" rel="stylesheet" href=<%=path+"css/layui.css"%>>
 </head>
 <body>
+<a href="javascript:history.back(-1)">返回</a>
 	<form class="layui-form" action="">
 		<input id="zpxxid" name="zpxxid" class="layui-input"  type="hidden" >
 		<div class="layui-form-item" style="background-color: #95877c;width: 720px">

@@ -37,7 +37,6 @@
 						<ul>
 							<li><a href="/jump/user/personal_updatepsd">修改密码</a></li>
 							<li><a href="/jump/user/personal_updatenum">修改手机</a></li>
-							<li><a href="/jump/user/personal_renzheng">修改邮箱</a></li>
 							<li><a href="/jump/home/index">退出</a></li>
 						</ul>
 					</div>
@@ -103,8 +102,8 @@
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li><a href="/jump/user/personal_sqzw">申请的职位</a></li>
-				<li><a href="/jump/user/personal_mygz">我的关注</a></li>
+				<li><a href="/user/shenqinglist">申请的职位</a></li>
+				<li><a href="/user/shoucanglist">我的关注</a></li>
 			</ul>
 			<div class="NavLeftBox twoNav">
 				<a class="a6">企业邀约</a>

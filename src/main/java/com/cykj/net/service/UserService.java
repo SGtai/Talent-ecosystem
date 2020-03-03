@@ -94,4 +94,17 @@ public class UserService
 		int num = userDao.shoucang(zpxxid,hyid);
 		return num;
 	}
+	public int shoucangCount(int zpxxid,int hyid){
+		int num = userDao.shoucangCount(zpxxid,hyid);
+		return num;
+	}
+	public List<Shoucang> shoucanglist(int hyid){
+		List<Shoucang> shoucanglist = userDao.shoucanglist(hyid);
+		return shoucanglist;
+	}
+
+	public List<Shoucang> shenqinglist(int hyid){
+		List<Shoucang> shoucanglist = userDao.shenqinglist(hyid);
+		return shoucanglist;
+	}
 }

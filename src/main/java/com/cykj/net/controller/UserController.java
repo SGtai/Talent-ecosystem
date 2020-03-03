@@ -51,6 +51,13 @@ public class UserController
 			return "false";
 		}
 	}
+//跳回主页
+	@RequestMapping("/index")
+	public ModelAndView index(){
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("index");
+		return mv;
+	}
 
 //	退出注销
 	@RequestMapping("/tuichu")
@@ -58,6 +65,15 @@ public class UserController
 	public String tuichu(HttpServletRequest request){
 		request.getSession().removeAttribute("user");
 		return "success";
+	}
+
+	//	退出注销
+	@RequestMapping("/tuichu2")
+	public ModelAndView tuichu2(HttpServletRequest request){
+		request.getSession().removeAttribute("user");
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("index");
+		return mv;
 	}
 
 //	跳转简历列表界面
@@ -311,17 +327,49 @@ public class UserController
 		}
 	}
 
-	//	投递简历，往简历日志表插入简历id，qyid和zpxxid以及状态
+	//	收藏简历，首先看下该简历收藏了吗，没有的话qyid和zpxxid
 	@RequestMapping("/shoucang")
 	@ResponseBody
 	public String shoucang(int zpxxid,HttpServletRequest request){
 		Userlist user = (Userlist) request.getSession().getAttribute("user");
 		int yhid = (int) user.getYhid();
-		int num = userService.shoucang(zpxxid,yhid);
-		if (num > 0){
-			return "true";
+		int count = userService.shoucangCount(zpxxid,yhid);
+		if (count == 0){
+			int num = userService.shoucang(zpxxid,yhid);
+			if (num > 0){
+				return "true";
+			}else {
+				return "false";
+			}
 		}else {
-			return "false";
+			return "noshoucang";
 		}
 	}
+
+//		跳转我的关注页面，获取数据并跳转
+	@RequestMapping("/shoucanglist")
+	public ModelAndView shoucanglist(HttpServletRequest request){
+		ModelAndView mv = new ModelAndView();
+		Userlist user = (Userlist) request.getSession().getAttribute("user");
+		int yhid = (int) user.getYhid();
+		List<Shoucang> list = userService.shoucanglist(yhid);
+		mv.addObject("list",list);
+		mv.setViewName("WEB-INF/user/personal_mygz");
+		return mv;
+	}
+
+//	用户的申请列表
+	@RequestMapping("/shenqinglist")
+	public ModelAndView shenqinglist(HttpServletRequest request){
+		Userlist user = (Userlist) request.getSession().getAttribute("user");
+		int yhid = (int) user.getYhid();
+		List<Shoucang> list = userService.shenqinglist(yhid);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list",list);
+		mv.setViewName("WEB-INF/user/personal_sqzw");
+		return mv;
+	}
+
+
+
 }
