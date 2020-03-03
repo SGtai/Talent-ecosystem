@@ -27,6 +27,8 @@ public class Jianli
 	private String yhname;
 	private String jlname;
 	private String xl;
+	private String byschool;
+	private String zy;
 	private List<Jobintension> jobintension;
 	private List<Experience> experienceList;
 	private List<Undergo> undergoList;

@@ -58,7 +58,6 @@
 			<a href=" ">好消息好消息好消息</a>
 		</div>
 	</div>
-	<a href="/jump/admin/login">管理员入口</a>
 </div>
 <div class="loginDiv">
 	<div class="loginL">
@@ -84,7 +83,7 @@
 <div class="menuDiv">
 	<a href="index.html" class="onnav">首页</a>
 	<a href="/techa">人才成长区</a>
-	<a href="/homeS/jumpsearch">职位搜索</a>
+	<a href="/jump/home/searchJob">职位搜索</a>
 	<a href="/jump/school/login">高校专区</a>
 	<a href=" " class="mobile">微信版</a>
 </div>
@@ -206,11 +205,6 @@
 								<div class="r"></div>
 							</div>
 						</div>
-						<div class="ContentC">
-							<div class="qybox0">
-								<a href="/jump/admin/login">管理员登录</a>
-							</div>
-						</div>
 					</div>
 
 	<%--				当session域里面没有，显登录--%>
@@ -260,11 +254,6 @@
 						<div class="qybox3">
 							<div class="l">企业服务热线<br><b>400-800-8*8*</b></div>
 							<div class="r"></div>
-						</div>
-					</div>
-					<div class="ContentC">
-						<div class="qybox0">
-							<a href="/jump/admin/login">管理员登录</a>
 						</div>
 					</div>
 				</div>

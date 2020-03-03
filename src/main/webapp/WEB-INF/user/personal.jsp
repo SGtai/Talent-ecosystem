@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 86158
@@ -138,14 +139,11 @@
 			</div>
 			<div class="perRpart1_r">
 				<div class="PaName">您好！</div>
-				<div class="PaStatus">
-					<span class="spStatus">目前处于离职状态，可即刻上岗</span>
-					<span class="btn"></span>
-				</div>
 				<div class="clear"></div>
 				<div class="PaCon">
-					<span class="span1">用户名：HEB5_14@your_email.com <a href="personal_renzheng.html" class="a1">[未认证]</a> <a href="personal_updatepsd.html" class="a2">修改密码</a></span>
-					<span class="span2">微信： <a href="" class="a1">[未绑定]</a></span><br />
+					<c:if test="${sessionScope.user.name != null}">
+						<span class="span1">用户名：${sessionScope.user.name} <a href="personal_renzheng.html" class="a1">[未认证]</a> <a href="personal_updatepsd.html" class="a2">修改密码</a></span>
+					</c:if>
 					<span class="span3">手机号：${sessionScope.user.phone} <a href="" class="a3">[已认证]</a> <a href="personal_updatenum.html" class="a2">修改</a></span>
 				</div>
 			</div>
@@ -183,64 +181,6 @@
 			</div>
 		</div>
 		<div class="clear"></div>
-		<div class="myJL">
-			<div class="titBox">
-				<span>我的简历</span>
-				<a href="/jump/user/personal_jl">更多操作>></a>
-			</div>
-			<div class="clear"></div>
-			<div class="conBox">
-				<div class="box1">
-					<a href="/jump/user/personal_jlsee">未完成简历</a>
-				</div>
-				<div class="box2">
-					<div class="Orange"></div>
-					<div class="Orangetxt">完整度15%</div>
-				</div>
-				<div class="box3">
-					<span>简历状态：</span>
-					<div class="statusjl on"></div>
-				</div>
-				<div class="box4">
-					浏览量：<span>0</span>
-				</div>
-				<div class="box5">
-					<span>更新时间：2017-12-28</span>
-				</div>
-				<div class="box6">
-					<a href="">更新</a> |
-					<a href="">预览</a> |
-					<a href="">下载</a> |
-					<a href="/jump/user/personal_jlsee">修改</a>
-				</div>
-			</div>
-			<div class="conBox">
-				<div class="box1">
-					<a href="/jump/user/personal_jlsee">未完成简历</a>
-				</div>
-				<div class="box2">
-					<div class="Orange"></div>
-					<div class="Orangetxt">完整度15%</div>
-				</div>
-				<div class="box3">
-					<span>简历状态：</span>
-					<div class="statusjl on"></div>
-				</div>
-				<div class="box4">
-					浏览量：<span>0</span>
-				</div>
-				<div class="box5">
-					<span>更新时间：2017-12-28</span>
-				</div>
-				<div class="box6">
-					<a href="">更新</a> |
-					<a href="">预览</a> |
-					<a href="">下载</a> |
-					<a href="/jump/user/personal_jlsee">修改</a>
-				</div>
-			</div>
-			<div class="clear"></div>
-		</div>
 		<div class="adBox">
 			<img src="<%=imagesPath+"perAD.jpg"%>" width="814" />
 		</div>

@@ -70,4 +70,24 @@ public class UserService
 		List<Resume> list = userDao.jliList(yhId);
 		return list;
 	}
+	public int deletejl(int jlid){
+		int num = userDao.deletejl(jlid);
+		return num;
+	}
+	public int openjl(int jlid){
+		int num = userDao.openjl(jlid);
+		return num;
+	}
+	public int closejl(int jlid){
+		int num = userDao.closejl(jlid);
+		return num;
+	}
+	public int toudi(int jlid,int qyId, int zpxxid){
+		int num = userDao.toudi(jlid,qyId,zpxxid);
+		return num;
+	}
+	public int toudijiancha(int jlid,int qyId, int zpxxid){
+		int num = userDao.toudijiancha(jlid,qyId,zpxxid);
+		return num;
+	}
 }

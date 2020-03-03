@@ -134,11 +134,7 @@
 	<div class="perRightcon ">
 		<div class="seeTitle">
 			<div class="seeTitle2">
-				<a href="/jump/user/personal_jlyulan">预览</a>
-				<a href="/jump/user/personal_jl">返回简历列表</a>
-			</div>
-			<div class="seeTitle3">
-				<a href="">英文简历</a>
+				<a href="/user/gopersonaljl">返回简历列表</a>
 			</div>
 		</div>
 		<form class="" id="userinfojl">
@@ -256,7 +252,7 @@
 						<div class="nametxt1"></div>
 						<div class="nametxt1">期望职位类别：
 							<c:if test="${yulan[0].jobintension[0].workstate != null}">
-								${yulan[0].jobintension[0].workstate}
+								${yulan[0].jobintension[0].intentionWork}
 							</c:if>
 						</div>
 					</div>
@@ -419,7 +415,7 @@
 
 <div class="clear"></div>
 <div class="footer">
-	<p><a href="">**人才</a>旗下<img src="<%=imagesPath+"logo_foot.gif"%>" />蝶飞人才网版权所有 <a href="">京ICP证0******9号</a><a href=""></a>本网站所有招聘信息，未经书面授权不得转载 投诉电话：400-8**-****</p>
+	<p><a href="">菜鸟人才网</a>旗下<img src="<%=imagesPath+"logo_foot.gif"%>" />蝶飞人才网版权所有 <a href=""></a>本网站所有招聘信息，未经书面授权不得转载 投诉电话：400-8**-****</p>
 </div>
 
 <script type="text/javascript" src=<%=path+"layui/jquery-3.4.1.js"%>></script>
