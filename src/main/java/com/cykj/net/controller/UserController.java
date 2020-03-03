@@ -1,7 +1,9 @@
 package com.cykj.net.controller;
 
 import com.cykj.net.javabean.*;
+import com.cykj.net.service.CompanyService;
 import com.cykj.net.service.UserService;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,8 @@ public class UserController
 {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private CompanyService companyService;
 
 	@RequestMapping("/login")
 	@ResponseBody
@@ -64,6 +68,25 @@ public class UserController
 		List<Resume> list = userService.jliList((int) userlist.getYhid());
 		mv.addObject("jllist",list);
 		mv.setViewName("/WEB-INF/user/personal_jl");
+		return mv;
+	}
+	//	用户投递简历的时候，获取简历列表
+	@RequestMapping("/getjllist")
+	@ResponseBody
+	public List<Resume> getjllist(HttpServletRequest request){
+		Userlist userlist = (Userlist) request.getSession().getAttribute("user");
+		List<Resume> list = userService.jliList((int) userlist.getYhid());
+		return list;
+	}
+
+
+//   修改简历页面，将数据库原有的数据返回出来
+	@RequestMapping("/gojlseeforupdate")
+	public ModelAndView gojlseeforupdate(int jlid){
+		List<Jianli> jianlis = userService.yulanxml(jlid);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("upatelist",jianlis);
+		mv.setViewName("/WEB-INF/user/personal_jlsee");
 		return mv;
 	}
 
@@ -222,5 +245,83 @@ public class UserController
 		mv.addObject("yulan",yulan);
 		mv.setViewName("/WEB-INF/user/personal_jlyulan");
 		return mv;
+	}
+
+	//	删除简历
+	@RequestMapping("/deletejl")
+	@ResponseBody
+	public String deletejl(int jlid){
+		int num = userService.deletejl(jlid);
+		if (num > 0){
+			return "true";
+		}else {
+			return "false";
+		}
+	}
+
+	//	打开关闭简历
+	@RequestMapping("/openjl")
+	@ResponseBody
+	public String openjl(int jlid){
+		int num = userService.openjl(jlid);
+		if (num > 0){
+			return "true";
+		}else {
+			return "false";
+		}
+	}
+	@RequestMapping("/closejl")
+	@ResponseBody
+	public String closejl(int jlid){
+		int num = userService.closejl(jlid);
+		if (num > 0){
+			return "true";
+		}else {
+			return "false";
+		}
+	}
+
+//	查看某家企业的招聘信息
+	@RequestMapping("/jobinfo")
+	public ModelAndView jobinfo(int id1,int id2){
+		Jobinfo jobinfo = new Jobinfo();
+		jobinfo.setQyid(id1);
+		jobinfo.setZpxxid(id2);
+		List<Jobinfo> jobinfo1 = companyService.searchJobinfoTable(jobinfo);
+		System.out.println(jobinfo1.toString());
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("jobinfo",jobinfo1);
+		mv.setViewName("WEB-INF/user/Jobinfo");
+		return mv;
+	}
+
+//	投递简历，往简历日志表插入简历id，qyid和zpxxid以及状态
+	@RequestMapping("/toudi")
+	@ResponseBody
+	public String toudi(int jlid,int qyid,int zpxxid){
+		if (userService.toudijiancha(jlid,qyid,zpxxid) == 0){
+			int num = userService.toudi(jlid,qyid,zpxxid);
+			if (num > 0){
+				return "true";
+			}else {
+				return "false";
+			}
+		}else {
+			return "notoudi";
+		}
+	}
+
+	//	投递简历，往简历日志表插入简历id，qyid和zpxxid以及状态
+	@RequestMapping("/shoucang")
+	@ResponseBody
+	public String shoucang(int zpxxid,HttpServletRequest request){
+		Userlist user = (Userlist) request.getSession().getAttribute("user");
+		int yhid = (int) user.getYhid();
+		int num = userService.shoucang(zpxxid,yhid);
+		if (num > 0){
+			return "true";
+		}else {
+			return "false";
+		}
 	}
 }

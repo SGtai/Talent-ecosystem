@@ -56,7 +56,7 @@ public class HomeController
 	public LayuiData searchJob(JobInfoIndex tijiao)
 	{
 		LayuiData layuiData = new LayuiData();
-		RowBounds rowBounds = new RowBounds(tijiao.getPage()-1, tijiao.getLimit());
+		RowBounds rowBounds = new RowBounds((tijiao.getPage()-1)*tijiao.getLimit(), tijiao.getLimit());
 		List<JobInfoIndex> list = homeService.searchJob(rowBounds,tijiao);
 		int num = homeService.searchJobCount(tijiao);
 		layuiData.setData(list);

@@ -89,7 +89,7 @@
 				<a href="/jump/user/personal" class="a1">会员首页</a>
 			</div>
 			<div class="NavLeftBox active">
-				<a href="/jump/user/personal_jl" class="a2">我的简历</a>
+				<a href="/user/gopersonaljl" class="a2">我的简历</a>
 			</div>
 			<div class="NavLeftBox">
 				<a href="personal_zwss.html" class="a3">职位搜索</a>
@@ -146,7 +146,7 @@
 				<tr>
 					<td colspan="5">
 						<div class="jlpart1">
-							<div class="jlName"><a href="/jump/user/personal_jlsee">${i.jlname}</a></div>
+							<div class="jlName"><a href="/jump/user/personal_jlsee?jlid=${i.jlId}">${i.jlname}</a></div>
 							<div class="jlDate">更新时间：${i.scTime}</div>
 							<div class="jlFresh">更新</div>
 						</div>
@@ -157,7 +157,7 @@
 						<div class="jlpart2">
 							<div class="Orange" style="width:40px;"></div>
 						</div>
-						<div class="jlpart3">中文完整度 20 分 [ <a href="/jump/user/personal_jlsee">修改</a>   <a href="/user/yulan?jlid=29">预览</a>   <a href="">下载</a> ]</div>
+						<div class="jlpart3">中文完整度 20 分 [ <a href="/user/gojlseeforupdate?jlid=${i.jlId}">修改</a>   <a href="/user/yulan?jlid=${i.jlId}">预览</a>   <a href="">下载</a>]</div>
 					</td>
 					<td rowspan="2">
 						<div class="jlpart4">
@@ -167,23 +167,26 @@
 					</td>
 					<td rowspan="2">
 						<div class="jlpart4">
-							<div class="statusjl on"></div>
-							<div class="tdname">姓名已公开</div>
+							<c:if test="${i.ycHide == 0}">
+								<div class="statusjl on"></div>
+							</c:if>
+							<c:if test="${i.ycHide == 1}">
+								<div class="statusjl"></div>
+							</c:if>
+							<div class="tdname">简历</div>
 						</div>
 					</td>
 					<td rowspan="2">
-						<div class="jlpart4">
-							<div class="statusjl on"></div>
-							<div class="tdname">简历已公开</div>
-						</div>
-					</td>
-					<td rowspan="2">
+						<input hidden value="${i.jlId}" id="jlid">
+						<a href="#" onclick="deletejl()">
 						<div class="jlpart4">
 							<div class="delicon"></div>
 							<div class="tdname">删除</div>
 						</div>
+						</a>
 					</td>
 				</tr>
+					<tr></tr>
 
 				<tr>
 					<td colspan="5">
@@ -199,9 +202,10 @@
 		</div>
 		<div class="clear"></div>
 		<div class="addJl">
-			<a href="/user/gojl">
+			<a href="#" onclick="creatjl()">
+				<input hidden id="jlcount" value="${jllist.size()}">
 				<span>继续创建简历</span>
-				<label>（还可创建2份简历）</label>
+				<label>（还可创建${4-jllist.size()}份简历）</label>
 			</a>
 		</div>
 		<div class="clear"></div>
@@ -286,5 +290,6 @@
 
 <script type="text/javascript" src=<%=path+"layui/jquery-3.4.1.js"%>></script>
 <script type="text/javascript" src=<%=jsPath+"personal.js"%>></script>
+<script type="text/javascript" src=<%=jsPath+"personal_jl.js"%>></script>
 </body>
 </html>

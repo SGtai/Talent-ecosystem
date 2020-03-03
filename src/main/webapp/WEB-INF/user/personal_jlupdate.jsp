@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 86158
@@ -85,10 +86,10 @@
 	<div class="perLeftnav">
 		<div class="NavLeftTop">个人中心</div>
 		<div class="NavLeftMain">
-			<div class="NavLeftBox">
+			<div class="NavLeftBox active">
 				<a href="/jump/user/personal" class="a1">会员首页</a>
 			</div>
-			<div class="NavLeftBox active">
+			<div class="NavLeftBox">
 				<a href="/jump/user/personal_jl" class="a2">我的简历</a>
 			</div>
 			<div class="NavLeftBox">
@@ -139,7 +140,12 @@
 				<div class="jldiv layui-form">
 					<div class="nametxt"><span>*</span>姓    名：</div>
 					<div class="inputtxt">
-						<input name="name" type="text" class="txt1"/>
+						<input name="name" type="text" class="txt1"
+						value=
+							<c:if test="${sessionScope.user.name != null}">
+									value="${sessionScope.user.name}"
+							</c:if>
+						/>
 						<span class="check1"></span>
 						<span class="ycname">隐藏姓名</span>
 					</div>
@@ -150,8 +156,18 @@
 					<div class="layui-input-inline">
 						<select name="sex" lay-filter="sex">
 							<option value=""></option>
-							<option value="男">男</option>
-							<option value="女">女</option>
+							<c:if test="${sessionScope.user.sex == null}">
+								<option value="男">男</option>
+								<option value="女">女</option>
+							</c:if>
+							<c:if test="${sessionScope.user.sex == '男'}">
+								<option value="男" selected="">男</option>
+								<option value="女">女</option>
+							</c:if>
+							<c:if test="${sessionScope.user.sex == '女'}">
+								<option value="男">男</option>
+								<option value="女" selected="">女</option>
+							</c:if>
 						</select>
 					</div>
 				</div>
@@ -159,7 +175,12 @@
 				<div class="layui-form-item jldiv">
 					<div class="nametxt"><span>*</span>出生年月：</div>
 					<div class="layui-input-inline">
-						<input id="birthday" name="birthday" class="layui-input" id="date" type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date">
+						<input id="birthday" name="birthday" class="layui-input" id="date" type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date"
+						       value=
+						       <c:if test="${sessionScope.user.birthday != null}">
+								       value="${sessionScope.user.birthday}"
+								</c:if>
+						>
 					</div>
 				</div>
 				<div class="clear"></div>
@@ -167,11 +188,42 @@
 					<div class="nametxt"><span>*</span>证件类型：</div>
 					<div class="layui-input-inline">
 						<select name="idCardType" lay-filter="idCardType">
-							<option value=""></option>
-							<option value="0">中华人民共和国身份证</option>
-							<option value="1">护照</option>
-							<option value="2">回乡证</option>
-							<option value="3">台胞证</option>
+
+							<c:if test="${sessionScope.user.idCardType == null}">
+								<option value=""></option>
+								<option value="0">中华人民共和国身份证</option>
+								<option value="1">护照</option>
+								<option value="2">回乡证</option>
+								<option value="3">台胞证</option>
+							</c:if>
+							<c:if test="${sessionScope.user.idCardType == '0'}">
+								<option value=""></option>
+								<option value="0">中华人民共和国身份证</option>
+								<option value="1">护照</option>
+								<option value="2">回乡证</option>
+								<option value="3">台胞证</option>
+							</c:if>
+							<c:if test="${sessionScope.user.idCardType == '1'}">
+								<option value=""></option>
+								<option value="0">中华人民共和国身份证</option>
+								<option value="1" selected="">护照</option>
+								<option value="2">回乡证</option>
+								<option value="3">台胞证</option>
+							</c:if>
+							<c:if test="${sessionScope.user.idCardType == '2'}">
+								<option value=""></option>
+								<option value="0">中华人民共和国身份证</option>
+								<option value="1">护照</option>
+								<option value="2" selected="">回乡证</option>
+								<option value="3">台胞证</option>
+							</c:if>
+							<c:if test="${sessionScope.user.idCardType == '3'}">
+								<option value=""></option>
+								<option value="0">中华人民共和国身份证</option>
+								<option value="1">护照</option>
+								<option value="2">回乡证</option>
+								<option value="3" selected="">台胞证</option>
+							</c:if>
 						</select>
 					</div>
 				</div>
@@ -179,7 +231,11 @@
 				<div class="jldiv">
 					<div class="nametxt"><span>*</span>证件号：</div>
 					<div class="inputtxt">
-						<input name="idCard" type="text" class="txt2" placeholder="请填写您的最高学历"/>
+						<input name="idCard" type="text" class="txt2" placeholder="请填写您的证件号"
+								<c:if test="${sessionScope.user.idCard != null}">
+									value="${sessionScope.user.idCard}"
+								</c:if>
+						/>
 					</div>
 				</div>
 				<div class="clear"></div>
@@ -187,9 +243,14 @@
 				<div class="jldiv">
 					<div class="nametxt"><span>*</span>最高学历：</div>
 					<div class="inputtxt">
-						<input name="degree" type="text" class="txt2" placeholder="请填写您的最高学历"/>
+						<input name="degree" type="text" class="txt2" placeholder="请填写您的最高学历"
+								<c:if test="${sessionScope.user.degree != null}">
+									value="${sessionScope.user.degree}"
+								</c:if>
+						/>
 					</div>
 				</div>
+
 				<div class="clear"></div>
 				<div class="jldiv">
 					<div class="nametxt"><span>*</span>手机号码：</div>
@@ -201,13 +262,6 @@
 					</div>
 				</div>
 				<div class="clear"></div>
-<%--				<div class="jldiv">--%>
-<%--					<div class="nametxt"><span>*</span>电子邮箱：</div>--%>
-<%--					<div class="inputtxt">--%>
-<%--						<input name="" type="text" class="txt3"/>--%>
-<%--						<b>可用来登录</b>--%>
-<%--					</div>--%>
-<%--				</div>--%>
 			</div>
 			<div class="JlBoxRight">
 				<img src="<%=imagesPath+"per1.jpg"%>" width="80" height="100" />

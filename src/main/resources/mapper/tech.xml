@@ -38,6 +38,10 @@
         select * from chapters where zjId = #{zjid}
     </select>
 
+    <select id="getLearningLog" resultType="LearningLog" parameterType="String">
+        SELECT * FROM learningLog WHERE yhId = #{yhId} ORDER BY jlId DESC LIMIT 6;
+    </select>
+
     <select id="getAssist" resultType="Assist" parameterType="Assist">
         select * from assist where yhId = #{yhId} and pjId = #{pjId}
     </select>
@@ -56,8 +60,18 @@
 
     <insert id="addCurriculum" parameterType="Curriculum" keyProperty="kcId" useGeneratedKeys="true">
 		insert into
-		curriculum(kcName,msDescribe,jgPrice,ckPicture,fzTypeId)
-		values(#{kcName},#{msDescribe},#{jgPrice},#{ckPicture},#{fzTypeId})
+		curriculum(kcName,msDescribe,jgPrice,ckPicture,fzTypeId,gmcsPurchase,plcsComment)
+		values(#{kcName},#{msDescribe},#{jgPrice},#{ckPicture},#{fzTypeId},0,0)
+	</insert>
+
+    <insert id="addLearningLog" parameterType="LearningLog" keyProperty="jlId" useGeneratedKeys="true">
+		insert into
+		learningLog(yhId,spId,czTime,zjPicture,spName,spDescribe,spPath,zjId)
+		values(#{yhId},#{spId},#{czTime},#{zjPicture},#{spName},#{spDescribe},#{spPath},#{zjId})
+	</insert>
+
+    <insert id="wxreg" parameterType="userlist">
+		insert into userlist (phone,password,regTime,state,name) value ( #{phone},#{password},#{regTime},0,#{name});
 	</insert>
 
     <insert id="addFinance" parameterType="Finance" keyProperty="cwId" useGeneratedKeys="true">
@@ -269,15 +283,25 @@
 
 
     <delete id="deleteKc" parameterType="String" >
-		DELETE a,b,c FROM curriculum a,chapters b,video c WHERE a.kcId=#{kcId} AND a.kcId=b.kjId AND b.zjId=c.zjId
+		DELETE  a.*, b.*, c.*
+FROM
+	curriculum a
+LEFT JOIN chapters b ON a.kcId = b.kjId
+LEFT JOIN video c ON b.zjId = c.zjId
+WHERE
+	a.kcId = #{kcId}
 	</delete>
 
     <delete id="deleteZj" parameterType="String" >
-		DELETE b,c FROM chapters b,video c WHERE b.zjId=#{zjId} AND c.zjId=#{zjId}
+	    DELETE b.*,c.*  FROM chapters b left join video c on b.zjId=c.zjId WHERE b.zjId=#{zjId}
 	</delete>
 
     <delete id="deleteSp" parameterType="String" >
 		DELETE  FROM video  WHERE spId=#{spId}
+	</delete>
+
+    <delete id="deleteJl" parameterType="String" >
+		DELETE  FROM learningLog  WHERE spId=#{spId}
 	</delete>
 
     <delete id="deleteFi" parameterType="String" >

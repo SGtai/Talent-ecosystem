@@ -24,6 +24,9 @@ layui.use(['table', 'layer', 'jquery', 'form'], function () {
 			, {field: 'gzAddress', title: '工作地点'}
 			, {field: 'salary', title: '薪水'}
 			, {field: 'time', title: '刷新时间'}
+			, {field: 'chakan', title: '',toolbar: '<div><a class="layui-btn layui-btn-sm background-style" lay-event="chakan">查看简历</a></div>'}
+			, {field: 'shoucang', title: '',toolbar: '<div><a class="layui-btn layui-btn-sm background-style" lay-event="shoucang">收藏</a></div>'}
+			, {field: 'jl', title: '',toolbar: '<div><a class="layui-btn layui-btn-sm background-style" lay-event="jl">投递简历</a></div>'}
 		]]
 			,skin: "line"
 	});
@@ -70,9 +73,81 @@ layui.use(['table', 'layer', 'jquery', 'form'], function () {
 					$('#ctid').append('<option value ="' + list[i].ctid + '">' + list[i].ctname + '</option>');
 				}
 				form.render();
-
 			}
 		);
 	});
 
-});
+	table.on('tool(searchJob)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+		var data = obj.data //获得当前行数据
+			, layEvent = obj.event; //获得 lay-event 对应的值
+
+		var qyid = data.qyid;
+		var zpxxid = data.zpxxid;
+
+		if (layEvent === 'chakan') {
+			window.location.href = "/user/jobinfo?id1=" + qyid + "&id2=" + zpxxid
+		}
+		if (layEvent === 'shoucang') {
+			$.ajax({
+				type: "POST",
+				url: "/user/shoucang",
+				dataType: "text",
+				data:{zpxxid:zpxxid},
+				success: function (msg1) {
+					if (msg1 == "true") {
+						window.alert("收藏成功");
+					}
+				}});
+		}
+
+		if (layEvent === 'jl') {
+
+			//发送ajax获取用户简历列表
+			$.ajax({
+				type: "POST",
+				url: "/user/getjllist",
+				dataType: "text",
+				success: function (msg1) {
+					var msg = eval(msg1);
+					$('#jlselect').empty();
+					for(var i=0;i<msg.length;i++){
+						$('#jlselect').append('<option value ="'+msg[i].jlId+'">' + msg[i].jlname + '</option>');
+					}
+					form.render();
+					layer.open({
+						type: 1
+						,id: 'layerDemo'
+						,content:$('#jllist')
+						,btn:  ['取消', '确定投递']
+						,btn2: function(index, layero){
+							var jlid=$('#jlselect option:selected').val();
+							layer.confirm('确定向此家公司投递此份简历？', function (index) {
+									$.ajax({
+										type: "POST",
+										url: "/user/toudi",
+										dataType: "text",
+										data:{jlid:jlid,qyid:qyid,zpxxid:zpxxid},
+										success: function (msg1) {
+											if (msg1 == "true"){
+												window.alert("投递成功，静等回复把")
+											}
+											if (msg1 == "notoudi"){
+												window.alert("投递失败，您已投递过该职位了")
+											}
+										}});
+								layer.close(index);
+							});
+
+						}
+						,btnAlign: 'c' //按钮居中
+						,shade: 0 //不显示遮罩
+						,yes: function(){
+							layer.closeAll();
+						}
+					});
+					}
+				});
+
+		}
+	})
+	});

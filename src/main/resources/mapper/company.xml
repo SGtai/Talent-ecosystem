@@ -60,12 +60,12 @@
 
 	<select id="searchJobinfoTable" resultType="com.cykj.net.javabean.Jobinfo" parameterType="com.cykj.net.javabean.Jobinfo"
 	>
-	select C.type,B.*,A.* from
+	select C.type,B.*,A.*,D.qyName,E.name priname,F.name cityname from
 	(select *,concat(beginTime,"至",endTime) zhaopinTime,concat(ageLow,"-",ageHigh) age,concat(salaryLow,"-",salaryHigh) salary,concat(baoxian,"、",gjijin,"、",jiangjin,"、",zhusu,"、",welfare) xinzifuli
-	from jobinfo where qyid=#{qyid}) A,station B,position C
+	from jobinfo where qyid=#{qyid}) A,station B,position C,qyinfo D,province E,city F
 		<where>
 			<if test="qyid!=null and qyid!=''">
-				A.zwid=B.stid and B.poid=C.poid
+				A.zwid=B.stid and B.poid=C.poid and E.prid = A.prid and F.ctid = A.ctid and D.qyid=#{qyid}
 			</if>
 			<if test="jobinfoState!=null and jobinfoState!=''">
 				and jobinfoState=#{jobinfoState}

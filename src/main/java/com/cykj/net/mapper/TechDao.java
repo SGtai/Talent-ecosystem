@@ -24,11 +24,14 @@ public interface TechDao
 	public ArrayList<Video> getVideoList(@Param("zjid") String id);
 	public ArrayList<Assess> getAssessList(@Param("spId") String id);
 	public Chapters getChapters(@Param("zjid") String id);
+	public ArrayList<LearningLog> getLearningLog(@Param("yhId") String id);
 	public ArrayList<Reply> getReplyList(@Param("pjId") String id);
 	public Assist getAssist(Assist ast);
 	public ArrayList<Chapters> getChaptersKcId(@Param("zjId") String id);
 	public  ArrayList<Finance> getFinance(Finance fe);
 	public int addCurriculum(Curriculum cc);
+	public int  addLearningLog(LearningLog learningLog);
+	public int wxreg(Userlist userlist);
 	public int addFinance(Finance fe);
 	public int addChapters(Chapters ct);
 	public int addVideo(Video vd);
@@ -38,6 +41,7 @@ public interface TechDao
 	public int deleteKc(@Param("kcId") String kcId);
 	public int deleteZj(@Param("zjId") String zjId);
 	public int deleteSp(@Param("spId") String spId);
+	public int deleteJl(@Param("spId") String spId);
 	public int deleteFi(@Param("cwId") String cwId);
 	public int upCurriculumD(Curriculum curriculum);
 	public int upChaptersD(Chapters cp);

@@ -24,9 +24,37 @@ $(document).ready(function () {
 	//简历状态  已公开 已隐藏
 	$('.statusjl').click(function(){
 	   if($(this).attr("class")=="statusjl on"){
-	        $(this).removeClass('on');
+	   	// 隐藏
+		   var jlid = $('#jlid').val();
+		   $.ajax({
+			   type: "POST",
+			   asyn: false,
+			   url: "/user/closejl",
+			   data: {jlid:jlid},
+			   success: function (msg) {
+				   if (msg == "true") {
+					   window.alert("简历隐藏成功");
+				   }
+			   }
+		   });
+		   $(this).removeClass('on');
+
 		}else{
-			$(this).addClass('on');
+	   	// 公开
+		   var jlid = $('#jlid').val();
+		   $.ajax({
+			   type: "POST",
+			   url: "/user/openjl",
+			   asyn: false,
+			   data: {jlid:jlid},
+			   success: function (msg) {
+				   if (msg == "true") {
+				   	    window.alert("简历推送成功");
+				   }
+
+			   }
+		   });
+		   $(this).addClass('on');
 		}
 	})
 	
@@ -158,3 +186,13 @@ $(document).ready(function () {
    
    
 })
+
+function creatjl(){
+	var count = $('#jlcount').val();
+	if(count == 4){
+		window.alert("简历已满，请删除或更新简历")
+	}else{
+		window.location.href = "/user/gojl";
+	}
+
+}
