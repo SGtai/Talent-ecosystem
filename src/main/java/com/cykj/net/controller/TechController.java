@@ -55,6 +55,13 @@ public class TechController
 	 */
 	@RequestMapping("/techa")
 	public ModelAndView techa(String lows,String highs,String kcname){
+		Userlist u = new Userlist();
+		u.setYhid(1);
+		ArrayList<LearningLog> learningLogs = techService.getLearningLog(String.valueOf(u.getYhid()));
+		for (int i = 0; i <learningLogs.size() ; i++)
+		{
+			learningLogs.get(i).setJlId(i+1);
+		}
 		ArrayList<Curriculum> al = new ArrayList<>();
 		Finance finance = new Finance();
 		finance.setYhId(1);
@@ -99,6 +106,12 @@ public class TechController
 		getMap.put(String.valueOf(dl.size()+1),cuA);
 		mv.addObject("getMap",getMap);
 		mv.addObject("dl",dl);
+		if (learningLogs.size()>0){
+			mv.addObject("learningLogs",learningLogs);
+			mv.addObject("jl","yes");
+		}else{
+			mv.addObject("jl","no");
+		}
 		mv.setViewName("/WEB-INF/tech/techA");
 		return mv;
 	}
@@ -199,7 +212,7 @@ public class TechController
 		ArrayList<Video> video = techService.getVideoList(id);
 		for (int i = 0; i < video.size(); i++)
 		{
-			video.get(i).setSpId(i+1);
+			video.get(i).setSort(i+1);
 		}
 		Chapters ct = techService.getChapters(id);
 		Curriculum cc = techService.getCurriculum(String.valueOf(ct.getKjId()));
@@ -209,6 +222,16 @@ public class TechController
 		mv.setViewName("/WEB-INF/tech/techC");
 		return mv;
 	}
+
+	public static void main(String[] args)
+	{
+
+		TechController tc = new TechController();
+		System.out.println(tc.getTime());
+		TimeZone tz = TimeZone.getTimeZone("ETC/GMT-8");
+		TimeZone.setDefault(tz);
+
+	}
 	/**
 	 *
 	 * 施恭泰 jx190719
@@ -216,18 +239,28 @@ public class TechController
 	 * @return
 	 */
 	@RequestMapping("/techvideo")
-	public ModelAndView techvideo(HttpServletRequest request, HttpServletResponse response,String id,String name,String path,String spId,String nr,String pjId,String cs,String dxName,String dfnr,String fName) throws IOException
+	public ModelAndView techvideo(HttpServletRequest request, HttpServletResponse response,String id,String name,String path,String spId,String nr,String pjId,String cs,String dxName,String dfnr,String fName,String spDescribe) throws IOException
 	{
 
-		getTime();
 		Userlist user = new Userlist();
 		user.setRegTime(getTime());
-		System.out.println(user.getRegTime());
 		user.setYhid(1);
-		user.setPicture("head-fl.jpg");
+		user.setPicture("1.jpg");
 		user.setName("小铭");
-		TimeZone tz = TimeZone.getTimeZone("ETC/GMT-8");
-		TimeZone.setDefault(tz);
+		LearningLog learningLog =new LearningLog();
+		learningLog.setSpDescribe(spDescribe);
+		learningLog.setSpId(Integer.valueOf(spId));
+		learningLog.setYhId(user.getYhid());
+		learningLog.setSpName(name);
+		learningLog.setSpPath(path);
+		learningLog.setZjId(Integer.valueOf(id));
+		learningLog.setCzTime(getTime());
+		ArrayList<Chapters> chap = techService.getChaptersKcId(id);
+		if (chap.size()>0){
+			learningLog.setZjPicture(chap.get(0).getZjPicture());
+		}
+		int de = techService.deleteJl(spId);
+		int ac = techService.addLearningLog(learningLog);
 		ModelAndView mv = new ModelAndView();
 		if (fName!=null&&fName.length()>0){
 			String as = myDownload(request,response,fName);
@@ -245,6 +278,7 @@ public class TechController
 			int a = techService.addAssess(assAssess);
 			ArrayList<Chapters> chapters = techService.getChaptersKcId(id);
 			if (chapters.size()>0){
+				System.out.println("21312312312312312312312312312312");
 				techService.upCurriculumPj(chapters.get(0).getKjId());
 			}
 		}
@@ -275,11 +309,12 @@ public class TechController
 			mv.addObject("notify","评论成功！！！");
 		}
 		ArrayList<Video> video = techService.getVideoList(id);
+		ArrayList<Assess> assess = techService.getAssessList(String.valueOf(video.get(0).getSpId()));
 		for (int i = 0; i < video.size(); i++)
 		{
-			video.get(i).setSpId(i+1);
+			video.get(i).setSort(i+1);
 		}
-		ArrayList<Assess> assess = techService.getAssessList(spId);
+
 		ArrayList<Comment> com = new ArrayList<>();
 		for (int i = 0; i < assess.size(); i++)
 		{
@@ -290,8 +325,6 @@ public class TechController
 			com.add(comment);
 		}
 		String suffix = path.substring(path.lastIndexOf(".") + 1);
-		System.out.println("后缀="+suffix);
-
 		mv.addObject("video",video);
 		mv.addObject("suffix",suffix);
 		mv.addObject("path",path);
@@ -952,7 +985,6 @@ public class TechController
 		fe.setJgPrice(Long.parseLong(total[0]));
 		fe.setDdNumber(out_trade_no);
 		fe.setDdTime(getTime());
-
 		Userlist user = new Userlist();
 		user.setYhid(1);
 		fe.setYhName("小铭");
@@ -965,6 +997,11 @@ public class TechController
 		ArrayList<Curriculum> al = new ArrayList<>();
 		Finance finance = new Finance();
 		finance.setYhId(1);
+		ArrayList<LearningLog> learningLogS = techService.getLearningLog(String.valueOf(user.getYhid()));
+		for (int i = 0; i <learningLogS.size() ; i++)
+		{
+			learningLogS.get(i).setJlId(i+1);
+		}
 		ArrayList<Finance> finances = techService.getFinance(finance);
 		if (lows!=null||highs!=null||kcname!=null){
 			Curriculum cu = new Curriculum();
@@ -1001,6 +1038,12 @@ public class TechController
 					cuA.add(al.get(j));
 				}
 			}
+		}
+		if (learningLogS.size()>0){
+			mv.addObject("learningLogs",learningLogS);
+			mv.addObject("jl","yes");
+		}else{
+			mv.addObject("jl","no");
 		}
 		System.out.println("购买成功");
 		mv.addObject("xx","购买成功");
