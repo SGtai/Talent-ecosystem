@@ -16,49 +16,37 @@
 	<title>反馈情况查看</title>
 	<link type="text/css" rel="stylesheet" href=<%=path+"css/layui.css"%>>
 	<link href ="favicon.ico" rel="shortcut icon">
+	<style>
+		.layui-table-cell{
+			height:25px;
+			line-height:25px;
+		}
+	</style>
 </head>
 <body>
 <input id="qyid" type="hidden" value="${sessionScope.Qyinfo.qyid}" />
 <form class="layui-form" lay-filter="component-form-group" id="search_submits" onsubmit="return false">
-	<h1  style="background-color: #95877c;font-weight:bold;text-align:center">反馈情况</h1>
+	<h1  style="background-color: #95877c;font-weight:bold;text-align:center">全部简历</h1>
 	<div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="layadmin-useradmin-formlist">
 		<div class="layui-inline">
-			<label class="layui-form-label">招聘行业：</label>
+			<label class="layui-form-label">反馈情况：</label>
 			<div class="layui-input-inline">
-				<select name="position2" id="position" lay-filter="choosePosition"  >
-					<option value="0" >请选择行业</option>
-					<c:if test="${position!=null}">
-						<c:forEach items="${position}" begin="0" var="i">
-							<option  value="${i.poid}">${i.type}</option>
-						</c:forEach>
-					</c:if>
+				<select name="paid" id="paid" lay-filter="choosePosition"  >
+					<option value="0" >请选择状态</option>
+					<option  value="12">等待回复</option>
+					<option  value="13">接受面试</option>
+					<option  value="14">已应聘</option>
 				</select>
 			</div>
 		</div>
-		<div class="layui-inline">
-			<label class="layui-form-label">招聘岗位：</label>
-			<div class="layui-input-block">
-				<select name="zwid" id="zwid2">
-				</select>
-			</div>
-		</div>
-		<%--		<div class="layui-inline">--%>
-		<%--			<label class="layui-form-label">发布状态:</label>--%>
-		<%--			<div class="layui-input-block">--%>
-		<%--				<select name="jobinfoState" id="jobinfoState" lay-filter="" lay-search>--%>
-		<%--					<option value="">选择</option>--%>
-		<%--					<option value="发布中">发布中</option>--%>
-		<%--					<option value="待发布">待发布</option>--%>
-		<%--					<option value="已到期">已到期</option>--%>
-		<%--				</select>--%>
-		<%--			</div>--%>
-		<%--		</div>--%>
+
 		<div class="layui-inline">
 			<button class="layui-btn" lay-submit="search_submits" lay-filter="search">查询</button>
 		</div>
 	</div>
 </form>
 <table id="demo" lay-filter="test"></table>
+
 <script src=<%=path + "jquery-3.4.1.js"%> ></script>
 <script src=<%=path + "layui.js"%>></script>
 <script src="<%=path+"json2.js"%>"></script>
@@ -68,115 +56,128 @@
 			class="layui-icon">&#xe63c;</i>
 		查看简历
 	</button>
-	<button lay-event="detail" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i
-			class="layui-icon">&#xe63c;</i>
+	<button lay-event="update" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i class="layui-icon">&#xe620;</i>
 		应聘
 	</button>
 </script>
-<script type="text/html" id="jobapplication">
-	待完善！
-</script>
 <script type="text/javascript">
-	layui.use(['form', 'layer', 'jquery','table','layedit', 'laydate'], function() {
+	layui.use(['form', 'layer', 'jquery','table'], function() {
 		var table = layui.table;
 		var layer = layui.layer;
 		var form = layui.form;
 		var $ = layui.jquery;
-		var layedit = layui.layedit;
-		var laydate = layui.laydate;
 
-		// 设置最小可选的日期
-		function minDate() {
-			var now = new Date();
-			return now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
-		};
 		//第一个实例
 		table.render({
 			elem: '#demo'
-			, height: 300
-			, url: "/company/searchJobinfoTable" //数据接口
+			, height: 280
+			, url: "/company/feedback" //数据接口
 			, page: true //开启分页
 			, limit: 5
 			, limits: [5, 10, 20, 50, 100]
 			, cols: [[ //表头
-				//简历发布时间 姓名 年龄 性别 应聘行业 岗位 学历
-				{field: 'zpxxid', title: 'ID', width: 80, hide: true}
-				, {field: 'type', title: '招聘行业', width: 150}
-				, {field: 'postion', title: '招聘岗位', width: 200}
-				, {field: '', title: '姓名', width: 120}
-				, {field: '', title: '学历', width: 150}
-				, {field: '', title: '反馈情况', width: 120}
-				, {field: '', title: '反馈时间', width: 140, sort: true}
+				{field: 'jlId', title: 'jlId', width: 80,hide: true}
+				, {field: 'yhId', title: 'yhId', width:80,hide: true}
+				, {field: 'cxrzId', title: 'cxrzId', width:80,hide: true}
+				, {field: 'zpxxid', title: 'zpxxid', width:80,hide: true}
+				, {field: 'paid', title: 'paid', width:80}
+				// , {field: 'type', title: '应聘行业', width: 150}
+				// , {field: 'postion', title: '应聘岗位', width: 200}
+				, {field: 'yhname', title: '名字', width: 150}
+				, {field: 'byschool', title: '毕业院校', width: 200}
+				, {field: 'xl', title: '学历', width: 120, sort: true}
+				, {field: 'zy', title: '专业', width: 170}
+				, {field: 'ckTime', title: '操作时间', width: 200, sort: true}
+				, {field: 'feedback', title: '反馈情况', width: 150, sort: true}
 				, {fixed: 'right', width: 320, align: 'center', toolbar: '#barDemo'}
 			]]
 			//设置查询刷新的ID
 			, id: 'table1'
 		});
 
-
 		form.on('submit(search)', function (data) {
-			var myselect = document.getElementById("position");
-			var index = myselect.selectedIndex;
-			var type = myselect.options[index].text;
-			var zwid = $('#zwid2').val();
+			var paid=$('#paid').val();
+			alert(paid);
 			table.reload('table1', {
-				url: "/company/searchJobinfoTable"
+				url: "/company/feedback"
 				, where: { //设定异步数据接口的额外参数，任意设
-					type: type,
-					zwid: zwid
+					paid: paid
 				}
 				, page: {
 					curr: 1 //重新从第 1 页开始
 				}
 			});
 		});
-		//查询岗位
-		form.on('select(choosePosition)', function(data){
-			var name = $('#zwid2');
-			name.empty();
-			$.ajax(
-				{
-					type:"POST",
-					url:"/company/chooseStation",
-					dataType:"text",
-					data:{poid:data.value},
-					success:function (msg) {
-						var gangwei = $('#zwid2');
-						gangwei.empty();
-						var arr = JSON.parse(msg);
-						gangwei.append("<option value=''>请选择岗位</option>");
-						for (var i = 0; i < arr.length; i++) {
-							gangwei.append("<option value='"+arr[i].stid+"'>"+arr[i].postion+"</option>");
-						}
-						layui.form.render('select')
-					},
-					error:function () {
-					}
-				}
-			);
-		});
-		table.on('tool(test)', function(obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+		table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
 			var data = obj.data //获得当前行数据
-				, layEvent = obj.event; //获得 lay-event 对应的值
-			//查看及修改
-			if (layEvent === 'detail') {
-				//打开查看页面
-				layer.open({
-					type: 1,
-					content: $('#jobapplication').html(),
-					area: ['740px', '550px'],
-					title: '个人简历',
-					btn: ['取消'],
-					anim: 1,//0-6的动画形式，-1不开启
-					offset: '40px',
-					success: function () {
-						form.render();
-					}
-				});
+				,layEvent = obj.event; //获得 lay-event 对应的值
+			//查看简历
+			if(layEvent === 'detail'){
+				window.location.href="/company/yulan?jlid="+data.jlId
+			}
+			//应聘
+			else if(layEvent === 'update'){
+				if(data.feedback==='等待回复'){
+					layer.msg('尚未完成面试无法应聘');
+					return false;
+				}else if(data.feedback==='已应聘'){
+					layer.msg('已应聘');
+					return false;
+				}else {
+					var cxrzId=data.cxrzId;
+					$.ajax({
+						type:"POST",
+						url:"/company/yingpin",
+						dataType:"text",
+						data:{cxrzId:cxrzId},
+						//从servlet接收的数据
+						success:function (msg) {
+							if (msg ==='success') {
+								alert("应聘成功！");
+								$(".layui-laypage-btn")[0].click();
+								//招聘人数加1
+
+							} else {
+								layer.msg("应聘失败！")
+							}
+						}
+						,error:function () {
+							alert("服务器正忙.....");
+						}
+					});
+				}
+			} else if(layEvent === 'delete'){
+
+				if(data.jobinfoState==='发布中'){
+					layer.msg('发布中无法删除状态');
+					return false;
+				}else {
+					$.ajax({
+						type:"POST",
+						url:"/company/deleteJobinfo",
+						dataType:"text",
+						data:{zpxxid:data.zpxxid},
+						//从servlet接收的数据
+						success:function (msg) {
+							if (msg ==='success') {
+								layer.msg('删除成功');
+								$(".layui-laypage-btn")[0].click();
+							} else {
+								layer.msg("修改失败！")
+							}
+						}
+						,error:function () {
+							alert("服务器正忙.....");
+						}
+					});
+
+				}
+
+
 			}
 		});
-	});
 
+	});
 </script>
 </body>
 </html>

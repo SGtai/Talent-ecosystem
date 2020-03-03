@@ -1,20 +1,20 @@
 <%--
   Created by IntelliJ IDEA.
   User: Lenovo
-  Date: 2020/2/27
-  Time: 10:05
+  Date: 2020/3/2
+  Time: 13:36
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	<%
+<%
 	String path = application.getContextPath()+"/layui/";
 	String Path =application.getContextPath();
 	String jsPath = application.getContextPath()+"/companys/js/";
 %>
 <html>
 <head>
-	<title>简历查询</title>
+	<title>投递我公司简历</title>
 	<link type="text/css" rel="stylesheet" href=<%=path+"css/layui.css"%>>
 	<link href ="favicon.ico" rel="shortcut icon">
 	<style>
@@ -27,7 +27,7 @@
 <body>
 <input id="qyid" type="hidden" value="${sessionScope.Qyinfo.qyid}" />
 <form class="layui-form" lay-filter="component-form-group" id="search_submits" onsubmit="return false">
-	<h1  style="background-color: #95877c;font-weight:bold;text-align:center">全部简历</h1>
+	<h1  style="background-color: #95877c;font-weight:bold;text-align:center">投递我公司简历</h1>
 	<div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="layadmin-useradmin-formlist">
 		<div class="layui-inline">
 			<label class="layui-form-label">招聘行业：</label>
@@ -68,7 +68,7 @@
 	<button lay-event="update" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i class="layui-icon">&#xe620;</i>
 		面试邀请
 	</button>
-	<button lay-event="" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i class="layui-icon">&#xe620;</i>
+	<button lay-event="update" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i class="layui-icon">&#xe620;</i>
 		导出简历
 	</button>
 
@@ -84,7 +84,7 @@
 		table.render({
 			elem: '#demo'
 			, height: 280
-			, url: "/company/searchResume" //数据接口
+			, url: "/company/searchResumeCompany" //数据接口
 			, page: true //开启分页
 			, limit: 5
 			, limits: [5, 10, 20, 50, 100]
@@ -92,11 +92,14 @@
 				//简历发布时间 姓名 年龄 性别 应聘行业 岗位 学历
 				{field: 'jlId', title: 'jlId', width: 80,hide: true}
 				, {field: 'yhId', title: 'yhId', width:80,hide: true}
-				, {field: 'type', title: '意向行业', width: 150}
-				, {field: 'postion', title: '意向岗位', width: 200}
+				, {field: 'cxrzId', title: 'cxrzId', width:80,hide: true}
+				, {field: 'zpxxid', title: 'zpxxid', width:80,hide: true}
+				, {field: 'type', title: '应聘行业', width: 150}
+				, {field: 'postion', title: '应聘岗位', width: 200}
 				, {field: 'yhname', title: '名字', width: 200}
 				, {field: 'xl', title: '学历', width: 120, sort: true}
-				, {field: 'scTime', title: '发布时间', width: 200, sort: true}
+				, {field: 'ckTime', title: '投递时间', width: 200, sort: true}
+				// , {field: 'jobinfoState', title: '发布状态', width: 110}
 				, {fixed: 'right', width: 320, align: 'center', toolbar: '#barDemo'}
 			]]
 			//设置查询刷新的ID
@@ -109,7 +112,7 @@
 			var type = myselect.options[index].text;
 			var postion = $('#zwid').val();
 			table.reload('table1', {
-				url: "/company/searchResume"
+				url: "/company/searchResumeCompany"
 				, where: { //设定异步数据接口的额外参数，任意设
 					type: type,
 					postion: postion
@@ -151,21 +154,20 @@
 			if(layEvent === 'detail'){
 				window.location.href="/company/yulan?jlid="+data.jlId
 			}
-			//邀请面试
+			//投递我公司简历邀请面试
 			else if(layEvent === 'update'){
-				var jlId=data.jlId;
+				var cxrzId=data.cxrzId;
 				$.ajax({
 					type:"POST",
-					url:"/company/selectQuery",
+					url:"/company/updateQuery",
 					dataType:"text",
-					data:{jlId:jlId},
-					//从servlet接收的数据
+					data:{cxrzId:cxrzId},
 					success:function (msg) {
 						if (msg ==='success') {
 							alert("面试邀请成功！");
 							$(".layui-laypage-btn")[0].click();
 						} else {
-							layer.msg("面试邀请失败！该简历已投递过我司")
+							layer.msg("面试邀请失败！")
 						}
 					}
 					,error:function () {

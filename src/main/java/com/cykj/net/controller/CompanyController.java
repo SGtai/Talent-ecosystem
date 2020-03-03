@@ -7,8 +7,8 @@ import com.cykj.net.javabean.Qyinfo;
 import com.cykj.net.javabean.LayuiData;
 import com.cykj.net.service.AdminroleService;
 import com.cykj.net.service.CompanyService;
+import com.cykj.net.service.UserService;
 import com.cykj.net.service.admin.AdminService;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -33,6 +31,8 @@ public class CompanyController
 	private AdminService adminService;
 	@Autowired
 	private AdminroleService adminroleService;
+	@Autowired
+	private UserService userService;
 
 
 	@RequestMapping("/companyLogin")
@@ -399,6 +399,205 @@ public class CompanyController
 		return result;
 	}
 
+	/**
+	 *
+	 * @param
+	 * @return
+	 */
+	@RequestMapping("/searchResume")
+	public @ResponseBody
+	LayuiData searchResume(String page, String limit, String postion, String type, HttpSession session)
+	{
+		Resume resume=new Resume();
+		resume.setPostion(postion);
+		resume.setType(type);
+		List<Resume> list1 = companyService.searchResume(resume);
+		System.out.println(list1);
+		LayuiData layuiData = new LayuiData();
+		layuiData.setCode(0);
+		layuiData.setMsg("");
+		int nowPage;
+		List<Resume> data = new ArrayList<>();
+		if (list1.size() < Integer.valueOf(page) * Integer.valueOf(limit))
+		{
+			nowPage = list1.size();
+		} else
+		{
+			nowPage = Integer.valueOf(page) * Integer.valueOf(limit);
+		}
+
+		for (int i = (Integer.valueOf(page) - 1) * Integer.valueOf(limit); i < nowPage; i++)
+		{
+			data.add(list1.get(i));
+		}
+
+		layuiData.setCount(list1.size());
+		layuiData.setData(data);
+
+		return layuiData;
+
+	}
+
+	@RequestMapping("/yulan")
+	public ModelAndView yulan(int jlid){
+		ModelAndView mv = new ModelAndView();
+		List<Jianli> yulan = userService.yulanxml(jlid);
+		mv.addObject("yulan",yulan);
+		mv.setViewName("WEB-INF/company/personal2");
+		return mv;
+	}
+
+
+	/**
+	 *
+	 * @param
+	 * @return
+	 */
+	@RequestMapping("/searchResumeCompany")
+	public @ResponseBody
+	LayuiData searchResumeCompany(String page, String limit, String postion, String type, HttpSession session)
+	{
+		Qyinfo qyinfo = (Qyinfo) session.getAttribute("Qyinfo");
+		Resume resume=new Resume();
+		resume.setQyId(qyinfo.getQyid());
+		//字段状态
+		resume.setPaid(10);
+		resume.setPostion(postion);
+		resume.setType(type);
+		List<Resume> list1 = companyService.searchResumeCompany(resume);
+		LayuiData layuiData = new LayuiData();
+		layuiData.setCode(0);
+		layuiData.setMsg("");
+		int nowPage;
+		List<Resume> data = new ArrayList<>();
+		if (list1.size() < Integer.valueOf(page) * Integer.valueOf(limit))
+		{
+			nowPage = list1.size();
+		} else
+		{
+			nowPage = Integer.valueOf(page) * Integer.valueOf(limit);
+		}
+
+		for (int i = (Integer.valueOf(page) - 1) * Integer.valueOf(limit); i < nowPage; i++)
+		{
+			data.add(list1.get(i));
+		}
+
+		layuiData.setCount(list1.size());
+		layuiData.setData(data);
+
+		return layuiData;
+
+	}
+
+	@RequestMapping("/updateQuery")
+	public @ResponseBody
+	String updateQuery(Query query,HttpSession session)
+	{
+		Qyinfo qyinfo = (Qyinfo) session.getAttribute("Qyinfo");
+		query.setQyId(qyinfo.getQyid());
+		query.setCkTime(new Timestamp(System.currentTimeMillis()));
+		query.setPaid(12);
+		String result = "";
+		int a = companyService.updateQuery(query);
+		if (a > 0)
+		{
+			result = "success";
+		} else
+		{
+			result = "nosuccess";
+		}
+		return result;
+	}
+
+	@RequestMapping("/selectQuery")
+	public @ResponseBody
+	String selectQuery(Query query,HttpSession session)
+	{
+		String result = "";
+		Qyinfo qyinfo = (Qyinfo) session.getAttribute("Qyinfo");
+		query.setQyId(qyinfo.getQyid());
+		Query query1 = companyService.selectQuery(query);
+		if(query1!=null){
+			result = "nosuccess";
+		}else {
+			query.setCkTime(new Timestamp(System.currentTimeMillis()));
+			query.setPaid(12);
+			int a=companyService.insertQuery(query);
+					if (a > 0)
+					{
+						result = "success";
+					} else
+					{
+						result = "nosuccess";
+					}
+		}
+		return result;
+	}
+
+
+	/**
+	 *
+	 * @param
+	 * @return
+	 */
+	@RequestMapping("/feedback")
+	public @ResponseBody
+	LayuiData feedback(String page, String limit,String paid,HttpSession session)
+	{
+		Qyinfo qyinfo = (Qyinfo) session.getAttribute("Qyinfo");
+		Resume resume=new Resume();
+		resume.setQyId(qyinfo.getQyid());
+		System.out.println(paid);
+		if(paid!=null){
+			resume.setPaid(Long.valueOf(paid));
+		}
+		List<Resume> list1 = companyService.feedbackQuery(resume);
+		LayuiData layuiData = new LayuiData();
+		layuiData.setCode(0);
+		layuiData.setMsg("");
+		int nowPage;
+		List<Resume> data = new ArrayList<>();
+		if (list1.size() < Integer.valueOf(page) * Integer.valueOf(limit))
+		{
+			nowPage = list1.size();
+		} else
+		{
+			nowPage = Integer.valueOf(page) * Integer.valueOf(limit);
+		}
+
+		for (int i = (Integer.valueOf(page) - 1) * Integer.valueOf(limit); i < nowPage; i++)
+		{
+			if(list1.get(i).getPaid()==12){
+				list1.get(i).setFeedback("等待回复");
+			} else if (list1.get(i).getPaid()==13) {
+				list1.get(i).setFeedback("接受面试");
+			} else if(list1.get(i).getPaid()==14){
+				list1.get(i).setFeedback("已应聘");
+			}
+			data.add(list1.get(i));
+		}
+
+		layuiData.setCount(list1.size());
+		layuiData.setData(data);
+
+		return layuiData;
+
+	}
+
+	@RequestMapping("/yingpin")
+	public @ResponseBody
+	String yingpin(Query query,HttpSession session)
+	{
+		String result = "";
+		int a=companyService.yingpin(query);
+		if (a > 0) {
+			result = "success";
+		} else {
+			result = "nosuccess";
+		}
+		return result;
+	}
 
 }
 

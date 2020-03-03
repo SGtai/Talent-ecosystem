@@ -65,7 +65,7 @@
 </div>
 
 
-<div style="margin-left: 12%;margin-top: 12%;">
+<div style="margin-left: 3%;margin-top: 12%;">
 	<table id="demo" lay-filter="test"></table>
 </div>
 
@@ -87,7 +87,7 @@
 		table.render({
 			elem: '#demo'
 			,height: 277
-			,width: 1176
+			,width: 1276
 			,url: '<%=path+"finance.data"%>' //数据接口
 			,limit:5
 			,page: true //开启分页
@@ -96,7 +96,8 @@
 				,{field: 'kcName', title: '订单名称', width:90}
 				,{field: 'msDescribe', title: '订单描述', width:137
 				}
-				,{field: 'ddNumber', title: '订单号', width: 307, sort: true}
+				,{field: 'ddNumber', title: '订单号', width: 287, sort: true}
+				,{field: 'ddTime', title: '时间', width: 127, sort: true}
 				,{field: 'jgPrice', title: '订单价格', width:137, sort: true}
 				,{field: 'yhName', title: '购买用户', width:177, sort: true}
 				,{field: 'jgPrice', title: '价格', width:100, sort: true}

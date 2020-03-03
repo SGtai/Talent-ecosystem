@@ -7,6 +7,7 @@ public class Jobintension {
 
   private long jzyxid;
   private long yhid;
+  private long id;
   private long gwid;
   private long jlid;
   private String workPlace;
@@ -16,4 +17,8 @@ public class Jobintension {
   private String other;
   private String by1;
   private String by2;
+  private String type;
+  private String postion;
+
+
 }

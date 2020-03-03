@@ -119,4 +119,34 @@
         INSERT INTO userlist (account, password,name,phone,sex,degree,idCard,idCardType,birthday,regTime,picture,state,tuijianren) VALUES
         (#{account},#{password},#{name},#{phone},#{sex},#{degree},#{idCard},#{idCardType},#{birthday},#{regTime},#{picture},#{state},#{tuijianren})
     </insert>
+<!--    插入简历信息-->
+    <insert id="inserjl" parameterType="Resume">
+        INSERT INTO resume (yhId, zsCertificate,scTime,phone,sex,degree,idCard,idCardType,birthday,regTime,picture,state,tuijianren) VALUES
+        (#{account},#{password},#{name},#{phone},#{sex},#{degree},#{idCard},#{idCardType},#{birthday},#{regTime},#{picture},#{state},#{tuijianren})
+    </insert>
+<!--    查找企业信息 表格-->
+    <select id="fenyecount2" resultType="int" parameterType="java.util.Map">
+        SELECT count(*) FROM jobinfo a,qyinfo b,station c,position d
+        <where>
+            a.qyid=b.qyid and a.zwid=c.stid and c.poid=d.poid
+            <if test="position != null and position !=''">
+                and c.position like '%${position}%'
+            </if>
+            <if test="type != null and type !=''">
+                and d.type like '%${type}%'
+            </if>
+        </where>
+     </select>
+    <select id="fenyeshuju2" resultType="com.cykj.net.javabean.J1" parameterType="java.util.Map">
+        SELECT * FROM jobinfo a,qyinfo b,station c,position d
+        <where>
+            a.qyid=b.qyid and a.zwid=c.stid and c.poid=d.poid
+            <if test="position != null and position !=''">
+                and c.position like '%${position}%'
+            </if>
+            <if test="type != null and type !=''">
+                and d.type like '%${type}%'
+            </if>
+        </where>
+    </select>
 </mapper>
