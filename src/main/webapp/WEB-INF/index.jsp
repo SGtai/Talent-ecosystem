@@ -84,7 +84,7 @@
 	<a href="index.html" class="onnav">首页</a>
 	<a href="/techa">人才成长区</a>
 	<a href="/jump/home/searchJob">职位搜索</a>
-	<a href="/jump/school/login">高校专区</a>
+	<a href="/jump/admin/login">高校专区</a>
 	<a href=" " class="mobile">微信版</a>
 </div>
 <div class="BodyMain">

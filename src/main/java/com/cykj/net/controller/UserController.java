@@ -310,4 +310,18 @@ public class UserController
 			return "notoudi";
 		}
 	}
+
+	//	投递简历，往简历日志表插入简历id，qyid和zpxxid以及状态
+	@RequestMapping("/shoucang")
+	@ResponseBody
+	public String shoucang(int zpxxid,HttpServletRequest request){
+		Userlist user = (Userlist) request.getSession().getAttribute("user");
+		int yhid = (int) user.getYhid();
+		int num = userService.shoucang(zpxxid,yhid);
+		if (num > 0){
+			return "true";
+		}else {
+			return "false";
+		}
+	}
 }

@@ -90,4 +90,8 @@ public class UserService
 		int num = userDao.toudijiancha(jlid,qyId,zpxxid);
 		return num;
 	}
+	public int shoucang(int zpxxid,int hyid){
+		int num = userDao.shoucang(zpxxid,hyid);
+		return num;
+	}
 }

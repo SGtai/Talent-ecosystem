@@ -30,4 +30,5 @@ public interface UserDao
 	public int closejl(@Param("jlid") int jlid);
 	public int toudi(@Param("jlid") int jlid,@Param("qyId") int qyId,@Param("zpxxid") int zpxxid);
 	public int toudijiancha(@Param("jlid") int jlid,@Param("qyId") int qyId,@Param("zpxxid") int zpxxid);
+	public int shoucang(@Param("zpxxid") int zpxxid,@Param("hyid") int hyid);
 }

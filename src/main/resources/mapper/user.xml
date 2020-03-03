@@ -223,12 +223,12 @@
         delete from jobintension where jlId = ${jlid};
     </delete>
 
-    <insert id="openjl" parameterType="int">
+    <update id="openjl" parameterType="int">
 		update resume set ycHide = 0 where jlId = ${jlid}
-	</insert>
-    <insert id="closejl" parameterType="int">
+	</update>
+    <update id="closejl" parameterType="int">
 		update resume set ycHide = 1 where jlId = ${jlid}
-	</insert>
+	</update>
 
     <insert id="toudi" parameterType="int">
 		insert into query (jlId,qyId,zpxxid,paid,ckTime) value (${jlid},${qyId},${zpxxid},10,now());
@@ -236,4 +236,7 @@
     <select id="toudijiancha" parameterType="int" resultType="int">
         select count(*) from query where jlId = ${jlid} and qyId = ${qyId} and zpxxid=${zpxxid};
     </select>
+    <insert id="shoucang" parameterType="int">
+		insert into shoucang set zpxxid = ${zpxxid} and hyid = ${hyid}
+	</insert>
 </mapper>
