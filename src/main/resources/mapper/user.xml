@@ -237,6 +237,21 @@
         select count(*) from query where jlId = ${jlid} and qyId = ${qyId} and zpxxid=${zpxxid};
     </select>
     <insert id="shoucang" parameterType="int">
-		insert into shoucang set zpxxid = ${zpxxid} and hyid = ${hyid}
+		insert into shoucang set zpxxid = ${zpxxid} and hyid = ${hyid} and sctime = now()
 	</insert>
+    <select id="shoucangCount" parameterType="int" resultType="int">
+		select count(*) from shoucang where zpxxid = ${zpxxid} and hyid = ${hyid}
+	</select>
+
+    <select id="shoucanglist" resultType="Shoucang" parameterType="int">
+		select A.zpxxid ,A.sctime,concat(B.salaryLow,'-',B.salaryHigh) money,B.zpNum,C.qyName,D.postion,concat(E.name,F.name,B.gzAddress) adress
+        from shoucang A,jobinfo B,qyinfo C,station D,province E,city F
+        where A.zpxxid = B.zpxxid and B.qyid = C.qyid and B.zwid = D.stid and B.prid = E.prid and B.ctid = F.ctid and A.hyid = ${hyid};
+	</select>
+    <select id="shenqinglist" resultType="Shoucang" parameterType="int">
+		select B.qyid,C.zpxxid,F.postion,B.qyName,B.replyRate,D.jlname,A.ckTime sctime,E.name statename
+        from query A,qyinfo B,jobinfo C,resume D,parameter E,station F
+        where E.paid = A.paid and A.qyId = B.qyid and A.zpxxid = C.zpxxid
+        and A.jlId = D.jlId and F.stid = C.zwid and A.qyId = ${hyid};
+	</select>
 </mapper>

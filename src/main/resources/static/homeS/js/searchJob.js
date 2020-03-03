@@ -25,7 +25,7 @@ layui.use(['table', 'layer', 'jquery', 'form'], function () {
 			, {field: 'salary', title: '薪水'}
 			, {field: 'time', title: '刷新时间'}
 			, {field: 'chakan', title: '',toolbar: '<div><a class="layui-btn layui-btn-sm background-style" lay-event="chakan">查看简历</a></div>'}
-			, {field: 'shoucang', title: '',toolbar: '<div><a class="layui-btn layui-btn-sm background-style" lay-event="shoucang">收藏</a></div>'}
+			, {field: 'shoucang', title: '',toolbar: '<div><a class="layui-btn layui-btn-sm background-style" lay-event="shoucang">关注</a></div>'}
 			, {field: 'jl', title: '',toolbar: '<div><a class="layui-btn layui-btn-sm background-style" lay-event="jl">投递简历</a></div>'}
 		]]
 			,skin: "line"
@@ -94,8 +94,11 @@ layui.use(['table', 'layer', 'jquery', 'form'], function () {
 				dataType: "text",
 				data:{zpxxid:zpxxid},
 				success: function (msg1) {
+					if (msg1 == "noshoucang") {
+						window.alert("这份招聘信息已经关注过了哦");
+					}
 					if (msg1 == "true") {
-						window.alert("收藏成功");
+						window.alert("关注成功");
 					}
 				}});
 		}

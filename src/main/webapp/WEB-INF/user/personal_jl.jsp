@@ -36,7 +36,6 @@
 						<ul>
 							<li><a href="personal_updatepsd.html">修改密码</a></li>
 							<li><a href="personal_updatenum.html">修改手机</a></li>
-							<li><a href="personal_renzheng.html">修改邮箱</a></li>
 							<li><a href="index.html">退出</a></li>
 						</ul>
 					</div>
@@ -102,8 +101,8 @@
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li><a href="personal_sqzw.html">申请的职位</a></li>
-				<li><a href="personal_mygz.html">我的关注</a></li>
+				<li><a href="/user/shenqinglist">申请的职位</a></li>
+				<li><a href="/user/shoucanglist">我的关注</a></li>
 			</ul>
 			<div class="NavLeftBox twoNav">
 				<a class="a6">企业邀约</a>
