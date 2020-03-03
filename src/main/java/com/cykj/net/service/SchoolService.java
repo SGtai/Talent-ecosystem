@@ -75,4 +75,15 @@ public class SchoolService
 		int Userlistnum=schoolDao.inseruserinfo(userlist);
 		return Userlistnum;
 	}
+
+	public int fenyecount2(String position,String type){
+		int fenyecount2=schoolDao.fenyecount2(position,type);
+		return fenyecount2;
+	}
+
+
+	public List<J1> fenyeshuju2(String position,String type, RowBounds rowBounds){
+		List<J1> fenyeshuju2=schoolDao.fenyeshuju2(position, type, rowBounds);
+		return fenyeshuju2;
+	}
 }

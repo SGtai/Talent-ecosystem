@@ -5,7 +5,8 @@
 <link type="text/css" rel="stylesheet" href="../../static/userS/css/personal.css" />
 <script type="text/javascript" src="../../static/layui/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="../../static/userS/js/personal.js"></script>
-<title>个人中心-我的简历</title>
+   <script type="text/javascript" src="../../static/userS/js/personal_jl.js"></script>
+   <title>个人中心-我的简历</title>
 </head>
 
 <body>
@@ -238,7 +239,7 @@
       </div>
       <div class="clear"></div>
       <div class="lineddiv"></div>
-      <div class="JlBoxCon">
+      <form class="JlBoxCon" id="jiaoyu">
          <h1><span>教育背景</span></h1>
          <div class="JlBoxLeft">
             <div class="jldiv">
@@ -292,7 +293,7 @@
             </div>
             <div class="clear"></div>
             <div class="jldiv">
-               <a href="" class="save">保存</a>
+               <a href="#" onclick="jiaoyu(this)" class="save">保存</a>
             </div>
          </div>
          <div class="JlBoxRight">
@@ -300,8 +301,9 @@
          </div>
          <div class="clear"></div>
          <div class="addcomeon">
-            <a href="">继续添加教育背景</a>
+            <a href="#" onclick="morejiaoyu(this)" id="morebtn">继续添加教育背景</a>
          </div>
+      </form>
       </div>
       <div class="clear"></div>
       <div class="lineddiv"></div>

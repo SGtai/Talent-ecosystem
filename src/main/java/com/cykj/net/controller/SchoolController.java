@@ -17,6 +17,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,10 +30,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
+import java.util.*;
 
 import static com.cykj.net.javabean.S1.*;
 
@@ -136,8 +136,10 @@ public class SchoolController
 			schoolinfo.setRegTime(new Timestamp(System.currentTimeMillis()));
 			//插入图片路径
 			String path= ResourceUtils.getURL("classpath:").getPath()+"static/schoolS/cunchu";
+			System.out.println("path="+path);
 			//判断logo目录的是否存在
 			File pathlogo=new File(path+"\\"+"logo");
+			System.out.println("pathlogo="+pathlogo);
 			if(!pathlogo.exists()){
 				pathlogo.mkdir();
 			}
@@ -332,7 +334,7 @@ public class SchoolController
 		Admin admin= (Admin) request.getSession().getAttribute("admin");
 		String lasttime="";
 		String nowtime="";
-		if(time!=null&&time!=""){
+		if(time!=null&&time!=""&&!time.equals("to")){
 			String arr[]=time.split("to");
 			lasttime=arr[0].trim();
 			nowtime=arr[1].trim();
@@ -371,47 +373,75 @@ public class SchoolController
 		gsonbean(t,response);
 	}
 
-	/**
-	 * 下载模板
-	 * @return
-	 * @throws IOException
-	 */
-	@RequestMapping("/xiazaimoban")
-	@ResponseBody
-	public String xiazaimoban() throws IOException
-	{
-		//new一个工作本
-		Workbook wb=new HSSFWorkbook();
-		//创建sheet页
-		Sheet sheet1=wb.createSheet("第一个sheet页");
-		//创建一个行
-		Row row=sheet1.createRow(0);
-		//给单元格赋值，列
-		row.createCell(0).setCellValue("账号");
-		row.createCell(1).setCellValue("密码");
-		row.createCell(2).setCellValue("姓名");
-		row.createCell(3).setCellValue("电话");
-		row.createCell(4).setCellValue("性别");
-		row.createCell(5).setCellValue("最高学历");
-		row.createCell(6).setCellValue("证件号");
-		row.createCell(7).setCellValue("证件类型");
-		row.createCell(8).setCellValue("出生日期");
-		FileOutputStream fileOut=new FileOutputStream("C:\\简历模板.xls");
-		//打印流
-		wb.write(fileOut);
-		//关闭流
-		fileOut.close();
-		return "ok";
-	}
+//	/**
+//	 * 下载模板
+//	 * @return
+//	 * @throws IOException
+//	 */
+//	@RequestMapping("/xiazaimoban")
+//	@ResponseBody
+//	public String xiazaimoban() throws IOException
+//	{
+//		//new一个工作本
+//		Workbook wb=new HSSFWorkbook();
+//		//创建sheet页
+//		Sheet sheet1=wb.createSheet("第一个sheet页");
+//		//创建一个行
+//		Row row=sheet1.createRow(0);
+//		//给单元格赋值，列
+//		row.createCell(0).setCellValue("账号");
+//		row.createCell(1).setCellValue("密码");
+//		row.createCell(2).setCellValue("姓名");
+//		row.createCell(3).setCellValue("电话");
+//		row.createCell(4).setCellValue("性别");
+//		row.createCell(5).setCellValue("最高学历");
+//		row.createCell(6).setCellValue("证件号");
+//		row.createCell(7).setCellValue("证件类型");
+//		row.createCell(8).setCellValue("出生日期");
+//		FileOutputStream fileOut=new FileOutputStream("C:\\简历模板.xls");
+//		//打印流
+//		wb.write(fileOut);
+//		//关闭流
+//		fileOut.close();
+//		return "ok";
+//	}
 
 	@RequestMapping("/daoru")
 	@ResponseBody
-	public String daoru(HttpServletRequest request,@RequestParam("file") MultipartFile file) throws IOException
+	public Map<String,Object> daoru(HttpServletRequest request,@RequestParam("file") MultipartFile file) throws IOException
 	{
 		System.out.println("开始导入数据");
-		String fileName = file.getOriginalFilename();
 
 		Admin admin= (Admin) request.getSession().getAttribute("admin");
+
+		System.out.println("文件大小为"+file .getSize());
+
+		String filename = file.getOriginalFilename();
+		Map map=new HashMap<String,Object>();
+
+		if(checkFile(file)==false){
+			//文件不存在或者格式错误
+			System.out.println("文件不存在或者格式错误");
+			map.put("msg","fail1");
+			return map;
+		}
+
+
+		if(file .getSize()>10*1024*1024){
+			//上传文件超过10M
+			System.out.println("上传文件超过10M");
+			map.put("msg","fail2");
+			return map;
+		}
+
+		if(checkFileexcel(file)==false){
+			//上传文件不是xsl文件
+			System.out.println("上传文件不是xsl文件");
+			map.put("msg","fail3");
+			return map;
+		}
+
+
 
 		//获取excel文件的io流
 		InputStream is = file.getInputStream();
@@ -429,42 +459,43 @@ public class SchoolController
 					continue;
 				}
 				Userlist userlist=new Userlist();
-				userlist.setAccount(formatCell(hssfRow.getCell(0)));
-				userlist.setPassword(formatCell(hssfRow.getCell(1)));
-				userlist.setName(formatCell(hssfRow.getCell(2)));
-				userlist.setPhone(formatCell(hssfRow.getCell(3)));
-				userlist.setPhone(formatCell(hssfRow.getCell(4)));
-				userlist.setSex(formatCell(hssfRow.getCell(5)));
-				userlist.setDegree(formatCell(hssfRow.getCell(6)));
-				userlist.setIdCard(formatCell(hssfRow.getCell(7)));
-				userlist.setIdCardType(formatCell(hssfRow.getCell(8)));
-				userlist.setBirthday(formatCell(hssfRow.getCell(9)));
+				userlist.setPassword(formatCell(hssfRow.getCell(0)));
+				userlist.setName(formatCell(hssfRow.getCell(1)));
+				userlist.setPhone(formatCell(hssfRow.getCell(2)));
+				userlist.setSex(formatCell(hssfRow.getCell(3)));
+				userlist.setSex(formatCell(hssfRow.getCell(4)));
+				userlist.setDegree(formatCell(hssfRow.getCell(5)));
+				userlist.setIdCard(formatCell(hssfRow.getCell(6)));
+				userlist.setIdCardType(formatCell(hssfRow.getCell(7)));
+				userlist.setBirthday(formatCell(hssfRow.getCell(8)));
 				userlist.setRegTime(new Timestamp(System.currentTimeMillis()));
 				userlist.setState(0);
 				userlist.setPicture("图片路径未定义");
 				userlist.setTuijianren(admin.getAccount());
 				//插入管理员表
 				Admin a=new Admin();
-				admin.setAccount(userlist.getAccount());
-				admin.setPassword(userlist.getPassword());
-				admin.setRegistertime(userlist.getRegTime());
-				admin.setName(userlist.getName());
-				adminService.regAdmin(admin);
+				a.setAccount(userlist.getPhone());
+				a.setPassword(userlist.getPassword());
+				a.setRegistertime(userlist.getRegTime());
+				a.setName(userlist.getName());
+				a.setState(0);
+				adminService.regAdmin(a);
 
 				//插入管理角色表
 				Adminrole adminrole=new Adminrole();
-				adminrole.setAccount(userlist.getAccount());
+				adminrole.setAccount(userlist.getPhone());
 				adminrole.setRoid(5);
 				adminroleService.regAdminRole(adminrole);
 
-				int i=schoolService.inseruserinfo(userlist);
-				if(i>0){
+				int k=schoolService.inseruserinfo(userlist);
+				if(k>0){
 					System.out.println("用户插入一条成功");
 				}
 			}
 
 		}
-		return "ok";
+		map.put("msg","ok");
+		return map;
 	}
 
 
@@ -473,17 +504,20 @@ public class SchoolController
 	 * @param file
 	 * @throws IOException
 	 */
-	public static void checkFile(MultipartFile file) throws IOException {
+	public static boolean checkFile(MultipartFile file) throws IOException {
 		//判断文件是否存在
 		if (null == file) {
 			System.err.println("文件不存在！");
+			return false;
 		}
 		//获得文件名
 		String fileName = file.getOriginalFilename();
 		//判断文件是否是excel文件
 		if (!fileName.endsWith("xls") && !fileName.endsWith("xlsx")) {
 			System.err.println("不是excel文件");
+			return false;
 		}
+		return  true;
 	}
 
 
@@ -492,26 +526,15 @@ public class SchoolController
 	 * @param file
 	 * @return
 	 */
-	public static Workbook getWorkBook(MultipartFile file) {
+	public static boolean checkFileexcel(MultipartFile file) {
 		//获得文件名
 		String fileName = file.getOriginalFilename();
-		//创建Workbook工作薄对象，表示整个excel
-		Workbook workbook = null;
-		try {
-			//获取excel文件的io流
-			InputStream is = file.getInputStream();
-			//根据文件后缀名不同(xls和xlsx)获得不同的Workbook实现类对象
+			//根据文件后缀名不同(xls)
 			if (fileName.endsWith("xls")) {
-				//2003
-				workbook = new HSSFWorkbook(is);
-			} else if (fileName.endsWith("xlsx")) {
-				//2007 及2007以上
-				workbook = new XSSFWorkbook(is);
+			return true;
 			}
-		} catch (IOException e) {
-			e.getMessage();
-		}
-		return workbook;
+
+		return false;
 	}
 
 	/**
@@ -520,19 +543,62 @@ public class SchoolController
 	 * @return
 	 */
 	public static String formatCell(HSSFCell hssfCell){
-		if(hssfCell==null){
-			return "";
+		String value = "";
+		if (hssfCell != null) {
+			switch (hssfCell.getCellType()) {
+				case HSSFCell.CELL_TYPE_FORMULA:
+					break;
+				case HSSFCell.CELL_TYPE_NUMERIC:
+					DecimalFormat df = new DecimalFormat("0");
+					value = df.format(hssfCell.getNumericCellValue());
+					break;
+				case HSSFCell.CELL_TYPE_STRING:
+					value = hssfCell.getStringCellValue().trim();
+					break;
+				default:
+					value = "";
+					break;
+			}
 		}
-		if(hssfCell.getCellType()==HSSFCell.CELL_TYPE_BOOLEAN){
-			return String.valueOf(hssfCell.getStringCellValue());
-		}else if(hssfCell.getCellType()==HSSFCell.CELL_TYPE_NUMERIC){
-			return String.valueOf(hssfCell.getStringCellValue());
-		}else{
-			return String.valueOf(hssfCell.getStringCellValue());
-		}
+		return value.trim();
 	}
 
+	/**
+	 * 跳转到推荐人才页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/tjrencai")
+	@ResponseBody
+	public ModelAndView turntjrc(HttpServletRequest request){
+		Admin admin= (Admin) request.getSession().getAttribute("admin");
+		S1 scinfo=schoolService.findSchoolinfo(admin.getAccount());
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("/WEB-INF/school/tuijianrencai");
+		mv.addObject("scinfo",scinfo);
+		return mv;
+	}
 
+	/**
+	 * 分页查询人才信息
+	 *
+	 */
+	@RequestMapping("/tjrcquery")
+	public void tjrcquery(HttpServletRequest request,HttpServletResponse response,String position,String type,String page,String limit)throws Exception{
+		utf8(request,response);
+		int page1 = Integer.valueOf(page);
+		int limit1=Integer.valueOf(limit);
+		RowBounds rowBounds = new RowBounds(page1-1, limit1);
+		int count=schoolService.fenyecount2(position,type);
+		System.out.println(count);
+		List<J1> list=schoolService.fenyeshuju2(position,type,rowBounds);
+		Table t=new Table();
+		t.setCode(0);
+		t.setCount(count);
+		t.setMsg("");
+		t.setData(list);
+		gsonbean(t,response);
+	}
 
 
 

@@ -216,6 +216,7 @@
                 title: '添加参数',
 
             });
+
             $('#addType').append('<option value="">请选择参数类型</option>');
 
             for (var i = 0; i < typeList.length; i++) {
@@ -285,6 +286,7 @@
                 //设置参数值
                 $('#upValue').prop('value', data.value);
 
+
                 // -----------------------这个参数类型列表感觉需要去数据库查完回来判断/先放着--------------------
                 //设置参数类型
                 for (var i = 0; i < typeList.length; i++) {
@@ -338,8 +340,6 @@
                                     layer.msg('服务器繁忙');
                                 }
                             });
-
-
                             layer.close(index);
                         });
 

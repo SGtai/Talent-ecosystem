@@ -90,4 +90,40 @@ public class CompanyService
 		int sum=companyDao.deleteJobinfo(jobinfo);
 		return sum;
 	}
+
+	public List<Resume> searchResume(Resume resume){
+		List<Resume> resume1=companyDao.searchResume(resume);
+		return resume1;
+	}
+
+	public List<Resume> searchResumeCompany(Resume resume){
+		List<Resume> resume1=companyDao.searchResumeCompany(resume);
+		return resume1;
+	}
+
+	public int updateQuery(Query query){
+		int sum=companyDao.updateQuery(query);
+		return sum;
+	}
+
+	public Query selectQuery(Query query){
+		Query query1=companyDao.selectQuery(query);
+		return query1;
+	}
+
+	public int insertQuery(Query query){
+		int sum=companyDao.insertQuery(query);
+		return sum;
+	}
+
+	public List<Resume> feedbackQuery(Resume resume){
+		List<Resume> resume1=companyDao.feedbackQuery(resume);
+		return resume1;
+	}
+
+	public int yingpin(Query query){
+		int sum=companyDao.yingpin(query);
+		return sum;
+	}
 }
+

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 86158
@@ -140,11 +141,13 @@
 		<div class="jianliBox">
 			<table width="100%" border="0" cellpadding="0" cellspacing="5">
 				<tbody>
+			<c:if test="${jllist != null}">
+				<c:forEach items="${jllist}" begin="0" var="i" varStatus="status">
 				<tr>
 					<td colspan="5">
 						<div class="jlpart1">
-							<div class="jlName"><a href="/jump/user/personal_jlsee">未完成简历</a></div>
-							<div class="jlDate">更新时间：2017-12-28</div>
+							<div class="jlName"><a href="/jump/user/personal_jlsee">${i.jlname}</a></div>
+							<div class="jlDate">更新时间：${i.scTime}</div>
 							<div class="jlFresh">更新</div>
 						</div>
 					</td>
@@ -154,7 +157,7 @@
 						<div class="jlpart2">
 							<div class="Orange" style="width:40px;"></div>
 						</div>
-						<div class="jlpart3">中文完整度 20 分 [ <a href="/jump/user/personal_jlsee">修改</a>   <a href="">预览</a>   <a href="">下载</a> ]</div>
+						<div class="jlpart3">中文完整度 20 分 [ <a href="/jump/user/personal_jlsee">修改</a>   <a href="/user/yulan?jlid=29">预览</a>   <a href="">下载</a> ]</div>
 					</td>
 					<td rowspan="2">
 						<div class="jlpart4">
@@ -179,76 +182,18 @@
 							<div class="delicon"></div>
 							<div class="tdname">删除</div>
 						</div>
-					</td>
-				</tr>
-				<tr>
-					<td width="61%">
-						<div class="jlpart2">
-							<div class="Orange" style="width:0"></div>
-						</div>
-						<div class="jlpart3">英文完整度 0 分 [ <a href="/jump/user/personal_jlsee">修改</a>   <a href="">预览</a>   <a href="">下载</a> ]</div>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="5">
-						<div class="divline"></div>
 					</td>
 				</tr>
 
 				<tr>
 					<td colspan="5">
-						<div class="jlpart1">
-							<div class="jlName"><a href="/jump/user/personal_jlsee" style="color:#53B73C">荔湾区+广告客户经理</a></div>
-							<div class="jlDate">更新时间：2017-12-28</div>
-							<div class="jlFresh">更新</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td width="61%">
-						<div class="jlpart2">
-							<div class="Green" style="width:140px"></div>
-						</div>
-						<div class="jlpart3">中文完整度 20 分 [ <a href="/jump/user/personal_jlsee">修改</a>   <a href="">预览</a>   <a href="">下载</a> ]</div>
-					</td>
-					<td rowspan="2">
-						<div class="jlpart4">
-							<div class="red">0</div>
-							<div class="tdname">被浏览</div>
-						</div>
-					</td>
-					<td rowspan="2">
-						<div class="jlpart4">
-							<div class="statusjl on"></div>
-							<div class="tdname">姓名已公开</div>
-						</div>
-					</td>
-					<td rowspan="2">
-						<div class="jlpart4">
-							<div class="statusjl on"></div>
-							<div class="tdname">简历已公开</div>
-						</div>
-					</td>
-					<td rowspan="2">
-						<div class="jlpart4">
-							<div class="delicon"></div>
-							<div class="tdname">删除</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td width="61%">
-						<div class="jlpart2">
-							<div class="Orange" style="width:60px"></div>
-						</div>
-						<div class="jlpart3">英文完整度 0 分 [ <a href="/jump/user/personal_jlsee">修改</a>   <a href="">预览</a>   <a href="">下载</a> ]</div>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="5">
 						<div class="divline"></div>
 					</td>
 				</tr>
+				</c:forEach>
+			</c:if>
+
+			
 				</tbody>
 			</table>
 		</div>

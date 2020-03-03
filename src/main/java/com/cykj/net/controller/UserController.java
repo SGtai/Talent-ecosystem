@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -55,6 +56,17 @@ public class UserController
 		return "success";
 	}
 
+//	跳转简历列表界面
+	@RequestMapping("/gopersonaljl")
+	public ModelAndView gopersonaljl(HttpServletRequest request){
+		ModelAndView mv = new ModelAndView();
+		Userlist userlist = (Userlist) request.getSession().getAttribute("user");
+		List<Resume> list = userService.jliList((int) userlist.getYhid());
+		mv.addObject("jllist",list);
+		mv.setViewName("/WEB-INF/user/personal_jl");
+		return mv;
+	}
+
 	//简历页面点击新建简历，重新获取用户的基础信息，并往数据库写上一行简历表，拿到该序号，然后返回到页面上
 	@RequestMapping("/gojl")
 	public ModelAndView gojl(HttpServletRequest request){
@@ -73,7 +85,7 @@ public class UserController
 		experience.setJlId(jlid);
 		Jobintension jobintension =new Jobintension();
 		jobintension.setJlid(jlid);
-		jobintension.setYhid(user.getYhid());
+		jobintension.setYhid((int) user.getYhid());
 		Undergo undergo = new Undergo();
 		undergo.setJlId(jlid);
 		//将值都放入实体类后，通过mybatis获取到插入后的自增长的主键id
@@ -107,11 +119,8 @@ public class UserController
 //	简历——个人基础信息
 	@RequestMapping("/userInfojl")
 	@ResponseBody
-	public String gerenInfo(Resume resume,HttpServletRequest request){
-		//先获取当前页面的简历id
-		int jlid = (int) request.getSession().getAttribute("nowjlid");
-//		根据id插入数据
-		resume.setJlId(jlid);
+	public String gerenInfo(Resume resume){
+
 		int num = userService.userInfojl(resume);
 		if (num > 0){
 			return "true";
@@ -120,5 +129,98 @@ public class UserController
 		}
 	}
 
+//	求职意向表的更新
+	@RequestMapping("/yixiang")
+	@ResponseBody
+	public String yixiang(Jobintension jobintension){
 
+		int num = userService.yixiang(jobintension);
+		if (num > 0){
+			return "true";
+		}else{
+			return "false";
+		}
+	}
+
+	//	求职教育表的更新
+	@RequestMapping("/jiaoyu")
+	@ResponseBody
+	public String jiaoyu(Experience experience){
+
+		int num = userService.jiaoyu(experience);
+		if (num > 0){
+			return "true";
+		}else{
+			return "false";
+		}
+	}
+//求职工作经历
+	@RequestMapping("/gongzuo")
+	@ResponseBody
+	public String gongzuo(Undergo undergo){
+
+		int num = userService.gongzuo(undergo);
+		if (num > 0){
+			return "true";
+		}else{
+			return "false";
+		}
+	}
+//证书
+	@RequestMapping("/zhengshu")
+	@ResponseBody
+	public String zhengshu(Resume resume){
+
+		int num = userService.zhengshu(resume);
+		if (num > 0){
+			return "true";
+		}else{
+			return "false";
+		}
+	}
+
+//	个人介绍
+	@RequestMapping("/pingjia")
+	@ResponseBody
+	public String pingjia(Resume resume){
+
+		int num = userService.pingjia(resume);
+		if (num > 0){
+			return "true";
+		}else{
+			return "false";
+		}
+	}
+
+//	新增教育经历
+	@RequestMapping("/morejiaoyu")
+	@ResponseBody
+	public String morejiaoyu(int jlid){
+		Experience experience = new Experience();
+		experience.setJlId(jlid);
+		//将值都放入实体类后，通过mybatis获取到插入后的自增长的主键id
+		userService.addexperience(experience);
+		return String.valueOf(experience.getJyId());
+	}
+//	新增工作经验
+	@RequestMapping("/moregongzuo")
+	@ResponseBody
+	public String moregongzuo(int jlid){
+		Undergo undergo = new Undergo();
+		undergo.setJlId(jlid);
+		//将值都放入实体类后，通过mybatis获取到插入后的自增长的主键id
+		userService.addundergo(undergo);
+		return String.valueOf(undergo.getGzjlId());
+	}
+
+//	跳转预览界面
+//	新增工作经验
+	@RequestMapping("/yulan")
+	public ModelAndView yulan(int jlid){
+		ModelAndView mv = new ModelAndView();
+		List<Jianli> yulan = userService.yulanxml(jlid);
+		mv.addObject("yulan",yulan);
+		mv.setViewName("/WEB-INF/user/personal_jlyulan");
+		return mv;
+	}
 }
