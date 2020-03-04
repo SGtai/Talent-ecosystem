@@ -48,7 +48,6 @@
 </div>
 <div class="navTop">
 	<div class="navTopmain">
-		<div class="logo"><a href="/user/index"><img src="<%=imagesPath+"logo_1.png"%>"/><img src="<%=imagesPath+"logo_2.png"%>" /></a></div>
 		<div class="nav">
 			<div class="navItem"><a href="/user/index">首页</a></div>
 			<div class="navItem"><a href="/jump/home/searchJob">职位搜索</a></div>
@@ -83,8 +82,8 @@
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li><a href="/jump/user/personal_mainshi">面试通知</a></li>
-				<li><a href="/jump/user/personal_yaoqing">应聘邀请</a></li>
+				<li><a href="/user/mianshi">面试通知</a></li>
+				<li><a href="/user/yaoyue">应聘邀请</a></li>
 			</ul>
 			<div class="NavLeftBox">
 				<a href="/jump/user/personal_help" class="a8">帮助中心</a>

@@ -2,6 +2,7 @@ package com.cykj.net.service;
 
 import com.cykj.net.javabean.*;
 import com.cykj.net.mapper.UserDao;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -106,5 +107,21 @@ public class UserService
 	public List<Shoucang> shenqinglist(int hyid){
 		List<Shoucang> shoucanglist = userDao.shenqinglist(hyid);
 		return shoucanglist;
+	}
+	public List<Shoucang> mianshi(@Param("hyid") int hyid){
+		List<Shoucang> shoucanglist = userDao.mianshi(hyid);
+		return shoucanglist;
+	}
+	public List<Shoucang> yaoyue(@Param("hyid") int hyid){
+		List<Shoucang> shoucanglist = userDao.yaoyue(hyid);
+		return shoucanglist;
+	}
+	public int msresultOk(int cxrzId){
+		int num = userDao.msresultOk(cxrzId);
+		return num;
+	}
+	public int msresultNo(int cxrzId){
+		int num = userDao.msresultNo(cxrzId);
+		return num;
 	}
 }

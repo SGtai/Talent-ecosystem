@@ -245,3 +245,33 @@ function deletejl(){
 		}
 	});
 }
+
+function msresultOk(msg) {
+	$.ajax({
+		type: "POST",
+		url: "/user/msresultOk",
+		dataType: "text",
+		data: {cxrzId:msg},
+		success: function (msg) {
+			if (msg == "true") {
+				window.alert("接收面试成功！祝您成功");
+				window.location.href = window.location;
+			}
+		}
+	});
+}
+
+function msresultNo(msg) {
+	$.ajax({
+		type: "POST",
+		url: "/user/msresultNo",
+		dataType: "text",
+		data: {cxrzId:msg},
+		success: function (msg) {
+			if (msg == "true") {
+				window.alert("拒绝成功！希望您能找到更心仪的职位");
+				window.location.href = window.location;
+			}
+		}
+	});
+}

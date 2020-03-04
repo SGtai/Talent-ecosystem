@@ -50,7 +50,6 @@
 </div>
 <div class="navTop">
 	<div class="navTopmain">
-		<div class="logo"><a href="/user/index"><img src="images/logo_1.png"/><img src="images/logo_2.png" /></a></div>
 		<div class="nav">
 			<div class="navItem"><a href="/user/index">首页</a></div>
 			<div class="navItem"><a href="/jump/home/searchJob">职位搜索</a></div>
@@ -84,8 +83,8 @@
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li><a href="personal_mainshi.html">面试通知</a></li>
-				<li><a href="personal_yaoqing.html">应聘邀请</a></li>
+				<li><a href="/user/mianshi">面试通知</a></li>
+				<li><a href="/user/yaoyue">应聘邀请</a></li>
 			</ul>
 			<div class="NavLeftBox">
 				<a href="personal_help.html" class="a8">帮助中心</a>
@@ -135,114 +134,6 @@
 
 						</tbody>
 					</table>
-				</ul>
-				<ul>
-					<table class="tabzw" cellpadding="0" cellspacing="0">
-						<tbody>
-						<tr>
-							<th width="22%" style="border-left: 1px #EDEDED solid;">职位名称</th>
-							<th width="27%">企业名称</th>
-							<th width="8%" style="text-align: center;">企业答复率</th>
-							<th width="16%"><select style="width:115px"><option value="0">相关简历</option><option value="">未完成简历</option><option value="">未完成简历</option><option value="">荔湾区+广告客户经理</option></select></th>
-							<th><div>申请时间</div></th>
-							<th>答复状态</th>
-							<th style="border-right: 1px #EDEDED solid;">提醒答复</th>
-						</tr>
-						<tr>
-							<td valign="middle">
-								<span class="check1"></span>
-								<a href="jobtype.html">做饭工(广州市)</a>
-							</td>
-							<td><a href="company.html" class="cpname">广州金桥物流有限公司</a></td>
-							<td style="text-align: center"><font style="color: red">100.0%</font></td>
-							<td><span>荔湾区+广告客户经理</span></td>
-							<td><span>01-03 14:24</span></td>
-							<td><span style="color:#707070">未查看</span></td>
-							<td><span class="NoticeNo"></span></td>
-						</tr>
-
-						</tbody>
-					</table>
-					<div class="sqxwqx">
-						<span class="check1"></span>
-						<span class="spantxt0">全选</span>
-						<div class="delbtn">删除已选</div>
-						<div class="btnnotice">提醒企业答复</div>
-						<div class="psge">共2条</div>
-					</div>
-				</ul>
-				<ul>
-					<table class="tabzw" cellpadding="0" cellspacing="0">
-						<tbody>
-						<tr>
-							<th width="22%" style="border-left: 1px #EDEDED solid;">职位名称</th>
-							<th width="27%">企业名称</th>
-							<th width="8%" style="text-align: center;">企业答复率</th>
-							<th width="16%"><select style="width:115px"><option value="0">相关简历</option><option value="">未完成简历</option><option value="">未完成简历</option><option value="">荔湾区+广告客户经理</option></select></th>
-							<th><div>申请时间</div></th>
-							<th>答复状态</th>
-							<th style="border-right: 1px #EDEDED solid;">提醒答复</th>
-						</tr>
-						<tr>
-							<td colspan="7">
-								<span class="sorry">对不起，没有查到符合条件的记录！</span>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</ul>
-				<ul>
-					<table class="tabzw" cellpadding="0" cellspacing="0">
-						<tbody>
-						<tr>
-							<th width="22%" style="border-left: 1px #EDEDED solid;">职位名称</th>
-							<th width="27%">企业名称</th>
-							<th width="8%" style="text-align: center;">企业答复率</th>
-							<th width="16%"><select style="width:115px"><option value="0">相关简历</option><option value="">未完成简历</option><option value="">未完成简历</option><option value="">荔湾区+广告客户经理</option></select></th>
-							<th><div>申请时间</div></th>
-							<th>答复状态</th>
-							<th style="border-right: 1px #EDEDED solid;">提醒答复</th>
-						</tr>
-						<tr>
-							<td colspan="7">
-								<span class="sorry">对不起，没有查到符合条件的记录！</span>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</ul>
-				<ul>
-					<table class="tabzw" cellpadding="0" cellspacing="0">
-						<tbody>
-						<tr>
-							<th width="22%" style="border-left: 1px #EDEDED solid;">职位名称</th>
-							<th width="27%">企业名称</th>
-							<th width="8%" style="text-align: center;">企业答复率</th>
-							<th width="16%"><select style="width:115px"><option value="0">相关简历</option><option value="">未完成简历</option><option value="">未完成简历</option><option value="">荔湾区+广告客户经理</option></select></th>
-							<th><div>申请时间</div></th>
-							<th>答复状态</th>
-							<th style="border-right: 1px #EDEDED solid;">提醒答复</th>
-						</tr>
-						<tr>
-							<td valign="middle">
-								<span class="check1"></span>
-								<a href="jobtype.html">后勤文员(佛山市)</a>
-							</td>
-							<td><a href="company.html" class="cpname">河北同源科技发展有限公司</a></td>
-							<td style="text-align: center"><font style="color: red">100.0%</font></td>
-							<td><span>荔湾区+广告客户经理</span></td>
-							<td><span>01-03 14:24</span></td>
-							<td><span style="color:red">不符合要求</span></td>
-							<td></td>
-						</tr>
-						</tbody>
-					</table>
-					<div class="sqxwqx">
-						<span class="check1"></span>
-						<span class="spantxt0">全选</span>
-						<div class="delbtn">删除已选</div>
-						<div class="psge">共1条</div>
-					</div>
 				</ul>
 			</div>
 		</div>

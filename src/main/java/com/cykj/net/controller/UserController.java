@@ -370,6 +370,54 @@ public class UserController
 		return mv;
 	}
 
+	//	用户的面试邀约
+	@RequestMapping("/mianshi")
+	public ModelAndView mianshi(HttpServletRequest request){
+		Userlist user = (Userlist) request.getSession().getAttribute("user");
+		ModelAndView mv = new ModelAndView();
+		int yhid = (int) user.getYhid();
+		List<Shoucang> list = userService.mianshi(yhid);
+		mv.addObject("list",list);
+		mv.setViewName("WEB-INF/user/personal_mianshi");
+		return mv;
+	}
+
+	//	用户的企业邀约
+	@RequestMapping("/yaoyue")
+	public ModelAndView yaoyue(HttpServletRequest request){
+		ModelAndView mv = new ModelAndView();
+		Userlist user = (Userlist) request.getSession().getAttribute("user");
+		int yhid = (int) user.getYhid();
+		List<Shoucang> list = userService.yaoyue(yhid);
+		mv.addObject("list",list);
+		mv.setViewName("WEB-INF/user/personal_yaoyue");
+		return mv;
+	}
+
+//	接收面试邀请
+	@RequestMapping("/msresultOk")
+	@ResponseBody
+	public String msresultOk(int cxrzId){
+		int num = userService.msresultOk(cxrzId);
+		if (num > 0){
+			return "true";
+		}else {
+			return "false";
+		}
+	}
+
+//	拒绝面试邀请
+	@RequestMapping("/msresultNo")
+	@ResponseBody
+	public String msresultNo(int cxrzId){
+		int num = userService.msresultOk(cxrzId);
+		if (num > 0){
+			return "true";
+		}else {
+			return "false";
+		}
+	}
+
 
 
 }

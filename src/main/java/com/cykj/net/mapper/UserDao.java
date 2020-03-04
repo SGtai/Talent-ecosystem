@@ -34,4 +34,9 @@ public interface UserDao
 	public int shoucangCount(@Param("zpxxid") int zpxxid,@Param("hyid") int hyid);
 	public List<Shoucang> shoucanglist(@Param("hyid") int hyid);
 	public List<Shoucang> shenqinglist(@Param("hyid") int hyid);
+	public List<Shoucang> mianshi(@Param("hyid") int hyid);
+	public List<Shoucang> yaoyue(@Param("hyid") int hyid);
+	public int msresultOk(@Param("cxrzId") int cxrzId);
+	public int msresultNo(@Param("cxrzId") int cxrzId);
+
 }

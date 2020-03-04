@@ -252,6 +252,25 @@
 		select B.qyid,C.zpxxid,F.postion,B.qyName,B.replyRate,D.jlname,A.ckTime sctime,E.name statename
         from query A,qyinfo B,jobinfo C,resume D,parameter E,station F
         where E.paid = A.paid and A.qyId = B.qyid and A.zpxxid = C.zpxxid
-        and A.jlId = D.jlId and F.stid = C.zwid and A.qyId = ${hyid};
+        and A.jlId = D.jlId and F.stid = C.zwid and  D.yhId = ${hyid};
 	</select>
+
+    <select id="mianshi" resultType="Shoucang" parameterType="int">
+		select B.qyid,C.zpxxid,F.postion,B.qyName,B.replyRate,D.jlname,A.ckTime sctime,E.name statename
+        from query A,qyinfo B,jobinfo C,resume D,parameter E,station F
+        where E.paid = A.paid and A.qyId = B.qyid and A.zpxxid = C.zpxxid
+        and A.jlId = D.jlId and F.stid = C.zwid and A.paid=12 and  D.yhId = ${hyid};
+	</select>
+
+    <select id="yaoyue" resultType="Shoucang" parameterType="int">
+		select B.qyid,B.qyName,B.replyRate,A.ckTime sctime,B.qyPeople,C.jlname
+        from query A,qyinfo B,resume C
+        where A.qyId = B.qyid and A.zpxxid is null and C.jlId = A.jlId and C.yhId=${hyid} and A.paid =12;
+	</select>
+    <update id="msresultOk" parameterType="int">
+        update query set paid = 13 and ckTime = now() where cxrzId =${cxrzId}
+    </update>
+    <update id="msresultNo" parameterType="int">
+        update query set paid = 8 and ckTime = now() where cxrzId =${cxrzId}
+    </update>
 </mapper>

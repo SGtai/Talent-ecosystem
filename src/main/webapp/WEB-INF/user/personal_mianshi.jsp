@@ -3,7 +3,7 @@
   Created by IntelliJ IDEA.
   User: 86158
   Date: 2020-3-3
-  Time: 19:43
+  Time: 19:46
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -20,7 +20,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href=<%=cssPath+"personal.css"%>>
 	<link rel="stylesheet" href="<%=path+"layui/css/layui.css"%>" media="all">
-	<title>个人中心-我的关注</title>
+	<title>个人中心-面试通知</title>
 </head>
 
 <body>
@@ -75,15 +75,15 @@
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li><a href="/user/shenqinglist">申请的职位</a></li>
-				<li class="orang"><a href="/user/shoucanglist">我的关注</a></li>
+				<li class="orang"><a href="/user/shenqinglist">申请的职位</a></li>
+				<li><a href="/user/shoucanglist">我的关注</a></li>
 			</ul>
 			<div class="NavLeftBox twoNav">
 				<a class="a6">企业邀约</a>
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li><a href="/user/mianshi">面试通知</a></li>
+				<li class="orang"><a href="/user/mianshi">面试通知</a></li>
 				<li><a href="/user/yaoyue">应聘邀请</a></li>
 			</ul>
 			<div class="NavLeftBox">
@@ -97,51 +97,44 @@
 	</div>
 	<div class="perRightcon">
 		<div class="commonTit">
-			<h1 class="fl">我的关注</h1>
+			<h1 class="fl">申请的职位</h1>
 		</div>
 		<div class="sqzwBox">
 			<ul id="tabsqzw">
-				<li>关注的职位</li>
+				<li class="currentsqzw">全部</li>
+				<div class="clear"></div>
 			</ul>
 			<div class="clear"></div>
+			<div id="contentsqzw">
+				<ul style="display:block;">
+					<table class="tabzw" cellpadding="0" cellspacing="0">
+						<tbody>
+						<tr>
+							<th width="22%" style="border-left: 1px #EDEDED solid;">职位信息</th>
+							<th width="25%">企业名称</th>
+							<th width="20%" style="text-align: center;">简历名称</th>
+							<th width="15%"><div>申请时间</div></th>
+							<th width="15%"><div>操作</div></th>
+						</tr>
+				<c:if test="${list != null}">
+					<c:forEach items="${list}" begin="0" var="i">
+						<tr>
+							<td valign="middle">
+								<a href="/user/jobinfo?id1=${i.qyid}&id2=${i.zpxxid}">${i.postion}</a>
+							</td>
+							<td><a href="#" class="cpname">${i.qyName}</a></td>
+							<td><span>${i.jlname}</span></td>
+							<td><span>${i.sctime}</span></td>
+							<td><span style="color:#707070">邀请面试</span></td>
+							<td><a href="javascript:void(0)" onclick="msresultOk(${i.cxrzId})">接收邀请</a>&nbsp;&nbsp;<a href="javascript:void(0)" onclick="msresultNo(${i.cxrzId})">拒绝邀请</a></td>
+						</tr>
+					</c:forEach>
+				</c:if>
 
-			<c:if test="${list != null}">
-				<c:forEach items="${list}" begin="0" var="i">
-					<div id="contentsqzw">
-						<input hidden value="${i.zpxxid}" id="zpxxid"/>
-						<input hidden value="${i.qyid}" id="qyid"/>
-						<div class="mygzBox">
-							<div class="mygzBox1">
-								<a href="jobtype.html" class="ajob">
-										<c:if test="${i.postion != null}">
-											${i.postion}
-										</c:if>
-
-								</a>
-								<a href="company.html" class="acmp">
-									<c:if test="${i.qyName != null}">
-										${i.qyName}
-									</c:if></a>
-								<a href="javascript:void(0)" class="ljsq" onclick="toudi()">立即投递简历</a>
-							</div>
-							<div class="clear"></div>
-							<div class="mygzBox2">
-								<div class="mygzBox2_1">工作地点：<c:if test="${i.adress != null}">${i.adress}</c:if></a> | 职位月薪：<c:if test="${i.money != null}">${i.money}</c:if> | 招聘人数：<c:if test="${i.zpNum != null}">${i.zpNum}</c:if>人</div>
-								<div class="mygzBox2_2">
-									<span>关注时间：
-										<c:if test="${i.sctime != null}">
-											${i.sctime}
-										</c:if>
-									</span>
-									<a href="">取消关注</a>
-								</div>
-								<div class="clear"></div>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
-			</c:if>
-
+						</tbody>
+					</table>
+				</ul>
+			</div>
 		</div>
 
 	</div>
@@ -155,16 +148,7 @@
 <script type="text/javascript" src=<%=path+"layui/jquery-3.4.1.js"%>></script>
 <script src=<%=path + "layui/layui.js"%>></script>
 <script type="text/javascript" src=<%=jsPath+"personal.js"%>></script>
-
-<div style="padding: 20px 100px;height: 150px;" class="layui-form" id="jllist">
-	<form class="layui-form">
-		<label class="layui-form-label" style="margin-left: -110px;">请选择投递的简历</label>
-		<div class="layui-input-block" style="width: 200px;margin-left: 0px;">
-			<select name="interest" lay-filter="jlselect" id="jlselect">
-			</select>
-		</div>
-	</form>
-</div>
+<script type="text/javascript" src=<%=jsPath+"personal_jl.js"%>></script>
 </body>
 </html>
 
