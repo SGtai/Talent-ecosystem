@@ -38,5 +38,6 @@ public interface UserDao
 	public List<Shoucang> yaoyue(@Param("hyid") int hyid);
 	public int msresultOk(@Param("cxrzId") int cxrzId);
 	public int msresultNo(@Param("cxrzId") int cxrzId);
+	public int password(@Param("password") String password,@Param("yhid") int yhid);
 
 }

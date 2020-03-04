@@ -124,4 +124,8 @@ public class UserService
 		int num = userDao.msresultNo(cxrzId);
 		return num;
 	}
+	public int password(String password,int yhid){
+		int num = userDao.password(password,yhid);
+		return num;
+	}
 }

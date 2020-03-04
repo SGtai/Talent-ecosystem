@@ -1,12 +1,11 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 86158
-  Date: 2020-3-3
-  Time: 19:46
+  Date: 2020-3-4
+  Time: 16:16
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String cssPath = application.getContextPath()+"/userS/css/";
 	String jsPath = application.getContextPath()+"/userS/js/";
@@ -20,7 +19,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href=<%=cssPath+"personal.css"%>>
 	<link rel="stylesheet" href="<%=path+"layui/css/layui.css"%>" media="all">
-	<title>个人中心-申请的职位</title>
+	<title>个人中心-应聘邀请</title>
 </head>
 
 <body>
@@ -74,7 +73,7 @@
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li class="orang"><a href="/user/shenqinglist">申请的职位</a></li>
+				<li><a href="/user/shenqinglist">申请的职位</a></li>
 				<li><a href="/user/shoucanglist">我的关注</a></li>
 			</ul>
 			<div class="NavLeftBox twoNav">
@@ -83,7 +82,7 @@
 			</div>
 			<ul>
 				<li><a href="/user/mianshi">面试通知</a></li>
-				<li><a href="/user/yaoyue">应聘邀请</a></li>
+				<li class="orang"><a href="/user/yaoyue">应聘邀请</a></li>
 			</ul>
 			<div class="NavLeftBox">
 				<a href="personal_help.html" class="a8">帮助中心</a>
@@ -96,47 +95,32 @@
 	</div>
 	<div class="perRightcon">
 		<div class="commonTit">
-			<h1 class="fl">申请的职位</h1>
+			<h1>账户管理</h1>
 		</div>
-		<div class="sqzwBox">
-			<ul id="tabsqzw">
-				<li class="currentsqzw">全部</li>
-				<div class="clear"></div>
-			</ul>
-			<div class="clear"></div>
-			<div id="contentsqzw">
-				<ul style="display:block;">
-					<table class="tabzw" cellpadding="0" cellspacing="0">
-						<tbody>
-						<tr>
-							<th width="22%" style="border-left: 1px #EDEDED solid;">职位名称</th>
-							<th width="25%">企业名称</th>
-							<th width="8%" style="text-align: center;">企业答复率</th>
-							<th width="20%" style="text-align: center;">简历名称</th>
-							<th width="15%"><div>申请时间</div></th>
-							<th width="20%">答复状态</th>
-						</tr>
-				<c:if test="${list != null}">
-					<c:forEach items="${list}" begin="0" var="i">
-						<tr>
-							<td valign="middle">
-								<a href="/user/jobinfo?id1=${i.qyid}&id2=${i.zpxxid}">${i.postion}</a>
-							</td>
-							<td><a href="#" class="cpname">${i.qyName}</a></td>
-							<td style="text-align: center"><font style="color: red">${i.replyRate}%</font></td>
-							<td><span>${i.jlname}</span></td>
-							<td><span>${i.sctime}</span></td>
-							<td><span style="color:#707070">${i.statename}</span></td>
-						</tr>
-					</c:forEach>
-				</c:if>
-
-						</tbody>
-					</table>
-				</ul>
+		<div class="TopNotice">
+			<span>修改密码</span>
+		</div>
+		<div class="AccountMain">
+			<div class="updatePsd">
+				<div class="boxDiv">
+					<input hidden id="userpass" value="${sessionScope.user.password}"/>
+					<span class="nametxt">原密码：</span>
+					<input name="" type="text" id="password"/>
+				</div>
+				<div class="boxDiv">
+					<span class="nametxt">新密码：</span>
+					<input name="" type="text" id="newpassword"/>
+					<span class="SpNotice">请输入6-20个字符</span>
+				</div>
+				<div class="boxDiv">
+					<span class="nametxt">确认新密码：</span>
+					<input name="" type="text" id="newpassword2"/>
+				</div>
+				<div class="boxDiv">
+					<a href="javascript:void(0)" onclick="passsure()" class="updateBtn">确认修改</a>
+				</div>
 			</div>
 		</div>
-
 	</div>
 </div>
 
@@ -151,4 +135,5 @@
 <script type="text/javascript" src=<%=jsPath+"personal_jl.js"%>></script>
 </body>
 </html>
+
 

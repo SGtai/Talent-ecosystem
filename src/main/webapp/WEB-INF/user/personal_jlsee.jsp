@@ -35,7 +35,6 @@
 					<div id="InfoPopup">
 						<ul>
 							<li><a href="/jump/user/personal_updatepsd">修改密码</a></li>
-							<li><a href="/jump/user/personal_updatenum">修改手机</a></li>
 							<li><a href="javascript:void(0)" onclick="tuichu2()">退出</a></li>
 						</ul>
 					</div>

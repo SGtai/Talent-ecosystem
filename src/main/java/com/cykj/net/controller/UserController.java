@@ -418,6 +418,20 @@ public class UserController
 		}
 	}
 
+	//	更改秘密
+	@RequestMapping("/password")
+	@ResponseBody
+	public String password(String password,HttpServletRequest request){
+		Userlist user = (Userlist) request.getSession().getAttribute("user");
+		int yhid = (int) user.getYhid();
+		int num = userService.password(password,yhid);
+		if (num > 0){
+			return "true";
+		}else {
+			return "false";
+		}
+	}
+
 
 
 }

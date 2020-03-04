@@ -230,16 +230,16 @@
 		update resume set ycHide = 1 where jlId = ${jlid}
 	</update>
 
-    <insert id="toudi" parameterType="int">
+    <insert id="toudi" parameterType="map">
 		insert into query (jlId,qyId,zpxxid,paid,ckTime) value (${jlid},${qyId},${zpxxid},10,now());
 	</insert>
-    <select id="toudijiancha" parameterType="int" resultType="int">
+    <select id="toudijiancha" parameterType="map" resultType="int">
         select count(*) from query where jlId = ${jlid} and qyId = ${qyId} and zpxxid=${zpxxid};
     </select>
-    <insert id="shoucang" parameterType="int">
+    <insert id="shoucang" parameterType="map">
 		insert into shoucang set zpxxid = ${zpxxid} and hyid = ${hyid} and sctime = now()
 	</insert>
-    <select id="shoucangCount" parameterType="int" resultType="int">
+    <select id="shoucangCount" parameterType="map" resultType="int">
 		select count(*) from shoucang where zpxxid = ${zpxxid} and hyid = ${hyid}
 	</select>
 
@@ -272,5 +272,8 @@
     </update>
     <update id="msresultNo" parameterType="int">
         update query set paid = 8 and ckTime = now() where cxrzId =${cxrzId}
+    </update>
+    <update id="password" parameterType="map">
+        update userlist set password = ${password} where yhid = ${yhid}
     </update>
 </mapper>
