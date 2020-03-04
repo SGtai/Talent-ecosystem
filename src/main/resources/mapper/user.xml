@@ -61,8 +61,8 @@
             <if test="minzu != null and minzu.length()>0">
                 minzu = #{minzu},
             </if>
-            <if test="xy != null and xy.length()>0">
-                xy = #{xy},
+            <if test="xl != null and xl.length()>0">
+                xl = #{xl},
             </if>
             <if test="byschool != null and byschool.length()>0">
                 byschool = #{byschool},
@@ -259,7 +259,7 @@
 	</select>
 
     <select id="mianshi" resultType="Shoucang" parameterType="int">
-		select B.qyid,C.zpxxid,F.postion,B.qyName,B.replyRate,D.jlname,A.ckTime sctime,E.name statename
+		select A.cxrzId,B.qyid,C.zpxxid,F.postion,B.qyName,B.replyRate,D.jlname,A.ckTime sctime,E.name statename
         from query A,qyinfo B,jobinfo C,resume D,parameter E,station F
         where E.paid = A.paid and A.qyId = B.qyid and A.zpxxid = C.zpxxid
         and A.jlId = D.jlId and F.stid = C.zwid and A.paid=12 and  D.yhId = ${hyid};
@@ -271,10 +271,10 @@
         where A.qyId = B.qyid and A.zpxxid is null and C.jlId = A.jlId and C.yhId=${hyid} and A.paid =12;
 	</select>
     <update id="msresultOk" parameterType="int">
-        update query set paid = 13 and ckTime = now() where cxrzId =${cxrzId}
+        update query set paid = 13,ckTime = now() where cxrzId =${cxrzId}
     </update>
     <update id="msresultNo" parameterType="int">
-        update query set paid = 8 and ckTime = now() where cxrzId =${cxrzId}
+        update query set paid = 8,ckTime = now() where cxrzId =${cxrzId}
     </update>
     <update id="password" parameterType="map">
         update userlist set password = ${password} where yhid = ${yhid}
