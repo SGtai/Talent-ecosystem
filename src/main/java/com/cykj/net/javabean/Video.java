@@ -11,6 +11,7 @@ public class Video {
   private String demo1;
   private String demo2;
   private String spDescribe;
+  private long sort;
 
 
   public long getSpId() {
@@ -82,6 +83,15 @@ public class Video {
 
   public void setSpDescribe(String spDescribe) {
     this.spDescribe = spDescribe;
+  }
+
+
+  public long getSort() {
+    return sort;
+  }
+
+  public void setSort(long sort) {
+    this.sort = sort;
   }
 
 }

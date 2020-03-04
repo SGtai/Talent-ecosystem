@@ -58,9 +58,9 @@
 						<c:forEach items="${video}" var="node">
 							<a class="layui-btn layui-btn-xs mydown" href = "javascript:void(0);" onclick ="down('${node.spPath}')">下载视频${node.spName}</a>
 							<div class="article-list">
-								<a href="/techvideo?id=${node.zjId}&name=${node.spName}&path=${node.spPath}&spId=${node.spId}" class="article-link">
+								<a href="/techvideo?id=${node.zjId}&name=${node.spName}&path=${node.spPath}&spId=${node.spId}&spDescribe=${node.spDescribe}" class="article-link">
 									<div class="article-head">
-										<span class="article-number">${node.spId}</span>
+										<span class="article-number">${node.sort}</span>
 										<span class="article-title">${node.spName}</span>
 									</div>
 									<div class="article-content">
@@ -197,7 +197,7 @@
 		if ($("#pl").val().length==0){
 			alert("你未输入评论");
 		} else{
-			alert($("#pl").val()+"评论成功！！！");
+			alert("评论成功！！！");
 			$("#nr").val($("#pl").val());
 			$("#myForm").submit();
 		}
@@ -228,6 +228,5 @@
 		alert(warning);
 	}
 </script>
-
 </body>
 </html>
