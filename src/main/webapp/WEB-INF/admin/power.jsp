@@ -40,12 +40,13 @@
                 <option value="2">普通管理员</option>
                 <option value="3">企业</option>
                 <option value="4">高校</option>
+                <option value="5">测试</option>
             </select>
         </div>
     </div>
 
     <div class="content_wrap" style="padding-left: 70px">
-        <div class="zTreeDemoBackground left">
+        <div class="zTreeDemoBackground left" style="height:470px;width:300px;overflow:auto">
             <ul id="treeDemo" class="ztree"></ul>
         </div>
     </div>
@@ -83,7 +84,6 @@
     // 页面加载后马上获取后台数据
     $(document).ready(function () {
         var rid = $("#role").val();
-
         $.ajax({
             url:"/adminMenu/initMenuChange",
             data: {"rid":rid},
@@ -125,7 +125,7 @@
                 for (var i = 0; i < nodes.length ; i++) {
                     arrayObj.push(nodes[i].id)
                 }
-
+                alert(arrayObj);
                 $.ajax({
                     url:"/adminMenu/changeMenu",
                     data: {"rid":rid,"checkList":JSON.stringify(arrayObj)},
