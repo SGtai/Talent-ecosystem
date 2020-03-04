@@ -35,8 +35,7 @@
 					<input type="button">
 					<div id="InfoPopup">
 						<ul>
-							<li><a href="personal_updatepsd.html">修改密码</a></li>
-							<li><a href="personal_updatenum.html">修改手机</a></li>
+							<li><a href="/jump/user/personal_updatepsd">修改密码</a></li>
 							<li><a href="javascript:void(0)" onclick="tuichu2()">退出</a></li>
 						</ul>
 					</div>
@@ -48,11 +47,10 @@
 </div>
 <div class="navTop">
 	<div class="navTopmain">
-		<div class="logo"><a href="/user/index"><img src="<%=imagesPath+"logo_1.png"%>"/><img src="<%=imagesPath+"logo_2.png"%>" /></a></div>
 		<div class="nav">
 			<div class="navItem"><a href="/user/index">首页</a></div>
 			<div class="navItem"><a href="/jump/home/searchJob">职位搜索</a></div>
-			<a href="/techa">人才成长区</a>
+			<div class="navItem"><a href="/techa">人才成长区</a></div>
 		</div>
 	</div>
 </div>
@@ -65,6 +63,9 @@
 			</div>
 			<div class="NavLeftBox">
 				<a href="/user/gopersonaljl" class="a2">我的简历</a>
+			</div>
+			<div class="NavLeftBox">
+				<a href="" class="a3">我的校友</a>
 			</div>
 			<div class="NavLeftBox twoNav">
 				<a class="a5">职位申请</a>
@@ -79,73 +80,43 @@
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li><a href="/jump/user/personal_mainshi">面试通知</a></li>
-				<li><a href="/jump/user/personal_yaoqing">应聘邀请</a></li>
+				<li><a href="/user/mianshi">面试通知</a></li>
+				<li><a href="/user/yaoyue">应聘邀请</a></li>
 			</ul>
 			<div class="NavLeftBox">
 				<a href="personal_help.html" class="a8">帮助中心</a>
 			</div>
 		</div>
-		<div class="navLeftBottom">
-			<img src="<%=imagesPath+"showqrcode.jpg"%>" />
-			<span class="Notice">菜鸟人才网<br>找工作更靠谱</span>
-		</div>
 	</div>
 	<div class="perRightcon">
 		<div class="perRT">
-			<span class="spl">您尚未绑定微信，绑定后第一时间接收信息，不再错过任何好工作。</span>
-			<span class="spr">蝶飞人才网 ，找工作更靠谱</span>
+			<span class="spr">菜鸟人才网 ，找工作更靠谱</span>
 		</div>
 		<div class="perRpart1">
 			<div class="perRpart1_l">
-				<img src="<%=imagesPath+"per1.jpg"%>" width="80" height="100" />
+				<c:if test="${sessionScope.user.picture ==null or sessionScope.user.picture ==''}">
+					<img src="<%=imagesPath+"per1.jpg"%>" width="80" height="100" />
+				</c:if>
+				<c:if test="${sessionScope.user.picture !=null and sessionScope.user.picture !=''}">
+					<img src="<%=dbimgPath%>${sessionScope.user.picture}" width="80" height="100" />
+				</c:if>
 			</div>
 			<div class="perRpart1_r">
 				<div class="PaName">您好！</div>
 				<div class="clear"></div>
 				<div class="PaCon">
 					<c:if test="${sessionScope.user.name != null}">
-						<span class="span1">用户名：${sessionScope.user.name} <a href="personal_renzheng.html" class="a1">[未认证]</a> <a href="personal_updatepsd.html" class="a2">修改密码</a></span>
+						<span class="span1">用户名：${sessionScope.user.name} <a href="personal_renzheng.html" class="a1"></a> <a href="/jump/user/personal_updatepsd" class="a2">修改密码</a></span>
 					</c:if>
-					<span class="span3">手机号：${sessionScope.user.phone} <a href="" class="a3">[已认证]</a> <a href="personal_updatenum.html" class="a2">修改</a></span>
+					<span class="span3">手机号：${sessionScope.user.phone} <a href="" class="a3"></a>
 				</div>
 			</div>
 			<div class="clear"></div>
-			<div class="perRpart1_c">
-				<div class="itemp">
-					<a href="personal_whogz.html">
-						<span class="Title">谁在关注我</span>
-						<span class="Num">0</span>
-					</a>
-				</div>
-				<div class="itemp">
-					<a href="personal_sqzw.html">
-						<span class="Title">申请的职位</span>
-						<span class="Num">0</span>
-					</a>
-				</div>
-				<div class="itemp">
-					<a href="personal_mainshi.html">
-						<span class="Title">面试通知</span>
-						<span class="Num">0</span>
-					</a>
-				</div>
-				<div class="itemp">
-					<a href="personal_yaoqing.html">
-						<span class="Title">应聘邀请</span>
-						<span class="Num">0</span>
-					</a>
-				</div>
-			</div>
 		</div>
 		<div class="jobSea">
 			<div class="jobSea3">
 				<a href="/jump/user/personal_jlupdate">完善个人信息</a>
 			</div>
-		</div>
-		<div class="clear"></div>
-		<div class="adBox">
-			<img src="<%=imagesPath+"perAD.jpg"%>" width="814" />
 		</div>
 	</div>
 </div>

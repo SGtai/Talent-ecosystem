@@ -35,7 +35,6 @@
 					<div id="InfoPopup">
 						<ul>
 							<li><a href="/jump/user/personal_updatepsd">修改密码</a></li>
-							<li><a href="/jump/user/personal_updatenum">修改手机</a></li>
 							<li><a href="javascript:void(0)" onclick="tuichu2()">退出</a></li>
 						</ul>
 					</div>
@@ -46,11 +45,10 @@
 </div>
 <div class="navTop">
 	<div class="navTopmain">
-		<div class="logo"><a href="/user/index"><img src="<%=imagesPath+"logo_1.png"%>"/><img src="<%=imagesPath+"logo_2.png"%>"/></a></div>
 		<div class="nav">
 			<div class="navItem"><a href="/user/index">首页</a></div>
 			<div class="navItem"><a href="/jump/home/searchJob">职位搜索</a></div>
-			<a href="/techa">人才成长区</a>
+			<div class="navItem"><a href="/techa">人才成长区</a></div>
 
 		</div>
 	</div>
@@ -65,6 +63,9 @@
 			<div class="NavLeftBox active">
 				<a href="/user/gopersonaljl" class="a2">我的简历</a>
 			</div>
+			<div class="NavLeftBox">
+				<a href="" class="a3">我的校友</a>
+			</div>
 			<div class="NavLeftBox twoNav">
 				<a class="a5">职位申请</a>
 				<span class="up"></span>
@@ -78,17 +79,14 @@
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li><a href="/jump/user/personal_mainshi">面试通知</a></li>
-				<li><a href="/jump/user/personal_yaoqing">应聘邀请</a></li>
+				<li><a href="/user/mianshi">面试通知</a></li>
+				<li><a href="/user/yaoyue">应聘邀请</a></li>
 			</ul>
 			<div class="NavLeftBox">
 				<a href="/jump/user/personal_help" class="a8">帮助中心</a>
 			</div>
 		</div>
-		<div class="navLeftBottom">
-			<img src="<%=imagesPath+"showqrcode.jpg"%>" />
-			<span class="Notice">菜鸟人才网<br>找工作更靠谱</span>
-		</div>
+
 	</div>
 	<div class="perRightcon layui-form">
 		<div class="seeTitle">
@@ -703,17 +701,6 @@
 		</form>
 		<div class="clear"></div>
 		<div class="lineddiv"></div>
-		<div class="JlBoxCon">
-			<h1><span>附件简历</span></h1>
-			<div class="wordSub">
-				<p>可以上传word文件或者图片类型的简历，图片支持jpg/gif/png/jpeg格式大小3M以内</p>
-				<div class="wordUp">
-					<span></span>
-					<input name="" type="button" value="浏览" class="liulan"/>
-				</div>
-				<input name="" type="button" value="上传" class="upchuan"/>
-			</div>
-		</div>
 	</div>
 </div>
 

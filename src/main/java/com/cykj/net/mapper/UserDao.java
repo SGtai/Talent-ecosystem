@@ -31,7 +31,15 @@ public interface UserDao
 	public int toudi(@Param("jlid") int jlid,@Param("qyId") int qyId,@Param("zpxxid") int zpxxid);
 	public int toudijiancha(@Param("jlid") int jlid,@Param("qyId") int qyId,@Param("zpxxid") int zpxxid);
 	public int shoucang(@Param("zpxxid") int zpxxid,@Param("hyid") int hyid);
+	public int qxguanzhu(@Param("zpxxid") int zpxxid,@Param("hyid") int hyid);
 	public int shoucangCount(@Param("zpxxid") int zpxxid,@Param("hyid") int hyid);
 	public List<Shoucang> shoucanglist(@Param("hyid") int hyid);
 	public List<Shoucang> shenqinglist(@Param("hyid") int hyid);
+	public List<Shoucang> mianshi(@Param("hyid") int hyid);
+	public List<Shoucang> yaoyue(@Param("hyid") int hyid);
+	public int msresultOk(@Param("cxrzId") int cxrzId);
+	public int msresultNo(@Param("cxrzId") int cxrzId);
+	public int password(@Param("password") String password,@Param("yhid") int yhid);
+	public int photo(@Param("urldb") String urldb,@Param("yhid") int yhid);
+
 }

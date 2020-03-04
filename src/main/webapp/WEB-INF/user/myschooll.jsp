@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: 86158
+  Date: 2020-3-4
+  Time: 9:47
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -52,7 +59,7 @@
 		<div class="nav">
 			<div class="navItem"><a href="/user/index">首页</a></div>
 			<div class="navItem"><a href="/jump/home/searchJob">职位搜索</a></div>
-			<div class="navItem"><a href="/techa">人才成长区</a></div>
+			<a href="/techa">人才成长区</a>
 		</div>
 	</div>
 </div>
@@ -89,47 +96,16 @@
 				<a href="personal_help.html" class="a8">帮助中心</a>
 			</div>
 		</div>
+		<div class="navLeftBottom">
+			<img src="images/showqrcode.jpg" />
+			<span class="Notice">菜鸟人才网<br>找工作更靠谱</span>
+		</div>
 	</div>
 	<div class="perRightcon">
 		<div class="commonTit">
-			<h1 class="fl">申请的职位</h1>
+			<h1 class="fl">我的校友</h1>
 		</div>
-		<div class="sqzwBox">
-			<ul id="tabsqzw">
-				<li class="currentsqzw">全部</li>
-				<div class="clear"></div>
-			</ul>
-			<div class="clear"></div>
-			<div id="contentsqzw">
-				<ul style="display:block;">
-					<table class="tabzw" cellpadding="0" cellspacing="0">
-						<tbody>
-						<tr>
-							<th width="22%" style="border-left: 1px #EDEDED solid;">职位名称</th>
-							<th width="25%">企业名称</th>
-							<th width="20%" style="text-align: center;">简历名称</th>
-							<th width="15%"><div>申请时间</div></th>
-							<th width="20%">答复状态</th>
-						</tr>
-				<c:if test="${list != null}">
-					<c:forEach items="${list}" begin="0" var="i">
-						<tr>
-							<td valign="middle">
-								<a href="/user/jobinfo?id1=${i.qyid}&id2=${i.zpxxid}">${i.postion}</a>
-							</td>
-							<td><a href="#" class="cpname">${i.qyName}</a></td>
-							<td><span>${i.jlname}</span></td>
-							<td><span>${i.sctime}</span></td>
-							<td><span style="color:#707070">${i.statename}</span></td>
-						</tr>
-					</c:forEach>
-				</c:if>
 
-						</tbody>
-					</table>
-				</ul>
-			</div>
-		</div>
 
 	</div>
 </div>
@@ -142,7 +118,7 @@
 <script type="text/javascript" src=<%=path+"layui/jquery-3.4.1.js"%>></script>
 <script src=<%=path + "layui/layui.js"%>></script>
 <script type="text/javascript" src=<%=jsPath+"personal.js"%>></script>
-<script type="text/javascript" src=<%=jsPath+"personal_jl.js"%>></script>
 </body>
 </html>
+
 

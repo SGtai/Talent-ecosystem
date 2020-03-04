@@ -37,8 +37,7 @@
 					<input type="button">
 					<div id="InfoPopup">
 						<ul>
-							<li><a href="personal_updatepsd.html">修改密码</a></li>
-							<li><a href="personal_updatenum.html">修改手机</a></li>
+							<li><a href="/jump/user/personal_updatepsd">修改密码</a></li>
 							<li><a href="javascript:void(0)" onclick="tuichu2()">退出</a></li>
 						</ul>
 					</div>
@@ -50,11 +49,10 @@
 </div>
 <div class="navTop">
 	<div class="navTopmain">
-		<div class="logo"><a href="/user/index"><img src="images/logo_1.png"/><img src="images/logo_2.png" /></a></div>
 		<div class="nav">
 			<div class="navItem"><a href="/user/index">首页</a></div>
 			<div class="navItem"><a href="/jump/home/searchJob">职位搜索</a></div>
-			<a href="/techa">人才成长区</a>
+			<div class="navItem"><a href="/techa">人才成长区</a></div>
 		</div>
 	</div>
 </div>
@@ -67,6 +65,9 @@
 			</div>
 			<div class="NavLeftBox">
 				<a href="/user/gopersonaljl" class="a2">我的简历</a>
+			</div>
+			<div class="NavLeftBox">
+				<a href="" class="a3">我的校友</a>
 			</div>
 			<div class="NavLeftBox twoNav">
 				<a class="a5">职位申请</a>
@@ -81,16 +82,12 @@
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li><a href="personal_mainshi.html">面试通知</a></li>
-				<li><a href="personal_yaoqing.html">应聘邀请</a></li>
+				<li><a href="/user/mianshi">面试通知</a></li>
+				<li><a href="/user/yaoyue">应聘邀请</a></li>
 			</ul>
 			<div class="NavLeftBox">
 				<a href="personal_help.html" class="a8">帮助中心</a>
 			</div>
-		</div>
-		<div class="navLeftBottom">
-			<img src="images/showqrcode.jpg" />
-			<span class="Notice">菜鸟人才网<br>找工作更靠谱</span>
 		</div>
 	</div>
 	<div class="perRightcon">
@@ -131,7 +128,7 @@
 											${i.sctime}
 										</c:if>
 									</span>
-									<a href="">取消关注</a>
+									<a href="javascript:void(0)" onclick="qxguanzhu(${i.zpxxid})">取消关注</a>
 								</div>
 								<div class="clear"></div>
 							</div>

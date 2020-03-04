@@ -20,7 +20,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href=<%=cssPath+"personal.css"%>>
 	<link rel="stylesheet" href="<%=path+"layui/css/layui.css"%>" media="all">
-	<title>个人中心-申请的职位</title>
+	<title>个人中心-面试通知</title>
 </head>
 
 <body>
@@ -82,7 +82,7 @@
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li><a href="/user/mianshi">面试通知</a></li>
+				<li class="orang"><a href="/user/mianshi">面试通知</a></li>
 				<li><a href="/user/yaoyue">应聘邀请</a></li>
 			</ul>
 			<div class="NavLeftBox">
@@ -105,11 +105,11 @@
 					<table class="tabzw" cellpadding="0" cellspacing="0">
 						<tbody>
 						<tr>
-							<th width="22%" style="border-left: 1px #EDEDED solid;">职位名称</th>
+							<th width="22%" style="border-left: 1px #EDEDED solid;">职位信息</th>
 							<th width="25%">企业名称</th>
 							<th width="20%" style="text-align: center;">简历名称</th>
 							<th width="15%"><div>申请时间</div></th>
-							<th width="20%">答复状态</th>
+							<th width="15%"><div>操作</div></th>
 						</tr>
 				<c:if test="${list != null}">
 					<c:forEach items="${list}" begin="0" var="i">
@@ -120,7 +120,8 @@
 							<td><a href="#" class="cpname">${i.qyName}</a></td>
 							<td><span>${i.jlname}</span></td>
 							<td><span>${i.sctime}</span></td>
-							<td><span style="color:#707070">${i.statename}</span></td>
+							<td><span style="color:#707070">邀请面试</span></td>
+							<td><a href="javascript:void(0)" onclick="msresultOk(${i.cxrzId})">接收邀请</a>&nbsp;&nbsp;<a href="javascript:void(0)" onclick="msresultNo(${i.cxrzId})">拒绝邀请</a></td>
 						</tr>
 					</c:forEach>
 				</c:if>

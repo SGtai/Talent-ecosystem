@@ -159,13 +159,13 @@
 				<div class="adBox0">
 					<ul style="margin-left: 0px; overflow: hidden">
 						<li>
-							<a href=" "><div style="background:url(<%=imagesPath+"head-fl.jpg"%>);background-size: cover;background-repeat: no-repeat;background-position: center"></div></a>
+							<a href=" "><div style="background:url(<%=imagesPath+"l.jpg"%>);background-size: cover;background-repeat: no-repeat;background-position: center"></div></a>
 						</li>
 						<li>
 							<a href=" "><div style="background:url(<%=imagesPath+"2.jpg"%>);background-size: cover;background-repeat: no-repeat;background-position: center"></div></a>
 						</li>
 						<li>
-							<a href=" "><div style="background:url(<%=imagesPath+"3.jpg"%>);background-size: cover;background-repeat: no-repeat;background-position: center"></div></a>
+							<a href=" "><div style="background:url(<%=imagesPath+"3.gif"%>);background-size: cover;background-repeat: no-repeat;background-position: center"></div></a>
 						</li>
 					</ul>
 				</div>
@@ -218,11 +218,6 @@
 				</c:if>
 			>
 
-				<div class="erweima">
-					<div class="close"></div>
-					<div class="ewmimg"><img src=<%=imagesPath+"showqrcode.jpg"%> /></div>
-					<div class="ewmtxt">使用微信扫描上方二维码登录</div>
-				</div>
 				<div class="logintop">
 					<div class="loginC loginA select">
 						<div class="smlogin"></div>
@@ -292,28 +287,50 @@
 		</div>
 	</div>
 	<div class="clear"></div>
+
 	<div class="mainCon1">
-		<c:if test="${sessionScope.advertList != null}">
-			<c:forEach items="${sessionScope.advertList}" begin="0" var="i" varStatus="status">
-				<c:if test="${status.index ==0 or status.index ==2 or status.index ==5}">
-					<div class="imgbox1">
-				</c:if>
-				<c:if test="${status.index < 2}">
-					<div class="box1"><img src=<%=imagesPath%>${i.advertPicture} height="71" width="546" /></div>
-				</c:if>
-				<c:if test="${status.index < 5 and status.index >1}">
-					<div class="box2"><img src=<%=imagesPath%>${i.advertPicture} height="71" width="362" /></div>
-				</c:if>
-				<c:if test="${status.index < 10 and status.index >4}">
-					<div class="box3"><img src=<%=imagesPath%>${i.advertPicture} height="71" width="178" /></div>
-				</c:if>
-				<c:if test="${status.index ==1 or status.index ==4 or status.index ==9}">
-					</div>
-					<div class="clear"></div>
-				</c:if>
-			</c:forEach>
-		</c:if>
+		<div class="imgbox1">
+			<div class="box1"><img src="<%=imagesPath+"1.gif"%>" height="71" width="546" /></div>
+			<div class="box1"><img src="<%=imagesPath+"2.gif"%>" height="71" width="546" /></div>
+		</div>
+		<div class="clear"></div>
+		<div class="imgbox1">
+			<div class="box2"><img src="<%=imagesPath+"4.gif"%>" height="71" width="362" /></div>
+			<div class="box2"><img src="<%=imagesPath+"5.gif"%>" height="71" width="362" /></div>
+			<div class="box2"><img src="<%=imagesPath+"6.gif"%>" height="71" width="362" /></div>
+		</div>
+		<div class="clear"></div>
+		<div class="imgbox1">
+			<div class="box2"><img src="<%=imagesPath+"7.gif"%>" height="71" width="362" /></div>
+			<div class="box3"><img src="<%=imagesPath+"8.gif"%>" height="71" width="178" /></div>
+			<div class="box3"><img src="<%=imagesPath+"9.gif"%>" height="71" width="178" /></div>
+			<div class="box3"><img src="<%=imagesPath+"10.gif"%>" height="71" width="178" /></div>
+			<div class="box3"><img src="<%=imagesPath+"11.gif"%>" height="71" width="178" /></div>
+		</div>
+		<div class="clear"></div>
 	</div>
+<%--	<div class="mainCon1">--%>
+<%--		<c:if test="${sessionScope.advertList != null}">--%>
+<%--			<c:forEach items="${sessionScope.advertList}" begin="0" var="i" varStatus="status">--%>
+<%--				<c:if test="${status.index ==0 or status.index ==2 or status.index ==5}">--%>
+<%--					<div class="imgbox1">--%>
+<%--				</c:if>--%>
+<%--				<c:if test="${status.index < 2}">--%>
+<%--					<div class="box1"><img src=<%=imagesPath%>${i.advertPicture} height="71" width="546" /></div>--%>
+<%--				</c:if>--%>
+<%--				<c:if test="${status.index < 5 and status.index >1}">--%>
+<%--					<div class="box2"><img src=<%=imagesPath%>${i.advertPicture} height="71" width="362" /></div>--%>
+<%--				</c:if>--%>
+<%--				<c:if test="${status.index < 10 and status.index >4}">--%>
+<%--					<div class="box3"><img src=<%=imagesPath%>${i.advertPicture} height="71" width="178" /></div>--%>
+<%--				</c:if>--%>
+<%--				<c:if test="${status.index ==1 or status.index ==4 or status.index ==9}">--%>
+<%--					</div>--%>
+<%--					<div class="clear"></div>--%>
+<%--				</c:if>--%>
+<%--			</c:forEach>--%>
+<%--		</c:if>--%>
+<%--	</div>--%>
 	<div class="mainCon2">
 		<div class="commontitdiv">
 			<div class="title">高薪职位</div>
@@ -348,14 +365,14 @@
 				<c:forEach items="${sessionScope.compAndJobList}" begin="0" var="i">
 					<li>
 						<img src=<%=imagesPath%>${i.qyPicture} width="62" height="62"/>
-						<p><a href=" ">${i.qyName}</a></p>
+						<p>${i.qyName}</p>
 					<c:if test="${i.list != null}">
 						<c:forEach items="${i.list}" begin="0" var="j" varStatus="status">
 <%--							第二次结束也就是第三次开始时换行--%>
 							<c:if test="${status.index == 2}">
 								<br>
 							</c:if>
-							<span><a href=" ">${j.postion}</a></span>
+							<span><a href=/user/jobinfo?id1=${i.qyid}&id2=${j.zpxxid}>${j.postion}</a></span>
 						</c:forEach>
 					</c:if>
 					</li>
@@ -409,43 +426,10 @@
 				<a href=" ">联系我们</a>
 				<a href=" ">网站声明</a>
 			</div>
-			<div class="footlbox">
-				<p>个人求职</p>
-				<a href=" ">查工资</a>
-				<a href=" ">注册/登录 </a>
-				<a href=" ">职位搜索</a>
-				<a href=" ">兼职招聘</a>
-				<a href=" ">手机找工作</a>
-			</div>
-			<div class="footlbox">
-				<p>企业招聘</p>
-				<a href=" ">注册/登录</a>
-				<a href=" ">资费标准</a>
-				<a href=" ">掌中招聘 </a>
-			</div>
-			<div class="footlbox">
-				<p>资讯中心</p>
-				<a href=" ">招聘会</a>
-				<a href=" ">校园招聘</a>
-				<a href=" ">就业资讯</a>
-				<a href=" ">文档下载</a>
-			</div>
-			<div class="footlbox">
-				<p>快速导航</p>
-				<a href=" ">网站地图</a>
-				<a href=" ">职位地图</a>
-				<a href=" ">热门搜索</a>
-				<a href=" ">专业搜索</a>
-				<a href=" ">推广入口</a>
-			</div>
 		</div>
 		<div class="footr">
 			<div class="fr1">400-8**-****</div>
 			<div class="fr2">每周一至周日 8:30-17:30</div>
-			<div class="fr3">
-				<span><img src=<%=imagesPath+"showqrcode.jpg"%> /><br />个人安卓客户端</span>
-				<span><img src=<%=imagesPath+"showqrcode.jpg"%> /><br />企业安卓客户端</span>
-			</div>
 		</div>
 		<div class="clear"></div>
 	</div>
