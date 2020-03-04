@@ -1,5 +1,4 @@
 package com.cykj.net.controller;
-
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
@@ -9,31 +8,22 @@ import com.cykj.net.javabean.*;
 import com.cykj.net.service.TechService;
 import com.cykj.net.tool.Comment;
 import com.cykj.net.tool.DateDemo;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.awt.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -54,9 +44,8 @@ public class TechController
 	 * @return
 	 */
 	@RequestMapping("/techa")
-	public ModelAndView techa(String lows,String highs,String kcname){
-		Userlist u = new Userlist();
-		u.setYhid(1);
+	public ModelAndView techa(HttpServletRequest request,String lows,String highs,String kcname){
+		Userlist u = (Userlist) request.getSession().getAttribute("user");
 		ArrayList<LearningLog> learningLogs = techService.getLearningLog(String.valueOf(u.getYhid()));
 		for (int i = 0; i <learningLogs.size() ; i++)
 		{
@@ -64,7 +53,7 @@ public class TechController
 		}
 		ArrayList<Curriculum> al = new ArrayList<>();
 		Finance finance = new Finance();
-		finance.setYhId(1);
+		finance.setYhId(u.getYhid());
 		ArrayList<Finance> finances = techService.getFinance(finance);
 		if (lows!=null||highs!=null||kcname!=null){
 			Curriculum cu = new Curriculum();
@@ -76,7 +65,6 @@ public class TechController
 		}else{
 			al = techService.getCurriculumListS();
 		}
-
 		ModelAndView mv = new ModelAndView();
 		ArrayList<Develop> dl = techService.getDevelopList();
 		HashMap<String,ArrayList<Curriculum>> getMap = new HashMap<>();
@@ -115,7 +103,6 @@ public class TechController
 		mv.setViewName("/WEB-INF/tech/techA");
 		return mv;
 	}
-
 	/**
 	 *
 	 * @param name 施恭泰 jx190719
@@ -132,10 +119,11 @@ public class TechController
 		System.out.println(name);
 		mv.addObject("ct", ct);
 		mv.addObject("name", name);
-		Userlist user = new Userlist();
-		user.setYhid(1);
+		Userlist user = (Userlist) request.getSession().getAttribute("user");
+//		Userlist user = new Userlist();
+//		user.setYhid(1);
 		Finance fea = new Finance();
-		fea.setYhId(1);
+		fea.setYhId(user.getYhid());
 		fea.setKcId(Long.parseLong(id));
 		ArrayList<Finance> fes = techService.getFinance(fea);
 		if (Integer.valueOf(jg)!=0){
@@ -189,7 +177,7 @@ public class TechController
 			fe.setJgPrice(Long.parseLong(jg));
 			fe.setDdNumber(UUID.randomUUID().toString());
 			fe.setDdTime(getTime());
-			fe.setYhName("小铭");
+			fe.setYhName(user.getName());
 			fe.setYhId(user.getYhid());
 			//		fe.setMsDescribe();
 			int a = techService.addFinance(fe);
@@ -241,12 +229,13 @@ public class TechController
 	@RequestMapping("/techvideo")
 	public ModelAndView techvideo(HttpServletRequest request, HttpServletResponse response,String id,String name,String path,String spId,String nr,String pjId,String cs,String dxName,String dfnr,String fName,String spDescribe) throws IOException
 	{
+		Userlist user = (Userlist) request.getSession().getAttribute("user");
 
-		Userlist user = new Userlist();
-		user.setRegTime(getTime());
-		user.setYhid(1);
-		user.setPicture("1.jpg");
-		user.setName("小铭");
+//		Userlist user = new Userlist();
+//		user.setRegTime(getTime());
+//		user.setYhid(1);
+//		user.setPicture("1.jpg");
+//		user.setName("小铭");
 		LearningLog learningLog =new LearningLog();
 		learningLog.setSpDescribe(spDescribe);
 		learningLog.setSpId(Integer.valueOf(spId));
@@ -974,7 +963,7 @@ public class TechController
 	 * @return
 	 */
 	@RequestMapping("/paymentUrl")
-	public ModelAndView returnUrl(String out_trade_no,String total_amount,String subject,String body,String lows,String highs,String kcname){
+	public ModelAndView returnUrl(HttpServletRequest request,String out_trade_no,String total_amount,String subject,String body,String lows,String highs,String kcname){
 
 		System.out.println("同步通知支付成功");
 		Finance fe = new Finance();
@@ -985,9 +974,11 @@ public class TechController
 		fe.setJgPrice(Long.parseLong(total[0]));
 		fe.setDdNumber(out_trade_no);
 		fe.setDdTime(getTime());
-		Userlist user = new Userlist();
-		user.setYhid(1);
-		fe.setYhName("小铭");
+		Userlist user = (Userlist) request.getSession().getAttribute("user");
+
+//		Userlist user = new Userlist();
+//		user.setYhid(1);
+		fe.setYhName(user.getName());
 		fe.setYhId(user.getYhid());
 //		fe.setMsDescribe();
 		if (kcNameS!=""){
@@ -996,7 +987,7 @@ public class TechController
 		kcNameS="";
 		ArrayList<Curriculum> al = new ArrayList<>();
 		Finance finance = new Finance();
-		finance.setYhId(1);
+		finance.setYhId(user.getYhid());
 		ArrayList<LearningLog> learningLogS = techService.getLearningLog(String.valueOf(user.getYhid()));
 		for (int i = 0; i <learningLogS.size() ; i++)
 		{
