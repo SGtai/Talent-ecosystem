@@ -12,7 +12,7 @@ import java.text.ParseException;
 
 @Controller
 @RequestMapping("/adminCensus")
-public class AdminUserCensusController {
+public class AdminCensusController {
 
     @Autowired
     private AdminCensusService adminUserCensusService;
