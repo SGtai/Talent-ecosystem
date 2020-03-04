@@ -256,20 +256,10 @@
 <div class="clear"></div>
 <div class="seachlist">
 	<div class="listtop">
-
-<%--		<div class="tj2">--%>
-<%--			<input name="" type="checkbox" value="" />--%>
-<%--			<span>只显示在线 </span>--%>
-<%--		</div>--%>
-<%--		<div class="tj2">--%>
-<%--			<input name="" type="checkbox" value="" />--%>
-<%--			<span>只显示有环境照片 </span>--%>
-<%--		</div>--%>
-
 	</div>
 	<div class="clear"></div>
 
-	<table class="layui-table" lay-skin="nob" lay-even="searchJob" id="searchJob" id="searchJob"></table>
+	<table class="layui-table" lay-skin="nob" lay-filter="searchJob" lay-even="searchJob" id="searchJob" id="searchJob"></table>
 </div>
 <div class="clear"></div>
 <div class="footer">
@@ -280,5 +270,13 @@
 <script src=<%=path + "layui/layui.js"%>></script>
 <script type="text/javascript" src=<%=jsPath+"searchJob.js"%>></script>
 </body>
+<div style="padding: 20px 100px;height: 150px;" class="layui-form" id="jllist">
+	<form class="layui-form">
+		<label class="layui-form-label" style="margin-left: -110px;">请选择投递的简历</label>
+		<div class="layui-input-block" style="width: 200px;margin-left: 0px;">
+			<select name="interest" lay-filter="jlselect" id="jlselect">
+			</select>
+		</div>
+	</form></div>
 </html>
 

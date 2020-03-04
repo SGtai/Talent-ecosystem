@@ -24,9 +24,37 @@ $(document).ready(function () {
 	//简历状态  已公开 已隐藏
 	$('.statusjl').click(function(){
 	   if($(this).attr("class")=="statusjl on"){
-	        $(this).removeClass('on');
+	   	// 隐藏
+		   var jlid = $('#jlid').val();
+		   $.ajax({
+			   type: "POST",
+			   asyn: false,
+			   url: "/user/closejl",
+			   data: {jlid:jlid},
+			   success: function (msg) {
+				   if (msg == "true") {
+					   window.alert("简历隐藏成功");
+				   }
+			   }
+		   });
+		   $(this).removeClass('on');
+
 		}else{
-			$(this).addClass('on');
+	   	// 公开
+		   var jlid = $('#jlid').val();
+		   $.ajax({
+			   type: "POST",
+			   url: "/user/openjl",
+			   asyn: false,
+			   data: {jlid:jlid},
+			   success: function (msg) {
+				   if (msg == "true") {
+				   	    window.alert("简历推送成功");
+				   }
+
+			   }
+		   });
+		   $(this).addClass('on');
 		}
 	})
 	
@@ -154,7 +182,86 @@ $(document).ready(function () {
 	// 			 }
 	//    }
   //  }
-   
+
    
    
 })
+
+function creatjl(){
+	var count = $('#jlcount').val();
+	if(count == 4){
+		window.alert("简历已满，请删除或更新简历")
+	}else{
+		window.location.href = "/user/gojl";
+	}
+
+}
+
+function tuichu2() {
+	layui.use(['layer', 'jquery', 'form'], function () {
+		var layer = layui.layer;
+
+		layer.confirm('确定退出用户登录吗？', function (index) {
+			window.location.href = "/user/tuichu2";
+			layer.close(index);
+		});
+
+	});
+}
+
+	function toudi(){
+		layui.use(['layer', 'jquery', 'form'], function () {
+			var layer = layui.layer
+				, $ = layui.jquery
+				, form = layui.form;
+
+			var qyid = $('#qyid').val();
+			var zpxxid = $('#zpxxid').val();
+
+				$.ajax({
+					type: "POST",
+					url: "/user/getjllist",
+					dataType: "text",
+					success: function (msg1) {
+						var msg = eval(msg1);
+						$('#jlselect').empty();
+						for(var i=0;i < msg.length;i++){
+							$('#jlselect').append('<option value ="'+msg[i].jlId+'">' + msg[i].jlname + '</option>');
+						}
+						form.render();
+						layer.open({
+							type: 1
+							,id: 'layerDemo'
+							,content:$('#jllist')
+							,btn:  ['取消', '确定投递']
+							,btn2: function(index, layero){
+								var jlid=$('#jlselect option:selected').val();
+								layer.confirm('确定向此职位投递此份简历？', function (index) {
+									$.ajax({
+										type: "POST",
+										url: "/user/toudi",
+										dataType: "text",
+										data:{jlid:jlid,qyid:qyid,zpxxid:zpxxid},
+										success: function (msg1) {
+											if (msg1 == "true"){
+												window.alert("投递成功，静等回复把")
+											}
+											if (msg1 == "notoudi"){
+												window.alert("投递失败，您已投递过该职位了")
+											}
+										}});
+									layer.close(index);
+								});
+
+							}
+							,btnAlign: 'c' //按钮居中
+							,shade: 0 //不显示遮罩
+							,yes: function(){
+								layer.closeAll();
+							}
+						});
+					}
+				});
+	})
+
+};

@@ -18,6 +18,7 @@
 <html>
 <head>
 	<link rel="stylesheet" href=<%=cssPath+"personal.css"%>>
+	<link rel="stylesheet" href="<%=path+"layui/css/layui.css"%>" media="all">
 	<title>个人中心-我的简历</title>
 </head>
 <body>
@@ -36,20 +37,8 @@
 						<ul>
 							<li><a href="personal_updatepsd.html">修改密码</a></li>
 							<li><a href="personal_updatenum.html">修改手机</a></li>
-							<li><a href="personal_renzheng.html">修改邮箱</a></li>
-							<li><a href="index.html">退出</a></li>
+							<li><a href="javascript:void(0)" onclick="tuichu2()">退出</a></li>
 						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="Left">
-				<a class="Mobile" href="">手机版</a>
-			</div>
-			<div class="Left">
-				<div class="Weixin">微信
-					<div id="WeixinPopup">
-						<img src="<%=imagesPath+"showqrcode.jpg"%>" width="120" height="120">
-						<p>扫一扫完成绑定<br>求职信息接收及时，<br>不再错过好工作！</p>
 					</div>
 				</div>
 			</div>
@@ -59,25 +48,11 @@
 </div>
 <div class="navTop">
 	<div class="navTopmain">
-		<div class="logo"><a href="index.html"><img src="<%=imagesPath+"logo_1.png"%>"/><img src="<%=imagesPath+"logo_2.png"%>" /></a></div>
+		<div class="logo"><a href="/user/index"><img src="<%=imagesPath+"logo_1.png"%>"/><img src="<%=imagesPath+"logo_2.png"%>" /></a></div>
 		<div class="nav">
-			<div class="navItem"><a href="index.html">首页</a></div>
-			<div class="navItem"><a href="searchJob.html">职位搜索</a></div>
-			<div class="navItem"><a href="meetingJob.html">招聘会</a></div>
-			<div class="navItem"><a href="">政府招考</a></div>
-			<div class="navItem"><a href="">校园招聘</a></div>
-			<div class="navItem other">
-				<div style="position:relative;">
-					<span>更多</span>
-					<div id="TopNavMorePopup">
-						<ul>
-							<li><a href="jobnews.html">就业资讯</a></li>
-							<li><a href="download.html">文档下载</a></li>
-							<li><a href="helpJob.html">求职互助</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
+			<div class="navItem"><a href="/user/index">首页</a></div>
+			<div class="navItem"><a href="/jump/home/searchJob">职位搜索</a></div>
+			<a href="/techa">人才成长区</a>
 		</div>
 	</div>
 </div>
@@ -89,21 +64,15 @@
 				<a href="/jump/user/personal" class="a1">会员首页</a>
 			</div>
 			<div class="NavLeftBox active">
-				<a href="/jump/user/personal_jl" class="a2">我的简历</a>
-			</div>
-			<div class="NavLeftBox">
-				<a href="personal_zwss.html" class="a3">职位搜索</a>
-			</div>
-			<div class="NavLeftBox">
-				<a href="personal_cai.html" class="a4">你的菜儿</a>
+				<a href="/user/gopersonaljl" class="a2">我的简历</a>
 			</div>
 			<div class="NavLeftBox twoNav">
 				<a class="a5">职位申请</a>
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li><a href="personal_sqzw.html">申请的职位</a></li>
-				<li><a href="personal_mygz.html">我的关注</a></li>
+				<li><a href="/user/shenqinglist">申请的职位</a></li>
+				<li><a href="/user/shoucanglist">我的关注</a></li>
 			</ul>
 			<div class="NavLeftBox twoNav">
 				<a class="a6">企业邀约</a>
@@ -112,20 +81,14 @@
 			<ul>
 				<li><a href="personal_mainshi.html">面试通知</a></li>
 				<li><a href="personal_yaoqing.html">应聘邀请</a></li>
-				<li><a href="personal_whogz.html">谁在关注我</a></li>
-				<li><a href="personal_goutong.html">在线沟通记录</a></li>
 			</ul>
-			<div class="NavLeftBox">
-				<a href="personal_zhanghu.html" class="a7">账户管理</a>
-			</div>
 			<div class="NavLeftBox">
 				<a href="personal_help.html" class="a8">帮助中心</a>
 			</div>
 		</div>
 		<div class="navLeftBottom">
-			<span class="sys">扫一扫绑定微信</span><br />
 			<img src="<%=imagesPath+"showqrcode.jpg"%>" />
-			<span class="Notice">蝶飞人才网<br>找工作更靠谱</span>
+			<span class="Notice">菜鸟人才网<br>找工作更靠谱</span>
 		</div>
 	</div>
 	<div class="perRightcon">
@@ -146,7 +109,7 @@
 				<tr>
 					<td colspan="5">
 						<div class="jlpart1">
-							<div class="jlName"><a href="/jump/user/personal_jlsee">${i.jlname}</a></div>
+							<div class="jlName"><a href="/jump/user/personal_jlsee?jlid=${i.jlId}">${i.jlname}</a></div>
 							<div class="jlDate">更新时间：${i.scTime}</div>
 							<div class="jlFresh">更新</div>
 						</div>
@@ -157,7 +120,7 @@
 						<div class="jlpart2">
 							<div class="Orange" style="width:40px;"></div>
 						</div>
-						<div class="jlpart3">中文完整度 20 分 [ <a href="/jump/user/personal_jlsee">修改</a>   <a href="/user/yulan?jlid=29">预览</a>   <a href="">下载</a> ]</div>
+						<div class="jlpart3">中文完整度 20 分 [ <a href="/user/gojlseeforupdate?jlid=${i.jlId}">修改</a>   <a href="/user/yulan?jlid=${i.jlId}">预览</a>   <a href="">下载</a>]</div>
 					</td>
 					<td rowspan="2">
 						<div class="jlpart4">
@@ -167,23 +130,26 @@
 					</td>
 					<td rowspan="2">
 						<div class="jlpart4">
-							<div class="statusjl on"></div>
-							<div class="tdname">姓名已公开</div>
+							<c:if test="${i.ycHide == 0}">
+								<div class="statusjl on"></div>
+							</c:if>
+							<c:if test="${i.ycHide == 1}">
+								<div class="statusjl"></div>
+							</c:if>
+							<div class="tdname">简历</div>
 						</div>
 					</td>
 					<td rowspan="2">
-						<div class="jlpart4">
-							<div class="statusjl on"></div>
-							<div class="tdname">简历已公开</div>
-						</div>
-					</td>
-					<td rowspan="2">
+						<input hidden value="${i.jlId}" id="jlid">
+						<a href="#" onclick="deletejl()">
 						<div class="jlpart4">
 							<div class="delicon"></div>
 							<div class="tdname">删除</div>
 						</div>
+						</a>
 					</td>
 				</tr>
+					<tr></tr>
 
 				<tr>
 					<td colspan="5">
@@ -199,9 +165,10 @@
 		</div>
 		<div class="clear"></div>
 		<div class="addJl">
-			<a href="/user/gojl">
+			<a href="#" onclick="creatjl()">
+				<input hidden id="jlcount" value="${jllist.size()}">
 				<span>继续创建简历</span>
-				<label>（还可创建2份简历）</label>
+				<label>（还可创建${4-jllist.size()}份简历）</label>
 			</a>
 		</div>
 		<div class="clear"></div>
@@ -280,11 +247,13 @@
 
 <div class="clear"></div>
 <div class="footer">
-	<p><a href="">**人才</a>旗下<img src="<%=imagesPath+"logo_foot.gif"%>" />蝶飞人才网版权所有 <a href="">京ICP证0******9号</a><a href=""></a>本网站所有招聘信息，未经书面授权不得转载 投诉电话：400-8**-****</p>
+	<p><a href="">菜鸟人才</a>旗下<img src="<%=imagesPath+"logo_foot.gif"%>" />菜鸟人才网版权所有 <a href="">闽ICP证0******9号</a><a href="#"></a>本网站所有招聘信息，未经书面授权不得转载 投诉电话：200-8**-****</p>
 </div>
 
 
 <script type="text/javascript" src=<%=path+"layui/jquery-3.4.1.js"%>></script>
+<script src=<%=path + "layui/layui.js"%>></script>
 <script type="text/javascript" src=<%=jsPath+"personal.js"%>></script>
+<script type="text/javascript" src=<%=jsPath+"personal_jl.js"%>></script>
 </body>
 </html>

@@ -61,8 +61,14 @@
             <if test="minzu != null and minzu.length()>0">
                 minzu = #{minzu},
             </if>
-            <if test="jzdResidence != null and jzdResidence.length()>0">
-                jzdResidence = #{jzdResidence},
+            <if test="xy != null and xy.length()>0">
+                xy = #{xy},
+            </if>
+            <if test="byschool != null and byschool.length()>0">
+                byschool = #{byschool},
+            </if>
+            <if test="zy != null and zy.length()>0">
+                zy = #{zy},
             </if>
             scTime=now()
         </set>
@@ -175,9 +181,12 @@
         <result column="scPath" property="scPath"/>
         <result column="minzu" property="minzu"/>
         <result column="csTime" property="csTime"/>
+        <result column="mmFace" property="mmFace"/>
         <result column="yhname" property="yhname"/>
         <result column="jlname" property="jlname"/>
         <result column="xl" property="xl"/>
+        <result column="byschool" property="byschool"/>
+        <result column="zy" property="zy"/>
         <collection property="jobintension" ofType="Jobintension">
             <id column="jzyxid" property="jzyxid"/>
             <result column="workPlace" property="workPlace"/>
@@ -207,4 +216,42 @@
         where A.jlId = ${jlid} and B.jlid = ${jlid} and C.jlId = ${jlid} and D.jlId = ${jlid};
 	</select>
 
+    <delete id="deletejl" parameterType="int">
+        delete from resume where jlId = ${jlid};
+        delete from experience where jlId = ${jlid};
+        delete from undergo where jlId = ${jlid};
+        delete from jobintension where jlId = ${jlid};
+    </delete>
+
+    <update id="openjl" parameterType="int">
+		update resume set ycHide = 0 where jlId = ${jlid}
+	</update>
+    <update id="closejl" parameterType="int">
+		update resume set ycHide = 1 where jlId = ${jlid}
+	</update>
+
+    <insert id="toudi" parameterType="int">
+		insert into query (jlId,qyId,zpxxid,paid,ckTime) value (${jlid},${qyId},${zpxxid},10,now());
+	</insert>
+    <select id="toudijiancha" parameterType="int" resultType="int">
+        select count(*) from query where jlId = ${jlid} and qyId = ${qyId} and zpxxid=${zpxxid};
+    </select>
+    <insert id="shoucang" parameterType="int">
+		insert into shoucang set zpxxid = ${zpxxid} and hyid = ${hyid} and sctime = now()
+	</insert>
+    <select id="shoucangCount" parameterType="int" resultType="int">
+		select count(*) from shoucang where zpxxid = ${zpxxid} and hyid = ${hyid}
+	</select>
+
+    <select id="shoucanglist" resultType="Shoucang" parameterType="int">
+		select A.zpxxid ,A.sctime,concat(B.salaryLow,'-',B.salaryHigh) money,B.zpNum,C.qyName,D.postion,concat(E.name,F.name,B.gzAddress) adress
+        from shoucang A,jobinfo B,qyinfo C,station D,province E,city F
+        where A.zpxxid = B.zpxxid and B.qyid = C.qyid and B.zwid = D.stid and B.prid = E.prid and B.ctid = F.ctid and A.hyid = ${hyid};
+	</select>
+    <select id="shenqinglist" resultType="Shoucang" parameterType="int">
+		select B.qyid,C.zpxxid,F.postion,B.qyName,B.replyRate,D.jlname,A.ckTime sctime,E.name statename
+        from query A,qyinfo B,jobinfo C,resume D,parameter E,station F
+        where E.paid = A.paid and A.qyId = B.qyid and A.zpxxid = C.zpxxid
+        and A.jlId = D.jlId and F.stid = C.zwid and A.qyId = ${hyid};
+	</select>
 </mapper>

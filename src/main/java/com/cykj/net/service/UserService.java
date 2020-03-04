@@ -70,4 +70,41 @@ public class UserService
 		List<Resume> list = userDao.jliList(yhId);
 		return list;
 	}
+	public int deletejl(int jlid){
+		int num = userDao.deletejl(jlid);
+		return num;
+	}
+	public int openjl(int jlid){
+		int num = userDao.openjl(jlid);
+		return num;
+	}
+	public int closejl(int jlid){
+		int num = userDao.closejl(jlid);
+		return num;
+	}
+	public int toudi(int jlid,int qyId, int zpxxid){
+		int num = userDao.toudi(jlid,qyId,zpxxid);
+		return num;
+	}
+	public int toudijiancha(int jlid,int qyId, int zpxxid){
+		int num = userDao.toudijiancha(jlid,qyId,zpxxid);
+		return num;
+	}
+	public int shoucang(int zpxxid,int hyid){
+		int num = userDao.shoucang(zpxxid,hyid);
+		return num;
+	}
+	public int shoucangCount(int zpxxid,int hyid){
+		int num = userDao.shoucangCount(zpxxid,hyid);
+		return num;
+	}
+	public List<Shoucang> shoucanglist(int hyid){
+		List<Shoucang> shoucanglist = userDao.shoucanglist(hyid);
+		return shoucanglist;
+	}
+
+	public List<Shoucang> shenqinglist(int hyid){
+		List<Shoucang> shoucanglist = userDao.shenqinglist(hyid);
+		return shoucanglist;
+	}
 }

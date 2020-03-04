@@ -30,16 +30,6 @@
 			border: #9F9F9F solid 1px;
 
 		}
-		/*.layui-form-label{*/
-		/*	width: 120px;*/
-
-		/*}*/
-		/*.layui-input{*/
-		/*	width: 250px;*/
-		/*}*/
-		/*#button1{*/
-		/*	margin-left: 38%;*/
-		/*}*/
 	</style>
 </head>
 <body>

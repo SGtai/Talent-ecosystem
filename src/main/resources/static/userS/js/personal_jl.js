@@ -229,3 +229,19 @@ function moregongzuo(){
 	});
 
 }
+
+function deletejl(){
+	var jlid = $('#jlid').val();
+	$.ajax({
+		type: "POST",
+		url: "/user/deletejl",
+		dataType: "text",
+		data: {jlid:jlid},
+		success: function (msg) {
+			if (msg == "true") {
+				window.alert("删除成功");
+				window.location.href = "/user/gopersonaljl";
+			}
+		}
+	});
+}

@@ -25,5 +25,13 @@ public interface UserDao
 	public int pingjia(Resume resume);
 	public List<Jianli> yulanxml(@Param("jlid") int jlid);
 	public List<Resume> jliList(@Param("yhId") int yhId);
-
+	public int deletejl(@Param("jlid") int jlid);
+	public int openjl(@Param("jlid") int jlid);
+	public int closejl(@Param("jlid") int jlid);
+	public int toudi(@Param("jlid") int jlid,@Param("qyId") int qyId,@Param("zpxxid") int zpxxid);
+	public int toudijiancha(@Param("jlid") int jlid,@Param("qyId") int qyId,@Param("zpxxid") int zpxxid);
+	public int shoucang(@Param("zpxxid") int zpxxid,@Param("hyid") int hyid);
+	public int shoucangCount(@Param("zpxxid") int zpxxid,@Param("hyid") int hyid);
+	public List<Shoucang> shoucanglist(@Param("hyid") int hyid);
+	public List<Shoucang> shenqinglist(@Param("hyid") int hyid);
 }
