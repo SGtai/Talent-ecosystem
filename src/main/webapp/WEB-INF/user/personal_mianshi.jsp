@@ -52,7 +52,7 @@
 		<div class="nav">
 			<div class="navItem"><a href="/user/index">首页</a></div>
 			<div class="navItem"><a href="/jump/home/searchJob">职位搜索</a></div>
-			<a href="/techa">人才成长区</a>
+			<div class="navItem"><a href="/techa">人才成长区</a></div>
 		</div>
 	</div>
 </div>
@@ -88,10 +88,6 @@
 			<div class="NavLeftBox">
 				<a href="personal_help.html" class="a8">帮助中心</a>
 			</div>
-		</div>
-		<div class="navLeftBottom">
-			<img src="images/showqrcode.jpg" />
-			<span class="Notice">菜鸟人才网<br>找工作更靠谱</span>
 		</div>
 	</div>
 	<div class="perRightcon">

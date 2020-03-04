@@ -52,7 +52,7 @@
 		<div class="nav">
 			<div class="navItem"><a href="/user/index">首页</a></div>
 			<div class="navItem"><a href="/jump/home/searchJob">职位搜索</a></div>
-			<a href="/techa">人才成长区</a>
+			<div class="navItem"><a href="/techa">人才成长区</a></div>
 		</div>
 	</div>
 </div>
@@ -89,10 +89,6 @@
 				<a href="personal_help.html" class="a8">帮助中心</a>
 			</div>
 		</div>
-		<div class="navLeftBottom">
-			<img src="images/showqrcode.jpg" />
-			<span class="Notice">菜鸟人才网<br>找工作更靠谱</span>
-		</div>
 	</div>
 	<div class="perRightcon">
 		<div class="commonTit">
@@ -111,7 +107,6 @@
 						<tr>
 							<th width="22%" style="border-left: 1px #EDEDED solid;">职位名称</th>
 							<th width="25%">企业名称</th>
-							<th width="8%" style="text-align: center;">企业答复率</th>
 							<th width="20%" style="text-align: center;">简历名称</th>
 							<th width="15%"><div>申请时间</div></th>
 							<th width="20%">答复状态</th>
@@ -123,7 +118,6 @@
 								<a href="/user/jobinfo?id1=${i.qyid}&id2=${i.zpxxid}">${i.postion}</a>
 							</td>
 							<td><a href="#" class="cpname">${i.qyName}</a></td>
-							<td style="text-align: center"><font style="color: red">${i.replyRate}%</font></td>
 							<td><span>${i.jlname}</span></td>
 							<td><span>${i.sctime}</span></td>
 							<td><span style="color:#707070">${i.statename}</span></td>

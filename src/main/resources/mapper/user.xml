@@ -237,8 +237,11 @@
         select count(*) from query where jlId = ${jlid} and qyId = ${qyId} and zpxxid=${zpxxid};
     </select>
     <insert id="shoucang" parameterType="map">
-		insert into shoucang set zpxxid = ${zpxxid} and hyid = ${hyid} and sctime = now()
+		insert into shoucang (zpxxid,hyid,sctime) value (${zpxxid},${hyid},now());
 	</insert>
+    <delete id="qxguanzhu" parameterType="map">
+        delete from shoucang where zpxxid = ${zpxxid} and hyid = ${hyid};
+    </delete>
     <select id="shoucangCount" parameterType="map" resultType="int">
 		select count(*) from shoucang where zpxxid = ${zpxxid} and hyid = ${hyid}
 	</select>
@@ -275,5 +278,8 @@
     </update>
     <update id="password" parameterType="map">
         update userlist set password = ${password} where yhid = ${yhid}
+    </update>
+    <update id="photo" parameterType="map">
+       update userlist set picture = '${urldb}' where yhid = ${yhid}
     </update>
 </mapper>

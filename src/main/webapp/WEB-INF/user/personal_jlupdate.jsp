@@ -50,7 +50,7 @@
 		<div class="nav">
 			<div class="navItem"><a href="/user/index">首页</a></div>
 			<div class="navItem"><a href="/jump/home/searchJob">职位搜索</a></div>
-			<a href="/techa">人才成长区</a>
+			<div class="navItem"><a href="/techa">人才成长区</a></div>
 
 		</div>
 	</div>
@@ -88,10 +88,6 @@
 				<a href="/jump/user/personal_help" class="a8">帮助中心</a>
 			</div>
 		</div>
-		<div class="navLeftBottom">
-			<img src="<%=imagesPath+"showqrcode.jpg"%>" />
-			<span class="Notice">菜鸟人才网<br>找工作更靠谱</span>
-		</div>
 	</div>
 	<form id="jl1" class="layui-form">
 	<div class="perRightcon layui-form">
@@ -101,17 +97,22 @@
 		<div class="JlBoxCon layui-form">
 			<h1><span>基本信息</span><div></div></h1>
 			<div class="JlBoxLeft">
+				<div class="layui-upload">
+					<button class="layui-btn" id="test1" type="button">上传用户头像</button>
+					<div class="layui-upload-list">
+						<img class="layui-upload-img" id="demo1">
+						<p id="demoText"></p>
+					</div>
+				</div>
 				<div class="jldiv layui-form">
 					<div class="nametxt"><span>*</span>姓    名：</div>
 					<div class="inputtxt">
 						<input name="name" type="text" class="txt1"
-						value=
 							<c:if test="${sessionScope.user.name != null}">
 									value="${sessionScope.user.name}"
 							</c:if>
 						/>
-						<span class="check1"></span>
-						<span class="ycname">隐藏姓名</span>
+
 					</div>
 					<div class="clear"></div>
 				</div>
@@ -140,7 +141,6 @@
 					<div class="nametxt"><span>*</span>出生年月：</div>
 					<div class="layui-input-inline">
 						<input id="birthday" name="birthday" class="layui-input" id="date" type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date"
-						       value=
 						       <c:if test="${sessionScope.user.birthday != null}">
 								       value="${sessionScope.user.birthday}"
 								</c:if>
@@ -220,23 +220,18 @@
 					<div class="nametxt"><span>*</span>手机号码：</div>
 					<div class="inputtxt">
 						<span class="phone">${sessionScope.user.phone}</span>
-						<a href="/jump/user/personal_updatenum" class="updateph">修改手机号</a>
-						<span class="check1"></span>
-						<span class="ycname">接收短信面试通知</span>
 					</div>
 				</div>
 				<div class="clear"></div>
 			</div>
 			<div class="JlBoxRight">
-				<img src="<%=imagesPath+"per1.jpg"%>" width="80" height="100" />
-			</div>
-		</div>
-		<div class="clear"></div>
-		<div class="JlBoxCon">
-			<div class="JlBoxLeft">
-				<div class="jldiv">
-					<a href="javascript:void(0)" class="nextBtn" onclick="personal_jlupdate()">保存个人信息</a>
-				</div>
+				<c:if test="${sessionScope.user.picture ==null or sessionScope.user.picture ==''}">
+					<img src="<%=imagesPath+"per1.jpg"%>" width="80" height="100" />
+				</c:if>
+				<c:if test="${sessionScope.user.picture !=null and sessionScope.user.picture !=''}">
+					<img src="<%=dbimgPath%>${sessionScope.user.picture}" width="80" height="100" />
+				</c:if>
+
 			</div>
 		</div>
 	</div>
@@ -264,6 +259,30 @@
 			elem: '#birthday'
 		});
 	});
+</script>
+<script>
+	layui.use('upload', function() {
+			var $ = layui.jquery
+				, upload = layui.upload;
+
+			//普通图片上传
+			var uploadInst = upload.render({
+				elem: '#test1'
+				, url: '/user/photo' //改成您自己的上传接口
+				, before: function (obj) {
+					//预读本地文件示例，不支持ie8
+					obj.preview(function (index, file, result) {
+						$('#demo1').attr('src', result); //图片链接（base64）
+					});
+				}
+				, done: function (res) {
+					//如果上传失败
+					return layer.msg('上传成功');
+
+					//上传成功
+				}
+			});
+		})
 </script>
 </body>
 </html>

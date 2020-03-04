@@ -265,3 +265,19 @@ function tuichu2() {
 	})
 
 };
+
+function qxguanzhu(msg) {
+	$.ajax({
+		type: "POST",
+		url: "/user/qxguanzhu",
+		dataType: "text",
+		data: {zpxxid: msg},
+		success: function (msg1) {
+			if (msg1 == "true"){
+				alert("取消成功");
+				window.location.href = window.location;
+			}
+
+		}
+	});
+}
