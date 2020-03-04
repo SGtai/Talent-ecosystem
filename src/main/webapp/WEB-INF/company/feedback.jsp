@@ -125,11 +125,12 @@
 					return false;
 				}else {
 					var cxrzId=data.cxrzId;
+					var zpxxid=data.zpxxid;
 					$.ajax({
 						type:"POST",
 						url:"/company/yingpin",
 						dataType:"text",
-						data:{cxrzId:cxrzId},
+						data:{cxrzId:cxrzId,zpxxid:zpxxid},
 						//从servlet接收的数据
 						success:function (msg) {
 							if (msg ==='success') {
@@ -138,7 +139,7 @@
 								//招聘人数加1
 
 							} else {
-								layer.msg("应聘失败！")
+								layer.msg("应聘失败,已招满!")
 							}
 						}
 						,error:function () {

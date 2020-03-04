@@ -16,98 +16,223 @@
 <head>
 	<meta charset="utf-8">
 	<title>ECharts</title>
-
+	<link rel="stylesheet" href=<%=path+"css/layui.css"%>>
 </head>
-<body>
-<button id="test2">Layer+Echarts构建弹出层折线图</button>
-<div id="speedChart" style="display: none;">
-	<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-	<div id="speedChartMain" style="width: 650px; height:500px;"></div>
+<body class="layui-layout-body">
+
+<h2 class="layui-form-item" style="margin-left: 43%;margin-top: 3%">招聘信息统计</h2>
+<div class="layui-form-item" style="margin-left: 15%;">
+	<label class="layui-form-label" style="text-align: left">统计：</label>
+
+	<div class="layui-input-inline" style="margin-left: 8%">
+		<button onclick="week()" type="button" class="layui-btn layui-btn-radius"
+		        id="week"><i class="layui-icon">&#xe615;</i>本周
+		</button>
+	</div>
+
+	<div class="layui-input-inline" >
+		<button type="button" class="layui-btn layui-btn-radius"
+		        id="month"><i class="layui-icon">&#xe615;</i>本月
+		</button>
+	</div>
+
+	<div class="layui-input-inline" >
+		<button type="button" class="layui-btn layui-btn-radius"
+		        id="half"><i class="layui-icon">&#xe615;</i>近半年
+		</button>
+	</div>
+
 </div>
-<div id="dfd">
-	<span>Layer+Echarts构建弹出层折线图</span>
-	<p>Layer+Echarts构建弹出层折线图</p>
+
+<div class="layui-form-item" style="margin-left: 55%">
+	<label id="howlong" class="layui-form-label" style="text-align: left;width: 150px"></label>
+	<label id="sum" class="layui-form-label" style="text-align: left;margin-left: -8%"></label>
 </div>
+
+<div id="echarts_div" style="width: 600px;height:400px;margin-left: 25%"></div>
+
 
 <script src="/echarts.min.js"></script>
 <script src=<%=path + "jquery-3.4.1.js"%> ></script>
 <script src=<%=path + "layui.js"%>></script>
 <script src="<%=path+"json2.js"%>"></script>
-<script type="text/javascript">
-	// 基于准备好的dom，初始化echarts实例
-	var myChart = echarts.init(document.getElementById('speedChartMain'));
-	// 基于准备好的dom，初始化echarts实例
-	var myChart = echarts.init(document.getElementById('speedChartMain'));
-	option = {
-		title: {
-			text: '南丁格尔玫瑰图',
-			subtext: '纯属虚构',
-			left: 'center'
-		},
-		tooltip: {
-			trigger: 'item',
-			formatter: '{a} <br/>{b} : {c} ({d}%)'
-		},
-		legend: {
-			left: 'center',
-			top: 'bottom',
-			data: ['rose1', 'rose2', 'rose3', 'rose4', 'rose5', 'rose6', 'rose7', 'rose8']
-		},
-		toolbox: {
-			show: true,
-			feature: {
-				mark: {show: true},
-				dataView: {show: true, readOnly: false},
-				magicType: {
-					show: true,
-					type: ['pie', 'funnel']
-				},
-				restore: {show: true},
-				saveAsImage: {show: true}
-			}
-		},
-		series: [
-			{
-				name: '面积模式',
-				type: 'pie',
-				radius: [70, 200],
-				center: ['50%', '50%'],
-				roseType: 'angle',
-				data: [
-					{value: 10, name: 'rose1'},
-					{value: 5, name: 'rose2'},
-					{value: 15, name: 'rose3'},
-					{value: 25, name: 'rose4'},
-					{value: 20, name: 'rose5'},
-					{value: 35, name: 'rose6'},
-					{value: 30, name: 'rose7'},
-					{value: 40, name: 'rose8'}
-				]
-			}
-		]
-	};
+<script type="text/javascript" >
+	var nameArr = [];
+	var valueArr = [];
+	var obArr = [];
 
-	myChart.setOption(option);
-	//弹出一个页面层
-	layui.use(['form', 'layer', 'jquery','table','layedit', 'laydate'], function() {
+	$(function() {
+		$.ajax({
+			method : "POST",
+			url : "/adminCensus/week",
+			dataType : "text",
+			data:{role:0},
+			success : function(msg) {
+				var list = msg.split("://");
+				var arr = JSON.parse(list[0]);
+				$('#howlong').html('本周总新增用户数：');
+				$('#sum').html(list[1]);
+				for (var i = 0; i < arr.length; i++) {
+					// 普通柱状图使用的数据
+					nameArr.push(arr[i].name);
+					valueArr.push(arr[i].count);
+				}
+				createEchars();// 创建普通柱状图
+
+			},
+			error : function() {
+				alert("服务器正忙");
+			}
+		});
+	});
+
+	layui.use(['table', 'jquery', 'layer', 'form'], function () {
 		var table = layui.table;
+		var $ = layui.jquery;
 		var layer = layui.layer;
 		var form = layui.form;
-		var $ = layui.jquery;
-		var layedit = layui.layedit;
-		var laydate = layui.laydate;
-		$('#test2').on('click', function () {
-			layer.open({
-				title: 'hello world',
-				type: 1,
-				shade: false,
-				area: ['650px', '550px'],
-				offset: '40px',
-				shadeClose: false, //点击遮罩关闭
-				content: $("#speedChart")
+		$("#week").click(function () {
+			nameArr = [];
+			valueArr = [];
+			$.ajax({
+				method : "POST",
+				url : "/adminCensus/week",
+				dataType : "text",
+				data:{role:0},
+				success : function(msg) {
+					var list = msg.split("://");
+					var arr = JSON.parse(list[0]);
+					$('#howlong').html('本周总新增用户数：');
+					$('#sum').html(list[1]);
+					for (var i = 0; i < arr.length; i++) {
+						// 普通柱状图使用的数据
+						nameArr.push(arr[i].name);
+						valueArr.push(arr[i].count);
+					}
+					createEchars();// 创建普通柱状图
+
+				},
+				error : function() {
+					alert("服务器正忙");
+				}
 			});
 		});
-	})
+		$("#month").click(function () {
+			nameArr = [];
+			valueArr = [];
+
+			$.ajax({
+				method : "POST",
+				url : "/adminCensus/month",
+				dataType : "text",
+				data:{date:new Date().format('yyyy-MM-dd'),role:0},
+				success : function(msg) {
+					var list = msg.split("://");
+					var arr = JSON.parse(list[0]);
+					$('#howlong').html('本月总新增用户数：');
+					$('#sum').html(list[1]);
+					for (var i = 0; i < arr.length; i++) {
+						// 普通柱状图使用的数据
+						nameArr.push(arr[i].name);
+						valueArr.push(arr[i].count);
+					}
+					createEchars();// 创建普通柱状图
+
+				},
+				error : function() {
+					alert("服务器正忙");
+				}
+			});
+		});
+		$("#half").click(function () {
+			nameArr = [];
+			valueArr = [];
+			$.ajax({
+				method : "POST",
+				url : "/adminCensus/half",
+				dataType : "text",
+				data:{role:0},
+				success : function(msg) {
+
+					var list = msg.split("://");
+					var arr = JSON.parse(list[0]);
+					$('#howlong').html('近半年总新增用户数：');
+					$('#sum').html(list[1]);
+					for (var i = 0; i < arr.length; i++) {
+						// 普通柱状图使用的数据
+						nameArr.push(arr[i].name);
+						valueArr.push(arr[i].count);
+					}
+					createEchars();// 创建普通柱状图
+
+				},
+				error : function() {
+					alert("服务器正忙");
+				}
+			});
+		});
+
+
+
+	});
+
+
+	//普通柱状图
+	function createEchars() {
+
+		//基于准备好的dom，初始化echarts实例
+		var myChart = echarts.init(document.getElementById('echarts_div'),'dark');//dark为暗黑主题 不要可以去掉
+
+		// 指定图表的配置项和数据
+		var option = {
+			title : {
+				text : '用户新增量统计报表'
+			},
+			tooltip : {},
+			legend : {
+				data : [ '柱状数据表' ]
+			},
+			xAxis : {
+				data : nameArr
+			},
+			yAxis : {},
+			series : [ {
+				name : '新增量',
+				type : 'bar',
+				data : valueArr
+			} ],
+		};
+
+		// 使用刚指定的配置项和数据显示图表。
+		myChart.setOption(option);
+
+	}
+
+
+	// 重构Date对象下的时间格式
+	Date.prototype.format = function (format) {
+		var o = {
+			"M+": this.getMonth() + 1,
+			"d+": this.getDate(),
+			"h+": this.getHours(),
+			"m+": this.getMinutes(),
+			"s+": this.getSeconds(),
+			"q+": Math.floor((this.getMonth() + 3) / 3),
+			"S": this.getMilliseconds()
+		}
+		if (/(y+)/.test(format)) {
+			format = format.replace(RegExp.$1, (this.getFullYear() + "")
+				.substr(4 - RegExp.$1.length));
+		}
+		for (var k in o) {
+			if (new RegExp("(" + k + ")").test(format)) {
+				format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k]
+					: ("00" + o[k]).substr(("" + o[k]).length));
+			}
+		}
+		return format;
+	}
 </script>
+
 </body>
 </html>

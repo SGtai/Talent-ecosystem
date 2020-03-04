@@ -61,7 +61,6 @@ public class CompanyController
 		if (companyService.findById(qyinfo.getQyAccount()) == null)
 		{
 			//插入企业信息表
-			qyinfo.setRegTime(new Timestamp(System.currentTimeMillis()));
 			companyService.regQyAccount(qyinfo);
 			//插入管理员表
 			Admin admin = new Admin();
@@ -587,15 +586,33 @@ public class CompanyController
 
 	@RequestMapping("/yingpin")
 	public @ResponseBody
-	String yingpin(Query query,HttpSession session)
+	String yingpin(Query query,Jobinfo jobinfo,HttpSession session)
 	{
 		String result = "";
-		int a=companyService.yingpin(query);
-		if (a > 0) {
-			result = "success";
-		} else {
+
+		//先完成应聘人数里面插入
+		jobinfo.setZpxxid(query.getZpxxid());
+		Jobinfo jobinfo1 = companyService.searchJobinfo(jobinfo);
+		int zpNum = Integer.valueOf(jobinfo1.getZpNum());
+		int zpNumEnd = Integer.valueOf(jobinfo1.getZpNumEnd());
+		//完成插入后进行更改状态
+		if (zpNum >= zpNumEnd + 1)
+		{
+			jobinfo1.setZpNumEnd(String.valueOf(zpNumEnd + 1));
+			companyService.yingpinNum(jobinfo1);
+			System.out.println(query.getCkTime());
+			int a = companyService.yingpin(query);
+			if (a > 0)
+			{
+				result = "success";
+			} else
+			{
+				result = "nosuccess";
+			}
+		} else
+		{
 			result = "nosuccess";
-		}
+		};
 		return result;
 	}
 

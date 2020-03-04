@@ -125,5 +125,11 @@ public class CompanyService
 		int sum=companyDao.yingpin(query);
 		return sum;
 	}
+
+	public int yingpinNum(Jobinfo jobinfo){
+		int sum=companyDao.yingpinNum(jobinfo);
+		return sum;
+	}
+
 }
 

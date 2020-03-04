@@ -73,4 +73,6 @@ public interface CompanyDao
 
 	//应聘
 	public int yingpin(Query query);
+	//增加应聘人数
+	public int yingpinNum(Jobinfo jobinfo);
 }
