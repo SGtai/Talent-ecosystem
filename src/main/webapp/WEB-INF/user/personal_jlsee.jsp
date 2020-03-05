@@ -35,8 +35,7 @@
 					<div id="InfoPopup">
 						<ul>
 							<li><a href="/jump/user/personal_updatepsd">修改密码</a></li>
-							<li><a href="/jump/user/personal_updatenum">修改手机</a></li>
-							<li><a href="/jump/user/index">退出</a></li>
+							<li><a href="javascript:void(0)" onclick="tuichu2()">退出</a></li>
 						</ul>
 					</div>
 				</div>
@@ -46,25 +45,11 @@
 </div>
 <div class="navTop">
 	<div class="navTopmain">
-		<div class="logo"><a href="index.html"><img src="<%=imagesPath+"logo_1.png"%>"/><img src="<%=imagesPath+"logo_2.png"%>"/></a></div>
 		<div class="nav">
-			<div class="navItem"><a href="/jump/user/index">首页</a></div>
-			<div class="navItem"><a href="/jump/user/searchJob">职位搜索</a></div>
-			<div class="navItem"><a href=/jump/user/"meetingJob">招聘会</a></div>
-			<div class="navItem"><a href="">政府招考</a></div>
-			<div class="navItem"><a href="">校园招聘</a></div>
-			<div class="navItem other">
-				<div style="position:relative;">
-					<span>更多</span>
-					<div id="TopNavMorePopup">
-						<ul>
-							<li><a href="jobnews.html">就业资讯</a></li>
-							<li><a href="download.html">文档下载</a></li>
-							<li><a href="helpJob.html">求职互助</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
+			<div class="navItem"><a href="/user/index">首页</a></div>
+			<div class="navItem"><a href="/jump/home/searchJob">职位搜索</a></div>
+			<div class="navItem"><a href="/techa">人才成长区</a></div>
+
 		</div>
 	</div>
 </div>
@@ -76,13 +61,10 @@
 				<a href="/jump/user/personal" class="a1">会员首页</a>
 			</div>
 			<div class="NavLeftBox active">
-				<a href="/jump/user/personal_jl" class="a2">我的简历</a>
+				<a href="/user/gopersonaljl" class="a2">我的简历</a>
 			</div>
 			<div class="NavLeftBox">
-				<a href="/jump/user/personal_zwss" class="a3">职位搜索</a>
-			</div>
-			<div class="NavLeftBox">
-				<a href="/jump/user/personal_cai" class="a4">你的菜儿</a>
+				<a href="" class="a3">我的校友</a>
 			</div>
 			<div class="NavLeftBox twoNav">
 				<a class="a5">职位申请</a>
@@ -97,23 +79,14 @@
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li><a href="/jump/user/personal_mainshi">面试通知</a></li>
-				<li><a href="/jump/user/personal_yaoqing">应聘邀请</a></li>
-				<li><a href="/jump/user/personal_whogz">谁在关注我</a></li>
-				<li><a href="/jump/user/personal_goutong">在线沟通记录</a></li>
+				<li><a href="/user/mianshi">面试通知</a></li>
+				<li><a href="/user/yaoyue">应聘邀请</a></li>
 			</ul>
-			<div class="NavLeftBox">
-				<a href="/jump/user/personal_zhanghu" class="a7">账户管理</a>
-			</div>
 			<div class="NavLeftBox">
 				<a href="/jump/user/personal_help" class="a8">帮助中心</a>
 			</div>
 		</div>
-		<div class="navLeftBottom">
-			<span class="sys">扫一扫绑定微信</span><br />
-			<img src="<%=imagesPath+"showqrcode.jpg"%>" />
-			<span class="Notice">蝶飞人才网<br>找工作更靠谱</span>
-		</div>
+
 	</div>
 	<div class="perRightcon layui-form">
 		<div class="seeTitle">
@@ -136,11 +109,9 @@
 					<div class="nametxt"><span>*</span>简历 名称：</div>
 					<div class="inputtxt">
 						<input name="jlname" type="text" class="txt2"
-						<c:if test="${upatelist != null}">
 							<c:if test="${upatelist[0].jlname != null}">
 								value="${upatelist[0].jlname}"
 							</c:if>
-						</c:if>
 						/>
 					</div>
 				</div>
@@ -149,12 +120,10 @@
 					<div class="nametxt"><span>*</span>姓    名：</div>
 					<div class="inputtxt">
 						<input name="yhname" type="text" class="txt1"
-						<c:if test="${upatelist != null}">
 							<c:if test="${upatelist[0].yhname != null}">
 								value="${upatelist[0].yhname}"
 							</c:if>
-						</c:if>
-						<c:if test="${userinfo.name != null and upatelist == null}">
+						<c:if test="${userinfo.name != null}">
 							value="${userinfo.name}"
 						</c:if>
 						/>
@@ -167,7 +136,7 @@
 					<div class="layui-input-inline">
 						<select name="xbSex" lay-filter="sex">
 							<option value=""></option>
-							<c:if test="${userinfo.sex == null and upatelist == null}">
+							<c:if test="${userinfo.sex == null}">
 								<option value="男">男</option>
 								<option value="女">女</option>
 							</c:if>
@@ -191,11 +160,10 @@
 					       <c:if test="${userinfo.birthday != null}">
 					            value= "${userinfo.birthday}"
 						   </c:if>
-							<c:if test="${upatelist != null}">
 								<c:if test="${upatelist[0].csTime != null}">
 								       value="${upatelist[0].csTime}"
 								</c:if>
-							</c:if>
+
 									>
 					</div>
 				</div>
@@ -204,12 +172,12 @@
 					<div class="nametxt"><span>*</span>最高学历：</div>
 					<div class="inputtxt">
 						<input name="xl" type="text" class="txt" placeholder="请输入您的学历"
-								<c:if test="${upatelist != null}">
+
 									<c:if test="${upatelist[0].xl != null}">
 										value="${upatelist[0].xl}"
 									</c:if>
-								</c:if>
-								<c:if test="${userinfo.degree != null and upatelist == null}">
+
+								<c:if test="${userinfo.degree != null}">
 									value="${userinfo.degree}"
 								</c:if>
 						/>
@@ -220,11 +188,11 @@
 					<div class="nametxt"><span>*</span>毕业学校：</div>
 					<div class="inputtxt">
 						<input name="byschool" type="text" class="txt" placeholder="请输入您的毕业学校"
-								<c:if test="${upatelist != null}">
+
 									<c:if test="${upatelist[0].byschool != null}">
 										value="${upatelist[0].byschool}"
 									</c:if>
-								</c:if>
+
 						/>
 					</div>
 				</div>
@@ -233,11 +201,11 @@
 					<div class="nametxt"><span>*</span>毕业专业：</div>
 					<div class="inputtxt">
 						<input name="zy" type="text" class="txt" placeholder="请输入您的毕业专业"
-								<c:if test="${upatelist != null}">
+
 									<c:if test="${upatelist[0].zy != null}">
 										value="${upatelist[0].zy}"
 									</c:if>
-								</c:if>
+
 						/>
 					</div>
 				</div>
@@ -246,11 +214,11 @@
 					<div class="nametxt"><span>*</span>国籍：</div>
 					<div class="inputtxt">
 						<input name="gjNationality" type="text" class="txt" placeholder="请输入您的国籍"
-								<c:if test="${upatelist != null}">
+
 									<c:if test="${upatelist[0].gjNationality != null}">
 										value="${upatelist[0].gjNationality}"
 									</c:if>
-								</c:if>
+
 						/>
 					</div>
 				</div>
@@ -259,11 +227,11 @@
 					<div class="nametxt"><span>*</span>政治面貌：</div>
 					<div class="inputtxt">
 						<input name="mmFace" type="text" class="txt" placeholder="群众/团员/党员"
-								<c:if test="${upatelist != null}">
+
 									<c:if test="${upatelist[0].mmFace != null}">
 										value="${upatelist[0].mmFace}"
 									</c:if>
-								</c:if>
+
 						/>
 					</div>
 				</div>
@@ -286,11 +254,11 @@
 					<div class="nametxt"><span>*</span>邮  箱：</div>
 					<div class="inputtxt">
 						<input name="yxMailbox" type="text" class="txt2" placeholder="请输入完整的邮箱地址"
-								<c:if test="${upatelist != null}">
+
 									<c:if test="${upatelist[0].yxMailbox != null}">
 										value="${upatelist[0].yxMailbox}"
 									</c:if>
-								</c:if>
+
 
 						/>
 					</div>
@@ -300,11 +268,11 @@
 					<div class="nametxt"><span>*</span>民  族：</div>
 					<div class="inputtxt">
 						<input name="minzu" type="text" class="txt" placeholder="请输入您的民族"
-								<c:if test="${upatelist != null}">
+
 									<c:if test="${upatelist[0].minzu != null}">
 										value="${upatelist[0].minzu}"
 									</c:if>
-								</c:if>
+
 						/>
 					</div>
 				</div>
@@ -313,11 +281,11 @@
 					<div class="nametxt"><span>*</span>居住地：</div>
 					<div class="inputtxt">
 						<input name="jzdResidence" type="text" class="txt3" placeholder="请填写您的现居住地"
-								<c:if test="${upatelist != null}">
+
 									<c:if test="${upatelist[0].jzdResidence != null}">
 										value="${upatelist[0].jzdResidence}"
 									</c:if>
-								</c:if>
+
 						/>
 					</div>
 				</div>
@@ -340,7 +308,7 @@
 						<div class="layui-input-inline inputtxt">
 							<select name="workstate" lay-filter="workstate">
 								<option value=""></option>
-								<c:if test="${upatelist != null}">
+
 									<c:if test="${upatelist[0].jobintension[0].workstate == '全职'}">
 										<option value="全职" selected="">全职</option>
 										<option value="兼职">兼职</option>
@@ -356,8 +324,8 @@
 										<option value="兼职">兼职</option>
 										<option value="实习" selected="">实习</option>
 									</c:if>
-								</c:if>
-								<c:if test="${upatelist == null}">
+
+								<c:if test="${upatelist[0].jobintension[0].workstate == null}">
 									<option value="全职">全职</option>
 									<option value="兼职">兼职</option>
 									<option value="实习">实习</option>
@@ -371,11 +339,11 @@
 					<div class="nametxt"><span>*</span>期望月薪：</div>
 					<div class="inputtxt">
 						<input name="monthlyPay" type="text" class="txt2"
-						<c:if test="${upatelist != null}">
+
 							<c:if test="${upatelist[0].jobintension[0].monthlyPay != null}">
 								value="${upatelist[0].jobintension[0].monthlyPay}"
 							</c:if>
-						</c:if>
+
 						/>
 
 					</div>
@@ -385,11 +353,11 @@
 					<div class="nametxt"><span>*</span>期望工作地点：</div>
 					<div class="inputtxt">
 						<input name="workPlace" type="text" class="txt3"
-							<c:if test="${upatelist != null}">
+
 								<c:if test="${upatelist[0].jobintension[0].workPlace != null}">
 									value="${upatelist[0].jobintension[0].workPlace}"
 								</c:if>
-							</c:if>
+
 						/>
 					</div>
 				</div>
@@ -398,11 +366,11 @@
 					<div class="nametxt"><span>*</span>期望职位类别：</div>
 					<div class="inputtxt">
 						<input name="intentionWork" type="text" class="txt2"
-							<c:if test="${upatelist != null}">
+
 								<c:if test="${upatelist[0].jobintension[0].workstate != null}">
 									value="${upatelist[0].jobintension[0].workstate}"
 								</c:if>
-							</c:if>
+
 						/>
 					</div>
 				</div>
@@ -411,11 +379,11 @@
 					<div class="nametxt"><span>*</span>其他要求：</div>
 					<div class="inputtxt">
 						<input name="other" type="text" class="txt2"
-							<c:if test="${upatelist != null}">
+
 								<c:if test="${upatelist[0].jobintension[0].other != null}">
 									value="${upatelist[0].jobintension[0].other}"
 								</c:if>
-							</c:if>
+
 						/>
 					</div>
 				</div>
@@ -728,24 +696,13 @@
 		</form>
 		<div class="clear"></div>
 		<div class="lineddiv"></div>
-		<div class="JlBoxCon">
-			<h1><span>附件简历</span></h1>
-			<div class="wordSub">
-				<p>可以上传word文件或者图片类型的简历，图片支持jpg/gif/png/jpeg格式大小3M以内</p>
-				<div class="wordUp">
-					<span></span>
-					<input name="" type="button" value="浏览" class="liulan"/>
-				</div>
-				<input name="" type="button" value="上传" class="upchuan"/>
-			</div>
-		</div>
 	</div>
 </div>
 
 
 <div class="clear"></div>
 <div class="footer">
-	<p><a href="">**人才</a>旗下<img src="<%=imagesPath+"logo_foot.gif"%>" />蝶飞人才网版权所有 <a href="">京ICP证0******9号</a><a href=""></a>本网站所有招聘信息，未经书面授权不得转载 投诉电话：400-8**-****</p>
+	<p><a href="">菜鸟人才</a>旗下<img src="<%=imagesPath+"logo_foot.gif"%>" />菜鸟人才网版权所有 <a href="">闽ICP证0******9号</a><a href="#"></a>本网站所有招聘信息，未经书面授权不得转载 投诉电话：200-8**-****</p>
 </div>
 
 <script type="text/javascript" src=<%=path+"layui/jquery-3.4.1.js"%>></script>

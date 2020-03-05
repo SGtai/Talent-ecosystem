@@ -56,45 +56,10 @@
                     <div class="zcpart8">
                         <a href="javascript:void(0)" onclick="doreg()">注 册</a>
                     </div>
-                    <div class="zcpart8 zcpart9">
-                        <a href="jianli.html">一分钟填写简历 快速填写 省时省力</a>
-                    </div>
-                    <div class="thirdLogin">
-                        <span>使用其他账号登录：</span>
-                        <div class="third">
-                            <div class="third_con third_1">QQ</div>
-                            <div class="third_con third_2">微博</div>
-                            <div class="third_con third_3">百度</div>
-                        </div>
-                    </div>
                 </div>
             </ul>
 
-            <ul >
-                <div class="zcpart1"></div>
-                <div class="zcpart2">
-                    <div class="zcpart2_l"><img src="<%=imagesPath+"showqrcode.jpg"%>" width="170" height="170" /></div>
-                    <div class="zcpart2_r">
-                        <img src="<%=imagesPath+"log24.png"%>" />
-                    </div>
-                    <div class="clear"></div>
-                    <div class="zcpart2_c">
-                        <span class="CheckBox Yes"></span>
-                        <span style="float:left">我已阅读并接受<a href="registeragreement.html">用户协议</a></span>
-                    </div>
-                </div>
-                <div class="zcpart3">
-                    <span class="zcstep">扫码</span>
-                    <span class="zcstepGo"></span>
-                    <span class="zcstep">关注</span>
-                    <span class="zcstepGo"></span>
-                    <span class="zcstep">确认</span>
-                    <span class="zcstepGo"></span>
-                    <span class="zcstepLast">安全注册成功</span>
-                </div>
-                <div class="zcpart4">及时接收企业答复通知，不再错过每一次面试机会。</div>
-            </ul>
-        </div>
+<div>
     </div>
     <div class="zcRight">
         <div class="topdiv">

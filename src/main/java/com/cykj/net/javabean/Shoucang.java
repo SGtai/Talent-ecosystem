@@ -16,6 +16,6 @@ public class Shoucang
 	private String jlname;
 	private Integer replyRate;
 	private String statename;
-
-
+	private String qyPeople;
+	private Integer cxrzId;
 }

@@ -245,3 +245,69 @@ function deletejl(){
 		}
 	});
 }
+
+function msresultOk(msg) {
+	$.ajax({
+		type: "POST",
+		url: "/user/msresultOk",
+		dataType: "text",
+		data: {cxrzId:msg},
+		success: function (msg) {
+			if (msg == "true") {
+				window.alert("接收面试成功！祝您成功");
+				window.location.href = window.location;
+			}
+		}
+	});
+}
+
+function msresultNo(msg) {
+	$.ajax({
+		type: "POST",
+		url: "/user/msresultNo",
+		dataType: "text",
+		data: {cxrzId:msg},
+		success: function (msg) {
+			if (msg == "true") {
+				window.alert("拒绝成功！希望您能找到更心仪的职位");
+				window.location.href = window.location;
+			}
+		}
+	});
+}
+
+function passsure() {
+
+	var newpassword = $('#newpassword').val();
+	var newpassword2 = $('#newpassword2').val();
+	var userpass =  $('#userpass').val();
+	var password = $('#password').val();
+	if (newpassword==newpassword2) {
+		if (userpass == password){
+			if (password == newpassword) {
+				window.alert("新密码不能和原密码一致")
+			}else {
+			$.ajax({
+				type: "POST",
+				url: "/user/password",
+				dataType: "text",
+				data: {password:password},
+				success: function (msg) {
+					if (msg == "true") {
+						window.alert("密码修改成功")
+					}else{
+						window.alert("异常错误，密码修改失败")
+					}
+				}
+			});
+			}
+		} else {
+			window.alert("原密码错误，请确认")
+		}
+
+	}else{
+		window.alert("两次密码不一致，请重新输入")
+	}
+
+
+}

@@ -18,6 +18,7 @@
 <html>
 <head>
 	<link rel="stylesheet" href=<%=cssPath+"personal.css"%>>
+	<link rel="stylesheet" href="<%=path+"layui/css/layui.css"%>" media="all">
 	<title>个人中心-我的简历</title>
 </head>
 <body>
@@ -34,21 +35,9 @@
 					<input type="button">
 					<div id="InfoPopup">
 						<ul>
-							<li><a href="personal_updatepsd.html">修改密码</a></li>
-							<li><a href="personal_updatenum.html">修改手机</a></li>
-							<li><a href="index.html">退出</a></li>
+							<li><a href="/jump/user/personal_updatepsd">修改密码</a></li>
+							<li><a href="javascript:void(0)" onclick="tuichu2()">退出</a></li>
 						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="Left">
-				<a class="Mobile" href="">手机版</a>
-			</div>
-			<div class="Left">
-				<div class="Weixin">微信
-					<div id="WeixinPopup">
-						<img src="<%=imagesPath+"showqrcode.jpg"%>" width="120" height="120">
-						<p>扫一扫完成绑定<br>求职信息接收及时，<br>不再错过好工作！</p>
 					</div>
 				</div>
 			</div>
@@ -58,25 +47,10 @@
 </div>
 <div class="navTop">
 	<div class="navTopmain">
-		<div class="logo"><a href="index.html"><img src="<%=imagesPath+"logo_1.png"%>"/><img src="<%=imagesPath+"logo_2.png"%>" /></a></div>
 		<div class="nav">
-			<div class="navItem"><a href="index.html">首页</a></div>
-			<div class="navItem"><a href="searchJob.html">职位搜索</a></div>
-			<div class="navItem"><a href="meetingJob.html">招聘会</a></div>
-			<div class="navItem"><a href="">政府招考</a></div>
-			<div class="navItem"><a href="">校园招聘</a></div>
-			<div class="navItem other">
-				<div style="position:relative;">
-					<span>更多</span>
-					<div id="TopNavMorePopup">
-						<ul>
-							<li><a href="jobnews.html">就业资讯</a></li>
-							<li><a href="download.html">文档下载</a></li>
-							<li><a href="helpJob.html">求职互助</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
+			<div class="navItem"><a href="/user/index">首页</a></div>
+			<div class="navItem"><a href="/jump/home/searchJob">职位搜索</a></div>
+			<div class="navItem"><a href="/techa">人才成长区</a></div>
 		</div>
 	</div>
 </div>
@@ -91,10 +65,7 @@
 				<a href="/user/gopersonaljl" class="a2">我的简历</a>
 			</div>
 			<div class="NavLeftBox">
-				<a href="personal_zwss.html" class="a3">职位搜索</a>
-			</div>
-			<div class="NavLeftBox">
-				<a href="personal_cai.html" class="a4">你的菜儿</a>
+				<a href="" class="a3">我的校友</a>
 			</div>
 			<div class="NavLeftBox twoNav">
 				<a class="a5">职位申请</a>
@@ -109,23 +80,14 @@
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li><a href="personal_mainshi.html">面试通知</a></li>
-				<li><a href="personal_yaoqing.html">应聘邀请</a></li>
-				<li><a href="personal_whogz.html">谁在关注我</a></li>
-				<li><a href="personal_goutong.html">在线沟通记录</a></li>
+				<li><a href="/user/mianshi">面试通知</a></li>
+				<li><a href="/user/yaoyue">应聘邀请</a></li>
 			</ul>
-			<div class="NavLeftBox">
-				<a href="personal_zhanghu.html" class="a7">账户管理</a>
-			</div>
 			<div class="NavLeftBox">
 				<a href="personal_help.html" class="a8">帮助中心</a>
 			</div>
 		</div>
-		<div class="navLeftBottom">
-			<span class="sys">扫一扫绑定微信</span><br />
-			<img src="<%=imagesPath+"showqrcode.jpg"%>" />
-			<span class="Notice">蝶飞人才网<br>找工作更靠谱</span>
-		</div>
+
 	</div>
 	<div class="perRightcon">
 		<div class="commonTit">
@@ -208,86 +170,18 @@
 			</a>
 		</div>
 		<div class="clear"></div>
-		<div class="commonTit">
-			<h1 class="fl">屏蔽公司</h1>
-			<span class="ShieldTip">不允许包含屏蔽关键词的企业主动查看我的简历</span>
-		</div>
-		<div class="PBcom">
-			<div class="PBcomtit">
-				<span class="sp1">公司名称关键词：</span>
-				<input name="" type="text" />
-				<span class="sp2">看一下有哪些企业</span>
-				<span class="sp3">屏蔽该关键词</span>
-			</div>
-			<div class="PBcomcon">
-				<ul>
-					<li>
-						<span>[山东] </span>
-						<a href="company.html">·爱玛客服务产业（中国）有限公司莱芜分公司</a>
-					</li>
-					<li>
-						<span>[河北] </span>
-						<a href="company.html">·秦皇岛市恒正会计服务有限公司</a>
-					</li>
-					<li>
-						<span>[广西] </span>
-						<a href="company.html">·南宁市瑞高文化商务服务中心</a>
-					</li>
-					<li>
-						<span>[上海] </span>
-						<a href="company.html">·上海点瀚展览服务有限公司</a>
-					</li>
-					<li>
-						<span>[江苏] </span>
-						<a href="company.html">·重庆天骄爱生活服务股份有限公司镇江分公司</a>
-					</li>
-					<li>
-						<span>[江苏] </span>
-						<a href="company.html">·苏州精确万分商务服务有限公司</a>
-					</li>
-					<li>
-						<span>[山东] </span>
-						<a href="company.html">·山东镇洋物业服务有限公司</a>
-					</li>
-					<li>
-						<span>[河北] </span>
-						<a href="company.html">·秦皇岛市恒正会计服务有限公司</a>
-					</li>
-					<li>
-						<span>[广西] </span>
-						<a href="company.html">·南宁市瑞高文化商务服务中心</a>
-					</li>
-					<li>
-						<span>[上海] </span>
-						<a href="company.html">·上海点瀚展览服务有限公司</a>
-					</li>
-				</ul>
-			</div>
-			<div class="clear"></div>
-			<div class="PBpage1">
-				<span>共50条 第1/5页</span>
-			</div>
-			<div class="PBpage2">
-				<span class="sp1">上一页</span>
-				<span class="sp2 on">1</span>
-				<span class="sp2">2</span>
-				<span class="sp2">3</span>
-				<span class="sp2">4</span>
-				<span class="sp2">5</span>
-				<span class="sp1">下一页</span>
-			</div>
-		</div>
 	</div>
 </div>
 
 
 <div class="clear"></div>
 <div class="footer">
-	<p><a href="">**人才</a>旗下<img src="<%=imagesPath+"logo_foot.gif"%>" />蝶飞人才网版权所有 <a href="">京ICP证0******9号</a><a href=""></a>本网站所有招聘信息，未经书面授权不得转载 投诉电话：400-8**-****</p>
+	<p><a href="">菜鸟人才</a>旗下<img src="<%=imagesPath+"logo_foot.gif"%>" />菜鸟人才网版权所有 <a href="">闽ICP证0******9号</a><a href="#"></a>本网站所有招聘信息，未经书面授权不得转载 投诉电话：200-8**-****</p>
 </div>
 
 
 <script type="text/javascript" src=<%=path+"layui/jquery-3.4.1.js"%>></script>
+<script src=<%=path + "layui/layui.js"%>></script>
 <script type="text/javascript" src=<%=jsPath+"personal.js"%>></script>
 <script type="text/javascript" src=<%=jsPath+"personal_jl.js"%>></script>
 </body>

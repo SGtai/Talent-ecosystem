@@ -62,7 +62,7 @@
         <!--        <div style="padding: 15px;">内容主体区域</div>-->
         <c:if test="${roid!=null}">
             <c:if test="${roid == 1 || roid == 2}">
-                <iframe src="/jump/admin/usercensus" name="main_self_frame" frameborder="0" class="layadmin-iframe"
+                <iframe src="/jump/admin/power" name="main_self_frame" frameborder="0" class="layadmin-iframe"
                         style="width: 100%"
                         height="100%"></iframe>
             </c:if>

@@ -2,6 +2,7 @@ package com.cykj.net.service;
 
 import com.cykj.net.javabean.*;
 import com.cykj.net.mapper.UserDao;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -94,6 +95,10 @@ public class UserService
 		int num = userDao.shoucang(zpxxid,hyid);
 		return num;
 	}
+	public int qxguanzhu(int zpxxid,int hyid){
+		int num = userDao.qxguanzhu(zpxxid,hyid);
+		return num;
+	}
 	public int shoucangCount(int zpxxid,int hyid){
 		int num = userDao.shoucangCount(zpxxid,hyid);
 		return num;
@@ -106,5 +111,29 @@ public class UserService
 	public List<Shoucang> shenqinglist(int hyid){
 		List<Shoucang> shoucanglist = userDao.shenqinglist(hyid);
 		return shoucanglist;
+	}
+	public List<Shoucang> mianshi(@Param("hyid") int hyid){
+		List<Shoucang> shoucanglist = userDao.mianshi(hyid);
+		return shoucanglist;
+	}
+	public List<Shoucang> yaoyue(@Param("hyid") int hyid){
+		List<Shoucang> shoucanglist = userDao.yaoyue(hyid);
+		return shoucanglist;
+	}
+	public int msresultOk(int cxrzId){
+		int num = userDao.msresultOk(cxrzId);
+		return num;
+	}
+	public int msresultNo(int cxrzId){
+		int num = userDao.msresultNo(cxrzId);
+		return num;
+	}
+	public int password(String password,int yhid){
+		int num = userDao.password(password,yhid);
+		return num;
+	}
+	public int photo(String urldb,int yhid){
+		int num = userDao.photo(urldb,yhid);
+		return num;
 	}
 }
