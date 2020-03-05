@@ -51,7 +51,6 @@
 				<div class="layui-inline">
 					<button style="margin-left: 0%" class="layui-btn layui-btn-normal layui-btn-radius" id="query_shuaxin" type="button">刷新</button>
 				</div>
-
 			</div>
 		</div>
 	</form>
