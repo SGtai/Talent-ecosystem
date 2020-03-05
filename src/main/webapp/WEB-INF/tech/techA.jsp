@@ -10,10 +10,7 @@
 <%
 	String cssPath = application.getContextPath()+"/techS/css/";
 	String jsPath = application.getContextPath()+"/techS/js/";
-	String path = application.getContextPath();
-	String othPath =application.getContextPath()+"/techS/other/";
 	String layuiPath =application.getContextPath()+"/layui/";
-//	String pathS = ResourceUtils.getURL("classpath:").getPath();
 
 %>
 <!DOCTYPE html>
@@ -46,7 +43,7 @@
 									<div class="c">
 										<div class="pubpic">
 											<a href="/techvideo?id=${node.zjId}&name=${node.spName}&path=${node.spPath}&spId=${node.spId}&spDescribe=${node.spDescribe}">
-												<img src="${'/techS/other/'.concat(node.zjPicture)}" /></a>
+												<img src="${'../../uploadS/other/'.concat(node.zjPicture)}" /></a>
 										</div>
 										<div class="pubtitle">
 											<a href="/techvideo?id=${node.zjId}&name=${node.spName}&path=${node.spPath}&spId=${node.spId}&spDescribe=${node.spDescribe}">
@@ -105,7 +102,7 @@
 						<li>
 							<a href="/techb?id=${cl.kcId}&name=${cl.kcName}&jg=${cl.jgPrice}&ms=${cl.msDescribe}">
 								<div class="image-ti">
-									<img src="${'/techS/other/'.concat(cl.ckPicture)}" alt="">
+									<img src="${'../../uploadS/other/'.concat(cl.ckPicture)}" alt="">
 								</div>
 								<p class="slide-title">${cl.kcName}</p>
 								<p class="slide-body">
@@ -141,13 +138,13 @@
 		<div class="floatDtt">在线客服</div>
 		<div class="floatShadow">
 			<ul class="floatDqq">
-				<li style="padding-left:0px;"><a target="_blank" href="tencent://message/?uin=981553511&Site=sc.chinaz.com&Menu=yes"><img src="/techS/other/qq.png" align="absmiddle">&nbsp;&nbsp;在线客服1号</a></li>
-				<li style="padding-left:0px;"><a target="_blank" href="tencent://message/?uin=844893039&Site=sc.chinaz.com&Menu=yes"><img src="/techS/other/qq.png" align="absmiddle">&nbsp;&nbsp;在线客服2号</a></li>
-				<li style="padding-left:0px;"><a target="_blank" href="tencent://message/?uin=315057742&Site=sc.chinaz.com&Menu=yes"><img src="/techS/other/qq.png" align="absmiddle">&nbsp;&nbsp;在线客服3号</a></li>
+				<li style="padding-left:0px;"><a target="_blank" href="tencent://message/?uin=981553511&Site=sc.chinaz.com&Menu=yes"><img src="../../uploadS/other/qq.png" align="absmiddle">&nbsp;&nbsp;在线客服1号</a></li>
+				<li style="padding-left:0px;"><a target="_blank" href="tencent://message/?uin=844893039&Site=sc.chinaz.com&Menu=yes"><img src="../../uploadS/other/qq.png" align="absmiddle">&nbsp;&nbsp;在线客服2号</a></li>
+				<li style="padding-left:0px;"><a target="_blank" href="tencent://message/?uin=315057742&Site=sc.chinaz.com&Menu=yes"><img src="../../uploadS/other/qq.png" align="absmiddle">&nbsp;&nbsp;在线客服3号</a></li>
 			</ul>
 			<div class="floatDtxt">热线电话</div>
-			<div class="floatDtel"><img src="/techS/other/online_phone.jpg" width="155" height="45" alt=""></div>
-			<div style="text-align:center;padding:10PX 0 5px 0;background:#EBEBEB;"><img src="/techS/other/wap_ico.jpg"><br>微信公众账号</div>
+			<div class="floatDtel"><img src="../../uploadS/other/online_phone.jpg" width="155" height="45" alt=""></div>
+			<div style="text-align:center;padding:10PX 0 5px 0;background:#EBEBEB;"><img src="../../uploadS/other/wap_ico.jpg"><br>微信公众账号</div>
 		</div>
 		<div class="floatDbg"></div>
 	</div>

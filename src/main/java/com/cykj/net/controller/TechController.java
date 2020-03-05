@@ -214,10 +214,24 @@ public class TechController
 	public static void main(String[] args)
 	{
 
-		TechController tc = new TechController();
-		System.out.println(tc.getTime());
-		TimeZone tz = TimeZone.getTimeZone("ETC/GMT-8");
-		TimeZone.setDefault(tz);
+//		TechController tc = new TechController();
+//		System.out.println(tc.getTime());
+//		TimeZone tz = TimeZone.getTimeZone("ETC/GMT-8");
+//		TimeZone.setDefault(tz);
+//		String savePath = "src/main/resources/static/techS/other";
+		String savePath = "src/main/webapp/uploadS";
+//		String savePath = ResourceUtils.getURL("classpath:").getPath()+ "static/techS/other";
+//		String savePath = request.getSession().getServletContext().getRealPath("/uploadS/images");
+		System.out.println("132="+savePath);
+		File file2 = new File(savePath);
+		//                        判断上传文件的保存目录是否存在
+		if (!file2.exists() && !file2.isDirectory()) {
+			System.out.println(savePath + "目录不存在，需要创建");
+			//创建目录
+			file2.mkdirs();
+		}else{
+			System.out.println("存在");
+		}
 
 	}
 	/**
@@ -230,12 +244,6 @@ public class TechController
 	public ModelAndView techvideo(HttpServletRequest request, HttpServletResponse response,String id,String name,String path,String spId,String nr,String pjId,String cs,String dxName,String dfnr,String fName,String spDescribe) throws IOException
 	{
 		Userlist user = (Userlist) request.getSession().getAttribute("user");
-
-//		Userlist user = new Userlist();
-//		user.setRegTime(getTime());
-//		user.setYhid(1);
-//		user.setPicture("1.jpg");
-//		user.setName("小铭");
 		LearningLog learningLog =new LearningLog();
 		learningLog.setSpDescribe(spDescribe);
 		learningLog.setSpId(Integer.valueOf(spId));
@@ -360,14 +368,13 @@ public class TechController
 				//文件格式   fileNames.substring(split+1,fileNames.length())
 				//文件内容 file.getBytes()
 				makeFileName = makeFileName(fileNames);
-				String savePath = ResourceUtils.getURL("classpath:").getPath()+"static/techS/other";
-//				String savePath = request.getSession().getServletContext().getRealPath("/techS/other");
+				String savePath = request.getSession().getServletContext().getRealPath("/uploadS/other");
 				File file2 = new File(savePath);
 				//                        判断上传文件的保存目录是否存在
 				if (!file2.exists() && !file2.isDirectory()) {
 					System.out.println(savePath + "目录不存在，需要创建");
 					//创建目录
-					file2.mkdir();
+					file2.mkdirs();
 				}
 				System.out.println(savePath + "/" + makeFileName);
 				file.transferTo(new File(savePath + "/" + makeFileName));
@@ -424,13 +431,13 @@ public class TechController
 				MultipartFile file = req.getFile(iterator.next());
 				String fileNames = file.getOriginalFilename();
 				makeFileName = makeFileName(fileNames);
-				String savePath = ResourceUtils.getURL("classpath:").getPath()+"static/techS/other";
+				String savePath = request.getSession().getServletContext().getRealPath("/uploadS/other");
 				File file2 = new File(savePath);
 				//                        判断上传文件的保存目录是否存在
 				if (!file2.exists() && !file2.isDirectory()) {
 					System.out.println(savePath + "目录不存在，需要创建");
 					//创建目录
-					file2.mkdir();
+					file2.mkdirs();
 				}
 				file.transferTo(new File(savePath + "/" + makeFileName));
 				ct.setZjName(request.getParameter("name"));
@@ -472,13 +479,13 @@ public class TechController
 				MultipartFile file = req.getFile(iterator.next());
 				String fileNames = file.getOriginalFilename();
 				makeFileName = makeFileName(fileNames);
-				String savePath = ResourceUtils.getURL("classpath:").getPath()+"static/techS/other/video";
+				String savePath = request.getSession().getServletContext().getRealPath("/uploadS/other/video");
 				File file2 = new File(savePath);
 				//                        判断上传文件的保存目录是否存在
 				if (!file2.exists() && !file2.isDirectory()) {
 					System.out.println(savePath + "目录不存在，需要创建");
 					//创建目录
-					file2.mkdir();
+					file2.mkdirs();
 				}
 				file.transferTo(new File(savePath + "/" + makeFileName));
 				vd.setSpName(request.getParameter("name"));
@@ -541,7 +548,8 @@ public class TechController
 		//得到要下载的文件名
 		String fileName = fName;
 		//上传的文件都是保存在/WEB-INF/upload目录下的子目录当中
-		String fileSaveRootPath = ResourceUtils.getURL("classpath:").getPath()+"static/techS/other/video";
+//		String fileSaveRootPath = ResourceUtils.getURL("classpath:").getPath()+ "static/techS/other/video";
+		String fileSaveRootPath = request.getSession().getServletContext().getRealPath("/uploadS/other/video");
 		//得到要下载的文件
 		File file = new File(fileSaveRootPath + "/" + fName);
 		//		System.out.println("fileName = " + fileName);
@@ -821,13 +829,17 @@ public class TechController
 				MultipartFile file = req.getFile(iterator.next());
 				String fileNames = file.getOriginalFilename();
 				makeFileName = makeFileName(fileNames);
-				String savePath = ResourceUtils.getURL("classpath:").getPath()+"static/techS/other";
+				String savePath = request.getSession().getServletContext().getRealPath("/uploadS/other");
+//				String savePath = "src/main/webapp/uploadS";
+				System.out.println("132="+savePath);
 				File file2 = new File(savePath);
 				//                        判断上传文件的保存目录是否存在
 				if (!file2.exists() && !file2.isDirectory()) {
 					System.out.println(savePath + "目录不存在，需要创建");
 					//创建目录
-					file2.mkdir();
+					file2.mkdirs();
+				}else{
+					System.out.println("存在");
 				}
 				file.transferTo(new File(savePath + "/" + makeFileName));
 				ct.setKcName(request.getParameter("name"));
@@ -868,13 +880,13 @@ public class TechController
 				MultipartFile file = req.getFile(iterator.next());
 				String fileNames = file.getOriginalFilename();
 				makeFileName = makeFileName(fileNames);
-				String savePath = ResourceUtils.getURL("classpath:").getPath()+"static/techS/other";
+				String savePath = request.getSession().getServletContext().getRealPath("/uploadS/other");
 				File file2 = new File(savePath);
 				//                        判断上传文件的保存目录是否存在
 				if (!file2.exists() && !file2.isDirectory()) {
 					System.out.println(savePath + "目录不存在，需要创建");
 					//创建目录
-					file2.mkdir();
+					file2.mkdirs();
 				}
 				file.transferTo(new File(savePath + "/" + makeFileName));
 				ct.setZjName(request.getParameter("name"));
@@ -915,13 +927,13 @@ public class TechController
 				MultipartFile file = req.getFile(iterator.next());
 				String fileNames = file.getOriginalFilename();
 				makeFileName = makeFileName(fileNames);
-				String savePath = ResourceUtils.getURL("classpath:").getPath()+"static/techS/other";
+				String savePath = request.getSession().getServletContext().getRealPath("/uploadS/other/video");
 				File file2 = new File(savePath);
 				//                        判断上传文件的保存目录是否存在
 				if (!file2.exists() && !file2.isDirectory()) {
 					System.out.println(savePath + "目录不存在，需要创建");
 					//创建目录
-					file2.mkdir();
+					file2.mkdirs();
 				}
 				file.transferTo(new File(savePath + "/" + makeFileName));
 				ct.setSpName(request.getParameter("name"));
@@ -975,12 +987,8 @@ public class TechController
 		fe.setDdNumber(out_trade_no);
 		fe.setDdTime(getTime());
 		Userlist user = (Userlist) request.getSession().getAttribute("user");
-
-//		Userlist user = new Userlist();
-//		user.setYhid(1);
 		fe.setYhName(user.getName());
 		fe.setYhId(user.getYhid());
-//		fe.setMsDescribe();
 		if (kcNameS!=""){
 		int a = techService.addFinance(fe);}
 		techService.upCurriculumGm(Long.parseLong(kcIdS));

@@ -13,8 +13,6 @@
 <%
 	String cssPath = application.getContextPath()+"/techS/css/";
 	String jsPath = application.getContextPath()+"/techS/js/";
-	String othPath =application.getContextPath()+"/techS/other/";
-	String videoPath =application.getContextPath()+"/techS/other/video";
 	String layuiPath =application.getContextPath()+"/layui/";
 %>
 <!DOCTYPE html>
@@ -46,10 +44,10 @@
 					<div class="information-left" style="width: 55%;height: 85%;position: absolute;">
 						<video style="width: 100%;height: 100%;position: absolute;" muted="muted" controls autoplay  >
 							<!-- <source src="movie.ogg" type="video/ogg"> -->
-							<source src="${'/techS/other/video/'.concat(path)}" type="${'video/'.concat(suffix)}">
+							<source src="${'../../uploadS/other/video/'.concat(path)}" type="${'video/'.concat(suffix)}">
 							<!-- <source src="movie.webm" type="video/webm"> -->
-							<object data="${'/techS/other/video/'.concat(path)}" width="320" height="240">
-								<embed width="320" height="240" src="${'/techS/other/video/'.concat(name)}${'.swf'}">
+							<object data="${'../../uploadS/other/video/'.concat(path)}" width="320" height="240">
+								<embed width="320" height="240" src="${'../../uploadS/other/video/'.concat(name)}${'.swf'}">
 							</object>
 						</video>
 					</div>
@@ -92,7 +90,7 @@
 	<div class="comment" id="content">
 		<c:forEach items="${com}" var="node">
 			<div class="imgdiv">
-				<img class="imgcss"  src="${'/images/'.concat(node.assess.yhPicture)}"/>
+				<img class="imgcss"  src="${'../../uploadS/images/'.concat(node.assess.yhPicture)}"/>
 			</div>
 			<div class="conmment_details">
 				<div style="float:left;">
@@ -117,13 +115,13 @@
 				<c:forEach items="${node.aryR}" var="nodes">
 					<c:if test="${nodes.dfId == user.yhid}">
 						<div class="reply" >
-							<img class="imgcss"  src="${'/images/'.concat(nodes.dfPicture)}" style="width: 5%;height: 5%;"/>
+							<img class="imgcss"  src="${'../../uploadS/images/'.concat(nodes.dfPicture)}" style="width: 5%;height: 5%;"/>
 							<span class="comment_name">${nodes.dfName}</span>回复<span class="comment_name">${nodes.dxName}</span> <span><fmt:formatDate value="${nodes.dfTime}" pattern="yyyy年MM月dd日 HH:mm:ss" /></span>：<span class="reply_content">${nodes.nrContent} </span>
 						</div>
 					</c:if>
 					<c:if test="${nodes.dfId != user.yhid}">
 						<div class="reply" >
-							<img class="imgcss"  src="${'/images/'.concat(nodes.dfPicture)}" style="width: 5%;height: 5%;"/>
+							<img class="imgcss"  src="${'../../uploadS/images/'.concat(nodes.dfPicture)}" style="width: 5%;height: 5%;"/>
 							<span class="comment_name">${nodes.dfName}</span>回复<span class="comment_name">${nodes.dxName}</span> <span><fmt:formatDate value="${nodes.dfTime}" pattern="yyyy年MM月dd日 HH:mm:ss" /></span>：<span class="reply_content">${nodes.nrContent} </span>
 								<a  data-id="1" class="del_reply">
 									<i class="icon layui-icon" >    <a class="a_hover" href = "javascript:void(0);" onclick ="eva(${node.assess.pjId},'${nodes.dfName}')">            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回复</a></i>
