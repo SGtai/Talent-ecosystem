@@ -10,7 +10,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>修改企业信息</title>
+	<title>修改高校信息</title>
 	<link rel="stylesheet" href="<%=path+"css/layui.css"%>" media="all">
 	<script type="text/javascript" src=<%=path+"jquery-3.4.1.js"%>></script>
 	<script src=<%=path+"layui.js"%>></script>

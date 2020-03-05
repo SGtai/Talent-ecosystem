@@ -116,7 +116,6 @@
 				<input type="text" id="hide8"  autocomplete="off" class="layui-input" disabled>
 			</div>
 		</div>
-		<img  src="\schoolS\cunchu\logo\555555\jmgz.jpg" alt="" style="width: 20%;height: 20%;margin-left: 70%;margin-top: -30%">
 		<div  class="layui-form-item">
 			<label class="layui-form-label" style="margin-left: -5%">学习经历</label>
 			<table class="layui-table" style="margin-left: -5%">
@@ -237,8 +236,6 @@
 				<input type="checkbox" id="a6" lay-filter="a6" checked class="layui-icon-radio">
 			</div>
 		</div>
-
-		<img  src="\schoolS\cunchu\logo\555555\jmgz.jpg" alt="" style="width: 20%;height: 20%;margin-left: 70%;margin-top: -30%">
 		<div class="layui-form-item" style="margin-left: -15%">
 			<label class="layui-form-label">技能证书</label>
 			<div class="layui-input-inline" style="width: 79%;">
@@ -561,7 +558,7 @@
 												phone:$("#hide7").val(),
 												name:$("#usename").val(),
 												school:$("#school").val(),
-												birth:$("#birth").val(),
+												birthday:$("#birth").val(),
 												zy:$("#zhuanye").val(),
 												mmFace:$("#mm").val(),
 												degree:$("#xl").val(),
@@ -648,7 +645,7 @@
 	<script>
 
 		function downloadTemp(){
-			window.location="/schoolS/cunchu/简历模板.xls";
+			window.location="../../cunchu/简历模板.xls";
 			// window.open("/schoolS/cunchu/简历模板.xls");
 			// $.ajax(
 			// 	{

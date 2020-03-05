@@ -65,6 +65,9 @@
             <if test="type!=null and type.length>0">
                 type=#{type},
             </if>
+            <if test="scpicture!=null and scpicture.length>0">
+                scpicture=#{scpicture},
+            </if>
         </trim>
     </update>
 <!--    查看人才信息-->

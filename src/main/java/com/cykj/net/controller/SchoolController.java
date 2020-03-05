@@ -137,23 +137,23 @@ public class SchoolController
 			Timestamp nousedate = new Timestamp(date.getTime());
 			schoolinfo.setRegTime(nousedate);
 			//插入图片路径  图片
-			String path= ResourceUtils.getURL("classpath:").getPath()+"static/schoolS/cunchu";
+			String path=request.getServletContext().getRealPath("/cunchu");
 			System.out.println("path="+path);
 			//判断logo目录的是否存在
-			File pathlogo=new File(path+"\\"+"logo"); //图片
+			File pathlogo=new File(path+"/"+"logo"); //图片
 			System.out.println("pathlogo="+pathlogo);
 			if(!pathlogo.exists()){
 				pathlogo.mkdir();
 			}
 			//判断以这个账号为命名目录的是否存在
-			File logoacc=new File(path+"\\"+"logo"+"\\"+schoolinfo.getScAccount()); //图片
+			File logoacc=new File(path+"/"+"logo"+"/"+schoolinfo.getScAccount()); //图片
 			if(!logoacc.exists()){
 				logoacc.mkdir();
 			}
-			System.out.println(path+"\\"+"logo"+"\\"+schoolinfo.getScAccount()); //图片
+			System.out.println(path+"/"+"logo"+"/"+schoolinfo.getScAccount()); //图片
 			String filename = file.getOriginalFilename();
-			file.transferTo(new File(path+"\\"+"logo"+"\\"+schoolinfo.getScAccount()+"\\"+ filename)); //插入成功
-			schoolinfo.setScpicture("\\schoolS\\cunchu\\"+"logo"+"\\"+schoolinfo.getScAccount()+"\\"+ filename);
+			file.transferTo(new File(path+"/"+"logo"+"/"+schoolinfo.getScAccount()+"/"+ filename)); //插入成功
+			schoolinfo.setScpicture("/cunchu/"+schoolinfo.getScAccount()+"/"+ filename);
 			schoolinfo.setScState("0");
 			Admin a=new Admin();
 			a=adminService.findAdmin(schoolinfo.getScAccount());
@@ -212,6 +212,7 @@ public class SchoolController
 	@ResponseBody
 	public String changeInfo1(S1 sc,HttpServletRequest request,@RequestParam("file") MultipartFile file) throws IOException
 	{
+
 		Admin admin= (Admin) request.getSession().getAttribute("admin");
 			sc.setScAccount(admin.getAccount());
 			S1 ssc=schoolService.findSchoolinfo(admin.getAccount());
@@ -222,8 +223,8 @@ public class SchoolController
 			int b=panduandaima(admin.getAccount(),sc.getXinyongDaima());
 			if(b==1){}else{return "-2";}
 			//插入图片路径
-			String path= ResourceUtils.getURL("classpath:").getPath()+"static/schoolS/cunchu";
-			File logoacc=new File(path+"\\"+"logo"+"\\"+admin.getAccount());
+			String path=request.getServletContext().getRealPath("/cunchu");
+			File logoacc=new File(path+"/"+"logo"+"/"+admin.getAccount());
 			//删除这个用户文件夹下的所有文件
 			File[] files = logoacc.listFiles();
 			//遍历删除文件
@@ -231,8 +232,9 @@ public class SchoolController
 				f.delete();
 			}
 			String filename = file.getOriginalFilename();
-			file.transferTo(new File(path+"\\"+"logo"+"\\"+admin.getAccount()+"\\"+ filename));
-			sc.setScpicture("\\"+"logo"+"\\"+admin.getAccount()+"\\"+ filename);
+			file.transferTo(new File(path+"/"+"logo"+"/"+admin.getAccount()+"/"+ filename));
+			sc.setScpicture("/cunchu/"+"logo"+"/"+admin.getAccount()+"/"+ filename);
+			System.out.println("/"+"logo"+"/"+admin.getAccount()+"/"+ filename);
 			int i=schoolService.updateSchoolinfo(sc);
 			if(i>0)
 			{
