@@ -62,8 +62,9 @@
         <!--        <div style="padding: 15px;">内容主体区域</div>-->
         <c:if test="${roid!=null}">
             <c:if test="${roid == 1 || roid == 2}">
-                <iframe src="/jump/admin/welcome" name="main_self_frame" frameborder="0" class="layadmin-iframe"
-                        style="width: 100%"
+                <iframe  src="/jump/admin/welcome" name="main_self_frame" frameborder="0" class="layadmin-iframe"
+                        style="width: 100%; background: url('../../uploadS/images/back_admin.png') no-repeat;
+                        background-size: 100% auto;"
                         height="100%"></iframe>
             </c:if>
 
