@@ -50,7 +50,7 @@
 		<div class="nav">
 			<div class="navItem"><a href="/user/index">首页</a></div>
 			<div class="navItem"><a href="/jump/home/searchJob">职位搜索</a></div>
-			<a href="/techa">人才成长区</a>
+			<div class="navItem"><a href="/techa">人才成长区</a></div>
 			</div>
 		</div>
 	</div>
@@ -88,10 +88,7 @@
 				<a href="/jump/user/personal_help" class="a8">帮助中心</a>
 			</div>
 		</div>
-		<div class="navLeftBottom">
-			<img src="<%=imagesPath+"showqrcode.jpg"%>" />
-			<span class="Notice">菜鸟人才网<br>找工作更靠谱</span>
-		</div>
+
 	</div>
 	<div class="perRightcon ">
 		<div class="seeTitle">
@@ -102,6 +99,14 @@
 		<form class="" id="userinfojl">
 			<div class="JlBoxCon ">
 				<h1><span>基本信息</span></h1>
+				<div class="JlBoxRight">
+					<c:if test="${sessionScope.user.picture ==null or sessionScope.user.picture ==''}">
+						<img src="<%=imagesPath+"per1.jpg"%>" width="80" height="100" />
+					</c:if>
+					<c:if test="${sessionScope.user.picture !=null and sessionScope.user.picture !=''}">
+						<img src="<%=dbimgPath%>${sessionScope.user.picture}" width="80" height="100" />
+					</c:if>
+				</div>
 				<div class="JlBoxLeft ">
 					<div class="jldiv">
 						<div class="nametxt1">简历名称：
@@ -360,17 +365,6 @@
 
 		<div class="clear"></div>
 		<div class="lineddiv"></div>
-		<div class="JlBoxCon">
-			<h1><span>附件简历</span></h1>
-			<div class="wordSub">
-				<p>可以上传word文件或者图片类型的简历，图片支持jpg/gif/png/jpeg格式大小3M以内</p>
-				<div class="wordUp">
-					
-					<input name="" type="button" value="浏览" class="liulan"/>
-				</div>
-				<input name="" type="button" value="上传" class="upchuan"/>
-			</div>
-		</div>
 	</div>
 </div>
 

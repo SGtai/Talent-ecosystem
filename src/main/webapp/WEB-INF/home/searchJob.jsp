@@ -34,13 +34,6 @@
 		</div>
 		<img src=<%=imagesPath+"spirit_40.png"%> />
 	</div>
-	<div class="topR">
-		<div class="topR0 topR1" style=" background: url(<%=imagesPath+"4.png"%>) no-repeat;width: 55px;padding-left: 25px;cursor: pointer;"><a href="zhuceCompany.html">企业招聘</a></div>
-		<div class="topR0 topR2"><a href="zhuce.html">注册</a></div>
-		<div class="topR0 topR3" style="background: url(<%=imagesPath+"5.png"%>) no-repeat;width: 62px;padding-left: 25px;cursor: pointer;"><a href="login.html">个人登录</a></div>
-		<div class="topR0 topR4" style="background: url(<%=imagesPath+"6.png"%>) no-repeat;width: 72px;padding-left: 25px;cursor: pointer; margin-right:20px"><a href="javascript:void()">手机找工作</a></div>
-		<div class="clear"></div>
-	</div>
 </div>
 <div class="menuDiv">
 	<div class="mainWarp">

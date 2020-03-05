@@ -50,7 +50,7 @@
 		<div class="nav">
 			<div class="navItem"><a href="/user/index">首页</a></div>
 			<div class="navItem"><a href="/jump/home/searchJob">职位搜索</a></div>
-			<a href="/techa">人才成长区</a>
+			<div class="navItem"><a href="/techa">人才成长区</a></div>
 		</div>
 	</div>
 </div>
@@ -87,10 +87,7 @@
 				<a href="personal_help.html" class="a8">帮助中心</a>
 			</div>
 		</div>
-		<div class="navLeftBottom">
-			<img src="<%=imagesPath+"showqrcode.jpg"%>" />
-			<span class="Notice">菜鸟人才网<br>找工作更靠谱</span>
-		</div>
+
 	</div>
 	<div class="perRightcon">
 		<div class="commonTit">
@@ -173,75 +170,6 @@
 			</a>
 		</div>
 		<div class="clear"></div>
-		<div class="commonTit">
-			<h1 class="fl">屏蔽公司</h1>
-			<span class="ShieldTip">不允许包含屏蔽关键词的企业主动查看我的简历</span>
-		</div>
-		<div class="PBcom">
-			<div class="PBcomtit">
-				<span class="sp1">公司名称关键词：</span>
-				<input name="" type="text" />
-				<span class="sp2">看一下有哪些企业</span>
-				<span class="sp3">屏蔽该关键词</span>
-			</div>
-			<div class="PBcomcon">
-				<ul>
-					<li>
-						<span>[山东] </span>
-						<a href="company.html">·爱玛客服务产业（中国）有限公司莱芜分公司</a>
-					</li>
-					<li>
-						<span>[河北] </span>
-						<a href="company.html">·秦皇岛市恒正会计服务有限公司</a>
-					</li>
-					<li>
-						<span>[广西] </span>
-						<a href="company.html">·南宁市瑞高文化商务服务中心</a>
-					</li>
-					<li>
-						<span>[上海] </span>
-						<a href="company.html">·上海点瀚展览服务有限公司</a>
-					</li>
-					<li>
-						<span>[江苏] </span>
-						<a href="company.html">·重庆天骄爱生活服务股份有限公司镇江分公司</a>
-					</li>
-					<li>
-						<span>[江苏] </span>
-						<a href="company.html">·苏州精确万分商务服务有限公司</a>
-					</li>
-					<li>
-						<span>[山东] </span>
-						<a href="company.html">·山东镇洋物业服务有限公司</a>
-					</li>
-					<li>
-						<span>[河北] </span>
-						<a href="company.html">·秦皇岛市恒正会计服务有限公司</a>
-					</li>
-					<li>
-						<span>[广西] </span>
-						<a href="company.html">·南宁市瑞高文化商务服务中心</a>
-					</li>
-					<li>
-						<span>[上海] </span>
-						<a href="company.html">·上海点瀚展览服务有限公司</a>
-					</li>
-				</ul>
-			</div>
-			<div class="clear"></div>
-			<div class="PBpage1">
-				<span>共50条 第1/5页</span>
-			</div>
-			<div class="PBpage2">
-				<span class="sp1">上一页</span>
-				<span class="sp2 on">1</span>
-				<span class="sp2">2</span>
-				<span class="sp2">3</span>
-				<span class="sp2">4</span>
-				<span class="sp2">5</span>
-				<span class="sp1">下一页</span>
-			</div>
-		</div>
 	</div>
 </div>
 

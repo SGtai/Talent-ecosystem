@@ -41,11 +41,6 @@
 			<div class="leftimg">
 				<img src="<%=imagesPath+"log1.gif"%>"/>
 			</div>
-			<div class="leftcon">
-				<a href="" class="a1">手机触屏版 m.diefeirencai.com</a>
-				<a href="" class="a2">Android客户端下载</a>
-				<a href="" class="a3">iPhone客户端下载</a>
-			</div>
 		</div>
 
 		<div class="logoRight">
@@ -60,11 +55,6 @@
 						<input id="password" name="password" type="text" placeholder="请输入密码"/>
 					</div>
 					<div class="autoLogo">
-						<span class="CheckBox"></span>
-						<span>七天内自动登录</span>
-						<a href="password.html" class="pasd">忘记密码？</a>
-					</div>
-					<div class="autoLogo">
 						<span class="CheckBox Yes"></span>
 						<span>我已阅读并接受<a href="registeragreement.html">用户协议</a></span>
 					</div>
@@ -74,25 +64,6 @@
 					<div class="zcbtn">
 						<a href="/jump/user/reg">还没有账号？立即注册</a>
 					</div>
-					<div class="thirdLogin">
-						<span>使用其他账号登录：</span>
-						<div class="third">
-							<div class="third_con third_1">QQ</div>
-							<div class="third_con third_2">微博</div>
-							<div class="third_con third_3">百度</div>
-						</div>
-					</div>
-				</div>
-				<div class="weixinLogin">
-					<div class="weixinQr">
-						<img src="<%=imagesPath+"showqrcode.jpg"%>" width="150" class="useHelpcon"/>
-						<p>使用微信扫描上方二维码</p>
-						<p class="useHelp useHelpcon">使用帮助</p>
-					</div>
-					<div class="zcbtn">
-						<a href="zhuce.html">还没有账号？立即注册</a>
-					</div>
-					<img src="<%=imagesPath+"log16.png"%>" class="usehelpimg"/>
 				</div>
 			</form>
 		</div>

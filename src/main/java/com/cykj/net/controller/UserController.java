@@ -6,11 +6,18 @@ import com.cykj.net.service.UserService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -346,6 +353,22 @@ public class UserController
 		}
 	}
 
+//	取消关注
+	@RequestMapping("/qxguanzhu")
+	@ResponseBody
+	public String qxguanzhu(int zpxxid,HttpServletRequest request){
+		Userlist user = (Userlist) request.getSession().getAttribute("user");
+		int yhid = (int) user.getYhid();
+
+		int num = userService.qxguanzhu(zpxxid,yhid);
+		if (num > 0){
+			return "true";
+		}else {
+			return "false";
+		}
+
+	}
+
 //		跳转我的关注页面，获取数据并跳转
 	@RequestMapping("/shoucanglist")
 	public ModelAndView shoucanglist(HttpServletRequest request){
@@ -430,6 +453,29 @@ public class UserController
 		}else {
 			return "false";
 		}
+	}
+
+	@RequestMapping("/photo")
+	@ResponseBody
+	public String photo(@RequestParam("file") MultipartFile file,HttpServletRequest request)
+	{
+		Userlist user = (Userlist) request.getSession().getAttribute("user");
+		int yhid = (int) user.getYhid();
+		try
+		{
+			String filename = file.getOriginalFilename();
+			String urldb = new Date().getTime()+filename;
+			String projectPath = System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\"+urldb;
+			file.transferTo(new File(projectPath));
+			int num = userService.photo(urldb,yhid);
+			Userlist userlist = userService.findPhone(user.getPhone());
+			request.getSession().setAttribute("user",userlist);
+
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		return "1";
 	}
 
 

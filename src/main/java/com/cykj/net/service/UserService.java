@@ -95,6 +95,10 @@ public class UserService
 		int num = userDao.shoucang(zpxxid,hyid);
 		return num;
 	}
+	public int qxguanzhu(int zpxxid,int hyid){
+		int num = userDao.qxguanzhu(zpxxid,hyid);
+		return num;
+	}
 	public int shoucangCount(int zpxxid,int hyid){
 		int num = userDao.shoucangCount(zpxxid,hyid);
 		return num;
@@ -126,6 +130,10 @@ public class UserService
 	}
 	public int password(String password,int yhid){
 		int num = userDao.password(password,yhid);
+		return num;
+	}
+	public int photo(String urldb,int yhid){
+		int num = userDao.photo(urldb,yhid);
 		return num;
 	}
 }

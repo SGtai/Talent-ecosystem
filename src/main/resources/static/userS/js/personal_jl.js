@@ -284,6 +284,9 @@ function passsure() {
 	var password = $('#password').val();
 	if (newpassword==newpassword2) {
 		if (userpass == password){
+			if (password == newpassword) {
+				window.alert("新密码不能和原密码一致")
+			}else {
 			$.ajax({
 				type: "POST",
 				url: "/user/password",
@@ -297,6 +300,7 @@ function passsure() {
 					}
 				}
 			});
+			}
 		} else {
 			window.alert("原密码错误，请确认")
 		}

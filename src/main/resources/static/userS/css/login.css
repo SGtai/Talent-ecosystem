@@ -17,8 +17,7 @@ input{ border:0; outline:0}
 .header .headerright span{color: #DADADA;margin-left: 10px;margin-right: 10px;}
 
 .content{width: 1000px;margin: 40px auto;background: #fff;border: 1px #FEE7B5 solid;margin-top: 50px;height: 500px;margin-top: 20px;}
-.logtype{float: right;width: 53px;height: 53px;background: url(../../homeS/images/log1.png) no-repeat;cursor: pointer}
-.logtype.on{background: url(../../homeS/images/log2.png) no-repeat;}
+.logtype{float: right;width: 53px;height: 53px;}
 
 .logoDiv{}
 .logoDiv .logoLeft{ float:left; width:636px}
