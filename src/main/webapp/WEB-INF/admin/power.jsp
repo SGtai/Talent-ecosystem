@@ -42,7 +42,7 @@
                 <option value="4">高校</option>
                 <option value="6">未审核企业</option>
                 <option value="7">未审核高校</option>
-                <option value="5">测试</option>
+
             </select>
         </div>
     </div>
@@ -147,8 +147,6 @@
                 });
                 return false;//false：阻止表单跳转  true：表单跳转
             });
-
-
             //绑定的按钮是select 监听提交 lay-filter="search"
             form.on('select(rolemenu)', function (data) {
                 var rid = $("#role").val();
@@ -180,11 +178,6 @@
             });
         });
     });
-
-
-
-
-
 </script>
 </body>
 </html>
