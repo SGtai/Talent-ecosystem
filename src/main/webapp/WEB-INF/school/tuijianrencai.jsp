@@ -191,6 +191,7 @@
 				,id:'UserTable1'
 				,done: function (res, curr, count) {
 					exportData=res.data;
+
 				}
 			});
 			//搜索1

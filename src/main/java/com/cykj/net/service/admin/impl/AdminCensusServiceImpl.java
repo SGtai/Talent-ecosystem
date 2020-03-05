@@ -112,4 +112,192 @@ public class AdminCensusServiceImpl implements AdminCensusService {
         String msg = jsonStr + "://" + sum;
         return msg;
     }
+
+
+	@Override
+	public String week1(int role,String tjr) {
+		ArrayList<CensusUtil> arrayList = new ArrayList<>();
+
+		List<String> dateWeekList = UtilTool.week(new Date());
+		String[] weekDays = {"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
+		int sum = 0;
+		String tableName = null;
+		if (role == 0){
+			tableName = "userlist";
+		}else if (role == 1){
+			tableName = "qyinfo";
+		}else {
+			tableName = "schoolinfo";
+		}
+		for (int i = 0; i < dateWeekList.size(); i++) {
+			int count = adminCensusMapper.countQueryWeek1(dateWeekList.get(i),tableName,tjr);
+			CensusUtil censusUtil = new CensusUtil();
+			censusUtil.setCount(count);
+			censusUtil.setName(weekDays[i]);
+			arrayList.add(censusUtil);
+			sum = count + sum;
+		}
+
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(arrayList);
+		String msg = jsonStr + "://" + sum;
+		return msg;
+	}
+
+	@Override
+	public String month1(String date,int role,String tjr) {
+		ArrayList<CensusUtil> arrayList = new ArrayList<>();
+		List<String> dateHalfList = null;
+
+		dateHalfList = UtilTool.month(date);
+		String tableName = null;
+		if (role == 0){
+			tableName = "userlist";
+		}else if (role == 1){
+			tableName = "qyinfo";
+		}else {
+			tableName = "schoolinfo";
+		}
+		int sum = 0;
+		for (int i = 0; i < dateHalfList.size(); i++) {
+			String[] time = dateHalfList.get(i).split(" ");
+			int count = adminCensusMapper.countQueryMonth1(time[0],time[1]+" 23:59:59",tableName,tjr);
+			CensusUtil censusUtil = new CensusUtil();
+			censusUtil.setCount(count);
+			censusUtil.setName("第" + (i + 1) + "周");
+			arrayList.add(censusUtil);
+
+			sum = count + sum;
+		}
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(arrayList);
+		String msg = jsonStr + "://" + sum;
+		return msg;
+	}
+
+	@Override
+	public String half1(int role,String tjr) throws ParseException {
+		ArrayList<CensusUtil> arrayList = new ArrayList<>();
+		List<String> dateHalfList = null;
+
+		dateHalfList = UtilTool.half();
+
+		int sum = 0;
+		String tableName = null;
+		if (role == 0){
+			tableName = "userlist";
+		}else if (role == 1){
+			tableName = "qyinfo";
+		}else {
+			tableName = "schoolinfo";
+		}
+		for (int i = 0; i < dateHalfList.size(); i++) {
+			int count = adminCensusMapper.countQueryHalf1(dateHalfList.get(i),tableName,tjr);
+			CensusUtil censusUtil = new CensusUtil();
+			censusUtil.setCount(count);
+			censusUtil.setName(dateHalfList.get(i));
+			arrayList.add(censusUtil);
+
+			sum = count + sum;
+		}
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(arrayList);
+
+		String msg = jsonStr + "://" + sum;
+		return msg;
+	}
+
+
+	@Override
+	public String week2(int role,String tjr) {
+		ArrayList<CensusUtil> arrayList = new ArrayList<>();
+
+		List<String> dateWeekList = UtilTool.week(new Date());
+		String[] weekDays = {"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
+		int sum = 0;
+		String tableName = null;
+		if (role == 0){
+			tableName = "tjjl";
+		}else if (role == 1){
+			tableName = "qyinfo";
+		}else {
+			tableName = "schoolinfo";
+		}
+		for (int i = 0; i < dateWeekList.size(); i++) {
+			int count = adminCensusMapper.countQueryWeek2(dateWeekList.get(i),tableName,tjr);
+			CensusUtil censusUtil = new CensusUtil();
+			censusUtil.setCount(count);
+			censusUtil.setName(weekDays[i]);
+			arrayList.add(censusUtil);
+			sum = count + sum;
+		}
+
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(arrayList);
+		String msg = jsonStr + "://" + sum;
+		return msg;
+	}
+
+	@Override
+	public String month2(String date,int role,String tjr) {
+		ArrayList<CensusUtil> arrayList = new ArrayList<>();
+		List<String> dateHalfList = null;
+
+		dateHalfList = UtilTool.month(date);
+		String tableName = null;
+		if (role == 0){
+			tableName = "tjjl";
+		}else if (role == 1){
+			tableName = "qyinfo";
+		}else {
+			tableName = "schoolinfo";
+		}
+		int sum = 0;
+		for (int i = 0; i < dateHalfList.size(); i++) {
+			String[] time = dateHalfList.get(i).split(" ");
+			int count = adminCensusMapper.countQueryMonth2(time[0],time[1]+" 23:59:59",tableName,tjr);
+			CensusUtil censusUtil = new CensusUtil();
+			censusUtil.setCount(count);
+			censusUtil.setName("第" + (i + 1) + "周");
+			arrayList.add(censusUtil);
+
+			sum = count + sum;
+		}
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(arrayList);
+		String msg = jsonStr + "://" + sum;
+		return msg;
+	}
+
+	@Override
+	public String half2(int role,String tjr) throws ParseException {
+		ArrayList<CensusUtil> arrayList = new ArrayList<>();
+		List<String> dateHalfList = null;
+
+		dateHalfList = UtilTool.half();
+
+		int sum = 0;
+		String tableName = null;
+		if (role == 0){
+			tableName = "tjjl";
+		}else if (role == 1){
+			tableName = "qyinfo";
+		}else {
+			tableName = "schoolinfo";
+		}
+		for (int i = 0; i < dateHalfList.size(); i++) {
+			int count = adminCensusMapper.countQueryHalf2(dateHalfList.get(i),tableName,tjr);
+			CensusUtil censusUtil = new CensusUtil();
+			censusUtil.setCount(count);
+			censusUtil.setName(dateHalfList.get(i));
+			arrayList.add(censusUtil);
+
+			sum = count + sum;
+		}
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(arrayList);
+
+		String msg = jsonStr + "://" + sum;
+		return msg;
+	}
 }

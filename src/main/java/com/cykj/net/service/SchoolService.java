@@ -144,4 +144,9 @@ public class SchoolService
 		return inserquery;
 	}
 
+	public int insertjjl(Tjjl tjjl){
+		int insertjjl=schoolDao.insertjjl(tjjl);
+		return insertjjl;
+	}
+
 }

@@ -133,7 +133,9 @@ public class SchoolController
 		}
 		else{
 			//插入注册时间
-			schoolinfo.setRegTime(new Timestamp(System.currentTimeMillis()));
+			Date date = new Date();
+			Timestamp nousedate = new Timestamp(date.getTime());
+			schoolinfo.setRegTime(nousedate);
 			//插入图片路径  图片
 			String path= ResourceUtils.getURL("classpath:").getPath()+"static/schoolS/cunchu";
 			System.out.println("path="+path);
@@ -467,7 +469,9 @@ public class SchoolController
 				userlist.setIdCard(formatCell(hssfRow.getCell(5)));
 				userlist.setIdCardType(formatCell(hssfRow.getCell(6)));
 				userlist.setDegree(formatCell(hssfRow.getCell(7)));
-				userlist.setRegTime(new Timestamp(System.currentTimeMillis()));
+				Date date = new Date();
+				Timestamp nousedate = new Timestamp(date.getTime());
+				userlist.setRegTime(nousedate);
 				userlist.setState(0);
 				userlist.setTuijianren(admin.getAccount());
 				int intuser=schoolService.inseruserinfo(userlist);
@@ -652,18 +656,29 @@ public class SchoolController
 
 	@RequestMapping("/tj")
 	@ResponseBody
-	public String tj(String yhid,String jlid,String xxzpid){
+	public String tj(String yhid,String jlid,String xxzpid,HttpServletRequest request){
 		Jobinfo jobinfo=schoolService.findjobinfo(Long.valueOf(xxzpid));
 		Query check=schoolService.findjljl(Long.valueOf(jlid),Long.valueOf(xxzpid));
 		if(check==null){
 			Query query=new Query();
-			query.setCkTime(new Timestamp(System.currentTimeMillis()));
+			Date date = new Date();
+			Timestamp nousedate = new Timestamp(date.getTime());
+			query.setCkTime(nousedate);
 			query.setJlId(Long.valueOf(jlid));
 			query.setPaid(Long.valueOf(10));
 			query.setZpxxid(jobinfo.getZpxxid());
 			query.setQyId(jobinfo.getQyid());
 			int i=schoolService.inserquery(query);
 			if(i>0){
+				Tjjl tjjl=new Tjjl();
+				Admin admin= (Admin) request.getSession().getAttribute("admin");
+				tjjl.setYhid(Long.valueOf(yhid));
+
+				tjjl.setDatetime(nousedate);
+				tjjl.setTuijianren(admin.getAccount());
+				tjjl.setZpxxid(Long.valueOf(xxzpid));
+				tjjl.setTjjlid(Long.valueOf(jlid));
+				int k=schoolService.insertjjl(tjjl);
 				return "1";
 			}else{
 				return "0";
@@ -673,6 +688,25 @@ public class SchoolController
 		return "0";
 	}
 
+	@RequestMapping("/tjbb")
+	@ResponseBody
+	public ModelAndView tjbb(HttpServletRequest request){
+		ModelAndView mv=new ModelAndView();
+		Admin admin= (Admin) request.getSession().getAttribute("admin");
+		mv.setViewName("/WEB-INF/school/tjbb");
+		mv.addObject("tuijianren",admin.getAccount());
+		return mv;
+	}
+
+	@RequestMapping("/tjbbuse")
+	@ResponseBody
+	public ModelAndView tjbbuse(HttpServletRequest request){
+		ModelAndView mv=new ModelAndView();
+		Admin admin= (Admin) request.getSession().getAttribute("admin");
+		mv.setViewName("/WEB-INF/school/tjbbuse");
+		mv.addObject("tuijianren",admin.getAccount());
+		return mv;
+	}
 
 
 

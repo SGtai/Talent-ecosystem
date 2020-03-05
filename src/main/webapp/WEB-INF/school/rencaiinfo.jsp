@@ -372,7 +372,7 @@
 					,{field: 'name', title: '姓名', width:150,height:100}
 					,{field: 'zy', title: '专业', width:150,height:100}
 					,{field: 'jzstate', title: '就业情况', width: 150,height:100}
-					,{field:'opera', width:150, title: '操作',align:'center', toolbar: '#toolbar'}
+					,{field:'opera', width:150, title: '',align:'center', toolbar: '#toolbar'}
 					,{field: 'mmFace', title: '政治面貌', width: 50,hide:true}
 					,{field: 'birthday', title: '出生日期', width: 50,hide:true}
 					,{field: 'byschool', title: '学校', width: 50,hide:true}

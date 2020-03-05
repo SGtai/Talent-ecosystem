@@ -19,14 +19,14 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>高校新增用户统计</title>
+	<title>高校推荐用户统计</title>
 	<link rel="stylesheet" href=<%=layuiPath+"css/layui.css"%>>
 
 
 </head>
 <body class="layui-layout-body">
 
-<h2 class="layui-form-item" style="margin-left: 43%;margin-top: 3%">高校新增用户统计</h2>
+<h2 class="layui-form-item" style="margin-left: 43%;margin-top: 3%">高校推荐用户统计</h2>
 <div class="layui-form-item" style="margin-left: 15%;">
 	<label class="layui-form-label" style="text-align: left">统计：</label>
 
@@ -50,7 +50,7 @@
 
 	<div >
 		<button type="button" class="layui-btn layui-btn-radius"
-		        id="tjbbuse" onclick="back()"><i class="layui-icon">&#xe615;</i>高校推荐新增情况
+		        id="tjbbuse" onclick="back()"><i class="layui-icon">&#xe615;</i>高校人员新增情况
 		</button>
 	</div>
 
@@ -83,13 +83,13 @@
 	$(function() {
 		$.ajax({
 			method : "POST",
-			url : "/adminCensus/week1",
+			url : "/adminCensus/week2",
 			dataType : "text",
 			data:{role:0,tjr:$("#test1").val()},
 			success : function(msg) {
 				var list = msg.split("://");
 				var arr = JSON.parse(list[0]);
-				$('#howlong').html('本周总新增用户数：');
+				$('#howlong').html('本周总推荐用户数：');
 				$('#sum').html(list[1]);
 				for (var i = 0; i < arr.length; i++) {
 					// 普通柱状图使用的数据
@@ -115,13 +115,13 @@
 			valueArr = [];
 			$.ajax({
 				method : "POST",
-				url : "/adminCensus/week1",
+				url : "/adminCensus/week2",
 				dataType : "text",
 				data:{role:0,tjr:$("#test1").val()},
 				success : function(msg) {
 					var list = msg.split("://");
 					var arr = JSON.parse(list[0]);
-					$('#howlong').html('本周总新增用户数：');
+					$('#howlong').html('本周总推荐用户数：');
 					$('#sum').html(list[1]);
 					for (var i = 0; i < arr.length; i++) {
 						// 普通柱状图使用的数据
@@ -142,13 +142,13 @@
 
 			$.ajax({
 				method : "POST",
-				url : "/adminCensus/month1",
+				url : "/adminCensus/month2",
 				dataType : "text",
 				data:{date:new Date().format('yyyy-MM-dd'),role:0,tjr:$("#test1").val()},
 				success : function(msg) {
 					var list = msg.split("://");
 					var arr = JSON.parse(list[0]);
-					$('#howlong').html('本月总新增用户数：');
+					$('#howlong').html('本月总推荐用户数：');
 					$('#sum').html(list[1]);
 					for (var i = 0; i < arr.length; i++) {
 						// 普通柱状图使用的数据
@@ -168,14 +168,14 @@
 			valueArr = [];
 			$.ajax({
 				method : "POST",
-				url : "/adminCensus/half1",
+				url : "/adminCensus/half2",
 				dataType : "text",
 				data:{role:0,tjr:$("#test1").val()},
 				success : function(msg) {
 
 					var list = msg.split("://");
 					var arr = JSON.parse(list[0]);
-					$('#howlong').html('近半年总新增用户数：');
+					$('#howlong').html('近半年总推荐用户数：');
 					$('#sum').html(list[1]);
 					for (var i = 0; i < arr.length; i++) {
 						// 普通柱状图使用的数据
@@ -205,7 +205,7 @@
 		// 指定图表的配置项和数据
 		var option = {
 			title : {
-				text : '用户新增量统计报表'
+				text : '用户新增推荐量统计报表'
 			},
 			tooltip : {},
 			legend : {
@@ -250,10 +250,10 @@
 			}
 		}
 		return format;
-	};
+	}
 	function back() {
 		var returnlogin = document.createElement("a");
-		returnlogin.href="/school/tjbbuse";
+		returnlogin.href="/school/tjbb";
 		returnlogin.click();
 	}
 </script>

@@ -75,13 +75,13 @@ public interface SchoolDao
 	 * @param account
 	 * @return
 	 */
-	public List<Experience> findexperience(@Param("account") String account);
+	public List<Experience> findexperience(@Param("phone") String phone);
 	/**
 	 * 查找工作经历
 	 * @param account
 	 * @return
 	 */
-	public List<Undergo> findegzjl(@Param("account") String account);
+	public List<Undergo> findegzjl(@Param("phone") String phone);
 	/**
 	 * 查找省
 	 * @return
@@ -160,20 +160,20 @@ public interface SchoolDao
 
 	/**
 	 * 分页查询发布信息
-	 * @param position
+	 * @param postion
 	 * @param type
 	 * @return
 	 */
-	public int fenyecount2(@Param("position") String position,@Param("type") String type);
+	public int fenyecount2(@Param("postion") String postion,@Param("type") String type);
 
 	/**
 	 * 查询发布信息
-	 * @param position
+	 * @param postion
 	 * @param type
 	 * @param rowBounds
 	 * @return
 	 */
-	public List<J1> fenyeshuju2(@Param("position") String position, @Param("type") String type, RowBounds rowBounds);
+	public List<J1> fenyeshuju2(@Param("postion") String postion, @Param("type") String type, RowBounds rowBounds);
 
 	/**
 	 * 查询招聘信息
@@ -196,4 +196,11 @@ public interface SchoolDao
 	 * @return
 	 */
 	public int inserquery(Query query);
+
+	/**
+	 * 推荐简历记录
+	 * @param tjjl
+	 * @return
+	 */
+	public int insertjjl(Tjjl tjjl);
 }

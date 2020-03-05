@@ -114,9 +114,9 @@
     <select id="fenyecount2" resultType="int" parameterType="java.util.Map">
         SELECT count(*) FROM jobinfo a,qyinfo b,station c,position d
         <where>
-            a.qyid=b.qyid and a.zwid=c.stid and c.poid=d.poid
-            <if test="position != null and position !=''">
-                and c.position like '%${position}%'
+            a.qyid=b.qyid and a.zwid=c.stid and c.poid=d.poid and a.jobinfoState='发布中'
+            <if test="postion != null and postion !=''">
+                and c.postion like '%${postion}%'
             </if>
             <if test="type != null and type !=''">
                 and d.type like '%${type}%'
@@ -126,9 +126,9 @@
     <select id="fenyeshuju2" resultType="com.cykj.net.javabean.J1" parameterType="java.util.Map">
         SELECT * FROM jobinfo a,qyinfo b,station c,position d
         <where>
-            a.qyid=b.qyid and a.zwid=c.stid and c.poid=d.poid
-            <if test="position != null and position !=''">
-                and c.position like '%${position}%'
+            a.qyid=b.qyid and a.zwid=c.stid and c.poid=d.poid and a.jobinfoState='发布中'
+            <if test="postion != null and postion !=''">
+                and c.postion like '%${postion}%'
             </if>
             <if test="type != null and type !=''">
                 and d.type like '%${type}%'
@@ -145,8 +145,8 @@
     </insert>
     <!--    插入简历信息-->
     <insert id="inserjl" parameterType="Resume">
-        INSERT INTO resume (yhId, zsCertificate,scTime,ycHide,gjNationality,yxMailbox,sjPhone,pjEvaluation,xbSex,csTime,jzdResidence,mmFace,minzu,jzstate,byschool,zy,jlname,xl) VALUES
-        (#{yhId},#{zsCertificate},#{scTime},#{ycHide},#{gjNationality},#{yxMailbox},#{sjPhone},#{pjEvaluation},#{xbSex},#{csTime},#{jzdResidence},#{mmFace},#{minzu},#{jzstate},#{byschool},#{zy},#{jlname},#{xl})
+        INSERT INTO resume (yhId, zsCertificate,scTime,ycHide,gjNationality,yxMailbox,sjPhone,pjEvaluation,xbSex,csTime,jzdResidence,mmFace,minzu,jzstate,byschool,zy,jlname,xl,yhname) VALUES
+        (#{yhId},#{zsCertificate},#{scTime},#{ycHide},#{gjNationality},#{yxMailbox},#{sjPhone},#{pjEvaluation},#{xbSex},#{csTime},#{jzdResidence},#{mmFace},#{minzu},#{jzstate},#{byschool},#{zy},#{jlname},#{xl},#{yhname})
     </insert>
     <!--    插入工作经历表-->
     <insert id="insergz" parameterType="Undergo">
@@ -231,13 +231,17 @@
     </update>
     <!--    查找简历的教育经历信息-->
     <select id="findexperience" resultType="Experience" parameterType="java.lang.String">
-        SELECT a.* FROM experience a,resume b,userlist c where a.jlId=b.jlId and b.yhId=c.yhid and c.account = #{account}
+        SELECT a.* FROM experience a,resume b,userlist c where a.jlId=b.jlId and b.yhId=c.yhid and c.phone = #{phone}
     </select>
     <!--    查找简历的工作经历信息-->
     <select id="findegzjl" resultType="Undergo" parameterType="java.lang.String">
-        SELECT a.* FROM undergo a,resume b,userlist c where a.jlId=b.jlId and b.yhId=c.yhid and c.account = #{account}
+        SELECT a.* FROM undergo a,resume b,userlist c where a.jlId=b.jlId and b.yhId=c.yhid and c.phone = #{phone}
     </select>
-
+<!--    插入推荐记录表-->
+    <insert id="insertjjl" parameterType="Tjjl">
+         INSERT INTO tjjl (zpxxid,yhid,datetime,tuijianren) VALUES
+        (#{zpxxid},#{yhid},#{datetime},#{tuijianren})
+    </insert>
 </mapper>
 
 
