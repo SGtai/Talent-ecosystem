@@ -650,7 +650,7 @@ public class CompanyController
 			String urldb = new Date().getTime() + filename;
 			//user.dir:用户的当前工作目录
 			//			String projectPath = System.getProperty("user.dir")+"\\target\\classes\\static\\images\\"+urldb;
-			String projectPath1 = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images\\" + urldb;
+			String projectPath1 =request.getSession().getServletContext().getRealPath("/uploadS/images/")+urldb;
 			file.transferTo(new File(projectPath1));
 			//			file.transferTo(new File(projectPath));
 			int num = companyService.qyPicture(urldb, qyid);

@@ -12,7 +12,6 @@
     String jsPath = application.getContextPath() + "/adminS/js/";
     String cssPath = application.getContextPath() + "/adminS/css/";
     String path = application.getContextPath() + "/";
-
 %>
 <!DOCTYPE html>
 <html lang="en">
