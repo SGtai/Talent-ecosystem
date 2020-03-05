@@ -186,4 +186,10 @@ left join  station F on E.gwid=F.stid) H
 		select count(*) from jobinfo where time between #{day} and #{day1}
 	</select>
 
+	<select id="finishJob" parameterType="com.cykj.net.javabean.Resume" resultType="com.cykj.net.javabean.Resume">
+			select * from resume A,
+	(select * from query where qyId=#{qyId} and zpxxid=#{zpxxid} and paid=14) B
+	WHERE A.jlId=B.jlId
+	</select>
+
 </mapper>

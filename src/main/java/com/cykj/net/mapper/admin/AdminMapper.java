@@ -18,8 +18,8 @@ public interface AdminMapper {
     int findRoid(String account);
 
     @Select("select a.menuname firstmenuname,b.menuname sencondmenuname,b.menuurl from " +
-            "(select b.* from rolemenu a,menu b where a.meid = b.meid and a.roid = #{roid} and a.status = 1 )a," +
-            "(select b.* from rolemenu a,menu b where a.meid = b.meid and a.roid = #{roid} and a.status = 1 )b " +
+            "(select b.* from rolemenu a,menu b where a.meid = b.meid and a.roid = #{roid} and a.status = 1)a," +
+            "(select b.* from rolemenu a,menu b where a.meid = b.meid and a.roid = #{roid} and a.status = 1)b " +
             "where a.firstmenuid = b.secondmenuid ")
     List<AdminMenu> findRoleMenus(int roid);
 

@@ -87,4 +87,7 @@ public interface CompanyDao
 	//查询当月
 	public int monthJobinfo(@Param("day") String day,@Param("day1") String day1, @Param("qyid") int qyid);
 
+	//搜索完成应聘的人
+	public List<Resume> finishJob(Resume resume);
+
 }

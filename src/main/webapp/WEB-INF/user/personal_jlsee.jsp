@@ -109,11 +109,9 @@
 					<div class="nametxt"><span>*</span>简历 名称：</div>
 					<div class="inputtxt">
 						<input name="jlname" type="text" class="txt2"
-						<c:if test="${upatelist != null}">
 							<c:if test="${upatelist[0].jlname != null}">
 								value="${upatelist[0].jlname}"
 							</c:if>
-						</c:if>
 						/>
 					</div>
 				</div>
@@ -122,12 +120,10 @@
 					<div class="nametxt"><span>*</span>姓    名：</div>
 					<div class="inputtxt">
 						<input name="yhname" type="text" class="txt1"
-						<c:if test="${upatelist != null}">
 							<c:if test="${upatelist[0].yhname != null}">
 								value="${upatelist[0].yhname}"
 							</c:if>
-						</c:if>
-						<c:if test="${userinfo.name != null and upatelist == null}">
+						<c:if test="${userinfo.name != null}">
 							value="${userinfo.name}"
 						</c:if>
 						/>
@@ -140,7 +136,7 @@
 					<div class="layui-input-inline">
 						<select name="xbSex" lay-filter="sex">
 							<option value=""></option>
-							<c:if test="${userinfo.sex == null and upatelist == null}">
+							<c:if test="${userinfo.sex == null}">
 								<option value="男">男</option>
 								<option value="女">女</option>
 							</c:if>
@@ -164,11 +160,10 @@
 					       <c:if test="${userinfo.birthday != null}">
 					            value= "${userinfo.birthday}"
 						   </c:if>
-							<c:if test="${upatelist != null}">
 								<c:if test="${upatelist[0].csTime != null}">
 								       value="${upatelist[0].csTime}"
 								</c:if>
-							</c:if>
+
 									>
 					</div>
 				</div>
@@ -177,12 +172,12 @@
 					<div class="nametxt"><span>*</span>最高学历：</div>
 					<div class="inputtxt">
 						<input name="xl" type="text" class="txt" placeholder="请输入您的学历"
-								<c:if test="${upatelist != null}">
+
 									<c:if test="${upatelist[0].xl != null}">
 										value="${upatelist[0].xl}"
 									</c:if>
-								</c:if>
-								<c:if test="${userinfo.degree != null and upatelist == null}">
+
+								<c:if test="${userinfo.degree != null}">
 									value="${userinfo.degree}"
 								</c:if>
 						/>
@@ -193,11 +188,11 @@
 					<div class="nametxt"><span>*</span>毕业学校：</div>
 					<div class="inputtxt">
 						<input name="byschool" type="text" class="txt" placeholder="请输入您的毕业学校"
-								<c:if test="${upatelist != null}">
+
 									<c:if test="${upatelist[0].byschool != null}">
 										value="${upatelist[0].byschool}"
 									</c:if>
-								</c:if>
+
 						/>
 					</div>
 				</div>
@@ -206,11 +201,11 @@
 					<div class="nametxt"><span>*</span>毕业专业：</div>
 					<div class="inputtxt">
 						<input name="zy" type="text" class="txt" placeholder="请输入您的毕业专业"
-								<c:if test="${upatelist != null}">
+
 									<c:if test="${upatelist[0].zy != null}">
 										value="${upatelist[0].zy}"
 									</c:if>
-								</c:if>
+
 						/>
 					</div>
 				</div>
@@ -219,11 +214,11 @@
 					<div class="nametxt"><span>*</span>国籍：</div>
 					<div class="inputtxt">
 						<input name="gjNationality" type="text" class="txt" placeholder="请输入您的国籍"
-								<c:if test="${upatelist != null}">
+
 									<c:if test="${upatelist[0].gjNationality != null}">
 										value="${upatelist[0].gjNationality}"
 									</c:if>
-								</c:if>
+
 						/>
 					</div>
 				</div>
@@ -232,11 +227,11 @@
 					<div class="nametxt"><span>*</span>政治面貌：</div>
 					<div class="inputtxt">
 						<input name="mmFace" type="text" class="txt" placeholder="群众/团员/党员"
-								<c:if test="${upatelist != null}">
+
 									<c:if test="${upatelist[0].mmFace != null}">
 										value="${upatelist[0].mmFace}"
 									</c:if>
-								</c:if>
+
 						/>
 					</div>
 				</div>
@@ -259,11 +254,11 @@
 					<div class="nametxt"><span>*</span>邮  箱：</div>
 					<div class="inputtxt">
 						<input name="yxMailbox" type="text" class="txt2" placeholder="请输入完整的邮箱地址"
-								<c:if test="${upatelist != null}">
+
 									<c:if test="${upatelist[0].yxMailbox != null}">
 										value="${upatelist[0].yxMailbox}"
 									</c:if>
-								</c:if>
+
 
 						/>
 					</div>
@@ -273,11 +268,11 @@
 					<div class="nametxt"><span>*</span>民  族：</div>
 					<div class="inputtxt">
 						<input name="minzu" type="text" class="txt" placeholder="请输入您的民族"
-								<c:if test="${upatelist != null}">
+
 									<c:if test="${upatelist[0].minzu != null}">
 										value="${upatelist[0].minzu}"
 									</c:if>
-								</c:if>
+
 						/>
 					</div>
 				</div>
@@ -286,11 +281,11 @@
 					<div class="nametxt"><span>*</span>居住地：</div>
 					<div class="inputtxt">
 						<input name="jzdResidence" type="text" class="txt3" placeholder="请填写您的现居住地"
-								<c:if test="${upatelist != null}">
+
 									<c:if test="${upatelist[0].jzdResidence != null}">
 										value="${upatelist[0].jzdResidence}"
 									</c:if>
-								</c:if>
+
 						/>
 					</div>
 				</div>
@@ -313,7 +308,7 @@
 						<div class="layui-input-inline inputtxt">
 							<select name="workstate" lay-filter="workstate">
 								<option value=""></option>
-								<c:if test="${upatelist != null}">
+
 									<c:if test="${upatelist[0].jobintension[0].workstate == '全职'}">
 										<option value="全职" selected="">全职</option>
 										<option value="兼职">兼职</option>
@@ -329,8 +324,8 @@
 										<option value="兼职">兼职</option>
 										<option value="实习" selected="">实习</option>
 									</c:if>
-								</c:if>
-								<c:if test="${upatelist == null}">
+
+								<c:if test="${upatelist[0].jobintension[0].workstate == null}">
 									<option value="全职">全职</option>
 									<option value="兼职">兼职</option>
 									<option value="实习">实习</option>
@@ -344,11 +339,11 @@
 					<div class="nametxt"><span>*</span>期望月薪：</div>
 					<div class="inputtxt">
 						<input name="monthlyPay" type="text" class="txt2"
-						<c:if test="${upatelist != null}">
+
 							<c:if test="${upatelist[0].jobintension[0].monthlyPay != null}">
 								value="${upatelist[0].jobintension[0].monthlyPay}"
 							</c:if>
-						</c:if>
+
 						/>
 
 					</div>
@@ -358,11 +353,11 @@
 					<div class="nametxt"><span>*</span>期望工作地点：</div>
 					<div class="inputtxt">
 						<input name="workPlace" type="text" class="txt3"
-							<c:if test="${upatelist != null}">
+
 								<c:if test="${upatelist[0].jobintension[0].workPlace != null}">
 									value="${upatelist[0].jobintension[0].workPlace}"
 								</c:if>
-							</c:if>
+
 						/>
 					</div>
 				</div>
@@ -371,11 +366,11 @@
 					<div class="nametxt"><span>*</span>期望职位类别：</div>
 					<div class="inputtxt">
 						<input name="intentionWork" type="text" class="txt2"
-							<c:if test="${upatelist != null}">
+
 								<c:if test="${upatelist[0].jobintension[0].workstate != null}">
 									value="${upatelist[0].jobintension[0].workstate}"
 								</c:if>
-							</c:if>
+
 						/>
 					</div>
 				</div>
@@ -384,11 +379,11 @@
 					<div class="nametxt"><span>*</span>其他要求：</div>
 					<div class="inputtxt">
 						<input name="other" type="text" class="txt2"
-							<c:if test="${upatelist != null}">
+
 								<c:if test="${upatelist[0].jobintension[0].other != null}">
 									value="${upatelist[0].jobintension[0].other}"
 								</c:if>
-							</c:if>
+
 						/>
 					</div>
 				</div>

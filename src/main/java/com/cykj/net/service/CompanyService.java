@@ -145,5 +145,10 @@ public class CompanyService
 		int num = companyDao.monthJobinfo(day,day1,qyid);
 		return num;
 	}
+
+	public List<Resume> finishJob(Resume resume){
+		List<Resume> resume1=companyDao.finishJob(resume);
+		return resume1;
+	}
 }
 

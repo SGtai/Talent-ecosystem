@@ -159,7 +159,7 @@
 				<div class="adBox0">
 					<ul style="margin-left: 0px; overflow: hidden">
 						<li>
-							<a href=" "><div style="background:url(<%=imagesPath+"l.jpg"%>);background-size: cover;background-repeat: no-repeat;background-position: center"></div></a>
+							<a href=" "><div style="background:url(<%=imagesPath+"1.jpg"%>);background-size: cover;background-repeat: no-repeat;background-position: center"></div></a>
 						</li>
 						<li>
 							<a href=" "><div style="background:url(<%=imagesPath+"2.jpg"%>);background-size: cover;background-repeat: no-repeat;background-position: center"></div></a>
@@ -195,7 +195,7 @@
 						<div class="ContentB">
 							<div class="qybox1">
 								<a href="/jump/admin/login">企业入口</a>
-								<a href=" ">企业注册</a>
+								<a href="/company/companyLogin">企业注册</a>
 							</div>
 							<div class="qybox2">
 								<p>注册后可<b>免费</b>升级为<b>普通会员</b><br>不花钱也能完成中低职位的招聘</p>
@@ -241,7 +241,7 @@
 					<div class="ContentB">
 						<div class="qybox1">
 							<a href="/jump/admin/login">企业入口</a>
-							<a href=" ">企业注册</a>
+							<a href="/company/companyLogin">企业注册</a>
 						</div>
 						<div class="qybox2">
 							<p>注册后可<b>免费</b>升级为<b>普通会员</b><br>不花钱也能完成中低职位的招聘</p>
@@ -275,10 +275,10 @@
 								</div>
 							</div>
 							<div class="zph_3">
-								<div class="zptit"><a href=" ">12月20日公明三和兴人才市场周三综合招聘会</a></div>
-								<div class="zptit"><a href=" ">12月21日公明三和兴人才市场周四综合招聘会</a></div>
-								<div class="zptit"><a href=" ">12月21日龙岗三和隆人才市场周四现场招聘会</a></div>
-								<div class="zptit"><a href=" ">12月21日龙华三和人才市场周四综合招聘会</a></div>
+								<div class="zptit"><a href=" ">欢迎 菜鸟大学 加入本平台</a></div>
+								<div class="zptit"><a href=" ">恭喜用户 刘** 面试成功</a></div>
+								<div class="zptit"><a href=" ">欢迎 菜鸟有限公司 入驻本平台</a></div>
+								<div class="zptit"><a href=" ">恭喜用户 杨** 面试成功</a></div>
 							</div>
 						</div>
 					</ul>
@@ -342,7 +342,7 @@
 			<c:if test="${sessionScope.jobInfolist != null}">
 				<c:forEach items="${sessionScope.jobInfolist}" begin="0" var="i">
 					<div class="divBox">
-						<a href=""><img src=<%=imagesPath%>${i.qyPicture} width="84"/></a>
+						<a href=/user/jobinfo?id1=${i.qyid}&id2=${j.zpxxid}><img src=<%=imagesPath%>${i.qyPicture} width="84"/></a>
 						<p class="tit"><a href="">${i.postion}</a></p>
 						<p class="sub"><a href="">${i.qyName}</a></p>
 						<p class="num"><span>${i.salaryLow}-${i.salaryHigh}</span></p>
@@ -362,12 +362,12 @@
 	<div class="mainCon4">
 		<ul>
 			<c:if test="${sessionScope.compAndJobList != null}">
-				<c:forEach items="${sessionScope.compAndJobList}" begin="0" var="i">
+				<c:forEach items="${sessionScope.compAndJobList}" begin="0" end="9" var="i">
 					<li>
 						<img src=<%=imagesPath%>${i.qyPicture} width="62" height="62"/>
 						<p>${i.qyName}</p>
 					<c:if test="${i.list != null}">
-						<c:forEach items="${i.list}" begin="0" var="j" varStatus="status">
+						<c:forEach items="${i.list}" begin="0" var="j" end="3" varStatus="status">
 <%--							第二次结束也就是第三次开始时换行--%>
 							<c:if test="${status.index == 2}">
 								<br>
