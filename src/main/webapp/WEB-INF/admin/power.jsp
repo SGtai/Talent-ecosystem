@@ -40,6 +40,8 @@
                 <option value="2">普通管理员</option>
                 <option value="3">企业</option>
                 <option value="4">高校</option>
+                <option value="6">未审核企业</option>
+                <option value="7">未审核高校</option>
                 <option value="5">测试</option>
             </select>
         </div>
