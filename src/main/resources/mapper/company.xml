@@ -4,7 +4,7 @@
     <!--单条数据插入，返回自增ID序号-->
     <insert id="regQyAccount" parameterType="Qyinfo" keyProperty="qyid" useGeneratedKeys="true">
 		insert into
-		qyinfo(qyAccount,password,qyData,qyName,regTime,ctid,prid) values(#{qyAccount},#{password},#{qyData},#{qyName},#{regTime},#{ctid},#{prid})
+		qyinfo(qyAccount,password,qyData,qyName,regTime,ctid,prid) values(#{qyAccount},#{password},#{qyData},#{qyName},now(),#{ctid},#{prid})
 	</insert>
     <!--    查询企业信息表-->
 	<select id="findById" parameterType="string" resultType="Qyinfo"
@@ -47,13 +47,13 @@
 	<!--发布招聘信息-->
 	<insert id="releaseJobinfo" parameterType="com.cykj.net.javabean.Jobinfo" keyProperty="qyid" useGeneratedKeys="true">
 		insert into
-		jobinfo(qyid, zwid, lxMan, lxPhone, zpNum, lxAddress, xueliRequire, zhiyeType, gzExperience, majorRequire, gzAddress, salaryLow, welfare, jobDuty,time, jobinfoState, salaryHigh, ctid, sex, ageLow, ageHigh, beginTime, endTime, dayTime, weekTime, workTime, baoxian, gjijin, jiangjin, zhusu,prid)
+		jobinfo(qyid, zwid, lxMan, lxPhone, zpNum, lxAddress, xueliRequire, zhiyeType, gzExperience, majorRequire, gzAddress, salaryLow, welfare, jobDuty,time, jobinfoState, salaryHigh, ctid, sex, ageLow, ageHigh, beginTime, endTime, dayTime, weekTime, workTime, baoxian, gjijin, jiangjin, zhusu,prid,zpNumEnd)
 		values(
-		#{qyid},#{zwid},#{lxMan},#{lxPhone},#{zpNum},#{lxAddress},#{xueliRequire},#{zhiyeType},#{gzExperience},#{majorRequire},#{gzAddress},#{salaryLow},#{welfare},#{jobDuty},#{time},#{jobinfoState},#{salaryHigh},#{ctid},#{sex},#{ageLow},#{ageHigh}, #{beginTime}, #{endTime},#{dayTime},#{weekTime},#{workTime},#{baoxian}, #{gjijin}, #{jiangjin}, #{zhusu}, #{prid})
+		#{qyid},#{zwid},#{lxMan},#{lxPhone},#{zpNum},#{lxAddress},#{xueliRequire},#{zhiyeType},#{gzExperience},#{majorRequire},#{gzAddress},#{salaryLow},#{welfare},#{jobDuty},now(),#{jobinfoState},#{salaryHigh},#{ctid},#{sex},#{ageLow},#{ageHigh}, #{beginTime}, #{endTime},#{dayTime},#{weekTime},#{workTime},#{baoxian}, #{gjijin}, #{jiangjin}, #{zhusu}, #{prid},0)
 	</insert>
 	<update id="updateJobinfo" parameterType="com.cykj.net.javabean.Jobinfo" keyProperty="qyid" useGeneratedKeys="true">
 	    update jobinfo
-	    set zwid=#{zwid},lxMan=#{lxMan},lxPhone=#{lxPhone},zpNum=#{zpNum},lxAddress=#{lxAddress},xueliRequire=#{xueliRequire},zhiyeType=#{zhiyeType},gzExperience=#{gzExperience},majorRequire=#{majorRequire},gzAddress=#{gzAddress},salaryLow=#{salaryLow},welfare=#{welfare},jobDuty=#{jobDuty},time=#{time},
+	    set zwid=#{zwid},lxMan=#{lxMan},lxPhone=#{lxPhone},zpNum=#{zpNum},lxAddress=#{lxAddress},xueliRequire=#{xueliRequire},zhiyeType=#{zhiyeType},gzExperience=#{gzExperience},majorRequire=#{majorRequire},gzAddress=#{gzAddress},salaryLow=#{salaryLow},welfare=#{welfare},jobDuty=#{jobDuty},time=now(),
 	    salaryHigh=#{salaryHigh},prid=#{prid},ctid=#{ctid},sex=#{sex},ageLow=#{ageLow},ageHigh=#{ageHigh}, beginTime=#{beginTime}, endTime=#{endTime},dayTime=#{dayTime} , weekTime=#{weekTime},workTime=#{workTime},baoxian=#{baoxian}, gjijin=#{gjijin},jiangjin=#{jiangjin}, zhusu=#{zhusu}
 	    where zpxxid=#{zpxxid};
 	</update>
@@ -140,7 +140,7 @@ left join  station F on E.gwid=F.stid) H
 
 	<!--    投递公司后的邀请面试-->
 	<update id="updateQuery" parameterType="com.cykj.net.javabean.Query">
-        update query set ckTime=#{ckTime},paid=#{paid} where cxrzId=#{cxrzId}
+        update query set ckTime=now(),paid=#{paid} where cxrzId=#{cxrzId}
     </update>
 	<!--    查询简历日志表-->
 	<select id="selectQuery" parameterType="com.cykj.net.javabean.Query" resultType="com.cykj.net.javabean.Query">
@@ -150,7 +150,7 @@ left join  station F on E.gwid=F.stid) H
 	<!--插入日志表-->
 	<insert id="insertQuery" parameterType="com.cykj.net.javabean.Query" keyProperty="cxrzId" useGeneratedKeys="true">
 		insert into query (jlId, qyId, ckTime, paid)
-		values (#{jlId},#{qyId},#{ckTime},#{paid})
+		values (#{jlId},#{qyId},now(),#{paid})
 	</insert>
 
 	<select id="feedbackQuery" parameterType="com.cykj.net.javabean.Resume" resultType="com.cykj.net.javabean.Resume">
@@ -166,7 +166,30 @@ left join  station F on E.gwid=F.stid) H
 
 	<!--    应聘修改状态-->
 	<update id="yingpin" parameterType="com.cykj.net.javabean.Query">
-        update query set paid=14 where cxrzId=#{cxrzId}
+        update query set paid=14,ckTime=now() where cxrzId=#{cxrzId}
     </update>
+
+	<!--    增加完成应聘人数-->
+	<update id="yingpinNum" parameterType="com.cykj.net.javabean.Jobinfo">
+        update jobinfo set zpNumEnd=#{zpNumEnd} where zpxxid=#{zpxxid}
+    </update>
+
+	<update id="qyPicture" parameterType="map">
+       update qyinfo set qyPicture = '${urldb}' where qyid = ${qyid}
+    </update>
+
+	<select id="weekJobinfo" parameterType="map" resultType="int">
+		select count(*) from jobinfo where time like concat('${day}','%') and qyid=${qyid}
+	</select>
+
+	<select id="monthJobinfo" parameterType="map" resultType="int">
+		select count(*) from jobinfo where time between #{day} and #{day1}
+	</select>
+
+	<select id="finishJob" parameterType="com.cykj.net.javabean.Resume" resultType="com.cykj.net.javabean.Resume">
+			select * from resume A,
+	(select * from query where qyId=#{qyId} and zpxxid=#{zpxxid} and paid=14) B
+	WHERE A.jlId=B.jlId
+	</select>
 
 </mapper>

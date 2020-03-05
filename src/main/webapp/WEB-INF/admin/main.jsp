@@ -12,7 +12,6 @@
     String jsPath = application.getContextPath() + "/adminS/js/";
     String cssPath = application.getContextPath() + "/adminS/css/";
     String path = application.getContextPath() + "/";
-
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,14 +61,16 @@
         <!--        <div style="padding: 15px;">内容主体区域</div>-->
         <c:if test="${roid!=null}">
             <c:if test="${roid == 1 || roid == 2}">
-                <iframe src="/jump/admin/welcome" name="main_self_frame" frameborder="0" class="layadmin-iframe"
-                        style="width: 100%"
+                <iframe  src="/jump/admin/welcome" name="main_self_frame" frameborder="0" class="layadmin-iframe"
+                        style="width: 100%; background: url('../../uploadS/images/back_admin.png') no-repeat;
+                        background-size: 100% auto;"
                         height="100%"></iframe>
             </c:if>
 
             <c:if test="${roid == 3 || roid == 6}">
                 <iframe src="" name="main_self_frame" frameborder="0" class="layadmin-iframe"
-                        style="width: 100%"
+                        style="width: 100%;background: url('../../uploadS/images/company.jpg') no-repeat;
+                        background-size: 100% auto;"
                         height="100%"></iframe>
             </c:if>
             <c:if test="${roid == 4 || roid == 7}">

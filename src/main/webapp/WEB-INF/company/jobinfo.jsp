@@ -84,7 +84,7 @@
 		<div class="layui-inline">
 			<label class="layui-form-label">联系电话：</label>
 			<div class="layui-input-inline">
-				<input name="lxPhone" id="lxPhone" class="layui-input" type="text" autocomplete="off" lay-verify="number" >
+				<input name="lxPhone" id="lxPhone" class="layui-input" type="phone" autocomplete="off" lay-verify="number" >
 			</div>
 		</div>
 	</div>

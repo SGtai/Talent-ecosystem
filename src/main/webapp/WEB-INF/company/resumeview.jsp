@@ -68,9 +68,6 @@
 	<button lay-event="update" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i class="layui-icon">&#xe620;</i>
 		面试邀请
 	</button>
-	<button lay-event="" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i class="layui-icon">&#xe620;</i>
-		导出简历
-	</button>
 
 </script>
 <script type="text/javascript">

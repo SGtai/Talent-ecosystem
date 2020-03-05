@@ -26,7 +26,7 @@
 <body>
 <input id="qyid" type="hidden" value="${sessionScope.Qyinfo.qyid}" />
 <form class="layui-form" lay-filter="component-form-group" id="search_submits" onsubmit="return false">
-	<h1  style="background-color: #95877c;font-weight:bold;text-align:center">全部简历</h1>
+	<h1  style="background-color: #95877c;font-weight:bold;text-align:center">反馈情况</h1>
 	<div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="layadmin-useradmin-formlist">
 		<div class="layui-inline">
 			<label class="layui-form-label">反馈情况：</label>
@@ -85,7 +85,7 @@
 				// , {field: 'postion', title: '应聘岗位', width: 200}
 				, {field: 'yhname', title: '名字', width: 150}
 				, {field: 'byschool', title: '毕业院校', width: 200}
-				, {field: 'xl', title: '学历', width: 120, sort: true}
+				, {field: 'xl', title: '学历', width: 120}
 				, {field: 'zy', title: '专业', width: 170}
 				, {field: 'ckTime', title: '操作时间', width: 200, sort: true}
 				, {field: 'feedback', title: '反馈情况', width: 150, sort: true}
@@ -125,11 +125,12 @@
 					return false;
 				}else {
 					var cxrzId=data.cxrzId;
+					var zpxxid=data.zpxxid;
 					$.ajax({
 						type:"POST",
 						url:"/company/yingpin",
 						dataType:"text",
-						data:{cxrzId:cxrzId},
+						data:{cxrzId:cxrzId,zpxxid:zpxxid},
 						//从servlet接收的数据
 						success:function (msg) {
 							if (msg ==='success') {
@@ -138,7 +139,7 @@
 								//招聘人数加1
 
 							} else {
-								layer.msg("应聘失败！")
+								layer.msg("应聘失败,已招满!")
 							}
 						}
 						,error:function () {
@@ -146,34 +147,6 @@
 						}
 					});
 				}
-			} else if(layEvent === 'delete'){
-
-				if(data.jobinfoState==='发布中'){
-					layer.msg('发布中无法删除状态');
-					return false;
-				}else {
-					$.ajax({
-						type:"POST",
-						url:"/company/deleteJobinfo",
-						dataType:"text",
-						data:{zpxxid:data.zpxxid},
-						//从servlet接收的数据
-						success:function (msg) {
-							if (msg ==='success') {
-								layer.msg('删除成功');
-								$(".layui-laypage-btn")[0].click();
-							} else {
-								layer.msg("修改失败！")
-							}
-						}
-						,error:function () {
-							alert("服务器正忙.....");
-						}
-					});
-
-				}
-
-
 			}
 		});
 
