@@ -9,8 +9,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	String cssPath = application.getContextPath()+"/techS/css/";
-	String jsPath = application.getContextPath()+"/techS/js/";
-	String othPath =application.getContextPath()+"/techS/other/";
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +28,7 @@
 			<c:forEach items="${ct}" var="node">
 				<li class="case-example-item">
 					<a href="/techc?id=${node.zjId}">
-						<img src="${'/techS/other/'.concat(node.zjPicture)}" alt="" class="case-pad">
+						<img src="${'../../uploadS/other/'.concat(node.zjPicture)}" alt="" class="case-pad">
 						<div class="case-item-info">
 <%--							<div class="case-info-logo"><img src="images/logo-001.jpg" alt=""></div>--%>
 							<div class="case-info-title">${node.zjName}</div>

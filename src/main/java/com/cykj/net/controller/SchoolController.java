@@ -10,14 +10,7 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,8 +26,6 @@ import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
-import static com.cykj.net.javabean.S1.*;
 
 @Controller
 @RequestMapping("/school")
@@ -135,7 +126,7 @@ public class SchoolController
 			//插入注册时间
 			schoolinfo.setRegTime(new Timestamp(System.currentTimeMillis()));
 			//插入图片路径
-			String path= ResourceUtils.getURL("classpath:").getPath()+"static/schoolS/cunchu";
+			String path= ResourceUtils.getURL("classpath:").getPath()+ "static/schoolS/cunchu";
 			System.out.println("path="+path);
 			//判断logo目录的是否存在
 			File pathlogo=new File(path+"\\"+"logo");
@@ -220,7 +211,7 @@ public class SchoolController
 			int b=panduandaima(admin.getAccount(),sc.getXinyongDaima());
 			if(b==1){}else{return "-2";}
 			//插入图片路径
-			String path= ResourceUtils.getURL("classpath:").getPath()+"static/schoolS/cunchu";
+			String path= ResourceUtils.getURL("classpath:").getPath()+ "static/schoolS/cunchu";
 			File logoacc=new File(path+"\\"+"logo"+"\\"+admin.getAccount());
 			//删除这个用户文件夹下的所有文件
 			File[] files = logoacc.listFiles();

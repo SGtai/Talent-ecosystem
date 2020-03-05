@@ -9,10 +9,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	String path = application.getContextPath()+"/";
-	String cssPath = application.getContextPath()+"/techS/css/";
 	String jsPath = application.getContextPath()+"/techS/js/";
 	String othPath =application.getContextPath()+"/techS/other/";
-	String videoPath =application.getContextPath()+"/techS/other/video";
 	String layuiPath =application.getContextPath()+"/layui/";
 %>
 <!DOCTYPE html>
@@ -39,7 +37,7 @@
 <div class="layui-form-item">
 	<label class="layui-form-label" style="margin-top: -4%;margin-left: 40%;font-size: 17px;">至</label>
 	<div class="layui-input-block" style="margin-left: 49%;margin-top: -4%;position: absolute;width: 12%;">
-		<input type="text" id="price2" name="price2" required  lay-verify="required" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入最高价" autocomplete="off" class="layui-input" >
+		<input type="text" id=" price2" name="price2" required  lay-verify="required" oninput="value=value.replace(/[^\d]/g,'')" placeholder="请输入最高价" autocomplete="off" class="layui-input" >
 	</div>
 </div>
 
