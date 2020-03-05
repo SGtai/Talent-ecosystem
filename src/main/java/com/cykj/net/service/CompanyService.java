@@ -131,5 +131,19 @@ public class CompanyService
 		return sum;
 	}
 
+	public int qyPicture(String urldb,int qyid){
+		int num = companyDao.qyPicture(urldb,qyid);
+		return num;
+	}
+
+	public int weekJobinfo(String day,int qyid){
+		int num = companyDao.weekJobinfo(day,qyid);
+		return num;
+	}
+
+	public int monthJobinfo(String day,String day1,int qyid){
+		int num = companyDao.monthJobinfo(day,day1,qyid);
+		return num;
+	}
 }
 

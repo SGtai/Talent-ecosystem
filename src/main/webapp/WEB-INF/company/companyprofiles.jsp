@@ -10,6 +10,7 @@
 <%
 	String path = application.getContextPath()+"/layui/";
 	String jsPath = application.getContextPath()+"/companys/js/";
+	String dbimgPath =application.getContextPath()+"/images/";
 %>
 <!DOCTYPE html>
 <html>
@@ -20,12 +21,12 @@
 	<style>
 		body {
 			width: 100%;
-			height:650px;
+			height:590px;
 		}
 
 		#layout3 {
 			width: 50%;
-			height: 500px;
+			height: 590px;
 			margin: auto;
 			margin-top: 15px;
 			border: #9F9F9F solid 1px;
@@ -46,6 +47,18 @@
 <div id="layout3">
 	<form class="layui-form" action="" >
 		<input id="qyAccount" type="hidden" value="${sessionScope.Qyinfo.qyAccount}" />
+		<div class="layui-upload">
+			<button class="layui-btn" id="test1" type="button">上传企业Logo</button>
+<%--			<div class="layui-upload-list">--%>
+<%--				<img class="layui-upload-img" id="demo1">--%>
+<%--				<p id="demoText"></p>--%>
+<%--			</div>--%>
+			<div class="JlBoxRight" style="text-align:center" >
+				<c:if test="${sessionScope.Qyinfo.qyPicture!=null and sessionScope.Qyinfo.qyPicture!=''}">
+				<img style="border:1px solid #000" src="<%=dbimgPath%>${sessionScope.Qyinfo.qyPicture}" width="50%" height="180px" />
+			</c:if>
+			</div>
+		</div>
 		<br>
 		<div>
 			<h1 align="center">企业简介</h1>
@@ -100,6 +113,29 @@
 		});
 	});
 </script>
+<script>
+	layui.use('upload', function() {
+		var $ = layui.jquery
+			, upload = layui.upload;
 
+		//普通图片上传
+		var uploadInst = upload.render({
+			elem: '#test1'
+			, url: '/company/photo' //改成您自己的上传接口
+			, before: function (obj) {
+				//预读本地文件示例，不支持ie8
+				// obj.preview(function (index, file, result) {
+				// 	$('#demo1').attr('src', result); //图片链接（base64）
+				// });
+			}
+			, done: function (res) {
+				//如果上传失败
+				return layer.alert('上传成功',function () {
+					window.location.reload();
+				});
+			}
+		});
+	})
+</script>
 </body>
 </html>

@@ -26,7 +26,7 @@
 <body>
 <input id="qyid" type="hidden" value="${sessionScope.Qyinfo.qyid}" />
 <form class="layui-form" lay-filter="component-form-group" id="search_submits" onsubmit="return false">
-	<h1  style="background-color: #95877c;font-weight:bold;text-align:center">全部简历</h1>
+	<h1  style="background-color: #95877c;font-weight:bold;text-align:center">反馈情况</h1>
 	<div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="layadmin-useradmin-formlist">
 		<div class="layui-inline">
 			<label class="layui-form-label">反馈情况：</label>

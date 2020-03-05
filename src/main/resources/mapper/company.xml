@@ -173,4 +173,17 @@ left join  station F on E.gwid=F.stid) H
 	<update id="yingpinNum" parameterType="com.cykj.net.javabean.Jobinfo">
         update jobinfo set zpNumEnd=#{zpNumEnd} where zpxxid=#{zpxxid}
     </update>
+
+	<update id="qyPicture" parameterType="map">
+       update qyinfo set qyPicture = '${urldb}' where qyid = ${qyid}
+    </update>
+
+	<select id="weekJobinfo" parameterType="map" resultType="int">
+		select count(*) from jobinfo where time like concat('${day}','%') and qyid=${qyid}
+	</select>
+
+	<select id="monthJobinfo" parameterType="map" resultType="int">
+		select count(*) from jobinfo where time between #{day} and #{day1}
+	</select>
+
 </mapper>

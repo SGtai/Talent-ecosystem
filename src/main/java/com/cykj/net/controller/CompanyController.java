@@ -5,20 +5,30 @@ import com.cykj.net.javabean.admin.Admin;
 import com.cykj.net.javabean.Adminrole;
 import com.cykj.net.javabean.Qyinfo;
 import com.cykj.net.javabean.LayuiData;
+import com.cykj.net.javabean.admin.CensusUtil;
 import com.cykj.net.service.AdminroleService;
 import com.cykj.net.service.CompanyService;
 import com.cykj.net.service.UserService;
 import com.cykj.net.service.admin.AdminService;
+import com.cykj.net.util.UtilTool;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -616,6 +626,111 @@ public class CompanyController
 		return result;
 	}
 
+
+	@RequestMapping("/photo")
+	@ResponseBody
+	public String photo(@RequestParam("file") MultipartFile file, HttpServletRequest request)
+	{
+		Qyinfo qyinfo = (Qyinfo) request.getSession().getAttribute("Qyinfo");
+		int qyid= (int) qyinfo.getQyid();
+		try
+		{
+			String filename = file.getOriginalFilename();
+			String urldb = new Date().getTime()+filename;
+			//user.dir:用户的当前工作目录
+//			String projectPath = System.getProperty("user.dir")+"\\target\\classes\\static\\images\\"+urldb;
+			String projectPath1 = System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\"+urldb;
+			file.transferTo(new File(projectPath1));
+//			file.transferTo(new File(projectPath));
+			int num = companyService.qyPicture(urldb,qyid);
+			Qyinfo qyinfo1 = companyService.findById(qyinfo.getQyAccount());
+			request.getSession().setAttribute("Qyinfo",qyinfo1);
+
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		return "1";
+	}
+
+	@RequestMapping("/weekJobinfo")
+	@ResponseBody
+	public String weekJobinfo(HttpSession session) {
+		Qyinfo qyinfo = (Qyinfo)session.getAttribute("Qyinfo");;
+		int qyid= (int) qyinfo.getQyid();
+		ArrayList<CensusUtil> arrayList = new ArrayList<>();
+		List<String> dateWeekList = UtilTool.week(new Date());
+		String[] weekDays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
+		int sum = 0;
+
+		for (int i = 0; i < dateWeekList.size(); i++) {
+			int count =companyService.weekJobinfo(dateWeekList.get(i),qyid);
+			CensusUtil censusUtil = new CensusUtil();
+			censusUtil.setCount(count);
+			censusUtil.setName(weekDays[i]);
+			arrayList.add(censusUtil);
+			sum = count + sum;
+		}
+
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(arrayList);
+		String msg = jsonStr + "://" + sum;
+		return msg;
+	}
+
+	@RequestMapping("/monthJobinfo")
+	@ResponseBody
+	public String monthJobinfo(String date,HttpSession session) {
+		Qyinfo qyinfo = (Qyinfo)session.getAttribute("Qyinfo");;
+		int qyid= (int) qyinfo.getQyid();
+		ArrayList<CensusUtil> arrayList = new ArrayList<>();
+		List<String> dateHalfList = null;
+		dateHalfList = UtilTool.month(date);
+
+		int sum = 0;
+		for (int i = 0; i < dateHalfList.size(); i++) {
+			String[] time = dateHalfList.get(i).split(" ");
+			int count = companyService.monthJobinfo(time[0],time[1]+" 23:59:59",qyid);
+			CensusUtil censusUtil = new CensusUtil();
+			censusUtil.setCount(count);
+			censusUtil.setName("第" + (i + 1) + "周");
+			arrayList.add(censusUtil);
+
+			sum = count + sum;
+		}
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(arrayList);
+		String msg = jsonStr + "://" + sum;
+		return msg;
+	}
+
+	@RequestMapping("/halfJobinfo")
+	@ResponseBody
+	public String halfJobinfo(HttpSession session) throws ParseException
+	{
+		Qyinfo qyinfo = (Qyinfo)session.getAttribute("Qyinfo");;
+		int qyid= (int) qyinfo.getQyid();
+		ArrayList<CensusUtil> arrayList = new ArrayList<>();
+		List<String> dateHalfList = null;
+
+		dateHalfList = UtilTool.half();
+
+		int sum = 0;
+		for (int i = 0; i < dateHalfList.size(); i++) {
+			int count = companyService.weekJobinfo(dateHalfList.get(i),qyid);
+			CensusUtil censusUtil = new CensusUtil();
+			censusUtil.setCount(count);
+			censusUtil.setName(dateHalfList.get(i));
+			arrayList.add(censusUtil);
+
+			sum = count + sum;
+		}
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(arrayList);
+
+		String msg = jsonStr + "://" + sum;
+		return msg;
+	}
 }
 
 

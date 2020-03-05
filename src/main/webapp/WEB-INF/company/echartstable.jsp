@@ -64,13 +64,13 @@
 	$(function() {
 		$.ajax({
 			method : "POST",
-			url : "/adminCensus/week",
+			url : "/company/weekJobinfo",
 			dataType : "text",
-			data:{role:0},
+			// data:{role:0},
 			success : function(msg) {
 				var list = msg.split("://");
 				var arr = JSON.parse(list[0]);
-				$('#howlong').html('本周总新增用户数：');
+				$('#howlong').html('本周总新增招聘信息：');
 				$('#sum').html(list[1]);
 				for (var i = 0; i < arr.length; i++) {
 					// 普通柱状图使用的数据
@@ -96,13 +96,13 @@
 			valueArr = [];
 			$.ajax({
 				method : "POST",
-				url : "/adminCensus/week",
+				url : "/company/weekJobinfo",
 				dataType : "text",
-				data:{role:0},
+				// data:{role:0},
 				success : function(msg) {
 					var list = msg.split("://");
 					var arr = JSON.parse(list[0]);
-					$('#howlong').html('本周总新增用户数：');
+					$('#howlong').html('本周总新增招聘：');
 					$('#sum').html(list[1]);
 					for (var i = 0; i < arr.length; i++) {
 						// 普通柱状图使用的数据
@@ -123,13 +123,13 @@
 
 			$.ajax({
 				method : "POST",
-				url : "/adminCensus/month",
+				url : "/company/monthJobinfo",
 				dataType : "text",
-				data:{date:new Date().format('yyyy-MM-dd'),role:0},
+				data:{date:new Date().format('yyyy-MM-dd')},
 				success : function(msg) {
 					var list = msg.split("://");
 					var arr = JSON.parse(list[0]);
-					$('#howlong').html('本月总新增用户数：');
+					$('#howlong').html('本月总新增招聘：');
 					$('#sum').html(list[1]);
 					for (var i = 0; i < arr.length; i++) {
 						// 普通柱状图使用的数据
@@ -149,14 +149,14 @@
 			valueArr = [];
 			$.ajax({
 				method : "POST",
-				url : "/adminCensus/half",
+				url : "/company/halfJobinfo",
 				dataType : "text",
 				data:{role:0},
 				success : function(msg) {
 
 					var list = msg.split("://");
 					var arr = JSON.parse(list[0]);
-					$('#howlong').html('近半年总新增用户数：');
+					$('#howlong').html('近半年总新增招聘：');
 					$('#sum').html(list[1]);
 					for (var i = 0; i < arr.length; i++) {
 						// 普通柱状图使用的数据
@@ -186,7 +186,7 @@
 		// 指定图表的配置项和数据
 		var option = {
 			title : {
-				text : '用户新增量统计报表'
+				text : '招聘信息发布新增量统计报表'
 			},
 			tooltip : {},
 			legend : {

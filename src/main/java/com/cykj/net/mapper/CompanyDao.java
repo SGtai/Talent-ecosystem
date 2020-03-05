@@ -2,6 +2,7 @@ package com.cykj.net.mapper;
 
 import com.cykj.net.javabean.*;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -73,6 +74,17 @@ public interface CompanyDao
 
 	//应聘
 	public int yingpin(Query query);
+
 	//增加应聘人数
 	public int yingpinNum(Jobinfo jobinfo);
+
+	//上传图片
+	public int qyPicture(@Param("urldb") String urldb, @Param("qyid") int qyid);
+
+	//查询当周
+	public int weekJobinfo(@Param("day") String day, @Param("qyid") int qyid);
+
+	//查询当月
+	public int monthJobinfo(@Param("day") String day,@Param("day1") String day1, @Param("qyid") int qyid);
+
 }
