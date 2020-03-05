@@ -12,7 +12,6 @@
 <%
 	String cssPath = application.getContextPath()+"/techS/css/";
 	String jsPath = application.getContextPath()+"/techS/js/";
-	String othPath =application.getContextPath()+"/techS/other/";
 %>
 <!DOCTYPE html>
 <html>
@@ -48,7 +47,7 @@
 
 						<div class="information-left">
 							<a href="#">
-								<img src="${'/techS/other/'.concat(ct.zjPicture)}" width="500" height="340" alt="恰同学少年 加油！！！">
+								<img src="${'../../uploadS/other/'.concat(ct.zjPicture)}" width="500" height="340" alt="恰同学少年 加油！！！">
 							</a>
 							<div class="left-bottom">
 								<div class="article-time">
