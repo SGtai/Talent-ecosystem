@@ -66,7 +66,7 @@
 				<a href="/user/gopersonaljl" class="a2">我的简历</a>
 			</div>
 			<div class="NavLeftBox">
-				<a href="" class="a3">我的校友</a>
+				<a href="/jump/user/myschooll" class="a3">我的校友</a>
 			</div>
 			<div class="NavLeftBox twoNav">
 				<a class="a5">职位申请</a>

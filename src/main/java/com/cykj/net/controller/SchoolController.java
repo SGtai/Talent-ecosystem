@@ -357,6 +357,34 @@ public class SchoolController
 		gsonbean(t,response);
 	}
 
+	@RequestMapping("/myschool")
+	public void myschool(HttpServletRequest request,HttpServletResponse response,String time,String name,String zy,String page,String limit)throws Exception{
+		utf8(request,response);
+		Userlist userlist= (Userlist) request.getSession().getAttribute("user");
+		Userlist userlist1=schoolService.finduser(userlist.getPhone());
+		String lasttime="";
+		String nowtime="";
+		if(time!=null&&time!=""&&!time.equals("to")){
+			String arr[]=time.split("to");
+			lasttime=arr[0].trim();
+			nowtime=arr[1].trim();
+			System.out.println(lasttime);
+			System.out.println(nowtime);
+		}
+		int page1 = Integer.valueOf(page);
+		int limit1=Integer.valueOf(limit);
+		RowBounds rowBounds = new RowBounds(page1-1, limit1);
+		int count=schoolService.fenyecount1(userlist1.getTuijianren(),name,zy,lasttime,nowtime);
+		System.out.println(count);
+		List<Alluserinfo> list=schoolService.fenyeshuju1(userlist1.getTuijianren(),name,zy,lasttime,nowtime,rowBounds);
+		Table t=new Table();
+		t.setCode(0);
+		t.setCount(count);
+		t.setMsg("");
+		t.setData(list);
+		gsonbean(t,response);
+	}
+
 	/**
 	 * 查询工作经历和学习经历
 	 * @param account
@@ -623,7 +651,7 @@ public class SchoolController
 	}
 
 	/**
-	 * 分页查询人才信息
+	 * 分页企业信息
 	 *
 	 */
 	@RequestMapping("/rgxg")
