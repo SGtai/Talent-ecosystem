@@ -184,6 +184,7 @@
 					,{field: 'jzdResidence', title: '住址', width: 50,hide:true}
 					,{field: 'zsCertificate', title: '技能证书', width: 50,hide:true}
 					,{field: 'pjEvaluation', title: '自我评价', width: 50,hide:true}
+					,{field: 'yhId', title: '用户id', width: 50,hide:true}
 				]]
 				,id:'UserTable1'
 			});

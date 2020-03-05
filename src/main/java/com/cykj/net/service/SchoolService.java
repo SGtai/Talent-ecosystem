@@ -76,6 +76,16 @@ public class SchoolService
 		return Userlistnum;
 	}
 
+	public int updateuser(Alluserinfo alluserinfo){
+		int updateusernum=schoolDao.updateuser(alluserinfo);
+		return updateusernum;
+	}
+
+	public int upadtejl1(Alluserinfo alluserinfo){
+		int updateusernum=schoolDao.upadtejl1(alluserinfo);
+		return updateusernum;
+	}
+
 	public int fenyecount2(String position,String type){
 		int fenyecount2=schoolDao.fenyecount2(position,type);
 		return fenyecount2;
@@ -85,5 +95,10 @@ public class SchoolService
 	public List<J1> fenyeshuju2(String position,String type, RowBounds rowBounds){
 		List<J1> fenyeshuju2=schoolDao.fenyeshuju2(position, type, rowBounds);
 		return fenyeshuju2;
+	}
+
+	public int inserqz(Applicationjob applicationjob){
+		int inserqz=schoolDao.inserqz(applicationjob);
+		return inserqz;
 	}
 }

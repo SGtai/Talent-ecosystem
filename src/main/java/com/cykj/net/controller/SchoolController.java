@@ -463,14 +463,12 @@ public class SchoolController
 				userlist.setName(formatCell(hssfRow.getCell(1)));
 				userlist.setPhone(formatCell(hssfRow.getCell(2)));
 				userlist.setSex(formatCell(hssfRow.getCell(3)));
-				userlist.setSex(formatCell(hssfRow.getCell(4)));
-				userlist.setDegree(formatCell(hssfRow.getCell(5)));
-				userlist.setIdCard(formatCell(hssfRow.getCell(6)));
-				userlist.setIdCardType(formatCell(hssfRow.getCell(7)));
-				userlist.setBirthday(formatCell(hssfRow.getCell(8)));
+				userlist.setDegree(formatCell(hssfRow.getCell(4)));
+				userlist.setIdCard(formatCell(hssfRow.getCell(5)));
+				userlist.setIdCardType(formatCell(hssfRow.getCell(6)));
+				userlist.setBirthday(formatCell(hssfRow.getCell(7)));
 				userlist.setRegTime(new Timestamp(System.currentTimeMillis()));
 				userlist.setState(0);
-				userlist.setPicture("图片路径未定义");
 				userlist.setTuijianren(admin.getAccount());
 				//插入管理员表
 				Admin a=new Admin();
@@ -600,7 +598,16 @@ public class SchoolController
 		gsonbean(t,response);
 	}
 
-
+	@RequestMapping("/cguserinfo")
+	@ResponseBody
+	public String cguserinfo(Alluserinfo alluserinfo){
+		int i=schoolService.updateuser(alluserinfo);
+		int k=schoolService.upadtejl1(alluserinfo);
+		if(i>0&&k>0){
+			return "1";
+		}
+		return "0";
+	}
 
 
 

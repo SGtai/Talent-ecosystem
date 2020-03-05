@@ -103,6 +103,20 @@ public interface SchoolDao
 	public int inseruserinfo(Userlist userlist);
 
 	/**
+	 * 修改用户信息
+	 * @param alluserinfo
+	 * @return
+	 */
+	public int updateuser(Alluserinfo alluserinfo);
+
+	/**
+	 * 修改简历表1
+	 * @param alluserinfo
+	 * @return
+	 */
+	public int upadtejl1(Alluserinfo alluserinfo);
+
+	/**
 	 * 分页查询发布信息
 	 * @param position
 	 * @param type
@@ -118,4 +132,11 @@ public interface SchoolDao
 	 * @return
 	 */
 	public List<J1> fenyeshuju2(@Param("position") String position, @Param("type") String type, RowBounds rowBounds);
+
+	/**
+	 * 插入求职表
+	 * @param applicationjob
+	 * @return
+	 */
+	public int inserqz(Applicationjob applicationjob);
 }

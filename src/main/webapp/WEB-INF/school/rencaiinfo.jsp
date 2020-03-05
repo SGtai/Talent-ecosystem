@@ -27,7 +27,7 @@
 </script>
 <div id="di">
 	<form class="layui-form">
-		<h1 style="margin-left: 40%">人才信息查询</h1>
+		<h1 style="margin-left: 40%">人才基本信息</h1>
 
 		<div style="margin-left: 15%;margin-top: 1%">
 			<div class="layui-form-item">
@@ -174,7 +174,8 @@
 			</div>
 		</div>
 	</div>
-
+	<input type="hidden" id="hide7">
+	<input type="hidden" id="hide11">
 <%--	个人简历修改--%>
 	<div id="mydiv1" style="display: none ; padding: 10px;margin-left: 10%">
 		<form class="layui-form">
@@ -380,6 +381,7 @@
 					,{field: 'jzdResidence', title: '住址', width: 50,hide:true}
 					,{field: 'zsCertificate', title: '技能证书', width: 50,hide:true}
 					,{field: 'pjEvaluation', title: '自我评价', width: 50,hide:true}
+					,{field: 'yhId', title: '用户id', width: 50,hide:true}
 				]]
 				,done: function (res, curr, count) {
 					exportData=res.data;
@@ -426,6 +428,7 @@
 				$("#hide8").val(data.jzdResidence);
 				$("#hide9").val(data.zsCertificate);
 				$("#hide10").val(data.pjEvaluation);
+				$("#hide11").val(data.yhId);
 
 				$("#usename").val(data.name);
 				$("#birth").val(data.birthday);
@@ -485,7 +488,7 @@
 
 						type:1 , //设置类型 默认为0， 1：页面层  2：iframe层 type - 基本层类型
 
-						title:"个人简历(简略)",// title - 标题
+						title:"个人信息",// title - 标题
 
 						content:$("#mydiv"),// content - 内容
 
@@ -522,7 +525,7 @@
 
 						type:1 , //设置类型 默认为0， 1：页面层  2：iframe层 type - 基本层类型
 
-						title:"个人简历修改",// title - 标题
+						title:"个人信息修改",// title - 标题
 
 						content:$("#mydiv1"),// content - 内容
 
@@ -556,17 +559,33 @@
 											url:"/school/cguserinfo",
 											dataType:"text",
 											data:{
-												username:$("#usename").val(),
+												phone:$("#hide7").val(),
+												name:$("#usename").val(),
 												school:$("#school").val(),
 												birth:$("#birth").val(),
-												zhuanye:$("#zhuanye").val(),
-												mm:$("#mm").val(),
-												xl:$("#xl").val(),
-												address:$("#address").val(),
-												jn:$("#jn").val(),
-												pp:$("#pp").val()
+												zy:$("#zhuanye").val(),
+												mmFace:$("#mm").val(),
+												degree:$("#xl").val(),
+												jzdResidence:$("#address").val(),
+												zsCertificate:$("#jn").val(),
+												pjEvaluation:$("#pp").val(),
+												yhId:$("#hide11").val()
 											},
 											success:function (msg) {
+												if(msg=="1"){
+													$("#usename1").val($("#usename").val());
+													$("#birth1").val($("#birth").val());
+													$("#zhuanye1").val($("#zhuanye").val());
+													$("#mm1").val($("#mm").val());
+													$("#xl1").val($("#xl").val());
+													$("#address1").val($("#address").val());
+													$("#jn1").val($("#jn").val());
+													$("#pp1").val($("#pp").val());
+													layer.msg("修改成功");
+
+												}else{
+													layer.msg("修改失败")
+												}
 
 											},
 											error:function (msg) {

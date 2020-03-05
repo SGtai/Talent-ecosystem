@@ -120,12 +120,9 @@
         (#{account},#{password},#{name},#{phone},#{sex},#{degree},#{idCard},#{idCardType},#{birthday},#{regTime},#{picture},#{state},#{tuijianren})
     </insert>
 <!--    修改用户表-->
-    <update  id="updateuser" parameterType="J1">
+    <update  id="updateuser" parameterType="Alluserinfo">
         UPDATE userlist
-        <trim prefix="set" suffixOverrides="," suffix=" where scAccount = #{scAccount} ">
-            <if test="name!=null and name.length>0">
-                name=#{name},
-            </if>
+        <trim prefix="set" suffixOverrides="," suffix=" where phone = #{phone} ">
             <if test="birthday!=null and birthday.length>0">
                 birthday=#{birthday},
             </if>
@@ -141,32 +138,29 @@
             <if test="idCard!=null and idCard.length>0">
                 idCard=#{idCard},
             </if>
-            <if test="kaibanMoney!=null and kaibanMoney.length>0">
-                kaibanMoney=#{kaibanMoney},
+            <if test="idCardType!=null and idCardType.length>0">
+                idCardType=#{idCardType},
             </if>
-            <if test="jubanDanwei!=null and jubanDanwei.length>0">
-                jubanDanwei=#{jubanDanwei},
+        </trim>
+    </update>
+<!--    修改简历表1-->
+    <update id="upadtejl1" parameterType="Alluserinfo">
+        UPDATE resume
+        <trim prefix="set" suffixOverrides="," suffix=" where yhId = #{yhId} ">
+            <if test="zsCertificate!=null and zsCertificate.length>0">
+                zsCertificate=#{zsCertificate},
             </if>
-            <if test="xinyongDaima!=null and xinyongDaima.length>0">
-                xinyongDaima=#{xinyongDaima},
+            <if test="jzdResidence!=null and jzdResidence.length>0">
+                jzdResidence=#{jzdResidence},
             </if>
-            <if test="scAbout!=null and scAbout.length>0">
-                scAbout=#{scAbout},
+            <if test="pjEvaluation!=null and pjEvaluation.length>0">
+                pjEvaluation=#{pjEvaluation},
             </if>
-            <if test="scPhone!=null and scPhone.length>0">
-                scPhone=#{scPhone},
+            <if test="mmFace!=null and mmFace.length>0">
+                mmFace=#{mmFace},
             </if>
-            <if test="scState!=null and scState.length>0">
-                scState=#{scState},
-            </if>
-            <if test="ctid!=null and ctid.length>0">
-                ctid=#{ctid},
-            </if>
-            <if test="prid!=null and prid.length>0">
-                prid=#{prid},
-            </if>
-            <if test="type!=null and type.length>0">
-                type=#{type},
+            <if test="zy!=null and zy.length>0">
+                zy=#{zy},
             </if>
         </trim>
     </update>
@@ -200,5 +194,9 @@
             </if>
         </where>
     </select>
-
+<!--插入求职表-->
+    <insert id="inserqz" parameterType="Applicationjob">
+        INSERT INTO applicationjob (feedbackType, yhid,gwid,deliverTime) VALUES
+        (#{feedbackType},#{yhid},#{gwid},#{deliverTime})
+    </insert>
 </mapper>
