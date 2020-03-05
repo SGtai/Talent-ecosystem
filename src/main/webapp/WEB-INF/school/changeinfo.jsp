@@ -190,6 +190,9 @@
 			<i class="layui-icon">&#xe67c;</i>修改图片
 		</button>
 		<input class="layui-upload-file" type="file" accept="" name="file">
+		<button type="button" class="layui-btn" id="test3" style="margin-top: -10% ">
+			<i class="layui-icon"></i>浏览当前高校图片
+		</button>
 		<div class="layui-form-item" >
 			<div class="layui-input-block" id="button1" style="margin-left: 48%">
 				<button type="button" class="layui-btn"  id="bb">提交</button>
@@ -281,6 +284,9 @@
 						}
 						else if(msg=="1"){
 							alert("修改成功");
+							var a=document.createElement("a");
+							a.href="/school/changeinfo";
+							a.click();
 						}
 					}
 					, error: function () {
@@ -432,7 +438,10 @@
 									}else if(msg=="-2"){
 										alert("修改失败，社会信用代码已经被注册")
 									}else if(msg=="1"){
-										alert("修改成功")
+										alert("修改成功");
+										var a=document.createElement("a");
+										a.href="/school/changeinfo";
+										a.click();
 									}
 								},
 								error:function (msg) {

@@ -98,14 +98,7 @@
             </if>
         </where>
     </select>
-<!--    查找简历的教育经历信息-->
-    <select id="findexperience" resultType="Experience" parameterType="java.lang.String">
-        SELECT a.* FROM experience a,resume b,userlist c where a.jlId=b.jlId and b.yhId=c.yhid and c.account = #{account}
-    </select>
-<!--    查找简历的工作经历信息-->
-    <select id="findegzjl" resultType="Undergo" parameterType="java.lang.String">
-        SELECT a.* FROM undergo a,resume b,userlist c where a.jlId=b.jlId and b.yhId=c.yhid and c.account = #{account}
-    </select>
+
 <!--    查找省信息-->
     <select id="findpro" resultType="P1">
         select * from province
@@ -114,61 +107,9 @@
     <select id="findcity" resultType="C1" parameterType="java.lang.String">
         select b.* from province a,city b where a.prid=b.prid and a.prid=#{prid}
     </select>
-<!--    插入用户表-->
-    <insert id="inseruserinfo" parameterType="Userlist">
-        INSERT INTO userlist (account, password,name,phone,sex,degree,idCard,idCardType,birthday,regTime,picture,state,tuijianren) VALUES
-        (#{account},#{password},#{name},#{phone},#{sex},#{degree},#{idCard},#{idCardType},#{birthday},#{regTime},#{picture},#{state},#{tuijianren})
-    </insert>
-<!--    修改用户表-->
-    <update  id="updateuser" parameterType="Alluserinfo">
-        UPDATE userlist
-        <trim prefix="set" suffixOverrides="," suffix=" where phone = #{phone} ">
-            <if test="birthday!=null and birthday.length>0">
-                birthday=#{birthday},
-            </if>
-            <if test="name!=null and name.length>0">
-                name=#{name},
-            </if>
-            <if test="sex!=null and sex.length>0">
-                sex=#{sex},
-            </if>
-            <if test="degree!=null and degree.length>0">
-                degree=#{degree},
-            </if>
-            <if test="idCard!=null and idCard.length>0">
-                idCard=#{idCard},
-            </if>
-            <if test="idCardType!=null and idCardType.length>0">
-                idCardType=#{idCardType},
-            </if>
-        </trim>
-    </update>
-<!--    修改简历表1-->
-    <update id="upadtejl1" parameterType="Alluserinfo">
-        UPDATE resume
-        <trim prefix="set" suffixOverrides="," suffix=" where yhId = #{yhId} ">
-            <if test="zsCertificate!=null and zsCertificate.length>0">
-                zsCertificate=#{zsCertificate},
-            </if>
-            <if test="jzdResidence!=null and jzdResidence.length>0">
-                jzdResidence=#{jzdResidence},
-            </if>
-            <if test="pjEvaluation!=null and pjEvaluation.length>0">
-                pjEvaluation=#{pjEvaluation},
-            </if>
-            <if test="mmFace!=null and mmFace.length>0">
-                mmFace=#{mmFace},
-            </if>
-            <if test="zy!=null and zy.length>0">
-                zy=#{zy},
-            </if>
-        </trim>
-    </update>
-<!--    插入简历信息-->
-    <insert id="inserjl" parameterType="Resume">
-        INSERT INTO resume (yhId, zsCertificate,scTime,phone,sex,degree,idCard,idCardType,birthday,regTime,picture,state,tuijianren) VALUES
-        (#{account},#{password},#{name},#{phone},#{sex},#{degree},#{idCard},#{idCardType},#{birthday},#{regTime},#{picture},#{state},#{tuijianren})
-    </insert>
+
+
+
 <!--    查找企业信息 表格-->
     <select id="fenyecount2" resultType="int" parameterType="java.util.Map">
         SELECT count(*) FROM jobinfo a,qyinfo b,station c,position d
@@ -194,9 +135,109 @@
             </if>
         </where>
     </select>
-<!--插入求职表-->
-    <insert id="inserqz" parameterType="Applicationjob">
-        INSERT INTO applicationjob (feedbackType, yhid,gwid,deliverTime) VALUES
-        (#{feedbackType},#{yhid},#{gwid},#{deliverTime})
+
+
+
+    <!--    插入用户表-->
+    <insert id="inseruserinfo" parameterType="Userlist">
+        INSERT INTO userlist (account, password,name,phone,sex,degree,idCard,idCardType,birthday,regTime,picture,state,tuijianren) VALUES
+        (#{account},#{password},#{name},#{phone},#{sex},#{degree},#{idCard},#{idCardType},#{birthday},#{regTime},#{picture},#{state},#{tuijianren})
     </insert>
+    <!--    插入简历信息-->
+    <insert id="inserjl" parameterType="Resume">
+        INSERT INTO resume (yhId, zsCertificate,scTime,ycHide,gjNationality,yxMailbox,sjPhone,pjEvaluation,xbSex,csTime,jzdResidence,mmFace,minzu,jzstate,byschool,zy,jlname,xl) VALUES
+        (#{yhId},#{zsCertificate},#{scTime},#{ycHide},#{gjNationality},#{yxMailbox},#{sjPhone},#{pjEvaluation},#{xbSex},#{csTime},#{jzdResidence},#{mmFace},#{minzu},#{jzstate},#{byschool},#{zy},#{jlname},#{xl})
+    </insert>
+    <!--    插入工作经历表-->
+    <insert id="insergz" parameterType="Undergo">
+        INSERT INTO undergo (jlId,ksTime,jzUnit,zwPosition,gxTime,gzContent,) VALUES
+        (#{jlId},#{ksTime},#{jzUnit},#{zwPosition},#{gxTime},#{gzContent})
+    </insert>
+    <!--    插入学习经历表-->
+    <insert id="inserxx" parameterType="Experience">
+        INSERT INTO experience (jlId,sxSchooltime,zyMajor,school,gxtime,rongyu) VALUES
+        (#{jlId},#{sxSchooltime},#{zyMajor},#{school},#{gxtime},#{rongyu})
+    </insert>
+    <!--    插入就职意向表-->
+    <insert id="inserjobint" parameterType="Jobintension">
+        INSERT INTO jobintension (yhid,gwid,jlid,workPlace,intentionWork,monthlyPay,workstate,other,poid) VALUES
+        (#{yhid},#{gwid},#{jlid},#{workPlace},#{intentionWork},#{monthlyPay},#{workstate},#{other},#{poid})
+    </insert>
+<!--    查找用户表-->
+    <select id="finduser" resultType="Userlist" parameterType="java.lang.String">
+         SELECT * FROM userlist WHERE phone=#{phone}
+    </select>
+<!--    查找简历表-->
+    <select id="findjl" resultType="Resume" parameterType="java.lang.Long">
+         SELECT * FROM resume WHERE yhId=#{yhId}
+    </select>
+    <!--    修改用户表-->
+    <update  id="updateuser" parameterType="Alluserinfo">
+        UPDATE userlist
+        <trim prefix="set" suffixOverrides="," suffix=" where phone = #{phone} ">
+            <if test="birthday!=null and birthday.length>0">
+                birthday=#{birthday},
+            </if>
+            <if test="name!=null and name.length>0">
+                name=#{name},
+            </if>
+            <if test="sex!=null and sex.length>0">
+                sex=#{sex},
+            </if>
+            <if test="degree!=null and degree.length>0">
+                degree=#{degree},
+            </if>
+            <if test="idCard!=null and idCard.length>0">
+                idCard=#{idCard},
+            </if>
+            <if test="idCardType!=null and idCardType.length>0">
+                idCardType=#{idCardType},
+            </if>
+        </trim>
+    </update>
+<!--    查找企业信息-->
+    <select id="findjobinfo" resultType="Jobinfo" parameterType="java.lang.Long">
+        SELECT * FROM jobinfo WHERE zpxxid=#{zpxxid}
+    </select>
+<!--    查找企业信息的简历是否交了-->
+    <select id="findjljl" resultType="Query" parameterType="java.util.Map">
+        SELECT * FROM query WHERE jlId=#{jlid} and zpxxid=#{zpxxid}
+    </select>
+<!--    插入企业表-->
+    <insert id="inserquery" parameterType="Query">
+        INSERT INTO query (jlId, qyId, ckTime, zpxxid,paid) VALUES
+        (#{jlId},#{qyId},#{ckTime},#{zpxxid},#{paid})
+    </insert>
+    <!--    修改简历表1-->
+    <update id="upadtejl1" parameterType="Alluserinfo">
+        UPDATE resume
+        <trim prefix="set" suffixOverrides="," suffix=" where yhId = #{yhId} ">
+            <if test="zsCertificate!=null and zsCertificate.length>0">
+                zsCertificate=#{zsCertificate},
+            </if>
+            <if test="jzdResidence!=null and jzdResidence.length>0">
+                jzdResidence=#{jzdResidence},
+            </if>
+            <if test="pjEvaluation!=null and pjEvaluation.length>0">
+                pjEvaluation=#{pjEvaluation},
+            </if>
+            <if test="mmFace!=null and mmFace.length>0">
+                mmFace=#{mmFace},
+            </if>
+            <if test="zy!=null and zy.length>0">
+                zy=#{zy},
+            </if>
+        </trim>
+    </update>
+    <!--    查找简历的教育经历信息-->
+    <select id="findexperience" resultType="Experience" parameterType="java.lang.String">
+        SELECT a.* FROM experience a,resume b,userlist c where a.jlId=b.jlId and b.yhId=c.yhid and c.account = #{account}
+    </select>
+    <!--    查找简历的工作经历信息-->
+    <select id="findegzjl" resultType="Undergo" parameterType="java.lang.String">
+        SELECT a.* FROM undergo a,resume b,userlist c where a.jlId=b.jlId and b.yhId=c.yhid and c.account = #{account}
+    </select>
+
 </mapper>
+
+

@@ -97,8 +97,51 @@ public class SchoolService
 		return fenyeshuju2;
 	}
 
-	public int inserqz(Applicationjob applicationjob){
-		int inserqz=schoolDao.inserqz(applicationjob);
-		return inserqz;
+	public int inserjl(Resume resume){
+		int inserjl=schoolDao.inserjl(resume);
+		return inserjl;
 	}
+
+	public int insergz(Undergo undergo)
+	{
+		int insergz=schoolDao.insergz(undergo);
+		return insergz;
+	}
+
+	public int inserxx(Experience experience)
+	{
+		int inserxx=schoolDao.inserxx(experience);
+		return inserxx;
+	}
+
+	public int inserjobint(Jobintension jobintension){
+		int inserjobint=schoolDao.inserjobint(jobintension);
+		return inserjobint;
+	}
+
+	public Userlist finduser(String phone){
+		Userlist userlist=schoolDao.finduser(phone);
+		return userlist;
+	}
+
+	public Resume findjl(Long yhId){
+		Resume resume=schoolDao.findjl(yhId);
+		return resume;
+	}
+
+	public Jobinfo findjobinfo(Long zpxxid){
+		Jobinfo jobinfo=schoolDao.findjobinfo(zpxxid);
+		return jobinfo;
+	}
+
+	public Query findjljl(Long jlid,Long zpxxid){
+		Query query=schoolDao.findjljl(jlid,zpxxid);
+		return query;
+	}
+
+	public int inserquery(Query query){
+		int inserquery=schoolDao.inserquery(query);
+		return inserquery;
+	}
+
 }

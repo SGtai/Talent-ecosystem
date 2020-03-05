@@ -174,7 +174,6 @@
 			</div>
 		</div>
 	</div>
-	<input type="hidden" id="hide7">
 	<input type="hidden" id="hide11">
 <%--	个人简历修改--%>
 	<div id="mydiv1" style="display: none ; padding: 10px;margin-left: 10%">

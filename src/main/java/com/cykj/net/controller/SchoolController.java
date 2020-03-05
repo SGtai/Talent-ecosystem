@@ -451,7 +451,7 @@ public class SchoolController
 		HSSFSheet hssfSheet=wb.getSheetAt(0);
 
 		if (hssfSheet!=null){
-			for (int rowNum = 1; rowNum < hssfSheet.getLastRowNum()+1; rowNum++)
+			for (int rowNum = 1; rowNum < hssfSheet.getLastRowNum(); rowNum++)
 			{
 				System.out.println("一次循环");
 				HSSFRow hssfRow=hssfSheet.getRow(rowNum);
@@ -459,24 +459,68 @@ public class SchoolController
 					continue;
 				}
 				Userlist userlist=new Userlist();
-				userlist.setPassword(formatCell(hssfRow.getCell(0)));
-				userlist.setName(formatCell(hssfRow.getCell(1)));
-				userlist.setPhone(formatCell(hssfRow.getCell(2)));
+				userlist.setPhone(formatCell(hssfRow.getCell(0)));
+				userlist.setPassword(formatCell(hssfRow.getCell(1)));
+				userlist.setName(formatCell(hssfRow.getCell(2)));
 				userlist.setSex(formatCell(hssfRow.getCell(3)));
-				userlist.setDegree(formatCell(hssfRow.getCell(4)));
+				userlist.setBirthday(formatCell(hssfRow.getCell(4)));
 				userlist.setIdCard(formatCell(hssfRow.getCell(5)));
 				userlist.setIdCardType(formatCell(hssfRow.getCell(6)));
-				userlist.setBirthday(formatCell(hssfRow.getCell(7)));
+				userlist.setDegree(formatCell(hssfRow.getCell(7)));
 				userlist.setRegTime(new Timestamp(System.currentTimeMillis()));
 				userlist.setState(0);
 				userlist.setTuijianren(admin.getAccount());
+				int intuser=schoolService.inseruserinfo(userlist);
+				if(intuser>0){
+					System.out.println("用户表插入一条成功");
+				}
+				//插入简历表
+				Userlist userlist1=schoolService.finduser(userlist.getPhone());
+				Resume resume=new Resume();
+				resume.setYhId(userlist1.getYhid());
+				resume.setScTime(userlist.getRegTime());
+				resume.setYhname(userlist1.getName());
+				resume.setYcHide("0");
+				resume.setSjPhone(userlist.getPhone());
+				resume.setXbSex(userlist.getSex());
+				resume.setCsTime(userlist.getBirthday());
+				resume.setJlname(formatCell(hssfRow.getCell(8)));
+				resume.setZsCertificate(formatCell(hssfRow.getCell(9)));
+				resume.setGjNationality(formatCell(hssfRow.getCell(10)));
+				resume.setYxMailbox(formatCell(hssfRow.getCell(11)));
+				resume.setPjEvaluation(formatCell(hssfRow.getCell(12)));
+				resume.setJzdResidence(formatCell(hssfRow.getCell(13)));
+				resume.setMmFace(formatCell(hssfRow.getCell(14)));
+				resume.setMinzu(formatCell(hssfRow.getCell(15)));
+				resume.setJzstate(formatCell(hssfRow.getCell(16)));
+				resume.setByschool(formatCell(hssfRow.getCell(17)));
+				resume.setXl(formatCell(hssfRow.getCell(18)));
+				resume.setZy(formatCell(hssfRow.getCell(19)));
+				int intres=schoolService.inserjl(resume);
+				if(intres>0){
+					System.out.println("简历表插入一条成功");
+				}
+				//插入就职意向表
+				Resume resume1=schoolService.findjl(userlist1.getYhid());
+				Jobintension jobintension=new Jobintension();
+				jobintension.setJlid(resume1.getJlId());
+				jobintension.setYhid(userlist1.getYhid());
+				jobintension.setWorkstate(formatCell(hssfRow.getCell(20)));
+				jobintension.setWorkPlace(formatCell(hssfRow.getCell(21)));
+				jobintension.setMonthlyPay(formatCell(hssfRow.getCell(22)));
+				jobintension.setGwid(0);
+				jobintension.setOther(formatCell(hssfRow.getCell(23)));
+				jobintension.setPoid(0);
+				int intjobint=schoolService.inserjobint(jobintension);
+				if(intjobint>0){
+					System.out.println("就业意向表插入一条成功");
+				}
 				//插入管理员表
 				Admin a=new Admin();
 				a.setAccount(userlist.getPhone());
 				a.setPassword(userlist.getPassword());
 				a.setRegistertime(userlist.getRegTime());
 				a.setName(userlist.getName());
-				a.setState(0);
 				adminService.regAdmin(a);
 
 				//插入管理角色表
@@ -485,10 +529,7 @@ public class SchoolController
 				adminrole.setRoid(5);
 				adminroleService.regAdminRole(adminrole);
 
-				int k=schoolService.inseruserinfo(userlist);
-				if(k>0){
-					System.out.println("用户插入一条成功");
-				}
+
 			}
 
 		}
@@ -605,6 +646,29 @@ public class SchoolController
 		int k=schoolService.upadtejl1(alluserinfo);
 		if(i>0&&k>0){
 			return "1";
+		}
+		return "0";
+	}
+
+	@RequestMapping("/tj")
+	@ResponseBody
+	public String tj(String yhid,String jlid,String xxzpid){
+		Jobinfo jobinfo=schoolService.findjobinfo(Long.valueOf(xxzpid));
+		Query check=schoolService.findjljl(Long.valueOf(jlid),Long.valueOf(xxzpid));
+		if(check==null){
+			Query query=new Query();
+			query.setCkTime(new Timestamp(System.currentTimeMillis()));
+			query.setJlId(Long.valueOf(jlid));
+			query.setPaid(Long.valueOf(10));
+			query.setZpxxid(jobinfo.getZpxxid());
+			query.setQyId(jobinfo.getQyid());
+			int i=schoolService.inserquery(query);
+			if(i>0){
+				return "1";
+			}else{
+				return "0";
+			}
+
 		}
 		return "0";
 	}
