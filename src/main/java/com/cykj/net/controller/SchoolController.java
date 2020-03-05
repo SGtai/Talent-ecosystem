@@ -153,7 +153,7 @@ public class SchoolController
 			System.out.println(path+"/"+"logo"+"/"+schoolinfo.getScAccount()); //图片
 			String filename = file.getOriginalFilename();
 			file.transferTo(new File(path+"/"+"logo"+"/"+schoolinfo.getScAccount()+"/"+ filename)); //插入成功
-			schoolinfo.setScpicture("/cunchu/"+schoolinfo.getScAccount()+"/"+ filename);
+			schoolinfo.setScpicture("/cunchu/logo/"+schoolinfo.getScAccount()+"/"+ filename);
 			schoolinfo.setScState("0");
 			Admin a=new Admin();
 			a=adminService.findAdmin(schoolinfo.getScAccount());
