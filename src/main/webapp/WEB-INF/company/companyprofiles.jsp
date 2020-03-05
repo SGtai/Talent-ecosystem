@@ -49,10 +49,7 @@
 		<input id="qyAccount" type="hidden" value="${sessionScope.Qyinfo.qyAccount}" />
 		<div class="layui-upload">
 			<button class="layui-btn" id="test1" type="button">上传企业Logo</button>
-<%--			<div class="layui-upload-list">--%>
-<%--				<img class="layui-upload-img" id="demo1">--%>
-<%--				<p id="demoText"></p>--%>
-<%--			</div>--%>
+
 			<div class="JlBoxRight" style="text-align:center" >
 				<c:if test="${sessionScope.Qyinfo.qyPicture!=null and sessionScope.Qyinfo.qyPicture!=''}">
 				<img style="border:1px solid #000" src="<%=dbimgPath%>${sessionScope.Qyinfo.qyPicture}" width="50%" height="180px" />
