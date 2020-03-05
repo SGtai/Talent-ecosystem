@@ -465,7 +465,8 @@ public class UserController
 		{
 			String filename = file.getOriginalFilename();
 			String urldb = new Date().getTime()+filename;
-			String projectPath = System.getProperty("user.dir")+"\\src\\main\\resources\\static\\images\\"+urldb;
+			String savePath = request.getSession().getServletContext().getRealPath("/uploadS/images/");
+			String projectPath =savePath +urldb;
 			file.transferTo(new File(projectPath));
 			int num = userService.photo(urldb,yhid);
 			Userlist userlist = userService.findPhone(user.getPhone());

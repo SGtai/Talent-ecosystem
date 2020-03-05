@@ -67,12 +67,12 @@
                         height="100%"></iframe>
             </c:if>
 
-            <c:if test="${roid == 3}">
+            <c:if test="${roid == 3 || roid == 6}">
                 <iframe src="" name="main_self_frame" frameborder="0" class="layadmin-iframe"
                         style="width: 100%"
                         height="100%"></iframe>
             </c:if>
-            <c:if test="${roid == 4}">
+            <c:if test="${roid == 4 || roid == 7}">
                 <iframe src="" name="main_self_frame" frameborder="0" class="layadmin-iframe"
                         style="width: 100%"
                         height="100%"></iframe>
