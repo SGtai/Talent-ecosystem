@@ -109,7 +109,7 @@
             // }
             , cols: [[ //表头
                 {field: 'yhid', title: '序列', sort: true, width: 80}
-                , {field: 'scpicture', title: '学校头像', width: 90,templet:'<div><img  src="{{ d.picture }}"></div>'}
+                // , {field: 'scpicture', title: '用户头像', width: 90,templet:'<div><img  src=path + "{{ d.picture }}"></div>'}
                 , {field: 'phone', title: '手机号'}
                 , {field: 'name', title: '姓名'}
                 , {field: 'regTime', title: '注册时间', width: 230}

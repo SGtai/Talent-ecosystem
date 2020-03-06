@@ -12,7 +12,7 @@
     String layuiPath = application.getContextPath() + "/layui/";
     String jsPath = application.getContextPath() + "/adminS/js/";
     String cssPath = application.getContextPath() + "/adminS/css/";
-    String path = application.getContextPath() + "/";
+    String path = application.getContextPath();
 
 %>
 <!DOCTYPE html>
@@ -55,7 +55,7 @@
         <table id="backUser" lay-filter="getBackUser"></table>
     </div>
 </div>
-
+<input id="Path" type="hidden" value="<%=path%>" />
 
 <script type="text/javascript" src=<%=layuiPath + "layui.js"%>></script>
 <script type="text/html" id="opeHtml">
@@ -127,7 +127,7 @@
         </div>
 
     </form>
-    <input id="Path" type="hidden" value="<%=path%>" />
+
 </script>
 <script type="text/javascript">
 
@@ -142,7 +142,7 @@
         table.render({
             elem: '#backUser'
             // , height: 312
-            , url: path+'adminBackUser/table/backUser' //数据接口
+            , url: path+'/adminBackUser/table/backUser' //数据接口
             , page: true //开启分页
             , limit: 5
             , limits: [5]
@@ -178,7 +178,7 @@
         //搜索
         form.on('submit(searchBackUser)', function (data) {
             table.reload('backUser', {
-                url: path + 'adminBackUser/table/backUser'
+                url: path + '/adminBackUser/table/backUser'
                 , where: { //设定异步数据接口的额外参数，任意设
                     account: data.field.account,
                     name: data.field.name
@@ -226,7 +226,7 @@
                     layer.confirm('确定要添加管理员:' + data.account + '吗?', function (index) {
                         $.ajax({
                             type: "POST",
-                            url: path + "adminBackUser/addBackUser",
+                            url: path + "/adminBackUser/addBackUser",
                             dataType: "text",
                             data: data,
                             success: function (msg) {
@@ -275,7 +275,7 @@
                 layer.confirm('确定要' + t + '管理员:' + data.account + '吗?', function (index) {
                     $.ajax({
                         type: "POST",
-                        url: path + "adminBackUser/updateState",
+                        url: path + "/adminBackUser/updateState",
                         dataType: "text",
                         data: {account: data.account, state: state},
                         success: function (msg) {
@@ -302,7 +302,7 @@
                 layer.confirm('确定要重置管理员:' + data.account + '的密码吗?', function (index) {
                     $.ajax({
                         type: "POST",
-                        url: path + "adminBackUser/updatePassword",
+                        url: path + "/adminBackUser/updatePassword",
                         dataType: "text",
                         data: {account: data.account},
                         success: function (msg) {

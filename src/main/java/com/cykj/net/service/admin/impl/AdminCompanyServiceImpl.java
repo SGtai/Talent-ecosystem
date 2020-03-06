@@ -5,10 +5,13 @@ import com.cykj.net.mapper.admin.AdminCompanyMapper;
 import com.cykj.net.mapper.admin.AdminMsgMapper;
 import com.cykj.net.mapper.admin.AdminParameterMapper;
 import com.cykj.net.service.admin.AdminComanyService;
+import com.cykj.net.util.MD5;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @Service("adminCompanyService")
@@ -85,10 +88,10 @@ public class AdminCompanyServiceImpl implements AdminComanyService {
     }
 
     @Override
-    public String updatePassword(String qyAccount) {
+    public String updatePassword(String qyAccount) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         String result = "";
         String updatePassword = adminParameterMapper.findPassword(1);
-        if (adminCompanyMapper.updatePassword(qyAccount, updatePassword) > 0 && adminCompanyMapper.updateCompanyPassword(qyAccount,updatePassword) > 0) {
+        if (adminCompanyMapper.updatePassword(qyAccount, MD5.EncoderByMd5(updatePassword)) > 0 && adminCompanyMapper.updateCompanyPassword(qyAccount,MD5.EncoderByMd5(updatePassword)) > 0) {
 
             //参数表查询
             result = updatePassword;
