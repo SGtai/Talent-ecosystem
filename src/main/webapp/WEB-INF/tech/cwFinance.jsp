@@ -116,7 +116,7 @@
 					$.ajax(
 						{
 							type:"POST",
-							url:"/deleteFinance",
+							url:'<%=path+"deleteFinance"%>',
 							dataType:"text",
 							data:{cwId:data.cwId},
 							success:function (msg) {
