@@ -31,7 +31,6 @@
     <div class="zcLeft">
         <ul id="tabzc">
             <li class="currentzc">手机号注册</li>
-            <li>微信注册</li>
             <div class="clear"></div>
         </ul>
         <div class="clear"></div>
@@ -59,14 +58,14 @@
                 </div>
             </ul>
 
-<div>
-    </div>
+        </div>
     <div class="zcRight">
         <div class="topdiv">
             <span class="noPa">已有账号了？</span><br />
             <a href="/jump/user/login">立即登录</a>
         </div>
     </div>
+</div>
 </div>
 <div class="clear"></div>
 <div class="footer">
