@@ -1,6 +1,8 @@
 package com.cykj.net.javabean;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Query {
 
   private long cxrzId;
@@ -38,6 +40,7 @@ public class Query {
   }
 
 
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   public java.sql.Timestamp getCkTime() {
     return ckTime;
   }

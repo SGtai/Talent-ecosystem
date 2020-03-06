@@ -20,7 +20,7 @@
 <body>
 <input id="qyid" type="hidden" value="${sessionScope.Qyinfo.qyid}" />
 <form class="layui-form" lay-filter="component-form-group" id="search_submits" onsubmit="return false">
-	<h1  style="background-color: #95877c;font-weight:bold;text-align:center">招聘情况</h1>
+	<h1  style="background-color: #95877c;font-weight:bold;text-align:center">招聘完成情况</h1>
 	<div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="layadmin-useradmin-formlist">
 		<div class="layui-inline">
 			<label class="layui-form-label">招聘行业：</label>
@@ -69,9 +69,7 @@
 		查看完成应聘人员信息
 	</button>
 </script>
-<script type="text/html" id="jobapplication">
-	待完善！
-</script>
+
 <script type="text/javascript">
 	layui.use(['form', 'layer', 'jquery','table','layedit', 'laydate'], function() {
 		var table = layui.table;
@@ -162,18 +160,7 @@
 			//查看及修改
 			if (layEvent === 'detail') {
 				//打开查看页面
-				layer.open({
-					type: 1,
-					content: $('#jobapplication').html(),
-					area: ['740px', '550px'],
-					title: '招聘完成人员信息',
-					btn: ['取消'],
-					anim: 1,//0-6的动画形式，-1不开启
-					offset: '40px',
-					success: function () {
-						form.render();
-					}
-				});
+				window.location.href="/jump/company/finishjob?zpxxid="+data.zpxxid
 			}
 		});
 	});

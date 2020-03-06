@@ -10,7 +10,14 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,9 +30,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static com.cykj.net.javabean.S1.*;
 
 @Controller
 @RequestMapping("/school")
@@ -124,25 +134,27 @@ public class SchoolController
 		}
 		else{
 			//插入注册时间
-			schoolinfo.setRegTime(new Timestamp(System.currentTimeMillis()));
-			//插入图片路径
-			String path= ResourceUtils.getURL("classpath:").getPath()+ "static/schoolS/cunchu";
+			Date date = new Date();
+			Timestamp nousedate = new Timestamp(date.getTime());
+			schoolinfo.setRegTime(nousedate);
+			//插入图片路径  图片
+			String path=request.getServletContext().getRealPath("/cunchu");
 			System.out.println("path="+path);
 			//判断logo目录的是否存在
-			File pathlogo=new File(path+"\\"+"logo");
+			File pathlogo=new File(path+"/"+"logo"); //图片
 			System.out.println("pathlogo="+pathlogo);
 			if(!pathlogo.exists()){
 				pathlogo.mkdir();
 			}
 			//判断以这个账号为命名目录的是否存在
-			File logoacc=new File(path+"\\"+"logo"+"\\"+schoolinfo.getScAccount());
+			File logoacc=new File(path+"/"+"logo"+"/"+schoolinfo.getScAccount()); //图片
 			if(!logoacc.exists()){
 				logoacc.mkdir();
 			}
-			System.out.println(path+"\\"+"logo"+"\\"+schoolinfo.getScAccount());
+			System.out.println(path+"/"+"logo"+"/"+schoolinfo.getScAccount()); //图片
 			String filename = file.getOriginalFilename();
-			file.transferTo(new File(path+"\\"+"logo"+"\\"+schoolinfo.getScAccount()+"\\"+ filename));
-			schoolinfo.setScpicture("\\schoolS\\cunchu\\"+"logo"+"\\"+schoolinfo.getScAccount()+"\\"+ filename);
+			file.transferTo(new File(path+"/"+"logo"+"/"+schoolinfo.getScAccount()+"/"+ filename)); //插入成功
+			schoolinfo.setScpicture("/cunchu/logo/"+schoolinfo.getScAccount()+"/"+ filename);
 			schoolinfo.setScState("0");
 			Admin a=new Admin();
 			a=adminService.findAdmin(schoolinfo.getScAccount());
@@ -201,6 +213,7 @@ public class SchoolController
 	@ResponseBody
 	public String changeInfo1(S1 sc,HttpServletRequest request,@RequestParam("file") MultipartFile file) throws IOException
 	{
+
 		Admin admin= (Admin) request.getSession().getAttribute("admin");
 			sc.setScAccount(admin.getAccount());
 			S1 ssc=schoolService.findSchoolinfo(admin.getAccount());
@@ -211,8 +224,8 @@ public class SchoolController
 			int b=panduandaima(admin.getAccount(),sc.getXinyongDaima());
 			if(b==1){}else{return "-2";}
 			//插入图片路径
-			String path= ResourceUtils.getURL("classpath:").getPath()+ "static/schoolS/cunchu";
-			File logoacc=new File(path+"\\"+"logo"+"\\"+admin.getAccount());
+			String path=request.getServletContext().getRealPath("/cunchu");
+			File logoacc=new File(path+"/"+"logo"+"/"+admin.getAccount());
 			//删除这个用户文件夹下的所有文件
 			File[] files = logoacc.listFiles();
 			//遍历删除文件
@@ -220,8 +233,9 @@ public class SchoolController
 				f.delete();
 			}
 			String filename = file.getOriginalFilename();
-			file.transferTo(new File(path+"\\"+"logo"+"\\"+admin.getAccount()+"\\"+ filename));
-			sc.setScpicture("\\"+"logo"+"\\"+admin.getAccount()+"\\"+ filename);
+			file.transferTo(new File(path+"/"+"logo"+"/"+admin.getAccount()+"/"+ filename));
+			sc.setScpicture("/cunchu/"+"logo"+"/"+admin.getAccount()+"/"+ filename);
+			System.out.println("/"+"logo"+"/"+admin.getAccount()+"/"+ filename);
 			int i=schoolService.updateSchoolinfo(sc);
 			if(i>0)
 			{
@@ -346,6 +360,34 @@ public class SchoolController
 		gsonbean(t,response);
 	}
 
+	@RequestMapping("/myschool")
+	public void myschool(HttpServletRequest request,HttpServletResponse response,String time,String name,String zy,String page,String limit)throws Exception{
+		utf8(request,response);
+		Userlist userlist= (Userlist) request.getSession().getAttribute("user");
+		Userlist userlist1=schoolService.finduser(userlist.getPhone());
+		String lasttime="";
+		String nowtime="";
+		if(time!=null&&time!=""&&!time.equals("to")){
+			String arr[]=time.split("to");
+			lasttime=arr[0].trim();
+			nowtime=arr[1].trim();
+			System.out.println(lasttime);
+			System.out.println(nowtime);
+		}
+		int page1 = Integer.valueOf(page);
+		int limit1=Integer.valueOf(limit);
+		RowBounds rowBounds = new RowBounds(page1-1, limit1);
+		int count=schoolService.fenyecount1(userlist1.getTuijianren(),name,zy,lasttime,nowtime);
+		System.out.println(count);
+		List<Alluserinfo> list=schoolService.fenyeshuju1(userlist1.getTuijianren(),name,zy,lasttime,nowtime,rowBounds);
+		Table t=new Table();
+		t.setCode(0);
+		t.setCount(count);
+		t.setMsg("");
+		t.setData(list);
+		gsonbean(t,response);
+	}
+
 	/**
 	 * 查询工作经历和学习经历
 	 * @param account
@@ -442,7 +484,7 @@ public class SchoolController
 		HSSFSheet hssfSheet=wb.getSheetAt(0);
 
 		if (hssfSheet!=null){
-			for (int rowNum = 1; rowNum < hssfSheet.getLastRowNum()+1; rowNum++)
+			for (int rowNum = 1; rowNum < hssfSheet.getLastRowNum(); rowNum++)
 			{
 				System.out.println("一次循环");
 				HSSFRow hssfRow=hssfSheet.getRow(rowNum);
@@ -450,26 +492,74 @@ public class SchoolController
 					continue;
 				}
 				Userlist userlist=new Userlist();
-				userlist.setPassword(formatCell(hssfRow.getCell(0)));
-				userlist.setName(formatCell(hssfRow.getCell(1)));
-				userlist.setPhone(formatCell(hssfRow.getCell(2)));
+				userlist.setPhone(formatCell(hssfRow.getCell(0)));
+				userlist.setPassword(formatCell(hssfRow.getCell(1)));
+				userlist.setName(formatCell(hssfRow.getCell(2)));
 				userlist.setSex(formatCell(hssfRow.getCell(3)));
-				userlist.setSex(formatCell(hssfRow.getCell(4)));
-				userlist.setDegree(formatCell(hssfRow.getCell(5)));
-				userlist.setIdCard(formatCell(hssfRow.getCell(6)));
-				userlist.setIdCardType(formatCell(hssfRow.getCell(7)));
-				userlist.setBirthday(formatCell(hssfRow.getCell(8)));
-				userlist.setRegTime(new Timestamp(System.currentTimeMillis()));
+				Date date1 = hssfRow.getCell(4).getDateCellValue();
+				DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+				String dateStr = sdf.format(date1);
+				userlist.setBirthday(dateStr);
+				userlist.setIdCard(formatCell(hssfRow.getCell(5)));
+				userlist.setIdCardType(formatCell(hssfRow.getCell(6)));
+				userlist.setDegree(formatCell(hssfRow.getCell(7)));
+				Date date = new Date();
+				Timestamp nousedate = new Timestamp(date.getTime());
+				userlist.setRegTime(nousedate);
 				userlist.setState(0);
-				userlist.setPicture("图片路径未定义");
 				userlist.setTuijianren(admin.getAccount());
+				int intuser=schoolService.inseruserinfo(userlist);
+				if(intuser>0){
+					System.out.println("用户表插入一条成功");
+				}
+				//插入简历表
+				Userlist userlist1=schoolService.finduser(userlist.getPhone());
+				Resume resume=new Resume();
+				resume.setYhId(userlist1.getYhid());
+				resume.setScTime(userlist.getRegTime());
+				resume.setYhname(userlist1.getName());
+				resume.setYcHide("0");
+				resume.setSjPhone(userlist.getPhone());
+				resume.setXbSex(userlist.getSex());
+
+//				resume.setCsTime(userlist.getBirthday());
+				resume.setJlname(formatCell(hssfRow.getCell(8)));
+				resume.setZsCertificate(formatCell(hssfRow.getCell(9)));
+				resume.setGjNationality(formatCell(hssfRow.getCell(10)));
+				resume.setYxMailbox(formatCell(hssfRow.getCell(11)));
+				resume.setPjEvaluation(formatCell(hssfRow.getCell(12)));
+				resume.setJzdResidence(formatCell(hssfRow.getCell(13)));
+				resume.setMmFace(formatCell(hssfRow.getCell(14)));
+				resume.setMinzu(formatCell(hssfRow.getCell(15)));
+				resume.setJzstate(formatCell(hssfRow.getCell(16)));
+				resume.setByschool(formatCell(hssfRow.getCell(17)));
+				resume.setXl(formatCell(hssfRow.getCell(18)));
+				resume.setZy(formatCell(hssfRow.getCell(19)));
+				int intres=schoolService.inserjl(resume);
+				if(intres>0){
+					System.out.println("简历表插入一条成功");
+				}
+				//插入就职意向表
+				Resume resume1=schoolService.findjl(userlist1.getYhid());
+				Jobintension jobintension=new Jobintension();
+				jobintension.setJlid(resume1.getJlId());
+				jobintension.setYhid(userlist1.getYhid());
+				jobintension.setWorkstate(formatCell(hssfRow.getCell(20)));
+				jobintension.setWorkPlace(formatCell(hssfRow.getCell(21)));
+				jobintension.setMonthlyPay(formatCell(hssfRow.getCell(22)));
+				jobintension.setGwid(0);
+				jobintension.setOther(formatCell(hssfRow.getCell(23)));
+				jobintension.setPoid(0);
+				int intjobint=schoolService.inserjobint(jobintension);
+				if(intjobint>0){
+					System.out.println("就业意向表插入一条成功");
+				}
 				//插入管理员表
 				Admin a=new Admin();
 				a.setAccount(userlist.getPhone());
 				a.setPassword(userlist.getPassword());
 				a.setRegistertime(userlist.getRegTime());
 				a.setName(userlist.getName());
-				a.setState(0);
 				adminService.regAdmin(a);
 
 				//插入管理角色表
@@ -478,10 +568,7 @@ public class SchoolController
 				adminrole.setRoid(5);
 				adminroleService.regAdminRole(adminrole);
 
-				int k=schoolService.inseruserinfo(userlist);
-				if(k>0){
-					System.out.println("用户插入一条成功");
-				}
+
 			}
 
 		}
@@ -571,10 +658,10 @@ public class SchoolController
 	}
 
 	/**
-	 * 分页查询人才信息
+	 * 分页企业信息
 	 *
 	 */
-	@RequestMapping("/tjrcquery")
+	@RequestMapping("/rgxg")
 	public void tjrcquery(HttpServletRequest request,HttpServletResponse response,String position,String type,String page,String limit)throws Exception{
 		utf8(request,response);
 		int page1 = Integer.valueOf(page);
@@ -591,8 +678,70 @@ public class SchoolController
 		gsonbean(t,response);
 	}
 
+	@RequestMapping("/cguserinfo")
+	@ResponseBody
+	public String cguserinfo(Alluserinfo alluserinfo){
+		int i=schoolService.updateuser(alluserinfo);
+		int k=schoolService.upadtejl1(alluserinfo);
+		if(i>0&&k>0){
+			return "1";
+		}
+		return "0";
+	}
 
+	@RequestMapping("/tj")
+	@ResponseBody
+	public String tj(String yhid,String jlid,String xxzpid,HttpServletRequest request){
+		Jobinfo jobinfo=schoolService.findjobinfo(Long.valueOf(xxzpid));
+		Query check=schoolService.findjljl(Long.valueOf(jlid),Long.valueOf(xxzpid));
+		if(check==null){
+			Query query=new Query();
+			Date date = new Date();
+			Timestamp nousedate = new Timestamp(date.getTime());
+			query.setCkTime(nousedate);
+			query.setJlId(Long.valueOf(jlid));
+			query.setPaid(Long.valueOf(10));
+			query.setZpxxid(jobinfo.getZpxxid());
+			query.setQyId(jobinfo.getQyid());
+			int i=schoolService.inserquery(query);
+			if(i>0){
+				Tjjl tjjl=new Tjjl();
+				Admin admin= (Admin) request.getSession().getAttribute("admin");
+				tjjl.setYhid(Long.valueOf(yhid));
 
+				tjjl.setDatetime(nousedate);
+				tjjl.setTuijianren(admin.getAccount());
+				tjjl.setZpxxid(Long.valueOf(xxzpid));
+				tjjl.setTjjlid(Long.valueOf(jlid));
+				int k=schoolService.insertjjl(tjjl);
+				return "1";
+			}else{
+				return "0";
+			}
+
+		}
+		return "0";
+	}
+
+	@RequestMapping("/tjbb")
+	@ResponseBody
+	public ModelAndView tjbb(HttpServletRequest request){
+		ModelAndView mv=new ModelAndView();
+		Admin admin= (Admin) request.getSession().getAttribute("admin");
+		mv.setViewName("/WEB-INF/school/tjbb");
+		mv.addObject("tuijianren",admin.getAccount());
+		return mv;
+	}
+
+	@RequestMapping("/tjbbuse")
+	@ResponseBody
+	public ModelAndView tjbbuse(HttpServletRequest request){
+		ModelAndView mv=new ModelAndView();
+		Admin admin= (Admin) request.getSession().getAttribute("admin");
+		mv.setViewName("/WEB-INF/school/tjbbuse");
+		mv.addObject("tuijianren",admin.getAccount());
+		return mv;
+	}
 
 
 

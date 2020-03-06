@@ -23,10 +23,11 @@
 <table class="layui-hide" id="test" lay-filter="table_pa"></table>
 <script type="text/html" id="toolbar">
 	<a class="layui-btn layui-btn-sm background-style" lay-event="able">查看</a>
+	<a class="layui-btn layui-btn-sm background-style" lay-event="able1">修改</a>
 </script>
 <div id="di">
 	<form class="layui-form">
-		<h1 style="margin-left: 40%">人才信息查询</h1>
+		<h1 style="margin-left: 40%">人才基本信息</h1>
 
 		<div style="margin-left: 15%;margin-top: 1%">
 			<div class="layui-form-item">
@@ -115,7 +116,6 @@
 				<input type="text" id="hide8"  autocomplete="off" class="layui-input" disabled>
 			</div>
 		</div>
-		<img  src="\schoolS\cunchu\logo\555555\jmgz.jpg" alt="" style="width: 20%;height: 20%;margin-left: 70%;margin-top: -30%">
 		<div  class="layui-form-item">
 			<label class="layui-form-label" style="margin-left: -5%">学习经历</label>
 			<table class="layui-table" style="margin-left: -5%">
@@ -172,6 +172,91 @@
 				<textarea name="scdata" id="hide10" class="layui-textarea" placeholder="请输入内容" maxlength="240" disabled></textarea>
 			</div>
 		</div>
+	</div>
+	<input type="hidden" id="hide11">
+<%--	个人简历修改--%>
+	<div id="mydiv1" style="display: none ; padding: 10px;margin-left: 10%">
+		<form class="layui-form">
+			<div>
+				<h1 align="center" style="margin-left: -15%">修改简历信息</h1>
+				<h3 style="color: red;margin-left: -10%" >提示:方框打勾默认可编辑可提交修改，不打勾默认不修改</h3>
+			</div>
+		<div class="layui-form-item" style="margin-left: -15%">
+			<label class="layui-form-label">姓名</label>
+			<div class="layui-input-inline">
+				<input type="text" id="usename"  autocomplete="off" class="layui-input" >
+				<input type="hidden" id="usename1"  autocomplete="off" class="layui-input" hidden >
+			</div>
+			<div class="layui-form-mid layui-word-aux" style="margin-top: -1%">
+				<input type="checkbox" id="a1" lay-filter="a1" checked class="layui-icon-radio">
+			</div>
+			<label class="layui-form-label">出生年月</label>
+			<div class="layui-input-inline">
+				<input type="text" id="birth"  autocomplete="off" class="layui-input" >
+				<input type="hidden" id="birth1"  autocomplete="off" class="layui-input" hidden >
+			</div>
+			<div class="layui-form-mid layui-word-aux" style="margin-top: -1%">
+				<input type="checkbox" id="a2" lay-filter="a2" checked class="layui-icon-radio">
+			</div>
+
+		</div>
+		<div class="layui-form-item" style="margin-left: -15%">
+			<label class="layui-form-label">住址</label>
+			<div class="layui-input-inline">
+				<input type="text" id="address"  autocomplete="off" class="layui-input">
+				<input type="hidden" id="address1"  autocomplete="off" class="layui-input" hidden >
+			</div>
+			<div class="layui-form-mid layui-word-aux" style="margin-top: -1%">
+				<input type="checkbox" id="a3" lay-filter="a3" checked class="layui-icon-radio">
+			</div>
+			<label class="layui-form-label">专业</label>
+			<div class="layui-input-inline">
+				<input type="text" id="zhuanye"  autocomplete="off" class="layui-input" >
+				<input type="hidden" id="zhuanye1"  autocomplete="off" class="layui-input" hidden >
+			</div>
+			<div class="layui-form-mid layui-word-aux" style="margin-top: -1%">
+				<input type="checkbox" id="a4" lay-filter="a4" checked class="layui-icon-radio">
+			</div>
+		</div>
+		<div class="layui-form-item" style="margin-left: -15%">
+			<label class="layui-form-label">政治面貌</label>
+			<div class="layui-input-inline">
+				<input type="text" id="mm"  autocomplete="off" class="layui-input" >
+				<input type="hidden" id="mm1"  autocomplete="off" class="layui-input" hidden >
+			</div>
+			<div class="layui-form-mid layui-word-aux" style="margin-top: -1%;">
+				<input type="checkbox" id="a5" lay-filter="a5" checked class="layui-icon-radio">
+			</div>
+			<label class="layui-form-label">学历</label>
+			<div class="layui-input-inline">
+				<input type="text" id="xl"  autocomplete="off" class="layui-input" >
+				<input type="hidden" id="xl1"  autocomplete="off" class="layui-input" hidden >
+			</div>
+			<div class="layui-form-mid layui-word-aux" style="margin-top: -1%">
+				<input type="checkbox" id="a6" lay-filter="a6" checked class="layui-icon-radio">
+			</div>
+		</div>
+		<div class="layui-form-item" style="margin-left: -15%">
+			<label class="layui-form-label">技能证书</label>
+			<div class="layui-input-inline" style="width: 79%;">
+				<textarea name="scdata" id="jn" class="layui-textarea" placeholder="请输入内容" maxlength="240"></textarea>
+				<input type="hidden" id="jn1"  autocomplete="off" class="layui-input" hidden >
+			</div>
+			<div class="layui-form-mid layui-word-aux" style="margin-top: 2%;margin-left: 0%">
+				<input type="checkbox" id="a7" lay-filter="a7" checked class="layui-icon-radio">
+			</div>
+		</div>
+		<div class="layui-form-item" style="margin-left: -15%">
+			<label class="layui-form-label">自我评价</label>
+			<div class="layui-input-inline" style="width: 79%;">
+				<textarea name="scdata" id="pp" class="layui-textarea" placeholder="请输入内容" maxlength="240"></textarea>
+				<input type="hidden" id="pp1"  autocomplete="off" class="layui-input" >
+			</div>
+			<div class="layui-form-mid layui-word-aux" style="margin-top: 2%;margin-left: 0%">
+				<input type="checkbox" id="a8" lay-filter="a8" checked class="layui-icon-radio">
+			</div>
+		</div>
+		</form>
 	</div>
 	<%--	人才批量导入面板--%>
 	<div id="daorumb" style="display: none ; padding: 10px;margin-left: 10%">
@@ -280,26 +365,26 @@
 				,page: true //开启分页
 				,even:true
 				,cols: [[ //表头
-					{field: 'account', title: '账号名', width:150,height:100}
+					{field: 'phone', title: '电话/账号', width: 150,height:100}
 					,{field: 'name', title: '姓名', width:150,height:100}
 					,{field: 'zy', title: '专业', width:150,height:100}
 					,{field: 'jzstate', title: '就业情况', width: 150,height:100}
-					,{field:'opera', width:150, title: '操作',align:'center', toolbar: '#toolbar'}
-					,{field: 'mmFace', title: '政治面貌', width: 50,style:'display:none;'}
-					,{field: 'birthday', title: '出生日期', width: 50,style:'display:none;'}
-					,{field: 'phone', title: '电话', width: 50,style:'display:none;'}
-					,{field: 'byschool', title: '学校', width: 50,style:'display:none;'}
-					,{field: 'xl', title: '学历', width: 50,style:'display:none;'}
-					,{field: 'jzdResidence', title: '住址', width: 50,style:'display:none;'}
-					,{field: 'zsCertificate', title: '技能证书', width: 50,style:'display:none;'}
-					,{field: 'pjEvaluation', title: '自我评价', width: 50,style:'display:none;'}
+					,{field:'opera', width:150, title: '',align:'center', toolbar: '#toolbar'}
+					,{field: 'mmFace', title: '政治面貌', width: 50,hide:true}
+					,{field: 'birthday', title: '出生日期', width: 50,hide:true}
+					,{field: 'byschool', title: '学校', width: 50,hide:true}
+					,{field: 'xl', title: '学历', width: 50,hide:true}
+					,{field: 'jzdResidence', title: '住址', width: 50,hide:true}
+					,{field: 'zsCertificate', title: '技能证书', width: 50,hide:true}
+					,{field: 'pjEvaluation', title: '自我评价', width: 50,hide:true}
+					,{field: 'yhId', title: '用户id', width: 50,hide:true}
 				]]
 				,done: function (res, curr, count) {
 					exportData=res.data;
 				}
 				,id:'UserTable'
 			});
-			$("#daochu").click(function(){
+			$("#daochu").click(function(res,curr,count){
 				table.exportFile(ins1.config.id,exportData, 'xls');
 			});
 			//搜索
@@ -339,6 +424,25 @@
 				$("#hide8").val(data.jzdResidence);
 				$("#hide9").val(data.zsCertificate);
 				$("#hide10").val(data.pjEvaluation);
+				$("#hide11").val(data.yhId);
+
+				$("#usename").val(data.name);
+				$("#birth").val(data.birthday);
+				$("#zhuanye").val(data.zy);
+				$("#mm").val(data.mmFace);
+				$("#xl").val(data.xl);
+				$("#address").val(data.jzdResidence);
+				$("#jn").val(data.zsCertificate);
+				$("#pp").val(data.pjEvaluation);
+
+				$("#usename1").val(data.name);
+				$("#birth1").val(data.birthday);
+				$("#zhuanye1").val(data.zy);
+				$("#mm1").val(data.mmFace);
+				$("#xl1").val(data.xl);
+				$("#address1").val(data.jzdResidence);
+				$("#jn1").val(data.zsCertificate);
+				$("#pp1").val(data.pjEvaluation);
 				$.ajax(
 					{
 						type:"POST",
@@ -375,11 +479,12 @@
 				);
 				// 查看简历
 				if(layEvent === 'able'){
+
 					layer.open({
 
 						type:1 , //设置类型 默认为0， 1：页面层  2：iframe层 type - 基本层类型
 
-						title:"个人简历(简略)",// title - 标题
+						title:"个人信息",// title - 标题
 
 						content:$("#mydiv"),// content - 内容
 
@@ -403,6 +508,91 @@
 
 						maxmin:false, //是否显示最大化和最小化的按钮 对type=1 type=2有效
 
+						success:function () {
+
+						}
+
+					})
+				}
+
+				if(layEvent === 'able1'){
+
+					layer.open({
+
+						type:1 , //设置类型 默认为0， 1：页面层  2：iframe层 type - 基本层类型
+
+						title:"个人信息修改",// title - 标题
+
+						content:$("#mydiv1"),// content - 内容
+
+						skin:'layui-layer-molv',// skin - 样式类名
+
+						area:['1000px','400px'],// area - 宽高
+
+						offset:'auto',// offset - 坐标
+
+						icon:1,//只对type=0的有效 icon - 图标。信息框和加载层的私有参数
+
+
+						btnAlign: 'c',//按钮居中对齐
+
+						// time:5000,//time - 自动关闭所需毫秒
+
+						anim:5,//anim - 弹出动画 渐显
+
+						resize:false,//resize - 是否允许拉伸
+
+						maxmin:false, //是否显示最大化和最小化的按钮 对type=1 type=2有效
+
+						btn: ['修改','关闭'],
+						btn1: function(){
+							layer.confirm('确认修改该生信息吗?', {
+									btn: ['是', '否'], btn1: function (index) {
+											layer.close(index);
+									$.ajax(
+										{
+											type:"POST",
+											url:"/school/cguserinfo",
+											dataType:"text",
+											data:{
+												phone:$("#hide7").val(),
+												name:$("#usename").val(),
+												school:$("#school").val(),
+												birthday:$("#birth").val(),
+												zy:$("#zhuanye").val(),
+												mmFace:$("#mm").val(),
+												degree:$("#xl").val(),
+												jzdResidence:$("#address").val(),
+												zsCertificate:$("#jn").val(),
+												pjEvaluation:$("#pp").val(),
+												yhId:$("#hide11").val()
+											},
+											success:function (msg) {
+												if(msg=="1"){
+													$("#usename1").val($("#usename").val());
+													$("#birth1").val($("#birth").val());
+													$("#zhuanye1").val($("#zhuanye").val());
+													$("#mm1").val($("#mm").val());
+													$("#xl1").val($("#xl").val());
+													$("#address1").val($("#address").val());
+													$("#jn1").val($("#jn").val());
+													$("#pp1").val($("#pp").val());
+													layer.msg("修改成功");
+
+												}else{
+													layer.msg("修改失败")
+												}
+
+											},
+											error:function (msg) {
+												alert("系统忙，请稍等");
+											}
+										}
+									);
+									}
+								}
+							)
+						},
 						success:function () {
 
 						}
@@ -455,7 +645,7 @@
 	<script>
 
 		function downloadTemp(){
-			window.location="/schoolS/cunchu/简历模板.xls";
+			window.location="../../cunchu/简历模板.xls";
 			// window.open("/schoolS/cunchu/简历模板.xls");
 			// $.ajax(
 			// 	{
@@ -485,7 +675,79 @@
 			$(".layui-laypage-btn")[0].click();
 		});
 	</script>
+	<script>
+		layui.use(['form'], function () {
+			var $ = layui.$; //Jquery,
+			var form = layui.form;//表单
+			form.on('checkbox(a1)', function(data){
+				if (data.elem.checked) {
+					$("#usename").attr("disabled", false )
+				}else {
+					$("#usename").val($("#usename1").val());
+					$("#usename").attr("disabled", "disabled" )
+				}
+			});
+			form.on('checkbox(a2)', function(data){
+				if (data.elem.checked) {
+					$("#birth").attr("disabled", false )
+				}else {
+					$("#birth").val($("#birth1").val());
+					$("#birth").attr("disabled", "disabled" )
+				}
 
+			});
+			form.on('checkbox(a3)', function(data){
+				if (data.elem.checked) {
+					$("#address").attr("disabled", false )
+				}else {
+					$("#address").val($("#address1").val());
+					$("#address").attr("disabled", "disabled" )
+				}
+			});
+			form.on('checkbox(a4)', function(data){
+				if (data.elem.checked) {
+					$("#zhuanye").attr("disabled", false )
+				}else {
+					$("#zhuanye").val($("#zhuanye1").val());
+					$("#zhuanye").attr("disabled", "disabled" )
+				}
+			});
+			form.on('checkbox(a5)', function(data){
+				if (data.elem.checked) {
+					$("#mm").attr("disabled", false )
+				}else {
+					$("#mm").val($("#mm1").val());
+					$("#mm").attr("disabled", "disabled" )
+				}
+			});
+			form.on('checkbox(a6)', function(data){
+				if (data.elem.checked) {
+					$("#xl").attr("disabled", false )
+				}else {
+					$("#xl").val($("#xl1").val());
+					$("#xl").attr("disabled", "disabled" )
+				}
+			});
+			form.on('checkbox(a7)', function(data){
+				if (data.elem.checked) {
+					$("#jn").attr("disabled", false )
+				}else {
+					$("#jn").val($("#jn1").val());
+					$("#jn").attr("disabled", "disabled" )
+				}
+			});
+			form.on('checkbox(a8)', function(data){
+				if (data.elem.checked) {
+					$("#pp").attr("disabled", false )
+				}else {
+					$("#pp").val($("#pp1").val());
+					$("#pp").attr("disabled", "disabled" )
+				}
+			});
+		});
+
+
+	</script>
 
 
 

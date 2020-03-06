@@ -5,20 +5,30 @@ import com.cykj.net.javabean.admin.Admin;
 import com.cykj.net.javabean.Adminrole;
 import com.cykj.net.javabean.Qyinfo;
 import com.cykj.net.javabean.LayuiData;
+import com.cykj.net.javabean.admin.CensusUtil;
 import com.cykj.net.service.AdminroleService;
 import com.cykj.net.service.CompanyService;
 import com.cykj.net.service.UserService;
 import com.cykj.net.service.admin.AdminService;
+import com.cykj.net.util.UtilTool;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -61,7 +71,6 @@ public class CompanyController
 		if (companyService.findById(qyinfo.getQyAccount()) == null)
 		{
 			//插入企业信息表
-			qyinfo.setRegTime(new Timestamp(System.currentTimeMillis()));
 			companyService.regQyAccount(qyinfo);
 			//插入管理员表
 			Admin admin = new Admin();
@@ -324,11 +333,11 @@ public class CompanyController
 		for (int i = (Integer.valueOf(page) - 1) * Integer.valueOf(limit); i < nowPage; i++)
 		{
 			//计算完成进度
-			int a=Integer.valueOf(list1.get(i).getZpNumEnd());
-			int b=Integer.valueOf(list1.get(i).getZpNum());
+			int a = Integer.valueOf(list1.get(i).getZpNumEnd());
+			int b = Integer.valueOf(list1.get(i).getZpNum());
 			DecimalFormat df = new DecimalFormat("0.00");//格式化小数
-			String num = df.format((float)a/b*100);//返回的是String类型
-			list1.get(i).setSchedule(num+"%");
+			String num = df.format((float) a / b * 100);//返回的是String类型
+			list1.get(i).setSchedule(num + "%");
 			data.add(list1.get(i));
 		}
 
@@ -352,12 +361,13 @@ public class CompanyController
 	{
 		List<Jobinfo> jobinfo1 = companyService.searchJobinfoTable(jobinfo);
 		System.out.println(jobinfo.getZpxxid());
-		session.setAttribute("zpxxid",jobinfo.getZpxxid());
+		session.setAttribute("zpxxid", jobinfo.getZpxxid());
 		return jobinfo1;
 	}
 
 	/**
 	 * 修改招聘信息状态
+	 *
 	 * @param jobinfo
 	 * @return
 	 */
@@ -374,12 +384,13 @@ public class CompanyController
 		{
 			result = "nosuccess";
 		}
-		System.out.println("返回值"+result);
+		System.out.println("返回值" + result);
 		return result;
 	}
 
 	/**
 	 * 删除招聘信息
+	 *
 	 * @param jobinfo
 	 * @return
 	 */
@@ -400,7 +411,6 @@ public class CompanyController
 	}
 
 	/**
-	 *
 	 * @param
 	 * @return
 	 */
@@ -408,7 +418,7 @@ public class CompanyController
 	public @ResponseBody
 	LayuiData searchResume(String page, String limit, String postion, String type, HttpSession session)
 	{
-		Resume resume=new Resume();
+		Resume resume = new Resume();
 		resume.setPostion(postion);
 		resume.setType(type);
 		List<Resume> list1 = companyService.searchResume(resume);
@@ -428,6 +438,10 @@ public class CompanyController
 
 		for (int i = (Integer.valueOf(page) - 1) * Integer.valueOf(limit); i < nowPage; i++)
 		{
+			if(list1.get(i).getGwid()==0){
+				list1.get(i).setPostion("在校生");
+				list1.get(i).setType("在校生");
+			}
 			data.add(list1.get(i));
 		}
 
@@ -439,17 +453,17 @@ public class CompanyController
 	}
 
 	@RequestMapping("/yulan")
-	public ModelAndView yulan(int jlid){
+	public ModelAndView yulan(int jlid)
+	{
 		ModelAndView mv = new ModelAndView();
 		List<Jianli> yulan = userService.yulanxml(jlid);
-		mv.addObject("yulan",yulan);
+		mv.addObject("yulan", yulan);
 		mv.setViewName("WEB-INF/company/personal2");
 		return mv;
 	}
 
 
 	/**
-	 *
 	 * @param
 	 * @return
 	 */
@@ -458,7 +472,7 @@ public class CompanyController
 	LayuiData searchResumeCompany(String page, String limit, String postion, String type, HttpSession session)
 	{
 		Qyinfo qyinfo = (Qyinfo) session.getAttribute("Qyinfo");
-		Resume resume=new Resume();
+		Resume resume = new Resume();
 		resume.setQyId(qyinfo.getQyid());
 		//字段状态
 		resume.setPaid(10);
@@ -492,7 +506,7 @@ public class CompanyController
 
 	@RequestMapping("/updateQuery")
 	public @ResponseBody
-	String updateQuery(Query query,HttpSession session)
+	String updateQuery(Query query, HttpSession session)
 	{
 		Qyinfo qyinfo = (Qyinfo) session.getAttribute("Qyinfo");
 		query.setQyId(qyinfo.getQyid());
@@ -512,44 +526,46 @@ public class CompanyController
 
 	@RequestMapping("/selectQuery")
 	public @ResponseBody
-	String selectQuery(Query query,HttpSession session)
+	String selectQuery(Query query, HttpSession session)
 	{
 		String result = "";
 		Qyinfo qyinfo = (Qyinfo) session.getAttribute("Qyinfo");
 		query.setQyId(qyinfo.getQyid());
 		Query query1 = companyService.selectQuery(query);
-		if(query1!=null){
+		if (query1 != null)
+		{
 			result = "nosuccess";
-		}else {
+		} else
+		{
 			query.setCkTime(new Timestamp(System.currentTimeMillis()));
 			query.setPaid(12);
-			int a=companyService.insertQuery(query);
-					if (a > 0)
-					{
-						result = "success";
-					} else
-					{
-						result = "nosuccess";
-					}
+			int a = companyService.insertQuery(query);
+			if (a > 0)
+			{
+				result = "success";
+			} else
+			{
+				result = "nosuccess";
+			}
 		}
 		return result;
 	}
 
 
 	/**
-	 *
 	 * @param
 	 * @return
 	 */
 	@RequestMapping("/feedback")
 	public @ResponseBody
-	LayuiData feedback(String page, String limit,String paid,HttpSession session)
+	LayuiData feedback(String page, String limit, String paid, HttpSession session)
 	{
 		Qyinfo qyinfo = (Qyinfo) session.getAttribute("Qyinfo");
-		Resume resume=new Resume();
+		Resume resume = new Resume();
 		resume.setQyId(qyinfo.getQyid());
 		System.out.println(paid);
-		if(paid!=null){
+		if (paid != null)
+		{
 			resume.setPaid(Long.valueOf(paid));
 		}
 		List<Resume> list1 = companyService.feedbackQuery(resume);
@@ -568,11 +584,14 @@ public class CompanyController
 
 		for (int i = (Integer.valueOf(page) - 1) * Integer.valueOf(limit); i < nowPage; i++)
 		{
-			if(list1.get(i).getPaid()==12){
+			if (list1.get(i).getPaid() == 12)
+			{
 				list1.get(i).setFeedback("等待回复");
-			} else if (list1.get(i).getPaid()==13) {
+			} else if (list1.get(i).getPaid() == 13)
+			{
 				list1.get(i).setFeedback("接受面试");
-			} else if(list1.get(i).getPaid()==14){
+			} else if (list1.get(i).getPaid() == 14)
+			{
 				list1.get(i).setFeedback("已应聘");
 			}
 			data.add(list1.get(i));
@@ -587,18 +606,191 @@ public class CompanyController
 
 	@RequestMapping("/yingpin")
 	public @ResponseBody
-	String yingpin(Query query,HttpSession session)
+	String yingpin(Query query, Jobinfo jobinfo, HttpSession session)
 	{
 		String result = "";
-		int a=companyService.yingpin(query);
-		if (a > 0) {
-			result = "success";
-		} else {
+
+		//先完成应聘人数里面插入
+		jobinfo.setZpxxid(query.getZpxxid());
+		Jobinfo jobinfo1 = companyService.searchJobinfo(jobinfo);
+		int zpNum = Integer.valueOf(jobinfo1.getZpNum());
+		int zpNumEnd = Integer.valueOf(jobinfo1.getZpNumEnd());
+		//完成插入后进行更改状态
+		if (zpNum >= zpNumEnd + 1)
+		{
+			jobinfo1.setZpNumEnd(String.valueOf(zpNumEnd + 1));
+			companyService.yingpinNum(jobinfo1);
+			System.out.println(query.getCkTime());
+			int a = companyService.yingpin(query);
+			if (a > 0)
+			{
+				result = "success";
+			} else
+			{
+				result = "nosuccess";
+			}
+		} else
+		{
 			result = "nosuccess";
 		}
+		;
 		return result;
 	}
 
+
+	@RequestMapping("/photo")
+	@ResponseBody
+	public String photo(@RequestParam("file") MultipartFile file, HttpServletRequest request)
+	{
+		Qyinfo qyinfo = (Qyinfo) request.getSession().getAttribute("Qyinfo");
+		int qyid = (int) qyinfo.getQyid();
+		try
+		{
+			String filename = file.getOriginalFilename();
+			String urldb = new Date().getTime() + filename;
+			//user.dir:用户的当前工作目录
+			//			String projectPath = System.getProperty("user.dir")+"\\target\\classes\\static\\images\\"+urldb;
+			String projectPath1 =request.getSession().getServletContext().getRealPath("/uploadS/images/")+urldb;
+			file.transferTo(new File(projectPath1));
+			//			file.transferTo(new File(projectPath));
+			int num = companyService.qyPicture(urldb, qyid);
+			Qyinfo qyinfo1 = companyService.findById(qyinfo.getQyAccount());
+			request.getSession().setAttribute("Qyinfo", qyinfo1);
+
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		return "1";
+	}
+
+	@RequestMapping("/weekJobinfo")
+	@ResponseBody
+	public String weekJobinfo(HttpSession session)
+	{
+		Qyinfo qyinfo = (Qyinfo) session.getAttribute("Qyinfo");
+		;
+		int qyid = (int) qyinfo.getQyid();
+		ArrayList<CensusUtil> arrayList = new ArrayList<>();
+		List<String> dateWeekList = UtilTool.week(new Date());
+		String[] weekDays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
+		int sum = 0;
+
+		for (int i = 0; i < dateWeekList.size(); i++)
+		{
+			int count = companyService.weekJobinfo(dateWeekList.get(i), qyid);
+			CensusUtil censusUtil = new CensusUtil();
+			censusUtil.setCount(count);
+			censusUtil.setName(weekDays[i]);
+			arrayList.add(censusUtil);
+			sum = count + sum;
+		}
+
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(arrayList);
+		String msg = jsonStr + "://" + sum;
+		return msg;
+	}
+
+	@RequestMapping("/monthJobinfo")
+	@ResponseBody
+	public String monthJobinfo(String date, HttpSession session)
+	{
+		Qyinfo qyinfo = (Qyinfo) session.getAttribute("Qyinfo");
+		;
+		int qyid = (int) qyinfo.getQyid();
+		ArrayList<CensusUtil> arrayList = new ArrayList<>();
+		List<String> dateHalfList = null;
+		dateHalfList = UtilTool.month(date);
+
+		int sum = 0;
+		for (int i = 0; i < dateHalfList.size(); i++)
+		{
+			String[] time = dateHalfList.get(i).split(" ");
+			int count = companyService.monthJobinfo(time[0], time[1] + " 23:59:59", qyid);
+			CensusUtil censusUtil = new CensusUtil();
+			censusUtil.setCount(count);
+			censusUtil.setName("第" + (i + 1) + "周");
+			arrayList.add(censusUtil);
+
+			sum = count + sum;
+		}
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(arrayList);
+		String msg = jsonStr + "://" + sum;
+		return msg;
+	}
+
+	@RequestMapping("/halfJobinfo")
+	@ResponseBody
+	public String halfJobinfo(HttpSession session) throws ParseException
+	{
+		Qyinfo qyinfo = (Qyinfo) session.getAttribute("Qyinfo");
+		;
+		int qyid = (int) qyinfo.getQyid();
+		ArrayList<CensusUtil> arrayList = new ArrayList<>();
+		List<String> dateHalfList = null;
+
+		dateHalfList = UtilTool.half();
+
+		int sum = 0;
+		for (int i = 0; i < dateHalfList.size(); i++)
+		{
+			int count = companyService.weekJobinfo(dateHalfList.get(i), qyid);
+			CensusUtil censusUtil = new CensusUtil();
+			censusUtil.setCount(count);
+			censusUtil.setName(dateHalfList.get(i));
+			arrayList.add(censusUtil);
+
+			sum = count + sum;
+		}
+		Gson gson = new Gson();
+		String jsonStr = gson.toJson(arrayList);
+
+		String msg = jsonStr + "://" + sum;
+		return msg;
+	}
+
+	/**
+	 * @param
+	 * @return
+	 */
+	@RequestMapping("/finishJob")
+	public @ResponseBody
+	LayuiData finishJob(String page, String limit, String zpxxid, HttpSession session)
+	{
+		Qyinfo qyinfo = (Qyinfo) session.getAttribute("Qyinfo");
+		Resume resume = new Resume();
+		resume.setQyId(qyinfo.getQyid());
+		System.out.println("zp1" + zpxxid);
+		resume.setZpxxid(Integer.valueOf(zpxxid));
+		List<Resume> list1 = companyService.finishJob(resume);
+		LayuiData layuiData = new LayuiData();
+		layuiData.setCode(0);
+		layuiData.setMsg("");
+		int nowPage;
+		List<Resume> data = new ArrayList<>();
+		if (list1.size() < Integer.valueOf(page) * Integer.valueOf(limit))
+		{
+			nowPage = list1.size();
+		} else
+		{
+			nowPage = Integer.valueOf(page) * Integer.valueOf(limit);
+		}
+
+		for (int i = (Integer.valueOf(page) - 1) * Integer.valueOf(limit); i < nowPage; i++)
+		{
+			data.add(list1.get(i));
+		}
+
+		layuiData.setCount(list1.size());
+		layuiData.setData(data);
+
+		return layuiData;
+
+	}
+
 }
+
 
 

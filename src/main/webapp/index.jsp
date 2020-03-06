@@ -195,7 +195,7 @@
 						<div class="ContentB">
 							<div class="qybox1">
 								<a href="/jump/admin/login">企业入口</a>
-								<a href=" ">企业注册</a>
+								<a href="/company/companyLogin">企业注册</a>
 							</div>
 							<div class="qybox2">
 								<p>注册后可<b>免费</b>升级为<b>普通会员</b><br>不花钱也能完成中低职位的招聘</p>
@@ -241,7 +241,7 @@
 					<div class="ContentB">
 						<div class="qybox1">
 							<a href="/jump/admin/login">企业入口</a>
-							<a href=" ">企业注册</a>
+							<a href="/company/companyLogin">企业注册</a>
 						</div>
 						<div class="qybox2">
 							<p>注册后可<b>免费</b>升级为<b>普通会员</b><br>不花钱也能完成中低职位的招聘</p>

@@ -1,26 +1,32 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Lenovo
-  Date: 2020/2/29
-  Time: 12:18
+  User: 蔡鹭鹏
+  Date: 2020/3/2
+  Time: 20:05
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<!DOCTYPE html>--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	String path = application.getContextPath()+"/layui/";
-	String Path =application.getContextPath();
-	String jsPath = application.getContextPath()+"/companys/js/";
+	String layuiPath = application.getContextPath() + "/layui/";
+	String jsPath = application.getContextPath() + "/adminS/js/";
+	String cssPath = application.getContextPath() + "/adminS/css/";
+	String path = application.getContextPath() + "/";
+
 %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>ECharts</title>
-	<link rel="stylesheet" href=<%=path+"css/layui.css"%>>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>高校推荐用户统计</title>
+	<link rel="stylesheet" href=<%=layuiPath+"css/layui.css"%>>
+
+
 </head>
 <body class="layui-layout-body">
 
-<h2 class="layui-form-item" style="margin-left: 43%;margin-top: 3%">招聘信息统计</h2>
+<h2 class="layui-form-item" style="margin-left: 43%;margin-top: 3%">高校推荐用户统计</h2>
 <div class="layui-form-item" style="margin-left: 15%;">
 	<label class="layui-form-label" style="text-align: left">统计：</label>
 
@@ -42,6 +48,12 @@
 		</button>
 	</div>
 
+	<div >
+		<button type="button" class="layui-btn layui-btn-radius"
+		        id="tjbbuse" onclick="back()"><i class="layui-icon">&#xe615;</i>高校人员新增情况
+		</button>
+	</div>
+
 </div>
 
 <div class="layui-form-item" style="margin-left: 55%">
@@ -51,26 +63,33 @@
 
 <div id="echarts_div" style="width: 600px;height:400px;margin-left: 25%"></div>
 
+<c:if test="${requestScope.tuijianren!=null}">
+	<input type="hidden" id="test1" value=${requestScope.tuijianren}>
+</c:if>
 
-<script src="/echarts.min.js"></script>
-<script src=<%=path + "jquery-3.4.1.js"%> ></script>
-<script src=<%=path + "layui.js"%>></script>
-<script src="<%=path+"json2.js"%>"></script>
+
+
+
+
+<script type="text/javascript" src=<%=jsPath + "echarts.js"%>></script>
+<script type="text/javascript" src=<%=layuiPath + "jquery-3.4.1.js"%>></script>
+<script type="text/javascript" src=<%=layuiPath + "layui.js"%>></script>
+<script type="text/javascript" src=<%=layuiPath + "json2.js"%>></script>
+
 <script type="text/javascript" >
 	var nameArr = [];
 	var valueArr = [];
 	var obArr = [];
-
 	$(function() {
 		$.ajax({
 			method : "POST",
-			url : "/company/weekJobinfo",
+			url : "/adminCensus/week2",
 			dataType : "text",
-			// data:{role:0},
+			data:{role:0,tjr:$("#test1").val()},
 			success : function(msg) {
 				var list = msg.split("://");
 				var arr = JSON.parse(list[0]);
-				$('#howlong').html('本周总新增招聘信息：');
+				$('#howlong').html('本周总推荐用户数：');
 				$('#sum').html(list[1]);
 				for (var i = 0; i < arr.length; i++) {
 					// 普通柱状图使用的数据
@@ -96,13 +115,13 @@
 			valueArr = [];
 			$.ajax({
 				method : "POST",
-				url : "/company/weekJobinfo",
+				url : "/adminCensus/week2",
 				dataType : "text",
-				// data:{role:0},
+				data:{role:0,tjr:$("#test1").val()},
 				success : function(msg) {
 					var list = msg.split("://");
 					var arr = JSON.parse(list[0]);
-					$('#howlong').html('本周总新增招聘：');
+					$('#howlong').html('本周总推荐用户数：');
 					$('#sum').html(list[1]);
 					for (var i = 0; i < arr.length; i++) {
 						// 普通柱状图使用的数据
@@ -123,13 +142,13 @@
 
 			$.ajax({
 				method : "POST",
-				url : "/company/monthJobinfo",
+				url : "/adminCensus/month2",
 				dataType : "text",
-				data:{date:new Date().format('yyyy-MM-dd')},
+				data:{date:new Date().format('yyyy-MM-dd'),role:0,tjr:$("#test1").val()},
 				success : function(msg) {
 					var list = msg.split("://");
 					var arr = JSON.parse(list[0]);
-					$('#howlong').html('本月总新增招聘：');
+					$('#howlong').html('本月总推荐用户数：');
 					$('#sum').html(list[1]);
 					for (var i = 0; i < arr.length; i++) {
 						// 普通柱状图使用的数据
@@ -149,14 +168,14 @@
 			valueArr = [];
 			$.ajax({
 				method : "POST",
-				url : "/company/halfJobinfo",
+				url : "/adminCensus/half2",
 				dataType : "text",
-				data:{role:0},
+				data:{role:0,tjr:$("#test1").val()},
 				success : function(msg) {
 
 					var list = msg.split("://");
 					var arr = JSON.parse(list[0]);
-					$('#howlong').html('近半年总新增招聘：');
+					$('#howlong').html('近半年总推荐用户数：');
 					$('#sum').html(list[1]);
 					for (var i = 0; i < arr.length; i++) {
 						// 普通柱状图使用的数据
@@ -186,7 +205,7 @@
 		// 指定图表的配置项和数据
 		var option = {
 			title : {
-				text : '招聘信息发布新增量统计报表'
+				text : '用户新增推荐量统计报表'
 			},
 			tooltip : {},
 			legend : {
@@ -219,7 +238,7 @@
 			"s+": this.getSeconds(),
 			"q+": Math.floor((this.getMonth() + 3) / 3),
 			"S": this.getMilliseconds()
-		}
+		};
 		if (/(y+)/.test(format)) {
 			format = format.replace(RegExp.$1, (this.getFullYear() + "")
 				.substr(4 - RegExp.$1.length));
@@ -231,6 +250,11 @@
 			}
 		}
 		return format;
+	}
+	function back() {
+		var returnlogin = document.createElement("a");
+		returnlogin.href="/school/tjbb";
+		returnlogin.click();
 	}
 </script>
 
