@@ -22,7 +22,7 @@
 	<title>个人中心-我的简历</title>
 </head>
 <body>
-
+<input hidden value="<%=path%>" id="path">
 
 <div  style="width:50%;margin: 20px auto">
 	<div class="JlBoxLeft">

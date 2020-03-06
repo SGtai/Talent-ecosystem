@@ -5,6 +5,7 @@
 	String jsPath = application.getContextPath()+"/schoolS/js/";
 	String path = application.getContextPath()+"/layui/";
 	String othPath =application.getContextPath()+"/schoolS/other/";
+	String apppath=application.getContextPath()+"/";
 %>
 <!DOCTYPE html>
 <html>
@@ -102,7 +103,7 @@
 			$.ajax(
 				{
 					type:"POST",
-					url:"/school/pwd",
+					url:'<%=apppath+"school/pwd"%>',
 					dataType:"text",
 					data:{
 						password:password,

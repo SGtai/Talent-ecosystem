@@ -12,7 +12,7 @@
     String layuiPath = application.getContextPath() + "/layui/";
     String jsPath = application.getContextPath() + "/adminS/js/";
     String cssPath = application.getContextPath() + "/adminS/css/";
-    String path = application.getContextPath() + "/";
+    String path = application.getContextPath();
 
 %>
 <!DOCTYPE html>
@@ -59,7 +59,7 @@
 <div id="echarts_div" style="width: 600px;height:400px;margin-left: 25%"></div>
 
 
-
+<input id="Path" type="hidden" value="<%=path%>" />
 
 
 
@@ -73,11 +73,11 @@
     var nameArr = [];
     var valueArr = [];
     var obArr = [];
-
+    var path=$('#Path').val();
     $(function() {
         $.ajax({
             method : "POST",
-            url : "/adminCensus/week",
+            url :path + "/adminCensus/week",
             dataType : "text",
             data:{role:1},
             success : function(msg) {
@@ -109,7 +109,7 @@
             valueArr = [];
             $.ajax({
                 method : "POST",
-                url : "/adminCensus/week",
+                url : path + "/adminCensus/week",
                 dataType : "text",
                 data:{role:1},
                 success : function(msg) {
@@ -136,7 +136,7 @@
 
             $.ajax({
                 method : "POST",
-                url : "/adminCensus/month",
+                url : path + "/adminCensus/month",
                 dataType : "text",
                 data:{date:new Date().format('yyyy-MM-dd'),role:1},
                 success : function(msg) {
@@ -162,7 +162,7 @@
             valueArr = [];
             $.ajax({
                 method : "POST",
-                url : "/adminCensus/half",
+                url : path + "/adminCensus/half",
                 dataType : "text",
                 data:{role:1},
                 success : function(msg) {

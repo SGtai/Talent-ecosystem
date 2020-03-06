@@ -11,7 +11,7 @@
     String layuiPath = application.getContextPath() + "/layui/";
     String jsPath = application.getContextPath() + "/adminS/js/";
     String cssPath = application.getContextPath() + "/adminS/css/";
-    String path = application.getContextPath() + "/";
+    String path = application.getContextPath();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +45,7 @@
                             <a class="" href="javascript:;">${i.key}</a>
                             <c:forEach items="${i.value}" begin="0" var="j">
                                 <dl class="layui-nav-child">
-                                    <dd><a href="${j.menuurl}" target="main_self_frame">${j.sencondmenuname}</a></dd>
+                                    <dd><a href=<%=path%>"${j.menuurl}" target="main_self_frame">${j.sencondmenuname}</a></dd>
                                 </dl>
                             </c:forEach>
                         </li>
@@ -61,7 +61,7 @@
         <!--        <div style="padding: 15px;">内容主体区域</div>-->
         <c:if test="${roid!=null}">
             <c:if test="${roid == 1 || roid == 2}">
-                <iframe  src="/jump/admin/welcome" name="main_self_frame" frameborder="0" class="layadmin-iframe"
+                <iframe  src=<%=path + "/jump/admin/welcome"%> name="main_self_frame" frameborder="0" class="layadmin-iframe"
                         style="width: 100%; background: url('../../uploadS/images/back_admin.png') no-repeat;
                         background-size: 100% auto;"
                         height="100%"></iframe>

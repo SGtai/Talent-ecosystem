@@ -11,7 +11,7 @@
     String layuiPath = application.getContextPath() + "/layui/";
     String jsPath = application.getContextPath() + "/adminS/js/";
     String cssPath = application.getContextPath() + "/adminS/css/";
-    String path = application.getContextPath() + "/";
+    String path = application.getContextPath();
 
 %>
 <!DOCTYPE html>
@@ -49,7 +49,7 @@
         <table id="frontUser" lay-filter="getFrontUser"></table>
     </div>
 </div>
-
+<input id="Path" type="hidden" value="<%=path%>" />
 
 <script type="text/javascript" src=<%=layuiPath + "layui.js"%>></script>
 <script type="text/html" id="opeHtml">
@@ -88,13 +88,13 @@
             , layer = layui.layer
             , $ = layui.jquery
             , form = layui.form;
-
+        var path=$('#Path').val();
 
         //第一个实例
         table.render({
             elem: '#frontUser'
             // , height: 312
-            , url: '/adminFrontUser/table/frontUser' //数据接口
+            , url: path + '/adminFrontUser/table/frontUser' //数据接口
             , page: true //开启分页
             , limit: 5
             , limits: [5]
@@ -131,7 +131,7 @@
         //搜索
         form.on('submit(searchFrontUser)', function (data) {
             table.reload('frontUser', {
-                url: '/adminFrontUser/table/frontUser'
+                url: path +  '/adminFrontUser/table/frontUser'
                 , where: { //设定异步数据接口的额外参数，任意设
                     phone: data.field.phone,
                     name: data.field.name
@@ -164,7 +164,7 @@
                 layer.confirm('确定要' + t + '手机号:' + data.phone + '的用户吗?', function (index) {
                     $.ajax({
                         type: "POST",
-                        url: "/adminFrontUser/updateState",
+                        url:  path + "/adminFrontUser/updateState",
                         dataType: "text",
                         data: {phone: data.phone, state: state},
                         success: function (msg) {
@@ -191,7 +191,7 @@
                 layer.confirm('确定要重置手机号:' + data.phone + '用户的密码吗?', function (index) {
                     $.ajax({
                         type: "POST",
-                        url: "/adminFrontUser/updatePassword",
+                        url: path +  "/adminFrontUser/updatePassword",
                         dataType: "text",
                         data: {phone: data.phone},
                         success: function (msg) {

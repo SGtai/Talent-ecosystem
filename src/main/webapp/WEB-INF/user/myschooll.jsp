@@ -21,9 +21,8 @@
 	String imagesPath =application.getContextPath()+"/homeS/images/";
 	String dbimgPath =application.getContextPath()+"/images/";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<!DOCTYPE html>
+<html>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href=<%=cssPath+"personal.css"%>>
 	<link rel="stylesheet" href="<%=path+"layui/css/layui.css"%>" media="all">
@@ -178,14 +177,13 @@
 			,width:760
 			,limit:5
 			,limits:[5,10,15,20]
-			,url: '/school/myschool' //数据接口
+			,url: '<%=path+"school/myschool"%>' //数据接口
 			,page: true //开启分页
 			,even:true
 			,cols: [[ //表头
 				{field: 'phone', title: '电话', width: 150,height:100}
 				,{field: 'name', title: '姓名', width:150,height:100}
 				,{field: 'zy', title: '专业', width:150,height:100}
-				,{field: 'jzstate', title: '就业情况', width: 150,height:100,hide:true}
 				,{field: 'xl', title: '学历', width: 5,width: 150}
 				,{field: 'jzdResidence', title: '住址', width: 150}
 

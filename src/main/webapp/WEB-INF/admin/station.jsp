@@ -11,7 +11,7 @@
     String layuiPath = application.getContextPath() + "/layui/";
     String jsPath = application.getContextPath() + "/adminS/js/";
     String cssPath = application.getContextPath() + "/adminS/css/";
-    String path = application.getContextPath() + "/";
+    String path = application.getContextPath();
 
 %>
 <!DOCTYPE html>
@@ -49,6 +49,7 @@
     </div>
 </div>
 
+<input id="Path" type="hidden" value="<%=path%>" />
 
 <script type="text/javascript" src=<%=layuiPath + "layui.js"%>></script>
 <script type="text/html" id="opeHtml">
@@ -106,6 +107,7 @@
 </script>
 <script type="text/javascript">
 
+    var path=$('#Path').val();
     layui.use(['table', 'layer', 'jquery', 'form'], function () {
         var table = layui.table
             , layer = layui.layer
@@ -117,7 +119,7 @@
         //ajax
         $.ajax({
             type: "POST",
-            url: "/adminStation/choosePosition",
+            url: path + "/adminStation/choosePosition",
             dataType: "text",
             data: {},
             success: function (msg) {
@@ -142,7 +144,7 @@
         table.render({
             elem: '#station'
             // , height: 312
-            , url: '/adminStation/table/station' //数据接口
+            , url:  path + '/adminStation/table/station' //数据接口
             , page: true //开启分页
             , limit: 5
             , limits: [5]
@@ -164,7 +166,7 @@
         //搜索
         form.on('submit(searchStation)', function () {
             table.reload('station', {
-                url: '/adminStation/table/station'
+                url:  path + '/adminStation/table/station'
                 , where: { //设定异步数据接口的额外参数，任意设
                     poid: position
                 }
@@ -207,7 +209,7 @@
 
                         $.ajax({
                             type: "POST",
-                            url: "/adminStation/addStation",
+                            url:  path + "/adminStation/addStation",
                             dataType: "text",
                             data: {poid: op, station: us},
                             success: function (msg) {
@@ -289,7 +291,7 @@
 
                             $.ajax({
                                 type: "POST",
-                                url: "/adminStation/updateStation",
+                                url:  path + "/adminStation/updateStation",
                                 dataType: "text",
                                 data: {id:data.poid,poid: op, station: us, initStation: data.station},
                                 success: function (msg) {
@@ -325,7 +327,7 @@
                 layer.confirm('确定要删除岗位：' + station + '吗?警告：删除后不可恢复！', function (index) {
                     $.ajax({
                         type: "POST",
-                        url: "/adminStation/deleteStation",
+                        url:  path + "/adminStation/deleteStation",
                         dataType: "text",
                         data: {poid: poid, station: station,stid:data.stid},
                         success: function (msg) {

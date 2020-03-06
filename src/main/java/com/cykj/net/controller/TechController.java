@@ -306,7 +306,20 @@ public class TechController
 			mv.addObject("notify","评论成功！！！");
 		}
 		ArrayList<Video> video = techService.getVideoList(id);
-		ArrayList<Assess> assess = techService.getAssessList(String.valueOf(video.get(0).getSpId()));
+		ArrayList<Assess> assess = techService.getAssessList(spId);
+		ArrayList<Assess> assess2 = new ArrayList<>();
+		for (int i = 0; i < assess.size(); i++)
+		{
+			if (assess.get(i).getYhId()!=user.getYhid()){
+				assess2.add(assess.get(i));
+				assess.remove(i);
+				i--;
+			}
+		}
+		for (int i = 0; i < assess2.size(); i++)
+		{
+			assess.add(assess2.get(i));
+		}
 		for (int i = 0; i < video.size(); i++)
 		{
 			video.get(i).setSort(i+1);

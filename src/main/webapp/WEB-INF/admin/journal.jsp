@@ -11,7 +11,7 @@
     String layuiPath = application.getContextPath() + "/layui/";
     String jsPath = application.getContextPath() + "/adminS/js/";
     String cssPath = application.getContextPath() + "/adminS/css/";
-    String path = application.getContextPath() + "/";
+    String path = application.getContextPath() ;
 
 %>
 <!DOCTYPE html>
@@ -48,7 +48,7 @@
         <table id="journal" lay-filter="getJournal"></table>
     </div>
 </div>
-
+<input id="Path" type="hidden" value="<%=path%>" />
 
 <script type="text/javascript" src=<%=layuiPath + "layui.js"%>></script>
 <script type="text/javascript">
@@ -58,11 +58,11 @@
             , layer = layui.layer
             , $ = layui.jquery
             , form = layui.form;
-
+        var path=$('#Path').val();
         $('#type').empty();
         $.ajax({
             type: "POST",
-            url: "/adminJournal/getJournal",
+            url: path + "/adminJournal/getJournal",
             dataType: "text",
             success: function (msg) {
                 $('#type').append('<option value="">请选择参数类型</option>');
@@ -81,7 +81,7 @@
         table.render({
             elem: '#journal'
             // , height: 312
-            , url: '/adminJournal/table/journal' //数据接口
+            , url:  path + '/adminJournal/table/journal' //数据接口
             , page: true //开启分页
             , limit: 5
             , limits: [5,10]
@@ -113,7 +113,7 @@
         //搜索
         form.on('submit(searchJournal)', function (data) {
             table.reload('journal', {
-                url: '/adminJournal/table/journal'
+                url:  path + '/adminJournal/table/journal'
                 , where: { //设定异步数据接口的额外参数，任意设
                     account: data.field.account,
                     type:type

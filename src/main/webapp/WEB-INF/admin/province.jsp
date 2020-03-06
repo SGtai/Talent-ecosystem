@@ -12,7 +12,7 @@
     String layuiPath = application.getContextPath() + "/layui/";
     String jsPath = application.getContextPath() + "/adminS/js/";
     String cssPath = application.getContextPath() + "/adminS/css/";
-    String path = application.getContextPath() + "/";
+    String path = application.getContextPath();
 
 %>
 <!DOCTYPE html>
@@ -40,7 +40,7 @@
         <table id="province" lay-filter="getProvince"></table>
     </div>
 </div>
-
+<input id="Path" type="hidden" value="<%=path%>" />
 
 <script type="text/javascript" src=<%=layuiPath + "layui.js"%>></script>
 <script type="text/html" id="opeHtml">
@@ -87,6 +87,8 @@
 </script>
 <script type="text/javascript">
 
+
+    var path=$('#Path').val();
     layui.use(['table', 'layer', 'jquery', 'form'], function () {
         var table = layui.table
             , layer = layui.layer
@@ -98,7 +100,7 @@
         table.render({
             elem: '#province'
             // , height: 312
-            , url: '/adminCity/table/province' //数据接口
+            , url: path + '/adminCity/table/province' //数据接口
             , page: true //开启分页
             , limit: 5
             , limits: [5]
@@ -134,7 +136,7 @@
                     layer.confirm('确定要增加省份:' + ap + '吗?', function (index) {
                         $.ajax({
                             type: "POST",
-                            url: "/adminCity/addProvince",
+                            url:path +  "/adminCity/addProvince",
                             dataType: "text",
                             data: {prname: ap},
                             success: function (msg) {
@@ -197,7 +199,7 @@
 
                             $.ajax({
                                 type: "POST",
-                                url: "/adminCity/updateProvince",
+                                url: path + "/adminCity/updateProvince",
                                 dataType: "text",
                                 data: {prname: up, name: data.prname},
                                 success: function (msg) {
@@ -233,7 +235,7 @@
                 layer.confirm('确定要删除省份：' + prname + '吗?警告：删除后不可恢复！', function (index) {
                     $.ajax({
                         type: "POST",
-                        url: "/adminCity/deleteProvince",
+                        url: path + "/adminCity/deleteProvince",
                         dataType: "text",
                         data: {prname: prname, prid: data.prid},
                         success: function (msg) {

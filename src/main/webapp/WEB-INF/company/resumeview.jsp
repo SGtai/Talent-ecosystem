@@ -55,6 +55,7 @@
 	</div>
 </form>
 <table id="demo" lay-filter="test"></table>
+<input id="Path" type="hidden" value="<%=Path%>" />
 
 <script src=<%=path + "jquery-3.4.1.js"%> ></script>
 <script src=<%=path + "layui.js"%>></script>
@@ -71,6 +72,8 @@
 
 </script>
 <script type="text/javascript">
+	var Path=$('#Path').val();
+
 	layui.use(['form', 'layer', 'jquery','table'], function() {
 		var table = layui.table;
 		var layer = layui.layer;
@@ -81,7 +84,7 @@
 		table.render({
 			elem: '#demo'
 			, height: 280
-			, url: "/company/searchResume" //数据接口
+			, url: Path+"/company/searchResume" //数据接口
 			, page: true //开启分页
 			, limit: 5
 			, limits: [5, 10, 20, 50, 100]
@@ -106,7 +109,7 @@
 			var type = myselect.options[index].text;
 			var postion = $('#zwid').val();
 			table.reload('table1', {
-				url: "/company/searchResume"
+				url: Path+"/company/searchResume"
 				, where: { //设定异步数据接口的额外参数，任意设
 					type: type,
 					postion: postion
@@ -123,7 +126,7 @@
 			$.ajax(
 				{
 					type:"POST",
-					url:"/company/chooseStation",
+					url:Path+"/company/chooseStation",
 					dataType:"text",
 					data:{poid:data.value},
 					success:function (msg) {
@@ -146,14 +149,14 @@
 				,layEvent = obj.event; //获得 lay-event 对应的值
 			//查看简历
 			if(layEvent === 'detail'){
-				window.location.href="/company/yulan?jlid="+data.jlId
+				window.location.href=Path+"/company/yulan?jlid="+data.jlId
 			}
 			//邀请面试
 			else if(layEvent === 'update'){
 				var jlId=data.jlId;
 				$.ajax({
 					type:"POST",
-					url:"/company/selectQuery",
+					url:Path+"/company/selectQuery",
 					dataType:"text",
 					data:{jlId:jlId},
 					//从servlet接收的数据
@@ -176,7 +179,7 @@
 				}else {
 					$.ajax({
 						type:"POST",
-						url:"/company/deleteJobinfo",
+						url:Path+"/company/deleteJobinfo",
 						dataType:"text",
 						data:{zpxxid:data.zpxxid},
 						//从servlet接收的数据
