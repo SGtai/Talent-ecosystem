@@ -106,8 +106,8 @@ public class CompanyService
 		return sum;
 	}
 
-	public Query selectQuery(Query query){
-		Query query1=companyDao.selectQuery(query);
+	public List<Query> selectQuery(Query query){
+		List<Query> query1=companyDao.selectQuery(query);
 		return query1;
 	}
 

@@ -531,7 +531,7 @@ public class CompanyController
 		String result = "";
 		Qyinfo qyinfo = (Qyinfo) session.getAttribute("Qyinfo");
 		query.setQyId(qyinfo.getQyid());
-		Query query1 = companyService.selectQuery(query);
+		List<Query> query1 = companyService.selectQuery(query);
 		if (query1 != null)
 		{
 			result = "nosuccess";
