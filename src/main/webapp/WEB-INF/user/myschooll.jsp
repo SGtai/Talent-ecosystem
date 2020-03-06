@@ -57,8 +57,8 @@
 <div class="navTop">
 	<div class="navTopmain">
 		<div class="nav">
-			<div class="navItem"><a href="/user/index">首页</a></div>
-			<div class="navItem"><a href="/jump/home/searchJob">职位搜索</a></div>
+			<div class="navItem"><a href=<%=path%>>首页</a></div>
+			<div class="navItem"><a href="<%=path%>jump/home/searchJob">职位搜索</a></div>
 			<a href="/techa">人才成长区</a>
 		</div>
 	</div>
@@ -69,38 +69,32 @@
 		<div class="NavLeftTop">个人中心</div>
 		<div class="NavLeftMain">
 			<div class="NavLeftBox">
-				<a href="/jump/user/personal" class="a1">会员首页</a>
+				<a href="<%=path%>jump/user/personal" class="a1">会员首页</a>
+			</div>
+			<div class="NavLeftBox active">
+				<a href="<%=path%>user/gopersonaljl" class="a2">我的简历</a>
 			</div>
 			<div class="NavLeftBox">
-				<a href="/user/gopersonaljl" class="a2">我的简历</a>
-			</div>
-			<div class="NavLeftBox">
-				<a href="" class="a3">我的校友</a>
+				<a href="<%=path%>jump/user/myschooll" class="a3">我的校友</a>
 			</div>
 			<div class="NavLeftBox twoNav">
 				<a class="a5">职位申请</a>
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li class="orang"><a href="/user/shenqinglist">申请的职位</a></li>
-				<li><a href="/user/shoucanglist">我的关注</a></li>
+				<li><a href="<%=path%>user/shenqinglist">申请的职位</a></li>
+				<li><a href="<%=path%>user/shoucanglist">我的关注</a></li>
 			</ul>
 			<div class="NavLeftBox twoNav">
 				<a class="a6">企业邀约</a>
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li><a href="/user/mianshi">面试通知</a></li>
-				<li><a href="/user/yaoyue">应聘邀请</a></li>
+				<li><a href="<%=path%>user/mianshi">面试通知</a></li>
+				<li><a href="<%=path%>user/yaoyue">应聘邀请</a></li>
 			</ul>
-			<div class="NavLeftBox">
-				<a href="personal_help.html" class="a8">帮助中心</a>
-			</div>
 		</div>
-		<div class="navLeftBottom">
-			<img src="images/showqrcode.jpg" />
-			<span class="Notice">菜鸟人才网<br>找工作更靠谱</span>
-		</div>
+
 	</div>
 	<div class="perRightcon">
 		<div class="commonTit">

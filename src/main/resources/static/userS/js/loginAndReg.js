@@ -61,7 +61,7 @@ function doreg(path){
 		success: function (msg) {
 			if (msg=='true'){
 				window.alert("注册成功");
-				window.location.href = "/jump/user/login";
+				window.location.href = path+"";
 			}
 			if(msg=='false'){
 				window.alert("出现异常，注册失败");

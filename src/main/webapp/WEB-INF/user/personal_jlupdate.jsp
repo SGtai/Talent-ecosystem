@@ -49,7 +49,7 @@
 <div class="navTop">
 	<div class="navTopmain">
 		<div class="nav">
-			<div class="navItem"><a href="<%=path%>user/index">首页</a></div>
+			<div class="navItem"><a href="<%=path%>">首页</a></div>
 			<div class="navItem"><a href="<%=path%>jump/home/searchJob">职位搜索</a></div>
 			<div class="navItem"><a href="<%=path%>techa">人才成长区</a></div>
 
