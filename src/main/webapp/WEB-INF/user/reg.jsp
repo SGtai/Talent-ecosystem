@@ -16,14 +16,14 @@
 <body>
 <div class="header">
     <div class="mainwarp">
-        <div class="logo"><a href="index.html"><img src="<%=imagesPath+"log.png"%>" /></a></div>
+        <div class="logo"><a href="<%=path%>user/index"><img src="<%=imagesPath+"log.png"%>" /></a></div>
         <div class="welcome">欢迎注册</div>
         <div class="headerright">
-            <a href="login.html">个人登录</a>
+            <a href="<%=path+"jump/user/login"%>">个人登录</a>
             <span>|</span>
-            <a href="loginCompany.html">企业登录</a>
+            <a href="<%=path+"jump/admin/login"%>">企业登录</a>
             <span>|</span>
-            <a href="index.html">返回首页</a>
+            <a href="<%=path%>user/index">返回首页</a>
         </div>
     </div>
 </div>
@@ -47,13 +47,9 @@
                         <input id="passwordReg" name="" type="text" placeholder="设置密码"/>
                     </div>
                     <div class="zcpart6">请输入6-20个字符</div>
-                    <div class="zcpart2_c">
-                        <span class="CheckBox Yes"></span>
-                        <span style="float:left">我已阅读并接受<a href="registeragreement.html">用户协议</a></span>
-                    </div>
                     <div class="clear"></div>
                     <div class="zcpart8">
-                        <a href="javascript:void(0)" onclick="doreg()">注 册</a>
+                        <a href="javascript:void(0)" onclick="doreg('<%=path%>')">注 册</a>
                     </div>
                 </div>
             </ul>
@@ -62,7 +58,7 @@
     <div class="zcRight">
         <div class="topdiv">
             <span class="noPa">已有账号了？</span><br />
-            <a href="/jump/user/login">立即登录</a>
+            <a href="<%=path%>jump/user/login">立即登录</a>
         </div>
     </div>
 </div>

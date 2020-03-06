@@ -22,6 +22,7 @@
 	<title>个人中心-我的简历</title>
 </head>
 <body>
+<input hidden value="<%=path%>" id="path">
 <div class="header">
 	<div class="headerMain">
 		<div class="Notice">
@@ -35,8 +36,8 @@
 					<input type="button">
 					<div id="InfoPopup">
 						<ul>
-							<li><a href="/jump/user/personal_updatepsd">修改密码</a></li>
-							<li><a href="javascript:void(0)" onclick="tuichu2()">退出</a></li>
+							<li><a href="<%=path%>jump/user/personal_updatepsd">修改密码</a></li>
+							<li><a href="javascript:void(0)" onclick="tuichu2('<%=path%>')">退出</a></li>
 						</ul>
 					</div>
 				</div>
@@ -48,9 +49,9 @@
 <div class="navTop">
 	<div class="navTopmain">
 		<div class="nav">
-			<div class="navItem"><a href="/user/index">首页</a></div>
-			<div class="navItem"><a href="/jump/home/searchJob">职位搜索</a></div>
-			<div class="navItem"><a href="/techa">人才成长区</a></div>
+			<div class="navItem"><a href="<%=path%>user/index">首页</a></div>
+			<div class="navItem"><a href="<%=path%>jump/home/searchJob">职位搜索</a></div>
+			<div class="navItem"><a href="<%=path%>techa">人才成长区</a></div>
 		</div>
 	</div>
 </div>
@@ -59,33 +60,30 @@
 		<div class="NavLeftTop">个人中心</div>
 		<div class="NavLeftMain">
 			<div class="NavLeftBox">
-				<a href="/jump/user/personal" class="a1">会员首页</a>
+				<a href="<%=path%>jump/user/personal" class="a1">会员首页</a>
 			</div>
 			<div class="NavLeftBox active">
-				<a href="/user/gopersonaljl" class="a2">我的简历</a>
+				<a href="<%=path%>user/gopersonaljl" class="a2">我的简历</a>
 			</div>
 			<div class="NavLeftBox">
-				<a href="/jump/user/myschooll" class="a3">我的校友</a>
+				<a href="<%=path%>jump/user/myschooll" class="a3">我的校友</a>
 			</div>
 			<div class="NavLeftBox twoNav">
 				<a class="a5">职位申请</a>
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li><a href="/user/shenqinglist">申请的职位</a></li>
-				<li><a href="/user/shoucanglist">我的关注</a></li>
+				<li><a href="<%=path%>user/shenqinglist">申请的职位</a></li>
+				<li><a href="<%=path%>user/shoucanglist">我的关注</a></li>
 			</ul>
 			<div class="NavLeftBox twoNav">
 				<a class="a6">企业邀约</a>
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li><a href="/user/mianshi">面试通知</a></li>
-				<li><a href="/user/yaoyue">应聘邀请</a></li>
+				<li><a href="<%=path%>user/mianshi">面试通知</a></li>
+				<li><a href="<%=path%>user/yaoyue">应聘邀请</a></li>
 			</ul>
-			<div class="NavLeftBox">
-				<a href="personal_help.html" class="a8">帮助中心</a>
-			</div>
 		</div>
 
 	</div>
@@ -107,7 +105,7 @@
 				<tr>
 					<td colspan="5">
 						<div class="jlpart1">
-							<div class="jlName"><a href="/jump/user/personal_jlsee?jlid=${i.jlId}">${i.jlname}</a></div>
+							<div class="jlName"><a href="<%=path%>jump/user/personal_jlsee?jlid=${i.jlId}">${i.jlname}</a></div>
 							<div class="jlDate">更新时间：${i.scTime}</div>
 							<div class="jlFresh">更新</div>
 						</div>
@@ -118,7 +116,7 @@
 						<div class="jlpart2">
 							<div class="Orange" style="width:40px;"></div>
 						</div>
-						<div class="jlpart3">中文完整度 20 分 [ <a href="/user/gojlseeforupdate?jlid=${i.jlId}">修改</a>   <a href="/user/yulan?jlid=${i.jlId}">预览</a>   <a href="">下载</a>]</div>
+						<div class="jlpart3">中文完整度 20 分 [ <a href="<%=path%>user/gojlseeforupdate?jlid=${i.jlId}">修改</a>   <a href="<%=path%>user/yulan?jlid=${i.jlId}">预览</a>]</div>
 					</td>
 					<td rowspan="2">
 						<div class="jlpart4">
@@ -139,7 +137,7 @@
 					</td>
 					<td rowspan="2">
 						<input hidden value="${i.jlId}" id="jlid">
-						<a href="#" onclick="deletejl()">
+						<a href="#" onclick="deletejl('<%=path%>')">
 						<div class="jlpart4">
 							<div class="delicon"></div>
 							<div class="tdname">删除</div>
@@ -163,7 +161,7 @@
 		</div>
 		<div class="clear"></div>
 		<div class="addJl">
-			<a href="#" onclick="creatjl()">
+			<a href="#" onclick="creatjl('<%=path%>')">
 				<input hidden id="jlcount" value="${jllist.size()}">
 				<span>继续创建简历</span>
 				<label>（还可创建${4-jllist.size()}份简历）</label>

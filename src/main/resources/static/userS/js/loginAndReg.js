@@ -1,10 +1,10 @@
-function dologin(){
+function dologin(path){
 		var phone = $('#phone').val();
 		var password = $('#password').val();
 		//ajax
 		$.ajax({
 			type: "POST",
-			url: "/user/login",
+			url: path+"user/login",
 			dataType: "text",
 			data: {phone:phone,password:password},
 			success: function (flag) {
@@ -12,7 +12,7 @@ function dologin(){
 					window.alert('登录成功');
 					$("#phone").val('');
 					$("#password").val('');
-					window.location.href = '/user/index';
+					window.location.href = path+'user/index';
 				} else if (flag === 'noCode') {
 					window.alert('验证码不正确，请重新输入');
 				} else if (flag === 'noAccount') {
@@ -34,11 +34,11 @@ function dologin(){
 		});
 	}
 
-function regBlur() {
+function regBlur(path) {
 	var phoneReg = $('#phoneReg').val();
 	$.ajax({
 		type: "POST",
-		url: "/user/login",
+		url: path+"user/login",
 		dataType: "text",
 		data: {phone: phoneReg},
 		success: function (msg) {
@@ -49,13 +49,13 @@ function regBlur() {
 	});
 }
 
-function doreg(){
+function doreg(path){
 	var phoneReg = $('#phoneReg').val();
 	var passwordReg = $('#passwordReg').val();
 
 	$.ajax({
 		type: "POST",
-		url: "/user/reg",
+		url: path+"user/reg",
 		dataType: "text",
 		data:{phoneReg: phoneReg, passwordReg: passwordReg},
 		success: function (msg) {

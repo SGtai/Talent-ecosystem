@@ -34,8 +34,8 @@
 					<input type="button">
 					<div id="InfoPopup">
 						<ul>
-							<li><a href="/jump/user/personal_updatepsd">修改密码</a></li>
-							<li><a href="javascript:void(0)" onclick="tuichu2()">退出</a></li>
+							<li><a href="<%=path%>jump/user/personal_updatepsd">修改密码</a></li>
+							<li><a href="javascript:void(0)" onclick="tuichu2(<%=path%>)">退出</a></li>
 						</ul>
 					</div>
 				</div>
@@ -46,9 +46,9 @@
 <div class="navTop">
 	<div class="navTopmain">
 		<div class="nav">
-			<div class="navItem"><a href="/user/index">首页</a></div>
-			<div class="navItem"><a href="/jump/home/searchJob">职位搜索</a></div>
-			<div class="navItem"><a href="/techa">人才成长区</a></div>
+			<div class="navItem"><a href="<%=path%>/user/index">首页</a></div>
+			<div class="navItem"><a href="<%=path%>jump/home/searchJob">职位搜索</a></div>
+			<div class="navItem"><a href="<%=path%>techa">人才成长区</a></div>
 
 		</div>
 	</div>
@@ -58,32 +58,32 @@
 		<div class="NavLeftTop">个人中心</div>
 		<div class="NavLeftMain">
 			<div class="NavLeftBox">
-				<a href="/jump/user/personal" class="a1">会员首页</a>
+				<a href="<%=path%>jump/user/personal" class="a1">会员首页</a>
 			</div>
 			<div class="NavLeftBox active">
-				<a href="/user/gopersonaljl" class="a2">我的简历</a>
+				<a href="<%=path%>user/gopersonaljl" class="a2">我的简历</a>
 			</div>
 			<div class="NavLeftBox">
-				<a href="/jump/user/myschooll" class="a3">我的校友</a>
+				<a href="<%=path%>jump/user/myschooll" class="a3">我的校友</a>
 			</div>
 			<div class="NavLeftBox twoNav">
 				<a class="a5">职位申请</a>
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li><a href="/user/shenqinglist">申请的职位</a></li>
-				<li><a href="/user/shoucanglist">我的关注</a></li>
+				<li><a href="<%=path%>user/shenqinglist">申请的职位</a></li>
+				<li><a href="<%=path%>user/shoucanglist">我的关注</a></li>
 			</ul>
 			<div class="NavLeftBox twoNav">
 				<a class="a6">企业邀约</a>
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li><a href="/user/mianshi">面试通知</a></li>
-				<li><a href="/user/yaoyue">应聘邀请</a></li>
+				<li><a href="<%=path%>user/mianshi">面试通知</a></li>
+				<li><a href="<%=path%>user/yaoyue">应聘邀请</a></li>
 			</ul>
 			<div class="NavLeftBox">
-				<a href="/jump/user/personal_help" class="a8">帮助中心</a>
+				<a href="<%=path%>jump/user/personal_help" class="a8">帮助中心</a>
 			</div>
 		</div>
 
@@ -91,7 +91,7 @@
 	<div class="perRightcon layui-form">
 		<div class="seeTitle">
 			<div class="seeTitle2">
-				<a href="/user/gopersonaljl">返回简历列表</a>
+				<a href="<%=path%>user/gopersonaljl">返回简历列表</a>
 			</div>
 		</div>
 		<form class="layui-form" id="userinfojl">
@@ -244,7 +244,7 @@
 								 ${sessionScope.user.phone}
 							 </c:if>
 							</span>
-						<a href="/jump/user/personal_updatenum" class="updateph">修改手机号</a>
+						<a href="<%=path%>jump/user/personal_updatenum" class="updateph">修改手机号</a>
 						<span class="check1"></span>
 						<span class="ycname">接收短信面试通知</span>
 					</div>
@@ -292,7 +292,7 @@
 				<div class="clear"></div>
 			</div>
 			<div class="jldiv">
-				<a href="javascript:void(0)" class="save" onclick="userinfojl()">保存</a>
+				<a href="javascript:void(0)" class="save" onclick="userinfojl('<%=path%>')">保存</a>
 			</div>
 		</div>
 		</form>
@@ -389,7 +389,7 @@
 				</div>
 				<div class="clear"></div>
 				<div class="jldiv">
-					<a href="javascript:void(0)" class="save" onclick="yixiang()">保存</a>
+					<a href="javascript:void(0)" class="save" onclick="yixiang('<%=path%>')">保存</a>
 				</div>
 			</div>
 		</div>
@@ -447,7 +447,7 @@
 				</div>
 				<div class="clear"></div>
 				<div class="jldiv">
-					<a href="javascript:void(0)" class="save" onclick="jiaoyu(this)">保存</a>
+					<a href="javascript:void(0)" class="save" onclick="jiaoyu(this,'<%=path%>')">保存</a>
 				</div>
 			</div>
 			<div class="JlBoxRight">
@@ -455,7 +455,7 @@
 			</div>
 			<div class="clear"></div>
 			<div class="addcomeon">
-				<a href="javascript:void(0)" onclick="morejiaoyu()">继续添加教育背景</a>
+				<a href="javascript:void(0)" onclick="morejiaoyu('<%=path%>')">继续添加教育背景</a>
 			</div>
 			</form>
 		</div>
@@ -499,7 +499,7 @@
 							</div>
 							<div class="clear"></div>
 							<div class="jldiv">
-								<a href="javascript:void(0)" class="save" onclick="jiaoyu(this)">保存</a>
+								<a href="javascript:void(0)" class="save" onclick="jiaoyu(this,'<%=path%>')">保存</a>
 							</div>
 						</div>
 						<div class="JlBoxRight">
@@ -507,7 +507,7 @@
 						</div>
 						<div class="clear"></div>
 						<div class="addcomeon">
-							<a href="javascript:void(0)" onclick="morejiaoyu()">继续添加教育背景</a>
+							<a href="javascript:void(0)" onclick="morejiaoyu('<%=path%>')">继续添加教育背景</a>
 						</div>
 					</form>
 					<div class="clear"></div>
@@ -569,7 +569,7 @@
 				</div>
 				<div class="clear"></div>
 				<div class="jldiv">
-					<a href="javascript:void(0)" class="save" onclick="gongzuo(this)">保存</a>
+					<a href="javascript:void(0)" class="save" onclick="gongzuo(this,'<%=path%>')">保存</a>
 				</div>
 			</div>
 			<div class="JlBoxRight" style="width:100px">
@@ -577,7 +577,7 @@
 			</div>
 			<div class="clear"></div>
 			<div class="addcomeon">
-				<a href="javascript:void(0)" onclick="moregongzuo()">继续添加工作经历</a>
+				<a href="javascript:void(0)" onclick="moregongzuo('<%=path%>')">继续添加工作经历</a>
 			</div>
 			</form>
 		</div>
@@ -627,7 +627,7 @@
 							</div>
 							<div class="clear"></div>
 							<div class="jldiv">
-								<a href="javascript:void(0)" class="save" onclick="gongzuo(this)">保存</a>
+								<a href="javascript:void(0)" class="save" onclick="gongzuo(this,'<%=path%>')">保存</a>
 							</div>
 						</div>
 						<div class="JlBoxRight" style="width:100px">
@@ -635,7 +635,7 @@
 						</div>
 						<div class="clear"></div>
 						<div class="addcomeon">
-							<a href="javascript:void(0)" onclick="moregongzuo()">继续添加工作经历</a>
+							<a href="javascript:void(0)" onclick="moregongzuo('<%=path%>')">继续添加工作经历</a>
 						</div>
 					</form>
 				</div>
@@ -661,7 +661,7 @@
 				</div>
 				<div class="clear"></div>
 				<div class="jldiv">
-					<a href="javascript:void(0)" class="save" onclick="zhengshu()">保存</a>
+					<a href="javascript:void(0)" class="save" onclick="zhengshu('<%=path%>')">保存</a>
 				</div>
 			</div>
 			<div class="JlBoxRight">
@@ -686,7 +686,7 @@
 					</div>
 					<div class="clear"></div>
 					<div class="jldiv">
-						<a href="javascript:void(0)" class="save" onclick="pingjia()">保存</a>
+						<a href="javascript:void(0)" class="save" onclick="pingjia('<%=path%>')">保存</a>
 					</div>
 				</div>
 				<div class="JlBoxRight">

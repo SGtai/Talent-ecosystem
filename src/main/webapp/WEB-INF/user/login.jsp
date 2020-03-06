@@ -24,12 +24,12 @@
 <body>
 <div class="header">
 	<div class="mainwarp">
-		<div class="logo"><a href="index.html"><img src=<%=imagesPath+"log.png"%>/></a></div>
+		<div class="logo"><a href="<%=path%>user/index"><img src=<%=imagesPath+"log.png"%>/></a></div>
 		<div class="welcome">欢迎登录</div>
 		<div class="headerright">
 <%--			<a href="loginCompany.html">企业登录</a>--%>
 			<span>|</span>
-			<a href="/jump/home/index">返回首页</a>
+			<a href="<%=path%>user/index">返回首页</a>
 		</div>
 	</div>
 </div>
@@ -55,10 +55,10 @@
 						<input id="password" name="password" type="text" placeholder="请输入密码"/>
 					</div>
 					<div class="logobtn">
-						<a href="javascript:void(0)" onclick="dologin()" >登  录</a>
+						<a href="javascript:void(0)" onclick="dologin('<%=path%>')" >登  录</a>
 					</div>
 					<div class="zcbtn">
-						<a href="/jump/user/reg">还没有账号？立即注册</a>
+						<a href="<%=path%>jump/user/reg">还没有账号？立即注册</a>
 					</div>
 				</div>
 			</form>

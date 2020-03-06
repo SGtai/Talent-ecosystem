@@ -7,12 +7,12 @@ layui.use(['table', 'layer', 'jquery', 'form'], function () {
 
 	var searchJobText = $('#searchJobText').val();
 	var postiontype  = $("#postiontype").val();
-
+	var path = $("#path").val();
 	//第一个实例
 	table.render({
 		elem: '#searchJob'
 		// , height: 312
-		, url: '/homeS/searchJob' //数据接口
+		, url: path+'homeS/searchJob' //数据接口
 		, page: true //开启分页
 		, limit: 10
 		, where:{postion:searchJobText,postiontype:postiontype}
@@ -34,7 +34,7 @@ layui.use(['table', 'layer', 'jquery', 'form'], function () {
 	form.on('submit(tijiao)', function(data){
 
 		table.reload('searchJob', {
-			url: "/homeS/searchJob"
+			url: path+"homeS/searchJob"
 			,where:data.field
 			, page: {
 				curr: 1 //重新从第 1 页开始
@@ -47,7 +47,7 @@ layui.use(['table', 'layer', 'jquery', 'form'], function () {
 		form.on('submit(searchBtn)', function(data){
 
 			table.reload('searchJob', {
-				url: "/homeS/searchJob"
+				url: path+"homeS/searchJob"
 				,where:data.field
 				, page: {
 					curr: 1 //重新从第 1 页开始
@@ -90,7 +90,7 @@ layui.use(['table', 'layer', 'jquery', 'form'], function () {
 		if (layEvent === 'shoucang') {
 			$.ajax({
 				type: "POST",
-				url: "/user/shoucang",
+				url: path+"user/shoucang",
 				dataType: "text",
 				data:{zpxxid:zpxxid},
 				success: function (msg1) {
@@ -108,7 +108,7 @@ layui.use(['table', 'layer', 'jquery', 'form'], function () {
 			//发送ajax获取用户简历列表
 			$.ajax({
 				type: "POST",
-				url: "/user/getjllist",
+				url: path+"user/getjllist",
 				dataType: "text",
 				success: function (msg1) {
 					var msg = eval(msg1);
@@ -127,7 +127,7 @@ layui.use(['table', 'layer', 'jquery', 'form'], function () {
 							layer.confirm('确定向此家公司投递此份简历？', function (index) {
 									$.ajax({
 										type: "POST",
-										url: "/user/toudi",
+										url: path+"user/toudi",
 										dataType: "text",
 										data:{jlid:jlid,qyid:qyid,zpxxid:zpxxid},
 										success: function (msg1) {

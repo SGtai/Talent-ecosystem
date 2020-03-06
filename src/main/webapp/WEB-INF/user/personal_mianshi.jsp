@@ -37,8 +37,8 @@
 					<input type="button">
 					<div id="InfoPopup">
 						<ul>
-							<li><a href="/jump/user/personal_updatepsd">修改密码</a></li>
-							<li><a href="javascript:void(0)" onclick="tuichu2()">退出</a></li>
+							<li><a href="<%=path%>jump/user/personal_updatepsd">修改密码</a></li>
+							<li><a href="javascript:void(0)" onclick="tuichu2('<%=path%>')">退出</a></li>
 						</ul>
 					</div>
 				</div>
@@ -50,9 +50,9 @@
 <div class="navTop">
 	<div class="navTopmain">
 		<div class="nav">
-			<div class="navItem"><a href="/user/index">首页</a></div>
-			<div class="navItem"><a href="/jump/home/searchJob">职位搜索</a></div>
-			<div class="navItem"><a href="/techa">人才成长区</a></div>
+			<div class="navItem"><a href="<%=path%>user/index">首页</a></div>
+			<div class="navItem"><a href="<%=path%>jump/home/searchJob">职位搜索</a></div>
+			<div class="navItem"><a href="<%=path%>techa">人才成长区</a></div>
 		</div>
 	</div>
 </div>
@@ -61,33 +61,30 @@
 		<div class="NavLeftTop">个人中心</div>
 		<div class="NavLeftMain">
 			<div class="NavLeftBox">
-				<a href="/jump/user/personal" class="a1">会员首页</a>
+				<a href="<%=path%>jump/user/personal" class="a1">会员首页</a>
 			</div>
 			<div class="NavLeftBox">
-				<a href="/user/gopersonaljl" class="a2">我的简历</a>
+				<a href="<%=path%>user/gopersonaljl" class="a2">我的简历</a>
 			</div>
 			<div class="NavLeftBox">
-				<a href="/jump/user/myschooll" class="a3">我的校友</a>
+				<a href="<%=path%>jump/user/myschooll" class="a3">我的校友</a>
 			</div>
 			<div class="NavLeftBox twoNav">
 				<a class="a5">职位申请</a>
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li class="orang"><a href="/user/shenqinglist">申请的职位</a></li>
-				<li><a href="/user/shoucanglist">我的关注</a></li>
+				<li class="orang"><a href="<%=path%>user/shenqinglist">申请的职位</a></li>
+				<li><a href="<%=path%>user/shoucanglist">我的关注</a></li>
 			</ul>
 			<div class="NavLeftBox twoNav">
 				<a class="a6">企业邀约</a>
 				<span class="up"></span>
 			</div>
 			<ul>
-				<li class="orang"><a href="/user/mianshi">面试通知</a></li>
-				<li><a href="/user/yaoyue">应聘邀请</a></li>
+				<li class="orang"><a href="<%=path%>user/mianshi">面试通知</a></li>
+				<li><a href="<%=path%>user/yaoyue">应聘邀请</a></li>
 			</ul>
-			<div class="NavLeftBox">
-				<a href="personal_help.html" class="a8">帮助中心</a>
-			</div>
 		</div>
 	</div>
 	<div class="perRightcon">
@@ -115,13 +112,13 @@
 					<c:forEach items="${list}" begin="0" var="i">
 						<tr>
 							<td valign="middle">
-								<a href="/user/jobinfo?id1=${i.qyid}&id2=${i.zpxxid}">${i.postion}</a>
+								<a href="<%=path%>user/jobinfo?id1=${i.qyid}&id2=${i.zpxxid}">${i.postion}</a>
 							</td>
 							<td><a href="#" class="cpname">${i.qyName}</a></td>
 							<td><span>${i.jlname}</span></td>
 							<td><span>${i.sctime}</span></td>
 							<td><span style="color:#707070">邀请面试</span></td>
-							<td><a href="javascript:void(0)" onclick="msresultOk(${i.cxrzId})">接收邀请</a>&nbsp;&nbsp;<a href="javascript:void(0)" onclick="msresultNo(${i.cxrzId})">拒绝邀请</a></td>
+							<td><a href="javascript:void(0)" onclick="msresultOk(${i.cxrzId},'<%=path%>')">接收邀请</a>&nbsp;&nbsp;<a href="javascript:void(0)" onclick="msresultNo(${i.cxrzId},'<%=path%>')">拒绝邀请</a></td>
 						</tr>
 					</c:forEach>
 				</c:if>

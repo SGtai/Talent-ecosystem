@@ -8,10 +8,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-	String cssPath = application.getContextPath()+"/homeS/css/";
-	String jsPath = application.getContextPath()+"/homeS/js/";
+	String cssPath = application.getContextPath()+"homeS/css/";
+	String jsPath = application.getContextPath()+"homeS/js/";
 	String path = application.getContextPath()+"/";
-	String imagesPath =application.getContextPath()+"/homeS/images/";
+	String imagesPath =application.getContextPath()+"homeS/images/";
 	String dbimgPath ="../../uploadS/images/";
 %>
 <!DOCTYPE html>
@@ -32,7 +32,7 @@
 	$.ajax(
 		{type:"POST",
 			async:false,
-			url:"/homeS/getTenHJob",
+			url:"<%=path+"homeS/getTenHJob"%>",
 			dataType:"text",
 			success:function (msg) {
 				window.location.href=window.location;
@@ -66,7 +66,7 @@
 			<span class="span2"></span>
 		</div>
 	</div>
-	<form method="post" action="/homeS/jumpsearch">
+	<form method="post" action=<%=path+"homeS/jumpsearch"%>>
 	<div class="loginC">
 		<input name="searchText" type="text" placeholder="请填写关键词或选择职位..."/>
 		<a href=""><button type="submit" style="margin-left: 39px;width: 118px;height: 46px; background-color:transparent;border-style:none;" id="searchIndx" ></button></a>
@@ -77,10 +77,10 @@
 	</div>
 </div>
 <div class="menuDiv">
-	<a href="index.html" class="onnav">首页</a>
-	<a href="/techa">人才成长区</a>
-	<a href="/jump/home/searchJob">职位搜索</a>
-	<a href="/jump/admin/login">高校专区</a>
+	<a href="<%=path%>jump/home/index" class="onnav">首页</a>
+	<a href="<%=path%>techa">人才成长区</a>
+	<a href="<%=path+"jump/home/searchJob"%>">职位搜索</a>
+	<a href="<%=path+"jump/admin/login"%>">高校专区</a>
 	<a href=" " class="mobile">微信版</a>
 </div>
 <div class="BodyMain">
@@ -89,62 +89,62 @@
 			<ul>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme7"><b></b><a href="/homeS/jumpsearch?type=1"> 技术</a></span>
+						<span class="itme7"><b></b><a href="<%=path+"homeS/jumpsearch?type=1"%>"> 技术</a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme1"><b></b><a href="/homeS/jumpsearch?type=2"> 市场</a></span>
+						<span class="itme1"><b></b><a href="<%=path+"homeS/jumpsearch?type=2"%>"> 市场</a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme2"><b></b><a href="/homeS/jumpsearch?type=3"> 人事</a></span>
+						<span class="itme2"><b></b><a href="<%=path+"homeS/jumpsearch?type=3"%>"> 人事</a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme6"><b></b><a href="/homeS/jumpsearch?type=4"> 媒体</a></span>
+						<span class="itme6"><b></b><a href="<%=path+"homeS/jumpsearch?type=4"%>"> 媒体</a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme8"><b></b><a href="/homeS/jumpsearch?type=5"> 金融</a></span>
+						<span class="itme8"><b></b><a href="<%=path+"homeS/jumpsearch?type=5"%>"> 金融</a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme9"><b></b><a href="/homeS/jumpsearch?type=6"> 医疗健康</a></span>
+						<span class="itme9"><b></b><a href="<%=path+"homeS/jumpsearch?type=6"%>"> 医疗健康</a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme3"><b></b><a href="/homeS/jumpsearch?type=7"> 供应链/物流</a></span>
+						<span class="itme3"><b></b><a href="<%=path+"homeS/jumpsearch?type=7"%>"> 供应链/物流</a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme10"><b></b><a href="/homeS/jumpsearch?type=8"> 房地产/建筑</a></span>
+						<span class="itme10"><b></b><a href="<%=path+"homeS/jumpsearch?type=8"%>"> 房地产/建筑</a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme4"><b></b><a href="/homeS/jumpsearch?type=9"> 咨询/翻译/法律/教育</a></span>
+						<span class="itme4"><b></b><a href="<%=path+"homeS/jumpsearch?type=9"%>"> 咨询/翻译/法律/教育</a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme5"><b></b><a href="/homeS/jumpsearch?type=10"> 旅游></a></span>
+						<span class="itme5"><b></b><a href="<%=path+"homeS/jumpsearch?type=10"%>"> 旅游></a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme12"><b></b><a href="/homeS/jumpsearch?type=11"> 服务业</a></span>
+						<span class="itme12"><b></b><a href="<%=path+"homeS/jumpsearch?type=11"%>"> 服务业</a></span>
 					</div>
 				</div>
 				<div class="items">
 					<div class="itemOne">
-						<span class="itme11"><b></b><a href="/homeS/jumpsearch?type=12"> 生产制造</a></span>
+						<span class="itme11"><b></b><a href="<%=path+"homeS/jumpsearch?type=12"%>"> 生产制造</a></span>
 					</div>
 				</div>
 			</ul>
@@ -184,14 +184,14 @@
 								<P style="margin-top: 46px;font-size: 20px;">欢迎您，用户${sessionScope.user.phone}</P>
 							</div>
 							<div class="qybox0">
-								<a href="/jump/user/personal">个人中心</a>
-								<a href="javascript:tuichu()">退出</a>
+								<a href="<%=path+"jump/user/personal"%>">个人中心</a>
+								<a href="javascript:tuichu(<%=path%>)">退出</a>
 							</div>
 						</div>
 						<div class="ContentB">
 							<div class="qybox1">
-								<a href="/jump/admin/login">企业入口</a>
-								<a href="/company/companyLogin">企业注册</a>
+								<a href="<%=path+"jump/admin/login"%>">企业入口</a>
+								<a href="<%=path+"company/companyLogin"%>">企业注册</a>
 							</div>
 							<div class="qybox2">
 								<p>注册后可<b>免费</b>升级为<b>普通会员</b><br>不花钱也能完成中低职位的招聘</p>
@@ -226,8 +226,8 @@
 				<div class="loginmain">
 					<div class="ContentA">
 						<div class="qybox0">
-							<a href="/jump/user/login">个人登录</a>
-							<a href="/jump/user/reg">个人注册</a>
+							<a href=<%=path+"jump/user/login"%>>个人登录</a>
+							<a href=<%=path+"jump/user/reg"%>>个人注册</a>
 						</div>
 						<div class="qybox2">
 							<p>&nbsp;注册后可<b>直接</b>成为<b>普通会员</b><br>即刻可开始寻求您的中意职位</p>
@@ -236,8 +236,8 @@
 
 					<div class="ContentB">
 						<div class="qybox1">
-							<a href="/jump/admin/login">企业入口</a>
-							<a href="/company/companyLogin">企业注册</a>
+							<a href=<%=path+"jump/admin/login"%>>企业入口</a>
+							<a href=<%=path+"company/companyLogin"%>>企业注册</a>
 						</div>
 						<div class="qybox2">
 							<p>注册后可<b>免费</b>升级为<b>普通会员</b><br>不花钱也能完成中低职位的招聘</p>
@@ -338,7 +338,7 @@
 			<c:if test="${sessionScope.jobInfolist != null}">
 				<c:forEach items="${sessionScope.jobInfolist}" begin="0" var="i">
 					<div class="divBox">
-						<a href=/user/jobinfo?id1=${i.qyid}&id2=${j.zpxxid}><img src=<%=dbimgPath%>${i.qyPicture} width="84"/></a>
+						<a href=<%=path%>user/jobinfo?id1=${i.qyid}&id2=${j.zpxxid}><img src=<%=dbimgPath%>${i.qyPicture} width="84"/></a>
 						<p class="tit"><a href="">${i.postion}</a></p>
 						<p class="sub"><a href="">${i.qyName}</a></p>
 						<p class="num"><span>${i.salaryLow}-${i.salaryHigh}</span></p>
@@ -368,7 +368,7 @@
 							<c:if test="${status.index == 2}">
 								<br>
 							</c:if>
-							<span><a href=/user/jobinfo?id1=${i.qyid}&id2=${j.zpxxid}>${j.postion}</a></span>
+							<span><a href=<%=path%>user/jobinfo?id1=${i.qyid}&id2=${j.zpxxid}>${j.postion}</a></span>
 						</c:forEach>
 					</c:if>
 					</li>

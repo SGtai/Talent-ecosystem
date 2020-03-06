@@ -19,17 +19,18 @@ $(document).ready(function () {
 		   $(this).find('span.up').addClass('down');
 		   $(this).next('ul').css('display','none');
 		} 
-	})
+	});
 	
 	//简历状态  已公开 已隐藏
 	$('.statusjl').click(function(){
+		var path = $('#path').val();
 	   if($(this).attr("class")=="statusjl on"){
 	   	// 隐藏
 		   var jlid = $('#jlid').val();
 		   $.ajax({
 			   type: "POST",
 			   asyn: false,
-			   url: "/user/closejl",
+			   url: path+"user/closejl",
 			   data: {jlid:jlid},
 			   success: function (msg) {
 				   if (msg == "true") {
@@ -44,7 +45,7 @@ $(document).ready(function () {
 		   var jlid = $('#jlid').val();
 		   $.ajax({
 			   type: "POST",
-			   url: "/user/openjl",
+			   url: path+"user/openjl",
 			   asyn: false,
 			   data: {jlid:jlid},
 			   success: function (msg) {
@@ -187,29 +188,29 @@ $(document).ready(function () {
    
 })
 
-function creatjl(){
+function creatjl(path){
 	var count = $('#jlcount').val();
 	if(count == 4){
 		window.alert("简历已满，请删除或更新简历")
 	}else{
-		window.location.href = "/user/gojl";
+		window.location.href = path+"user/gojl";
 	}
 
 }
 
-function tuichu2() {
+function tuichu2(path) {
 	layui.use(['layer', 'jquery', 'form'], function () {
 		var layer = layui.layer;
 
 		layer.confirm('确定退出用户登录吗？', function (index) {
-			window.location.href = "/user/tuichu2";
+			window.location.href = path+"user/tuichu2";
 			layer.close(index);
 		});
 
 	});
 }
 
-	function toudi(){
+	function toudi(path){
 		layui.use(['layer', 'jquery', 'form'], function () {
 			var layer = layui.layer
 				, $ = layui.jquery
@@ -220,7 +221,7 @@ function tuichu2() {
 
 				$.ajax({
 					type: "POST",
-					url: "/user/getjllist",
+					url: path+"user/getjllist",
 					dataType: "text",
 					success: function (msg1) {
 						var msg = eval(msg1);
@@ -239,7 +240,7 @@ function tuichu2() {
 								layer.confirm('确定向此职位投递此份简历？', function (index) {
 									$.ajax({
 										type: "POST",
-										url: "/user/toudi",
+										url: path+"user/toudi",
 										dataType: "text",
 										data:{jlid:jlid,qyid:qyid,zpxxid:zpxxid},
 										success: function (msg1) {
@@ -266,10 +267,10 @@ function tuichu2() {
 
 };
 
-function qxguanzhu(msg) {
+function qxguanzhu(msg,path) {
 	$.ajax({
 		type: "POST",
-		url: "/user/qxguanzhu",
+		url: path+"user/qxguanzhu",
 		dataType: "text",
 		data: {zpxxid: msg},
 		success: function (msg1) {

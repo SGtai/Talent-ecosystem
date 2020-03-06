@@ -25,7 +25,7 @@
 </head>
 
 <body>
-
+<input hidden value="<%=path%>" id="path">
 <div class="topDiv">
 	<div class="topL">
 		<div class="logo">
@@ -39,23 +39,13 @@
 	<div class="mainWarp">
 		<ul>
 			<li><a href=<%=path+"jump/home/index"%>>首页</a></li>
-			<li><a href="personal.html">个人中心</a></li>
 			<li class="onmenu"><a href=<%=path+"jump/home/searchJob"%>>职位搜索</a></li>
-			<li><a href="meetingJob.html">招聘会</a></li>
-			<li><a href="jobnews.html">就业资讯</a></li>
-			<li><a href="download.html">文档下载</a></li>
-			<li><a href="helpJob.html">求职互助</a></li>
 			<div class="clear"></div>
 		</ul>
 	</div>
 </div>
 <div class="clear"></div>
 <div class="menuLittle">
-	<div class="menuselect"><a href="searchJob.html" class="on">高级搜索</a></div>
-	<div class="menuselect"><a href="searchJob_map.html">地图搜索</a></div>
-	<div class="menuselect"><a href="searchJob_new.html">最新职位</a></div>
-	<div class="menuselect"><a href="searchJob_hot.html">热门搜索</a></div>
-	<div class="menuselect"><a href="searchJob_jianzhi.html">兼职招聘</a></div>
 	<div class="clear"></div>
 </div>
 <div class="clear"></div>

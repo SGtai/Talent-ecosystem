@@ -45,7 +45,7 @@
 					<div id="InfoPopup">
 						<ul>
 							<li><a href="/jump/user/personal_updatepsd">修改密码</a></li>
-							<li><a href="javascript:void(0)" onclick="tuichu2()">退出</a></li>
+							<li><a href="javascript:void(0)" onclick="tuichu2('<%=path%>')">退出</a></li>
 						</ul>
 					</div>
 				</div>

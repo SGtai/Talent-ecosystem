@@ -1,9 +1,9 @@
-function personal_jlupdate(){
+function personal_jlupdate(path){
 
 	var s = $('#jl1').serialize();
 	$.ajax({
 		type: "POST",
-		url: "/user/gerenInfo",
+		url: path+"user/gerenInfo",
 		dataType: "text",
 		data: s,
 		success: function (msg) {
@@ -14,11 +14,11 @@ function personal_jlupdate(){
 	});
 }
 
-function userinfojl() {
+function userinfojl(path) {
 	var s = $('#userinfojl').serialize();
 	$.ajax({
 		type: "POST",
-		url: "/user/userInfojl",
+		url: path+"user/userInfojl",
 		dataType: "text",
 		data: s,
 		success: function (msg) {
@@ -28,11 +28,11 @@ function userinfojl() {
 		}
 	});
 }
-function yixiang() {
+function yixiang(path) {
 	var s = $('#yixiang').serialize();
 	$.ajax({
 		type: "POST",
-		url: "/user/yixiang",
+		url: path+"user/yixiang",
 		dataType: "text",
 		data: s,
 		success: function (msg) {
@@ -42,12 +42,12 @@ function yixiang() {
 		}
 	});
 }
-function jiaoyu(msg) {
+function jiaoyu(msg,path) {
 	var formid = msg.parentNode.parentNode.parentNode.id;
 	var s = $('#'+formid).serialize();
 	$.ajax({
 		type: "POST",
-		url: "/user/jiaoyu",
+		url: path+"user/jiaoyu",
 		dataType: "text",
 		data: s,
 		success: function (msg) {
@@ -58,12 +58,12 @@ function jiaoyu(msg) {
 	});
 }
 
-function gongzuo(msg) {
+function gongzuo(msg,path) {
 	var formid = msg.parentNode.parentNode.parentNode.id;
 	var s = $('#'+formid).serialize();
 	$.ajax({
 		type: "POST",
-		url: "/user/gongzuo",
+		url: path+"user/gongzuo",
 		dataType: "text",
 		data: s,
 		success: function (msg) {
@@ -74,11 +74,11 @@ function gongzuo(msg) {
 	});
 }
 
-function zhengshu() {
+function zhengshu(path) {
 	var s = $('#zhengshu').serialize();
 	$.ajax({
 		type: "POST",
-		url: "/user/zhengshu",
+		url: path+"user/zhengshu",
 		dataType: "text",
 		data: s,
 		success: function (msg) {
@@ -89,11 +89,11 @@ function zhengshu() {
 	});
 }
 
-function pingjia() {
+function pingjia(path) {
 	var s = $('#pingjia').serialize();
 	$.ajax({
 		type: "POST",
-		url: "/user/pingjia",
+		url: path+"user/pingjia",
 		dataType: "text",
 		data: s,
 		success: function (msg) {
@@ -104,12 +104,12 @@ function pingjia() {
 	});
 }
 
-function morejiaoyu(){
+function morejiaoyu(path){
 
 	var jlid = $('#jlId').val();
 	$.ajax({
 		type: "POST",
-		url: "/user/morejiaoyu",
+		url: path+"user/morejiaoyu",
 		dataType: "text",
 		data:{jlid:jlid},
 		success: function (msg) {
@@ -148,7 +148,7 @@ function morejiaoyu(){
 				"\t\t\t\t</div>\n" +
 				"\t\t\t\t<div class=\"clear\"></div>\n" +
 				"\t\t\t\t<div class=\"jldiv\">\n" +
-				"\t\t\t\t\t<a href=\"javascript:void(0)\" class=\"save\" onclick=\"jiaoyu(this)\">保存</a>\n" +
+				"\t\t\t\t\t<a href=\"javascript:void(0)\" class=\"save\" onclick=\"jiaoyu(this,'<%=path>')\">保存</a>\n" +
 				"\t\t\t\t</div>\n" +
 				"\t\t\t</div>\n" +
 				"\t\t\t<div class=\"JlBoxRight\">\n" +
@@ -156,7 +156,7 @@ function morejiaoyu(){
 				"\t\t\t</div>\n" +
 				"\t\t\t<div class=\"clear\"></div>\n" +
 				"\t\t\t<div class=\"addcomeon\">\n" +
-				"\t\t\t\t<a href=\"javascript:void(0)\" onclick=\"morejiaoyu()\">继续添加教育背景</a>\n" +
+				"\t\t\t\t<a href=\"javascript:void(0)\" onclick=\"morejiaoyu('<%=path>')\">继续添加教育背景</a>\n" +
 				"\t\t\t</div>\n" +
 				"\t\t\t</form>";
 			$('#jiaoyudiv').append(s);
@@ -166,12 +166,12 @@ function morejiaoyu(){
 
 }
 
-function moregongzuo(){
+function moregongzuo(path){
 
 	var jlid = $('#jlId').val();
 	$.ajax({
 		type: "POST",
-		url: "/user/moregongzuo",
+		url: path+"user/moregongzuo",
 		dataType: "text",
 		data:{jlid:jlid},
 		success: function (msg) {
@@ -213,7 +213,7 @@ function moregongzuo(){
 				"\t\t\t\t</div>\n" +
 				"\t\t\t\t<div class=\"clear\"></div>\n" +
 				"\t\t\t\t<div class=\"jldiv\">\n" +
-				"\t\t\t\t\t<a href=\"javascript:void(0)\" class=\"save\" onclick=\"gongzuo(this)\">保存</a>\n" +
+				"\t\t\t\t\t<a href=\"javascript:void(0)\" class=\"save\" onclick=\"gongzuo(this,'<%=path>')\">保存</a>\n" +
 				"\t\t\t\t</div>\n" +
 				"\t\t\t</div>\n" +
 				"\t\t\t<div class=\"JlBoxRight\" style=\"width:100px\">\n" +
@@ -221,7 +221,7 @@ function moregongzuo(){
 				"\t\t\t</div>\n" +
 				"\t\t\t<div class=\"clear\"></div>\n" +
 				"\t\t\t<div class=\"addcomeon\">\n" +
-				"\t\t\t\t<a href=\"javascript:void(0)\" onclick=\"moregongzuo()\">继续添加工作经历</a>\n" +
+				"\t\t\t\t<a href=\"javascript:void(0)\" onclick=\"moregongzuo('<%=path>')\">继续添加工作经历</a>\n" +
 				"\t\t\t</div>\n" +
 				"\t\t\t</form>";
 			$('#gongzuodiv').append(s);
@@ -230,11 +230,11 @@ function moregongzuo(){
 
 }
 
-function deletejl(){
+function deletejl(path){
 	var jlid = $('#jlid').val();
 	$.ajax({
 		type: "POST",
-		url: "/user/deletejl",
+		url: path+"user/deletejl",
 		dataType: "text",
 		data: {jlid:jlid},
 		success: function (msg) {
@@ -246,10 +246,10 @@ function deletejl(){
 	});
 }
 
-function msresultOk(msg) {
+function msresultOk(msg,path) {
 	$.ajax({
 		type: "POST",
-		url: "/user/msresultOk",
+		url: path+"user/msresultOk",
 		dataType: "text",
 		data: {cxrzId:msg},
 		success: function (msg) {
@@ -261,10 +261,10 @@ function msresultOk(msg) {
 	});
 }
 
-function msresultNo(msg) {
+function msresultNo(msg,path) {
 	$.ajax({
 		type: "POST",
-		url: "/user/msresultNo",
+		url: path+"user/msresultNo",
 		dataType: "text",
 		data: {cxrzId:msg},
 		success: function (msg) {
@@ -276,7 +276,7 @@ function msresultNo(msg) {
 	});
 }
 
-function passsure() {
+function passsure(path) {
 
 	var newpassword = $('#newpassword').val();
 	var newpassword2 = $('#newpassword2').val();
@@ -289,7 +289,7 @@ function passsure() {
 			}else {
 			$.ajax({
 				type: "POST",
-				url: "/user/password",
+				url: path+"user/password",
 				dataType: "text",
 				data: {password:password},
 				success: function (msg) {

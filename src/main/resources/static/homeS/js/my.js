@@ -67,10 +67,10 @@ $(document).ready(function () {
 
 });
 
-function tuichu() {
+function tuichu(path) {
 	$.ajax({
 		type: "POST",
-		url: "/user/tuichu",
+		url: path+"user/tuichu",
 		async:false,
 		dataType: "text",
 		success: function (flag) {
