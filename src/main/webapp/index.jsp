@@ -12,7 +12,7 @@
 	String jsPath = application.getContextPath()+"/homeS/js/";
 	String path = application.getContextPath()+"/";
 	String imagesPath =application.getContextPath()+"/homeS/images/";
-	String dbimgPath =application.getContextPath()+"/images/";
+	String dbimgPath ="../../uploadS/images/";
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -342,7 +342,7 @@
 			<c:if test="${sessionScope.jobInfolist != null}">
 				<c:forEach items="${sessionScope.jobInfolist}" begin="0" var="i">
 					<div class="divBox">
-						<a href=/user/jobinfo?id1=${i.qyid}&id2=${j.zpxxid}><img src=<%=imagesPath%>${i.qyPicture} width="84"/></a>
+						<a href=/user/jobinfo?id1=${i.qyid}&id2=${j.zpxxid}><img src=<%=dbimgPath%>${i.qyPicture} width="84"/></a>
 						<p class="tit"><a href="">${i.postion}</a></p>
 						<p class="sub"><a href="">${i.qyName}</a></p>
 						<p class="num"><span>${i.salaryLow}-${i.salaryHigh}</span></p>
