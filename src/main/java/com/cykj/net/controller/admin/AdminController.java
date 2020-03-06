@@ -9,6 +9,7 @@ import com.cykj.net.javabean.admin.AdminMenu;
 import com.cykj.net.service.CompanyService;
 import com.cykj.net.service.admin.AdminService;
 import com.cykj.net.util.GetCode;
+import com.cykj.net.util.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -47,7 +50,7 @@ public class AdminController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public @ResponseBody
-    String login(Admin getAdmin, HttpSession session) {
+    String login(Admin getAdmin, HttpSession session) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         //获取验证码
         String sessionVerifyCode = (String) session.getAttribute("verifyCodeValue");
         //验证验证码
@@ -60,7 +63,7 @@ public class AdminController {
             return "noAccount";
         }
         //判断密码是否一致
-        if (!getAdmin.getPassword().equals(findAdmin.getPassword())) {
+        if (!MD5.checkpassword(getAdmin.getPassword(),findAdmin.getPassword())) {
             return "false";
         }
         //判断用户的状态是否可登录

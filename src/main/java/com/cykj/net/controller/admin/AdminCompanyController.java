@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+
 
 @Controller
 @RequestMapping("/adminCompany")
@@ -59,7 +62,7 @@ public class AdminCompanyController {
     @Log(type = "修改操作",event = "修改企业密码")
     @RequestMapping(value = "/updatePassword")
     @ResponseBody
-    public String updatePasswordLog(String qyAccount){
+    public String updatePasswordLog(String qyAccount) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         return adminComanyService.updatePassword(qyAccount);
     }
 
