@@ -83,7 +83,7 @@
 				, {field: 'yhId', title: 'yhId', width:80,hide: true}
 				, {field: 'cxrzId', title: 'cxrzId', width:80,hide: true}
 				, {field: 'zpxxid', title: 'zpxxid', width:80,hide: true}
-				, {field: 'paid', title: 'paid', width:80}
+				, {field: 'paid', title: 'paid', width:80,hide: true}
 				// , {field: 'type', title: '应聘行业', width: 150}
 				// , {field: 'postion', title: '应聘岗位', width: 200}
 				, {field: 'yhname', title: '名字', width: 150}
