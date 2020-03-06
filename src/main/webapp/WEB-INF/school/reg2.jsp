@@ -201,7 +201,6 @@
 						})
 					}
 					, done: function (msg) {
-						alert(msg);
 						if(msg=="0"){
 							alert("注册失败,该账号已经被其他管理员注册了");
 						}else if(msg=="-1"){
