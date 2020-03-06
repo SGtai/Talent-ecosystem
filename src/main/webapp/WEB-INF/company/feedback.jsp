@@ -10,6 +10,7 @@
 <%
 	String path = application.getContextPath()+"/layui/";
 	String jsPath = application.getContextPath()+"/companys/js/";
+	String Path=application.getContextPath();
 %>
 <html>
 <head>
@@ -46,7 +47,7 @@
 	</div>
 </form>
 <table id="demo" lay-filter="test"></table>
-
+<input id="Path" type="hidden" value="<%=Path%>" />
 <script src=<%=path + "jquery-3.4.1.js"%> ></script>
 <script src=<%=path + "layui.js"%>></script>
 <script src="<%=path+"json2.js"%>"></script>
@@ -61,6 +62,8 @@
 	</button>
 </script>
 <script type="text/javascript">
+	var Path=$('#Path').val();
+
 	layui.use(['form', 'layer', 'jquery','table'], function() {
 		var table = layui.table;
 		var layer = layui.layer;
@@ -71,7 +74,7 @@
 		table.render({
 			elem: '#demo'
 			, height: 280
-			, url: "/company/feedback" //数据接口
+			, url: Path+"/company/feedback" //数据接口
 			, page: true //开启分页
 			, limit: 5
 			, limits: [5, 10, 20, 50, 100]
@@ -80,7 +83,7 @@
 				, {field: 'yhId', title: 'yhId', width:80,hide: true}
 				, {field: 'cxrzId', title: 'cxrzId', width:80,hide: true}
 				, {field: 'zpxxid', title: 'zpxxid', width:80,hide: true}
-				, {field: 'paid', title: 'paid', width:80}
+				, {field: 'paid', title: 'paid', width:80,hide: true}
 				// , {field: 'type', title: '应聘行业', width: 150}
 				// , {field: 'postion', title: '应聘岗位', width: 200}
 				, {field: 'yhname', title: '名字', width: 150}
@@ -99,7 +102,7 @@
 			var paid=$('#paid').val();
 			alert(paid);
 			table.reload('table1', {
-				url: "/company/feedback"
+				url: Path+"/company/feedback"
 				, where: { //设定异步数据接口的额外参数，任意设
 					paid: paid
 				}
@@ -113,7 +116,7 @@
 				,layEvent = obj.event; //获得 lay-event 对应的值
 			//查看简历
 			if(layEvent === 'detail'){
-				window.location.href="/company/yulan?jlid="+data.jlId
+				window.location.href=Path+"/company/yulan?jlid="+data.jlId
 			}
 			//应聘
 			else if(layEvent === 'update'){
@@ -128,7 +131,7 @@
 					var zpxxid=data.zpxxid;
 					$.ajax({
 						type:"POST",
-						url:"/company/yingpin",
+						url:Path+"/company/yingpin",
 						dataType:"text",
 						data:{cxrzId:cxrzId,zpxxid:zpxxid},
 						//从servlet接收的数据

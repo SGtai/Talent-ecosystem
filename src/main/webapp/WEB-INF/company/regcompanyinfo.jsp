@@ -10,6 +10,7 @@
 <%
 	String path = application.getContextPath()+"/layui/";
 	String jsPath = application.getContextPath()+"/companys/js/";
+	String Path = application.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -46,6 +47,7 @@
 	</style>
 </head>
 <body>
+<input id="Path" type="hidden" value="<%=Path%>" />
 <div id="layout2">
 	<form class="layui-form" action="" >
 		<input id="qyAccount" type="hidden" value="${sessionScope.Qyinfo.qyAccount}" />

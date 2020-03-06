@@ -10,6 +10,7 @@
 <%
 	String path = application.getContextPath()+"/layui/";
 	String jsPath = application.getContextPath()+"/companys/js/";
+	String Path=application.getContextPath();
 %>
 <html>
 <head>
@@ -24,10 +25,12 @@
 	</button>
 </span>
 <table id="demo" lay-filter="test"></table>
+<input id="Path" type="hidden" value="<%=Path%>" />
 <script src=<%=path + "jquery-3.4.1.js"%> ></script>
 <script src=<%=path + "layui.js"%>></script>
 <script src="<%=path+"json2.js"%>"></script>
 <script type="text/javascript">
+	var Path=$('#Path').val();
 	//获取window.location.href带参数的值
 	function GetRequest() {
 		var url = location.search; //获取url中"?"符后的字串
@@ -60,7 +63,7 @@
 		table.render({
 			elem: '#demo'
 			, height: 300
-			, url: "/company/finishJob" //数据接口
+			, url: Path+"/company/finishJob" //数据接口
 			, where:{zpxxid:GetRequest().zpxxid}
 			, page: true //开启分页
 			, limit: 5

@@ -1,3 +1,4 @@
+var Path=$('#Path').val();
 /**
  * 注册功能判断
  */
@@ -15,7 +16,7 @@ layui.use(['form', 'layer'], function(){
 		$.ajax(
 			{
 				type:"POST",
-				url:"/company/chooseCity",
+				url:Path+"/company/chooseCity",
 				dataType:"text",
 				data:{prid:data.value},
 				success:function (msg) {
@@ -49,7 +50,7 @@ layui.use(['form', 'layer'], function(){
 				$.ajax(
 					{
 						type:"POST",
-						url:"/company/doReg",
+						url:Path+"/company/doReg",
 						dataType:"text",
 						data:data.field,
 						success:function (msg) {
@@ -109,7 +110,7 @@ function queryaccount(value) {
 		$.ajax(
 			{
 				type:"POST",
-				url:"/company/doAccount",
+				url:Path+"/company/doAccount",
 				dataType:"text",
 				data:{qyAccount:value},
 				success:function (msg) {

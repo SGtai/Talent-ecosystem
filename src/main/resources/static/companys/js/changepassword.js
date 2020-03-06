@@ -1,3 +1,5 @@
+var Path=$('#Path').val();
+
 layui.use(['form', 'layer'], function(){
 	var form = layui.form
 		,layer = layui.layer;
@@ -16,7 +18,7 @@ layui.use(['form', 'layer'], function(){
 				$.ajax(
 					{
 						type:"POST",
-						url:"/company/changePassword",
+						url:Path+"/company/changePassword",
 						dataType:"text",
 						data:{qyAccount:qyAccount,password:password},
 						success:function (msg) {
@@ -55,7 +57,7 @@ function verifyPwd(password) {
 	$.ajax(
 		{
 			type:"POST",
-			url:"/company/verifyPwd",
+			url:Path+"/company/verifyPwd",
 			dataType:"text",
 			data:{qyAccount:qyAccount,password:password},
 			success:function (msg) {
