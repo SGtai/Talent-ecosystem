@@ -53,10 +53,6 @@
 <%--			<a href=" ">深圳</a>--%>
 <%--			<a href=" ">珠海</a>--%>
 		</div>
-		<div class="topRight">
-			<span>好消息：</span>
-			<a href=" ">好消息好消息好消息</a>
-		</div>
 	</div>
 </div>
 <div class="loginDiv">
