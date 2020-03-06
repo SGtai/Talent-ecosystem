@@ -5,6 +5,7 @@
 	String jsPath = application.getContextPath()+"/schoolS/js/";
 	String path = application.getContextPath()+"/layui/";
 	String othPath =application.getContextPath()+"/schoolS/other/";
+	String apppath =application.getContextPath()+"/";
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -123,7 +124,7 @@
 				,width:760
 				,limit:5
 				,limits:[5,10,15,20]
-				,url: '/school/rgxg' //数据接口
+				,url: '<%=apppath+"school/rgxg"%>' //数据接口
 				,page: true //开启分页
 				,even:true
 				,cols: [[ //表头
@@ -169,7 +170,7 @@
 				,width:760
 				,limit:5
 				,limits:[5,10,15,20]
-				,url: '/school/rencaiinfoquery' //数据接口
+				,url: '<%=apppath+"school/rencaiinfoquery"%>' //数据接口
 				,page: true //开启分页
 				,even:true
 				,cols: [[ //表头
@@ -197,7 +198,7 @@
 			//搜索1
 			$("#query_pa").click(function () {
 				table.reload('UserTable',{
-					url:'/school/rgxg'
+					url:'<%=apppath+"school/rgxg"%>'
 					,where: { //设定异步数据接口的额外参数，任意设
 						position: $("#gw").val(),
 						type:$("#hy").val()
@@ -219,7 +220,7 @@
 					}
 				}
 				table.reload('UserTable1',{
-					url:'/school/rencaiinfoquery'
+					url:'<%=apppath+"school/rencaiinfoquery"%>'
 					,where: { //设定异步数据接口的额外参数，任意设
 						name: $('#name').val(),
 						time:times,
@@ -286,7 +287,7 @@
 					$.ajax(
 						{
 							type:"POST",
-							url:"/school/tj",
+							url:'<%=apppath+"school/tj"%>',
 							dataType:"text",
 							data:{
 								yhid:$("#yhid").val(),

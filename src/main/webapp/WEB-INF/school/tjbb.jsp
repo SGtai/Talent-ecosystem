@@ -11,7 +11,7 @@
 	String layuiPath = application.getContextPath() + "/layui/";
 	String jsPath = application.getContextPath() + "/adminS/js/";
 	String cssPath = application.getContextPath() + "/adminS/css/";
-	String path = application.getContextPath() + "/";
+	String apppath = application.getContextPath() + "/";
 
 %>
 <!DOCTYPE html>
@@ -83,7 +83,7 @@
 	$(function() {
 		$.ajax({
 			method : "POST",
-			url : "/adminCensus/week1",
+			url : '<%=apppath+"adminCensus/week1"%>',
 			dataType : "text",
 			data:{role:0,tjr:$("#test1").val()},
 			success : function(msg) {
@@ -115,7 +115,7 @@
 			valueArr = [];
 			$.ajax({
 				method : "POST",
-				url : "/adminCensus/week1",
+				url : '<%=apppath+"adminCensus/week1"%>',
 				dataType : "text",
 				data:{role:0,tjr:$("#test1").val()},
 				success : function(msg) {
@@ -142,7 +142,7 @@
 
 			$.ajax({
 				method : "POST",
-				url : "/adminCensus/month1",
+				url : '<%=apppath+"adminCensus/month1"%>',
 				dataType : "text",
 				data:{date:new Date().format('yyyy-MM-dd'),role:0,tjr:$("#test1").val()},
 				success : function(msg) {
@@ -168,7 +168,7 @@
 			valueArr = [];
 			$.ajax({
 				method : "POST",
-				url : "/adminCensus/half1",
+				url : '<%=apppath+"adminCensus/half1"%>',
 				dataType : "text",
 				data:{role:0,tjr:$("#test1").val()},
 				success : function(msg) {
@@ -253,7 +253,7 @@
 	};
 	function back() {
 		var returnlogin = document.createElement("a");
-		returnlogin.href="/school/tjbbuse";
+		returnlogin.href='<%=apppath+"school/tjbbuse"%>';
 		returnlogin.click();
 	}
 </script>

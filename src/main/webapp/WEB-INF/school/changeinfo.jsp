@@ -5,6 +5,7 @@
 	String jsPath = application.getContextPath()+"/schoolS/js/";
 	String path = application.getContextPath()+"/layui/";
 	String othPath =application.getContextPath()+"/schoolS/other/";
+	String apppath=application.getContextPath()+"/";
 %>
 <!DOCTYPE html>
 <html>
@@ -215,7 +216,7 @@
 						$.ajax(
 							{
 								type:"POST",
-								url:"/school/findcity",
+								url:'<%=apppath+"school/findcity"%>',
 								dataType:"text",
 								data:{
 									province:data.value
@@ -245,7 +246,7 @@
 				//执行实例
 				upload.render({
 					elem: '#test2' //绑定元素
-					, url: '/school/changeInfo1' //上传接口
+					, url: '<%=apppath+"school/changeInfo1"%>' //上传接口
 					, multiple: false //设置是否多文件上传
 					, auto: false  //取消自动上传，并指定提交按钮进行上传
 					, bindAction: '#btn' //这个绑定id为btn的按钮触发这个提交
@@ -285,7 +286,7 @@
 						else if(msg=="1"){
 							alert("修改成功");
 							var a=document.createElement("a");
-							a.href="/school/changeinfo";
+							a.href='<%=apppath+"school/changeinfo"%>';
 							a.click();
 						}
 					}
@@ -440,7 +441,7 @@
 									}else if(msg=="1"){
 										alert("修改成功");
 										var a=document.createElement("a");
-										a.href="/school/changeinfo";
+										a.href='<%=apppath+"school/changeinfo"%>';
 										a.click();
 									}
 								},

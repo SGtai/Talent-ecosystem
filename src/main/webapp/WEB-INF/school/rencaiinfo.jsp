@@ -5,6 +5,7 @@
 	String jsPath = application.getContextPath()+"/schoolS/js/";
 	String path = application.getContextPath()+"/layui/";
 	String othPath =application.getContextPath()+"/schoolS/other/";
+	String apppath =application.getContextPath()+"/";
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -297,7 +298,7 @@
 			//上传文件
 			upload.render({
 				elem: '#test2' //绑定元素
-				, url: '/school/daoru' //上传接口
+				, url: '<%=apppath+"school/daoru"%>' //上传接口
 				, multiple: false //设置是否多文件上传
 				, auto: false  //取消自动上传，并指定提交按钮进行上传
 				, bindAction: '#btn' //这个绑定id为btn的按钮触发这个提交
@@ -361,7 +362,7 @@
 				,width:760
 				,limit:5
 				,limits:[5,10,15,20]
-				,url: '/school/rencaiinfoquery' //数据接口
+				,url: '<%=apppath+"school/rencaiinfoquery"%>' //数据接口
 				,page: true //开启分页
 				,even:true
 				,cols: [[ //表头
@@ -399,7 +400,7 @@
 					}
 				}
 				table.reload('UserTable',{
-					url:'/school/rencaiinfoquery'
+					url:'<%=apppath+"school/rencaiinfoquery"%>'
 					,where: { //设定异步数据接口的额外参数，任意设
 						name: $('#name').val(),
 						time:times,
@@ -446,7 +447,7 @@
 				$.ajax(
 					{
 						type:"POST",
-						url:"/school/exgz",
+						url:'<%=apppath+"school/exgz"%>',
 						dataType:"text",
 						data:{
 							account:data.account
@@ -552,7 +553,7 @@
 									$.ajax(
 										{
 											type:"POST",
-											url:"/school/cguserinfo",
+											url:'<%=apppath+"school/cguserinfo"%>',
 											dataType:"text",
 											data:{
 												phone:$("#hide7").val(),
