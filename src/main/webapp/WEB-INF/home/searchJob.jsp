@@ -25,7 +25,7 @@
 </head>
 
 <body>
-<input hidden value="<%=path%>" id="path">
+<input hidden value="<%=path%>" id="path">f
 <div class="topDiv">
 	<div class="topL">
 		<div class="logo">
@@ -38,7 +38,7 @@
 <div class="menuDiv">
 	<div class="mainWarp">
 		<ul>
-			<li><a href=<%=path+"jump/home/index"%>>首页</a></li>
+			<li><a href=<%=path%>>首页</a></li>
 			<li class="onmenu"><a href=<%=path+"jump/home/searchJob"%>>职位搜索</a></li>
 			<div class="clear"></div>
 		</ul>
