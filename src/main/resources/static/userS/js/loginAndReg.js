@@ -12,7 +12,7 @@ function dologin(path){
 					window.alert('登录成功');
 					$("#phone").val('');
 					$("#password").val('');
-					window.location.href = path+'user/index';
+					window.location.href = path+'';
 				} else if (flag === 'noCode') {
 					window.alert('验证码不正确，请重新输入');
 				} else if (flag === 'noAccount') {
