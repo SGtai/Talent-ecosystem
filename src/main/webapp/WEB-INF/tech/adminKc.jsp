@@ -162,7 +162,7 @@
 					$.ajax(
 						{
 							type:"POST",
-							url:"/delete",
+							url:'<%=path+"delete"%>',
 							dataType:"text",
 							data:{kcId:data.kcId},
 							success:function (msg) {
@@ -205,7 +205,7 @@
 //选完文件后不自动上传
 									upload.render({
 										elem: '#test1'
-										, url: '/upData'
+										, url: '<%=path+"upData"%>'
 										, auto: false
 										, accept: 'file' //普通文件
 										//,multiple: true
@@ -267,7 +267,7 @@
 						$.ajax(
 							{
 								type:"POST",
-								url:"/upPrice",
+								url:'<%=path+"upPrice"%>',
 								dataType:"text",
 								data:{kcId:data.kcId,jgPrice:str},
 								success:function (msg) {
