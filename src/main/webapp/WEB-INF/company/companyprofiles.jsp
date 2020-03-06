@@ -11,6 +11,7 @@
 	String path = application.getContextPath()+"/layui/";
 	String jsPath = application.getContextPath()+"/companys/js/";
 	String dbimgPath ="../../uploadS/images/";
+	String Path=application.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -44,6 +45,7 @@
 	</style>
 </head>
 <body>
+<input id="Path" type="hidden" value="<%=Path%>" />
 <div id="layout3">
 	<form class="layui-form" action="" >
 		<input id="qyAccount" type="hidden" value="${sessionScope.Qyinfo.qyAccount}" />
@@ -81,6 +83,7 @@
 <script src=<%=path + "layui.js"%>></script>
 <script src="<%=path+"json2.js"%>"></script>
 <script >
+	var Path=$('#Path').val();
 	layui.use(['form', 'layer'], function(){
 		var form = layui.form
 			,layer = layui.layer;
@@ -91,7 +94,7 @@
 			$.ajax(
 				{
 					type:"POST",
-					url:"/company/doRegQyKind",
+					url:Path+"/company/doRegQyKind",
 					dataType:"text",
 					data:{qyAccount:qyAccount,qyKind:qyKind},
 					success:function (msg) {
@@ -118,7 +121,7 @@
 		//普通图片上传
 		var uploadInst = upload.render({
 			elem: '#test1'
-			, url: '/company/photo' //改成您自己的上传接口
+			, url:Path+'/company/photo' //改成您自己的上传接口
 			, before: function (obj) {
 				//预读本地文件示例，不支持ie8
 				// obj.preview(function (index, file, result) {

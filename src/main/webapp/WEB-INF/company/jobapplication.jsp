@@ -10,6 +10,7 @@
 <%
 	String path = application.getContextPath()+"/layui/";
 	String jsPath = application.getContextPath()+"/companys/js/";
+	String Path = application.getContextPath();
 %>
 <html>
 <head>
@@ -18,6 +19,7 @@
 	<link href ="favicon.ico" rel="shortcut icon">
 </head>
 <body>
+<input id="Path" type="hidden" value="<%=Path%>" />
 <input id="qyid" type="hidden" value="${sessionScope.Qyinfo.qyid}" />
 <form class="layui-form" lay-filter="component-form-group" id="search_submits" onsubmit="return false">
 	<h1  style="background-color: #95877c;font-weight:bold;text-align:center">招聘完成情况</h1>
@@ -71,6 +73,8 @@
 </script>
 
 <script type="text/javascript">
+	var Path=$('#Path').val();
+
 	layui.use(['form', 'layer', 'jquery','table','layedit', 'laydate'], function() {
 		var table = layui.table;
 		var layer = layui.layer;
@@ -88,7 +92,7 @@
 		table.render({
 			elem: '#demo'
 			, height: 300
-			, url: "/company/searchJobinfoTable" //数据接口
+			, url:Path+"/company/searchJobinfoTable" //数据接口
 			, page: true //开启分页
 			, limit: 5
 			, limits: [5, 10, 20, 50, 100]
@@ -119,7 +123,7 @@
 			var type = myselect.options[index].text;
 			var zwid = $('#zwid2').val();
 			table.reload('table1', {
-				url: "/company/searchJobinfoTable"
+				url: Path+"/company/searchJobinfoTable"
 				, where: { //设定异步数据接口的额外参数，任意设
 					type: type,
 					zwid: zwid
@@ -136,7 +140,7 @@
 			$.ajax(
 				{
 					type:"POST",
-					url:"/company/chooseStation",
+					url:Path+"/company/chooseStation",
 					dataType:"text",
 					data:{poid:data.value},
 					success:function (msg) {
@@ -160,7 +164,7 @@
 			//查看及修改
 			if (layEvent === 'detail') {
 				//打开查看页面
-				window.location.href="/jump/company/finishjob?zpxxid="+data.zpxxid
+				window.location.href=Path+"/jump/company/finishjob?zpxxid="+data.zpxxid
 			}
 		});
 	});

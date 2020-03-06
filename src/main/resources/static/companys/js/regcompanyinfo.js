@@ -1,4 +1,4 @@
-
+var Path=$('#Path').val();
 /**
  * 注册功能判断
  */
@@ -18,7 +18,7 @@ layui.use(['form', 'layer'], function(){
 				$.ajax(
 					{
 						type:"POST",
-						url:"/company/doRegQyinfo",
+						url:Path+"/company/doRegQyinfo",
 						dataType:"text",
 						data:{qyAccount:qyAccount,qyAddress:qyAddress,qyfdMan:qyfdMan,regMoney:regMoney,qyType:qyType,jyScope:jyScope,jyTime:jyTime},
 						success:function (msg) {

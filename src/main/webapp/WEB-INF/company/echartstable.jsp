@@ -51,12 +51,13 @@
 
 <div id="echarts_div" style="width: 600px;height:400px;margin-left: 25%"></div>
 
-
+<input id="Path" type="hidden" value="<%=Path%>" />
 <script src="/echarts.min.js"></script>
 <script src=<%=path + "jquery-3.4.1.js"%> ></script>
 <script src=<%=path + "layui.js"%>></script>
 <script src="<%=path+"json2.js"%>"></script>
 <script type="text/javascript" >
+	var Path=$('#Path').val();
 	var nameArr = [];
 	var valueArr = [];
 	var obArr = [];
@@ -64,7 +65,7 @@
 	$(function() {
 		$.ajax({
 			method : "POST",
-			url : "/company/weekJobinfo",
+			url : Path+"/company/weekJobinfo",
 			dataType : "text",
 			// data:{role:0},
 			success : function(msg) {
@@ -96,7 +97,7 @@
 			valueArr = [];
 			$.ajax({
 				method : "POST",
-				url : "/company/weekJobinfo",
+				url :Path+ "/company/weekJobinfo",
 				dataType : "text",
 				// data:{role:0},
 				success : function(msg) {
@@ -123,7 +124,7 @@
 
 			$.ajax({
 				method : "POST",
-				url : "/company/monthJobinfo",
+				url :Path+"/company/monthJobinfo",
 				dataType : "text",
 				data:{date:new Date().format('yyyy-MM-dd')},
 				success : function(msg) {
@@ -149,7 +150,7 @@
 			valueArr = [];
 			$.ajax({
 				method : "POST",
-				url : "/company/halfJobinfo",
+				url :Path+"/company/halfJobinfo",
 				dataType : "text",
 				data:{role:0},
 				success : function(msg) {
