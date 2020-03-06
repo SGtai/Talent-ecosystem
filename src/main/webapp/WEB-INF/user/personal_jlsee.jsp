@@ -401,7 +401,7 @@
 	<c:forEach items="${upatelist[0].experienceList}" begin="0" var="i" varStatus="status">
 		<div class="JlBoxCon" id="jiaoyudiv">
 			<form id="jiaoyu" class="layui-form">
-			<input hidden value="${jyid}" name="jyId">
+			<input hidden value="${i.jyid}" name="jyId">
 			<h1><span>教育背景${status.index+1}</span></h1>
 			<div class="JlBoxLeft">
 				<div class="jldiv">
@@ -519,7 +519,7 @@
 	<c:forEach items="${upatelist[0].undergoList}" begin="0" var="i" varStatus="status">
 		<div class="JlBoxCon" id="gongzuodiv">
 			<form id="gongzuo" class="layui-form">
-			<input hidden value="${gzjlId}" name="gzjlId">
+			<input hidden value="${i.gzjlId}" name="gzjlId">
 			<h1><span>工作经历${status.index+1}</span></h1>
 
 			<div class="clear"></div>

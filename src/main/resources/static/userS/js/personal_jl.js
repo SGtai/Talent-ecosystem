@@ -104,12 +104,12 @@ function pingjia(path) {
 	});
 }
 
-function morejiaoyu(path){
+function morejiaoyu(pathS){
 
 	var jlid = $('#jlId').val();
 	$.ajax({
 		type: "POST",
-		url: path+"user/morejiaoyu",
+		url: pathS+"user/morejiaoyu",
 		dataType: "text",
 		data:{jlid:jlid},
 		success: function (msg) {
@@ -148,7 +148,7 @@ function morejiaoyu(path){
 				"\t\t\t\t</div>\n" +
 				"\t\t\t\t<div class=\"clear\"></div>\n" +
 				"\t\t\t\t<div class=\"jldiv\">\n" +
-				"\t\t\t\t\t<a href=\"javascript:void(0)\" class=\"save\" onclick=\"jiaoyu(this,'<%=path>')\">保存</a>\n" +
+				"\t\t\t\t\t<a href=\"javascript:void(0)\" class=\"save\" onclick=\"jiaoyu(this,'"+pathS+"')\">保存</a>\n" +
 				"\t\t\t\t</div>\n" +
 				"\t\t\t</div>\n" +
 				"\t\t\t<div class=\"JlBoxRight\">\n" +
@@ -156,7 +156,7 @@ function morejiaoyu(path){
 				"\t\t\t</div>\n" +
 				"\t\t\t<div class=\"clear\"></div>\n" +
 				"\t\t\t<div class=\"addcomeon\">\n" +
-				"\t\t\t\t<a href=\"javascript:void(0)\" onclick=\"morejiaoyu('<%=path>')\">继续添加教育背景</a>\n" +
+				"\t\t\t\t<a href=\"javascript:void(0)\" onclick=\"morejiaoyu('"+pathS+"')\">继续添加教育背景</a>\n" +
 				"\t\t\t</div>\n" +
 				"\t\t\t</form>";
 			$('#jiaoyudiv').append(s);
@@ -166,12 +166,12 @@ function morejiaoyu(path){
 
 }
 
-function moregongzuo(path){
+function moregongzuo(pathS){
 
 	var jlid = $('#jlId').val();
 	$.ajax({
 		type: "POST",
-		url: path+"user/moregongzuo",
+		url: pathS+"user/moregongzuo",
 		dataType: "text",
 		data:{jlid:jlid},
 		success: function (msg) {
@@ -213,7 +213,7 @@ function moregongzuo(path){
 				"\t\t\t\t</div>\n" +
 				"\t\t\t\t<div class=\"clear\"></div>\n" +
 				"\t\t\t\t<div class=\"jldiv\">\n" +
-				"\t\t\t\t\t<a href=\"javascript:void(0)\" class=\"save\" onclick=\"gongzuo(this,'<%=path>')\">保存</a>\n" +
+				"\t\t\t\t\t<a href=\"javascript:void(0)\" class=\"save\" onclick=\"gongzuo(this,'"+pathS+"')\">保存</a>\n" +
 				"\t\t\t\t</div>\n" +
 				"\t\t\t</div>\n" +
 				"\t\t\t<div class=\"JlBoxRight\" style=\"width:100px\">\n" +
@@ -221,7 +221,7 @@ function moregongzuo(path){
 				"\t\t\t</div>\n" +
 				"\t\t\t<div class=\"clear\"></div>\n" +
 				"\t\t\t<div class=\"addcomeon\">\n" +
-				"\t\t\t\t<a href=\"javascript:void(0)\" onclick=\"moregongzuo('<%=path>')\">继续添加工作经历</a>\n" +
+				"\t\t\t\t<a href=\"javascript:void(0)\" onclick=\"moregongzuo('"+pathS+"')\">继续添加工作经历</a>\n" +
 				"\t\t\t</div>\n" +
 				"\t\t\t</form>";
 			$('#gongzuodiv').append(s);
@@ -240,7 +240,7 @@ function deletejl(path){
 		success: function (msg) {
 			if (msg == "true") {
 				window.alert("删除成功");
-				window.location.href = "/user/gopersonaljl";
+				window.location.href = window.location;
 			}
 		}
 	});
