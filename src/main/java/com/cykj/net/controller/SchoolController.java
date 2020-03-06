@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -495,7 +496,10 @@ public class SchoolController
 				userlist.setPassword(formatCell(hssfRow.getCell(1)));
 				userlist.setName(formatCell(hssfRow.getCell(2)));
 				userlist.setSex(formatCell(hssfRow.getCell(3)));
-				userlist.setBirthday(formatCell(hssfRow.getCell(4)));
+				Date date1 = hssfRow.getCell(4).getDateCellValue();
+				DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+				String dateStr = sdf.format(date1);
+				userlist.setBirthday(dateStr);
 				userlist.setIdCard(formatCell(hssfRow.getCell(5)));
 				userlist.setIdCardType(formatCell(hssfRow.getCell(6)));
 				userlist.setDegree(formatCell(hssfRow.getCell(7)));
@@ -517,7 +521,8 @@ public class SchoolController
 				resume.setYcHide("0");
 				resume.setSjPhone(userlist.getPhone());
 				resume.setXbSex(userlist.getSex());
-				resume.setCsTime(userlist.getBirthday());
+
+//				resume.setCsTime(userlist.getBirthday());
 				resume.setJlname(formatCell(hssfRow.getCell(8)));
 				resume.setZsCertificate(formatCell(hssfRow.getCell(9)));
 				resume.setGjNationality(formatCell(hssfRow.getCell(10)));
