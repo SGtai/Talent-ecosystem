@@ -76,6 +76,16 @@ public class SchoolService
 		return Userlistnum;
 	}
 
+	public int updateuser(Alluserinfo alluserinfo){
+		int updateusernum=schoolDao.updateuser(alluserinfo);
+		return updateusernum;
+	}
+
+	public int upadtejl1(Alluserinfo alluserinfo){
+		int updateusernum=schoolDao.upadtejl1(alluserinfo);
+		return updateusernum;
+	}
+
 	public int fenyecount2(String position,String type){
 		int fenyecount2=schoolDao.fenyecount2(position,type);
 		return fenyecount2;
@@ -86,4 +96,57 @@ public class SchoolService
 		List<J1> fenyeshuju2=schoolDao.fenyeshuju2(position, type, rowBounds);
 		return fenyeshuju2;
 	}
+
+	public int inserjl(Resume resume){
+		int inserjl=schoolDao.inserjl(resume);
+		return inserjl;
+	}
+
+	public int insergz(Undergo undergo)
+	{
+		int insergz=schoolDao.insergz(undergo);
+		return insergz;
+	}
+
+	public int inserxx(Experience experience)
+	{
+		int inserxx=schoolDao.inserxx(experience);
+		return inserxx;
+	}
+
+	public int inserjobint(Jobintension jobintension){
+		int inserjobint=schoolDao.inserjobint(jobintension);
+		return inserjobint;
+	}
+
+	public Userlist finduser(String phone){
+		Userlist userlist=schoolDao.finduser(phone);
+		return userlist;
+	}
+
+	public Resume findjl(Long yhId){
+		Resume resume=schoolDao.findjl(yhId);
+		return resume;
+	}
+
+	public Jobinfo findjobinfo(Long zpxxid){
+		Jobinfo jobinfo=schoolDao.findjobinfo(zpxxid);
+		return jobinfo;
+	}
+
+	public Query findjljl(Long jlid,Long zpxxid){
+		Query query=schoolDao.findjljl(jlid,zpxxid);
+		return query;
+	}
+
+	public int inserquery(Query query){
+		int inserquery=schoolDao.inserquery(query);
+		return inserquery;
+	}
+
+	public int insertjjl(Tjjl tjjl){
+		int insertjjl=schoolDao.insertjjl(tjjl);
+		return insertjjl;
+	}
+
 }

@@ -36,4 +36,51 @@ public class AdminCensusController {
     String half(int role) throws ParseException {
         return adminUserCensusService.half(role);
     }
+
+
+    /**
+     * yukai
+     * @param role
+     * @param tjr
+     * @return
+     */
+    @PostMapping(value = "/week1")
+    public @ResponseBody
+    String week1(int role,String tjr) {
+        return adminUserCensusService.week1(role,tjr);
+    }
+
+
+    @PostMapping(value = "/month1")
+    public @ResponseBody
+    String month1(String date,int role,String tjr) {
+        return adminUserCensusService.month1(date,role,tjr);
+    }
+
+
+    @PostMapping(value = "/half1")
+    public @ResponseBody
+    String half1(int role,String tjr) throws ParseException {
+        return adminUserCensusService.half1(role,tjr);
+    }
+
+    @PostMapping(value = "/week2")
+    public @ResponseBody
+    String week2(int role,String tjr) {
+        return adminUserCensusService.week2(role,tjr);
+    }
+
+
+    @PostMapping(value = "/month2")
+    public @ResponseBody
+    String month2(String date,int role,String tjr) {
+        return adminUserCensusService.month2(date,role,tjr);
+    }
+
+
+    @PostMapping(value = "/half2")
+    public @ResponseBody
+    String half2(int role,String tjr) throws ParseException {
+        return adminUserCensusService.half2(role,tjr);
+    }
 }

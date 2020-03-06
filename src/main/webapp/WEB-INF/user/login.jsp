@@ -54,10 +54,6 @@
 						<span></span>
 						<input id="password" name="password" type="text" placeholder="请输入密码"/>
 					</div>
-					<div class="autoLogo">
-						<span class="CheckBox Yes"></span>
-						<span>我已阅读并接受<a href="registeragreement.html">用户协议</a></span>
-					</div>
 					<div class="logobtn">
 						<a href="javascript:void(0)" onclick="dologin()" >登  录</a>
 					</div>

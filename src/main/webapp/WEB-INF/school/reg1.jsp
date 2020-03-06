@@ -12,6 +12,7 @@
 	String jsPath = application.getContextPath()+"/schoolS/js/";
 	String path = application.getContextPath()+"/layui/";
 	String othPath =application.getContextPath()+"/schoolS/other/";
+	String apppath=application.getContextPath()+"/";
 %>
 <!DOCTYPE html>
 <html>
@@ -81,7 +82,7 @@
 				$.ajax(
 					{
 						type:"POST",
-						url:"/school/reg1",
+						url:'<%=apppath+"school/reg1"%>',
 						dataType:"text",
 						data:{scAccount:acc,password:pass},
 						success:function (msg) {
@@ -92,7 +93,7 @@
 								$("#password1").val("");
 								$("#password2").val("");
 								var a=document.createElement("a");
-								a.href="/school/returnreg2";
+								a.href='<%=apppath+"school/returnreg2"%>';
 								a.click();
 							}
 						},
@@ -111,7 +112,7 @@
 	}
 	function back() {
 		var returnlogin = document.createElement("a");
-		returnlogin.href="/jump/admin/login";
+		returnlogin.href='<%=apppath+"jump/admin/login"%>';
 		returnlogin.click();
 	}
 

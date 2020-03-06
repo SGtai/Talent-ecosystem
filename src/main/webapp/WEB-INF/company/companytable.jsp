@@ -20,8 +20,7 @@
 </head>
 
 <body>
-
-
+<input id="Path" type="hidden" value="<%=Path%>" />
 <script type="text/html" id="barDemo">
 	<button lay-event="detail" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i
 			class="layui-icon">&#xe63c;</i>
@@ -325,9 +324,10 @@
 <script src=<%=path + "jquery-3.4.1.js"%> ></script>
 <script src=<%=path + "layui.js"%>></script>
 <script src="<%=path+"json2.js"%>"></script>
-<%--<script src="<%=jsPath+"companytable.js"%>"></script>--%>
 
 <script type="text/javascript">
+	var Path=$('#Path').val();
+
 	layui.use(['form', 'layer', 'jquery','table','layedit', 'laydate'], function(){
 		var table = layui.table;
 		var layer = layui.layer;
@@ -345,7 +345,7 @@
 		table.render({
 			elem: '#demo'
 			,height: 280
-			,url: "/company/searchJobinfoTable" //数据接口
+			,url: Path+"/company/searchJobinfoTable" //数据接口
 			,page: true //开启分页
 			,limit:5
 			,limits:[5,10,20,50,100]
@@ -374,7 +374,7 @@
 			var zwid = $('#zwid2').val();
 			var jobinfoState = $('#jobinfoState').val();
 			table.reload('table1',{
-				url:"/company/searchJobinfoTable"
+				url:Path+"/company/searchJobinfoTable"
 				,where: { //设定异步数据接口的额外参数，任意设
 					type:type,
 					zwid:zwid,
@@ -392,7 +392,7 @@
 			$.ajax(
 				{
 					type:"POST",
-					url:"/company/chooseStation",
+					url:Path+"/company/chooseStation",
 					dataType:"text",
 					data:{poid:data.value},
 					success:function (msg) {
@@ -417,7 +417,7 @@
 			$.ajax(
 				{
 					type:"POST",
-					url:"/company/chooseStation",
+					url:Path+"/company/chooseStation",
 					dataType:"text",
 					data:{poid:data.value},
 					success:function (msg) {
@@ -445,7 +445,7 @@
 			$.ajax(
 				{
 					type:"POST",
-					url:"/company/chooseCity",
+					url:Path+"/company/chooseCity",
 					dataType:"text",
 					data:{prid:data.value},
 					success:function (msg) {
@@ -476,7 +476,7 @@
 				$.ajax(
 					{
 						type:"POST",
-						url:"/company/searchJobinfo",
+						url:Path+"/company/searchJobinfo",
 						dataType:"json",
 						data:{zpxxid:data.zpxxid,qyid:qyid},
 						success:function (msg) {
@@ -520,7 +520,7 @@
 				                                $.ajax(
 					                                {
 						                                type:"POST",
-						                                url:"/company/chooseStation",
+						                                url:Path+"/company/chooseStation",
 						                                dataType:"text",
 						                                data:{poid:poid},
 						                                success:function (msg2) {
@@ -563,7 +563,7 @@
 				                                $.ajax(
 					                                {
 						                                type:"POST",
-						                                url:"/company/chooseCity",
+						                                url:Path+"/company/chooseCity",
 						                                dataType:"text",
 						                                data:{prid:prid},
 						                                success:function (msg2) {
@@ -621,7 +621,7 @@
 									$.ajax(
 										{
 											type:"POST",
-											url:"/company/updateJobinfo",
+											url:Path+"/company/updateJobinfo",
 											dataType:"text",
 											data:data.field,
 											success:function (msg) {
@@ -664,7 +664,7 @@
 
 					$.ajax({
 						type:"POST",
-						url:"/company/updateJobinfoState",
+						url:Path+"/company/updateJobinfoState",
 						dataType:"text",
 						data:{zpxxid:data.zpxxid,jobinfoState:jobinfoState},
 						//从servlet接收的数据
@@ -687,7 +687,7 @@
 				}else {
 					$.ajax({
 						type:"POST",
-						url:"/company/deleteJobinfo",
+						url:Path+"/company/deleteJobinfo",
 						dataType:"text",
 						data:{zpxxid:data.zpxxid},
 						//从servlet接收的数据

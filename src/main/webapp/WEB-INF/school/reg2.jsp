@@ -5,6 +5,7 @@
 	String jsPath = application.getContextPath()+"/schoolS/js/";
 	String path = application.getContextPath()+"/layui/";
 	String othPath =application.getContextPath()+"/schoolS/other/";
+	String apppath=application.getContextPath()+"/";
 %>
 <!DOCTYPE html>
 <html>
@@ -160,7 +161,7 @@
 			<div class="layui-input-block" id="button1" style="margin-left: 40%">
 				<button type="button" class="layui-btn"  id="bb">提交</button>
 				<button type="button" class="layui-btn" style="position: absolute;visibility: hidden" id="btn">提交</button>
-				<a type="button" href="/jump/school/reg1"  class="layui-btn">返回</a>
+				<a type="button" href='<%=apppath+"jump/school/reg1"%>'  class="layui-btn">返回</a>
 			</div>
 		</div>
 		<script>
@@ -172,7 +173,7 @@
 				//执行实例上传
 				upload.render({
 					elem: '#test2' //绑定元素
-					, url: '/school/reg2' //上传接口
+					, url: '<%=apppath+"school/reg2"%>' //上传接口
 					, multiple: false //设置是否多文件上传
 					, auto: false  //取消自动上传，并指定提交按钮进行上传
 					, bindAction: '#btn' //这个绑定id为btn的按钮触发这个提交
@@ -201,7 +202,6 @@
 						})
 					}
 					, done: function (msg) {
-						alert(msg);
 						if(msg=="0"){
 							alert("注册失败,该账号已经被其他管理员注册了");
 						}else if(msg=="-1"){
@@ -233,7 +233,7 @@
 							$.ajax(
 								{
 									type:"POST",
-									url:"/school/findcity",
+									url:'<%=apppath+"school/findcity"%>',
 									dataType:"text",
 									data:{
 										province:data.value

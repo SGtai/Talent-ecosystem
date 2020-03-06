@@ -1,3 +1,5 @@
+var Path=$('#Path').val();
+
 layui.use(['form', 'layedit', 'laydate'], function(){
 	var form = layui.form
 		,layer = layui.layer
@@ -39,7 +41,7 @@ layui.use(['form', 'layedit', 'laydate'], function(){
 			$.ajax(
 				{
 					type:"POST",
-					url:"/company/releaseJobinfo",
+					url:Path+"/company/releaseJobinfo",
 					dataType:"text",
 					data:data.field,
 					success:function (msg) {
@@ -71,7 +73,7 @@ layui.use(['form', 'layedit', 'laydate'], function(){
 		$.ajax(
 			{
 				type:"POST",
-				url:"/company/chooseCity",
+				url:Path+"/company/chooseCity",
 				dataType:"text",
 				data:{prid:data.value},
 				success:function (msg) {
@@ -99,7 +101,7 @@ layui.use(['form', 'layedit', 'laydate'], function(){
 		$.ajax(
 			{
 				type:"POST",
-				url:"/company/chooseStation",
+				url:Path+"/company/chooseStation",
 				dataType:"text",
 				data:{poid:data.value},
 				success:function (msg) {
@@ -143,7 +145,7 @@ function releaseJobinfos() {
 	$.ajax(
 		{
 			type:"POST",
-			url:"/company/releaseJobinfos",
+			url:Path+"/company/releaseJobinfos",
 			dataType:"text",
 			data:{
 				qyid:$('#qyid').val(),
@@ -184,7 +186,7 @@ function releaseJobinfos() {
 				if (msg==="success"){
 					layer.alert('招聘信息发布成功!', function(index) {
 						layer.close(index);
-						window.location.href="/company/jobinfo"
+						window.location.href=Path+"/company/jobinfo"
 					})
 				} else{
 					layer.alert("招聘信息发布失败", { icon: 1, offset: "auto", time:1500 });

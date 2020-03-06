@@ -10,6 +10,7 @@
 <%
 	String path = application.getContextPath()+"/layui/";
 	String jsPath = application.getContextPath()+"/companys/js/";
+	String Path = application.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -36,9 +37,8 @@
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
 	<legend style="margin: 0 auto;float: none;">招聘信息填写</legend>
 </fieldset>
+<input id="Path" type="hidden" value="<%=Path%>" />
 <div id="layout">
-
-
 <form class="layui-form" action="">
 	<input id="qyid" type="hidden" value="${sessionScope.Qyinfo.qyid}" />
 	<div class="layui-form-item" style="background-color: #95877c;width: 720px">
@@ -84,7 +84,7 @@
 		<div class="layui-inline">
 			<label class="layui-form-label">联系电话：</label>
 			<div class="layui-input-inline">
-				<input name="lxPhone" id="lxPhone" class="layui-input" type="text" autocomplete="off" lay-verify="number" >
+				<input name="lxPhone" id="lxPhone" class="layui-input" type="phone" autocomplete="off" lay-verify="number" >
 			</div>
 		</div>
 	</div>

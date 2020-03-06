@@ -21,9 +21,8 @@
 	String imagesPath =application.getContextPath()+"/homeS/images/";
 	String dbimgPath =application.getContextPath()+"/images/";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<!DOCTYPE html>
+<html>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href=<%=cssPath+"personal.css"%>>
 	<link rel="stylesheet" href="<%=path+"layui/css/layui.css"%>" media="all">
@@ -54,6 +53,7 @@
 		</div>
 	</div>
 </div>
+
 <div class="navTop">
 	<div class="navTopmain">
 		<div class="nav">
@@ -63,6 +63,7 @@
 		</div>
 	</div>
 </div>
+
 <div class="personalBody">
 	<div class="perLeftnav">
 		<div class="NavLeftTop">个人中心</div>
@@ -105,12 +106,28 @@
 		<div class="commonTit">
 			<h1 class="fl">我的校友</h1>
 		</div>
-
-
 	</div>
 </div>
+<div id="di" >
+	<form class="layui-form">
 
+		<div style="margin-left: 15%;margin-top: 1%">
+			<div class="layui-form-item">
 
+			</div>
+
+				<div class="layui-inline">
+					<button style="margin-left: 5%" class="layui-btn layui-btn-normal layui-btn-radius" id="query_pa" type="button">搜索</button>
+
+				</div>
+				<div class="layui-inline">
+					<button style="margin-left: 20%" class="layui-btn layui-btn-normal layui-btn-radius" id="query_shuaxin" type="button">刷新</button>
+				</div>
+			</div>
+	</form>
+</div>
+	<div style="margin-left: 30%;margin-top: -45%"><table id="demo" lay-filter="table_pa"></table></div>
+</div>
 <div class="clear"></div>
 <div class="footer">
 	<p><a href="">菜鸟人才</a>旗下<img src="<%=imagesPath+"logo_foot.gif"%>" />菜鸟人才网版权所有 <a href="">闽ICP证0******9号</a><a href="#"></a>本网站所有招聘信息，未经书面授权不得转载 投诉电话：200-8**-****</p>
@@ -118,6 +135,66 @@
 <script type="text/javascript" src=<%=path+"layui/jquery-3.4.1.js"%>></script>
 <script src=<%=path + "layui/layui.js"%>></script>
 <script type="text/javascript" src=<%=jsPath+"personal.js"%>></script>
+<script>
+	layui.use(['form','layer','jquery','table','laydate','upload'], function() {
+		var table = layui.table;
+		var form = layui.form;
+		var $ = layui.jquery;
+		var layer = layui.layer;
+		var laydate = layui.laydate;
+		var upload = layui.upload;
+		var nowTime = new Date().valueOf();
+		var max = null;
+		//日期显示
+		var start = laydate.render({
+			elem: '#start_time',
+			type: 'datetime',
+			max: nowTime,
+			btns: ['clear', 'confirm'],
+			done: function(value, date){
+				endMax = end.config.max;
+				end.config.min = date;
+				end.config.min.month = date.month -1;
+			}
+		});
+		var end = laydate.render({
+			elem: '#end_time',
+			type: 'datetime',
+			max: nowTime,
+			done: function(value, date){
+				if($.trim(value) == ''){
+					var curDate = new Date();
+					date = {'date': curDate.getDate(), 'month': curDate.getMonth()+1, 'year': curDate.getFullYear()};
+				}
+				start.config.max = date;
+				start.config.max.month = date.month -1;
+			}
+		});
+		//表格
+		var ins1=table.render({
+			elem: '#demo'
+			,height: 300
+			,width:760
+			,limit:5
+			,limits:[5,10,15,20]
+			,url: '<%=path+"school/myschool"%>' //数据接口
+			,page: true //开启分页
+			,even:true
+			,cols: [[ //表头
+				{field: 'phone', title: '电话', width: 150,height:100}
+				,{field: 'name', title: '姓名', width:150,height:100}
+				,{field: 'zy', title: '专业', width:150,height:100}
+				,{field: 'xl', title: '学历', width: 5,width: 150}
+				,{field: 'jzdResidence', title: '住址', width: 150}
+
+			]]
+
+			,id:'UserTable'
+		});
+	});
+
+</script>
+
 </body>
 </html>
 

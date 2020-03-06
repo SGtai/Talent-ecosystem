@@ -55,7 +55,7 @@
 	</div>
 </form>
 <table id="demo" lay-filter="test"></table>
-
+<input id="Path" type="hidden" value="<%=Path%>" />
 <script src=<%=path + "jquery-3.4.1.js"%> ></script>
 <script src=<%=path + "layui.js"%>></script>
 <script src="<%=path+"json2.js"%>"></script>
@@ -68,12 +68,14 @@
 	<button lay-event="update" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i class="layui-icon">&#xe620;</i>
 		面试邀请
 	</button>
-	<button lay-event="update" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i class="layui-icon">&#xe620;</i>
-		导出简历
+	<button lay-event="delete" id="daochu" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i class="layui-icon">&#xe620;</i>
+		导出信息
 	</button>
 
 </script>
 <script type="text/javascript">
+	var Path=$('#Path').val();
+
 	layui.use(['form', 'layer', 'jquery','table'], function() {
 		var table = layui.table;
 		var layer = layui.layer;
@@ -81,10 +83,10 @@
 		var $ = layui.jquery;
 
 		//第一个实例
-		table.render({
+		var ins1=table.render({
 			elem: '#demo'
 			, height: 280
-			, url: "/company/searchResumeCompany" //数据接口
+			, url: Path+"/company/searchResumeCompany" //数据接口
 			, page: true //开启分页
 			, limit: 5
 			, limits: [5, 10, 20, 50, 100]
@@ -94,25 +96,31 @@
 				, {field: 'yhId', title: 'yhId', width:80,hide: true}
 				, {field: 'cxrzId', title: 'cxrzId', width:80,hide: true}
 				, {field: 'zpxxid', title: 'zpxxid', width:80,hide: true}
-				, {field: 'type', title: '应聘行业', width: 150}
-				, {field: 'postion', title: '应聘岗位', width: 200}
-				, {field: 'yhname', title: '名字', width: 200}
-				, {field: 'xl', title: '学历', width: 120, sort: true}
+				, {field: 'type', title: '应聘行业', width: 100}
+				, {field: 'postion', title: '应聘岗位', width: 100}
+				, {field: 'yhname', title: '名字', width: 80}
+				, {field: 'sjPhone', title: '手机号', width: 120}
+				, {field: 'yxMailbox', title: '邮箱', width: 150}
+				, {field: 'byschool', title: '毕业院校', width: 120}
+				, {field: 'zy', title: '专业', width: 100}
+				, {field: 'xl', title: '学历', width: 80, sort: true}
 				, {field: 'ckTime', title: '投递时间', width: 200, sort: true}
 				// , {field: 'jobinfoState', title: '发布状态', width: 110}
 				, {fixed: 'right', width: 320, align: 'center', toolbar: '#barDemo'}
 			]]
+			,done: function (res, curr, count) {
+				exportData=res.data;
+			}
 			//设置查询刷新的ID
 			, id: 'table1'
 		});
-
 		form.on('submit(search)', function (data) {
 			var myselect = document.getElementById("position");
 			var index = myselect.selectedIndex;
 			var type = myselect.options[index].text;
 			var postion = $('#zwid').val();
 			table.reload('table1', {
-				url: "/company/searchResumeCompany"
+				url:Path+ "/company/searchResumeCompany"
 				, where: { //设定异步数据接口的额外参数，任意设
 					type: type,
 					postion: postion
@@ -129,7 +137,7 @@
 			$.ajax(
 				{
 					type:"POST",
-					url:"/company/chooseStation",
+					url:Path+"/company/chooseStation",
 					dataType:"text",
 					data:{poid:data.value},
 					success:function (msg) {
@@ -152,14 +160,14 @@
 				,layEvent = obj.event; //获得 lay-event 对应的值
 			//查看简历
 			if(layEvent === 'detail'){
-				window.location.href="/company/yulan?jlid="+data.jlId
+				window.location.href=Path+"/company/yulan?jlid="+data.jlId
 			}
 			//投递我公司简历邀请面试
 			else if(layEvent === 'update'){
 				var cxrzId=data.cxrzId;
 				$.ajax({
 					type:"POST",
-					url:"/company/updateQuery",
+					url:Path+"/company/updateQuery",
 					dataType:"text",
 					data:{cxrzId:cxrzId},
 					success:function (msg) {
@@ -175,32 +183,7 @@
 					}
 				});
 			} else if(layEvent === 'delete'){
-				if(data.jobinfoState==='发布中'){
-					layer.msg('发布中无法删除状态');
-					return false;
-				}else {
-					$.ajax({
-						type:"POST",
-						url:"/company/deleteJobinfo",
-						dataType:"text",
-						data:{zpxxid:data.zpxxid},
-						//从servlet接收的数据
-						success:function (msg) {
-							if (msg ==='success') {
-								layer.msg('删除成功');
-								$(".layui-laypage-btn")[0].click();
-							} else {
-								layer.msg("修改失败！")
-							}
-						}
-						,error:function () {
-							alert("服务器正忙.....");
-						}
-					});
-
-				}
-
-
+				table.exportFile(ins1.config.id,exportData, 'xls');
 			}
 		});
 

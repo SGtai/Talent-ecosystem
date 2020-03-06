@@ -22,7 +22,7 @@
 	<title>个人中心-我的简历</title>
 </head>
 <body>
-
+<input hidden value="<%=path%>" id="path">
 
 <div  style="width:50%;margin: 20px auto">
 	<div class="JlBoxLeft">
@@ -32,6 +32,14 @@
 		<form class="" id="userinfojl" >
 			<div class="JlBoxCon ">
 				<h1><span>基本信息</span></h1>
+				<div class="JlBoxRight">
+					<c:if test="${sessionScope.user.picture ==null or sessionScope.user.picture ==''}">
+						<img src="<%=imagesPath+"per1.jpg"%>" width="80" height="100" />
+					</c:if>
+					<c:if test="${sessionScope.user.picture !=null and sessionScope.user.picture !=''}">
+						<img src="<%=dbimgPath%>${sessionScope.user.picture}" width="80" height="100" />
+					</c:if>
+				</div>
 				<span>
 				<button type="button" class="layui-btn layui-btn-primary layui-btn-radius">
 					<a href="javascript:history.back(-1)"><<返回</a>

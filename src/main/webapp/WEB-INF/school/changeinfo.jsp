@@ -5,12 +5,13 @@
 	String jsPath = application.getContextPath()+"/schoolS/js/";
 	String path = application.getContextPath()+"/layui/";
 	String othPath =application.getContextPath()+"/schoolS/other/";
+	String apppath=application.getContextPath()+"/";
 %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>修改企业信息</title>
+	<title>修改高校信息</title>
 	<link rel="stylesheet" href="<%=path+"css/layui.css"%>" media="all">
 	<script type="text/javascript" src=<%=path+"jquery-3.4.1.js"%>></script>
 	<script src=<%=path+"layui.js"%>></script>
@@ -190,6 +191,9 @@
 			<i class="layui-icon">&#xe67c;</i>修改图片
 		</button>
 		<input class="layui-upload-file" type="file" accept="" name="file">
+		<button type="button" class="layui-btn" id="test3" style="margin-top: -10% ">
+			<i class="layui-icon"></i>浏览当前高校图片
+		</button>
 		<div class="layui-form-item" >
 			<div class="layui-input-block" id="button1" style="margin-left: 48%">
 				<button type="button" class="layui-btn"  id="bb">提交</button>
@@ -212,7 +216,7 @@
 						$.ajax(
 							{
 								type:"POST",
-								url:"/school/findcity",
+								url:'<%=apppath+"school/findcity"%>',
 								dataType:"text",
 								data:{
 									province:data.value
@@ -242,7 +246,7 @@
 				//执行实例
 				upload.render({
 					elem: '#test2' //绑定元素
-					, url: '/school/changeInfo1' //上传接口
+					, url: '<%=apppath+"school/changeInfo1"%>' //上传接口
 					, multiple: false //设置是否多文件上传
 					, auto: false  //取消自动上传，并指定提交按钮进行上传
 					, bindAction: '#btn' //这个绑定id为btn的按钮触发这个提交
@@ -281,6 +285,9 @@
 						}
 						else if(msg=="1"){
 							alert("修改成功");
+							var a=document.createElement("a");
+							a.href='<%=apppath+"school/changeinfo"%>';
+							a.click();
 						}
 					}
 					, error: function () {
@@ -432,7 +439,10 @@
 									}else if(msg=="-2"){
 										alert("修改失败，社会信用代码已经被注册")
 									}else if(msg=="1"){
-										alert("修改成功")
+										alert("修改成功");
+										var a=document.createElement("a");
+										a.href='<%=apppath+"school/changeinfo"%>';
+										a.click();
 									}
 								},
 								error:function (msg) {

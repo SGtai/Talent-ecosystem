@@ -125,5 +125,30 @@ public class CompanyService
 		int sum=companyDao.yingpin(query);
 		return sum;
 	}
+
+	public int yingpinNum(Jobinfo jobinfo){
+		int sum=companyDao.yingpinNum(jobinfo);
+		return sum;
+	}
+
+	public int qyPicture(String urldb,int qyid){
+		int num = companyDao.qyPicture(urldb,qyid);
+		return num;
+	}
+
+	public int weekJobinfo(String day,int qyid){
+		int num = companyDao.weekJobinfo(day,qyid);
+		return num;
+	}
+
+	public int monthJobinfo(String day,String day1,int qyid){
+		int num = companyDao.monthJobinfo(day,day1,qyid);
+		return num;
+	}
+
+	public List<Resume> finishJob(Resume resume){
+		List<Resume> resume1=companyDao.finishJob(resume);
+		return resume1;
+	}
 }
 

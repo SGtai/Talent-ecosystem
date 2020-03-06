@@ -5,6 +5,7 @@
 	String jsPath = application.getContextPath()+"/schoolS/js/";
 	String path = application.getContextPath()+"/layui/";
 	String othPath =application.getContextPath()+"/schoolS/other/";
+	String apppath =application.getContextPath()+"/";
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +26,7 @@
 	<a class="layui-btn layui-btn-sm background-style" lay-event="able">推荐</a>
 </script>
 <script type="text/html" id="toolbar1">
-	<input type="checkbox"  checked class="layui-icon-radio">
+	<a class="layui-btn layui-btn-sm background-style" lay-event="able1">推荐</a>
 </script>
 <div id="di">
 	<form class="layui-form">
@@ -51,12 +52,13 @@
 				<div class="layui-inline">
 					<button style="margin-left: 0%" class="layui-btn layui-btn-normal layui-btn-radius" id="query_shuaxin" type="button">刷新</button>
 				</div>
-
 			</div>
 		</div>
 	</form>
 </div>
 	<input type="hidden" id="xxzpid">
+<input type="hidden" id="yhid">
+<input type="hidden" id="jlid">
 <div id="mydiv" style="display: none ; padding: 10px;margin-left: 10%">
 	<form class="layui-form">
 		<h1 style="margin-left: 30%;margin-top: 1%">人才信息推荐</h1>
@@ -95,9 +97,9 @@
 				<div class="layui-inline">
 					<button style="margin-left: 20%" class="layui-btn layui-btn-normal layui-btn-radius" id="query_shuaxin1" type="button">刷新</button>
 				</div>
-				<div class="layui-inline">
-					<button style="margin-left: 20%" class="layui-btn layui-btn-normal layui-btn-radius" id="tj" type="button">推荐</button>
-				</div>
+<%--				<div class="layui-inline">--%>
+<%--					<button style="margin-left: 20%" class="layui-btn layui-btn-normal layui-btn-radius" id="tj" type="button">推荐</button>--%>
+<%--				</div>--%>
 			</div>
 		</div>
 	</form>
@@ -122,7 +124,7 @@
 				,width:760
 				,limit:5
 				,limits:[5,10,15,20]
-				,url: '/school/tjrcquery' //数据接口
+				,url: '<%=apppath+"school/rgxg"%>' //数据接口
 				,page: true //开启分页
 				,even:true
 				,cols: [[ //表头
@@ -131,7 +133,7 @@
 					,{field: 'postion', title: '岗位', width:150,height:100}
 					,{field: 'time', title: '发布时间', width: 150,height:100}
 					,{field:'opera', width:150, title: '推荐',align:'center', toolbar: '#toolbar'}
-					,{field: 'zpxxid', title: '企业招聘的id', width: 150,height:100,style:'display:none;'}
+					,{field: 'zpxxid', title: '企业招聘的id', width: 150,height:100,hide:true}
 				]]
 				,id:'UserTable'
 			});
@@ -168,30 +170,35 @@
 				,width:760
 				,limit:5
 				,limits:[5,10,15,20]
-				,url: '/school/rencaiinfoquery' //数据接口
+				,url: '<%=apppath+"school/rencaiinfoquery"%>' //数据接口
 				,page: true //开启分页
 				,even:true
 				,cols: [[ //表头
-					{field: 'account', title: '账号名', width:150,height:100}
+					{field: 'phone', title: '手机号', width:150,height:100}
 					,{field: 'name', title: '姓名', width:150,height:100}
 					,{field: 'zy', title: '专业', width:150,height:100}
 					,{field: 'jzstate', title: '就业情况', width: 150,height:100}
 					,{field:'opera', width:150, title: '是否推荐',align:'center', toolbar: '#toolbar1'}
-					,{field: 'mmFace', title: '政治面貌', width: 50,style:'display:none;'}
-					,{field: 'birthday', title: '出生日期', width: 50,style:'display:none;'}
-					,{field: 'phone', title: '电话', width: 50,style:'display:none;'}
-					,{field: 'byschool', title: '学校', width: 50,style:'display:none;'}
-					,{field: 'xl', title: '学历', width: 50,style:'display:none;'}
-					,{field: 'jzdResidence', title: '住址', width: 50,style:'display:none;'}
-					,{field: 'zsCertificate', title: '技能证书', width: 50,style:'display:none;'}
-					,{field: 'pjEvaluation', title: '自我评价', width: 50,style:'display:none;'}
+					,{field: 'mmFace', title: '政治面貌', width: 50,hide:true}
+					,{field: 'birthday', title: '出生日期', width: 50,hide:true}
+					,{field: 'byschool', title: '学校', width: 50,hide:true}
+					,{field: 'xl', title: '学历', width: 50,hide:true}
+					,{field: 'jzdResidence', title: '住址', width: 50,hide:true}
+					,{field: 'zsCertificate', title: '技能证书', width: 50,hide:true}
+					,{field: 'pjEvaluation', title: '自我评价', width: 50,hide:true}
+					,{field: 'yhId', title: '用户id', width: 50,hide:true}
+					,{field: 'jlId', title: '简历id', width: 50,hide:true}
 				]]
 				,id:'UserTable1'
+				,done: function (res, curr, count) {
+					exportData=res.data;
+
+				}
 			});
 			//搜索1
 			$("#query_pa").click(function () {
 				table.reload('UserTable',{
-					url:'/school/tjrcquery'
+					url:'<%=apppath+"school/rgxg"%>'
 					,where: { //设定异步数据接口的额外参数，任意设
 						position: $("#gw").val(),
 						type:$("#hy").val()
@@ -213,7 +220,7 @@
 					}
 				}
 				table.reload('UserTable1',{
-					url:'/school/rencaiinfoquery'
+					url:'<%=apppath+"school/rencaiinfoquery"%>'
 					,where: { //设定异步数据接口的额外参数，任意设
 						name: $('#name').val(),
 						time:times,
@@ -269,6 +276,41 @@
 
 
 
+			//点击推荐
+			table.on('tool(table_pa1)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+				var data = obj.data //获得当前行数据
+					,layEvent = obj.event; //获得 lay-event 对应的值
+				$("#yhid").val(data.yhId);
+				$("#jlid").val(data.jlId);
+				// 点击推荐
+				if(layEvent === 'able1') {
+					$.ajax(
+						{
+							type:"POST",
+							url:'<%=apppath+"school/tj"%>',
+							dataType:"text",
+							data:{
+								yhid:$("#yhid").val(),
+								jlid:$("#jlid").val(),
+								xxzpid:$("#xxzpid").val()
+							},
+							success:function (msg) {
+								if(msg=="1"){
+									alert("推荐成功")
+								}else{
+									alert("该企业已经推荐")
+								}
+							},
+							error:function (msg) {
+								alert("系统忙，请稍等");
+							}
+						}
+					);
+				}
+
+			});
+
+
 		});
 
 	</script>
@@ -279,9 +321,7 @@
 		$('#query_shuaxin1').click(function () {
 			$(".layui-laypage-btn")[0].click();
 		});
-		$("#tj").click(function () {
-			alert("推荐成功");
-		});
+
 	</script>
 
 

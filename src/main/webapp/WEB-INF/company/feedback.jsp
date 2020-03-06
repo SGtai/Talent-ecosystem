@@ -10,6 +10,7 @@
 <%
 	String path = application.getContextPath()+"/layui/";
 	String jsPath = application.getContextPath()+"/companys/js/";
+	String Path=application.getContextPath();
 %>
 <html>
 <head>
@@ -26,7 +27,7 @@
 <body>
 <input id="qyid" type="hidden" value="${sessionScope.Qyinfo.qyid}" />
 <form class="layui-form" lay-filter="component-form-group" id="search_submits" onsubmit="return false">
-	<h1  style="background-color: #95877c;font-weight:bold;text-align:center">全部简历</h1>
+	<h1  style="background-color: #95877c;font-weight:bold;text-align:center">反馈情况</h1>
 	<div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="layadmin-useradmin-formlist">
 		<div class="layui-inline">
 			<label class="layui-form-label">反馈情况：</label>
@@ -46,7 +47,7 @@
 	</div>
 </form>
 <table id="demo" lay-filter="test"></table>
-
+<input id="Path" type="hidden" value="<%=Path%>" />
 <script src=<%=path + "jquery-3.4.1.js"%> ></script>
 <script src=<%=path + "layui.js"%>></script>
 <script src="<%=path+"json2.js"%>"></script>
@@ -61,6 +62,8 @@
 	</button>
 </script>
 <script type="text/javascript">
+	var Path=$('#Path').val();
+
 	layui.use(['form', 'layer', 'jquery','table'], function() {
 		var table = layui.table;
 		var layer = layui.layer;
@@ -71,7 +74,7 @@
 		table.render({
 			elem: '#demo'
 			, height: 280
-			, url: "/company/feedback" //数据接口
+			, url: Path+"/company/feedback" //数据接口
 			, page: true //开启分页
 			, limit: 5
 			, limits: [5, 10, 20, 50, 100]
@@ -80,12 +83,12 @@
 				, {field: 'yhId', title: 'yhId', width:80,hide: true}
 				, {field: 'cxrzId', title: 'cxrzId', width:80,hide: true}
 				, {field: 'zpxxid', title: 'zpxxid', width:80,hide: true}
-				, {field: 'paid', title: 'paid', width:80}
+				, {field: 'paid', title: 'paid', width:80,hide: true}
 				// , {field: 'type', title: '应聘行业', width: 150}
 				// , {field: 'postion', title: '应聘岗位', width: 200}
 				, {field: 'yhname', title: '名字', width: 150}
 				, {field: 'byschool', title: '毕业院校', width: 200}
-				, {field: 'xl', title: '学历', width: 120, sort: true}
+				, {field: 'xl', title: '学历', width: 120}
 				, {field: 'zy', title: '专业', width: 170}
 				, {field: 'ckTime', title: '操作时间', width: 200, sort: true}
 				, {field: 'feedback', title: '反馈情况', width: 150, sort: true}
@@ -99,7 +102,7 @@
 			var paid=$('#paid').val();
 			alert(paid);
 			table.reload('table1', {
-				url: "/company/feedback"
+				url: Path+"/company/feedback"
 				, where: { //设定异步数据接口的额外参数，任意设
 					paid: paid
 				}
@@ -113,7 +116,7 @@
 				,layEvent = obj.event; //获得 lay-event 对应的值
 			//查看简历
 			if(layEvent === 'detail'){
-				window.location.href="/company/yulan?jlid="+data.jlId
+				window.location.href=Path+"/company/yulan?jlid="+data.jlId
 			}
 			//应聘
 			else if(layEvent === 'update'){
@@ -125,11 +128,12 @@
 					return false;
 				}else {
 					var cxrzId=data.cxrzId;
+					var zpxxid=data.zpxxid;
 					$.ajax({
 						type:"POST",
-						url:"/company/yingpin",
+						url:Path+"/company/yingpin",
 						dataType:"text",
-						data:{cxrzId:cxrzId},
+						data:{cxrzId:cxrzId,zpxxid:zpxxid},
 						//从servlet接收的数据
 						success:function (msg) {
 							if (msg ==='success') {
@@ -138,7 +142,7 @@
 								//招聘人数加1
 
 							} else {
-								layer.msg("应聘失败！")
+								layer.msg("应聘失败,已招满!")
 							}
 						}
 						,error:function () {
@@ -146,34 +150,6 @@
 						}
 					});
 				}
-			} else if(layEvent === 'delete'){
-
-				if(data.jobinfoState==='发布中'){
-					layer.msg('发布中无法删除状态');
-					return false;
-				}else {
-					$.ajax({
-						type:"POST",
-						url:"/company/deleteJobinfo",
-						dataType:"text",
-						data:{zpxxid:data.zpxxid},
-						//从servlet接收的数据
-						success:function (msg) {
-							if (msg ==='success') {
-								layer.msg('删除成功');
-								$(".layui-laypage-btn")[0].click();
-							} else {
-								layer.msg("修改失败！")
-							}
-						}
-						,error:function () {
-							alert("服务器正忙.....");
-						}
-					});
-
-				}
-
-
 			}
 		});
 

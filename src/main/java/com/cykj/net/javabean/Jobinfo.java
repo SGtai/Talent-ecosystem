@@ -57,7 +57,16 @@ public class Jobinfo
   private String priname;
   private String cityname;
 
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+  public Timestamp getTime()
+  {
+    return time;
+  }
 
+  public void setTime(Timestamp time)
+  {
+    this.time = time;
+  }
 }
 
 

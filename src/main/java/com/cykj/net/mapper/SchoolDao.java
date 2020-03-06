@@ -75,13 +75,13 @@ public interface SchoolDao
 	 * @param account
 	 * @return
 	 */
-	public List<Experience> findexperience(@Param("account") String account);
+	public List<Experience> findexperience(@Param("phone") String phone);
 	/**
 	 * 查找工作经历
 	 * @param account
 	 * @return
 	 */
-	public List<Undergo> findegzjl(@Param("account") String account);
+	public List<Undergo> findegzjl(@Param("phone") String phone);
 	/**
 	 * 查找省
 	 * @return
@@ -103,19 +103,104 @@ public interface SchoolDao
 	public int inseruserinfo(Userlist userlist);
 
 	/**
+	 * 插入简历表
+	 * @param resume
+	 * @return
+	 */
+	public int inserjl(Resume resume);
+
+	/**
+	 * 插入工作经历表
+	 * @param undergo
+	 * @return
+	 */
+	public int insergz(Undergo undergo);
+
+	/**
+	 * 插入学习经历表
+	 * @param experience
+	 * @return
+	 */
+	public int inserxx(Experience experience);
+
+
+	/**
+	 * 插入就职意向表
+	 * @param jobintension
+	 * @return
+	 */
+	public int inserjobint(Jobintension jobintension);
+
+	/**
+	 * 查找用户表
+	 * @param phone
+	 * @return
+	 */
+	public Userlist finduser(@Param("phone") String phone);
+
+	/**
+	 * 查找简历表
+	 * @param yhId
+	 * @return
+	 */
+	public Resume findjl(@Param("yhId") Long yhId);
+	/**
+	 * 修改用户信息
+	 * @param alluserinfo
+	 * @return
+	 */
+	public int updateuser(Alluserinfo alluserinfo);
+
+	/**
+	 * 修改简历表1
+	 * @param alluserinfo
+	 * @return
+	 */
+	public int upadtejl1(Alluserinfo alluserinfo);
+
+	/**
 	 * 分页查询发布信息
-	 * @param position
+	 * @param postion
 	 * @param type
 	 * @return
 	 */
-	public int fenyecount2(@Param("position") String position,@Param("type") String type);
+	public int fenyecount2(@Param("postion") String postion,@Param("type") String type);
 
 	/**
 	 * 查询发布信息
-	 * @param position
+	 * @param postion
 	 * @param type
 	 * @param rowBounds
 	 * @return
 	 */
-	public List<J1> fenyeshuju2(@Param("position") String position, @Param("type") String type, RowBounds rowBounds);
+	public List<J1> fenyeshuju2(@Param("postion") String postion, @Param("type") String type, RowBounds rowBounds);
+
+	/**
+	 * 查询招聘信息
+	 * @param zpxxid
+	 * @return
+	 */
+	public Jobinfo findjobinfo(@Param("zpxxid") Long zpxxid);
+
+	/**
+	 * 查询简历是否交了
+	 * @param zpxxid
+	 * @param jlid
+	 * @return
+	 */
+	public Query findjljl(@Param("jlid") Long jlid,@Param("zpxxid") Long zpxxid);
+
+	/**
+	 * 插入query
+	 * @param query
+	 * @return
+	 */
+	public int inserquery(Query query);
+
+	/**
+	 * 推荐简历记录
+	 * @param tjjl
+	 * @return
+	 */
+	public int insertjjl(Tjjl tjjl);
 }
