@@ -11,7 +11,7 @@
     String layuiPath = application.getContextPath() + "/layui/";
     String jsPath = application.getContextPath() + "/adminS/js/";
     String cssPath = application.getContextPath() + "/adminS/css/";
-    String path = application.getContextPath() + "/";
+    String path = application.getContextPath();
 
 %>
 <!DOCTYPE html>
@@ -54,7 +54,7 @@
     </div>
 </div>
 
-
+<input id="Path" type="hidden" value="<%=path%>" />
 <script type="text/javascript" src=<%=layuiPath + "layui.js"%>></script>
 <script type="text/html" id="opeHtml">
 
@@ -134,6 +134,7 @@
 </script>
 <script type="text/javascript">
 
+    var path=$('#Path').val();
     layui.use(['table', 'layer', 'jquery', 'form'], function () {
         var table = layui.table
             , layer = layui.layer
@@ -144,7 +145,7 @@
         $('#type').empty();
         $.ajax({
             type: "POST",
-            url: "/adminParameter/getParameter",
+            url: path + "/adminParameter/getParameter",
             dataType: "text",
             success: function (msg) {
                 $('#type').append('<option value="">请选择参数类型</option>');
@@ -163,7 +164,7 @@
         table.render({
             elem: '#parameter'
             // , height: 312
-            , url: '/adminParameter/table/parameter' //数据接口
+            , url: path + '/adminParameter/table/parameter' //数据接口
             , page: true //开启分页
             , limit: 5
             , limits: [5]
@@ -195,7 +196,7 @@
         //搜索
         form.on('submit(searchParameter)', function (data) {
             table.reload('parameter', {
-                url: '/adminParameter/table/parameter'
+                url: path + '/adminParameter/table/parameter'
                 , where:  //设定异步数据接口的额外参数，任意设
                 data.field
                 , page: {
@@ -241,7 +242,7 @@
                     layer.confirm('确定要添加参数:' + data.name + '吗?', function (index) {
                         $.ajax({
                             type: "POST",
-                            url: "/adminParameter/addParameter",
+                            url: path + "/adminParameter/addParameter",
                             dataType: "text",
                             data: data,
                             success: function (msg) {
@@ -321,7 +322,7 @@
 
                             $.ajax({
                                 type: "POST",
-                                url: "/adminParameter/updateParameter",
+                                url: path + "/adminParameter/updateParameter",
                                 dataType: "text",
                                 data: data.field,
                                 success: function (msg) {

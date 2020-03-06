@@ -11,7 +11,7 @@
     String layuiPath = application.getContextPath() + "/layui/";
     String jsPath = application.getContextPath() + "/adminS/js/";
     String cssPath = application.getContextPath() + "/adminS/css/";
-    String path = application.getContextPath() + "/";
+    String path = application.getContextPath();
 
 %>
 <!DOCTYPE html>
@@ -102,7 +102,7 @@
             </div>
         </div>
     </form>
-
+    <input id="Path" type="hidden" value="<%=path%>" />
 </script>
 <script type="text/javascript">
 
@@ -112,12 +112,12 @@
             , $ = layui.jquery
             , form = layui.form;
 
-        var poidList;
-
+        var poidList
+        var path=$('#Path').val();
         //ajax
         $.ajax({
             type: "POST",
-            url: "/adminCity/chooseProvince",
+            url: path + "/adminCity/chooseProvince",
             dataType: "text",
             data: {},
             success: function (msg) {
@@ -142,7 +142,7 @@
         table.render({
             elem: '#city'
             // , height: 312
-            , url: '/adminCity/table/city' //数据接口
+            , url:  path + '/adminCity/table/city' //数据接口
             , page: true //开启分页
             , limit: 5
             , limits: [5]
@@ -164,7 +164,7 @@
         //搜索
         form.on('submit(searchCity)', function () {
             table.reload('city', {
-                url: '/adminCity/table/city'
+                url:  path + '/adminCity/table/city'
                 , where: { //设定异步数据接口的额外参数，任意设
                     prid: prid
                 }
@@ -207,7 +207,7 @@
 
                         $.ajax({
                             type: "POST",
-                            url: "/adminCity/addCity",
+                            url:  path + "/adminCity/addCity",
                             dataType: "text",
                             data: {prid: op, ctname: us},
                             success: function (msg) {
@@ -289,7 +289,7 @@
 
                             $.ajax({
                                 type: "POST",
-                                url: "/adminCity/updateCity",
+                                url:  path + "/adminCity/updateCity",
                                 dataType: "text",
                                 data: {ctid:data.prid,prid: op, ctname: us, name: data.ctname},
                                 success: function (msg) {
@@ -325,7 +325,7 @@
                 layer.confirm('确定要删除城市：' + ctname + '吗?警告：删除后不可恢复！', function (index) {
                     $.ajax({
                         type: "POST",
-                        url: "/adminCity/deleteCity",
+                        url: path +  "/adminCity/deleteCity",
                         dataType: "text",
                         data: {prid: prid, ctname: ctname,ctid:data.ctid},
                         success: function (msg) {

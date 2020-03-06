@@ -11,7 +11,7 @@
     String layuiPath = application.getContextPath() + "/layui/";
     String jsPath = application.getContextPath() + "/adminS/js/";
     String cssPath = application.getContextPath() + "/adminS/css/";
-    String path = application.getContextPath() + "/";
+    String path = application.getContextPath();
 
 %>
 <!DOCTYPE html>
@@ -80,7 +80,7 @@
         <table id="company" lay-filter="getCompany"></table>
     </div>
 </div>
-
+<input id="Path" type="hidden" value="<%=path%>" />
 
 <script type="text/javascript" src=<%=layuiPath + "layui.js"%>></script>
 <script type="text/html" id="opeHtml">
@@ -172,14 +172,14 @@
             , layer = layui.layer
             , $ = layui.jquery
             , form = layui.form;
-
+        var path=$('#Path').val();
 
         $('#prid').empty();
         $('#ctid').empty();
         $('#ctid').append('<option value="">请选择城市</option>');
         $.ajax({
             type: "POST",
-            url: "/adminCompany/getProvince",
+            url: path + "/adminCompany/getProvince",
             dataType: "text",
             success: function (msg) {
                 $('#prid').append('<option value="">请选择省份</option>');
@@ -202,7 +202,7 @@
             } else {
                 $.ajax({
                     type: "POST",
-                    url: "/adminCompany/getCity",
+                    url: path + "/adminCompany/getCity",
                     dataType: "text",
                     data: {prid: data.value},
                     success: function (msg) {
@@ -224,7 +224,7 @@
         table.render({
             elem: '#company'
             // , height: 312
-            , url: '/adminCompany/table/company' //数据接口
+            , url: path + '/adminCompany/table/company' //数据接口
             , page: true //开启分页
             , limit: 5
             , limits: [5]
@@ -283,7 +283,7 @@
         //搜索
         form.on('submit(searchCompany)', function (data) {
             table.reload('company', {
-                url: '/adminCompany/table/company'
+                url: path + '/adminCompany/table/company'
                 , where: //设定异步数据接口的额外参数，任意设
                 data.field
                 , page: {
@@ -309,7 +309,7 @@
                 layer.confirm('确定要将：' + data.qyName + '' + t + '吗?', function (index) {
                     $.ajax({
                         type: "POST",
-                        url: "/adminCompany/updateQyState",
+                        url: path + "/adminCompany/updateQyState",
                         dataType: "text",
                         data: {qyAccount: data.qyAccount, qyState: state,name:data.qyName},
                         success: function (msg) {

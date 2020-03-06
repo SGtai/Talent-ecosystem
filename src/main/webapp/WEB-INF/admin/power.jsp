@@ -11,7 +11,7 @@
     String layuiPath = application.getContextPath() + "/layui/";
     String jsPath = application.getContextPath() + "/adminS/js/";
     String cssPath = application.getContextPath() + "/adminS/css/";
-    String path = application.getContextPath() + "/";
+    String path = application.getContextPath();
     String zTreePath = application.getContextPath() + "/adminS/ztree/";
 %>
 <!DOCTYPE html>
@@ -29,10 +29,10 @@
 <body class="layui-layout-body">
 
 
-<form class="layui-form" action="" lay-filter="frm">
+<form class="layui-form" action="" lay-filter="frm" style="margin-left: 20%">
 
     <br>
-    <div class="layui-form-item">
+    <div class="layui-form-item" >
         <label class="layui-form-label">角色</label>
         <div class="layui-input-inline">
             <select name="role" id="role" lay-filter="rolemenu">
@@ -47,7 +47,7 @@
         </div>
     </div>
 
-    <div class="content_wrap" style="padding-left: 70px">
+    <div class="content_wrap" style="padding-left:15%;background: white;width: 35%">
         <div class="zTreeDemoBackground left" style="height:470px;width:300px;overflow:auto">
             <ul id="treeDemo" class="ztree"></ul>
         </div>
@@ -60,11 +60,12 @@
     </div>
 </form>
 
-
+<input id="Path" type="hidden" value="<%=path%>" />
 
 <script type="text/javascript" src=<%=layuiPath + "layui.js"%>></script>
 <script type="text/javascript">
 
+    var path=$('#Path').val();
 
     // setting是初始化ztree的组件
     var setting = {
@@ -87,7 +88,7 @@
     $(document).ready(function () {
         var rid = $("#role").val();
         $.ajax({
-            url:"/adminMenu/initMenuChange",
+            url:path + "/adminMenu/initMenuChange",
             data: {"rid":rid},
             type: "post",
             dataType: "json",
@@ -129,7 +130,7 @@
                 }
                 alert(arrayObj);
                 $.ajax({
-                    url:"/adminMenu/changeMenu",
+                    url:path + "/adminMenu/changeMenu",
                     data: {"rid":rid,"checkList":JSON.stringify(arrayObj)},
                     type: "post",
                     dataType: "json",
@@ -152,7 +153,7 @@
                 var rid = $("#role").val();
 
                 $.ajax({
-                    url:"/adminMenu/initMenuChange",
+                    url:path + "/adminMenu/initMenuChange",
                     data: {"rid":rid},
                     type: "post",
                     dataType: "json",

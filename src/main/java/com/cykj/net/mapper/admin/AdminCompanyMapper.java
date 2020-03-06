@@ -75,4 +75,7 @@ public interface AdminCompanyMapper {
 
     @Update("update schoolinfo set scState = #{scState} where scAccount = #{scAccount}")
     int updateScState(String scAccount, String scState);
+
+    @Update("update qyinfo set password = #{updatePassword} where qyAccount = #{qyAccount}")
+    int updateCompanyPassword(String qyAccount, String updatePassword);
 }

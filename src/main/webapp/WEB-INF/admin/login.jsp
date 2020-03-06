@@ -11,7 +11,7 @@
     String layuiPath = application.getContextPath() + "/layui/";
     String jsPath = application.getContextPath() + "/adminS/js/";
     String cssPath = application.getContextPath() + "/adminS/css/";
-    String path = application.getContextPath() + "/";
+    String path = application.getContextPath();
 
 %>
 <!DOCTYPE html>
@@ -79,6 +79,7 @@
         </form>
     </div>
 </div>
+<input id="Path" type="hidden" value="<%=path%>" />
 <script src=<%=layuiPath+"layui.js"%> type="text/javascript"></script>
 
 <%--注册弹出层--%>
@@ -92,11 +93,11 @@
 <%--登录登录js--%>
 <script type="text/javascript">
 
-
+    var path=$('#Path').val();
     // 点击图片更换验证码事件
     $('#verifyCodeImage').on('click', function () {
         // $('#verifyCodeImage').removeProp('src');
-        $('#verifyCodeImage').attr('src', '/admin/getVerifyCode?' + Math.random());
+        $('#verifyCodeImage').attr('src', path + '/admin/getVerifyCode?' + Math.random());
     })
     layui.use(['jquery', 'form', 'layer'], function () {
         var $ = layui.jquery
@@ -125,7 +126,7 @@
             var inputCode = document.getElementById("code").value;
             $.ajax({
                 type: "POST",
-                url: "/admin/contrastCode",
+                url:  path + "/admin/contrastCode",
                 dataType: "text",
                 data: {code: inputCode},
                 success: function (flag) {
@@ -133,7 +134,7 @@
                     } else {
                         layer.msg('验证码不一致', {icon: 5});
                         $("#code").val('');
-                        $('#verifyCodeImage').attr('src', '/admin/getVerifyCode?' + Math.random());
+                        $('#verifyCodeImage').attr('src',  path + '/admin/getVerifyCode?' + Math.random());
                     }
                 },
                 error: function () {
@@ -151,7 +152,7 @@
             //ajax
             $.ajax({
                 type: "POST",
-                url: "/admin/login",
+                url:  path + "/admin/login",
                 dataType: "text",
                 data: data.field,
                 success: function (flag) {
@@ -160,7 +161,7 @@
                         $("#account").val('');
                         $("#password").val('');
                         $("#code").val('');
-                        $('#verifyCodeImage').attr('src', '/admin/getVerifyCode?' + Math.random());
+                        $('#verifyCodeImage').attr('src',  path + '/admin/getVerifyCode?' + Math.random());
                         window.location.href = '/admin/main';
                     } else if (flag === 'noCode') {
                         layer.msg('验证码不正确，请重新输入', {icon: 5});
@@ -177,7 +178,7 @@
                         $("#password").val('');
                     }
                     $("#code").val('');
-                    $('#verifyCodeImage').attr('src', '/admin/getVerifyCode?' + Math.random());
+                    $('#verifyCodeImage').attr('src',  path + '/admin/getVerifyCode?' + Math.random());
                 },
                 error: function () {
                     layer.msg('服务器繁忙');

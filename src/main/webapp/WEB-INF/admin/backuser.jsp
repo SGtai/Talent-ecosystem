@@ -127,6 +127,7 @@
         </div>
 
     </form>
+    <input id="Path" type="hidden" value="<%=path%>" />
 </script>
 <script type="text/javascript">
 
@@ -135,13 +136,13 @@
             , layer = layui.layer
             , $ = layui.jquery
             , form = layui.form;
-
+        var path=$('#Path').val();
 
         //第一个实例
         table.render({
             elem: '#backUser'
             // , height: 312
-            , url: '/adminBackUser/table/backUser' //数据接口
+            , url: path+'adminBackUser/table/backUser' //数据接口
             , page: true //开启分页
             , limit: 5
             , limits: [5]
@@ -177,7 +178,7 @@
         //搜索
         form.on('submit(searchBackUser)', function (data) {
             table.reload('backUser', {
-                url: '/adminBackUser/table/backUser'
+                url: path + 'adminBackUser/table/backUser'
                 , where: { //设定异步数据接口的额外参数，任意设
                     account: data.field.account,
                     name: data.field.name
@@ -225,7 +226,7 @@
                     layer.confirm('确定要添加管理员:' + data.account + '吗?', function (index) {
                         $.ajax({
                             type: "POST",
-                            url: "/adminBackUser/addBackUser",
+                            url: path + "adminBackUser/addBackUser",
                             dataType: "text",
                             data: data,
                             success: function (msg) {
@@ -274,7 +275,7 @@
                 layer.confirm('确定要' + t + '管理员:' + data.account + '吗?', function (index) {
                     $.ajax({
                         type: "POST",
-                        url: "/adminBackUser/updateState",
+                        url: path + "adminBackUser/updateState",
                         dataType: "text",
                         data: {account: data.account, state: state},
                         success: function (msg) {
@@ -301,7 +302,7 @@
                 layer.confirm('确定要重置管理员:' + data.account + '的密码吗?', function (index) {
                     $.ajax({
                         type: "POST",
-                        url: "/adminBackUser/updatePassword",
+                        url: path + "adminBackUser/updatePassword",
                         dataType: "text",
                         data: {account: data.account},
                         success: function (msg) {

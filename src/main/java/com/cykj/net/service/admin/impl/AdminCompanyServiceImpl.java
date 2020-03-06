@@ -88,7 +88,8 @@ public class AdminCompanyServiceImpl implements AdminComanyService {
     public String updatePassword(String qyAccount) {
         String result = "";
         String updatePassword = adminParameterMapper.findPassword(1);
-        if (adminCompanyMapper.updatePassword(qyAccount, updatePassword) > 0) {
+        if (adminCompanyMapper.updatePassword(qyAccount, updatePassword) > 0 && adminCompanyMapper.updateCompanyPassword(qyAccount,updatePassword) > 0) {
+
             //参数表查询
             result = updatePassword;
         }
