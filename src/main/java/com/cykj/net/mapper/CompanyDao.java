@@ -64,7 +64,7 @@ public interface CompanyDao
 	public int updateQuery(Query query);
 
 	//搜索简历日志表
-	public Query selectQuery(Query query);
+	public List<Query> selectQuery(Query query);
 
 	//插入日志表信息
 	public int insertQuery(Query query);

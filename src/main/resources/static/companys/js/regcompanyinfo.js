@@ -12,7 +12,7 @@ layui.use(['form', 'layer'], function(){
 		var qyAddress=$('#qyAddress').val();
 		var qyfdMan=$('#qyfdMan').val();
 		var regMoney=$('#regMoney').val();
-		var qyType=$("input[name='qyType']:checked").val();
+		var qyType=$('#qytype2').val();
 		var jyScope=$('#jyScope').val();
 		var jyTime=$('#jyTime').val();
 				$.ajax(
