@@ -4,6 +4,7 @@ import com.cykj.net.javabean.admin.Admin;
 import com.cykj.net.service.AdminroleService;
 import com.cykj.net.service.SchoolService;
 import com.cykj.net.service.admin.AdminService;
+import com.cykj.net.util.MD5;
 import com.google.gson.Gson;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -29,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -106,14 +108,14 @@ public class SchoolController
 	 */
 	@RequestMapping("/reg2")
 	@ResponseBody
-	public String screg2(S1 schoolinfo, HttpServletRequest request,@RequestParam("file") MultipartFile file) throws IOException
+	public String screg2(S1 schoolinfo, HttpServletRequest request,@RequestParam("file") MultipartFile file) throws IOException, NoSuchAlgorithmException
 	{
 		System.out.println("学校注册２启动。。。");
 		//session里面取值
 		S1 sess= (S1) request.getSession().getAttribute("reg1need");
 		//注入账户密码
 		schoolinfo.setScAccount(sess.getScAccount());
-		schoolinfo.setPassword(sess.getPassword());
+		schoolinfo.setPassword(MD5.EncoderByMd5(sess.getPassword()));
 		//查找这个账户存在不，是否被其他管理员在这个期间注册了
 		S1 scnamecheck=schoolService.findSchoolinfo(schoolinfo.getScAccount());
 		//查找手机号是否唯一
@@ -292,14 +294,17 @@ public class SchoolController
 	 */
 	@RequestMapping("/pwd")
 	@ResponseBody
-	public String changepwd(S1 sc,String newpass,HttpServletRequest request){
+	public String changepwd(S1 sc,String newpass,HttpServletRequest request) throws UnsupportedEncodingException, NoSuchAlgorithmException
+	{
+
 		Admin admin= (Admin) request.getSession().getAttribute("admin");
 		if(admin!=null){
-			if(schoolService.findSchoolinfo(admin.getAccount()).getPassword().equals(sc.getPassword())){
+			if(schoolService.findSchoolinfo(admin.getAccount()).getPassword().equals(MD5.EncoderByMd5(sc.getPassword()))){
+				System.out.println("密码一致");
 				sc.setScAccount(admin.getAccount());
-				sc.setPassword(newpass);
+				sc.setPassword(MD5.EncoderByMd5(newpass));
 				int i=schoolService.updateSchoolinfo(sc);
-				admin.setPassword(newpass);
+				admin.setPassword(MD5.EncoderByMd5(newpass));
 				int k=adminService.changeAdminPassword(admin);
 				if(i>0&&k>0){
 					return "1";
@@ -484,7 +489,7 @@ public class SchoolController
 		HSSFSheet hssfSheet=wb.getSheetAt(0);
 
 		if (hssfSheet!=null){
-			for (int rowNum = 1; rowNum < hssfSheet.getLastRowNum(); rowNum++)
+			for (int rowNum = 1; rowNum < hssfSheet.getLastRowNum()+1; rowNum++)
 			{
 				System.out.println("一次循环");
 				HSSFRow hssfRow=hssfSheet.getRow(rowNum);
@@ -492,6 +497,9 @@ public class SchoolController
 					continue;
 				}
 				Userlist userlist=new Userlist();
+				if(formatCell(hssfRow.getCell(0))==""||formatCell(hssfRow.getCell(0))==null){
+					continue;
+				}
 				userlist.setPhone(formatCell(hssfRow.getCell(0)));
 				userlist.setPassword(formatCell(hssfRow.getCell(1)));
 				userlist.setName(formatCell(hssfRow.getCell(2)));
@@ -521,7 +529,7 @@ public class SchoolController
 				resume.setYcHide("0");
 				resume.setSjPhone(userlist.getPhone());
 				resume.setXbSex(userlist.getSex());
-
+//				resume.setCsTime(dateStr);
 //				resume.setCsTime(userlist.getBirthday());
 				resume.setJlname(formatCell(hssfRow.getCell(8)));
 				resume.setZsCertificate(formatCell(hssfRow.getCell(9)));
@@ -554,19 +562,26 @@ public class SchoolController
 				if(intjobint>0){
 					System.out.println("就业意向表插入一条成功");
 				}
-				//插入管理员表
-				Admin a=new Admin();
-				a.setAccount(userlist.getPhone());
-				a.setPassword(userlist.getPassword());
-				a.setRegistertime(userlist.getRegTime());
-				a.setName(userlist.getName());
-				adminService.regAdmin(a);
+				Experience experience=new Experience();
+				experience.setJlId(resume1.getJlId());
 
-				//插入管理角色表
-				Adminrole adminrole=new Adminrole();
-				adminrole.setAccount(userlist.getPhone());
-				adminrole.setRoid(5);
-				adminroleService.regAdminRole(adminrole);
+				Undergo undergo=new Undergo();
+				undergo.setJlId(resume1.getJlId());
+				schoolService.inserxx(experience);
+				schoolService.insergz(undergo);
+//				//插入管理员表
+//				Admin a=new Admin();
+//				a.setAccount(userlist.getPhone());
+//				a.setPassword(userlist.getPassword());
+//				a.setRegistertime(userlist.getRegTime());
+//				a.setName(userlist.getName());
+//				adminService.regAdmin(a);
+//
+//				//插入管理角色表
+//				Adminrole adminrole=new Adminrole();
+//				adminrole.setAccount(userlist.getPhone());
+//				adminrole.setRoid(5);
+//				adminroleService.regAdminRole(adminrole);
 
 
 			}

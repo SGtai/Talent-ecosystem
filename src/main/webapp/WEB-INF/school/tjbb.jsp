@@ -61,7 +61,7 @@
 	<label id="sum" class="layui-form-label" style="text-align: left;margin-left: -8%"></label>
 </div>
 
-<div id="echarts_div" style="width: 600px;height:400px;margin-left: 25%"></div>
+<div id="echarts_div" style="width: 600px;height:200px;margin-left: 25%"></div>
 
 <c:if test="${requestScope.tuijianren!=null}">
 	<input type="hidden" id="test1" value=${requestScope.tuijianren}>
@@ -243,7 +243,7 @@
 			format = format.replace(RegExp.$1, (this.getFullYear() + "")
 				.substr(4 - RegExp.$1.length));
 		}
-		for (var k in o) {
+		for (var k in o) {advert
 			if (new RegExp("(" + k + ")").test(format)) {
 				format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k]
 					: ("00" + o[k]).substr(("" + o[k]).length));

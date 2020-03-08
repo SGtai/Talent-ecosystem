@@ -28,7 +28,7 @@
 </script>
 <div id="di">
 	<form class="layui-form">
-		<h1 style="margin-left: 40%">人才基本信息</h1>
+		<h1 style="margin-left: 42%;margin-top: 2%">人才基本信息</h1>
 
 		<div style="margin-left: 15%;margin-top: 1%">
 			<div class="layui-form-item">
@@ -63,7 +63,7 @@
 							       placeholder="结束时间">
 						</div>
 				</div>
-				<div class="layui-inline">
+				<div class="layui-inline" style="margin-left: 10%">
 					<button style="margin-left: 5%" class="layui-btn layui-btn-normal layui-btn-radius" id="query_pa" type="button">搜索</button>
 
 				</div>
@@ -324,6 +324,9 @@
 						alert("上传文件不是xsl文件");
 					}else {
 						alert("上传成功");
+						var a=document.createElement("a");
+						a.href='<%=apppath+"school/rencaiinfo"%>';
+						a.click();
 					}
 				}
 				, error: function () {
@@ -359,9 +362,9 @@
 			var ins1=table.render({
 				elem: '#demo'
 				,height: 300
-				,width:760
+				,width:750
 				,limit:5
-				,limits:[5,10,15,20]
+				,limits:[5,10,15,20,100]
 				,url: '<%=apppath+"school/rencaiinfoquery"%>' //数据接口
 				,page: true //开启分页
 				,even:true
@@ -579,6 +582,9 @@
 													$("#jn1").val($("#jn").val());
 													$("#pp1").val($("#pp").val());
 													layer.msg("修改成功");
+													var a=document.createElement("a");
+													a.href='<%=apppath+"school/rencaiinfo"%>';
+													a.click();
 
 												}else{
 													layer.msg("修改失败")
@@ -673,7 +679,10 @@
 				}
 			});
 		$('#query_shuaxin').click(function () {
-			$(".layui-laypage-btn")[0].click();
+			// $(".layui-laypage-btn")[0].click();
+			var a=document.createElement("a");
+			a.href='<%=apppath+"school/rencaiinfo"%>';
+			a.click();
 		});
 	</script>
 	<script>

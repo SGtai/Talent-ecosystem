@@ -11,6 +11,6 @@ public class txx {
 
     @Test
     public void tt() throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        System.out.println( MD5.EncoderByMd5("a123456"));
+        System.out.println( MD5.EncoderByMd5("444444"));
     }
 }

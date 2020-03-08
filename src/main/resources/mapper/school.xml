@@ -153,7 +153,7 @@
     </insert>
     <!--    插入工作经历表-->
     <insert id="insergz" parameterType="Undergo">
-        INSERT INTO undergo (jlId,ksTime,jzUnit,zwPosition,gxTime,gzContent,) VALUES
+        INSERT INTO undergo (jlId,ksTime,jzUnit,zwPosition,gxTime,gzContent) VALUES
         (#{jlId},#{ksTime},#{jzUnit},#{zwPosition},#{gxTime},#{gzContent})
     </insert>
     <!--    插入学习经历表-->
