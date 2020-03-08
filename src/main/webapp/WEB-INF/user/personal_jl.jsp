@@ -120,12 +120,6 @@
 					</td>
 					<td rowspan="2">
 						<div class="jlpart4">
-							<div class="red">0</div>
-							<div class="tdname">被浏览</div>
-						</div>
-					</td>
-					<td rowspan="2">
-						<div class="jlpart4">
 							<c:if test="${i.ycHide == 0}">
 								<div class="statusjl on"></div>
 							</c:if>
