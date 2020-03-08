@@ -10,7 +10,7 @@
 <%
 	String path = application.getContextPath()+"/layui/";
 	String jsPath = application.getContextPath()+"/companys/js/";
-	String dbimgPath =application.getContextPath()+"../../uploadS/images/";
+	String dbimgPath =application.getContextPath()+"/uploadS/images/";
 	String Path=application.getContextPath();
 %>
 <!DOCTYPE html>
