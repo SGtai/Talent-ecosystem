@@ -20,7 +20,7 @@
 </head>
 <body class="layui-layout-body">
 
-<h2 class="layui-form-item" style="margin-left: 43%;margin-top: 3%">招聘信息统计</h2>
+<h1 class="layui-form-item" style="margin-left: 43%;margin-top: 3%">招聘信息统计</h1>
 <div class="layui-form-item" style="margin-left: 15%;">
 	<label class="layui-form-label" style="text-align: left">统计：</label>
 
@@ -52,7 +52,7 @@
 <div id="echarts_div" style="width: 600px;height:400px;margin-left: 25%"></div>
 
 <input id="Path" type="hidden" value="<%=Path%>" />
-<script src="/echarts.min.js"></script>
+<script src=<%=Path+"/echarts.min.js"%>></script>
 <script src=<%=path + "jquery-3.4.1.js"%> ></script>
 <script src=<%=path + "layui.js"%>></script>
 <script src="<%=path+"json2.js"%>"></script>

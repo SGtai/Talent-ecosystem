@@ -18,7 +18,7 @@
 	<link type="text/css" rel="stylesheet" href=<%=path+"css/layui.css"%>>
 </head>
 <body>
-<h1  style="background-color: #95877c;font-weight:bold;text-align:center">完成应聘人员信息</h1>
+<h1  style="background-color: #d2d2d2;font-weight:bold;text-align:center">完成应聘人员信息</h1>
 <span>
 	<button type="button" class="layui-btn layui-btn-primary layui-btn-radius" style="right: auto">
 		<a href="javascript:history.back(-1)"><<返回</a>

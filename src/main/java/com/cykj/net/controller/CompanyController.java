@@ -10,6 +10,7 @@ import com.cykj.net.service.AdminroleService;
 import com.cykj.net.service.CompanyService;
 import com.cykj.net.service.UserService;
 import com.cykj.net.service.admin.AdminService;
+import com.cykj.net.util.MD5;
 import com.cykj.net.util.UtilTool;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -64,18 +67,20 @@ public class CompanyController
 	 */
 	@RequestMapping("/doReg")
 	public @ResponseBody
-	String doReg(Qyinfo qyinfo)
+	String doReg(Qyinfo qyinfo) throws UnsupportedEncodingException, NoSuchAlgorithmException
 	{
 		System.out.println("准备注册");
 		String result = "";
 		if (companyService.findById(qyinfo.getQyAccount()) == null)
 		{
+			String pwd=MD5.EncoderByMd5(qyinfo.getPassword());
+			qyinfo.setPassword(pwd);
 			//插入企业信息表
 			companyService.regQyAccount(qyinfo);
 			//插入管理员表
 			Admin admin = new Admin();
 			admin.setAccount(qyinfo.getQyAccount());
-			admin.setPassword(qyinfo.getPassword());
+			admin.setPassword(pwd);
 			admin.setRegistertime(qyinfo.getRegTime());
 			admin.setName(qyinfo.getQyName());
 			adminService.regAdmin(admin);
@@ -169,12 +174,12 @@ public class CompanyController
 	 */
 	@RequestMapping("/verifyPwd")
 	public @ResponseBody
-	String verifyPwd(String qyAccount, String password)
+	String verifyPwd(String qyAccount, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException
 	{
 		String result = "";
 		Qyinfo qyinfo = companyService.findById(qyAccount);
 
-		if (qyinfo.getPassword().equals(password))
+		if (qyinfo.getPassword().equals(MD5.EncoderByMd5(password)))
 		{
 			result = "success";
 		} else
@@ -192,13 +197,15 @@ public class CompanyController
 	 */
 	@RequestMapping("/changePassword")
 	public @ResponseBody
-	String changePassword(Qyinfo qyinfo)
+	String changePassword(Qyinfo qyinfo) throws UnsupportedEncodingException, NoSuchAlgorithmException
 	{
 		String result = "";
+		String pwd=MD5.EncoderByMd5(qyinfo.getPassword());
+		qyinfo.setPassword(pwd);
 		int a = companyService.changePassword(qyinfo);
 		Admin admin = new Admin();
 		admin.setAccount(qyinfo.getQyAccount());
-		admin.setPassword(qyinfo.getPassword());
+		admin.setPassword(pwd);
 		int b = adminService.changeAdminPassword(admin);
 		if (a > 0 && b > 0)
 		{
@@ -790,6 +797,17 @@ public class CompanyController
 
 	}
 
+
+	@RequestMapping("/yulanJobinfo")
+	public @ResponseBody
+	ModelAndView yulanJobinfo(Jobinfo jobinfo,HttpSession session)
+	{
+		ModelAndView mv = new ModelAndView();
+		List<Jobinfo> jobinfo1 = companyService.searchJobinfoTable(jobinfo);
+		mv.addObject("yulan",jobinfo1);
+		mv.setViewName("/WEB-INF/company/job-yulan");
+		return mv;
+	}
 }
 
 

@@ -69,7 +69,7 @@
 
             <c:if test="${roid == 3 || roid == 6}">
                 <iframe src="" name="main_self_frame" frameborder="0" class="layadmin-iframe"
-                        style="width: 100%;background: url('../../uploadS/images/company.jpg') no-repeat;
+                        style="width: 100%;background: url() no-repeat;
                         background-size: 100% auto;"
                         height="100%"></iframe>
             </c:if>
