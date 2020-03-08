@@ -102,26 +102,9 @@
 		</div>
 	</div>
 </div>
-<div id="di" >
-	<form class="layui-form">
 
-		<div style="margin-left: 15%;margin-top: 1%">
-			<div class="layui-form-item">
+	<div style="margin-left: 30%;margin-top: 5%"><table id="demo" lay-filter="table_pa"></table></div>
 
-			</div>
-
-				<div class="layui-inline">
-					<button style="margin-left: 5%" class="layui-btn layui-btn-normal layui-btn-radius" id="query_pa" type="button">搜索</button>
-
-				</div>
-				<div class="layui-inline">
-					<button style="margin-left: 20%" class="layui-btn layui-btn-normal layui-btn-radius" id="query_shuaxin" type="button">刷新</button>
-				</div>
-			</div>
-	</form>
-</div>
-	<div style="margin-left: 30%;margin-top: -45%"><table id="demo" lay-filter="table_pa"></table></div>
-</div>
 <div class="clear"></div>
 <div class="footer">
 	<p><a href="">菜鸟人才</a>旗下<img src="<%=imagesPath+"logo_foot.gif"%>" />菜鸟人才网版权所有 <a href="">闽ICP证0******9号</a><a href="#"></a>本网站所有招聘信息，未经书面授权不得转载 投诉电话：200-8**-****</p>
@@ -170,7 +153,7 @@
 			,height: 300
 			,width:760
 			,limit:5
-			,limits:[5,10,15,20]
+			,limits:[20,30,40,50]
 			,url: '<%=path+"school/myschool"%>' //数据接口
 			,page: true //开启分页
 			,even:true
