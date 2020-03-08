@@ -23,6 +23,7 @@
 	<title>个人中心-我的简历</title>
 </head>
 <body>
+<input hidden value="<%=path%>" id="path">
 <div class="header">
 	<div class="headerMain">
 		<div class="Notice">
@@ -268,11 +269,12 @@
 	layui.use('upload', function() {
 			var $ = layui.jquery
 				, upload = layui.upload;
+			var path = $('#path').val();
 
 			//普通图片上传
 			var uploadInst = upload.render({
 				elem: '#test1'
-				, url: '/user/photo' //改成您自己的上传接口
+				, url: path+'user/photo' //改成您自己的上传接口
 				, before: function (obj) {
 					//预读本地文件示例，不支持ie8
 					obj.preview(function (index, file, result) {
