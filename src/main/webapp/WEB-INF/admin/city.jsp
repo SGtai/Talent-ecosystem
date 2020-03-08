@@ -48,7 +48,7 @@
         <table id="city" lay-filter="getCity"></table>
     </div>
 </div>
-
+<input id="Path" type="hidden" value="<%=path%>" />
 
 <script type="text/javascript" src=<%=layuiPath + "layui.js"%>></script>
 <script type="text/html" id="opeHtml">
@@ -102,7 +102,7 @@
             </div>
         </div>
     </form>
-    <input id="Path" type="hidden" value="<%=path%>" />
+
 </script>
 <script type="text/javascript">
 

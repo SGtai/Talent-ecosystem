@@ -8,9 +8,12 @@ import com.cykj.net.mapper.admin.AdminMsgMapper;
 import com.cykj.net.mapper.admin.AdminParameterMapper;
 import com.cykj.net.mapper.admin.AdminSchoolMapper;
 import com.cykj.net.service.admin.AdminSchoolService;
+import com.cykj.net.util.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @Service("adminSchoolService")
@@ -59,10 +62,10 @@ public class AdminSchoolServiceImpl implements AdminSchoolService {
     }
 
     @Override
-    public String updatePassword(String scAccount) {
+    public String updatePassword(String scAccount) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         String result = "";
         String updatePassword = adminParameterMapper.findPassword(1);
-        if (adminCompanyMapper.updatePassword(scAccount, updatePassword) > 0) {
+        if (adminCompanyMapper.updatePassword(scAccount, MD5.EncoderByMd5(updatePassword)) > 0) {
             //参数表查询
             result = updatePassword;
         }

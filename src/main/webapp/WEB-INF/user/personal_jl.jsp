@@ -12,7 +12,7 @@
 	String jsPath = application.getContextPath()+"/userS/js/";
 	String path = application.getContextPath()+"/";
 	String imagesPath =application.getContextPath()+"/homeS/images/";
-	String dbimgPath =application.getContextPath()+"/images/";
+
 %>
 <!DOCTYPE html>
 <html>
@@ -49,7 +49,7 @@
 <div class="navTop">
 	<div class="navTopmain">
 		<div class="nav">
-			<div class="navItem"><a href="<%=path%>user/index">首页</a></div>
+			<div class="navItem"><a href="<%=path%>">首页</a></div>
 			<div class="navItem"><a href="<%=path%>jump/home/searchJob">职位搜索</a></div>
 			<div class="navItem"><a href="<%=path%>techa">人才成长区</a></div>
 		</div>
@@ -117,12 +117,6 @@
 							<div class="Orange" style="width:40px;"></div>
 						</div>
 						<div class="jlpart3">中文完整度 20 分 [ <a href="<%=path%>user/gojlseeforupdate?jlid=${i.jlId}">修改</a>   <a href="<%=path%>user/yulan?jlid=${i.jlId}">预览</a>]</div>
-					</td>
-					<td rowspan="2">
-						<div class="jlpart4">
-							<div class="red">0</div>
-							<div class="tdname">被浏览</div>
-						</div>
 					</td>
 					<td rowspan="2">
 						<div class="jlpart4">

@@ -8,11 +8,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-	String cssPath = application.getContextPath()+"homeS/css/";
-	String jsPath = application.getContextPath()+"homeS/js/";
+	String cssPath = application.getContextPath()+"/homeS/css/";
+	String jsPath = application.getContextPath()+"/homeS/js/";
 	String path = application.getContextPath()+"/";
-	String imagesPath =application.getContextPath()+"homeS/images/";
-	String dbimgPath ="../../uploadS/images/";
+	String imagesPath =application.getContextPath()+"/homeS/images/";
+	String dbimgPath =application.getContextPath()+"/uploadS/images/";
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,7 +77,7 @@
 	</div>
 </div>
 <div class="menuDiv">
-	<a href="<%=path%>jump/home/index" class="onnav">首页</a>
+	<a href="<%=path%>" class="onnav">首页</a>
 	<a href="<%=path%>techa">人才成长区</a>
 	<a href="<%=path+"jump/home/searchJob"%>">职位搜索</a>
 	<a href="<%=path+"jump/admin/login"%>">高校专区</a>

@@ -10,7 +10,7 @@
 <%
 	String path = application.getContextPath()+"/layui/";
 	String jsPath = application.getContextPath()+"/companys/js/";
-	String dbimgPath =application.getContextPath()+"../../uploadS/images/";
+	String dbimgPath =application.getContextPath()+"/uploadS/images/";
 	String Path=application.getContextPath();
 %>
 <!DOCTYPE html>
@@ -31,6 +31,7 @@
 			margin: auto;
 			margin-top: 15px;
 			border: #9F9F9F solid 1px;
+			background-color: #f2f2f2
 		}
 		.layui-form-label{
 			width: 120px;

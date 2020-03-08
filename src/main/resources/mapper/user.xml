@@ -18,7 +18,7 @@
 
 <!--    创建简历是，创建一个简历表空表-->
     <insert id="addbasejl" parameterType="Resume" useGeneratedKeys="true" keyProperty="jlId">
-	    insert into resume(yhId,sjPhone) values(#{yhId},#{sjPhone})
+	    insert into resume(yhId,sjPhone,ycHide) values(#{yhId},#{sjPhone},0)
     </insert>
 <!--创建空的求职意向表-->
     <insert id="addJobIntension" parameterType="Resume" useGeneratedKeys="true" keyProperty="jzyxid">

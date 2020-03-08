@@ -8,11 +8,14 @@ import com.cykj.net.mapper.AdminDao;
 import com.cykj.net.mapper.AdminRoleDao;
 import com.cykj.net.service.admin.AdminBackUserService;
 import com.cykj.net.service.admin.AdminService;
+import com.cykj.net.util.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -83,10 +86,11 @@ public class AdminBackUserController {
     @RequestMapping(value = "/updatePassword")
     @Log(type = "修改操作",event = "修改后台管理员密码")
     public @ResponseBody
-    String updatePasswordLog(Admin admin) {
+    String updatePasswordLog(Admin admin) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         String msg = "";
         //参数表获得
-        admin.setPassword("123456");
+        String updatePassword = adminBackUserService.findPassword(1);
+        admin.setPassword(MD5.EncoderByMd5(updatePassword));
         if (adminBackUserService.updateAdmin(admin) > 0) {
             msg = admin.getPassword();
         }
@@ -102,12 +106,13 @@ public class AdminBackUserController {
     @RequestMapping(value = "/addBackUser")
     @Log(type = "添加操作",event = "添加后台管理员")
     public @ResponseBody
-    String addBackUserLog(Admin admin) {
+    String addBackUserLog(Admin admin) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         String msg = "false";
         admin.setRegistertime(new Timestamp(System.currentTimeMillis()));
         if (adminService.findAdmin(admin.getAccount()) != null) {
             msg = "haveAdmin";
         } else {
+            admin.setPassword(MD5.EncoderByMd5(admin.getPassword()));
             if (adminDao.regAdmin(admin) > 0) {
                 Adminrole adminrole = new Adminrole();
                 adminrole.setAccount(admin.getAccount());

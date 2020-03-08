@@ -24,7 +24,11 @@
 <script type="text/html" id="barDemo">
 	<button lay-event="detail" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i
 			class="layui-icon">&#xe63c;</i>
-		查看/修改
+		修改
+	</button>
+	<button lay-event="yulan" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i
+			class="layui-icon">&#xe63c;</i>
+		预览
 	</button>
 	<button lay-event="update" type="button" class="layui-btn layui-btn-xs layui-btn-radius"><i class="layui-icon">&#xe620;</i>
 		发布/下架
@@ -35,7 +39,8 @@
 </script>
 
 <input id="qyid" type="hidden" value="${sessionScope.Qyinfo.qyid}" />
-<form class="layui-form" lay-filter="component-form-group" id="search_submits" onsubmit="return false">
+<h1  style="background-color: #d2d2d2;font-weight:bold;text-align:center;margin-top: 15px">招聘信息管理</h1>
+<form class="layui-form" lay-filter="component-form-group" id="search_submits" onsubmit="return false" style="margin-top: 15px">
 	<div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="layadmin-useradmin-formlist">
 		<div class="layui-inline">
 			<label class="layui-form-label">招聘行业：</label>
@@ -77,9 +82,10 @@
 
 <%--查看招聘信息表--%>
 <script type="text/html" id="jobinfo">
-	<form class="layui-form" action="">
+	<form class="layui-form" action="" style="			border: #9F9F9F solid 1px;
+			background-color: #f2f2f2;">
 		<input id="zpxxid" name="zpxxid" class="layui-input"  type="hidden" >
-		<div class="layui-form-item" style="background-color: #95877c;width: 720px">
+		<div class="layui-form-item" style="background-color: #d2d2d2 ;width: 720px">
 			<h3><label class="layui-form-label" style="width: 80px;text-align: left">招聘职位:</label></h3>
 			<div class="layui-input-inline">
 				<select name="position"  id="position2" lay-filter="choosePosition2" lay-verify="required" >
@@ -134,7 +140,7 @@
 				<input name="lxAddress" id="lxAddress" style="width: 600px" class="layui-input" type="text" autocomplete="off"  lay-verify="lxAddress" >
 			</div>
 		</div>
-		<div class="layui-form-item" style="background-color: #95877c;width:720px">
+		<div class="layui-form-item" style="background-color: #d2d2d2;width:720px">
 			<h3><label class="layui-form-label" style="width: 150px;text-align: left">职业基本信息:</label></h3>
 		</div>
 		<div class="layui-form-item">
@@ -304,7 +310,7 @@
 		</div>
 		<div class="layui-form-item layui-form-text">
 			<h3>
-				<label class="layui-form-label"  style="background-color:#95877c;width:690px;text-align: left">岗位职责：</label>
+				<label class="layui-form-label"  style="background-color:#d2d2d2;width:690px;text-align: left">岗位职责：</label>
 			</h3>
 			<br><br><br>
 			<div class="layui-input-line">
@@ -485,7 +491,7 @@
                                 type: 1,
                                 content: $('#jobinfo').html(),
                                 area: ['740px','550px'],
-                                title: '招聘信息',
+                                title: ['招聘信息', 'text-align: center;font-size:25px;'],
                                 btn:['取消'],
                                 anim: 1,//0-6的动画形式，-1不开启
                                 offset: '40px',
@@ -707,6 +713,17 @@
 				}
 
 
+			}else if(layEvent === 'yulan'){
+				var qyid=$('#qyid').val();
+				// $.ajax(
+				// 	{
+				// 		type:"POST",
+				// 		url:Path+"/company/yulanJobinfo",
+				// 		dataType:"json",
+				// 		data:{zpxxid:data.zpxxid,qyid:qyid}
+				//
+				// 	});
+				window.location.href=Path+"/company/yulanJobinfo?zpxxid="+data.zpxxid+"&qyid="+qyid;
 			}
 		});
 

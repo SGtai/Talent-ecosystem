@@ -30,6 +30,7 @@
 			margin: auto;
 			margin-top: 15px;
 			border: #9F9F9F solid 1px;
+			background-color: #f2f2f2
 		}
 		#qytype2{
 			width: 150px;
@@ -131,7 +132,17 @@
 <script src="<%=path+"json2.js"%>"></script>
 <script src="<%=jsPath+"regcompanyinfo.js"%>"></script>
 <script type="text/javascript">
-	$("#qytype2").find("option[value='${sessionScope.Qyinfo.qyType}']").attr("selected",'selected');
+
+	$("#qytype2").each(function () {
+		// this代表的是<option></option>，对option再进行遍历
+		$(this).children("option").each(function () {
+			// 判断需要对那个选项进行回显
+			if (this.value =='${sessionScope.Qyinfo.qyType}') {
+				// 进行回显
+				$(this).attr("selected", "selected");
+			}
+		});
+	});
 </script>
 </body>
 </html>
