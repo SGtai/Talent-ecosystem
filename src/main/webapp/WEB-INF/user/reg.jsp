@@ -43,7 +43,7 @@
                     <div  class="zcpart6">手机号用于登录和找回密码</div>
                     <div class="zcpart7">
                         <span></span>
-                        <input id="passwordReg" name="" type="text" placeholder="设置密码"/>
+                        <input id="passwordReg" name="" type="password" placeholder="设置密码"/>
                     </div>
                     <div class="zcpart6">请输入6-20个字符</div>
                     <div class="clear"></div>

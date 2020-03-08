@@ -24,7 +24,7 @@ layui.use(['table', 'layer', 'jquery', 'form'], function () {
 			, {field: 'gzAddress', title: '工作地点'}
 			, {field: 'salary', title: '薪水'}
 			, {field: 'time', title: '刷新时间'}
-			, {field: 'chakan', title: '',toolbar: '<div><a class="layui-btn layui-btn-sm background-style" lay-event="chakan">查看简历</a></div>'}
+			, {field: 'chakan', title: '',toolbar: '<div><a class="layui-btn layui-btn-sm background-style" lay-event="chakan">查看</a></div>'}
 			, {field: 'shoucang', title: '',toolbar: '<div><a class="layui-btn layui-btn-sm background-style" lay-event="shoucang">关注</a></div>'}
 			, {field: 'jl', title: '',toolbar: '<div><a class="layui-btn layui-btn-sm background-style" lay-event="jl">投递简历</a></div>'}
 		]]
