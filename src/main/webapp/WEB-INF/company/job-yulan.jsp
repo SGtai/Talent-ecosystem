@@ -34,6 +34,9 @@
 	</style>
 </head>
 <body >
+<button type="button" class="layui-btn layui-btn-radius">
+	<a href="javascript:history.back(-1)"><<返回</a>
+</button>
 	<form id="layout" class="layui-form" action="" style="border: #9F9F9F solid 1px;background-color: #f2f2f2;
 			background-image: url('../../uploadS/images/zhaopinbeijing.jpg');
 			background-size: 100%">
