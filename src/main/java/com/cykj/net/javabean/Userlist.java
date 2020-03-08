@@ -1,5 +1,6 @@
 package com.cykj.net.javabean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 @Data
@@ -15,6 +16,7 @@ public class Userlist {
   private String idCard;
   private String idCardType;
   private String birthday;
+  @JsonFormat(timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
   private java.sql.Timestamp regTime;
   private String picture;
   private String by1;

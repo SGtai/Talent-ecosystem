@@ -13,7 +13,6 @@ public class Admin {
   private long state;
   private String code;
 
-
   public String getCode() {
     return code;
   }
@@ -30,7 +29,6 @@ public class Admin {
     this.adid = adid;
   }
 
-
   public String getAccount() {
     return account;
   }
@@ -38,7 +36,6 @@ public class Admin {
   public void setAccount(String account) {
     this.account = account;
   }
-
 
   public String getPassword() {
     return password;
@@ -57,7 +54,6 @@ public class Admin {
     this.registertime = registertime;
   }
 
-
   public String getName() {
     return name;
   }
@@ -65,7 +61,6 @@ public class Admin {
   public void setName(String name) {
     this.name = name;
   }
-
 
   public long getState() {
     return state;

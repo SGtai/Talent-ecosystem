@@ -123,7 +123,7 @@
 				,height: 300
 				,width:760
 				,limit:5
-				,limits:[5,10,15,20]
+				,limits:[5,10,15,20,100]
 				,url: '<%=apppath+"school/rgxg"%>' //数据接口
 				,page: true //开启分页
 				,even:true
@@ -169,7 +169,7 @@
 				,height: 300
 				,width:760
 				,limit:5
-				,limits:[5,10,15,20]
+				,limits:[5,10,15,20,100]
 				,url: '<%=apppath+"school/rencaiinfoquery"%>' //数据接口
 				,page: true //开启分页
 				,even:true

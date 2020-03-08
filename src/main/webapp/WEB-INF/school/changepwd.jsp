@@ -62,19 +62,19 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">原始密码：</label>
 			<div class="layui-input-inline" style="width: 190px">
-				<input name="mpass" id="mpass" class="layui-input" type="text" placeholder="请输入"  autocomplete="off"   lay-verify="required" maxlength="30" >
+				<input name="mpass" id="mpass" class="layui-input" type="password" placeholder="请输入"  autocomplete="off"   lay-verify="required" maxlength="30" >
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">新密码：</label>
 			<div class="layui-input-inline" style="width: 190px">
-				<input name="newpass" id="newpass" class="layui-input" type="text" placeholder="请输入"  autocomplete="off"   lay-verify="required" onkeyup="this.value=this.value.replace(/\D/g,'')" maxlength="10">
+				<input name="newpass" id="newpass" class="layui-input" type="password" placeholder="请输入"  autocomplete="off"   lay-verify="required" onkeyup="this.value=this.value.replace(/\D/g,'')" maxlength="10">
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">再次确认新密码：</label>
 			<div class="layui-input-inline" style="width: 190px">
-				<input name="renewpass" id="renewpass" class="layui-input" type="text" placeholder="请输入"  autocomplete="off"  lay-verify="required" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" maxlength="18" >
+				<input name="renewpass" id="renewpass" class="layui-input" type="password" placeholder="请输入"  autocomplete="off"  lay-verify="required" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" maxlength="18" >
 			</div>
 		</div>
 		<div class="layui-form-item" >
@@ -82,6 +82,8 @@
 				<button type="button" class="layui-btn"  id="bb" onclick="changepwd()">确认修改</button>
 			</div>
 		</div>
+	</form>
+</div>
 <script>
 	function changepwd() {
 		var password=$("#mpass").val();

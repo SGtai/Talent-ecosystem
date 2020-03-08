@@ -61,7 +61,7 @@
 	<label id="sum" class="layui-form-label" style="text-align: left;margin-left: -8%"></label>
 </div>
 
-<div id="echarts_div" style="width: 600px;height:400px;margin-left: 25%"></div>
+<div id="echarts_div" style="width: 600px;height:200px;margin-left: 25%"></div>
 
 <c:if test="${requestScope.tuijianren!=null}">
 	<input type="hidden" id="test1" value=${requestScope.tuijianren}>
