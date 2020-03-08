@@ -34,6 +34,9 @@
 	</style>
 </head>
 <body >
+<button type="button" class="layui-btn layui-btn-radius">
+	<a href="javascript:history.back(-1)">返回</a>
+</button>
 	<form id="layout" class="layui-form" action="" style="border: #9F9F9F solid 1px;background-color: #f2f2f2;
 			background-image: url('../../uploadS/images/zhaopinbeijing.jpg');
 			background-size: 100%">
@@ -70,7 +73,7 @@
 
 		</div>
 		<div class="layui-form-item" style="width: 720px;margin-top:0;margin-left: 45%" >
-			<B><h2><label  style="color: yellow;text-align: right" >招聘单位:${yulan[0].qyname}</label></h2></B>
+			<B><h2><label  style="color: yellow;text-align: right" >招聘单位:${yuan[0].qyname}</label></h2></B>
 			<h2><label  style="color: #cccccc">联系人:${yulan[0].lxMan}</label></h2>
 			<h2><label  style="color: #cccccc">联系电话:${yulan[0].lxPhone}</label></h2>
 			<h2><label  style="color: #cccccc">联系地址:${yulan[0].lxAddress}</label></h2>

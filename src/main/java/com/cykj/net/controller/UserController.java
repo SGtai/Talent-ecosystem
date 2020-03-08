@@ -313,8 +313,8 @@ public class UserController
 		List<Jobinfo> jobinfo1 = companyService.searchJobinfoTable(jobinfo);
 		System.out.println(jobinfo1.toString());
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("jobinfo",jobinfo1);
-		mv.setViewName("WEB-INF/user/Jobinfo");
+		mv.addObject("yulan",jobinfo1);
+		mv.setViewName("WEB-INF/user/Job-yulan");
 		return mv;
 	}
 
