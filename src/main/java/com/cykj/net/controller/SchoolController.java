@@ -497,6 +497,9 @@ public class SchoolController
 					continue;
 				}
 				Userlist userlist=new Userlist();
+				if(formatCell(hssfRow.getCell(0))==""||formatCell(hssfRow.getCell(0))==null){
+					continue;
+				}
 				userlist.setPhone(formatCell(hssfRow.getCell(0)));
 				userlist.setPassword(formatCell(hssfRow.getCell(1)));
 				userlist.setName(formatCell(hssfRow.getCell(2)));
@@ -526,7 +529,7 @@ public class SchoolController
 				resume.setYcHide("0");
 				resume.setSjPhone(userlist.getPhone());
 				resume.setXbSex(userlist.getSex());
-
+//				resume.setCsTime(dateStr);
 //				resume.setCsTime(userlist.getBirthday());
 				resume.setJlname(formatCell(hssfRow.getCell(8)));
 				resume.setZsCertificate(formatCell(hssfRow.getCell(9)));
@@ -561,6 +564,7 @@ public class SchoolController
 				}
 				Experience experience=new Experience();
 				experience.setJlId(resume1.getJlId());
+
 				Undergo undergo=new Undergo();
 				undergo.setJlId(resume1.getJlId());
 				schoolService.inserxx(experience);
