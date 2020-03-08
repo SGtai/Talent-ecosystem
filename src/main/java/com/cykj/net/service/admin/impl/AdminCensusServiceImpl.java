@@ -54,9 +54,9 @@ public class AdminCensusServiceImpl implements AdminCensusService {
     public String month(String date,int role) {
         ArrayList<CensusUtil> arrayList = new ArrayList<>();
         List<String> dateHalfList = null;
-
+		String tableName = null;
         dateHalfList = UtilTool.month(date);
-        String tableName = null;
+
         if (role == 0){
             tableName = "userlist";
         }else if (role == 1){
@@ -87,9 +87,9 @@ public class AdminCensusServiceImpl implements AdminCensusService {
         List<String> dateHalfList = null;
 
         dateHalfList = UtilTool.half();
-
+		String tableName = null;
         int sum = 0;
-        String tableName = null;
+
         if (role == 0){
             tableName = "userlist";
         }else if (role == 1){
@@ -117,11 +117,11 @@ public class AdminCensusServiceImpl implements AdminCensusService {
 	@Override
 	public String week1(int role,String tjr) {
 		ArrayList<CensusUtil> arrayList = new ArrayList<>();
-
+		String tableName = null;
 		List<String> dateWeekList = UtilTool.week(new Date());
 		String[] weekDays = {"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
 		int sum = 0;
-		String tableName = null;
+
 		if (role == 0){
 			tableName = "userlist";
 		}else if (role == 1){
