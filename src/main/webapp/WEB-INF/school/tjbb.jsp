@@ -243,7 +243,7 @@
 			format = format.replace(RegExp.$1, (this.getFullYear() + "")
 				.substr(4 - RegExp.$1.length));
 		}
-		for (var k in o) {
+		for (var k in o) {advert
 			if (new RegExp("(" + k + ")").test(format)) {
 				format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k]
 					: ("00" + o[k]).substr(("" + o[k]).length));
