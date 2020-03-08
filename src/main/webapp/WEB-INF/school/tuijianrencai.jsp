@@ -30,9 +30,9 @@
 </script>
 <div id="di">
 	<form class="layui-form">
-		<h1 style="margin-left: 45%">推荐人才</h1>
+		<h1 style="margin-left: 45%;margin-top: 2%">推荐人才</h1>
 
-		<div style="margin-left: 15%;margin-top: 1%">
+		<div style="margin-left: 15%;margin-top: 2%">
 			<div class="layui-form-item">
 				<div class="layui-inline" style="margin-left: 3%">
 					<label class="layui-form-label">行业：</label>
@@ -94,9 +94,6 @@
 					<button style="margin-left: 5%" class="layui-btn layui-btn-normal layui-btn-radius" id="query_pa1" type="button">搜索</button>
 
 				</div>
-				<div class="layui-inline">
-					<button style="margin-left: 20%" class="layui-btn layui-btn-normal layui-btn-radius" id="query_shuaxin1" type="button">刷新</button>
-				</div>
 <%--				<div class="layui-inline">--%>
 <%--					<button style="margin-left: 20%" class="layui-btn layui-btn-normal layui-btn-radius" id="tj" type="button">推荐</button>--%>
 <%--				</div>--%>
@@ -121,7 +118,7 @@
 			var ins1=table.render({
 				elem: '#demo'
 				,height: 300
-				,width:760
+				,width:750
 				,limit:5
 				,limits:[5,10,15,20,100]
 				,url: '<%=apppath+"school/rgxg"%>' //数据接口
@@ -167,7 +164,7 @@
 			table.render({
 				elem: '#demo1'
 				,height: 300
-				,width:760
+				,width:750
 				,limit:5
 				,limits:[5,10,15,20,100]
 				,url: '<%=apppath+"school/rencaiinfoquery"%>' //数据接口
@@ -248,7 +245,7 @@
 
 						skin:'layui-layer-molv',// skin - 样式类名
 
-						area:['1000px','600px'],// area - 宽高
+						area:['900px','450px'],// area - 宽高
 
 						offset:'auto',// offset - 坐标
 
@@ -316,11 +313,11 @@
 	</script>
 	<script>
 		$('#query_shuaxin').click(function () {
-			$(".layui-laypage-btn")[0].click();
+			var a=document.createElement("a");
+			a.href='<%=apppath+"school/tjrencai"%>';
+			a.click();
 		});
-		$('#query_shuaxin1').click(function () {
-			$(".layui-laypage-btn")[0].click();
-		});
+
 
 	</script>
 
