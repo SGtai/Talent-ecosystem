@@ -52,7 +52,7 @@
 					</div>
 					<div class="password">
 						<span></span>
-						<input id="password" name="password" type="text" placeholder="请输入密码"/>
+						<input id="password" name="password" type="password" placeholder="请输入密码"/>
 					</div>
 					<div class="logobtn">
 						<a href="javascript:void(0)" onclick="dologin('<%=path%>')" >登  录</a>

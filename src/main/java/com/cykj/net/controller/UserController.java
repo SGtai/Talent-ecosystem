@@ -314,7 +314,7 @@ public class UserController
 		System.out.println(jobinfo1.toString());
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("yulan",jobinfo1);
-		mv.setViewName("WEB-INF/user/Job-yulan");
+		mv.setViewName("WEB-INF/user/job-yulan");
 		return mv;
 	}
 
