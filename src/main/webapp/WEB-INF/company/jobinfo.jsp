@@ -29,19 +29,20 @@
 			margin: auto;
 			margin-top: 15px;
 			border: #9F9F9F solid 1px;
+			background-color: #f2f2f2;
 
 		}
 	</style>
 </head>
 <body>
-<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-	<legend style="margin: 0 auto;float: none;">招聘信息填写</legend>
-</fieldset>
+<h1  style="background-color: #d2d2d2;font-weight:bold;text-align:center;width: 720px;
+			margin: auto;border: #9F9F9F solid 1px;
+			margin-top: 15px;">招聘信息填写</h1>
 <input id="Path" type="hidden" value="<%=Path%>" />
 <div id="layout">
 <form class="layui-form" action="">
 	<input id="qyid" type="hidden" value="${sessionScope.Qyinfo.qyid}" />
-	<div class="layui-form-item" style="background-color: #95877c;width: 720px">
+	<div class="layui-form-item" style="background-color: #d2d2d2;width: 720px">
 		<h3><label class="layui-form-label" style="width: 80px;text-align: left">招聘职位:</label></h3>
 		<div class="layui-input-inline">
 			<select name="position" lay-filter="choosePosition" lay-verify="required" >
@@ -94,7 +95,7 @@
 			<input name="lxAddress" id="lxAddress" style="width: 600px" class="layui-input" type="text" autocomplete="off"  lay-verify="lxAddress" >
 		</div>
 	</div>
-	<div class="layui-form-item" style="background-color: #95877c;width:720px">
+	<div class="layui-form-item" style="background-color:  #d2d2d2;width:720px">
 		<h3><label class="layui-form-label" style="width: 150px;text-align: left">职业基本信息:</label></h3>
 	</div>
 	<div class="layui-form-item">
@@ -240,7 +241,7 @@
 	<div class="layui-form-item">
 		<label class="layui-form-label">薪资福利：</label>
 		<div class="layui-input-block">
-			<input name="baoxian" title="五险" type="checkbox" value="五险">
+			<input name="baoxian" title="五险" type="checkbox"  value="五险">
 			<input name="gjijin" title="公积金" type="checkbox" value="公积金">
 			<input name="jiangjin" title="奖金提成" type="checkbox" value="奖金提成">
 			<input name="zhusu" title="提供住宿" type="checkbox" value="提供住宿">
@@ -263,7 +264,7 @@
 	</div>
 	<div class="layui-form-item layui-form-text">
 		<h3>
-			<label class="layui-form-label"  style="background-color: #95877c;width:690px;text-align: left">岗位职责：</label>
+			<label class="layui-form-label"  style="background-color:  #d2d2d2;width:690px;text-align: left">岗位职责：</label>
 		</h3>
 		<br><br><br>
 		<div class="layui-input-line">

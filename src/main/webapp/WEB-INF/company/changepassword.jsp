@@ -29,6 +29,7 @@
 			margin: auto;
 			margin-top: 100px;
 			border: #9F9F9F solid 1px;
+			background-color: #f2f2f2
 		}
 		#label1{
 			margin-top: -10px;

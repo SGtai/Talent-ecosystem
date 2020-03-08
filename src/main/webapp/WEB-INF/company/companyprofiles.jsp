@@ -31,6 +31,7 @@
 			margin: auto;
 			margin-top: 15px;
 			border: #9F9F9F solid 1px;
+			background-color: #f2f2f2
 		}
 		.layui-form-label{
 			width: 120px;
