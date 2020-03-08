@@ -191,7 +191,7 @@ public class AdminController {
         String verifyCodeValue = new GetCode().drawImg(output);
         // 将校验码保存到session中
         HttpSession session = request.getSession();
-        session.setAttribute("verifyCodeValue", "1234");
+        session.setAttribute("verifyCodeValue", verifyCodeValue);
         try {
             ServletOutputStream out = response.getOutputStream();
             output.writeTo(out);
