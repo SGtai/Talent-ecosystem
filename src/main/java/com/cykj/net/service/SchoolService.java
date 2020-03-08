@@ -149,4 +149,9 @@ public class SchoolService
 		return insertjjl;
 	}
 
+	public Userlist userreg(String phone){
+		Userlist userlist=schoolDao.userreg(phone);
+		return userlist;
+	}
+
 }

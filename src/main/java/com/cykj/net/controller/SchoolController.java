@@ -514,6 +514,9 @@ public class SchoolController
 				if(formatCell(hssfRow.getCell(0))==""||formatCell(hssfRow.getCell(0))==null){
 					continue;
 				}
+				if(schoolService.userreg(formatCell(hssfRow.getCell(0)))!=null){
+					continue;
+				}
 				userlist.setPhone(formatCell(hssfRow.getCell(0)));
 				userlist.setPassword(formatCell(hssfRow.getCell(1)));
 				userlist.setName(formatCell(hssfRow.getCell(2)));

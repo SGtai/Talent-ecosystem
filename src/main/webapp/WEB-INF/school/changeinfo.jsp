@@ -413,7 +413,7 @@
 						$.ajax(
 							{
 								type:"POST",
-								url:"/school/changeInfo2",
+								url:'<%=apppath+"school/changeInfo2"%>
 								dataType:"text",
 								data:{
 									scName:document.getElementById("scName").value,
