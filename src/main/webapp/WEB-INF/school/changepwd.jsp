@@ -83,6 +83,7 @@
 			</div>
 		</div>
 	</form>
+</div>
 <script>
 	function changepwd() {
 		var password=$("#mpass").val();

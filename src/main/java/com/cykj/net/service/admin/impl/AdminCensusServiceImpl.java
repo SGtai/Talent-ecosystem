@@ -119,7 +119,7 @@ public class AdminCensusServiceImpl implements AdminCensusService {
 		ArrayList<CensusUtil> arrayList = new ArrayList<>();
 		String tableName = null;
 		List<String> dateWeekList = UtilTool.week(new Date());
-		String[] weekDays = {"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
+		String[] weekDays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
 		int sum = 0;
 
 		if (role == 0){
@@ -213,7 +213,7 @@ public class AdminCensusServiceImpl implements AdminCensusService {
 		ArrayList<CensusUtil> arrayList = new ArrayList<>();
 
 		List<String> dateWeekList = UtilTool.week(new Date());
-		String[] weekDays = {"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
+		String[] weekDays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
 		int sum = 0;
 		String tableName = null;
 		if (role == 0){
