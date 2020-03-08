@@ -228,7 +228,7 @@
 				<select name="workTime" id="gztime3" lay-verify="required">
 					<option value="">请选择上班班次</option>
 					<option value="白班">白班</option>
-					<option value="晚班">晚班</option>
+					<option value="夜班">夜班</option>
 					<option value="早班">早班</option>
 					<option value="中班">中班</option>
 					<option value="晚班">晚班</option>
