@@ -12,7 +12,7 @@
 	String jsPath = application.getContextPath()+"/userS/js/";
 	String path = application.getContextPath()+"/";
 	String imagesPath =application.getContextPath()+"/homeS/images/";
-	String dbimgPath =application.getContextPath()+"../../uploadS/images/";
+	String dbimgPath =application.getContextPath()+"/uploadS/images/";
 
 %>
 <!DOCTYPE html>

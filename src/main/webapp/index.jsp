@@ -8,11 +8,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-	String cssPath = application.getContextPath()+"homeS/css/";
-	String jsPath = application.getContextPath()+"homeS/js/";
+	String cssPath = application.getContextPath()+"/homeS/css/";
+	String jsPath = application.getContextPath()+"/homeS/js/";
 	String path = application.getContextPath()+"/";
-	String imagesPath =application.getContextPath()+"homeS/images/";
-	String dbimgPath =application.getContextPath()+"../../uploadS/images/";
+	String imagesPath =application.getContextPath()+"/homeS/images/";
+	String dbimgPath =application.getContextPath()+"/uploadS/images/";
 %>
 <!DOCTYPE html>
 <html lang="en">

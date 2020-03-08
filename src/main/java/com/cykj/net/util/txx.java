@@ -1,6 +1,8 @@
 package com.cykj.net.util;
 
-import org.junit.Test;
+
+
+import org.testng.annotations.Test;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
