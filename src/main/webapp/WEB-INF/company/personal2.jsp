@@ -18,8 +18,8 @@
 <html>
 <head>
 	<link rel="stylesheet" href=<%=cssPath+"personal.css"%>>
-	<link rel="stylesheet" href="<%=path+"layui/css/layui.css"%>" media="all">
-	<title>个人中心-我的简历</title>
+	<link rel="styl我的简历esheet" href="<%=path+"layui/css/layui.css"%>" media="all">
+	<title>个人中心--</title>
 </head>
 <body>
 <input hidden value="<%=path%>" id="path">
