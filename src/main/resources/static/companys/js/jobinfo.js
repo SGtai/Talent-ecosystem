@@ -48,7 +48,7 @@ layui.use(['form', 'layedit', 'laydate'], function(){
 						if (msg==="success"){
 							layer.alert('招聘信息发布成功!', function(index) {
 								layer.close(index);
-								window.location.href="/company/jobinfo"
+								window.location.href=Path+"/company/jobinfo"
 							})
 						} else{
 							layer.alert("招聘信息发布失败", { icon: 1, offset: "auto", time:1500 });

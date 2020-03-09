@@ -539,7 +539,7 @@ public class CompanyController
 		Qyinfo qyinfo = (Qyinfo) session.getAttribute("Qyinfo");
 		query.setQyId(qyinfo.getQyid());
 		List<Query> query1 = companyService.selectQuery(query);
-		if (query1 != null)
+		if (query1.size()>0)
 		{
 			result = "nosuccess";
 		} else

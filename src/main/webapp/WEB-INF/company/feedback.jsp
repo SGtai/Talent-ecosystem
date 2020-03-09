@@ -100,7 +100,6 @@
 
 		form.on('submit(search)', function (data) {
 			var paid=$('#paid').val();
-			alert(paid);
 			table.reload('table1', {
 				url: Path+"/company/feedback"
 				, where: { //设定异步数据接口的额外参数，任意设

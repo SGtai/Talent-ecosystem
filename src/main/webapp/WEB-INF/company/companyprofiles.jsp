@@ -100,7 +100,9 @@
 					data:{qyAccount:qyAccount,qyKind:qyKind},
 					success:function (msg) {
 						if (msg==="success"){
-							layer.alert("修改成功", { icon: 1, offset: "auto", time:1000 });
+							layer.alert("修改成功", function () {
+								parent.location.reload();
+							});
 						} else{
 							layer.alert("修改失败，请重新提交！", { icon: 1, offset: "auto", time:1000 });
 						}

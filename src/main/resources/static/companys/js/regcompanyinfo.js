@@ -23,9 +23,11 @@ layui.use(['form', 'layer'], function(){
 						data:{qyAccount:qyAccount,qyAddress:qyAddress,qyfdMan:qyfdMan,regMoney:regMoney,qyType:qyType,jyScope:jyScope,jyTime:jyTime},
 						success:function (msg) {
 							if (msg==="success"){
-								layer.alert("注册成功", { icon: 1, offset: "auto", time:1000 });
+								layer.alert("修改成功", function () {
+									parent.location.reload();
+								});
 							} else{
-								layer.alert("注册失败，请重新注册！", { icon: 1, offset: "auto", time:1000 });
+								layer.alert("修改成功！", { icon: 1, offset: "auto", time:1000 });
 							}
 						},
 						error:function (msg) {

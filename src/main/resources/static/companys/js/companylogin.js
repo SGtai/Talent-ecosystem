@@ -55,7 +55,9 @@ layui.use(['form', 'layer'], function(){
 						data:data.field,
 						success:function (msg) {
 							if (msg==="success"){
-								layer.alert("注册成功", { icon: 1, offset: "auto", time:1000 });
+								layer.alert("注册成功", function () {
+									window.location.href=Path+"/jump/admin/login"
+								});
 							} else{
 								layer.alert("注册失败，请重新注册！", { icon: 1, offset: "auto", time:1000 });
 							}
