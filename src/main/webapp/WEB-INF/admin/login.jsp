@@ -17,6 +17,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+        .layui-layer-tips .layui-layer-content{
+            background-color: white!important;
+            color: red!important;
+        }
+    </style>
     <meta charset="UTF-8">
     <title>登录</title>
     <script src=<%=layuiPath + "jquery-3.4.1.js"%>></script>
@@ -45,7 +51,7 @@
                         <div class="usernameDiv">
                             <i class="layui-icon layui-icon-username adminIcon"></i>
                             <input id="account" class="layui-input adminInput" type="text" name="account"
-                                   lay-verify="required" autocomplete="off" value="admin" placeholder="输入账号">
+                                   lay-verType="tips" lay-verify="required" autocomplete="off" value="" placeholder="输入账号">
                         </div>
                     </div>
                     <div class="usernameWrapDiv">
@@ -55,7 +61,7 @@
                         <div class="passwordDiv">
                             <i class="layui-icon layui-icon-password adminIcon"></i>
                             <input id="password" class="layui-input adminInput" type="password" name="password"
-                                   lay-verify="required" autocomplete="off" value="admin" placeholder="输入密码">
+                                   lay-verType="tips"  lay-verify="required" autocomplete="off" value="" placeholder="输入密码">
                         </div>
                     </div>
                     <div class="usernameWrapDiv">
@@ -64,7 +70,7 @@
                         </div>
                         <div class="cardDiv">
                             <input id="code" class="layui-input cardInput" type="text" name="code"
-                                   lay-verify="required" autocomplete="off" value="1234" placeholder="输入验证码">
+                                   lay-verType="tips" lay-verify="required" autocomplete="off" value="" placeholder="输入验证码">
                         </div>
                         <div class="codeDiv">
                             <%--                    <input id="loginCode" class="layui-input codeInput" type="button">--%>
@@ -145,7 +151,8 @@
                 success: function (flag) {
                     if (flag === 'true') {
                     } else {
-                        layer.msg('验证码不一致', {icon: 5});
+                        layer.msg('<a style =color:black >验证码不一致</a>', {icon: 5});
+                        // layer.msg('验证码不一致', {icon: 5});
                         $("#code").val('');
                         $('#verifyCodeImage').attr('src',  path + '/admin/getVerifyCode?' + Math.random());
                     }
@@ -170,24 +177,30 @@
                 data: data.field,
                 success: function (flag) {
                     if (flag === 'true') {
-                        layer.msg('登录成功', {icon: 6});
+                        layer.msg('<a style =color:black >登录成功</a>', {icon: 6});
+                        // layer.msg('登录成功', {icon: 6});
                         $("#account").val('');
                         $("#password").val('');
                         $("#code").val('');
                         $('#verifyCodeImage').attr('src',  path + '/admin/getVerifyCode?' + Math.random());
                         window.location.href = '/admin/main';
                     } else if (flag === 'noCode') {
-                        layer.msg('验证码不正确，请重新输入', {icon: 5});
+                        layer.msg('<a style =color:black >验证码不正确，请重新输入</a>', {icon: 5});
+                        // layer.msg('验证码不正确，请重新输入', {icon: 5});
                     } else if (flag === 'noAccount') {
-                        layer.msg('账号不存在，请重新输入', {icon: 5});
+                        layer.msg('<a style =color:black >账号不存在，请重新输入</a>', {icon: 5});
+                        // layer.msg('账号不存在，请重新输入', {icon: 5});
                         $("#account").val('');
                         $("#password").val('');
                     } else if (flag === 'prohibit') {
-                        layer.msg('账号被禁用，请联系管理员', {icon: 5});
+                        layer.msg('<a style =color:black >账号被禁用，请联系管理员</a>', {icon: 5});
+                        // layer.msg('账号被禁用，请联系管理员', {icon: 5});
                     } else if (flag === 'delete') {
-                        layer.msg('账号被删除，请重新注册/联系管理员', {icon: 5});
+                        layer.msg('<a style =color:black >账号被删除，请重新注册/联系管理员</a>', {icon: 5});
+                        // layer.msg('账号被删除，请重新注册/联系管理员', {icon: 5});
                     } else {
-                        layer.msg('密码不正确，请重新输入', {icon: 5});
+                        layer.msg('<a style =color:black >密码不正确，请重新输入</a>', {icon: 5});
+                        // layer.msg('密码不正确，请重新输入', {icon: 5});
                         $("#password").val('');
                     }
                     $("#code").val('');

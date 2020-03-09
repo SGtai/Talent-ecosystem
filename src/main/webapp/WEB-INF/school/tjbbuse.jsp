@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 蔡鹭鹏
-  Date: 2020/3/2
-  Time: 20:05
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
@@ -61,7 +55,7 @@
 	<label id="sum" class="layui-form-label" style="text-align: left;margin-left: -8%"></label>
 </div>
 
-<div id="echarts_div" style="width: 600px;height:200px;margin-left: 25%"></div>
+<div id="echarts_div" style="width: 600px;height:300px;margin-left: 25%"></div>
 
 <c:if test="${requestScope.tuijianren!=null}">
 	<input type="hidden" id="test1" value=${requestScope.tuijianren}>

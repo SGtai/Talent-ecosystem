@@ -25,9 +25,7 @@
 <script type="text/html" id="toolbar">
 	<a class="layui-btn layui-btn-sm background-style" lay-event="able">推荐</a>
 </script>
-<script type="text/html" id="toolbar1">
-	<a class="layui-btn layui-btn-sm background-style" lay-event="able1">推荐</a>
-</script>
+
 <div id="di">
 	<form class="layui-form">
 		<h1 style="margin-left: 45%;margin-top: 2%">推荐人才</h1>
@@ -168,6 +166,9 @@
 				,limit:5
 				,limits:[5,10,15,20,100]
 				,url: '<%=apppath+"school/rencaiinfoquery"%>' //数据接口
+				,where: { //设定异步数据接口的额外参数，任意设
+					zd:$("#xxzpid").val()
+				}
 				,page: true //开启分页
 				,even:true
 				,cols: [[ //表头
@@ -185,6 +186,7 @@
 					,{field: 'pjEvaluation', title: '自我评价', width: 50,hide:true}
 					,{field: 'yhId', title: '用户id', width: 50,hide:true}
 					,{field: 'jlId', title: '简历id', width: 50,hide:true}
+					,{field: 'zpqk', title: '可否被推荐', width: 50,hide:true}
 				]]
 				,id:'UserTable1'
 				,done: function (res, curr, count) {
@@ -221,7 +223,9 @@
 					,where: { //设定异步数据接口的额外参数，任意设
 						name: $('#name').val(),
 						time:times,
-						zy:$('#zy').val()
+						zy:$('#zy').val(),
+						zd:$("#xxzpid").val()
+
 					}
 					,page: {
 						curr: 1 //重新从第 1 页开始
@@ -233,6 +237,8 @@
 				var data = obj.data //获得当前行数据
 					,layEvent = obj.event; //获得 lay-event 对应的值
 				$("#xxzpid").val(data.zpxxid);
+				var a=document.getElementById("query_pa1");
+				a.click();
 				// 点击推荐
 				if(layEvent === 'able'){
 					layer.open({
@@ -320,7 +326,14 @@
 
 
 	</script>
+<script type="text/html" id="toolbar1">
+	{{#  if(d.zpqk=="未推荐"){ }}
+	<a class="layui-btn layui-btn-sm background-style" lay-event="able1">推荐</a>
+	{{#  }else if(d.zpqk=="已经推荐"){ }}
+	已推荐
+	{{#  } }}
 
+</script>
 
 
 

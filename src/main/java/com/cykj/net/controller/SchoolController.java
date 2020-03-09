@@ -339,7 +339,7 @@ public class SchoolController
 	 *
 	 */
 	@RequestMapping("/rencaiinfoquery")
-	public void rencaiquery(HttpServletRequest request,HttpServletResponse response,String time,String name,String zy,String page,String limit)throws Exception{
+	public void rencaiquery(HttpServletRequest request,HttpServletResponse response,String time,String zd,String name,String zy,String page,String limit)throws Exception{
 		utf8(request,response);
 		Admin admin= (Admin) request.getSession().getAttribute("admin");
 		String lasttime="";
@@ -357,6 +357,20 @@ public class SchoolController
 		int count=schoolService.fenyecount1(admin.getAccount(),name,zy,lasttime,nowtime);
 		System.out.println(count);
 		List<Alluserinfo> list=schoolService.fenyeshuju1(admin.getAccount(),name,zy,lasttime,nowtime,rowBounds);
+		if(zd!=null&&zd!="")
+		{
+			for (int i = 0; i < list.size(); i++)
+			{
+				Query q = schoolService.findjljl(list.get(i).getJlId(), Long.valueOf(zd));
+				if (q != null)
+				{
+					list.get(i).setZpqk("已经推荐");
+				} else
+				{
+					list.get(i).setZpqk("未推荐");
+				}
+			}
+		}
 		Table t=new Table();
 		t.setCode(0);
 		t.setCount(count);
@@ -498,6 +512,9 @@ public class SchoolController
 				}
 				Userlist userlist=new Userlist();
 				if(formatCell(hssfRow.getCell(0))==""||formatCell(hssfRow.getCell(0))==null){
+					continue;
+				}
+				if(schoolService.userreg(formatCell(hssfRow.getCell(0)))!=null){
 					continue;
 				}
 				userlist.setPhone(formatCell(hssfRow.getCell(0)));

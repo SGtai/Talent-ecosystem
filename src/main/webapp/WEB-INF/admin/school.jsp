@@ -250,7 +250,7 @@
             // }
             , cols: [[ //表头
                 {field: 'id', title: '序列', width: 70}
-                , {field: 'scpicture', title: '学校头像', width: 90,templet:'<div><img  src=path + "{{ d.scpicture }}"></div>'}
+                , {field: 'scpicture', title: '学校头像', width: 90,templet:'<div><img  src="{{ d.scpicture }}"></div>'}
                 , {field: 'scName', title: '学校名称', width: 170}
                 , {field: 'scfdMan', title: '学校法人', width: 90}
                 , {field: 'type', title: '学校类型', width: 90}
