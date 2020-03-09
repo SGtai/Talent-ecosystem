@@ -200,17 +200,24 @@
 				<button type="button" class="layui-btn" style="position: absolute;visibility: hidden" id="btn">修改</button>
 			</div>
 		</div>
+		<div id="uploadLoadingDiv">
+			<div class="layui-progress" lay-showpercent="true" lay-filter="demo" >
+				<div class="layui-progress-bar layui-bg-red" lay-percent=""></div>
+			</div>
+		</div>
 		<script>
 			$("#pro").val('${requestScope.scinfo.prid}');
 			$("#sctype").val('${requestScope.scinfo.type}');
 			$("#city").val('${requestScope.scinfo.ctid}');
 		</script>
 		<script>
-			layui.use(['form', 'layer', 'jquery', 'upload'], function () {
+			layui.use(['form', 'layer','element', 'jquery', 'upload'], function () {
 				var upload = layui.upload;
 				var form = layui.form;
 				var $ = layui.jquery;
 				var layer = layui.layer;
+				var element = layui.element;
+				var timer;//定义一个计时器
 				form.on('select(pro)', function(data) {
 					if(data.value!=""&&data.value!=null){
 						$.ajax(
@@ -266,7 +273,17 @@
 							prid:$("#pro").val(),
 							ctid:$("#city").val(),
 							type:$("#sctype").val()
-						}
+						};
+						layer.load(); //上传loading
+						var n = 0;
+						timer = setInterval(function(){//按照时间随机生成一个小于95的进度，具体数值可以自己调整
+							n = n + Math.random()*10|0;
+							if(n>95){
+								n = 95;
+								clearInterval(timer);
+							}
+							element.progress('demo', n+'%');
+						}, 50+Math.random()*100);
 					}
 					, choose: function (obj) {
 						var files = this.files = obj.pushFile();//需要上传的这个文档对象
@@ -275,16 +292,20 @@
 						})
 					}
 					, done: function (msg) {
-						alert(msg);
 						if(msg=="0"){
+							element.progress('demo', '0%');layer.closeAll();
 							alert("修改失败");
 						}else if(msg=="-1"){
+							element.progress('demo', '0%');layer.closeAll();
 							alert("修改失败，手机号码已经被注册");
 						}else if(msg=="-2"){
+							element.progress('demo', '0%');layer.closeAll();
 							alert("修改失败，社会信用代码已经被注册")
 						}
 						else if(msg=="1"){
+							element.progress('demo', '100%');//一成功就把进度条置为100%
 							alert("修改成功");
+							layer.closeAll();
 							var a=document.createElement("a");
 							a.href='<%=apppath+"school/changeinfo"%>';
 							a.click();
@@ -413,7 +434,7 @@
 						$.ajax(
 							{
 								type:"POST",
-								url:'<%=apppath+"school/changeInfo2"%>
+								url:'<%=apppath+"school/changeInfo2"%>',
 								dataType:"text",
 								data:{
 									scName:document.getElementById("scName").value,

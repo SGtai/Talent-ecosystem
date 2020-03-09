@@ -206,6 +206,13 @@
     <select id="findjljl" resultType="Query" parameterType="java.util.Map">
         SELECT * FROM query WHERE jlId=#{jlid} and zpxxid=#{zpxxid}
     </select>
+<!--    查询公司是否直接面试了-->
+    <select id="findjljl1" resultType="Query" parameterType="java.lang.Long">
+        SELECT * FROM query WHERE jlId=#{jlid} and paid=12
+    </select>
+    <select id="findjljl2" resultType="Query" parameterType="java.util.Map">
+        SELECT * FROM query WHERE jlId=#{jlid} and qyId=#{qyId}
+    </select>
 <!--    插入企业表-->
     <insert id="inserquery" parameterType="Query">
         INSERT INTO query (jlId, qyId, ckTime, zpxxid,paid) VALUES

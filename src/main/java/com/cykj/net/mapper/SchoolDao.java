@@ -210,4 +210,12 @@ public interface SchoolDao
 	 * @return
 	 */
 	public Userlist userreg(@Param("phone") String phone);
+
+	/**
+	 * 查询用户是否被公司面试了
+	 * @param jlid
+	 * @return
+	 */
+	public Query findjljl1(@Param("jlid") Long jlid);
+	public Query findjljl2(@Param("jlid") Long jlid,@Param("qyId") Long qyId);
 }

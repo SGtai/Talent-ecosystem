@@ -55,6 +55,7 @@
 	</form>
 </div>
 	<input type="hidden" id="xxzpid">
+	<input type="hidden" id="qyid">
 <input type="hidden" id="yhid">
 <input type="hidden" id="jlid">
 <div id="mydiv" style="display: none ; padding: 10px;margin-left: 10%">
@@ -129,6 +130,7 @@
 					,{field: 'time', title: '发布时间', width: 150,height:100}
 					,{field:'opera', width:150, title: '推荐',align:'center', toolbar: '#toolbar'}
 					,{field: 'zpxxid', title: '企业招聘的id', width: 150,height:100,hide:true}
+					,{field: 'qyid', title: '企业的id', width: 150,height:100,hide:true}
 				]]
 				,id:'UserTable'
 			});
@@ -167,7 +169,8 @@
 				,limits:[5,10,15,20,100]
 				,url: '<%=apppath+"school/rencaiinfoquery"%>' //数据接口
 				,where: { //设定异步数据接口的额外参数，任意设
-					zd:$("#xxzpid").val()
+					zd:$("#xxzpid").val(),
+					qy:$("#qyid").val()
 				}
 				,page: true //开启分页
 				,even:true
@@ -224,8 +227,8 @@
 						name: $('#name').val(),
 						time:times,
 						zy:$('#zy').val(),
-						zd:$("#xxzpid").val()
-
+						zd:$("#xxzpid").val(),
+						qy:$("#qyid").val()
 					}
 					,page: {
 						curr: 1 //重新从第 1 页开始
@@ -237,6 +240,7 @@
 				var data = obj.data //获得当前行数据
 					,layEvent = obj.event; //获得 lay-event 对应的值
 				$("#xxzpid").val(data.zpxxid);
+				$("#qyid").val(data.qyid);
 				var a=document.getElementById("query_pa1");
 				a.click();
 				// 点击推荐
@@ -295,7 +299,8 @@
 							data:{
 								yhid:$("#yhid").val(),
 								jlid:$("#jlid").val(),
-								xxzpid:$("#xxzpid").val()
+								xxzpid:$("#xxzpid").val(),
+								qy:$("#qyid").val()
 							},
 							success:function (msg) {
 								if(msg=="1"){

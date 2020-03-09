@@ -284,16 +284,23 @@
 				<button type="button" class="layui-btn" style="position: absolute;visibility: hidden" id="btn">修改</button>
 			</div>
 		</div>
+		<div id="uploadLoadingDiv">
+			<div class="layui-progress" lay-showpercent="true" lay-filter="demo" >
+				<div class="layui-progress-bar layui-bg-red" lay-percent=""></div>
+			</div>
+		</div>
 	</div>
 	<script>
-		layui.use(['form','layer','jquery','table','laydate','upload'], function() {
+		layui.use(['form','layer','jquery','element','table','laydate','upload'], function() {
 			var table = layui.table;
 			var form = layui.form;
 			var $ = layui.jquery;
 			var layer = layui.layer;
 			var laydate = layui.laydate;
 			var upload = layui.upload;
+			var element = layui.element;
 			var nowTime = new Date().valueOf();
+			var timer;//定义一个计时器
 			var max = null;
 			//上传文件
 			upload.render({
@@ -305,9 +312,16 @@
 				, accept: 'file' //允许上传的文件类型
 				,exts:'xls|xlsx'
 				, before: function (obj) { //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
-					this.data = {
-
-					}
+					layer.load(); //上传loading
+					var n = 0;
+					timer = setInterval(function(){//按照时间随机生成一个小于95的进度，具体数值可以自己调整
+						n = n + Math.random()*10|0;
+						if(n>95){
+							n = 95;
+							clearInterval(timer);
+						}
+						element.progress('demo', n+'%');
+					}, 50+Math.random()*100);
 				}
 				, choose: function (obj) {
 					var files = this.files = obj.pushFile();//需要上传的这个文档对象
@@ -317,13 +331,18 @@
 				}
 				, done: function (json) {
 					if(json.msg=="fail1"){
+						element.progress('demo', '0%');layer.closeAll();
 						alert("文件不存在或者格式错误");
 					}else if(json.msg=="fail2"){
+						element.progress('demo', '0%');layer.closeAll();
 						alert("上传文件超过10M")
 					}else if(json.msg=="fail3"){
+						element.progress('demo', '0%');layer.closeAll();
 						alert("上传文件不是xsl文件");
 					}else {
+						element.progress('demo', '100%');//一成功就把进度条置为100%
 						alert("上传成功");
+						layer.closeAll();
 						var a=document.createElement("a");
 						a.href='<%=apppath+"school/rencaiinfo"%>';
 						a.click();

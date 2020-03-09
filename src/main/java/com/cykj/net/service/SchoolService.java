@@ -154,4 +154,13 @@ public class SchoolService
 		return userlist;
 	}
 
+	public Query findjljl1(Long jlid){
+		Query query=schoolDao.findjljl1(jlid);
+		return query;
+	}
+
+	public Query findjljl2(@Param("jlid") Long jlid,@Param("qyId") Long qyId){
+		Query query=schoolDao.findjljl2(jlid,qyId);
+		return query;
+	}
 }

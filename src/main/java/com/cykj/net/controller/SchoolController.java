@@ -339,7 +339,7 @@ public class SchoolController
 	 *
 	 */
 	@RequestMapping("/rencaiinfoquery")
-	public void rencaiquery(HttpServletRequest request,HttpServletResponse response,String time,String zd,String name,String zy,String page,String limit)throws Exception{
+	public void rencaiquery(HttpServletRequest request,HttpServletResponse response,String time,String zd,String qy,String name,String zy,String page,String limit)throws Exception{
 		utf8(request,response);
 		Admin admin= (Admin) request.getSession().getAttribute("admin");
 		String lasttime="";
@@ -357,12 +357,14 @@ public class SchoolController
 		int count=schoolService.fenyecount1(admin.getAccount(),name,zy,lasttime,nowtime);
 		System.out.println(count);
 		List<Alluserinfo> list=schoolService.fenyeshuju1(admin.getAccount(),name,zy,lasttime,nowtime,rowBounds);
-		if(zd!=null&&zd!="")
+		if(zd!=null&&zd!=""&&qy!=null&&qy!="")
 		{
 			for (int i = 0; i < list.size(); i++)
 			{
 				Query q = schoolService.findjljl(list.get(i).getJlId(), Long.valueOf(zd));
-				if (q != null)
+				Query check1=schoolService.findjljl1(list.get(i).getJlId());
+				Query check2=schoolService.findjljl2(list.get(i).getJlId(),Long.valueOf(qy));
+				if (check1 != null||check2!=null)
 				{
 					list.get(i).setZpqk("已经推荐");
 				} else
@@ -723,10 +725,11 @@ public class SchoolController
 
 	@RequestMapping("/tj")
 	@ResponseBody
-	public String tj(String yhid,String jlid,String xxzpid,HttpServletRequest request){
+	public String tj(String yhid,String jlid,String qy,String xxzpid,HttpServletRequest request){
 		Jobinfo jobinfo=schoolService.findjobinfo(Long.valueOf(xxzpid));
-		Query check=schoolService.findjljl(Long.valueOf(jlid),Long.valueOf(xxzpid));
-		if(check==null){
+		Query check=schoolService.findjljl2(Long.valueOf(jlid),Long.valueOf(qy));
+		Query check1=schoolService.findjljl1(Long.valueOf(jlid));
+		if(check==null&&check1==null){
 			Query query=new Query();
 			Date date = new Date();
 			Timestamp nousedate = new Timestamp(date.getTime());
