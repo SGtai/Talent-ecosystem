@@ -31,7 +31,7 @@
 
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">欢迎你：${sessionScope.admin.name}</li>
-            <li class="layui-nav-item"><a href="/admin/exit">注销</a></li>
+            <li class="layui-nav-item"><a href=<%=path+"/admin/exit"%>>注销</a></li>
         </ul>
     </div>
 
