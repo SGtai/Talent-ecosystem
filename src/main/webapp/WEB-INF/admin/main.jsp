@@ -45,7 +45,7 @@
                             <a class="" href="javascript:;">${i.key}</a>
                             <c:forEach items="${i.value}" begin="0" var="j">
                                 <dl class="layui-nav-child">
-                                    <dd><a href="<%=path%>${j.menuurl}" target="main_self_frame">${j.sencondmenuname}</a></dd>
+                                    <dd><a href='<%=path%>${j.menuurl}' target="main_self_frame">${j.sencondmenuname}</a></dd>
                                 </dl>
                             </c:forEach>
                         </li>

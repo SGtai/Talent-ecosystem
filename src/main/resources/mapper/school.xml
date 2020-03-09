@@ -245,6 +245,10 @@
          INSERT INTO tjjl (zpxxid,yhid,datetime,tuijianren) VALUES
         (#{zpxxid},#{yhid},#{datetime},#{tuijianren})
     </insert>
+<!--    查询用户是否已经注册-->
+    <select id="userreg" resultType="Userlist" parameterType="java.lang.String">
+        SELECT * from userlist where phone = #{phone}
+    </select>
 </mapper>
 
 

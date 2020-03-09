@@ -177,7 +177,7 @@
                 data: data.field,
                 success: function (flag) {
                     if (flag === 'true') {
-                        layer.msg('<a style =color:black >登录成功</a>', {icon: 5});
+                        layer.msg('<a style =color:black >登录成功</a>', {icon: 6});
                         // layer.msg('登录成功', {icon: 6});
                         $("#account").val('');
                         $("#password").val('');

@@ -203,4 +203,11 @@ public interface SchoolDao
 	 * @return
 	 */
 	public int insertjjl(Tjjl tjjl);
+
+	/**
+	 * 查询账户是否被注册了
+	 * @param phone
+	 * @return
+	 */
+	public Userlist userreg(@Param("phone") String phone);
 }

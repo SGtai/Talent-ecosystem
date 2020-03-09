@@ -40,6 +40,17 @@ public class Alluserinfo {
 	private String by2;
 	private String zy;
 	private String xl;
+	private String zpqk;
+
+	public String getZpqk()
+	{
+		return zpqk;
+	}
+
+	public void setZpqk(String zpqk)
+	{
+		this.zpqk = zpqk;
+	}
 
 	public String getXl() {
 		return xl;

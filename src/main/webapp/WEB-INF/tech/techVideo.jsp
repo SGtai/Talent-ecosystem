@@ -11,6 +11,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.text.*"%>
 <%
+	String path = application.getContextPath()+"/";
 	String cssPath = application.getContextPath()+"/techS/css/";
 	String jsPath = application.getContextPath()+"/techS/js/";
 	String layuiPath =application.getContextPath()+"/layui/";
@@ -43,11 +44,9 @@
 
 					<div class="information-left" style="width: 55%;height: 85%;position: absolute;">
 						<video style="width: 100%;height: 100%;position: absolute;" muted="muted" controls autoplay  >
-							<!-- <source src="movie.ogg" type="video/ogg"> -->
-							<source src="${'../../uploadS/other/video/'.concat(path)}" type="${'video/'.concat(suffix)}">
-							<!-- <source src="movie.webm" type="video/webm"> -->
-							<object data="${'../../uploadS/other/video/'.concat(path)}" width="320" height="240">
-								<embed width="320" height="240" src="${'../../uploadS/other/video/'.concat(name)}${'.swf'}">
+							<source type="${'video/'.concat(suffix)}" src=<%=path%>${'uploadS/other/video/'.concat(path)} >
+							<object width="320" height="240" data=<%=path%>${'uploadS/other/video/'.concat(path)} >
+								<embed width="320" height="240" src=<%=path%>${'uploadS/other/video/'.concat(name)}${'.swf'}>
 							</object>
 						</video>
 					</div>
@@ -56,7 +55,7 @@
 						<c:forEach items="${video}" var="node">
 							<a class="layui-btn layui-btn-xs mydown" href = "javascript:void(0);" onclick ="down('${node.spPath}')">下载视频${node.spName}</a>
 							<div class="article-list">
-								<a href="/techvideo?id=${node.zjId}&name=${node.spName}&path=${node.spPath}&spId=${node.spId}&spDescribe=${node.spDescribe}" class="article-link">
+								<a class="article-link" href=<%=path%>techvideo?id=${node.zjId}&name=${node.spName}&path=${node.spPath}&spId=${node.spId}&spDescribe=${node.spDescribe} >
 									<div class="article-head">
 										<span class="article-number">${node.sort}</span>
 										<span class="article-title">${node.spName}</span>
@@ -75,22 +74,23 @@
 
 </div>
 <div class="layui-form-item layui-form-text" style="position: absolute;margin-top: 45%;margin-left: 25%;width: 1000px;">
-	<div class="layui-input-inline" style="width: 70%;">
-		<input type="text"  name="pl"  placeholder="请输入评论"
-		       id="pl"     class="layui-input" >
+	<div class="layui-input-inline" style="width: 60%;">
+<%--		<input type="text"  name="pl"  placeholder="请输入评论"--%>
+<%--		       id="pl"     class="layui-input" >--%>
+		<textarea name="pl" id="pl" rows="10" cols="30" style="height:50%;width: 100%;" aria-label="editor" placeholder="请输入评论"></textarea>
 	</div>
 </div>
-<div class="layui-form-item" style="position: absolute;margin-top: 45%;margin-left: 77%;">
+<div class="layui-form-item" style="position: absolute;margin-top: 55%;margin-left: 77%;">
 	<button class="layui-btn" lay-submit="" lay-filter="upload" id="myUpload" onclick="release()">发布评论</button>
 </div>
-<div class="article-container" style="position: absolute;margin-top: 50%;margin-left: 20%;">
+<div class="article-container" style="position: absolute;margin-top: 65%;margin-left: 20%;">
 <h1>评论区</h1>
 	<hr>
 	<h2>${tips}</h2>
 	<div class="comment" id="content">
 		<c:forEach items="${com}" var="node">
 			<div class="imgdiv">
-				<img class="imgcss"  src="${'../../uploadS/images/'.concat(node.assess.yhPicture)}"/>
+				<img class="imgcss"  src=<%=path%>${'uploadS/images/'.concat(node.assess.yhPicture)}/>
 			</div>
 			<div class="conmment_details">
 				<div style="float:left;">
@@ -115,13 +115,13 @@
 				<c:forEach items="${node.aryR}" var="nodes">
 					<c:if test="${nodes.dfId == user.yhid}">
 						<div class="reply" >
-							<img class="imgcss"  src="${'../../uploadS/images/'.concat(nodes.dfPicture)}" style="width: 5%;height: 5%;"/>
+							<img class="imgcss" style="width: 5%;height: 5%;" src=<%=path%>${'uploadS/images/'.concat(nodes.dfPicture)} />
 							<span class="comment_name">${nodes.dfName}</span>回复<span class="comment_name">${nodes.dxName}</span> <span><fmt:formatDate value="${nodes.dfTime}" pattern="yyyy年MM月dd日 HH:mm:ss" /></span>：<span class="reply_content">${nodes.nrContent} </span>
 						</div>
 					</c:if>
 					<c:if test="${nodes.dfId != user.yhid}">
 						<div class="reply" >
-							<img class="imgcss"  src="${'../../uploadS/images/'.concat(nodes.dfPicture)}" style="width: 5%;height: 5%;"/>
+							<img class="imgcss"  style="width: 5%;height: 5%;" src=<%=path%>${'uploadS/images/'.concat(nodes.dfPicture)} />
 							<span class="comment_name">${nodes.dfName}</span>回复<span class="comment_name">${nodes.dxName}</span> <span><fmt:formatDate value="${nodes.dfTime}" pattern="yyyy年MM月dd日 HH:mm:ss" /></span>：<span class="reply_content">${nodes.nrContent} </span>
 								<a  data-id="1" class="del_reply">
 									<i class="icon layui-icon" >    <a class="a_hover" href = "javascript:void(0);" onclick ="eva(${node.assess.pjId},'${nodes.dfName}')">            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回复</a></i>
@@ -129,6 +129,7 @@
 						</div>
 					</c:if>
 				</c:forEach>
+				<c:if test="${empty node.aryR}"><h2 style="margin-left: 44%;color: crimson;">暂无回复</h2></c:if>
 			</div>
 			<hr>
 		</c:forEach>
@@ -144,7 +145,7 @@
 		</div>
 	</div>
 	</div>
-<form action="/techvideo" method="get" id="myForm">
+<form action=<%=path+"techvideo"%> method="get" id="myForm">
 	<input type="hidden" value="" name="nr" id="nr">
 	<input type="hidden" value="${name}" name="name" id="name">
 	<input type="hidden" value="${path}" name="path" id="path">
@@ -196,6 +197,7 @@
 			alert("你未输入评论");
 		} else{
 			alert("评论成功！！！");
+			$("#fName").val("");
 			$("#nr").val($("#pl").val());
 			$("#myForm").submit();
 		}

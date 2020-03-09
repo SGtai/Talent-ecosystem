@@ -9,10 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	String path = application.getContextPath()+"/";
-	String cssPath = application.getContextPath()+"/techS/css/";
 	String jsPath = application.getContextPath()+"/techS/js/";
-	String othPath =application.getContextPath()+"/techS/other/";
-	String videoPath =application.getContextPath()+"/techS/other/video";
 	String layuiPath =application.getContextPath()+"/layui/";
 %>
 <!DOCTYPE html>

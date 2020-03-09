@@ -652,7 +652,10 @@
 	<script>
 
 		function downloadTemp(){
-			window.location="../../cunchu/简历模板.xls";
+			<%--alert(--%>
+			<%--	'<%=apppath+"cunchu/简历模板.xls"%>'--%>
+			<%--);--%>
+			window.location='<%=apppath+"cunchu/简历模板.xls"%>';
 			// window.open("/schoolS/cunchu/简历模板.xls");
 			// $.ajax(
 			// 	{
