@@ -105,9 +105,9 @@ public class AdminController {
             //高校
             }else if (roid == 4){
 
-
-
-
+            }else if (roid == 6){
+                Qyinfo qyinfo=companyService.findById(admin.getAccount());
+                session.setAttribute("Qyinfo", qyinfo);
             }
             //查询管理所对应的角色的菜单
             List<AdminMenu> list = adminService.findRoleMenus(roid);

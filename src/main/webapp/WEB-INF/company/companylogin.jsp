@@ -27,7 +27,7 @@
 			width: 100%;
 			height: 500px;
 			background-color: #16a085;
-			background: url(<%=Path%>'/uploadS/images/regbeijing.jpg');
+			background: url(<%=Path%>/uploadS/images/regbeijing.jpg);
 			background-size: 100% auto;
 		}
 

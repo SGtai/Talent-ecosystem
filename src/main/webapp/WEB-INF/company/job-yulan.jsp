@@ -29,7 +29,8 @@
 			margin-top: 15px;
 			border: #9F9F9F solid 1px;
 			background-color: #f2f2f2;
-
+			background-image: url(<%=Path%>/uploadS/images/zhaopinbeijing.jpg);
+			background-size: 100%
 		}
 	</style>
 </head>
@@ -37,9 +38,7 @@
 <button type="button" class="layui-btn layui-btn-radius">
 	<a href="javascript:history.back(-1)"><<返回</a>
 </button>
-	<form id="layout" class="layui-form" action="" style="border: #9F9F9F solid 1px;background-color: #f2f2f2;
-			background-image: url('../../uploadS/images/zhaopinbeijing.jpg');
-			background-size: 100%">
+	<form id="layout" class="layui-form" action="" style="border: #9F9F9F solid 1px;background-color: #f2f2f2;">
 		<div class="layui-form-item" style="width: 720px;margin-top:75%" align="center">
 			<b><h1><label style="color:yellow">诚|聘|精|英&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp广|募|良|才</label></h1></b>
 			<h2><label  style="color: #cccccc">招聘时间：${yulan[0].zhaopinTime} </label></h2>
