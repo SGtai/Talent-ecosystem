@@ -10,15 +10,17 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.*"%>
 <%
+	String path = application.getContextPath()+"/";
 	String cssPath = application.getContextPath()+"/techS/css/";
 	String jsPath = application.getContextPath()+"/techS/js/";
+
 %>
 <!DOCTYPE html>
 <html>
 
 <head>
 	<meta charset="UTF-8">
-	<title>章节</title>
+	<title>课程视频界面</title>
 	<link rel="stylesheet" type="text/css" href=<%=cssPath+"video.css"%> />
 	<script src=<%=jsPath+"jquery.min.js"%> type="text/javascript" charset="utf-8"></script>
 </head>
@@ -47,7 +49,7 @@
 
 						<div class="information-left">
 							<a href="#">
-								<img src="${'../../uploadS/other/'.concat(ct.zjPicture)}" width="500" height="340" alt="恰同学少年 加油！！！">
+								<img width="500" height="340" alt="恰同学少年 加油！！！" src=<%=path%>${'uploadS/other/'.concat(ct.zjPicture)} >
 							</a>
 							<div class="left-bottom">
 								<div class="article-time">
@@ -58,7 +60,7 @@
 						<div class="information-right" style="height:340px;width:640px;overflow:auto">
 							<c:forEach items="${video}" var="node">
 								<div class="article-list">
-									<a href="/techvideo?id=${node.zjId}&name=${node.spName}&path=${node.spPath}&spId=${node.spId}&spDescribe=${node.spDescribe}" class="article-link">
+									<a  class="article-link" href=<%=path%>techvideo?id=${node.zjId}&name=${node.spName}&path=${node.spPath}&spId=${node.spId}&spDescribe=${node.spDescribe}>
 										<div class="article-head">
 											<span class="article-number">${node.sort}</span>
 											<span class="article-title">${node.spName}</span>

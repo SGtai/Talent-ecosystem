@@ -8,12 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
+	String path = application.getContextPath()+"/";
 	String jsPath = application.getContextPath()+"/techS/js/";
 	String layuiPath =application.getContextPath()+"/layui/";
 %>
 <html>
 <head>
-	<title>Title</title>
+	<title>新增界面</title>
 
 	<link rel="stylesheet" href=<%=layuiPath+"css/layui.css" %>>
 
@@ -87,7 +88,7 @@
 		<button type="button" class="layui-btn" id="test9" >开始上传</button>
 	</div>
 
-	<img src="../../uploadS/other/sc.png"  alt="" style="position: absolute;margin-left: 41%;margin-top: -20%;" id="sc1">
+	<img alt="" style="position: absolute;margin-left: 41%;margin-top: -20%;" id="sc1" src=<%=path%>uploadS/other/sc.png  >
 </form>
 </body>
 
@@ -129,7 +130,7 @@
 			<button type="button" class="layui-btn" id="voide" >添加视频</button>
 		</div>
 	</form>
-	<img src="../../uploadS/other/sc.png" alt="" style="position: absolute;margin-left: 41%;margin-top: -20%;" id="sc2">
+	<img alt="" style="position: absolute;margin-left: 41%;margin-top: -20%;" id="sc2" src=<%=path%>uploadS/other/sc.png >
 </script>
 
 <script type="text/html" id="chapter2">
@@ -167,7 +168,7 @@
 			<button type="button" class="layui-btn" id="test22" >开始上传</button>
 		</div>
 	</form>
-	<img src="../../uploadS/other/sc.png" alt="" style="position: absolute;margin-left: 41%;margin-top: -20%;" id="sc3">
+	<img alt="" style="position: absolute;margin-left: 41%;margin-top: -20%;" id="sc3" src=<%=path%>uploadS/other/sc.png >
 </script>
 <script type="text/javascript" src=<%=jsPath + "jquery-3.4.1.js"%>></script>
 <script type="text/javascript" src=<%=jsPath + "json2.js"%>></script>
@@ -175,6 +176,7 @@
 <script type="text/javascript" src=<%=jsPath + "util.js"%>></script>
 <script type="text/javascript" src=<%=jsPath + "upload.js"%>></script>
 <script>
+	var   pathS ='<%=path%>';
 	var   kcid =null;
 	var   zjId =null;
 	var   spId =null;

@@ -18,7 +18,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>tab切换</title>
+	<title>课程界面</title>
 	<link rel="stylesheet" href=<%=layuiPath+"css/layui.css" %>>
 	<script src=<%=jsPath+"jquery.SuperSlide.2.1.1.js"%> type="text/javascript" charset="utf-8"></script>
 	<link type="text/css" href=<%=cssPath+"styleS.css"%> rel="stylesheet" />
@@ -43,11 +43,11 @@
 									<span class="num">${node.jlId}</span>
 									<div class="c">
 										<div class="pubpic">
-											<a href="/techvideo?id=${node.zjId}&name=${node.spName}&path=${node.spPath}&spId=${node.spId}&spDescribe=${node.spDescribe}">
-												<img src="${'../../uploadS/other/'.concat(node.zjPicture)}" /></a>
+											<a href=<%=path%>techvideo?id=${node.zjId}&name=${node.spName}&path=${node.spPath}&spId=${node.spId}&spDescribe=${node.spDescribe}>
+												<img src=<%=path%>${'uploadS/other/'.concat(node.zjPicture)} /></a>
 										</div>
 										<div class="pubtitle">
-											<a href="/techvideo?id=${node.zjId}&name=${node.spName}&path=${node.spPath}&spId=${node.spId}&spDescribe=${node.spDescribe}">
+											<a href=<%=path%>techvideo?id=${node.zjId}&name=${node.spName}&path=${node.spPath}&spId=${node.spId}&spDescribe=${node.spDescribe}>
 													${node.spName}:${node.spDescribe}
 											</a>
 											<p>${node.czTime}</p>
@@ -62,14 +62,6 @@
 					</ul>
 				</dd>
 			</dl>
-<%--		<div class="floor-side">--%>
-<%--			<h3>--%>
-<%--				<a href="#">技术·专区</a>--%>
-<%--			</h3>--%>
-<%--			<a href="#" class="floor-side-link">--%>
-<%--				<img src=<%=othPath+"head-f.jpg"%> alt="">--%>
-<%--			</a>--%>
-<%--		</div>--%>
 		<div class="floor-side-right">
 			<div class="hd floor-side-list" >
 				<ul>
@@ -80,9 +72,8 @@
 					</c:forEach>
 					<li>我的课程</li>
 				</ul>
-<%--				<a href="#" class="slide-more">更多>></a>--%>
 			</div>
-			<form action="/techa" method="post"   accept-charset="UTF-8">
+			<form action=<%=path+"techa"%> method="post"   accept-charset="UTF-8">
 			<label class="layui-form-label" style="position: absolute;margin-left: 25%;width: 10%;">价格区间</label>
 			<div class="layui-input-block" style="">
 				<input type="text" name="lows" id="lows" oninput="value=value.replace(/[^\d]/g,'')"  placeholder="最低价" autocomplete="off" class="layui-input" style="position: absolute;width: 10%;margin-left: 30%;">
@@ -101,9 +92,9 @@
 					<ul>
 					<c:forEach items="${node.value}" var="cl">
 						<li>
-							<a href="/techb?id=${cl.kcId}&name=${cl.kcName}&jg=${cl.jgPrice}&ms=${cl.msDescribe}">
+							<a href=<%=path%>techb?id=${cl.kcId}&name=${cl.kcName}&jg=${cl.jgPrice}&ms=${cl.msDescribe}>
 								<div class="image-ti">
-									<img src="${'../../uploadS/other/'.concat(cl.ckPicture)}" alt="">
+									<img alt="" src=<%=path%>${'uploadS/other/'.concat(cl.ckPicture)} >
 								</div>
 								<p class="slide-title">${cl.kcName}</p>
 								<p class="slide-body">
@@ -139,13 +130,13 @@
 		<div class="floatDtt">在线客服</div>
 		<div class="floatShadow">
 			<ul class="floatDqq">
-				<li style="padding-left:0px;"><a target="_blank" href="tencent://message/?uin=981553511&Site=sc.chinaz.com&Menu=yes"><img src="../../uploadS/other/qq.png" align="absmiddle">&nbsp;&nbsp;在线客服1号</a></li>
-				<li style="padding-left:0px;"><a target="_blank" href="tencent://message/?uin=844893039&Site=sc.chinaz.com&Menu=yes"><img src="../../uploadS/other/qq.png" align="absmiddle">&nbsp;&nbsp;在线客服2号</a></li>
-				<li style="padding-left:0px;"><a target="_blank" href="tencent://message/?uin=315057742&Site=sc.chinaz.com&Menu=yes"><img src="../../uploadS/other/qq.png" align="absmiddle">&nbsp;&nbsp;在线客服3号</a></li>
+				<li style="padding-left:0px;"><a target="_blank" href="tencent://message/?uin=981553511&Site=sc.chinaz.com&Menu=yes"><img align="absmiddle" src=<%=path%>uploadS/other/qq.png >&nbsp;&nbsp;在线客服1号</a></li>
+				<li style="padding-left:0px;"><a target="_blank" href="tencent://message/?uin=844893039&Site=sc.chinaz.com&Menu=yes"><img align="absmiddle" src=<%=path%>uploadS/other/qq.png >&nbsp;&nbsp;在线客服2号</a></li>
+				<li style="padding-left:0px;"><a target="_blank" href="tencent://message/?uin=315057742&Site=sc.chinaz.com&Menu=yes"><img align="absmiddle" src=<%=path%>uploadS/other/qq.png >&nbsp;&nbsp;在线客服3号</a></li>
 			</ul>
 			<div class="floatDtxt">热线电话</div>
-			<div class="floatDtel"><img src="../../uploadS/other/online_phone.jpg" width="155" height="45" alt=""></div>
-			<div style="text-align:center;padding:10PX 0 5px 0;background:#EBEBEB;"><img src="../../uploadS/other/wap_ico.jpg"><br>微信公众账号</div>
+			<div class="floatDtel"><img width="155" height="45" alt="" src=<%=path%>uploadS/other/online_phone.jpg ></div>
+			<div style="text-align:center;padding:10PX 0 5px 0;background:#EBEBEB;"><img src=<%=path%>uploadS/other/wap_ico.jpg><br>微信公众账号</div>
 		</div>
 		<div class="floatDbg"></div>
 	</div>
@@ -174,10 +165,6 @@
 		trigger: "mouseover",
 		delayTime: 700
 	});
-	<%--var xx  ='${xx}' ;--%>
-	<%--if (xx.length>0){--%>
-	<%--	alert(xx);--%>
-	<%--}--%>
 </script>
 
 <script type="text/javascript">

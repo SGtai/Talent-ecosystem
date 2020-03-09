@@ -8,13 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
+	String path = application.getContextPath()+"/";
 	String cssPath = application.getContextPath()+"/techS/css/";
 %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>tab切换</title>
+	<title>章节界面</title>
 	<link href=<%=cssPath+"zjchapter.css"%> rel="stylesheet" type="text/css"/>
 </head>
 <body>
@@ -27,8 +28,8 @@
 		<ul class="clearfix">
 			<c:forEach items="${ct}" var="node">
 				<li class="case-example-item">
-					<a href="/techc?id=${node.zjId}">
-						<img src="${'../../uploadS/other/'.concat(node.zjPicture)}" alt="" class="case-pad">
+					<a href=<%=path%>techc?id=${node.zjId}>
+						<img alt="" class="case-pad"  src=<%=path%>${'uploadS/other/'.concat(node.zjPicture)} >
 						<div class="case-item-info">
 <%--							<div class="case-info-logo"><img src="images/logo-001.jpg" alt=""></div>--%>
 							<div class="case-info-title">${node.zjName}</div>

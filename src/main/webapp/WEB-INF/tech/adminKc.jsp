@@ -10,7 +10,7 @@
 <%
 	String path = application.getContextPath()+"/";
 	String jsPath = application.getContextPath()+"/techS/js/";
-	String othPath =application.getContextPath()+"/techS/other/";
+	String othPath =application.getContextPath()+"/uploadS/other/";
 	String layuiPath =application.getContextPath()+"/layui/";
 %>
 <!DOCTYPE html>
@@ -41,7 +41,7 @@
 	</div>
 </div>
 
-<button type="button"  style="position: absolute;margin-top: -4%;margin-left: 75%;" ><a href="/techUpload" class="a_hover" style="font-size: 27px;color: midnightblue;">添加课程</a></button>
+<button type="button"  style="position: absolute;margin-top: -4%;margin-left: 75%;" ><a class="a_hover" style="font-size: 27px;color: midnightblue;" href=<%=path+"techUpload"%> >添加课程</a></button>
 <button type="button" class="layui-btn" style="position: absolute;margin-top: -4%;margin-left: 65%;" id="cx">查询</button>
 <label class="layui-form-label" style="margin-top: -8%;margin-left: 41%;font-size: 17px;">课程类型</label>
 <div class="layui-form" style="width: 12%;position: absolute;margin-top: -8%;margin-left: 49%;">
