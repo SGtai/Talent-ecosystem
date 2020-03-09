@@ -62,14 +62,17 @@
         <c:if test="${roid!=null}">
             <c:if test="${roid == 1 || roid == 2}">
                 <iframe  src=<%=path + "/jump/admin/welcome"%> name="main_self_frame" frameborder="0" class="layadmin-iframe"
-                        style="width: 100%; background: url('../../uploadS/images/back_admin.png') no-repeat;
-                        background-size: 100% auto;"
-                        height="100%"></iframe>
+                        style="width: 100%;"
+                        height="100%">
+
+<%--                    background: url('../../uploadS/images/back_admin.png') no-repeat;--%>
+<%--                    background-size: 100% auto;--%>
+                </iframe>
             </c:if>
 
             <c:if test="${roid == 3 || roid == 6}">
                 <iframe src="" name="main_self_frame" frameborder="0" class="layadmin-iframe"
-                        style="width: 100%;background: url() no-repeat;
+                        style="width: 100%;
                         background-size: 100% auto;"
                         height="100%"></iframe>
             </c:if>

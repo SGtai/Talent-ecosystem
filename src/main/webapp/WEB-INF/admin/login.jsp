@@ -75,7 +75,7 @@
                         <div class="codeDiv">
                             <%--                    <input id="loginCode" class="layui-input codeInput" type="button">--%>
                             <img title="点击切换验证码" type="button" class="codeInput"
-                                 src="/admin/getVerifyCode" id="verifyCodeImage">
+                                 src=<%=path+"/admin/getVerifyCode"%> id="verifyCodeImage">
                         </div>
                     </div>
                     <div class="usernameWrapDiv">
@@ -105,8 +105,8 @@
 <script type="text/html" id="registerHtml">
 
 
-    <div style="margin-top: 5%;margin-left: 10%"><label style="color: #95877c">没有企业账号？<a href="/company/companyLogin">点击前往企业注册</a></label></div>
-    <div style="margin-top: 10%;margin-left: 10%"><label style="color: #95877c">没有高校账号？<a href="/jump/school/reg1">点击前往高校注册</a></label></div>
+    <div style="margin-top: 5%;margin-left: 10%"><label style="color: #95877c">没有企业账号？<a href=<%=path+"/company/companyLogin"%>>点击前往企业注册</a></label></div>
+    <div style="margin-top: 10%;margin-left: 10%"><label style="color: #95877c">没有高校账号？<a href=<%=path+"/jump/school/reg1"%>>点击前往高校注册</a></label></div>
 </script>
 
 <%--登录登录js--%>
@@ -183,7 +183,7 @@
                         $("#password").val('');
                         $("#code").val('');
                         $('#verifyCodeImage').attr('src',  path + '/admin/getVerifyCode?' + Math.random());
-                        window.location.href = '/admin/main';
+                        window.location.href = path + '/admin/main';
                     } else if (flag === 'noCode') {
                         layer.msg('<a style =color:black >验证码不正确，请重新输入</a>', {icon: 5});
                         // layer.msg('验证码不正确，请重新输入', {icon: 5});
